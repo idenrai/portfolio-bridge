@@ -70,7 +70,7 @@ npm run tauri:build
 | Windows | `src-tauri/target/release/bundle/nsis/` | `.exe` (NSIS 설치 프로그램) |
 | Windows | `src-tauri/target/release/bundle/msi/` | `.msi` |
 
-> **참고**: Tauri는 크로스 컴파일을 지원하지 않습니다. Windows `.exe`는 Windows에서, macOS `.dmg`는 macOS에서 빌드해야 합니다. GitHub Actions를 사용하면 양쪽 플랫폼에서 자동 빌드할 수 있습니다 — `.github/workflows/tauri-build.yml` 참조.
+> **참고**: Tauri는 크로스 컴파일을 지원하지 않습니다. Windows `.exe`는 Windows에서, macOS `.dmg`는 macOS에서 빌드해야 합니다.
 
 ### 아키텍처
 
@@ -138,7 +138,6 @@ npm run tauri:build
 | 라우팅 | React Router v7 |
 | 시세 조회 | Yahoo Finance API (US) + Yahoo Japan HTML 스크래핑 (JP) |
 | 데스크톱 | Tauri v2 (Rust) + tauri-plugin-http |
-| CI/CD | GitHub Actions (macOS + Windows 크로스 빌드) |
 
 ---
 
