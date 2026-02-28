@@ -38,13 +38,15 @@ export function TopHoldingsTable({ summary }: Props) {
   const tdCls = "px-3 py-2 text-right text-sm";
 
   const sortBtn = (key: SortKey, label: string) => (
-    <button
-      onClick={() => setSortKey(key)}
-      className={`${thCls} cursor-pointer hover:text-slate-800 ${sortKey === key ? "text-blue-600 font-semibold" : ""}`}
-    >
-      {label}
-      {sortKey === key ? " ↓" : ""}
-    </button>
+    <th className="p-0">
+      <button
+        onClick={() => setSortKey(key)}
+        className={`${thCls} w-full cursor-pointer hover:text-slate-800 ${sortKey === key ? "text-blue-600 font-semibold" : ""}`}
+      >
+        {label}
+        {sortKey === key ? " ↓" : ""}
+      </button>
+    </th>
   );
 
   return (
