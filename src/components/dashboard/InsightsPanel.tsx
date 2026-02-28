@@ -1,4 +1,5 @@
 import { Card } from "@/components/common";
+import { useT } from "@/hooks";
 import type { PortfolioSummary } from "@/types";
 
 interface Props {
@@ -12,18 +13,20 @@ const TYPE_STYLES = {
 } as const;
 
 export function InsightsPanel({ summary }: Props) {
+  const t = useT();
+
   if (summary.insights.length === 0) {
     return (
-      <Card title="인사이트">
+      <Card title={t.insights_title}>
         <div className="text-sm text-slate-400 py-4 text-center">
-          ✅ 특이사항 없음
+          {t.insights_ok}
         </div>
       </Card>
     );
   }
 
   return (
-    <Card title="인사이트">
+    <Card title={t.insights_title}>
       <div className="space-y-2">
         {summary.insights.map((insight, i) => (
           <div

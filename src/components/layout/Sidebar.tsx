@@ -1,13 +1,16 @@
 import { NavLink } from "react-router-dom";
-
-const NAV_ITEMS = [
-  { to: "/", label: "대시보드", icon: "📊" },
-  { to: "/assets", label: "자산 관리", icon: "💼" },
-  { to: "/gurus", label: "투자 구루", icon: "🧠" },
-  { to: "/settings", label: "설정", icon: "⚙️" },
-];
+import { useT } from "@/hooks";
 
 export function Sidebar() {
+  const t = useT();
+
+  const NAV_ITEMS = [
+    { to: "/", label: t.nav_dashboard, icon: "📊" },
+    { to: "/assets", label: t.nav_assets, icon: "💼" },
+    { to: "/gurus", label: t.nav_gurus, icon: "🧠" },
+    { to: "/settings", label: t.nav_settings, icon: "⚙️" },
+  ];
+
   return (
     <aside className="w-60 min-h-screen bg-slate-900 text-slate-200 flex flex-col">
       {/* 로고 */}
@@ -16,7 +19,7 @@ export function Sidebar() {
           <span className="text-blue-400">Portfolio</span>
           <span className="text-slate-400">Bridge</span>
         </h1>
-        <p className="text-xs text-slate-500 mt-1">다국가 자산 통합 관리</p>
+        <p className="text-xs text-slate-500 mt-1">{t.app_tagline}</p>
       </div>
 
       {/* 네비게이션 */}
@@ -42,7 +45,7 @@ export function Sidebar() {
 
       {/* 하단 */}
       <div className="px-6 py-4 border-t border-slate-700">
-        <p className="text-xs text-slate-600">v0.1.0 · 로컬 전용</p>
+        <p className="text-xs text-slate-600">v0.1.0 · {t.app_version_local}</p>
       </div>
     </aside>
   );

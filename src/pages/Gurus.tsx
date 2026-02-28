@@ -13,8 +13,8 @@ import {
   PolarRadiusAxis,
   Radar,
 } from "recharts";
-import { usePortfolio } from "@/hooks";
-import { GURU_PROFILES, getTagLabel, formatCurrency } from "@/utils";
+import { usePortfolio, useT } from "@/hooks";
+import { GURU_PROFILES, formatCurrency } from "@/utils";
 import { calculateRebalancing } from "@/utils";
 import type { GuruProfile } from "@/types";
 
@@ -32,16 +32,17 @@ const COLORS = [
 export function GurusPage() {
   const { assets, summary } = usePortfolio();
   const [selectedGuru, setSelectedGuru] = useState<GuruProfile | null>(null);
+  const t = useT();
 
   if (assets.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-slate-400">
         <p className="text-6xl mb-4">🧠</p>
         <h2 className="text-xl font-semibold text-slate-600 mb-2">
-          투자 구루 분석
+          {t.guru_empty_title}
         </h2>
         <p className="text-sm">
-          자산을 등록한 후 구루와 비교 분석을 할 수 있습니다.
+          {t.guru_empty_desc}
         </p>
       </div>
     );
@@ -54,9 +55,9 @@ export function GurusPage() {
   // 레이더 차트용 데이터: 내 포트폴리오 vs 선택 구루
   const radarData = selectedGuru
     ? selectedGuru.idealAllocation.map((ga) => {
-        const myAlloc = summary.tagAllocation.find((t) => t.tag === ga.tag);
+        const myAlloc = summary.tagAllocation.find((t_) => t_.tag === ga.tag);
         return {
-          tag: getTagLabel(ga.tag),
+          tag: t.tag_labels[ga.tag] ?? ga.tag,
           guru: ga.targetPercent,
           mine: myAlloc ? Number(myAlloc.percent.toFixed(1)) : 0,
         };
@@ -65,7 +66,7 @@ export function GurusPage() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-lg font-bold text-slate-800">투자 구루</h2>
+      <h2 className="text-lg font-bold text-slate-800">{t.guru_title}</h2>
 
       {/* 구루 선택 카드 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
@@ -88,20 +89,20 @@ export function GurusPage() {
       {selectedGuru && (
         <>
           {/* 철학 */}
-          <Card title={`${selectedGuru.nameKo}의 투자 철학`}>
+          <Card title={t.guru_philosophy_title(selectedGuru.nameKo)}>
             <p className="text-sm text-slate-600 leading-relaxed">
-              {selectedGuru.philosophy}
+              {t[`guru_philosophy_${selectedGuru.id}` as keyof typeof t] as string || selectedGuru.philosophy}
             </p>
           </Card>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* 이상적 배분 파이 차트 */}
-            <Card title={`${selectedGuru.nameKo}의 이상적 배분`}>
+            <Card title={t.guru_ideal_alloc(selectedGuru.nameKo)}>
               <ResponsiveContainer width="100%" height={260}>
                 <PieChart>
                   <Pie
                     data={selectedGuru.idealAllocation.map((a) => ({
-                      name: getTagLabel(a.tag),
+                      name: t.tag_labels[a.tag] ?? a.tag,
                       value: a.targetPercent,
                     }))}
                     cx="50%"
@@ -123,7 +124,7 @@ export function GurusPage() {
             </Card>
 
             {/* 레이더 비교 차트 */}
-            <Card title="내 포트폴리오 vs 구루 비교">
+            <Card title={t.guru_radar_title}>
               <ResponsiveContainer width="100%" height={260}>
                 <RadarChart data={radarData}>
                   <PolarGrid />
@@ -137,7 +138,7 @@ export function GurusPage() {
                     fillOpacity={0.15}
                   />
                   <Radar
-                    name="내 포트폴리오"
+                    name={t.guru_my_portfolio}
                     dataKey="mine"
                     stroke="#10b981"
                     fill="#10b981"
@@ -151,16 +152,16 @@ export function GurusPage() {
           </div>
 
           {/* 조정 제안 */}
-          <Card title={`${selectedGuru.nameKo} 기준 리밸런싱 제안`}>
+          <Card title={t.guru_rebalance_title(selectedGuru.nameKo)}>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-left text-xs text-slate-500 border-b">
-                    <th className="pb-2 font-medium">태그</th>
-                    <th className="pb-2 font-medium text-right">현재</th>
-                    <th className="pb-2 font-medium text-right">구루 목표</th>
-                    <th className="pb-2 font-medium text-right">차이</th>
-                    <th className="pb-2 font-medium text-right">조정 금액</th>
+                    <th className="pb-2 font-medium">{t.guru_col_tag}</th>
+                    <th className="pb-2 font-medium text-right">{t.guru_col_current}</th>
+                    <th className="pb-2 font-medium text-right">{t.guru_col_guru_target}</th>
+                    <th className="pb-2 font-medium text-right">{t.guru_col_diff}</th>
+                    <th className="pb-2 font-medium text-right">{t.guru_col_amount}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -168,7 +169,7 @@ export function GurusPage() {
                     const diff = s.targetPercent - s.currentPercent;
                     return (
                       <tr key={s.tag}>
-                        <td className="py-2">{getTagLabel(s.tag)}</td>
+                        <td className="py-2">{t.tag_labels[s.tag] ?? s.tag}</td>
                         <td className="py-2 text-right tabular-nums">
                           {s.currentPercent.toFixed(1)}%
                         </td>

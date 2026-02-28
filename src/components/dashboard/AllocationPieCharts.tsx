@@ -8,8 +8,8 @@ import {
 } from "recharts";
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
-import { MARKET_LABELS, TAG_LABELS } from "@/types";
 import { useSettingsStore } from "@/stores";
+import { useT } from "@/hooks";
 import type { PortfolioSummary, Market, AssetTag } from "@/types";
 
 const COLORS = [
@@ -38,14 +38,16 @@ interface Props {
 function MiniPie({
   data,
   valueLabel,
+  noDataText,
 }: {
   data: ChartEntry[];
   valueLabel: (v: number) => string;
+  noDataText: string;
 }) {
   if (data.length === 0) {
     return (
       <div className="flex items-center justify-center h-[220px] text-slate-400 text-sm">
-        데이터 없음
+        {noDataText}
       </div>
     );
   }
@@ -83,6 +85,7 @@ function MiniPie({
 export function AllocationPieCharts({ summary }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const rates = useSettingsStore((s) => s.exchangeRates);
+  const t = useT();
 
   if (summary.totalValueKRW === 0) return null;
 
@@ -91,25 +94,25 @@ export function AllocationPieCharts({ summary }: Props) {
 
   // 국가(시장)별
   const marketData: ChartEntry[] = summary.marketAllocation.map((x) => ({
-    name: MARKET_LABELS[x.market as Market] ?? x.market,
+    name: t.market_labels[x.market as Market] ?? x.market,
     value: x.valueKRW,
     percent: x.percent,
   }));
 
   // 태그별
   const tagData: ChartEntry[] = summary.tagAllocation.map((x) => ({
-    name: TAG_LABELS[x.tag as AssetTag] ?? x.tag,
+    name: t.tag_labels[x.tag as AssetTag] ?? x.tag,
     value: x.valueKRW,
     percent: x.percent,
   }));
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <Card title="국가(시장)별 배분">
-        <MiniPie data={marketData} valueLabel={fmt} />
+      <Card title={t.chart_market}>
+        <MiniPie data={marketData} valueLabel={fmt} noDataText={t.chart_no_data} />
       </Card>
-      <Card title="태그별 배분">
-        <MiniPie data={tagData} valueLabel={fmt} />
+      <Card title={t.chart_tag}>
+        <MiniPie data={tagData} valueLabel={fmt} noDataText={t.chart_no_data} />
       </Card>
     </div>
   );

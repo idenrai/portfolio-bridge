@@ -1,5 +1,6 @@
 import { useSettingsStore } from "@/stores";
 import { formatCurrency, formatPercent, fromKRW } from "@/utils";
+import { useT } from "@/hooks";
 import type { PortfolioSummary } from "@/types";
 
 interface Props {
@@ -16,6 +17,7 @@ interface KpiItem {
 export function KpiBar({ summary }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const rates = useSettingsStore((s) => s.exchangeRates);
+  const t = useT();
 
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
 
@@ -26,22 +28,22 @@ export function KpiBar({ summary }: Props) {
 
   const items: KpiItem[] = [
     {
-      label: "총 평가액",
+      label: t.kpi_total_value,
       value: formatCurrency(convert(summary.totalValueKRW), baseCurrency, true),
     },
     {
-      label: "평가 손익",
+      label: t.kpi_pnl,
       value: formatCurrency(convert(summary.totalPnLKRW), baseCurrency, true),
       sub: formatPercent(summary.totalReturnPercent),
       color: summary.totalPnLKRW >= 0 ? "text-red-600" : "text-blue-600",
     },
     {
-      label: "보유 종목",
-      value: `${summary.holdingCount}종목`,
-      sub: `${summary.assetTypeCount}개 자산군`,
+      label: t.holdings_title,
+      value: `${summary.holdingCount}${t.kpi_holdings_unit}`,
+      sub: `${summary.assetTypeCount}${t.kpi_asset_type_unit}`,
     },
     {
-      label: "현금 비중",
+      label: t.kpi_cash_weight,
       value: `${summary.cashPercent.toFixed(1)}%`,
       color:
         summary.cashPercent > 20
@@ -51,7 +53,7 @@ export function KpiBar({ summary }: Props) {
             : "text-slate-900",
     },
     {
-      label: "외화 노출",
+      label: t.kpi_fx_exposure,
       value: `${fxExposure.toFixed(1)}%`,
       sub: summary.currencyExposure
         .filter((e) => e.currency !== "KRW")
@@ -63,9 +65,9 @@ export function KpiBar({ summary }: Props) {
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-      {items.map((item) => (
+      {items.map((item, i) => (
         <div
-          key={item.label}
+          key={i}
           className="bg-white rounded-xl border border-slate-200 shadow-sm px-4 py-3"
         >
           <p className="text-[11px] text-slate-500 font-medium mb-0.5">

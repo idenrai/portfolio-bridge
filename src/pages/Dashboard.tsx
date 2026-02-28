@@ -1,4 +1,4 @@
-import { usePortfolio } from "@/hooks";
+import { usePortfolio, useT } from "@/hooks";
 import { KpiBar } from "@/components/dashboard/KpiBar";
 import { AllocationPieCharts } from "@/components/dashboard/AllocationPieCharts";
 import { TopHoldingsTable } from "@/components/dashboard/TopHoldingsTable";
@@ -9,25 +9,23 @@ import { InsightsPanel } from "@/components/dashboard/InsightsPanel";
 
 export function DashboardPage() {
   const { assets, summary, rebalancing } = usePortfolio();
+  const t = useT();
 
   if (assets.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-slate-400">
         <p className="text-6xl mb-4">📊</p>
         <h2 className="text-xl font-semibold text-slate-600 mb-2">
-          포트폴리오를 시작하세요
+          {t.dash_empty_title}
         </h2>
-        <p className="text-sm">
-          &quot;자산 관리&quot; 메뉴에서 보유 자산을 등록하면 여기에 요약이
-          표시됩니다.
-        </p>
+        <p className="text-sm">{t.dash_empty_desc}</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      <h2 className="text-lg font-bold text-slate-800">대시보드</h2>
+      <h2 className="text-lg font-bold text-slate-800">{t.dash_title}</h2>
 
       {/* ① KPI 바 */}
       <KpiBar summary={summary} />

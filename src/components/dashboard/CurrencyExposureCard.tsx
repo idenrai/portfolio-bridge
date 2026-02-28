@@ -2,6 +2,7 @@ import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
 import { CURRENCY_LABELS } from "@/types";
 import { useSettingsStore } from "@/stores";
+import { useT } from "@/hooks";
 import type { PortfolioSummary, CurrencyCode } from "@/types";
 
 interface Props {
@@ -12,6 +13,7 @@ export function CurrencyExposureCard({ summary }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const rates = useSettingsStore((s) => s.exchangeRates);
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
+  const t = useT();
 
   if (summary.currencyExposure.length === 0) return null;
 
@@ -25,23 +27,23 @@ export function CurrencyExposureCard({ summary }: Props) {
   }
 
   return (
-    <Card title="환율 노출 & 시나리오">
+    <Card title={t.fx_title}>
       {/* 환율 노출 테이블 */}
       <div className="overflow-x-auto -mx-5 px-5 mb-4">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-slate-100">
               <th className="text-[11px] text-slate-500 font-medium px-2 py-1.5 text-left">
-                통화
+                {t.fx_col_currency}
               </th>
               <th className="text-[11px] text-slate-500 font-medium px-2 py-1.5 text-right">
-                평가액
+                {t.fx_col_value}
               </th>
               <th className="text-[11px] text-slate-500 font-medium px-2 py-1.5 text-right">
-                비중
+                {t.fx_col_weight}
               </th>
               <th className="text-[11px] text-slate-500 font-medium px-2 py-1.5 text-right">
-                환율
+                {t.fx_col_rate}
               </th>
             </tr>
           </thead>
@@ -90,7 +92,7 @@ export function CurrencyExposureCard({ summary }: Props) {
       {scenarioMap.size > 0 && (
         <div>
           <h4 className="text-[11px] text-slate-500 font-medium mb-2">
-            환율 ±5% 시나리오
+            {t.fx_scenario_title}
           </h4>
           <div className="grid grid-cols-1 gap-2">
             {[...scenarioMap.entries()].map(([currency, { up, down }]) => (

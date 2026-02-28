@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Card, Button } from "@/components/common";
 import { useSettingsStore } from "@/stores";
 import { useAssetStore } from "@/stores";
-import { useExchangeRates } from "@/hooks";
-import { TAG_LABELS, CURRENCY_LABELS, CURRENCY_SYMBOLS } from "@/types";
+import { useExchangeRates, useT } from "@/hooks";
+import { CURRENCY_LABELS, CURRENCY_SYMBOLS } from "@/types";
 import type { AssetTag, TargetAllocation } from "@/types";
 import { format } from "date-fns";
 
@@ -31,12 +31,11 @@ export function SettingsPage() {
   };
 
   const totalPercent = allocations.reduce((s, a) => s + a.targetPercent, 0);
+  const t = useT();
 
   const handleResetAll = () => {
     if (
-      window.confirm(
-        "모든 데이터(자산, 설정)를 초기화합니다. 이 작업은 되돌릴 수 없습니다.",
-      )
+      window.confirm(t.settings_data_reset_confirm)
     ) {
       localStorage.removeItem("portfolio-bridge-assets");
       localStorage.removeItem("portfolio-bridge-settings");
@@ -48,16 +47,16 @@ export function SettingsPage() {
 
   return (
     <div className="space-y-6 max-w-2xl">
-      <h2 className="text-lg font-bold text-slate-800">설정</h2>
+      <h2 className="text-lg font-bold text-slate-800">{t.settings_title}</h2>
 
       {/* 환율 */}
       <Card
-        title="환율 (Yahoo Finance 자동 조회)"
+        title={t.settings_fx_title}
         action={
           <div className="flex items-center gap-2">
             {lastUpdated && (
               <span className="text-xs text-slate-400">
-                {format(new Date(lastUpdated), "HH:mm 기준")}
+                {t.settings_fx_time(format(new Date(lastUpdated), "HH:mm"))}
               </span>
             )}
             <Button
@@ -66,7 +65,7 @@ export function SettingsPage() {
               onClick={refreshRates}
               disabled={isLoading}
             >
-              {isLoading ? "조회 중…" : "🔄 지금 갱신"}
+              {isLoading ? t.settings_fx_refreshing : t.settings_fx_refresh}
             </Button>
           </div>
         }
@@ -95,7 +94,7 @@ export function SettingsPage() {
           ))}
           {!lastUpdated && !rateError && (
             <p className="text-xs text-slate-400">
-              앱 시작 시 자동 조회됩니다.
+              {t.settings_fx_auto}
             </p>
           )}
         </div>
@@ -103,7 +102,7 @@ export function SettingsPage() {
 
       {/* 목표 비중 */}
       <Card
-        title="목표 비중 배분"
+        title={t.settings_target_title}
         action={
           <div className="flex items-center gap-2">
             <span
@@ -113,10 +112,10 @@ export function SettingsPage() {
                   : "text-red-600"
               }`}
             >
-              합계: {totalPercent.toFixed(0)}%
+              {t.settings_target_sum(totalPercent.toFixed(0))}
             </span>
             <Button size="sm" onClick={saveAllocations}>
-              저장
+              {t.settings_target_save}
             </Button>
           </div>
         }
@@ -125,7 +124,7 @@ export function SettingsPage() {
           {allocations.map((a, i) => (
             <label key={a.tag} className="flex items-center gap-3">
               <span className="text-sm text-slate-600 w-32">
-                {TAG_LABELS[a.tag as AssetTag] ?? a.tag}
+                {t.tag_labels[a.tag as AssetTag] ?? a.tag}
               </span>
               <input
                 type="number"
@@ -142,16 +141,16 @@ export function SettingsPage() {
       </Card>
 
       {/* 데이터 관리 */}
-      <Card title="데이터 관리">
+      <Card title={t.settings_data_title}>
         <div className="space-y-3">
           <p className="text-sm text-slate-500">
-            모든 데이터는 브라우저 로컬 스토리지에 저장됩니다.
+            {t.settings_data_desc}
           </p>
           <p className="text-sm text-slate-500">
-            현재 등록된 자산: <strong>{assetStore.assets.length}</strong>건
+            {t.settings_data_count(assetStore.assets.length)}
           </p>
           <Button variant="danger" size="sm" onClick={handleResetAll}>
-            전체 데이터 초기화
+            {t.settings_data_reset}
           </Button>
         </div>
       </Card>

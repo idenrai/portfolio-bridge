@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/common";
-import { useTickerSearch } from "@/hooks";
+import { useTickerSearch, useT } from "@/hooks";
 import { fetchCurrentPrice } from "@/utils";
 import type {
   AssetFormData,
@@ -9,7 +9,7 @@ import type {
   Market,
   CurrencyCode,
 } from "@/types";
-import { ASSET_TYPE_LABELS, MARKET_LABELS, CURRENCY_SYMBOLS } from "@/types";
+import { CURRENCY_SYMBOLS } from "@/types";
 
 interface Props {
   initial?: Asset;
@@ -42,6 +42,7 @@ function EditForm({
   const [quantity, setQuantity] = useState(initial.quantity);
   const [avgBuyPrice, setAvgBuyPrice] = useState(initial.avgBuyPrice);
   const sym = CURRENCY_SYMBOLS[initial.currency];
+  const t = useT();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,10 +71,10 @@ function EditForm({
           </span>
         )}
         <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded self-center">
-          {ASSET_TYPE_LABELS[initial.type]}
+          {t.asset_type_labels[initial.type]}
         </span>
         <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded self-center">
-          {MARKET_LABELS[initial.market]}
+          {t.market_labels[initial.market]}
         </span>
         <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded self-center">
           {initial.currency}
@@ -82,7 +83,7 @@ function EditForm({
 
       <div className="grid grid-cols-2 gap-3">
         <label className="block">
-          <span className="text-xs font-medium text-slate-600">보유 수량</span>
+          <span className="text-xs font-medium text-slate-600">{t.af_quantity_label}</span>
           <input
             type="number"
             required
@@ -95,7 +96,7 @@ function EditForm({
         </label>
         <label className="block">
           <span className="text-xs font-medium text-slate-600">
-            매입 단가 ({sym})
+            {t.af_avg_price_label} ({sym})
           </span>
           <input
             type="number"
@@ -111,7 +112,7 @@ function EditForm({
 
       <label className="block">
         <span className="text-xs font-medium text-slate-600">
-          현재가 ({sym})
+          {t.af_current_price_label} ({sym})
         </span>
         <input
           type="number"
@@ -123,9 +124,9 @@ function EditForm({
 
       <div className="flex justify-end gap-2">
         <Button type="button" variant="secondary" onClick={onCancel}>
-          취소
+          {t.af_btn_cancel}
         </Button>
-        <Button type="submit">수정 완료</Button>
+        <Button type="submit">{t.af_btn_submit}</Button>
       </div>
     </form>
   );
@@ -140,10 +141,11 @@ function ModeSelector({
   mode: FormMode;
   onChange: (m: FormMode) => void;
 }) {
+  const t = useT();
   const tabs: { key: FormMode; label: string }[] = [
-    { key: "stock", label: "주식·ETF·채권" },
-    { key: "cash", label: "현금" },
-    { key: "crypto", label: "코인" },
+    { key: "stock", label: t.af_mode_stock },
+    { key: "cash", label: t.af_mode_cash },
+    { key: "crypto", label: t.af_mode_crypto },
   ];
   return (
     <div className="flex rounded-lg border border-slate-200 overflow-hidden">
@@ -167,12 +169,6 @@ function ModeSelector({
 
 // ─── 현금 등록 폼 ─────────────────────────────────────────────────────────────
 
-const CURRENCY_OPTIONS: { code: CurrencyCode; label: string }[] = [
-  { code: "KRW", label: "한국 원화 (KRW)" },
-  { code: "JPY", label: "일본 엔화 (JPY)" },
-  { code: "USD", label: "미국 달러 (USD)" },
-];
-
 function CashForm({
   onSubmit,
   onCancel,
@@ -184,6 +180,13 @@ function CashForm({
   const [currency, setCurrency] = useState<CurrencyCode | null>(null);
   const [amount, setAmount] = useState<number | "">("");
   const [open, setOpen] = useState(false);
+  const t = useT();
+
+  const CURRENCY_OPTIONS: { code: CurrencyCode; label: string }[] = [
+    { code: "KRW", label: `${t.currency_krw} (KRW)` },
+    { code: "JPY", label: `${t.currency_jpy} (JPY)` },
+    { code: "USD", label: `${t.currency_usd} (USD)` },
+  ];
 
   const filtered = useMemo(
     () =>
@@ -204,7 +207,7 @@ function CashForm({
     e.preventDefault();
     if (!currency || !selected) return;
     onSubmit({
-      name: `${selected.label} 현금`,
+      name: `${selected.label}`,
       type: "cash",
       market: marketFromCurrency(currency),
       currency,
@@ -218,7 +221,7 @@ function CashForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <span className="text-xs font-medium text-slate-600">화폐 선택</span>
+        <span className="text-xs font-medium text-slate-600">{t.af_currency_label}</span>
         <div className="relative mt-1">
           <button
             type="button"
@@ -226,7 +229,7 @@ function CashForm({
             className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-left flex justify-between items-center bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           >
             <span className={currency ? "text-slate-800" : "text-slate-400"}>
-              {selected ? selected.label : "화폐를 선택하세요"}
+              {selected ? selected.label : t.af_currency_placeholder}
             </span>
             <span className="text-slate-400 text-xs">▼</span>
           </button>
@@ -259,7 +262,7 @@ function CashForm({
                 ))}
                 {filtered.length === 0 && (
                   <p className="text-center text-sm text-slate-400 py-3">
-                    결과 없음
+                    {t.af_currency_no_result}
                   </p>
                 )}
               </div>
@@ -270,7 +273,7 @@ function CashForm({
 
       <label className="block">
         <span className="text-xs font-medium text-slate-600">
-          보유액{currency ? ` (${CURRENCY_SYMBOLS[currency]})` : ""} *
+          {t.af_cash_amount_label}{currency ? ` (${CURRENCY_SYMBOLS[currency]})` : ""} *
         </span>
         <input
           type="number"
@@ -289,10 +292,10 @@ function CashForm({
 
       <div className="flex justify-end gap-2">
         <Button type="button" variant="secondary" onClick={onCancel}>
-          취소
+          {t.af_btn_cancel}
         </Button>
         <Button type="submit" disabled={!currency}>
-          등록 완료
+          {t.af_btn_submit}
         </Button>
       </div>
     </form>
@@ -323,6 +326,7 @@ function CryptoForm({
   const [selectedPair, setSelectedPair] = useState<CryptoPair | null>(null);
   const [quantity, setQuantity] = useState<number | "">("");
   const [avgBuyPrice, setAvgBuyPrice] = useState<number | "">("");
+  const t = useT();
 
   const searchPairs = async () => {
     const base = coinQuery.trim().toUpperCase();
@@ -376,9 +380,7 @@ function CryptoForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <p className="text-sm text-slate-500">
-        코인 티커를 입력하고 거래쌍을 선택하세요.
-        <br />
-        <span className="text-xs">예: BTC · ETH · SOL · XRP</span>
+        {t.af_crypto_hint}
       </p>
 
       <div className="flex gap-2">
@@ -396,14 +398,14 @@ function CryptoForm({
           onClick={searchPairs}
           disabled={isSearching || !coinQuery.trim()}
         >
-          {isSearching ? "조회 중…" : "거래쌍 검색"}
+          {isSearching ? t.af_crypto_searching : t.af_crypto_search_btn}
         </Button>
       </div>
 
       {pairs.length > 0 && (
         <div className="border border-slate-200 rounded-lg overflow-hidden">
           <div className="bg-slate-50 px-3 py-2 border-b border-slate-200">
-            <p className="text-xs text-slate-500 font-medium">거래쌍 선택</p>
+            <p className="text-xs text-slate-500 font-medium">{t.af_crypto_pair_title}</p>
           </div>
           <div className="divide-y divide-slate-100">
             {pairs.map((p) => (
@@ -434,7 +436,7 @@ function CryptoForm({
                         : "bg-slate-100 text-slate-600"
                     }`}
                   >
-                    {selectedPair?.symbol === p.symbol ? "선택됨" : "선택"}
+                    {selectedPair?.symbol === p.symbol ? t.af_crypto_selected : t.af_crypto_select}
                   </span>
                 </div>
               </button>
@@ -445,7 +447,7 @@ function CryptoForm({
 
       {searchedOnce && pairs.length === 0 && !isSearching && (
         <p className="text-sm text-slate-500 bg-slate-50 rounded-lg px-3 py-2">
-          거래쌍을 찾을 수 없습니다. 티커를 확인해 주세요.
+          {t.af_crypto_no_pairs}
         </p>
       )}
 
@@ -458,7 +460,7 @@ function CryptoForm({
               </span>
               {selectedPair.price !== null && (
                 <span className="text-sm text-green-600 font-medium">
-                  현재가 {sym}
+                  {t.af_current_price_label} {sym}
                   {selectedPair.price.toLocaleString()}
                 </span>
               )}
@@ -468,7 +470,7 @@ function CryptoForm({
           <div className="grid grid-cols-2 gap-3">
             <label className="block">
               <span className="text-xs font-medium text-slate-600">
-                보유 수량 *
+                {t.af_quantity_label} *
               </span>
               <input
                 type="number"
@@ -487,7 +489,7 @@ function CryptoForm({
             </label>
             <label className="block">
               <span className="text-xs font-medium text-slate-600">
-                매입 단가 ({sym}) *
+                {t.af_avg_price_label} ({sym}) *
               </span>
               <input
                 type="number"
@@ -508,9 +510,9 @@ function CryptoForm({
 
           <div className="flex justify-end gap-2">
             <Button type="button" variant="secondary" onClick={onCancel}>
-              취소
+              {t.af_btn_cancel}
             </Button>
-            <Button type="submit">등록 완료</Button>
+            <Button type="submit">{t.af_btn_submit}</Button>
           </div>
         </>
       )}
@@ -518,7 +520,7 @@ function CryptoForm({
       {!selectedPair && (
         <div className="flex justify-end">
           <Button type="button" variant="secondary" onClick={onCancel}>
-            취소
+            {t.af_btn_cancel}
           </Button>
         </div>
       )}
@@ -527,27 +529,6 @@ function CryptoForm({
 }
 
 // ─── 직접 입력 폼 (Yahoo 검색 불가 시 폴백) ──────────────────────────────────
-
-const ASSET_TYPE_OPTIONS: { value: AssetType; label: string }[] = [
-  { value: "stock", label: "주식" },
-  { value: "etf", label: "ETF" },
-  { value: "fund", label: "펀드·투자신탁" },
-  { value: "bond", label: "채권" },
-  { value: "other", label: "기타" },
-];
-
-const MARKET_OPTIONS: { value: Market; label: string }[] = [
-  { value: "JP", label: "일본 (JP)" },
-  { value: "US", label: "미국 (US)" },
-  { value: "KR", label: "한국 (KR)" },
-  { value: "OTHER", label: "기타" },
-];
-
-const CURRENCY_INPUT_OPTIONS: { value: CurrencyCode; label: string }[] = [
-  { value: "JPY", label: "엔화 (JPY)" },
-  { value: "USD", label: "달러 (USD)" },
-  { value: "KRW", label: "원화 (KRW)" },
-];
 
 function ManualEntryForm({
   onSubmit,
@@ -565,6 +546,26 @@ function ManualEntryForm({
   const [avgBuyPrice, setAvgBuyPrice] = useState<number | "">("");
   const [currentPrice, setCurrentPrice] = useState<number | "">("");
   const [isFetchingPrice, setIsFetchingPrice] = useState(false);
+
+  const t = useT();
+  const ASSET_TYPE_OPTIONS: { value: AssetType; label: string }[] = [
+    { value: "stock", label: t.atype_stock },
+    { value: "etf", label: t.atype_etf },
+    { value: "fund", label: t.atype_fund },
+    { value: "bond", label: t.atype_bond },
+    { value: "other", label: t.atype_other },
+  ];
+  const MARKET_OPTIONS: { value: Market; label: string }[] = [
+    { value: "JP", label: t.market_jp },
+    { value: "US", label: t.market_us },
+    { value: "KR", label: t.market_kr },
+    { value: "OTHER", label: t.market_other },
+  ];
+  const CURRENCY_INPUT_OPTIONS: { value: CurrencyCode; label: string }[] = [
+    { value: "JPY", label: t.currency_jpy },
+    { value: "USD", label: t.currency_usd },
+    { value: "KRW", label: t.currency_krw },
+  ];
 
   const sym = CURRENCY_SYMBOLS[currency];
 
@@ -596,16 +597,12 @@ function ManualEntryForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
         <p className="text-xs text-amber-700">
-          💡 Yahoo Finance에서 검색되지 않는 종목(투자신탁 등)을 직접
-          입력합니다.
-          <br />
-          ISIN 또는 심볼을 알고 있다면 입력 후 <strong>현재가 조회</strong>를
-          시도하세요.
+          {t.af_manual_hint}
         </p>
       </div>
 
       <label className="block">
-        <span className="text-xs font-medium text-slate-600">종목명 *</span>
+        <span className="text-xs font-medium text-slate-600">{t.af_name_label} *</span>
         <input
           type="text"
           required
@@ -619,7 +616,7 @@ function ManualEntryForm({
 
       <label className="block">
         <span className="text-xs font-medium text-slate-600">
-          심볼 / ISIN (선택)
+          {t.af_ticker_label}
         </span>
         <div className="flex gap-2 mt-1">
           <input
@@ -636,14 +633,14 @@ function ManualEntryForm({
             onClick={handleFetchPrice}
             disabled={!ticker.trim() || isFetchingPrice}
           >
-            {isFetchingPrice ? "조회 중…" : "현재가 조회"}
+            {isFetchingPrice ? t.af_fetching : t.af_fetch_price_btn}
           </Button>
         </div>
       </label>
 
       <div className="grid grid-cols-3 gap-3">
         <label className="block">
-          <span className="text-xs font-medium text-slate-600">자산 유형</span>
+          <span className="text-xs font-medium text-slate-600">{t.af_asset_type_label}</span>
           <select
             value={assetType}
             onChange={(e) => setAssetType(e.target.value as AssetType)}
@@ -657,7 +654,7 @@ function ManualEntryForm({
           </select>
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-slate-600">시장</span>
+          <span className="text-xs font-medium text-slate-600">{t.af_market_label}</span>
           <select
             value={market}
             onChange={(e) => setMarket(e.target.value as Market)}
@@ -671,7 +668,7 @@ function ManualEntryForm({
           </select>
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-slate-600">통화</span>
+          <span className="text-xs font-medium text-slate-600">{t.af_currency_label}</span>
           <select
             value={currency}
             onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
@@ -689,7 +686,7 @@ function ManualEntryForm({
       <div className="grid grid-cols-3 gap-3">
         <label className="block">
           <span className="text-xs font-medium text-slate-600">
-            보유 수량 *
+            {t.af_quantity_label} *
           </span>
           <input
             type="number"
@@ -706,7 +703,7 @@ function ManualEntryForm({
         </label>
         <label className="block">
           <span className="text-xs font-medium text-slate-600">
-            매입 단가 ({sym}) *
+            {t.af_avg_price_label} ({sym}) *
           </span>
           <input
             type="number"
@@ -725,7 +722,7 @@ function ManualEntryForm({
         </label>
         <label className="block">
           <span className="text-xs font-medium text-slate-600">
-            현재가 ({sym})
+              {t.af_current_price_label} ({sym})
           </span>
           <input
             type="number"
@@ -737,7 +734,7 @@ function ManualEntryForm({
                 e.target.value === "" ? "" : Number(e.target.value),
               )
             }
-            placeholder="자동 조회 또는 수동 입력"
+            placeholder={t.af_current_price_placeholder}
             className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           />
         </label>
@@ -745,9 +742,9 @@ function ManualEntryForm({
 
       <div className="flex justify-between">
         <Button type="button" variant="ghost" onClick={onBack}>
-          ← 검색으로
+          {t.af_back_to_search}
         </Button>
-        <Button type="submit">등록 완료</Button>
+        <Button type="submit">{t.af_btn_submit}</Button>
       </div>
     </form>
   );
@@ -776,6 +773,7 @@ function SearchStep({
     isFetchingPrice,
     selectItem,
   } = useTickerSearch();
+  const t = useT();
 
   useEffect(() => {
     if (!selected || isFetchingPrice) return;
@@ -799,9 +797,7 @@ function SearchStep({
   return (
     <div className="space-y-4">
       <p className="text-sm text-slate-500">
-        티커 또는 종목명을 입력하고 검색하세요.
-        <br />
-        <span className="text-xs">예: ACN · 삼성전자 · 7203 · MSFT</span>
+        {t.af_search_hint}
       </p>
 
       <div className="flex gap-2">
@@ -810,7 +806,7 @@ function SearchStep({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="티커 또는 종목명..."
+          placeholder={t.af_search_placeholder}
           autoFocus
           className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
@@ -819,7 +815,7 @@ function SearchStep({
           onClick={search}
           disabled={isSearching || !query.trim()}
         >
-          {isSearching ? "검색 중…" : "검색"}
+          {isSearching ? t.af_searching : t.af_search_btn}
         </Button>
       </div>
 
@@ -827,7 +823,7 @@ function SearchStep({
         <div className="border border-slate-200 rounded-lg overflow-hidden">
           <div className="bg-slate-50 px-3 py-2 border-b border-slate-200">
             <p className="text-xs text-slate-500 font-medium">
-              검색 결과 {results.length}건
+              {t.af_results_count(results.length)}
             </p>
           </div>
           <div className="max-h-64 overflow-y-auto divide-y divide-slate-100">
@@ -849,16 +845,16 @@ function SearchStep({
                 </div>
                 <div className="flex items-center gap-1.5 shrink-0">
                   <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
-                    {ASSET_TYPE_LABELS[item.type]}
+                    {t.asset_type_labels[item.type]}
                   </span>
                   <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
-                    {MARKET_LABELS[item.market]}
+                    {t.market_labels[item.market]}
                   </span>
                   <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
                     {item.currency}
                   </span>
                   <span className="text-xs text-blue-600 font-semibold ml-1">
-                    선택 →
+                    {t.af_search_btn} →
                   </span>
                 </div>
               </button>
@@ -874,7 +870,7 @@ function SearchStep({
       )}
       {isFetchingPrice && (
         <p className="text-sm text-slate-500 text-center animate-pulse py-2">
-          현재가 조회 중…
+          {t.af_current_price_label} {t.af_fetching}
         </p>
       )}
 
@@ -884,11 +880,11 @@ function SearchStep({
           onClick={onManual}
           className="text-xs text-slate-400 hover:text-blue-600 underline text-center py-1 transition-colors"
         >
-          Yahoo Finance에서 검색되지 않나요? → 직접 입력
+          {t.af_manual_link}
         </button>
         <div className="flex justify-end">
           <Button type="button" variant="secondary" onClick={onCancel}>
-            취소
+            {t.af_btn_cancel}
           </Button>
         </div>
       </div>
@@ -910,6 +906,7 @@ function ConfirmStep({
   const [quantity, setQuantity] = useState<number | "">("");
   const [avgBuyPrice, setAvgBuyPrice] = useState<number | "">("");
   const sym = CURRENCY_SYMBOLS[item.currency];
+  const t = useT();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -941,10 +938,10 @@ function ConfirmStep({
         </div>
         <div className="flex flex-wrap gap-1.5 mt-2">
           <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
-            {ASSET_TYPE_LABELS[item.type]}
+          {t.asset_type_labels[item.type]}
           </span>
           <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
-            {MARKET_LABELS[item.market]}
+          {t.market_labels[item.market]}
           </span>
           <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
             {item.currency}
@@ -955,7 +952,7 @@ function ConfirmStep({
       <div className="grid grid-cols-2 gap-3">
         <label className="block">
           <span className="text-xs font-medium text-slate-600">
-            보유 수량 *
+            {t.af_quantity_label} *
           </span>
           <input
             type="number"
@@ -973,7 +970,7 @@ function ConfirmStep({
         </label>
         <label className="block">
           <span className="text-xs font-medium text-slate-600">
-            매입 단가 ({sym}) *
+            {t.af_avg_price_label} ({sym}) *
           </span>
           <input
             type="number"
@@ -994,10 +991,10 @@ function ConfirmStep({
 
       <label className="block">
         <span className="text-xs font-medium text-slate-600">
-          현재가 ({sym})
+          {t.af_current_price_label} ({sym})
           {item.currentPrice > 0 && (
             <span className="ml-2 text-green-600 font-normal text-xs">
-              ✓ Yahoo Finance 자동 조회
+              {t.af_current_price_auto}
             </span>
           )}
         </span>
@@ -1011,9 +1008,9 @@ function ConfirmStep({
 
       <div className="flex justify-between">
         <Button type="button" variant="ghost" onClick={onBack}>
-          ← 다시 검색
+          {t.af_re_search}
         </Button>
-        <Button type="submit">등록 완료</Button>
+        <Button type="submit">{t.af_btn_submit}</Button>
       </div>
     </form>
   );

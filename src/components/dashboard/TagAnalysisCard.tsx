@@ -1,5 +1,5 @@
 import { Card } from "@/components/common";
-import { TAG_LABELS } from "@/types";
+import { useT } from "@/hooks";
 import type { RebalanceSuggestion, AssetTag } from "@/types";
 
 interface Props {
@@ -7,11 +7,13 @@ interface Props {
 }
 
 export function TagAnalysisCard({ rebalancing }: Props) {
+  const t = useT();
+
   if (rebalancing.length === 0) {
     return (
-      <Card title="태그 목표 vs 실제">
+      <Card title={t.tag_title}>
         <p className="text-sm text-slate-400 py-4 text-center">
-          설정에서 목표 배분을 등록하세요
+          {t.tag_empty}
         </p>
       </Card>
     );
@@ -23,13 +25,13 @@ export function TagAnalysisCard({ rebalancing }: Props) {
   );
 
   return (
-    <Card title="태그 목표 vs 실제">
+    <Card title={t.tag_title}>
       <div className="space-y-3">
         {rebalancing.map((r) => {
           const diff = r.currentPercent - r.targetPercent;
           const absDiff = Math.abs(diff);
           const isOver = diff > 0;
-          const label = TAG_LABELS[r.tag as AssetTag] ?? r.tag;
+          const label = t.tag_labels[r.tag as AssetTag] ?? r.tag;
 
           return (
             <div key={r.tag}>
@@ -84,19 +86,19 @@ export function TagAnalysisCard({ rebalancing }: Props) {
       <div className="flex items-center gap-4 mt-4 text-[10px] text-slate-400">
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 bg-slate-300/50 rounded-full inline-block" />
-          목표
+          {t.tag_legend_target}
         </span>
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 bg-emerald-400 rounded-full inline-block" />
-          정상
+          {t.tag_legend_normal}
         </span>
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 bg-amber-400 rounded-full inline-block" />
-          초과
+          {t.tag_legend_over}
         </span>
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 bg-blue-400 rounded-full inline-block" />
-          부족
+          {t.tag_legend_under}
         </span>
       </div>
     </Card>

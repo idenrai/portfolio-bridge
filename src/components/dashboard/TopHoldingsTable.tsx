@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/common";
 import { formatCurrency, formatPercent, fromKRW } from "@/utils";
 import { useSettingsStore } from "@/stores";
-import { TAG_LABELS, ASSET_TYPE_LABELS, MARKET_LABELS } from "@/types";
+import { useT } from "@/hooks";
 import type { PortfolioSummary, AssetTag, AssetType, Market } from "@/types";
 
 interface Props {
@@ -16,6 +16,7 @@ export function TopHoldingsTable({ summary }: Props) {
   const rates = useSettingsStore((s) => s.exchangeRates);
   const [sortKey, setSortKey] = useState<SortKey>("value");
   const [showAll, setShowAll] = useState(false);
+  const t = useT();
 
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
 
@@ -51,14 +52,14 @@ export function TopHoldingsTable({ summary }: Props) {
 
   return (
     <Card
-      title="보유 종목"
+      title={t.holdings_title}
       action={
         sorted.length > 10 && (
           <button
             onClick={() => setShowAll(!showAll)}
             className="text-xs text-blue-600 hover:underline cursor-pointer"
           >
-            {showAll ? "상위 10개만" : `전체 ${sorted.length}개 보기`}
+            {showAll ? t.holdings_show_top10 : t.holdings_show_all(sorted.length)}
           </button>
         )
       }
@@ -68,15 +69,15 @@ export function TopHoldingsTable({ summary }: Props) {
           <thead>
             <tr className="border-b border-slate-100">
               <th className="text-[11px] text-slate-500 font-medium px-3 py-2 text-left">
-                종목
+                {t.holdings_col_name}
               </th>
               <th className="text-[11px] text-slate-500 font-medium px-3 py-2 text-left">
-                유형
+                {t.holdings_col_type}
               </th>
-              {sortBtn("value", "평가액")}
-              {sortBtn("pnl", "손익")}
-              {sortBtn("return", "수익률")}
-              {sortBtn("weight", "비중")}
+              {sortBtn("value", t.holdings_col_value)}
+              {sortBtn("pnl", t.holdings_col_pnl)}
+              {sortBtn("return", t.holdings_col_return)}
+              {sortBtn("weight", t.holdings_col_weight)}
             </tr>
           </thead>
           <tbody>
@@ -93,15 +94,15 @@ export function TopHoldingsTable({ summary }: Props) {
                     {h.ticker && <span>{h.ticker}</span>}
                     {h.tag && (
                       <span className="ml-1 px-1 py-0.5 bg-slate-100 rounded text-[9px]">
-                        {TAG_LABELS[h.tag as AssetTag] ?? h.tag}
+                        {t.tag_labels[h.tag as AssetTag] ?? h.tag}
                       </span>
                     )}
                   </div>
                 </td>
                 <td className="px-3 py-2 text-left text-[11px] text-slate-500">
-                  <div>{ASSET_TYPE_LABELS[h.type as AssetType] ?? h.type}</div>
+                  <div>{t.asset_type_labels[h.type as AssetType] ?? h.type}</div>
                   <div className="text-[10px] text-slate-400">
-                    {MARKET_LABELS[h.market as Market] ?? h.market}
+                    {t.market_labels[h.market as Market] ?? h.market}
                   </div>
                 </td>
                 <td className={tdCls}>

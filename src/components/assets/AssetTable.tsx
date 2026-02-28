@@ -1,9 +1,8 @@
 import { Button } from "@/components/common";
 import type { Asset, AssetTag } from "@/types";
-import { MARKET_LABELS, CURRENCY_SYMBOLS, TAG_LABELS } from "@/types";
+import { CURRENCY_SYMBOLS } from "@/types";
 import { useAssetStore } from "@/stores";
-
-const TAG_OPTIONS = Object.entries(TAG_LABELS) as [AssetTag, string][];
+import { useT } from "@/hooks";
 import {
   assetValue,
   assetPnL,
@@ -19,6 +18,8 @@ interface Props {
 
 export function AssetTable({ assets, onEdit, onDelete }: Props) {
   const updateAsset = useAssetStore((s) => s.updateAsset);
+  const t = useT();
+  const TAG_OPTIONS = Object.entries(t.tag_labels) as [AssetTag, string][];
 
   const handleTagChange = (id: string, tag: AssetTag | "") => {
     updateAsset(id, { tags: tag ? [tag] : [] });
@@ -27,10 +28,8 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
     return (
       <div className="text-center py-16 text-slate-400">
         <p className="text-4xl mb-3">💼</p>
-        <p className="font-medium">등록된 자산이 없습니다</p>
-        <p className="text-sm mt-1">
-          위의 &quot;자산 추가&quot; 버튼으로 첫 자산을 등록해 보세요.
-        </p>
+        <p className="font-medium">{t.at_empty_title}</p>
+        <p className="text-sm mt-1">{t.at_empty_desc}</p>
       </div>
     );
   }
@@ -40,15 +39,15 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
       <table className="w-full text-sm">
         <thead>
           <tr className="text-left text-xs text-slate-500 border-b border-slate-200">
-            <th className="pb-2 font-medium">종목</th>
-            <th className="pb-2 font-medium">시장</th>
-            <th className="pb-2 font-medium">분류</th>
-            <th className="pb-2 font-medium text-right">수량</th>
-            <th className="pb-2 font-medium text-right">현재가</th>
-            <th className="pb-2 font-medium text-right">평가액</th>
-            <th className="pb-2 font-medium text-right">손익</th>
-            <th className="pb-2 font-medium text-right">수익률</th>
-            <th className="pb-2 font-medium text-center">관리</th>
+            <th className="pb-2 font-medium">{t.at_col_name}</th>
+            <th className="pb-2 font-medium">{t.at_col_market}</th>
+            <th className="pb-2 font-medium">{t.at_col_tag}</th>
+            <th className="pb-2 font-medium text-right">{t.at_col_quantity}</th>
+            <th className="pb-2 font-medium text-right">{t.at_col_current_price}</th>
+            <th className="pb-2 font-medium text-right">{t.at_col_value}</th>
+            <th className="pb-2 font-medium text-right">{t.at_col_pnl}</th>
+            <th className="pb-2 font-medium text-right">{t.at_col_return}</th>
+            <th className="pb-2 font-medium text-center">{t.at_col_actions}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100">
@@ -71,7 +70,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
                 </td>
                 <td className="py-2.5">
                   <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
-                    {MARKET_LABELS[a.market]}
+                    {t.market_labels[a.market]}
                   </span>
                 </td>
                 <td className="py-2.5">
@@ -82,7 +81,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
                     }
                     className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-[90px]"
                   >
-                    <option value="">미분류</option>
+                    <option value="">{t.at_unclassified}</option>
                     {TAG_OPTIONS.map(([val, label]) => (
                       <option key={val} value={val}>
                         {label}
@@ -113,7 +112,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
                 <td className="py-2.5 text-center">
                   <div className="flex items-center justify-center gap-1">
                     <Button variant="ghost" size="sm" onClick={() => onEdit(a)}>
-                      편집
+                      {t.at_btn_edit}
                     </Button>
                     <Button
                       variant="ghost"
@@ -121,7 +120,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
                       onClick={() => onDelete(a.id)}
                       className="text-red-500 hover:text-red-700"
                     >
-                      삭제
+                      {t.at_btn_delete}
                     </Button>
                   </div>
                 </td>
