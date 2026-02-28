@@ -83,7 +83,9 @@ function EditForm({
 
       <div className="grid grid-cols-2 gap-3">
         <label className="block">
-          <span className="text-xs font-medium text-slate-600">{t.af_quantity_label}</span>
+          <span className="text-xs font-medium text-slate-600">
+            {t.af_quantity_label}
+          </span>
           <input
             type="number"
             required
@@ -221,7 +223,9 @@ function CashForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <span className="text-xs font-medium text-slate-600">{t.af_currency_label}</span>
+        <span className="text-xs font-medium text-slate-600">
+          {t.af_currency_label}
+        </span>
         <div className="relative mt-1">
           <button
             type="button"
@@ -273,7 +277,8 @@ function CashForm({
 
       <label className="block">
         <span className="text-xs font-medium text-slate-600">
-          {t.af_cash_amount_label}{currency ? ` (${CURRENCY_SYMBOLS[currency]})` : ""} *
+          {t.af_cash_amount_label}
+          {currency ? ` (${CURRENCY_SYMBOLS[currency]})` : ""} *
         </span>
         <input
           type="number"
@@ -379,9 +384,7 @@ function CryptoForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <p className="text-sm text-slate-500">
-        {t.af_crypto_hint}
-      </p>
+      <p className="text-sm text-slate-500">{t.af_crypto_hint}</p>
 
       <div className="flex gap-2">
         <input
@@ -405,7 +408,9 @@ function CryptoForm({
       {pairs.length > 0 && (
         <div className="border border-slate-200 rounded-lg overflow-hidden">
           <div className="bg-slate-50 px-3 py-2 border-b border-slate-200">
-            <p className="text-xs text-slate-500 font-medium">{t.af_crypto_pair_title}</p>
+            <p className="text-xs text-slate-500 font-medium">
+              {t.af_crypto_pair_title}
+            </p>
           </div>
           <div className="divide-y divide-slate-100">
             {pairs.map((p) => (
@@ -436,7 +441,9 @@ function CryptoForm({
                         : "bg-slate-100 text-slate-600"
                     }`}
                   >
-                    {selectedPair?.symbol === p.symbol ? t.af_crypto_selected : t.af_crypto_select}
+                    {selectedPair?.symbol === p.symbol
+                      ? t.af_crypto_selected
+                      : t.af_crypto_select}
                   </span>
                 </div>
               </button>
@@ -596,13 +603,13 @@ function ManualEntryForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
-        <p className="text-xs text-amber-700">
-          {t.af_manual_hint}
-        </p>
+        <p className="text-xs text-amber-700">{t.af_manual_hint}</p>
       </div>
 
       <label className="block">
-        <span className="text-xs font-medium text-slate-600">{t.af_name_label} *</span>
+        <span className="text-xs font-medium text-slate-600">
+          {t.af_name_label} *
+        </span>
         <input
           type="text"
           required
@@ -640,7 +647,9 @@ function ManualEntryForm({
 
       <div className="grid grid-cols-3 gap-3">
         <label className="block">
-          <span className="text-xs font-medium text-slate-600">{t.af_asset_type_label}</span>
+          <span className="text-xs font-medium text-slate-600">
+            {t.af_asset_type_label}
+          </span>
           <select
             value={assetType}
             onChange={(e) => setAssetType(e.target.value as AssetType)}
@@ -654,7 +663,9 @@ function ManualEntryForm({
           </select>
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-slate-600">{t.af_market_label}</span>
+          <span className="text-xs font-medium text-slate-600">
+            {t.af_market_label}
+          </span>
           <select
             value={market}
             onChange={(e) => setMarket(e.target.value as Market)}
@@ -668,7 +679,9 @@ function ManualEntryForm({
           </select>
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-slate-600">{t.af_currency_label}</span>
+          <span className="text-xs font-medium text-slate-600">
+            {t.af_currency_label}
+          </span>
           <select
             value={currency}
             onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
@@ -722,7 +735,7 @@ function ManualEntryForm({
         </label>
         <label className="block">
           <span className="text-xs font-medium text-slate-600">
-              {t.af_current_price_label} ({sym})
+            {t.af_current_price_label} ({sym})
           </span>
           <input
             type="number"
@@ -796,9 +809,7 @@ function SearchStep({
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
-        {t.af_search_hint}
-      </p>
+      <p className="text-sm text-slate-500">{t.af_search_hint}</p>
 
       <div className="flex gap-2">
         <input
@@ -938,10 +949,10 @@ function ConfirmStep({
         </div>
         <div className="flex flex-wrap gap-1.5 mt-2">
           <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
-          {t.asset_type_labels[item.type]}
+            {t.asset_type_labels[item.type]}
           </span>
           <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
-          {t.market_labels[item.market]}
+            {t.market_labels[item.market]}
           </span>
           <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
             {item.currency}

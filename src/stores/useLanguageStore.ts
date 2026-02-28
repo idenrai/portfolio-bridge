@@ -13,6 +13,6 @@ export const useLanguageStore = create<LanguageStore>()(
       lang: "ko" as Lang,
       setLang: (lang) => set({ lang }),
     }),
-    { name: "portfolio-bridge-lang" }
-  )
+    { name: "portfolio-bridge-lang" },
+  ),
 );

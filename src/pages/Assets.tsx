@@ -271,7 +271,10 @@ export function AssetsPage() {
 
               {importResult && (
                 <div className="rounded-lg bg-green-50 border border-green-200 px-3 py-2 text-sm text-green-700">
-                  {t.asset_ai_apply_result(importResult.applied, importResult.skipped)}
+                  {t.asset_ai_apply_result(
+                    importResult.applied,
+                    importResult.skipped,
+                  )}
                 </div>
               )}
 

@@ -55,7 +55,7 @@ export function RebalanceCard({ rebalancing }: Props) {
                     isBuy ? "text-red-600" : "text-blue-600"
                   }`}
                 >
-                {isBuy ? t.rebalance_buy + " " : t.rebalance_sell + " "}
+                  {isBuy ? t.rebalance_buy + " " : t.rebalance_sell + " "}
                   {formatCurrency(
                     Math.abs(convert(r.diffAmountKRW)),
                     baseCurrency,

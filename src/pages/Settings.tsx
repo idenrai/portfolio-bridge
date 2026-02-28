@@ -34,9 +34,7 @@ export function SettingsPage() {
   const t = useT();
 
   const handleResetAll = () => {
-    if (
-      window.confirm(t.settings_data_reset_confirm)
-    ) {
+    if (window.confirm(t.settings_data_reset_confirm)) {
       localStorage.removeItem("portfolio-bridge-assets");
       localStorage.removeItem("portfolio-bridge-settings");
       window.location.reload();
@@ -93,9 +91,7 @@ export function SettingsPage() {
             </div>
           ))}
           {!lastUpdated && !rateError && (
-            <p className="text-xs text-slate-400">
-              {t.settings_fx_auto}
-            </p>
+            <p className="text-xs text-slate-400">{t.settings_fx_auto}</p>
           )}
         </div>
       </Card>
@@ -143,9 +139,7 @@ export function SettingsPage() {
       {/* 데이터 관리 */}
       <Card title={t.settings_data_title}>
         <div className="space-y-3">
-          <p className="text-sm text-slate-500">
-            {t.settings_data_desc}
-          </p>
+          <p className="text-sm text-slate-500">{t.settings_data_desc}</p>
           <p className="text-sm text-slate-500">
             {t.settings_data_count(assetStore.assets.length)}
           </p>

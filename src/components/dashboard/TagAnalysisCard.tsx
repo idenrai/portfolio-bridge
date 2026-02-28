@@ -12,9 +12,7 @@ export function TagAnalysisCard({ rebalancing }: Props) {
   if (rebalancing.length === 0) {
     return (
       <Card title={t.tag_title}>
-        <p className="text-sm text-slate-400 py-4 text-center">
-          {t.tag_empty}
-        </p>
+        <p className="text-sm text-slate-400 py-4 text-center">{t.tag_empty}</p>
       </Card>
     );
   }

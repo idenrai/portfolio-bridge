@@ -109,7 +109,11 @@ export function AllocationPieCharts({ summary }: Props) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <Card title={t.chart_market}>
-        <MiniPie data={marketData} valueLabel={fmt} noDataText={t.chart_no_data} />
+        <MiniPie
+          data={marketData}
+          valueLabel={fmt}
+          noDataText={t.chart_no_data}
+        />
       </Card>
       <Card title={t.chart_tag}>
         <MiniPie data={tagData} valueLabel={fmt} noDataText={t.chart_no_data} />

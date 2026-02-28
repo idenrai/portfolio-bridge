@@ -11,7 +11,7 @@ export const ja: Translations = {
   dash_title: "ダッシュボード",
   dash_empty_title: "ポートフォリオを始めましょう",
   dash_empty_desc:
-    '「資産管理」メニューで保有資産を登録すると、ここにサマリーが表示されます。',
+    "「資産管理」メニューで保有資産を登録すると、ここにサマリーが表示されます。",
 
   kpi_total_value: "総評価額",
   kpi_pnl: "評価損益",
@@ -117,7 +117,8 @@ export const ja: Translations = {
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",
   settings_data_title: "データ管理",
-  settings_data_desc: "すべてのデータはブラウザのローカルストレージに保存されます。",
+  settings_data_desc:
+    "すべてのデータはブラウザのローカルストレージに保存されます。",
   settings_data_count: (n) => `登録資産数: ${n}件`,
   settings_data_reset: "全データ初期化",
   settings_data_reset_confirm:
@@ -133,7 +134,7 @@ export const ja: Translations = {
   at_col_return: "騰落率",
   at_col_actions: "操作",
   at_empty_title: "資産が登録されていません",
-  at_empty_desc: '上の「資産追加」ボタンから最初の資産を登録してください。',
+  at_empty_desc: "上の「資産追加」ボタンから最初の資産を登録してください。",
   at_btn_edit: "編集",
   at_btn_delete: "削除",
   at_unclassified: "未分類",
@@ -173,7 +174,8 @@ export const ja: Translations = {
   af_crypto_search_btn: "取引ペアを検索",
   af_crypto_searching: "取得中…",
   af_crypto_pair_title: "取引ペアを選択",
-  af_crypto_no_pairs: "取引ペアが見つかりません。ティッカーを確認してください。",
+  af_crypto_no_pairs:
+    "取引ペアが見つかりません。ティッカーを確認してください。",
   af_crypto_selected: "選択済み",
   af_crypto_select: "選択",
   af_buy_price_label: "取得単価",

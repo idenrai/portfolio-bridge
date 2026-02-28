@@ -41,9 +41,7 @@ export function GurusPage() {
         <h2 className="text-xl font-semibold text-slate-600 mb-2">
           {t.guru_empty_title}
         </h2>
-        <p className="text-sm">
-          {t.guru_empty_desc}
-        </p>
+        <p className="text-sm">{t.guru_empty_desc}</p>
       </div>
     );
   }
@@ -91,7 +89,9 @@ export function GurusPage() {
           {/* 철학 */}
           <Card title={t.guru_philosophy_title(selectedGuru.nameKo)}>
             <p className="text-sm text-slate-600 leading-relaxed">
-              {t[`guru_philosophy_${selectedGuru.id}` as keyof typeof t] as string || selectedGuru.philosophy}
+              {(t[
+                `guru_philosophy_${selectedGuru.id}` as keyof typeof t
+              ] as string) || selectedGuru.philosophy}
             </p>
           </Card>
 
@@ -158,10 +158,18 @@ export function GurusPage() {
                 <thead>
                   <tr className="text-left text-xs text-slate-500 border-b">
                     <th className="pb-2 font-medium">{t.guru_col_tag}</th>
-                    <th className="pb-2 font-medium text-right">{t.guru_col_current}</th>
-                    <th className="pb-2 font-medium text-right">{t.guru_col_guru_target}</th>
-                    <th className="pb-2 font-medium text-right">{t.guru_col_diff}</th>
-                    <th className="pb-2 font-medium text-right">{t.guru_col_amount}</th>
+                    <th className="pb-2 font-medium text-right">
+                      {t.guru_col_current}
+                    </th>
+                    <th className="pb-2 font-medium text-right">
+                      {t.guru_col_guru_target}
+                    </th>
+                    <th className="pb-2 font-medium text-right">
+                      {t.guru_col_diff}
+                    </th>
+                    <th className="pb-2 font-medium text-right">
+                      {t.guru_col_amount}
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">

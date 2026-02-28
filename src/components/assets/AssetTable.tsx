@@ -43,7 +43,9 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
             <th className="pb-2 font-medium">{t.at_col_market}</th>
             <th className="pb-2 font-medium">{t.at_col_tag}</th>
             <th className="pb-2 font-medium text-right">{t.at_col_quantity}</th>
-            <th className="pb-2 font-medium text-right">{t.at_col_current_price}</th>
+            <th className="pb-2 font-medium text-right">
+              {t.at_col_current_price}
+            </th>
             <th className="pb-2 font-medium text-right">{t.at_col_value}</th>
             <th className="pb-2 font-medium text-right">{t.at_col_pnl}</th>
             <th className="pb-2 font-medium text-right">{t.at_col_return}</th>

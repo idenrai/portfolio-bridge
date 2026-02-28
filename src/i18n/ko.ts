@@ -10,7 +10,8 @@ export const ko: Translations = {
 
   dash_title: "대시보드",
   dash_empty_title: "포트폴리오를 시작하세요",
-  dash_empty_desc: '"자산 관리" 메뉴에서 보유 자산을 등록하면 여기에 요약이 표시됩니다.',
+  dash_empty_desc:
+    '"자산 관리" 메뉴에서 보유 자산을 등록하면 여기에 요약이 표시됩니다.',
 
   kpi_total_value: "총 평가액",
   kpi_pnl: "평가 손익",

@@ -59,7 +59,9 @@ export function TopHoldingsTable({ summary }: Props) {
             onClick={() => setShowAll(!showAll)}
             className="text-xs text-blue-600 hover:underline cursor-pointer"
           >
-            {showAll ? t.holdings_show_top10 : t.holdings_show_all(sorted.length)}
+            {showAll
+              ? t.holdings_show_top10
+              : t.holdings_show_all(sorted.length)}
           </button>
         )
       }
@@ -100,7 +102,9 @@ export function TopHoldingsTable({ summary }: Props) {
                   </div>
                 </td>
                 <td className="px-3 py-2 text-left text-[11px] text-slate-500">
-                  <div>{t.asset_type_labels[h.type as AssetType] ?? h.type}</div>
+                  <div>
+                    {t.asset_type_labels[h.type as AssetType] ?? h.type}
+                  </div>
                   <div className="text-[10px] text-slate-400">
                     {t.market_labels[h.market as Market] ?? h.market}
                   </div>
