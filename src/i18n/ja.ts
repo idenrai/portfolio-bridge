@@ -15,10 +15,10 @@ export const ja: Translations = {
   about_features_title: "主な機能",
   about_feat1_title: "統合ダッシュボード",
   about_feat1_desc:
-    "KPIサマリー、タグ・市場別配分チャート、保有銘柄テーブル、リバランス提案を一目で確認できます。",
+    "KPIサマリー、カテゴリー・市場別配分チャート、保有銘柄テーブル、リバランス提案を一目で確認できます。",
   about_feat2_title: "資産管理",
   about_feat2_desc:
-    "Yahoo Financeで銘柄を検索するか、手動登録で多国籍資産を一元管理。AI自動タグ分類、CSVインポート・エクスポートに対応。",
+    "Yahoo Financeで銘柄を検索するか、手動登録で多国籍資産を一元管理。AI自動分類、CSVインポート・エクスポートに対応。",
   about_feat3_title: "投資家",
   about_feat3_desc:
     "バフェット、ダリオ、リンチなど伝賭の投資家１15名の哲学と代表ポートフォリオを参考に、自分のポートフォリオと比較できます。",
@@ -62,7 +62,7 @@ export const ja: Translations = {
   kpi_asset_type_unit: "資産クラス",
 
   chart_market: "国別配分",
-  chart_tag: "タグ別配分",
+  chart_tag: "カテゴリー別配分",
   chart_no_data: "データなし",
 
   holdings_title: "保有銘柄",
@@ -75,7 +75,7 @@ export const ja: Translations = {
   holdings_show_all: (n) => `全${n}件を表示`,
   holdings_show_top10: "上位10件のみ",
 
-  tag_title: "タグ目標 vs 実績",
+  tag_title: "カテゴリー目標 vs 実績",
   tag_empty: "設定から目標配分を登録してください",
   tag_legend_target: "目標",
   tag_legend_normal: "正常",
@@ -122,7 +122,7 @@ export const ja: Translations = {
   asset_btn_ai: "🤖 AI分類プロンプト",
   asset_ai_banner_title: "AI 資産分類",
   asset_ai_banner_desc:
-    "タグのない資産をAIが自動的に分類します。プロンプトをChatGPT・Claude・Gemini・Grokに貼り付けると、各資産に適したタグを提案してもらえます。",
+    "カテゴリーのない資産をAIが自動的に分類します。プロンプトをChatGPT・Claude・Gemini・Grokに貼り付けると、各資産に適したカテゴリーを提案してもらえます。",
   asset_btn_import_csv: "CSVインポート",
   asset_btn_export_csv: "CSVエクスポート",
   asset_btn_add: "+ 資産追加",
@@ -142,9 +142,9 @@ export const ja: Translations = {
   asset_ai_format_label: "形式:",
   asset_ai_json_placeholder:
     'AIの応答JSONをここに貼り付けてください...\n\n例:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
-  asset_ai_apply_btn: "タグを適用",
+  asset_ai_apply_btn: "カテゴリーを適用",
   asset_ai_apply_result: (applied, skipped) =>
-    `✓ ${applied}件にタグを適用しました。${skipped > 0 ? `（${skipped}件スキップ）` : ""}`,
+    `✓ ${applied}件にカテゴリーを適用しました。${skipped > 0 ? `（${skipped}件スキップ）` : ""}`,
   asset_ai_parse_error: "パースエラー",
   exchange_rate_error:
     "為替レートの取得に失敗しました。手動で入力してください。",
@@ -164,7 +164,7 @@ export const ja: Translations = {
   guru_radar_title: "マイポートフォリオ vs 投資家比較",
   guru_my_portfolio: "マイポートフォリオ",
   guru_rebalance_title: (name) => `${name}基準のリバランス提案`,
-  guru_col_tag: "タグ",
+  guru_col_tag: "カテゴリー",
   guru_col_current: "現在",
   guru_col_guru_target: "投資家目標",
   guru_col_diff: "差異",

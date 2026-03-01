@@ -15,10 +15,10 @@ export const en: Translations = {
   about_features_title: "Features",
   about_feat1_title: "Unified Dashboard",
   about_feat1_desc:
-    "KPI summary, tag & market allocation charts, holdings table, and rebalancing suggestions — all at a glance.",
+    "KPI summary, category & market allocation charts, holdings table, and rebalancing suggestions — all at a glance.",
   about_feat2_title: "Asset Management",
   about_feat2_desc:
-    "Search tickers via Yahoo Finance or add assets manually. AI auto-tagging, CSV import & export supported.",
+    "Search tickers via Yahoo Finance or add assets manually. AI auto-classification, CSV import & export supported.",
   about_feat3_title: "Investment Gurus",
   about_feat3_desc:
     "Reference the philosophies and model portfolios of 15 legendary investors — Buffett, Dalio, Lynch, and more — and compare them with your own portfolio.",
@@ -61,7 +61,7 @@ export const en: Translations = {
   kpi_asset_type_unit: "asset types",
 
   chart_market: "By Market",
-  chart_tag: "By Tag",
+  chart_tag: "By Category",
   chart_no_data: "No data",
 
   holdings_title: "Holdings",
@@ -74,7 +74,7 @@ export const en: Translations = {
   holdings_show_all: (n) => `View all ${n}`,
   holdings_show_top10: "Top 10 only",
 
-  tag_title: "Tag Target vs Actual",
+  tag_title: "Category Target vs Actual",
   tag_empty: "Set target allocations in Settings.",
   tag_legend_target: "Target",
   tag_legend_normal: "Normal",
@@ -121,7 +121,7 @@ export const en: Translations = {
   asset_btn_ai: "🤖 AI Classification Prompt",
   asset_ai_banner_title: "AI Asset Classification",
   asset_ai_banner_desc:
-    "Automatically classify untagged assets with AI. Copy the prompt and paste it into ChatGPT, Claude, Gemini, or Grok to get recommended tags for each holding.",
+    "Automatically classify assets with AI. Copy the prompt and paste it into ChatGPT, Claude, Gemini, or Grok to get a recommended category for each holding.",
   asset_btn_import_csv: "Import CSV",
   asset_btn_export_csv: "Export CSV",
   asset_btn_add: "+ Add Asset",
@@ -141,9 +141,9 @@ export const en: Translations = {
   asset_ai_format_label: "Format:",
   asset_ai_json_placeholder:
     'Paste AI response JSON here...\n\nExample:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
-  asset_ai_apply_btn: "Apply Tags",
+  asset_ai_apply_btn: "Apply Categories",
   asset_ai_apply_result: (applied, skipped) =>
-    `✓ Tags applied to ${applied} assets.${skipped > 0 ? ` (${skipped} skipped)` : ""}`,
+    `✓ Categories applied to ${applied} assets.${skipped > 0 ? ` (${skipped} skipped)` : ""}`,
   asset_ai_parse_error: "Parse error",
   exchange_rate_error: "Failed to fetch exchange rates. Please enter manually.",
   asset_ai_copy_link_pre: "When you get a response, go to the",
@@ -162,7 +162,7 @@ export const en: Translations = {
   guru_radar_title: "My Portfolio vs Guru",
   guru_my_portfolio: "My Portfolio",
   guru_rebalance_title: (name) => `Rebalance Suggestions (${name})`,
-  guru_col_tag: "Tag",
+  guru_col_tag: "Category",
   guru_col_current: "Current",
   guru_col_guru_target: "Guru Target",
   guru_col_diff: "Diff",
@@ -288,7 +288,7 @@ export const en: Translations = {
 
   at_col_name: "Name",
   at_col_market: "Market",
-  at_col_tag: "Tag",
+  at_col_tag: "Category",
   at_col_quantity: "Qty",
   at_col_current_price: "Current Price",
   at_col_value: "Value",
