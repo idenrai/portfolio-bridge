@@ -16,6 +16,8 @@ export interface Translations {
   dash_notice_storage: string;
   dash_notice_csv: string;
   dash_notice_mobile: string;
+  dash_sample_btn: string;
+  dash_sample_hint: string;
 
   // ─── KPI Bar ───────────────────────────────────────────────────────────────
   kpi_total_value: string;
@@ -91,6 +93,9 @@ export interface Translations {
   asset_ai_copy_link_pre: string;
   asset_ai_copy_link_post: string;
   asset_ai_import_btn_suffix: string;
+  csv_preview_title: (n: number) => string;
+  csv_preview_confirm: string;
+  csv_preview_more: (n: number) => string;
 
   // ─── Gurus Page ────────────────────────────────────────────────────────────
   guru_title: string;
@@ -136,6 +141,7 @@ export interface Translations {
   settings_fx_refresh: string;
   settings_fx_auto: string;
   settings_fx_time: (time: string) => string;
+  settings_fx_cache_warn: (time: string) => string;
   settings_target_title: string;
   settings_target_sum: (n: string) => string;
   settings_target_save: string;

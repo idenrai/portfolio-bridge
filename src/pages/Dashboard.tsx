@@ -1,4 +1,5 @@
 import { usePortfolio, useT } from "@/hooks";
+import { useAssetStore } from "@/stores";
 import { KpiBar } from "@/components/dashboard/KpiBar";
 import { AllocationPieCharts } from "@/components/dashboard/AllocationPieCharts";
 import { TopHoldingsTable } from "@/components/dashboard/TopHoldingsTable";
@@ -6,10 +7,16 @@ import { TagAnalysisCard } from "@/components/dashboard/TagAnalysisCard";
 import { CurrencyExposureCard } from "@/components/dashboard/CurrencyExposureCard";
 import { RebalanceCard } from "@/components/dashboard/RebalanceCard";
 import { InsightsPanel } from "@/components/dashboard/InsightsPanel";
+import { SAMPLE_ASSETS } from "@/utils/sampleData";
 
 export function DashboardPage() {
   const { assets, summary, rebalancing } = usePortfolio();
+  const { addAsset } = useAssetStore();
   const t = useT();
+
+  const handleLoadSample = () => {
+    SAMPLE_ASSETS.forEach((data) => addAsset(data));
+  };
 
   if (assets.length === 0) {
     return (
@@ -32,6 +39,18 @@ export function DashboardPage() {
               </p>
             ),
           )}
+        </div>
+
+        {/* 샘플 데이터 온보딩 */}
+        <div className="mt-6 flex flex-col items-center gap-2">
+          <button
+            type="button"
+            onClick={handleLoadSample}
+            className="px-5 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors"
+          >
+            {t.dash_sample_btn}
+          </button>
+          <p className="text-xs text-slate-400">{t.dash_sample_hint}</p>
         </div>
       </div>
     );

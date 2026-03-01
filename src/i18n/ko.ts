@@ -18,6 +18,8 @@ export const ko: Translations = {
     "📁 자산 데이터는 CSV 파일로 내보내기/가져오기가 가능합니다. 백업이나 기기 이전 시 활용하세요.",
   dash_notice_mobile:
     "🖥️ 현재 PC 브라우저에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
+  dash_sample_btn: "📈 샘플 데이터로 둘러보기",
+  dash_sample_hint: "샘플 데이터는 '설정 › 전체 초기화'로 제거할 수 있습니다.",
 
   kpi_total_value: "총 평가액",
   kpi_pnl: "평가 손익",
@@ -87,6 +89,9 @@ export const ko: Translations = {
   asset_ai_copy_link_pre: "응답을 받으면",
   asset_ai_copy_link_post: "탭에서 자동 적용할 수 있습니다.",
   asset_ai_import_btn_suffix: "버튼을 눌러 주세요.",
+  csv_preview_title: (n) => `CSV 미리보기 — ${n}행`,
+  csv_preview_confirm: "가져오기 확정",
+  csv_preview_more: (n) => `... 외 ${n}행`,
 
   guru_title: "투자 구루",
   guru_empty_title: "투자 구루 분석",
@@ -207,6 +212,7 @@ export const ko: Translations = {
   settings_fx_refresh: "🔄 지금 갱신",
   settings_fx_auto: "앱 시작 시 자동 조회됩니다.",
   settings_fx_time: (time) => `${time} 기준`,
+  settings_fx_cache_warn: (time) => `⚠️ 환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
   settings_target_title: "목표 비중 배분",
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",

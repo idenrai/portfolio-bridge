@@ -15,6 +15,7 @@ export function SettingsPage() {
     isLoading,
     lastUpdated,
     error: rateError,
+    isCached,
   } = useExchangeRates();
   const [allocations, setAllocations] = useState<TargetAllocation[]>([
     ...settings.targetAllocations,
@@ -98,6 +99,16 @@ export function SettingsPage() {
               {rateError}
             </p>
           )}
+          {isCached && lastUpdated && (
+            <p className="text-xs text-amber-700 bg-amber-50 rounded px-3 py-2">
+              {t.settings_fx_cache_warn(
+                new Date(lastUpdated).toLocaleTimeString("ko-KR", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }),
+              )}
+            </p>
+          )}
           {(
             Object.entries(CURRENCY_LABELS).filter(([k]) => k !== "KRW") as [
               keyof typeof CURRENCY_SYMBOLS,
@@ -114,7 +125,7 @@ export function SettingsPage() {
               <span className="text-xs text-slate-400">KRW</span>
             </div>
           ))}
-          {!lastUpdated && !rateError && (
+          {!lastUpdated && !rateError && !isCached && (
             <p className="text-xs text-slate-400">{t.settings_fx_auto}</p>
           )}
         </div>

@@ -24,6 +24,7 @@ export function AssetsPage() {
     skipped: number;
   } | null>(null);
   const [importError, setImportError] = useState<string | null>(null);
+  const [importPreview, setImportPreview] = useState<AssetFormData[] | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const promptText = buildClassificationPrompt(assets);
   const t = useT();
@@ -105,10 +106,16 @@ export function AssetsPage() {
     reader.onload = (ev) => {
       const csv = ev.target?.result as string;
       const parsed = parseCsv(csv);
-      parsed.forEach((data) => addAsset(data));
+      setImportPreview(parsed);
     };
     reader.readAsText(file);
     e.target.value = "";
+  };
+
+  const handleConfirmImport = () => {
+    if (!importPreview) return;
+    importPreview.forEach((data) => addAsset(data));
+    setImportPreview(null);
   };
 
   return (
@@ -292,6 +299,62 @@ export function AssetsPage() {
             </>
           )}
         </div>
+      </Modal>
+
+      {/* CSV 미리보기 모달 */}
+      <Modal
+        open={!!importPreview}
+        onClose={() => setImportPreview(null)}
+        title={importPreview ? t.csv_preview_title(importPreview.length) : ""}
+        maxWidth="max-w-3xl"
+      >
+        {importPreview && (
+          <div className="space-y-4">
+            <div className="overflow-x-auto rounded-lg border border-slate-200">
+              <table className="w-full text-xs text-left">
+                <thead className="bg-slate-50 text-slate-500 font-medium">
+                  <tr>
+                    <th className="px-3 py-2">{t.at_col_name}</th>
+                    <th className="px-3 py-2">티커</th>
+                    <th className="px-3 py-2">{t.at_col_market}</th>
+                    <th className="px-3 py-2">{t.af_currency_label}</th>
+                    <th className="px-3 py-2 text-right">{t.af_quantity_label}</th>
+                    <th className="px-3 py-2 text-right">{t.af_avg_price_label}</th>
+                    <th className="px-3 py-2 text-right">{t.af_current_price_label}</th>
+                    <th className="px-3 py-2">{t.at_col_tag}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {importPreview.slice(0, 5).map((row, i) => (
+                    <tr key={i} className="hover:bg-slate-50">
+                      <td className="px-3 py-1.5 text-slate-800 font-medium">{row.name}</td>
+                      <td className="px-3 py-1.5 font-mono text-slate-500">{row.ticker ?? "—"}</td>
+                      <td className="px-3 py-1.5 text-slate-600">{row.market}</td>
+                      <td className="px-3 py-1.5 text-slate-600">{row.currency}</td>
+                      <td className="px-3 py-1.5 text-right text-slate-700">{row.quantity.toLocaleString()}</td>
+                      <td className="px-3 py-1.5 text-right text-slate-700">{row.avgBuyPrice.toLocaleString()}</td>
+                      <td className="px-3 py-1.5 text-right text-slate-700">{row.currentPrice.toLocaleString()}</td>
+                      <td className="px-3 py-1.5 text-slate-500">{row.tags.join(", ")}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {importPreview.length > 5 && (
+              <p className="text-xs text-slate-400 text-center">
+                {t.csv_preview_more(importPreview.length - 5)}
+              </p>
+            )}
+            <div className="flex justify-end gap-2">
+              <Button variant="secondary" onClick={() => setImportPreview(null)}>
+                {t.af_btn_cancel}
+              </Button>
+              <Button onClick={handleConfirmImport}>
+                {t.csv_preview_confirm}
+              </Button>
+            </div>
+          </div>
+        )}
       </Modal>
     </div>
   );

@@ -8,6 +8,8 @@ interface SettingsState {
   baseCurrency: CurrencyCode;
   /** 환율 (1 단위 → KRW) */
   exchangeRates: Record<CurrencyCode, number>;
+  /** 환율 마지막 갱신 시각 (ISO 문자열, 영속화) */
+  exchangeRatesUpdatedAt: string | null;
   /** 목표 비중 배분 */
   targetAllocations: TargetAllocation[];
   /** 언어 */
@@ -15,6 +17,7 @@ interface SettingsState {
 
   setBaseCurrency: (c: CurrencyCode) => void;
   setExchangeRate: (currency: CurrencyCode, rate: number) => void;
+  setExchangeRatesUpdatedAt: (iso: string) => void;
   setTargetAllocations: (allocations: TargetAllocation[]) => void;
   setLocale: (l: "ko" | "ja" | "en") => void;
 }
@@ -33,6 +36,7 @@ export const useSettingsStore = create<SettingsState>()(
     (set) => ({
       baseCurrency: "KRW",
       exchangeRates: { ...DEFAULT_RATES },
+      exchangeRatesUpdatedAt: null,
       targetAllocations: DEFAULT_TARGET,
       locale: "ko",
 
@@ -41,6 +45,7 @@ export const useSettingsStore = create<SettingsState>()(
         set((state) => ({
           exchangeRates: { ...state.exchangeRates, [currency]: rate },
         })),
+      setExchangeRatesUpdatedAt: (iso) => set({ exchangeRatesUpdatedAt: iso }),
       setTargetAllocations: (targetAllocations) => set({ targetAllocations }),
       setLocale: (locale) => set({ locale }),
     }),

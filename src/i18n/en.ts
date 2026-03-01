@@ -18,6 +18,8 @@ export const en: Translations = {
     "📁 Asset data can be exported/imported as CSV files. Use this for backups or device migration.",
   dash_notice_mobile:
     "🖥️ Optimized for desktop browsers. Mobile screens are not currently supported.",
+  dash_sample_btn: "📈 Explore with sample data",
+  dash_sample_hint: "Sample data can be removed via Settings › Reset all data.",
 
   kpi_total_value: "Total Value",
   kpi_pnl: "Unrealized P&L",
@@ -87,6 +89,9 @@ export const en: Translations = {
   asset_ai_copy_link_pre: "When you get a response, go to the",
   asset_ai_copy_link_post: "tab to apply automatically.",
   asset_ai_import_btn_suffix: "and apply.",
+  csv_preview_title: (n) => `CSV Preview — ${n} rows`,
+  csv_preview_confirm: "Confirm import",
+  csv_preview_more: (n) => `... and ${n} more rows`,
 
   guru_title: "Investment Gurus",
   guru_empty_title: "Guru Analysis",
@@ -208,6 +213,7 @@ export const en: Translations = {
   settings_fx_refresh: "🔄 Refresh Now",
   settings_fx_auto: "Rates are fetched automatically on app start.",
   settings_fx_time: (time) => `As of ${time}`,
+  settings_fx_cache_warn: (time) => `⚠️ Rate fetch failed — using cached value (as of ${time})`,
   settings_target_title: "Target Allocation",
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",
