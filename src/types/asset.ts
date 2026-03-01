@@ -1,8 +1,8 @@
 /** 통화 코드 */
-export type CurrencyCode = "KRW" | "JPY" | "USD";
+export type CurrencyCode = "KRW" | "JPY" | "USD" | "EUR";
 
 /** 자산이 속한 국가/시장 */
-export type Market = "KR" | "JP" | "US" | "OTHER";
+export type Market = "KR" | "JP" | "US" | "EU" | "OTHER";
 
 /** 자산 분류 태그 */
 export type AssetTag =
@@ -91,5 +91,6 @@ export const MARKET_LABELS: Record<Market, string> = {
   KR: "한국",
   JP: "일본",
   US: "미국",
+  EU: "유럽",
   OTHER: "기타",
 };

@@ -12,6 +12,7 @@ function detectLang(): Lang {
   const bl = navigator.language ?? navigator.languages?.[0] ?? "en";
   if (bl.startsWith("ko")) return "ko";
   if (bl.startsWith("ja")) return "ja";
+  if (bl.startsWith("de")) return "de";
   return "en";
 }
 

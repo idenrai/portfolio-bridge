@@ -1,10 +1,11 @@
-export type Lang = "ko" | "en" | "ja";
+export type Lang = "ko" | "en" | "ja" | "de";
 
 /** Language display names for AI prompts */
 export const LANG_NAMES: Record<Lang, string> = {
   ko: "Korean (한국어)",
   en: "English",
   ja: "Japanese (日本語)",
+  de: "German (Deutsch)",
 };
 
 /** BCP-47 locale codes per Lang */
@@ -12,6 +13,7 @@ export const LANG_LOCALES: Record<Lang, string> = {
   ko: "ko-KR",
   en: "en-US",
   ja: "ja-JP",
+  de: "de-DE",
 };
 
 export interface Translations {
@@ -228,6 +230,7 @@ export interface Translations {
   at_col_value: string;
   at_col_pnl: string;
   at_col_return: string;
+  at_col_weight: string;
   at_col_actions: string;
   at_empty_title: string;
   at_empty_desc: string;
@@ -287,10 +290,12 @@ export interface Translations {
   market_jp: string;
   market_us: string;
   market_kr: string;
+  market_eu: string;
   market_other: string;
   currency_jpy: string;
   currency_usd: string;
   currency_krw: string;
+  currency_eur: string;
 
   // ─── Label maps (charts, dropdowns) ───────────────────────────────────────
   tag_labels: Record<string, string>;

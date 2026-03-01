@@ -30,7 +30,7 @@ export const ko: Translations = {
     "과대비중, 큰 손실, 현금 부족, 환 노출 초과 등을 자동으로 감지해 콘스리업스 명시에서 확인할 수 있습니다.",
   about_feat6_title: "다국어 · 다통화",
   about_feat6_desc:
-    "한국어 · English · 日本어 3개국어와 KRW · USD · JPY 통화 표시를 지원합니다.",
+    "한국어 · English · 日本語 · Deutsch 4개국어와 KRW · USD · JPY · EUR 통화 표시를 지원합니다.",
   about_privacy_title: "프라이버시 우선",
   about_privacy_desc:
     "모든 자산 데이터는 브라우저 localStorage에만 저장됩니다. 외부 서버로 개인 자산 데이터가 전송되지 않으며, 계정 생성 없이 바로 사용할 수 있습니다.",
@@ -293,6 +293,7 @@ export const ko: Translations = {
   at_col_value: "평가액",
   at_col_pnl: "손익",
   at_col_return: "수익률",
+  at_col_weight: "비중",
   at_col_actions: "관리",
   at_empty_title: "등록된 자산이 없습니다",
   at_empty_desc: '위의 "자산 추가" 버튼으로 첫 자산을 등록해 보세요.',
@@ -351,10 +352,12 @@ export const ko: Translations = {
   market_jp: "일본 (JP)",
   market_us: "미국 (US)",
   market_kr: "한국 (KR)",
+  market_eu: "유럽 (EU)",
   market_other: "기타",
   currency_jpy: "엔화 (JPY)",
   currency_usd: "달러 (USD)",
   currency_krw: "원화 (KRW)",
+  currency_eur: "유로 (EUR)",
 
   tag_labels: {
     dividend: "배당",
@@ -382,6 +385,7 @@ export const ko: Translations = {
     KR: "한국",
     JP: "일본",
     US: "미국",
+    EU: "유럽",
     OTHER: "기타",
   },
 };

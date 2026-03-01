@@ -95,6 +95,7 @@ export function TopHoldingsTable({ summary }: Props) {
                           KRW: t.currency_krw,
                           USD: t.currency_usd,
                           JPY: t.currency_jpy,
+                          EUR: t.currency_eur,
                         }[h.currency] ?? h.name)
                       : h.name}
                   </div>

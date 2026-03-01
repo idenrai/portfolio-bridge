@@ -30,7 +30,7 @@ export const ja: Translations = {
     "集中リスク、大きな損失、現金不足、為替エクスポージャー超過などを自動検知。インサイトカードとして表示されます。",
   about_feat6_title: "多言語・多通貨",
   about_feat6_desc:
-    "韓国語・English・日本語の3ヵ国語とKRW・USD・JPYの通貨表示に対応しています。",
+    "韓国語・English・日本語・Deutschの4ヵ国語とKRW・USD・JPY・EURの通貨表示に対応しています。",
   about_privacy_title: "プライバシー重視",
   about_privacy_desc:
     "すべての資産データはブラウザのlocalStorageのみに保存されます。外部サーバーへの送信は一切なく、アカウント不要で即座にご利用いただけます。",
@@ -297,6 +297,7 @@ export const ja: Translations = {
   at_col_value: "評価額",
   at_col_pnl: "損益",
   at_col_return: "騰落率",
+  at_col_weight: "比重",
   at_col_actions: "操作",
   at_empty_title: "資産が登録されていません",
   at_empty_desc: "上の「資産追加」ボタンから最初の資産を登録してください。",
@@ -356,10 +357,12 @@ export const ja: Translations = {
   market_jp: "日本 (JP)",
   market_us: "米国 (US)",
   market_kr: "韓国 (KR)",
+  market_eu: "ヨーロッパ (EU)",
   market_other: "その他",
   currency_jpy: "円 (JPY)",
   currency_usd: "ドル (USD)",
   currency_krw: "ウォン (KRW)",
+  currency_eur: "ユーロ (EUR)",
 
   tag_labels: {
     dividend: "配当",
@@ -387,6 +390,7 @@ export const ja: Translations = {
     KR: "韓国",
     JP: "日本",
     US: "米国",
+    EU: "ヨーロッパ",
     OTHER: "その他",
   },
 };

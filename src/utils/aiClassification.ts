@@ -57,6 +57,7 @@ const MARKET_EN: Record<string, string> = {
   KR: "Korea",
   JP: "Japan",
   US: "US",
+  EU: "Europe (EU)",
   OTHER: "Other",
 };
 

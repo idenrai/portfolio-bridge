@@ -6,6 +6,7 @@ const LANG_LABELS: Record<Lang, string> = {
   ko: "🇰🇷",
   en: "🇺🇸",
   ja: "🇯🇵",
+  de: "🇩🇪",
 };
 
 /** 언어별 기본 표시 화폐 */
@@ -13,6 +14,7 @@ const LANG_CURRENCY: Record<Lang, CurrencyCode> = {
   ko: "KRW",
   en: "USD",
   ja: "JPY",
+  de: "EUR",
 };
 
 export function Header() {

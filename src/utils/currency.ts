@@ -27,6 +27,7 @@ const CURRENCY_LOCALES: Record<CurrencyCode, string> = {
   KRW: "ko-KR",
   USD: "en-US",
   JPY: "ja-JP",
+  EUR: "de-DE",
 };
 
 /**
@@ -50,7 +51,7 @@ export function formatCurrency(
     if (compact && abs >= 1_0000)
       return `${symbol}${Math.round(amount / 1_0000).toLocaleString("ja-JP")}万`;
   } else {
-    // USD, etc.
+    // USD, EUR, etc.
     if (compact && abs >= 1_000_000)
       return `${symbol}${(amount / 1_000_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`;
     if (compact && abs >= 1_000)

@@ -188,6 +188,7 @@ function CashForm({
     { code: "KRW", label: t.currency_krw },
     { code: "JPY", label: t.currency_jpy },
     { code: "USD", label: t.currency_usd },
+    { code: "EUR", label: t.currency_eur },
   ];
 
   const filtered = useMemo(
@@ -203,7 +204,7 @@ function CashForm({
   const selected = CURRENCY_OPTIONS.find((c) => c.code === currency);
 
   const marketFromCurrency = (c: CurrencyCode): Market =>
-    c === "KRW" ? "KR" : c === "JPY" ? "JP" : "US";
+    c === "KRW" ? "KR" : c === "JPY" ? "JP" : c === "EUR" ? "EU" : "US";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -245,7 +246,7 @@ function CashForm({
                   autoFocus
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="KRW, JPY, USD..."
+                  placeholder="KRW, JPY, USD, EUR..."
                   className="w-full rounded border border-slate-200 px-2 py-1.5 text-sm focus:outline-none focus:border-blue-400"
                 />
               </div>
@@ -362,7 +363,7 @@ function CryptoForm({
   };
 
   const marketFromCurrency = (c: CurrencyCode): Market =>
-    c === "KRW" ? "KR" : c === "JPY" ? "JP" : "US";
+    c === "KRW" ? "KR" : c === "JPY" ? "JP" : c === "EUR" ? "EU" : "US";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

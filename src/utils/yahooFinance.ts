@@ -115,6 +115,16 @@ const EXCHANGE_MARKET_MAP: Record<string, Market> = {
   TIF: "JP",
   JMF: "JP",
   XTKS: "JP",
+  // 유럽
+  GER: "EU",
+  FRA: "EU",
+  ETR: "EU",
+  STU: "EU",
+  EBS: "EU",
+  AMS: "EU",
+  MCE: "EU",
+  MIL: "EU",
+  XETRA: "EU",
   // 미국
   NYQ: "US",
   NMS: "US",
@@ -140,15 +150,19 @@ const SYMBOL_SUFFIX_MARKET_MAP: Record<string, Market> = {
   ".T": "JP",
   ".OS": "JP",
   ".N": "JP",
-  ".F": "JP",
   ".S": "JP",
   // 한국
   ".KS": "KR",
   ".KQ": "KR",
   // 유럽/기타
   ".L": "OTHER",
-  ".PA": "OTHER",
-  ".DE": "OTHER",
+  ".PA": "EU",
+  ".DE": "EU",
+  ".F": "EU",
+  ".AS": "EU",
+  ".MC": "EU",
+  ".MI": "EU",
+  ".VI": "EU",
   ".HK": "OTHER",
 };
 
@@ -157,6 +171,7 @@ const MARKET_DEFAULT_CURRENCY: Record<Market, CurrencyCode> = {
   KR: "KRW",
   JP: "JPY",
   US: "USD",
+  EU: "EUR",
   OTHER: "USD",
 };
 
@@ -189,6 +204,7 @@ function toMarket(
   // 3순위: 통화
   if (currency === "KRW") return "KR";
   if (currency === "JPY") return "JP";
+  if (currency === "EUR") return "EU";
   if (currency === "USD") return "US";
   return "OTHER";
 }
@@ -197,6 +213,7 @@ function toCurrency(currency?: string, market?: Market): CurrencyCode {
   if (currency === "KRW") return "KRW";
   if (currency === "JPY") return "JPY";
   if (currency === "USD") return "USD";
+  if (currency === "EUR") return "EUR";
   // currency 필드가 없거나 알 수 없는 경우 → market 기반 기본값 사용
   if (market) return MARKET_DEFAULT_CURRENCY[market];
   return "USD";
@@ -520,19 +537,21 @@ export async function fetchExchangeRate(
 }
 
 /**
- * KRW 기준 환율 전체 갱신 (JPY, USD → KRW)
- * 반환: { JPY: number, USD: number }
+ * KRW 기준 환율 전체 갱신 (JPY, USD, EUR → KRW)
+ * 반환: { JPY: number, USD: number, EUR: number }
  */
 export async function fetchAllExchangeRates(): Promise<
   Partial<Record<CurrencyCode, number>>
 > {
-  const [jpy, usd] = await Promise.all([
+  const [jpy, usd, eur] = await Promise.all([
     fetchExchangeRate("JPY", "KRW"),
     fetchExchangeRate("USD", "KRW"),
+    fetchExchangeRate("EUR", "KRW"),
   ]);
 
   const result: Partial<Record<CurrencyCode, number>> = {};
   if (jpy !== null) result.JPY = jpy;
   if (usd !== null) result.USD = usd;
+  if (eur !== null) result.EUR = eur;
   return result;
 }

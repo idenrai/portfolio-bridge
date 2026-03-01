@@ -30,7 +30,7 @@ export const en: Translations = {
     "Automatically detects concentration risk, large losses, low cash, and high FX exposure — displayed as dismissible insight cards.",
   about_feat6_title: "Multi-language & Currency",
   about_feat6_desc:
-    "Full UI in Korean, English, and Japanese. Display currency switchable between KRW, USD, and JPY.",
+    "Full UI in Korean, English, Japanese, and German. Display currency switchable between KRW, USD, JPY, and EUR.",
   about_privacy_title: "Privacy First",
   about_privacy_desc:
     "All asset data is stored only in your browser's localStorage. Nothing is sent to an external server. No account creation needed.",
@@ -294,6 +294,7 @@ export const en: Translations = {
   at_col_value: "Value",
   at_col_pnl: "P&L",
   at_col_return: "Return",
+  at_col_weight: "Weight",
   at_col_actions: "Actions",
   at_empty_title: "No assets registered",
   at_empty_desc: 'Click the "Add Asset" button above to add your first asset.',
@@ -352,10 +353,12 @@ export const en: Translations = {
   market_jp: "Japan (JP)",
   market_us: "US (US)",
   market_kr: "South Korea (KR)",
+  market_eu: "Europe (EU)",
   market_other: "Other",
   currency_jpy: "Yen (JPY)",
   currency_usd: "Dollar (USD)",
   currency_krw: "Won (KRW)",
+  currency_eur: "Euro (EUR)",
 
   tag_labels: {
     dividend: "Dividend",
@@ -383,6 +386,7 @@ export const en: Translations = {
     KR: "South Korea",
     JP: "Japan",
     US: "US",
+    EU: "Europe",
     OTHER: "Other",
   },
 };
