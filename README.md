@@ -8,7 +8,7 @@
 
 ## English
 
-> Manage multi-country financial assets (Korea · Japan · US · Europe) in one dashboard,  
+> Manage multi-country financial assets (Korea · Japan · US · Germany) in one dashboard,  
 > and gain portfolio insights from AI and legendary investors — a **privacy-first web app**
 
 🌐 **Live Demo**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)
@@ -250,7 +250,7 @@ vercel.json                     # Vercel config (SPA rewrite, API routing)
 
 ## 한국어
 
-> 한국 · 일본 · 미국 · 유럽 다국가 금융자산을 하나의 대시보드에서 통합 관리하고,  
+> 한국 · 일본 · 미국 · 독일 다국가 금융자산을 하나의 대시보드에서 통합 관리하고,  
 > AI 및 전설적인 투자가들의 관점에서 포트폴리오 인사이트를 얻는 **privacy-first 웹 앱**
 
 🌐 **라이브 데모**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)

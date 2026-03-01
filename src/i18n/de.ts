@@ -12,7 +12,7 @@ export const de: Translations = {
   about_tagline:
     "Einheitliches Multi-Länder-Vermögensmanagement + KI & Guru-Einblicke",
   about_intro:
-    "Portfolio Bridge ist eine datenschutzorientierte Web-App zur Verwaltung von Finanzanlagen aus Korea, den USA, Japan und Europa in einem einzigen Dashboard. Erhalten Sie umsetzbare Portfolio-Einblicke durch KI und die Weisheit legendärer Investoren. Alle Daten verbleiben im Browser — kein Konto erforderlich.",
+    "Portfolio Bridge ist eine datenschutzorientierte Web-App zur Verwaltung von Finanzanlagen aus Korea, den USA, Japan und Deutschland in einem einzigen Dashboard. Erhalten Sie umsetzbare Portfolio-Einblicke durch KI und die Weisheit legendärer Investoren. Alle Daten verbleiben im Browser — kein Konto erforderlich.",
   about_features_title: "Funktionen",
   about_feat1_title: "Einheitliches Dashboard",
   about_feat1_desc:

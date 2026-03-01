@@ -48,6 +48,17 @@ export const useSettingsStore = create<SettingsState>()(
       setExchangeRatesUpdatedAt: (iso) => set({ exchangeRatesUpdatedAt: iso }),
       setTargetAllocations: (targetAllocations) => set({ targetAllocations }),
     }),
-    { name: "portfolio-bridge-settings" },
+    {
+      name: "portfolio-bridge-settings",
+      merge: (persistedState, currentState) => ({
+        ...currentState,
+        ...(persistedState as Partial<SettingsState>),
+        // 구버전 localStorage에 없는 통화 키를 DEFAULT_RATES로 채워 넣는다
+        exchangeRates: {
+          ...DEFAULT_RATES,
+          ...((persistedState as Partial<SettingsState>)?.exchangeRates ?? {}),
+        },
+      }),
+    },
   ),
 );
