@@ -3,7 +3,7 @@
 > 한국 · 일본 · 미국 다국가 금융자산을 하나의 대시보드에서 통합 관리하는 로컬 우선(privacy-first) 포트폴리오 앱
 
 모든 데이터는 **브라우저 localStorage**에만 저장되며 외부 서버로 전송되지 않습니다.  
-Yahoo Finance 시세/환율 조회는 개발 서버 프록시를 통해 클라이언트에서 직접 수행합니다.
+Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 직접 수행합니다.
 
 ---
 
@@ -33,6 +33,30 @@ npm run dev
 # 프로덕션 빌드
 npm run build
 ```
+
+---
+
+## 웹 배포 (Vercel)
+
+Vercel에 배포하면 별도의 서버 없이 정적 SPA + API 프록시가 함께 동작합니다.
+
+### 배포 방법
+
+1. GitHub에 레포지토리를 푸시합니다.
+2. [vercel.com](https://vercel.com)에서 GitHub 계정으로 로그인합니다.
+3. "Add New Project" → `portfolio-bridge` 레포 선택 → **Deploy** 클릭
+4. 환경변수 설정 없이 바로 배포됩니다.
+
+이후 `git push`할 때마다 자동으로 재배포됩니다.
+
+### 프록시 구조
+
+| 경로 | 대상 | 파일 |
+|---|---|---|
+| `/api/yahoo/*` | `query1.finance.yahoo.com` | `api/yahoo/[...path].ts` |
+| `/api/yahoo-jp/*` | `finance.yahoo.co.jp` | `api/yahoo-jp/[...path].ts` |
+
+`vercel.json`에서 SPA 라우팅 fallback과 API 리라이트를 설정합니다.
 
 ---
 
@@ -75,20 +99,21 @@ npm run tauri:build
 ### 아키텍처
 
 ```
-브라우저 (Vite dev)                    Tauri 데스크톱 앱
-┌──────────────────┐              ┌──────────────────────┐
-│  React SPA       │              │  React SPA (WebView) │
-│  fetch("/api/…") │              │  yahooFetch()        │
-│       ↓          │              │       ↓              │
-│  Vite Proxy      │              │  tauri-plugin-http   │
-│       ↓          │              │       ↓              │
-│  Yahoo Finance   │              │  Yahoo Finance       │
-└──────────────────┘              └──────────────────────┘
+브라우저 (로컬 개발)                   Vercel 웹 배포                     Tauri 데스크톱 앱
+┌──────────────────┐            ┌──────────────────────┐          ┌──────────────────────┐
+│  React SPA       │            │  React SPA (CDN)     │          │  React SPA (WebView) │
+│  fetch("/api/…") │            │  fetch("/api/…")     │          │  yahooFetch()        │
+│       ↓          │            │       ↓              │          │       ↓              │
+│  Vite Proxy      │            │  Serverless Function │          │  tauri-plugin-http   │
+│       ↓          │            │       ↓              │          │       ↓              │
+│  Yahoo Finance   │            │  Yahoo Finance       │          │  Yahoo Finance       │
+└──────────────────┘            └──────────────────────┘          └──────────────────────┘
 ```
 
 `yahooFetch()` 래퍼가 실행 환경을 자동 감지하여:
 
-- **브라우저**: Vite 프록시 (`/api/yahoo/…`) 경유
+- **브라우저 (로컬 개발)**: Vite 프록시 (`/api/yahoo/…`) 경유
+- **Vercel 웹 배포**: Vercel Serverless Functions 프록시 경유
 - **Tauri 데스크톱**: `tauri-plugin-http`로 Yahoo Finance에 직접 요청 (CORS 우회)
 
 ---
@@ -114,13 +139,22 @@ npm run tauri:build
 
 ### 투자 구루
 
-- 버핏 · 멍거 · 린치 · 그레이엄 · 달리오 투자 철학
+- 15명의 투자 구루 지원: 버핏, 멍거, 린치, 그레이엄, 달리오, 리루, 빌 애크먼, 마이클 버리, 켄 피셔, 스티븐 코헨, 하워드 막스, 세스 클라먼, 존 템플턴, 조지 소로스, 캐시 우드
+- 구루별 투자 철학 (5개 항목 상세 설명)
+- 구루별 대표 보유 종목 Top 5 (티커, 종목명, 비중)
 - 구루 이상적 배분 파이 차트 vs 내 포트폴리오 레이더 비교
 - 구루 기준 리밸런싱 제안
 
+### 다국어 (i18n)
+
+- 한국어 🇰🇷 · English 🇺🇸 · 日本語 🇯🇵 3개국어 지원
+- 헤더의 국기 버튼으로 즉시 전환
+- 투자 구루 이름/철학 포함 전체 UI 다국어 대응
+- Zustand persist로 언어 설정 유지
+
 ### 설정
 
-- 기준 통화 전환 (KRW / JPY / USD)
+- 표시 화폐 전환 (KRW / JPY / USD)
 - Yahoo Finance 환율 자동 조회 (JPY↔KRW, USD↔KRW)
 - 태그별 목표 비중 설정
 - 전체 데이터 초기화
@@ -136,8 +170,10 @@ npm run tauri:build
 | 상태 관리 | Zustand 5 (localStorage persist) |
 | 차트 | Recharts |
 | 라우팅 | React Router v7 |
+| 다국어 | 커스텀 i18n (ko / en / ja) |
 | 시세 조회 | Yahoo Finance API (US) + Yahoo Japan HTML 스크래핑 (JP) |
 | 데스크톱 | Tauri v2 (Rust) + tauri-plugin-http |
+| 웹 배포 | Vercel (Serverless Functions + 정적 CDN) |
 
 ---
 
@@ -154,11 +190,18 @@ src/
 │   │                   # RebalanceCard, InsightsPanel
 │   └── assets/         # AssetForm, AssetTable
 ├── hooks/              # usePortfolio, useExchangeRates, useTickerSearch
-├── stores/             # useAssetStore, useSettingsStore (Zustand)
+├── stores/             # useAssetStore, useSettingsStore, useLanguageStore
+├── i18n/               # types.ts, ko.ts, en.ts, ja.ts, index.ts
 ├── types/              # Asset, Currency, Portfolio, Guru 타입
 ├── utils/              # 계산, 환율, CSV, 구루, Yahoo Finance, AI 분류
 ├── App.tsx
 └── main.tsx
+
+api/
+├── yahoo/              # Vercel Serverless — Yahoo Finance US 프록시
+│   └── [...path].ts
+└── yahoo-jp/           # Vercel Serverless — Yahoo Finance Japan 프록시
+    └── [...path].ts
 
 src-tauri/
 ├── Cargo.toml          # Rust 의존성 (tauri, tauri-plugin-http)
@@ -168,6 +211,8 @@ src-tauri/
 └── src/
     ├── main.rs         # Rust 진입점
     └── lib.rs          # 플러그인 등록 (http, log)
+
+vercel.json             # Vercel 배포 설정 (SPA rewrite, API 라우팅)
 ```
 
 ---
@@ -178,8 +223,8 @@ src-tauri/
 
 | 경로 | 엔드포인트 | 용도 |
 |---|---|---|
-| US API | `query1.finance.yahoo.com` (Vite http-proxy) | 미국·한국 종목 검색/시세, 환율 |
-| JP 스크래핑 | `finance.yahoo.co.jp` (커스텀 Vite 플러그인) | 일본 펀드·주식 검색/시세 (HTML `__PRELOADED_STATE__` 파싱) |
+| US API | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | 미국·한국 종목 검색/시세, 환율 |
+| JP 스크래핑 | `finance.yahoo.co.jp` (커스텀 플러그인 / Vercel Serverless) | 일본 펀드·주식 검색/시세 (HTML `__PRELOADED_STATE__` 파싱) |
 
 > **참고**: Yahoo Finance의 비공식 엔드포인트를 사용하므로 API 구조가 변경되면 조회가 실패할 수 있습니다.
 
