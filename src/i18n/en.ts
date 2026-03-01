@@ -194,6 +194,9 @@ export const en: Translations = {
     "• Transparent Management: Publicly disclose daily trades for full fund transparency",
 
   settings_title: "Settings",
+  settings_display_currency_title: "Display Currency",
+  settings_display_currency_desc:
+    "Select the base currency for displaying portfolio values.",
   settings_fx_title: "Exchange Rates (auto-fetched from Yahoo Finance)",
   settings_fx_refreshing: "Fetching…",
   settings_fx_refresh: "🔄 Refresh Now",

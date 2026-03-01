@@ -1,6 +1,4 @@
-import { useSettingsStore, useLanguageStore } from "@/stores";
-import { CURRENCY_LABELS } from "@/types";
-import type { CurrencyCode } from "@/types";
+import { useLanguageStore } from "@/stores";
 import type { Lang } from "@/i18n";
 
 const LANG_LABELS: Record<Lang, string> = {
@@ -10,7 +8,6 @@ const LANG_LABELS: Record<Lang, string> = {
 };
 
 export function Header() {
-  const { baseCurrency, setBaseCurrency } = useSettingsStore();
   const { lang, setLang } = useLanguageStore();
 
   return (
@@ -33,19 +30,6 @@ export function Header() {
             </button>
           ))}
         </div>
-        <select
-          value={baseCurrency}
-          onChange={(e) => setBaseCurrency(e.target.value as CurrencyCode)}
-          className="text-sm border border-slate-300 rounded-md px-2 py-1 bg-white"
-        >
-          {(Object.entries(CURRENCY_LABELS) as [CurrencyCode, string][]).map(
-            ([code, label]) => (
-              <option key={code} value={code}>
-                {label}
-              </option>
-            ),
-          )}
-        </select>
       </div>
     </header>
   );

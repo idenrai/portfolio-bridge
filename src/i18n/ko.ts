@@ -193,6 +193,9 @@ export const ko: Translations = {
     "• 투명한 운용: 매일 매매 내역을 공개하는 등 투명한 펀드 운용",
 
   settings_title: "설정",
+  settings_display_currency_title: "표시 화폐",
+  settings_display_currency_desc:
+    "대시보드 금액을 표시할 기준 통화를 선택합니다.",
   settings_fx_title: "환율 (Yahoo Finance 자동 조회)",
   settings_fx_refreshing: "조회 중…",
   settings_fx_refresh: "🔄 지금 갱신",

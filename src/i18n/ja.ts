@@ -194,6 +194,9 @@ export const ja: Translations = {
     "• 透明な運用：日次で売買内容を公開するなど、透明性の高いファンド運営",
 
   settings_title: "設定",
+  settings_display_currency_title: "表示通貨",
+  settings_display_currency_desc:
+    "ダッシュボードの金額表示に使用する基準通貨を選択します。",
   settings_fx_title: "為替レート（Yahoo Finance 自動取得）",
   settings_fx_refreshing: "取得中…",
   settings_fx_refresh: "🔄 今すぐ更新",

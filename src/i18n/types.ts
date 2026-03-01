@@ -126,6 +126,8 @@ export interface Translations {
 
   // ─── Settings Page ─────────────────────────────────────────────────────────
   settings_title: string;
+  settings_display_currency_title: string;
+  settings_display_currency_desc: string;
   settings_fx_title: string;
   settings_fx_refreshing: string;
   settings_fx_refresh: string;

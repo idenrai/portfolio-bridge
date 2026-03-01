@@ -4,7 +4,7 @@ import { useSettingsStore } from "@/stores";
 import { useAssetStore } from "@/stores";
 import { useExchangeRates, useT } from "@/hooks";
 import { CURRENCY_LABELS, CURRENCY_SYMBOLS } from "@/types";
-import type { AssetTag, TargetAllocation } from "@/types";
+import type { AssetTag, CurrencyCode, TargetAllocation } from "@/types";
 import { format } from "date-fns";
 
 export function SettingsPage() {
@@ -46,6 +46,30 @@ export function SettingsPage() {
   return (
     <div className="space-y-6 max-w-2xl">
       <h2 className="text-lg font-bold text-slate-800">{t.settings_title}</h2>
+
+      {/* 표시 화폐 */}
+      <Card title={t.settings_display_currency_title}>
+        <div className="flex items-center gap-3">
+          <span className="text-sm text-slate-500">
+            {t.settings_display_currency_desc}
+          </span>
+          <select
+            value={settings.baseCurrency}
+            onChange={(e) =>
+              settings.setBaseCurrency(e.target.value as CurrencyCode)
+            }
+            className="text-sm border border-slate-300 rounded-md px-3 py-1.5 bg-white"
+          >
+            {(Object.entries(CURRENCY_LABELS) as [CurrencyCode, string][]).map(
+              ([code, label]) => (
+                <option key={code} value={code}>
+                  {label}
+                </option>
+              ),
+            )}
+          </select>
+        </div>
+      </Card>
 
       {/* 환율 */}
       <Card
