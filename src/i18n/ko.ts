@@ -63,11 +63,15 @@ export const ko: Translations = {
 
   insights_title: "인사이트",
   insights_ok: "✅ 특이사항 없음",
-  insights_ai_btn: "🤖 AI 분석 프롬프트",
+  insights_ai_btn: "프롬프트 보기",
   insights_ai_copy: "클립보드에 복사",
   insights_ai_copied: "✓ 복사됨!",
-  insights_ai_desc: "아래 프롬프트를 복사해 ChatGPT, Claude 등 AI에 붙여넣으세요.",
+  insights_ai_desc:
+    "아래 프롬프트를 복사해 ChatGPT, Claude 등 AI에 붙여넣으세요.",
   insights_ai_close: "닫기",
+  insights_ai_banner_title: "AI 포트폴리오 분석",
+  insights_ai_banner_desc:
+    "보유 종목 저눅 데이터를 포함한 프롬프트를 생성합니다. ChatGPT · Claude에 바로 붙여넣어 이상적 자산 배분 모델과 구체적인 조정 인사이트를 받아보세요.",
   insight_concentration: (name, pct) =>
     `${name} 비중 ${pct}% — 개별 종목 집중도 높음`,
   insight_big_loss: (name, pct) => `${name} 수익률 ${pct}% — 큰 손실 발생 중`,

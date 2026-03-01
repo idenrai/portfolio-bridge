@@ -63,11 +63,15 @@ export const en: Translations = {
 
   insights_title: "Insights",
   insights_ok: "✅ No issues found",
-  insights_ai_btn: "🤖 AI Analysis Prompt",
+  insights_ai_btn: "View Prompt",
   insights_ai_copy: "Copy to clipboard",
   insights_ai_copied: "✓ Copied!",
-  insights_ai_desc: "Copy the prompt below and paste it into ChatGPT, Claude, or any AI assistant.",
+  insights_ai_desc:
+    "Copy the prompt below and paste it into ChatGPT, Claude, or any AI assistant.",
   insights_ai_close: "Close",
+  insights_ai_banner_title: "AI Portfolio Analysis",
+  insights_ai_banner_desc:
+    "Generate a prompt packed with your holdings data. Paste it into ChatGPT or Claude to get an ideal allocation model and actionable insights.",
   insight_concentration: (name, pct) =>
     `${name} weight ${pct}% — high single-stock concentration`,
   insight_big_loss: (name, pct) => `${name} return ${pct}% — significant loss`,

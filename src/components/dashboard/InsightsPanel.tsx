@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
-import { Card, Button } from "@/components/common";
+import { Card } from "@/components/common";
 import { useT } from "@/hooks";
+import { useLanguageStore } from "@/stores";
 import { buildInsightPrompt } from "@/utils";
 import type { PortfolioSummary, Asset, TargetAllocation } from "@/types";
 
@@ -24,6 +25,7 @@ const CLOSE_BTN = {
 
 export function InsightsPanel({ summary, assets, targets }: Props) {
   const t = useT();
+  const lang = useLanguageStore((s) => s.lang);
   const [dismissed, setDismissed] = useState<Set<number>>(new Set());
   const [showPrompt, setShowPrompt] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -33,7 +35,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
     [],
   );
 
-  const promptText = buildInsightPrompt(summary, assets, targets);
+  const promptText = buildInsightPrompt(summary, assets, targets, lang);
 
   const copyPrompt = async () => {
     await navigator.clipboard.writeText(promptText);
@@ -44,33 +46,58 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
   const visible = summary.insights.filter((_, i) => !dismissed.has(i));
 
   return (
-    <Card
-      title={t.insights_title}
-      action={
-        <Button size="sm" variant="secondary" onClick={() => setShowPrompt((v) => !v)}>
-          {showPrompt ? t.insights_ai_close : t.insights_ai_btn}
-        </Button>
-      }
-    >
-      {/* AI 프롬프트 영역 */}
-      {showPrompt && (
-        <div className="mb-4 space-y-2">
-          <p className="text-xs text-slate-500">{t.insights_ai_desc}</p>
-          <textarea
-            readOnly
-            value={promptText}
-            rows={10}
-            className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
-          />
-          <div className="flex justify-end">
-            <Button size="sm" onClick={copyPrompt}>
-              {copied ? t.insights_ai_copied : t.insights_ai_copy}
-            </Button>
+    <Card title={t.insights_title}>
+      {/* ── AI 분석 배너 (항상 표시) ── */}
+      <div className="mb-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-500 p-px shadow-md">
+        <div className="rounded-[11px] bg-white/95 px-4 py-3">
+          <div className="flex items-center justify-between gap-4">
+            {/* 좌측: 아이콘 + 텍스트 */}
+            <div className="flex items-start gap-3 min-w-0">
+              <span className="text-2xl flex-shrink-0 mt-0.5">🤖</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-800 leading-tight">
+                  {t.insights_ai_banner_title}
+                </p>
+                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                  {t.insights_ai_banner_desc}
+                </p>
+              </div>
+            </div>
+            {/* 우측: 버튼 */}
+            <button
+              type="button"
+              onClick={() => setShowPrompt((v) => !v)}
+              className="flex-shrink-0 rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+            >
+              {showPrompt ? t.insights_ai_close : t.insights_ai_btn}
+            </button>
           </div>
-        </div>
-      )}
 
-      {/* 인사이트 목록 */}
+          {/* 프롬프트 확장 영역 */}
+          {showPrompt && (
+            <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
+              <p className="text-xs text-slate-500">{t.insights_ai_desc}</p>
+              <textarea
+                readOnly
+                value={promptText}
+                rows={10}
+                className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
+              />
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={copyPrompt}
+                  className="rounded-lg bg-slate-800 hover:bg-slate-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                >
+                  {copied ? t.insights_ai_copied : t.insights_ai_copy}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── 인사이트 목록 ── */}
       {visible.length === 0 ? (
         <div className="text-sm text-slate-400 py-4 text-center">
           {t.insights_ok}
@@ -84,7 +111,9 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                 className={`flex items-start gap-2 px-3 py-2 rounded-lg border text-xs ${TYPE_STYLES[insight.type]}`}
               >
                 <span className="text-sm flex-shrink-0">{insight.icon}</span>
-                <span className="leading-relaxed flex-1">{insight.message}</span>
+                <span className="leading-relaxed flex-1">
+                  {insight.message}
+                </span>
                 <button
                   type="button"
                   onClick={() => dismiss(i)}

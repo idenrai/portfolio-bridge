@@ -73,6 +73,8 @@ export interface Translations {
   insights_ai_copied: string;
   insights_ai_desc: string;
   insights_ai_close: string;
+  insights_ai_banner_title: string;
+  insights_ai_banner_desc: string;
   insight_concentration: (name: string, pct: string) => string;
   insight_big_loss: (name: string, pct: string) => string;
   insight_cash_high: (pct: string) => string;

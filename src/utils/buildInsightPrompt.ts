@@ -1,6 +1,13 @@
 import type { Asset, AssetTag, TargetAllocation } from "@/types";
 import type { PortfolioSummary } from "@/types";
 import { ASSET_TYPE_LABELS, MARKET_LABELS, TAG_LABELS } from "@/types";
+import type { Lang } from "@/i18n";
+
+const LANG_NAMES: Record<Lang, string> = {
+  ko: "Korean (한국어)",
+  en: "English",
+  ja: "Japanese (日本語)",
+};
 
 /**
  * AI에게 포트폴리오 인사이트를 요청하는 프롬프트 생성
@@ -9,6 +16,7 @@ export function buildInsightPrompt(
   summary: PortfolioSummary,
   assets: Asset[],
   targets: TargetAllocation[],
+  lang: Lang = "ko",
 ): string {
   const totalKRW = summary.totalValueKRW;
   const pnlKRW = summary.totalPnLKRW;
@@ -26,7 +34,10 @@ export function buildInsightPrompt(
 
   // 시장별 배분
   const marketSection = summary.marketAllocation
-    .map((m) => `  - ${MARKET_LABELS[m.market as keyof typeof MARKET_LABELS] ?? m.market}: ${m.percent.toFixed(1)}%`)
+    .map(
+      (m) =>
+        `  - ${MARKET_LABELS[m.market as keyof typeof MARKET_LABELS] ?? m.market}: ${m.percent.toFixed(1)}%`,
+    )
     .join("\n");
 
   // 외화 노출
@@ -42,8 +53,10 @@ export function buildInsightPrompt(
 
   const holdingRows = holdings
     .map((h, i) => {
-      const type = ASSET_TYPE_LABELS[h.type as keyof typeof ASSET_TYPE_LABELS] ?? h.type;
-      const market = MARKET_LABELS[h.market as keyof typeof MARKET_LABELS] ?? h.market;
+      const type =
+        ASSET_TYPE_LABELS[h.type as keyof typeof ASSET_TYPE_LABELS] ?? h.type;
+      const market =
+        MARKET_LABELS[h.market as keyof typeof MARKET_LABELS] ?? h.market;
       const tag = h.tag ? (TAG_LABELS[h.tag as AssetTag] ?? h.tag) : "—";
       return (
         `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
@@ -57,9 +70,12 @@ export function buildInsightPrompt(
 
   // 현금자산
   const cashAssets = assets.filter((a) => a.type === "cash");
-  const cashSection = cashAssets.length > 0
-    ? cashAssets.map((a) => `  - ${a.currency} ${a.quantity.toLocaleString()}`).join("\n")
-    : "  (none)";
+  const cashSection =
+    cashAssets.length > 0
+      ? cashAssets
+          .map((a) => `  - ${a.currency} ${a.quantity.toLocaleString()}`)
+          .join("\n")
+      : "  (none)";
 
   return `You are a professional portfolio analyst. Please analyze the following portfolio and provide:
 1. An assessment of the current portfolio composition (diversification, risk concentration, currency exposure)
@@ -88,5 +104,5 @@ ${holdingRows || "  (no data)"}
 --- CASH POSITIONS ---
 ${cashSection}
 
-Please respond in the same language as this message or in the user's preferred language. Be concise but specific, and prioritize actionable recommendations.`;
+IMPORTANT: Please respond entirely in ${LANG_NAMES[lang]}. Be concise but specific, and prioritize actionable recommendations.`;
 }

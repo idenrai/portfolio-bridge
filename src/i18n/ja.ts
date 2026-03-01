@@ -64,11 +64,15 @@ export const ja: Translations = {
 
   insights_title: "インサイト",
   insights_ok: "✅ 特記事項なし",
-  insights_ai_btn: "🤖 AI分析プロンプト",
+  insights_ai_btn: "プロンプトを見る",
   insights_ai_copy: "クリップボードにコピー",
   insights_ai_copied: "✓ コピー済み!",
-  insights_ai_desc: "下のプロンプトをコピーして、ChatGPTやClaudeなどのAIに貳り付けてください。",
+  insights_ai_desc:
+    "下のプロンプトをコピーして、ChatGPTやClaudeなどのAIに貳り付けてください。",
   insights_ai_close: "閉じる",
+  insights_ai_banner_title: "AI ポートフォリオ分析",
+  insights_ai_banner_desc:
+    "保有銘柄の詳細データを含むプロンプトを生成します。ChatGPT · Claudeに貳り付けて理想的な資産配分モデルと調整のインサイトを得ましょう。",
   insight_concentration: (name, pct) =>
     `${name} 比率${pct}% — 個別銘柄集中度が高い`,
   insight_big_loss: (name, pct) =>
