@@ -118,7 +118,7 @@ export const en: Translations = {
     `${label} ${pct}% vs target ${target}% → ${diff}%p underweight`,
 
   asset_title: "Assets",
-  asset_btn_ai: "🤖 AI Classification Prompt",
+  asset_btn_ai: "View Prompt",
   asset_ai_banner_title: "AI Asset Classification",
   asset_ai_banner_desc:
     "Automatically classify assets with AI. Copy the prompt and paste it into ChatGPT, Claude, Gemini, or Grok to get a recommended category for each holding.",
@@ -140,7 +140,7 @@ export const en: Translations = {
   asset_ai_import_desc: "Paste the JSON returned by the AI below and",
   asset_ai_format_label: "Format:",
   asset_ai_json_placeholder:
-    'Paste AI response JSON here...\n\nExample:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
+    'Paste AI response JSON here...\n\nExample:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "..." }\n]',
   asset_ai_apply_btn: "Apply Categories",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ Categories applied to ${applied} assets.${skipped > 0 ? ` (${skipped} skipped)` : ""}`,

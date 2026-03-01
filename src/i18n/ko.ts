@@ -117,7 +117,7 @@ export const ko: Translations = {
     `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
 
   asset_title: "자산 관리",
-  asset_btn_ai: "🤖 AI 분류 프롬프트",
+  asset_btn_ai: "프롬프트 보기",
   asset_ai_banner_title: "AI 자산 분류",
   asset_ai_banner_desc:
     "분류가 없는 자산을 AI가 자동으로 분류합니다. 프롬프트를 ChatGPT · Claude · Gemini · Grok에 붙여넣으면 각 자산에 적합한 분류를 추천받을 수 있습니다.",
@@ -139,7 +139,7 @@ export const ko: Translations = {
   asset_ai_import_desc: "AI가 응답한 JSON을 아래에 붙여 넣고",
   asset_ai_format_label: "형식:",
   asset_ai_json_placeholder:
-    'AI 응답 JSON을 여기에 붙여 넣으세요...\n\n예시:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
+    'AI 응답 JSON을 여기에 붙여 넣으세요...\n\n예시:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "..." }\n]',
   asset_ai_apply_btn: "분류 적용",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ ${applied}건 분류가 적용되었습니다.${skipped > 0 ? ` (${skipped}건 건너뜀)` : ""}`,

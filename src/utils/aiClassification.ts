@@ -23,7 +23,8 @@ function isValidTag(tag: string): tag is AssetTag {
 interface AiClassificationItem {
   index: number;
   name: string;
-  tag: string;
+  category?: string; // 신규 필드명
+  tag?: string;      // 하위 호환용
   reason?: string;
 }
 
@@ -72,16 +73,16 @@ export function buildClassificationPrompt(
     .map((a, i) => {
       const type = ASSET_TYPE_EN[a.type] ?? a.type;
       const market = MARKET_EN[a.market] ?? a.market;
-      const currentTag = a.tags[0]
-        ? `(current tag: ${a.tags[0]})`
-        : "(untagged)";
-      return `${i + 1}. ${a.name}${a.ticker ? ` [${a.ticker}]` : ""} | type: ${type} | market: ${market} | currency: ${a.currency} ${currentTag}`;
+      const currentCategory = a.tags[0]
+        ? `(current category: ${a.tags[0]})`
+        : "(no category)";
+      return `${i + 1}. ${a.name}${a.ticker ? ` [${a.ticker}]` : ""} | type: ${type} | market: ${market} | currency: ${a.currency} ${currentCategory}`;
     })
     .join("\n");
 
-  return `You are a portfolio asset classifier. For each asset below, choose the single most appropriate tag that best describes its investment characteristic.
+  return `You are a portfolio asset classifier. For each asset below, choose the single most appropriate category that best describes its investment characteristic.
 
-Available tags:
+Available categories:
 ${tagList}
 
 Asset list:
@@ -89,13 +90,13 @@ ${assetLines}
 
 Output format — respond with a JSON array only, no extra text:
 [
-  { "index": 1, "name": "asset name", "tag": "tag_key", "reason": "brief reason" },
+  { "index": 1, "name": "asset name", "category": "category_key", "reason": "brief reason" },
   ...
 ]
 
 Rules:
-- The "tag" field must be exactly one of the tag keys listed above (e.g. "dividend", "growth").
-- Classify every asset, including already-tagged ones.
+- The "category" field must be exactly one of the category keys listed above (e.g. "dividend", "growth").
+- Classify every asset, including already-classified ones.
 - Keep reasons concise (one sentence).
 
 IMPORTANT: Please write the "reason" field entirely in ${LANG_NAMES[lang]}.`;
@@ -127,11 +128,11 @@ export function parseAiResponse(
       skipped++;
       continue;
     }
-    if (!isValidTag(item.tag)) {
+    if (!isValidTag(item.category ?? item.tag ?? "")) {
       skipped++;
       continue;
     }
-    results.push({ id: asset.id, tag: item.tag });
+    results.push({ id: asset.id, tag: (item.category ?? item.tag) as AssetTag });
   }
 
   return { applied: results.length, skipped, results };

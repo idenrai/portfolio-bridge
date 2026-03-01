@@ -119,7 +119,7 @@ export const ja: Translations = {
     `${label} ${pct}% (目標${target}%) → ${diff}%p アンダーウェイト`,
 
   asset_title: "資産管理",
-  asset_btn_ai: "🤖 AI分類プロンプト",
+  asset_btn_ai: "プロンプトを見る",
   asset_ai_banner_title: "AI 資産分類",
   asset_ai_banner_desc:
     "カテゴリーのない資産をAIが自動的に分類します。プロンプトをChatGPT・Claude・Gemini・Grokに貼り付けると、各資産に適したカテゴリーを提案してもらえます。",
@@ -141,7 +141,7 @@ export const ja: Translations = {
   asset_ai_import_desc: "AIが返答したJSONを下に貼り付けて",
   asset_ai_format_label: "形式:",
   asset_ai_json_placeholder:
-    'AIの応答JSONをここに貼り付けてください...\n\n例:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
+    'AIの応答JSONをここに貼り付けてください...\n\n例:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "..." }\n]',
   asset_ai_apply_btn: "カテゴリーを適用",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ ${applied}件にカテゴリーを適用しました。${skipped > 0 ? `（${skipped}件スキップ）` : ""}`,
