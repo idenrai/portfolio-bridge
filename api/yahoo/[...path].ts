@@ -4,15 +4,12 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
  * Vercel Serverless Function — Yahoo Finance US 프록시
  * /api/yahoo/* → https://query1.finance.yahoo.com/*
  */
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse,
-) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   // catch-all path 조합
   const pathSegments = req.query.path;
   const pathStr = Array.isArray(pathSegments)
     ? pathSegments.join("/")
-    : pathSegments ?? "";
+    : (pathSegments ?? "");
 
   // 쿼리스트링 재조립 (path 제외)
   const qs = new URLSearchParams();

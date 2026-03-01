@@ -2,6 +2,8 @@
 
 > 한국 · 일본 · 미국 다국가 금융자산을 하나의 대시보드에서 통합 관리하는 로컬 우선(privacy-first) 포트폴리오 앱
 
+🌐 **라이브 데모**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)
+
 모든 데이터는 **브라우저 localStorage**에만 저장되며 외부 서버로 전송되지 않습니다.  
 Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 직접 수행합니다.
 
