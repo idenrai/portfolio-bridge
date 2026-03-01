@@ -4,8 +4,16 @@ import type { Lang } from "@/i18n";
 
 /** 유효한 AssetTag인지 확인 */
 const VALID_TAGS = new Set<string>([
-  "dividend", "growth", "value", "index", "bond",
-  "reit", "cash", "crypto", "commodity", "other",
+  "dividend",
+  "growth",
+  "value",
+  "index",
+  "bond",
+  "reit",
+  "cash",
+  "crypto",
+  "commodity",
+  "other",
 ]);
 function isValidTag(tag: string): tag is AssetTag {
   return VALID_TAGS.has(tag);
@@ -26,29 +34,42 @@ const LANG_NAMES: Record<Lang, string> = {
 };
 
 const TAG_DESCRIPTIONS: Record<string, string> = {
-  dividend: "dividend - income-generating stocks / REITs with regular dividends",
-  growth:   "growth - high-growth stocks (tech, biotech, etc.)",
-  value:    "value - undervalued, low-multiple stocks",
-  index:    "index - index funds / broad market ETFs",
-  bond:     "bond - government or corporate bonds / bond ETFs",
-  reit:     "reit - real estate investment trusts",
-  cash:     "cash - cash equivalents, money market, savings",
-  crypto:   "crypto - cryptocurrency assets",
-  commodity:"commodity - gold, oil, silver, commodities ETFs",
-  other:    "other - does not fit any category above",
+  dividend:
+    "dividend - income-generating stocks / REITs with regular dividends",
+  growth: "growth - high-growth stocks (tech, biotech, etc.)",
+  value: "value - undervalued, low-multiple stocks",
+  index: "index - index funds / broad market ETFs",
+  bond: "bond - government or corporate bonds / bond ETFs",
+  reit: "reit - real estate investment trusts",
+  cash: "cash - cash equivalents, money market, savings",
+  crypto: "crypto - cryptocurrency assets",
+  commodity: "commodity - gold, oil, silver, commodities ETFs",
+  other: "other - does not fit any category above",
 };
 
 const ASSET_TYPE_EN: Record<string, string> = {
-  stock: "Stock", etf: "ETF", bond: "Bond", fund: "Fund",
-  cash: "Cash/Deposit", crypto: "Crypto", real_estate: "Real Estate", other: "Other",
+  stock: "Stock",
+  etf: "ETF",
+  bond: "Bond",
+  fund: "Fund",
+  cash: "Cash/Deposit",
+  crypto: "Crypto",
+  real_estate: "Real Estate",
+  other: "Other",
 };
 
 const MARKET_EN: Record<string, string> = {
-  KR: "Korea", JP: "Japan", US: "US", OTHER: "Other",
+  KR: "Korea",
+  JP: "Japan",
+  US: "US",
+  OTHER: "Other",
 };
 
 /** 자산 목록을 AI 분류 요청 프롬프트로 변환 */
-export function buildClassificationPrompt(assets: Asset[], lang: Lang = "ko"): string {
+export function buildClassificationPrompt(
+  assets: Asset[],
+  lang: Lang = "ko",
+): string {
   const tagList = Object.entries(TAG_DESCRIPTIONS)
     .map(([, desc]) => `  - ${desc}`)
     .join("\n");
@@ -57,7 +78,9 @@ export function buildClassificationPrompt(assets: Asset[], lang: Lang = "ko"): s
     .map((a, i) => {
       const type = ASSET_TYPE_EN[a.type] ?? ASSET_TYPE_LABELS[a.type];
       const market = MARKET_EN[a.market] ?? MARKET_LABELS[a.market];
-      const currentTag = a.tags[0] ? `(current tag: ${a.tags[0]})` : "(untagged)";
+      const currentTag = a.tags[0]
+        ? `(current tag: ${a.tags[0]})`
+        : "(untagged)";
       return `${i + 1}. ${a.name}${a.ticker ? ` [${a.ticker}]` : ""} | type: ${type} | market: ${market} | currency: ${a.currency} ${currentTag}`;
     })
     .join("\n");

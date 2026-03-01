@@ -185,9 +185,9 @@ function CashForm({
   const t = useT();
 
   const CURRENCY_OPTIONS: { code: CurrencyCode; label: string }[] = [
-    { code: "KRW", label: `${t.currency_krw} (KRW)` },
-    { code: "JPY", label: `${t.currency_jpy} (JPY)` },
-    { code: "USD", label: `${t.currency_usd} (USD)` },
+    { code: "KRW", label: t.currency_krw },
+    { code: "JPY", label: t.currency_jpy },
+    { code: "USD", label: t.currency_usd },
   ];
 
   const filtered = useMemo(
