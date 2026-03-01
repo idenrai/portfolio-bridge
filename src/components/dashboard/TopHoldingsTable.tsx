@@ -90,7 +90,9 @@ export function TopHoldingsTable({ summary }: Props) {
               >
                 <td className="px-3 py-2 text-left">
                   <div className="text-sm font-medium text-slate-800 truncate max-w-[200px]">
-                    {h.name}
+                    {h.type === "cash"
+                      ? ({ KRW: t.currency_krw, USD: t.currency_usd, JPY: t.currency_jpy }[h.currency] ?? h.name)
+                      : h.name}
                   </div>
                   <div className="text-[10px] text-slate-400">
                     {h.ticker && <span>{h.ticker}</span>}
@@ -110,12 +112,12 @@ export function TopHoldingsTable({ summary }: Props) {
                   </div>
                 </td>
                 <td className={tdCls}>
-                  {formatCurrency(convert(h.valueKRW), baseCurrency, true)}
+                  {formatCurrency(convert(h.valueKRW), baseCurrency)}
                 </td>
                 <td
                   className={`${tdCls} ${h.pnlKRW >= 0 ? "text-red-600" : "text-blue-600"}`}
                 >
-                  {formatCurrency(convert(h.pnlKRW), baseCurrency, true)}
+                  {formatCurrency(convert(h.pnlKRW), baseCurrency)}
                 </td>
                 <td
                   className={`${tdCls} font-medium ${h.returnPercent >= 0 ? "text-red-600" : "text-blue-600"}`}

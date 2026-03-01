@@ -1,9 +1,9 @@
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
-import { CURRENCY_LABELS, CURRENCY_SYMBOLS } from "@/types";
+import { CURRENCY_SYMBOLS } from "@/types";
 import { useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
-import type { PortfolioSummary, CurrencyCode } from "@/types";
+import type { PortfolioSummary } from "@/types";
 
 interface Props {
   summary: PortfolioSummary;
@@ -14,6 +14,9 @@ export function CurrencyExposureCard({ summary }: Props) {
   const rates = useSettingsStore((s) => s.exchangeRates);
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
   const t = useT();
+
+  const getCurrencyLabel = (code: string) =>
+    ({ KRW: t.currency_krw, USD: t.currency_usd, JPY: t.currency_jpy }[code] ?? code);
 
   if (summary.currencyExposure.length === 0) return null;
 
@@ -52,8 +55,7 @@ export function CurrencyExposureCard({ summary }: Props) {
               <tr key={exp.currency} className="border-b border-slate-50">
                 <td className="px-2 py-1.5 text-left">
                   <span className="font-medium text-slate-700">
-                    {CURRENCY_LABELS[exp.currency as CurrencyCode] ??
-                      exp.currency}
+                    {getCurrencyLabel(exp.currency)}
                   </span>
                   <span className="ml-1 text-[10px] text-slate-400">
                     {exp.currency}

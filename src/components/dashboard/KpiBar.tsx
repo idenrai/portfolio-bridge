@@ -29,11 +29,11 @@ export function KpiBar({ summary }: Props) {
   const items: KpiItem[] = [
     {
       label: t.kpi_total_value,
-      value: formatCurrency(convert(summary.totalValueKRW), baseCurrency, true),
+      value: formatCurrency(convert(summary.totalValueKRW), baseCurrency),
     },
     {
       label: t.kpi_pnl,
-      value: formatCurrency(convert(summary.totalPnLKRW), baseCurrency, true),
+      value: formatCurrency(convert(summary.totalPnLKRW), baseCurrency),
       sub: formatPercent(summary.totalReturnPercent),
       color: summary.totalPnLKRW >= 0 ? "text-red-600" : "text-blue-600",
     },

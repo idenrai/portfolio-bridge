@@ -55,25 +55,27 @@ export function TagAnalysisCard({ rebalancing }: Props) {
                   )}
                 </span>
               </div>
-              <div className="relative h-2 bg-slate-100 rounded-full overflow-hidden">
-                {/* 목표 */}
+              <div className="relative h-2">
+                <div className="absolute inset-0 bg-slate-100 rounded-full overflow-hidden">
+                  {/* 실제 */}
+                  <div
+                    className={`absolute inset-y-0 left-0 rounded-full ${
+                      absDiff > 5
+                        ? isOver
+                          ? "bg-amber-400"
+                          : "bg-blue-400"
+                        : "bg-emerald-400"
+                    }`}
+                    style={{
+                      width: `${(r.currentPercent / maxPercent) * 100}%`,
+                    }}
+                  />
+                </div>
+                {/* 목표 마커 */}
                 <div
-                  className="absolute inset-y-0 left-0 bg-slate-300/50 rounded-full"
+                  className="absolute top-0 h-full w-0.5 bg-slate-500/70 rounded-full"
                   style={{
-                    width: `${(r.targetPercent / maxPercent) * 100}%`,
-                  }}
-                />
-                {/* 실제 */}
-                <div
-                  className={`absolute inset-y-0 left-0 rounded-full ${
-                    absDiff > 5
-                      ? isOver
-                        ? "bg-amber-400"
-                        : "bg-blue-400"
-                      : "bg-emerald-400"
-                  }`}
-                  style={{
-                    width: `${(r.currentPercent / maxPercent) * 100}%`,
+                    left: `${(r.targetPercent / maxPercent) * 100}%`,
                   }}
                 />
               </div>
@@ -83,7 +85,7 @@ export function TagAnalysisCard({ rebalancing }: Props) {
       </div>
       <div className="flex items-center gap-4 mt-4 text-[10px] text-slate-400">
         <span className="flex items-center gap-1">
-          <span className="w-2 h-2 bg-slate-300/50 rounded-full inline-block" />
+          <span className="w-0.5 h-3 bg-slate-500/70 inline-block" />
           {t.tag_legend_target}
         </span>
         <span className="flex items-center gap-1">

@@ -124,8 +124,15 @@ export function GurusPage() {
                 <tbody className="divide-y divide-slate-100">
                   {selectedGuru.topHoldings.map((h) => (
                     <tr key={h.ticker}>
-                      <td className="py-2 font-mono text-blue-600 font-medium">
-                        {h.ticker}
+                      <td className="py-2 font-mono font-medium">
+                        <a
+                          href={`https://finance.yahoo.com/quote/${h.ticker}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:underline"
+                        >
+                          {h.ticker}
+                        </a>
                       </td>
                       <td className="py-2 text-slate-700">{h.name}</td>
                       <td className="py-2 text-right tabular-nums font-medium text-slate-800">
