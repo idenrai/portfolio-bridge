@@ -14,6 +14,7 @@ import {
   Radar,
 } from "recharts";
 import { usePortfolio, useT } from "@/hooks";
+import { useLanguageStore } from "@/stores";
 import { GURU_PROFILES, formatCurrency } from "@/utils";
 import { calculateRebalancing } from "@/utils";
 import type { GuruProfile } from "@/types";
@@ -33,6 +34,14 @@ export function GurusPage() {
   const { assets, summary } = usePortfolio();
   const [selectedGuru, setSelectedGuru] = useState<GuruProfile | null>(null);
   const t = useT();
+  const lang = useLanguageStore((s) => s.lang);
+
+  /** 언어별 구루 이름 */
+  const guruName = (guru: GuruProfile) => {
+    if (lang === "en") return guru.name;
+    if (lang === "ja") return guru.nameJa;
+    return guru.nameKo;
+  };
 
   if (assets.length === 0) {
     return (
@@ -67,7 +76,7 @@ export function GurusPage() {
       <h2 className="text-lg font-bold text-slate-800">{t.guru_title}</h2>
 
       {/* 구루 선택 카드 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
         {GURU_PROFILES.map((guru) => (
           <button
             key={guru.id}
@@ -78,7 +87,7 @@ export function GurusPage() {
                 : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"
             }`}
           >
-            <p className="font-semibold text-slate-800">{guru.nameKo}</p>
+            <p className="font-semibold text-slate-800">{guruName(guru)}</p>
             <p className="text-xs text-slate-500 mt-0.5">{guru.name}</p>
           </button>
         ))}
@@ -87,17 +96,54 @@ export function GurusPage() {
       {selectedGuru && (
         <>
           {/* 철학 */}
-          <Card title={t.guru_philosophy_title(selectedGuru.nameKo)}>
-            <p className="text-sm text-slate-600 leading-relaxed">
+          <Card title={t.guru_philosophy_title(guruName(selectedGuru))}>
+            <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
               {(t[
                 `guru_philosophy_${selectedGuru.id}` as keyof typeof t
               ] as string) || selectedGuru.philosophy}
             </p>
           </Card>
 
+          {/* 대표 보유 종목 */}
+          <Card title={t.guru_top_holdings_title(guruName(selectedGuru))}>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="text-left text-xs text-slate-500 border-b">
+                    <th className="pb-2 font-medium">
+                      {t.guru_holdings_col_ticker}
+                    </th>
+                    <th className="pb-2 font-medium">
+                      {t.guru_holdings_col_name}
+                    </th>
+                    <th className="pb-2 font-medium text-right">
+                      {t.guru_holdings_col_weight}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {selectedGuru.topHoldings.map((h) => (
+                    <tr key={h.ticker}>
+                      <td className="py-2 font-mono text-blue-600 font-medium">
+                        {h.ticker}
+                      </td>
+                      <td className="py-2 text-slate-700">{h.name}</td>
+                      <td className="py-2 text-right tabular-nums font-medium text-slate-800">
+                        {h.percent.toFixed(1)}%
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-slate-400 mt-3">
+              {t.guru_holdings_note}
+            </p>
+          </Card>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* 이상적 배분 파이 차트 */}
-            <Card title={t.guru_ideal_alloc(selectedGuru.nameKo)}>
+            <Card title={t.guru_ideal_alloc(guruName(selectedGuru))}>
               <ResponsiveContainer width="100%" height={260}>
                 <PieChart>
                   <Pie
@@ -131,7 +177,7 @@ export function GurusPage() {
                   <PolarAngleAxis dataKey="tag" tick={{ fontSize: 11 }} />
                   <PolarRadiusAxis angle={90} domain={[0, 60]} />
                   <Radar
-                    name={selectedGuru.nameKo}
+                    name={guruName(selectedGuru)}
                     dataKey="guru"
                     stroke="#3b82f6"
                     fill="#3b82f6"
@@ -152,7 +198,7 @@ export function GurusPage() {
           </div>
 
           {/* 조정 제안 */}
-          <Card title={t.guru_rebalance_title(selectedGuru.nameKo)}>
+          <Card title={t.guru_rebalance_title(guruName(selectedGuru))}>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

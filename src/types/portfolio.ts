@@ -105,14 +105,40 @@ export interface PortfolioSummary {
 }
 
 /** 투자 구루 ID */
-export type GuruId = "buffett" | "munger" | "lynch" | "graham" | "dalio";
+export type GuruId =
+  | "buffett"
+  | "munger"
+  | "lynch"
+  | "graham"
+  | "dalio"
+  | "lilu"
+  | "ackman"
+  | "burry"
+  | "fisher"
+  | "cohen"
+  | "marks"
+  | "klarman"
+  | "templeton"
+  | "soros"
+  | "wood";
+
+/** 구루 대표 보유 종목 */
+export interface TopHolding {
+  ticker: string;
+  name: string;
+  /** 비중 (%) */
+  percent: number;
+}
 
 /** 투자 구루 프로필 */
 export interface GuruProfile {
   id: GuruId;
   name: string;
   nameKo: string;
+  nameJa: string;
   philosophy: string;
   /** 추천 태그 비중 */
   idealAllocation: TargetAllocation[];
+  /** 대표 보유 종목 */
+  topHoldings: TopHolding[];
 }

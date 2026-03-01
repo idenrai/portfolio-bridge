@@ -103,11 +103,26 @@ export interface Translations {
   guru_col_guru_target: string;
   guru_col_diff: string;
   guru_col_amount: string;
+  guru_top_holdings_title: (name: string) => string;
+  guru_holdings_col_ticker: string;
+  guru_holdings_col_name: string;
+  guru_holdings_col_weight: string;
+  guru_holdings_note: string;
   guru_philosophy_buffett: string;
   guru_philosophy_munger: string;
   guru_philosophy_lynch: string;
   guru_philosophy_graham: string;
   guru_philosophy_dalio: string;
+  guru_philosophy_lilu: string;
+  guru_philosophy_ackman: string;
+  guru_philosophy_burry: string;
+  guru_philosophy_fisher: string;
+  guru_philosophy_cohen: string;
+  guru_philosophy_marks: string;
+  guru_philosophy_klarman: string;
+  guru_philosophy_templeton: string;
+  guru_philosophy_soros: string;
+  guru_philosophy_wood: string;
 
   // ─── Settings Page ─────────────────────────────────────────────────────────
   settings_title: string;

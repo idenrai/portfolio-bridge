@@ -4,9 +4,9 @@ import type { CurrencyCode } from "@/types";
 import type { Lang } from "@/i18n";
 
 const LANG_LABELS: Record<Lang, string> = {
-  ko: "한",
-  en: "EN",
-  ja: "日",
+  ko: "🇰🇷",
+  en: "🇺🇸",
+  ja: "🇯🇵",
 };
 
 export function Header() {
