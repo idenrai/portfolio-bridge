@@ -15,10 +15,10 @@ export const ko: Translations = {
   about_features_title: "주요 기능",
   about_feat1_title: "통합 대시보드",
   about_feat1_desc:
-    "KPI 요약, 태그·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안을 한눈에 확인하세요.",
+    "KPI 요약, 분류·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안을 한눈에 확인하세요.",
   about_feat2_title: "자산 관리",
   about_feat2_desc:
-    "Yahoo Finance 종목 검색 및 수동 등록으로 다국가 자산을 통합 관리합니다. AI 자동 태그 분류, CSV 가져오기·내보내기 지원.",
+    "Yahoo Finance 종목 검색 및 수동 등록으로 다국가 자산을 통합 관리합니다. AI 자동 분류, CSV 가져오기·내보내기 지원.",
   about_feat3_title: "투자 구루",
   about_feat3_desc:
     "버폾, 달리오, 린치 등 15명의 투자 철학과 대표 포트폴리오를 참고해 내 포트폴리오와 비교할 수 있습니다.",
@@ -61,7 +61,7 @@ export const ko: Translations = {
   kpi_asset_type_unit: "개 자산군",
 
   chart_market: "국가(시장)별 배분",
-  chart_tag: "태그별 배분",
+  chart_tag: "분류별 배분",
   chart_no_data: "데이터 없음",
 
   holdings_title: "보유 종목",
@@ -74,7 +74,7 @@ export const ko: Translations = {
   holdings_show_all: (n) => `전체 ${n}개 보기`,
   holdings_show_top10: "상위 10개만",
 
-  tag_title: "태그 목표 vs 실제",
+  tag_title: "분류 목표 vs 실제",
   tag_empty: "설정에서 목표 배분을 등록하세요",
   tag_legend_target: "목표",
   tag_legend_normal: "정상",
@@ -120,7 +120,7 @@ export const ko: Translations = {
   asset_btn_ai: "🤖 AI 분류 프롬프트",
   asset_ai_banner_title: "AI 자산 분류",
   asset_ai_banner_desc:
-    "태그가 없는 자산을 AI가 자동으로 분류합니다. 프롬프트를 ChatGPT · Claude · Gemini · Grok에 붙여넣으면 각 자산에 적합한 태그를 추천받을 수 있습니다.",
+    "분류가 없는 자산을 AI가 자동으로 분류합니다. 프롬프트를 ChatGPT · Claude · Gemini · Grok에 붙여넣으면 각 자산에 적합한 분류를 추천받을 수 있습니다.",
   asset_btn_import_csv: "CSV 가져오기",
   asset_btn_export_csv: "CSV 내보내기",
   asset_btn_add: "+ 자산 추가",
@@ -140,9 +140,10 @@ export const ko: Translations = {
   asset_ai_format_label: "형식:",
   asset_ai_json_placeholder:
     'AI 응답 JSON을 여기에 붙여 넣으세요...\n\n예시:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
-  asset_ai_apply_btn: "태그 적용",
+  asset_ai_apply_btn: "분류 적용",
   asset_ai_apply_result: (applied, skipped) =>
-    `✓ ${applied}건 태그가 적용되었습니다.${skipped > 0 ? ` (${skipped}건 건너뜀)` : ""}`,
+    `✓ ${applied}건 분류가 적용되었습니다.${skipped > 0 ? ` (${skipped}건 건너뜀)` : ""}`,
+
   asset_ai_parse_error: "파싱 오류",
   exchange_rate_error: "환율 조회에 실패했습니다. 수동으로 입력해 주세요.",
   asset_ai_copy_link_pre: "응답을 받으면",
@@ -160,7 +161,7 @@ export const ko: Translations = {
   guru_radar_title: "내 포트폴리오 vs 구루 비교",
   guru_my_portfolio: "내 포트폴리오",
   guru_rebalance_title: (name) => `${name} 기준 리밸런싱 제안`,
-  guru_col_tag: "태그",
+  guru_col_tag: "분류",
   guru_col_current: "현재",
   guru_col_guru_target: "구루 목표",
   guru_col_diff: "차이",
