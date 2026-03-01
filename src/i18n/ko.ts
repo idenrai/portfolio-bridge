@@ -137,10 +137,14 @@ export const ko: Translations = {
   asset_ai_copied: "✓ 복사됨!",
   asset_ai_close: "닫기",
   asset_ai_import_desc: "AI가 응답한 JSON을 아래에 붙여 넣고",
+  asset_ai_format_label: "형식:",
+  asset_ai_json_placeholder:
+    "AI 응답 JSON을 여기에 붙여 넣으세요...\n\n예시:\n[\n  { \"index\": 1, \"name\": \"AAPL\", \"tag\": \"growth\", \"reason\": \"...\" },\n  { \"index\": 2, \"name\": \"MSFT\", \"tag\": \"growth\", \"reason\": \"...\" }\n]",
   asset_ai_apply_btn: "태그 적용",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ ${applied}건 태그가 적용되었습니다.${skipped > 0 ? ` (${skipped}건 건너뜀)` : ""}`,
   asset_ai_parse_error: "파싱 오류",
+  exchange_rate_error: "환율 조회에 실패했습니다. 수동으로 입력해 주세요.",
   asset_ai_copy_link_pre: "응답을 받으면",
   asset_ai_copy_link_post: "탭에서 자동 적용할 수 있습니다.",
   asset_ai_import_btn_suffix: "버튼을 눌러 주세요.",

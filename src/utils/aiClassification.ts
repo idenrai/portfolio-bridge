@@ -1,6 +1,6 @@
-import { ASSET_TYPE_LABELS, MARKET_LABELS } from "@/types";
 import type { Asset, AssetTag } from "@/types";
 import type { Lang } from "@/i18n";
+import { LANG_NAMES } from "@/i18n";
 
 /** 유효한 AssetTag인지 확인 */
 const VALID_TAGS = new Set<string>([
@@ -26,12 +26,6 @@ interface AiClassificationItem {
   tag: string;
   reason?: string;
 }
-
-const LANG_NAMES: Record<Lang, string> = {
-  ko: "Korean (한국어)",
-  en: "English",
-  ja: "Japanese (日本語)",
-};
 
 const TAG_DESCRIPTIONS: Record<string, string> = {
   dividend:
@@ -76,8 +70,8 @@ export function buildClassificationPrompt(
 
   const assetLines = assets
     .map((a, i) => {
-      const type = ASSET_TYPE_EN[a.type] ?? ASSET_TYPE_LABELS[a.type];
-      const market = MARKET_EN[a.market] ?? MARKET_LABELS[a.market];
+      const type = ASSET_TYPE_EN[a.type] ?? a.type;
+      const market = MARKET_EN[a.market] ?? a.market;
       const currentTag = a.tags[0]
         ? `(current tag: ${a.tags[0]})`
         : "(untagged)";
@@ -118,10 +112,10 @@ export function parseAiResponse(
 } {
   // JSON 배열 부분만 추출 (마크다운 코드블록 등 제거)
   const arrMatch = jsonText.match(/\[[\s\S]*\]/);
-  if (!arrMatch) throw new Error("JSON 배열을 찾을 수 없습니다.");
+  if (!arrMatch) throw new Error("No JSON array found in the response.");
 
   const parsed: AiClassificationItem[] = JSON.parse(arrMatch[0]);
-  if (!Array.isArray(parsed)) throw new Error("배열 형태가 아닙니다.");
+  if (!Array.isArray(parsed)) throw new Error("Parsed result is not an array.");
 
   const results: { id: string; tag: AssetTag }[] = [];
   let skipped = 0;

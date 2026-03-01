@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { CurrencyCode, TargetAllocation, AssetTag } from "@/types";
-import { DEFAULT_RATES } from "@/types";
+import { type CurrencyCode, type TargetAllocation, type AssetTag, DEFAULT_RATES } from "@/types";
 
 interface SettingsState {
   /** 표시 기준 통화 */
@@ -12,14 +11,11 @@ interface SettingsState {
   exchangeRatesUpdatedAt: string | null;
   /** 목표 비중 배분 */
   targetAllocations: TargetAllocation[];
-  /** 언어 */
-  locale: "ko" | "ja" | "en";
 
   setBaseCurrency: (c: CurrencyCode) => void;
   setExchangeRate: (currency: CurrencyCode, rate: number) => void;
   setExchangeRatesUpdatedAt: (iso: string) => void;
   setTargetAllocations: (allocations: TargetAllocation[]) => void;
-  setLocale: (l: "ko" | "ja" | "en") => void;
 }
 
 const DEFAULT_TARGET: TargetAllocation[] = [
@@ -38,7 +34,6 @@ export const useSettingsStore = create<SettingsState>()(
       exchangeRates: { ...DEFAULT_RATES },
       exchangeRatesUpdatedAt: null,
       targetAllocations: DEFAULT_TARGET,
-      locale: "ko",
 
       setBaseCurrency: (baseCurrency) => set({ baseCurrency }),
       setExchangeRate: (currency, rate) =>
@@ -47,7 +42,6 @@ export const useSettingsStore = create<SettingsState>()(
         })),
       setExchangeRatesUpdatedAt: (iso) => set({ exchangeRatesUpdatedAt: iso }),
       setTargetAllocations: (targetAllocations) => set({ targetAllocations }),
-      setLocale: (locale) => set({ locale }),
     }),
     { name: "portfolio-bridge-settings" },
   ),

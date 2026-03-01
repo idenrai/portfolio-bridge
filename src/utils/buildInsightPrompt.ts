@@ -1,19 +1,7 @@
-import type { Asset, AssetTag, TargetAllocation } from "@/types";
-import type { PortfolioSummary } from "@/types";
-import { ASSET_TYPE_LABELS, MARKET_LABELS, TAG_LABELS } from "@/types";
+import type { Asset, AssetTag, TargetAllocation, PortfolioSummary } from "@/types";
+import { ASSET_TYPE_LABELS, MARKET_LABELS, TAG_LABELS, CURRENCY_SYMBOLS } from "@/types";
 import type { Lang } from "@/i18n";
-
-const LANG_NAMES: Record<Lang, string> = {
-  ko: "Korean (한국어)",
-  en: "English",
-  ja: "Japanese (日本語)",
-};
-
-const CURRENCY_SYMBOLS: Record<string, string> = {
-  KRW: "₩",
-  USD: "$",
-  JPY: "¥",
-};
+import { LANG_NAMES } from "@/i18n";
 
 /** KRW 기준 금액을 baseCurrency로 변환하여 포맷팅 */
 function formatInBase(
@@ -21,7 +9,7 @@ function formatInBase(
   baseCurrency: string,
   rates: Record<string, number>,
 ): string {
-  const symbol = CURRENCY_SYMBOLS[baseCurrency] ?? baseCurrency;
+  const symbol = (CURRENCY_SYMBOLS as Record<string, string>)[baseCurrency] ?? baseCurrency;
   if (baseCurrency === "KRW") {
     return `${symbol}${Math.round(krwAmount).toLocaleString()}`;
   }

@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
-import { useSettingsStore } from "@/stores";
+import { useSettingsStore, useLanguageStore } from "@/stores";
+import { TRANSLATIONS } from "@/i18n";
 import { fetchAllExchangeRates } from "@/utils";
 
 /** 캐시 유효 기간: 1시간 (이 시간 이내이면 자동 재조회 생략) */
@@ -29,6 +30,7 @@ export function useExchangeRates(): UseExchangeRateResult {
   const setExchangeRate = useSettingsStore((s) => s.setExchangeRate);
   const lastUpdated = useSettingsStore((s) => s.exchangeRatesUpdatedAt);
   const setLastUpdated = useSettingsStore((s) => s.setExchangeRatesUpdatedAt);
+  const lang = useLanguageStore((s) => s.lang);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -53,12 +55,12 @@ export function useExchangeRates(): UseExchangeRateResult {
         // 캐시 폴백: 에러 대신 경고 상태로 처리
         setIsCached(true);
       } else {
-        setError("환율 조회에 실패했습니다. 수동으로 입력해 주세요.");
+        setError(TRANSLATIONS[lang].exchange_rate_error);
       }
     } finally {
       setIsLoading(false);
     }
-  }, [setExchangeRate, setLastUpdated, lastUpdated]);
+  }, [setExchangeRate, setLastUpdated, lastUpdated, lang]);
 
   // 마운트 시 자동 조회: 캐시가 없거나 1시간 이상 경과한 경우
   useEffect(() => {

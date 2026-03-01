@@ -1,6 +1,5 @@
 import { Button } from "@/components/common";
-import type { Asset, AssetTag } from "@/types";
-import { CURRENCY_SYMBOLS } from "@/types";
+import { type Asset, type AssetTag, CURRENCY_SYMBOLS } from "@/types";
 import { useAssetStore } from "@/stores";
 import { useT } from "@/hooks";
 import {

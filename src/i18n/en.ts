@@ -138,10 +138,14 @@ export const en: Translations = {
   asset_ai_copied: "✓ Copied!",
   asset_ai_close: "Close",
   asset_ai_import_desc: "Paste the JSON returned by the AI below and",
+  asset_ai_format_label: "Format:",
+  asset_ai_json_placeholder:
+    "Paste AI response JSON here...\n\nExample:\n[\n  { \"index\": 1, \"name\": \"AAPL\", \"tag\": \"growth\", \"reason\": \"...\" },\n  { \"index\": 2, \"name\": \"MSFT\", \"tag\": \"growth\", \"reason\": \"...\" }\n]",
   asset_ai_apply_btn: "Apply Tags",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ Tags applied to ${applied} assets.${skipped > 0 ? ` (${skipped} skipped)` : ""}`,
   asset_ai_parse_error: "Parse error",
+  exchange_rate_error: "Failed to fetch exchange rates. Please enter manually.",
   asset_ai_copy_link_pre: "When you get a response, go to the",
   asset_ai_copy_link_post: "tab to apply automatically.",
   asset_ai_import_btn_suffix: "and apply.",

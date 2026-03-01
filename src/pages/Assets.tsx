@@ -277,7 +277,7 @@ export function AssetsPage() {
                 {t.asset_ai_import_btn_suffix}
                 <br />
                 <span className="text-xs text-slate-400">
-                  형식: {`[{ "index": 1, "tag": "dividend", ... }, ...]`}
+                  {t.asset_ai_format_label} {`[{ "index": 1, "tag": "dividend", ... }, ...]`}
                 </span>
               </p>
               <textarea
@@ -288,7 +288,7 @@ export function AssetsPage() {
                   setImportError(null);
                 }}
                 rows={14}
-                placeholder={`AI 응답 JSON을 여기에 붙여 넣으세요...\n\n예시:\n[\n  { "index": 1, "name": "삼성전자", "tag": "value", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]`}
+                placeholder={t.asset_ai_json_placeholder}
                 className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-mono text-slate-700 resize-none focus:outline-none focus:border-blue-300"
               />
 

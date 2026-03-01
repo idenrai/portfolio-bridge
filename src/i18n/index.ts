@@ -1,4 +1,5 @@
 export type { Translations, Lang } from "./types";
+export { LANG_NAMES, LANG_LOCALES } from "./types";
 export { ko } from "./ko";
 export { en } from "./en";
 export { ja } from "./ja";

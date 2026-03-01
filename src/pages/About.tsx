@@ -61,7 +61,9 @@ export function AboutPage() {
             <p className="text-sm text-slate-400 mt-0.5">{t.about_tagline}</p>
           </div>
         </div>
-        <p className="text-slate-300 text-sm leading-relaxed">{t.about_intro}</p>
+        <p className="text-slate-300 text-sm leading-relaxed">
+          {t.about_intro}
+        </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <a
             href="https://portfolio-bridge-sigma.vercel.app/"
@@ -84,7 +86,9 @@ export function AboutPage() {
 
       {/* Features */}
       <div>
-        <h2 className="text-base font-bold text-slate-700 mb-3">{t.about_features_title}</h2>
+        <h2 className="text-base font-bold text-slate-700 mb-3">
+          {t.about_features_title}
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {FEATURES.map((f) => (
             <div
@@ -93,8 +97,12 @@ export function AboutPage() {
             >
               <span className="text-xl flex-shrink-0 mt-0.5">{f.icon}</span>
               <div>
-                <p className="text-sm font-semibold text-slate-800">{t[f.titleKey]}</p>
-                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{t[f.descKey]}</p>
+                <p className="text-sm font-semibold text-slate-800">
+                  {t[f.titleKey]}
+                </p>
+                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                  {t[f.descKey]}
+                </p>
               </div>
             </div>
           ))}
@@ -105,14 +113,20 @@ export function AboutPage() {
       <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 flex items-start gap-3">
         <span className="text-xl flex-shrink-0 mt-0.5">🔒</span>
         <div>
-          <p className="text-sm font-semibold text-emerald-800">{t.about_privacy_title}</p>
-          <p className="text-xs text-emerald-700 mt-0.5 leading-relaxed">{t.about_privacy_desc}</p>
+          <p className="text-sm font-semibold text-emerald-800">
+            {t.about_privacy_title}
+          </p>
+          <p className="text-xs text-emerald-700 mt-0.5 leading-relaxed">
+            {t.about_privacy_desc}
+          </p>
         </div>
       </div>
 
       {/* Tech Stack */}
       <div>
-        <h2 className="text-base font-bold text-slate-700 mb-3">{t.about_tech_title}</h2>
+        <h2 className="text-base font-bold text-slate-700 mb-3">
+          {t.about_tech_title}
+        </h2>
         <div className="flex flex-wrap gap-2">
           {STACK.map((s) => (
             <span

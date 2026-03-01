@@ -1,5 +1,19 @@
 export type Lang = "ko" | "en" | "ja";
 
+/** Language display names for AI prompts */
+export const LANG_NAMES: Record<Lang, string> = {
+  ko: "Korean (한국어)",
+  en: "English",
+  ja: "Japanese (日本語)",
+};
+
+/** BCP-47 locale codes per Lang */
+export const LANG_LOCALES: Record<Lang, string> = {
+  ko: "ko-KR",
+  en: "en-US",
+  ja: "ja-JP",
+};
+
 export interface Translations {
   // ─── App / Navigation ──────────────────────────────────────────────────────
   nav_dashboard: string;
@@ -137,9 +151,12 @@ export interface Translations {
   asset_ai_copied: string;
   asset_ai_close: string;
   asset_ai_import_desc: string;
+  asset_ai_format_label: string;
+  asset_ai_json_placeholder: string;
   asset_ai_apply_btn: string;
   asset_ai_apply_result: (applied: number, skipped: number) => string;
   asset_ai_parse_error: string;
+  exchange_rate_error: string;
   asset_ai_copy_link_pre: string;
   asset_ai_copy_link_post: string;
   asset_ai_import_btn_suffix: string;

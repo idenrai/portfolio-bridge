@@ -1,5 +1,4 @@
-import type { CurrencyCode } from "@/types";
-import { CURRENCY_SYMBOLS } from "@/types";
+import { type CurrencyCode, CURRENCY_SYMBOLS } from "@/types";
 
 /**
  * 현지 통화 금액 → KRW 변환
@@ -23,6 +22,12 @@ export function fromKRW(
   const rate = rates[currency] ?? 1;
   return rate === 0 ? 0 : amountKRW / rate;
 }
+
+const CURRENCY_LOCALES: Record<CurrencyCode, string> = {
+  KRW: "ko-KR",
+  USD: "en-US",
+  JPY: "ja-JP",
+};
 
 /**
  * 금액 포맷 (현지 통화 형식)
@@ -51,7 +56,7 @@ export function formatCurrency(
     if (compact && abs >= 1_000)
       return `${symbol}${(amount / 1_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}K`;
   }
-  return `${symbol}${amount.toLocaleString("ko-KR", {
+  return `${symbol}${amount.toLocaleString(CURRENCY_LOCALES[currency], {
     maximumFractionDigits: currency === "JPY" || currency === "KRW" ? 0 : 2,
   })}`;
 }

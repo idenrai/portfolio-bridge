@@ -381,10 +381,3 @@ export function calculateRebalancing(
     };
   });
 }
-
-/**
- * 태그 라벨 가져오기 (없으면 키 그대로 반환)
- */
-export function getTagLabel(tag: string): string {
-  return TAG_LABELS[tag as AssetTag] ?? tag;
-}

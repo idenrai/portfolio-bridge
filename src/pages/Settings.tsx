@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Card, Button } from "@/components/common";
-import { useSettingsStore } from "@/stores";
-import { useAssetStore } from "@/stores";
+import { useSettingsStore, useAssetStore, useLanguageStore } from "@/stores";
 import { useExchangeRates, useT } from "@/hooks";
 import { CURRENCY_LABELS, CURRENCY_SYMBOLS } from "@/types";
 import type { AssetTag, TargetAllocation } from "@/types";
+import { LANG_LOCALES } from "@/i18n";
 import { format } from "date-fns";
 
 export function SettingsPage() {
   const settings = useSettingsStore();
   const assetStore = useAssetStore();
+  const lang = useLanguageStore((s) => s.lang);
+  const langLocale = LANG_LOCALES[lang];
   const {
     refreshRates,
     isLoading,
@@ -81,7 +83,7 @@ export function SettingsPage() {
           {isCached && lastUpdated && (
             <p className="text-xs text-amber-700 bg-amber-50 rounded px-3 py-2">
               {t.settings_fx_cache_warn(
-                new Date(lastUpdated).toLocaleTimeString("ko-KR", {
+                new Date(lastUpdated).toLocaleTimeString(langLocale, {
                   hour: "2-digit",
                   minute: "2-digit",
                 }),
@@ -97,7 +99,7 @@ export function SettingsPage() {
             <div key={code} className="flex items-center gap-3">
               <span className="text-sm text-slate-600 w-32">{label}</span>
               <span className="text-sm font-mono text-slate-800 w-24 text-right">
-                {settings.exchangeRates[code]?.toLocaleString("ko-KR", {
+                {settings.exchangeRates[code]?.toLocaleString(langLocale, {
                   maximumFractionDigits: 2,
                 }) ?? "—"}
               </span>
