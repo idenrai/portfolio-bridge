@@ -27,7 +27,7 @@ export function InsightsPanel({ summary }: Props) {
 
   return (
     <Card title={t.insights_title}>
-      <div className="space-y-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
         {summary.insights.map((insight, i) => (
           <div
             key={i}

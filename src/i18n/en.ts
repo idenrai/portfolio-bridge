@@ -63,6 +63,13 @@ export const en: Translations = {
 
   insights_title: "Insights",
   insights_ok: "✅ No issues found",
+  insight_concentration: (name, pct) => `${name} weight ${pct}% — high single-stock concentration`,
+  insight_big_loss: (name, pct) => `${name} return ${pct}% — significant loss`,
+  insight_cash_high: (pct) => `Cash ${pct}% — excess liquidity, consider deploying`,
+  insight_cash_low: (pct) => `Cash ${pct}% — low emergency buffer`,
+  insight_fx_high: (currency, pct) => `${currency} exposure ${pct}% — sensitive to FX moves`,
+  insight_tag_over: (label, pct, target, diff) => `${label} ${pct}% vs target ${target}% → +${diff}%p overweight`,
+  insight_tag_under: (label, pct, target, diff) => `${label} ${pct}% vs target ${target}% → ${diff}%p underweight`,
 
   asset_title: "Assets",
   asset_btn_ai: "🤖 AI Classification Prompt",

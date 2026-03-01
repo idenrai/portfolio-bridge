@@ -91,7 +91,11 @@ export function TopHoldingsTable({ summary }: Props) {
                 <td className="px-3 py-2 text-left">
                   <div className="text-sm font-medium text-slate-800 truncate max-w-[200px]">
                     {h.type === "cash"
-                      ? ({ KRW: t.currency_krw, USD: t.currency_usd, JPY: t.currency_jpy }[h.currency] ?? h.name)
+                      ? ({
+                          KRW: t.currency_krw,
+                          USD: t.currency_usd,
+                          JPY: t.currency_jpy,
+                        }[h.currency] ?? h.name)
                       : h.name}
                   </div>
                   <div className="text-[10px] text-slate-400">

@@ -46,7 +46,7 @@ export function GurusPage() {
   if (assets.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-slate-400">
-        <p className="text-6xl mb-4">🧠</p>
+        <p className="text-6xl mb-4">💡</p>
         <h2 className="text-xl font-semibold text-slate-600 mb-2">
           {t.guru_empty_title}
         </h2>

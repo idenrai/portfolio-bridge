@@ -14,6 +14,29 @@ import type {
 import { TAG_LABELS } from "@/types";
 import { toKRW } from "./currency";
 
+/** 인사이트 메시지 템플릿 (i18n 주입용) */
+export interface InsightMessages {
+  concentration: (name: string, pct: string) => string;
+  bigLoss: (name: string, pct: string) => string;
+  cashHigh: (pct: string) => string;
+  cashLow: (pct: string) => string;
+  fxHigh: (currency: string, pct: string) => string;
+  tagOver: (label: string, pct: string, target: string, diff: string) => string;
+  tagUnder: (label: string, pct: string, target: string, diff: string) => string;
+  getTagLabel: (tag: string) => string;
+}
+
+const DEFAULT_INSIGHT_MESSAGES: InsightMessages = {
+  concentration: (name, pct) => `${name} 비중 ${pct}% — 개별 종목 집중도 높음`,
+  bigLoss: (name, pct) => `${name} 수익률 ${pct}% — 큰 손실 발생 중`,
+  cashHigh: (pct) => `현금 비중 ${pct}% — 유동성 과다, 투자 기회 검토`,
+  cashLow: (pct) => `현금 비중 ${pct}% — 비상자금 부족 주의`,
+  fxHigh: (currency, pct) => `${currency} 노출 ${pct}% — 환율 변동 민감`,
+  tagOver: (label, pct, target, diff) => `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
+  tagUnder: (label, pct, target, diff) => `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
+  getTagLabel: (tag) => TAG_LABELS[tag as AssetTag] ?? tag,
+};
+
 /**
  * 자산 한 건의 현재 평가액 (현지 통화)
  */
@@ -54,6 +77,7 @@ function generateInsights(
   currencyExposure: CurrencyExposure[],
   targets: TargetAllocation[],
   baseCurrency: CurrencyCode,
+  msg: InsightMessages,
 ): PortfolioInsight[] {
   const insights: PortfolioInsight[] = [];
 
@@ -63,7 +87,7 @@ function generateInsights(
       insights.push({
         type: "warning",
         icon: "⚠️",
-        message: `${h.name} 비중 ${h.weightPercent.toFixed(1)}% — 개별 종목 집중도 높음`,
+        message: msg.concentration(h.name, h.weightPercent.toFixed(1)),
       });
     }
   }
@@ -74,7 +98,7 @@ function generateInsights(
       insights.push({
         type: "danger",
         icon: "🔻",
-        message: `${h.name} 수익률 ${h.returnPercent.toFixed(1)}% — 큰 손실 발생 중`,
+        message: msg.bigLoss(h.name, h.returnPercent.toFixed(1)),
       });
     }
   }
@@ -84,13 +108,13 @@ function generateInsights(
     insights.push({
       type: "info",
       icon: "💰",
-      message: `현금 비중 ${cashPercent.toFixed(1)}% — 유동성 과다, 투자 기회 검토`,
+      message: msg.cashHigh(cashPercent.toFixed(1)),
     });
   } else if (cashPercent < 3 && assets.length > 3) {
     insights.push({
       type: "warning",
       icon: "💰",
-      message: `현금 비중 ${cashPercent.toFixed(1)}% — 비상자금 부족 주의`,
+      message: msg.cashLow(cashPercent.toFixed(1)),
     });
   }
 
@@ -100,7 +124,7 @@ function generateInsights(
       insights.push({
         type: "warning",
         icon: "💱",
-        message: `${exp.currency} 노출 ${exp.percent.toFixed(1)}% — 환율 변동 민감`,
+        message: msg.fxHigh(exp.currency, exp.percent.toFixed(1)),
       });
     }
   }
@@ -111,18 +135,18 @@ function generateInsights(
     const currentPercent = current?.percent ?? 0;
     const diff = currentPercent - t.targetPercent;
     if (Math.abs(diff) > 10) {
-      const label = TAG_LABELS[t.tag] ?? t.tag;
+      const label = msg.getTagLabel(t.tag);
       if (diff > 0) {
         insights.push({
           type: "warning",
           icon: "📊",
-          message: `${label} 비중 ${currentPercent.toFixed(1)}% (목표 ${t.targetPercent}%) → +${diff.toFixed(1)}%p 과중`,
+          message: msg.tagOver(label, currentPercent.toFixed(1), String(t.targetPercent), diff.toFixed(1)),
         });
       } else {
         insights.push({
           type: "info",
           icon: "📊",
-          message: `${label} 비중 ${currentPercent.toFixed(1)}% (목표 ${t.targetPercent}%) → ${diff.toFixed(1)}%p 부족`,
+          message: msg.tagUnder(label, currentPercent.toFixed(1), String(t.targetPercent), Math.abs(diff).toFixed(1)),
         });
       }
     }
@@ -139,6 +163,7 @@ export function calculateSummary(
   rates: Record<CurrencyCode, number>,
   targets: TargetAllocation[] = [],
   baseCurrency: CurrencyCode = "KRW",
+  insightMessages?: InsightMessages,
 ): PortfolioSummary {
   let totalValueKRW = 0;
   let totalCostKRW = 0;
@@ -278,6 +303,7 @@ export function calculateSummary(
   }
 
   // 인사이트 생성
+  const msg = insightMessages ?? DEFAULT_INSIGHT_MESSAGES;
   const insights = generateInsights(
     assets,
     holdings,
@@ -286,6 +312,7 @@ export function calculateSummary(
     currencyExposure,
     targets,
     baseCurrency,
+    msg,
   );
 
   return {

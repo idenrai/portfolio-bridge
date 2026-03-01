@@ -69,15 +69,15 @@ export function DashboardPage() {
       {/* ③ 보유종목 테이블 */}
       <TopHoldingsTable summary={summary} />
 
-      {/* ④ 하단 3열 그리드 */}
+      {/* ④ 하단 2열 그리드 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <TagAnalysisCard rebalancing={rebalancing} />
         <CurrencyExposureCard summary={summary} />
-        <div className="space-y-4">
-          <RebalanceCard rebalancing={rebalancing} />
-          <InsightsPanel summary={summary} />
-        </div>
+        <RebalanceCard rebalancing={rebalancing} />
       </div>
+
+      {/* ⑤ 인사이트 (단독) */}
+      <InsightsPanel summary={summary} />
     </div>
   );
 }

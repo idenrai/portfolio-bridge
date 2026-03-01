@@ -16,7 +16,8 @@ export function CurrencyExposureCard({ summary }: Props) {
   const t = useT();
 
   const getCurrencyLabel = (code: string) =>
-    ({ KRW: t.currency_krw, USD: t.currency_usd, JPY: t.currency_jpy }[code] ?? code);
+    ({ KRW: t.currency_krw, USD: t.currency_usd, JPY: t.currency_jpy })[code] ??
+    code;
 
   if (summary.currencyExposure.length === 0) return null;
 

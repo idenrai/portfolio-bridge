@@ -63,6 +63,13 @@ export const ko: Translations = {
 
   insights_title: "인사이트",
   insights_ok: "✅ 특이사항 없음",
+  insight_concentration: (name, pct) => `${name} 비중 ${pct}% — 개별 종목 집중도 높음`,
+  insight_big_loss: (name, pct) => `${name} 수익률 ${pct}% — 큰 손실 발생 중`,
+  insight_cash_high: (pct) => `현금 비중 ${pct}% — 유동성 과다, 투자 기회 검토`,
+  insight_cash_low: (pct) => `현금 비중 ${pct}% — 비상자금 부족 주의`,
+  insight_fx_high: (currency, pct) => `${currency} 노출 ${pct}% — 환율 변동 민감`,
+  insight_tag_over: (label, pct, target, diff) => `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
+  insight_tag_under: (label, pct, target, diff) => `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
 
   asset_title: "자산 관리",
   asset_btn_ai: "🤖 AI 분류 프롬프트",

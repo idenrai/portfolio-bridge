@@ -7,7 +7,7 @@ export function Sidebar() {
   const NAV_ITEMS = [
     { to: "/", label: t.nav_dashboard, icon: "📊" },
     { to: "/assets", label: t.nav_assets, icon: "💼" },
-    { to: "/gurus", label: t.nav_gurus, icon: "🧠" },
+    { to: "/gurus", label: t.nav_gurus, icon: "💡" },
     { to: "/settings", label: t.nav_settings, icon: "⚙️" },
   ];
 
