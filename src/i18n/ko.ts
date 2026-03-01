@@ -217,6 +217,7 @@ export const ko: Translations = {
   settings_target_title: "목표 비중 배분",
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",
+  settings_target_saved: "저장되었습니다",
   settings_data_title: "데이터 관리",
   settings_data_desc: "모든 데이터는 브라우저 로컬 스토리지에 저장됩니다.",
   settings_data_count: (n) => `현재 등록된 자산: ${n}건`,

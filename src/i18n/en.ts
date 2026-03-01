@@ -218,6 +218,7 @@ export const en: Translations = {
   settings_target_title: "Target Allocation",
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",
+  settings_target_saved: "Saved",
   settings_data_title: "Data Management",
   settings_data_desc: "All data is stored in browser local storage.",
   settings_data_count: (n) => `Registered assets: ${n}`,

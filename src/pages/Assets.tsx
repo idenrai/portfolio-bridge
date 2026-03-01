@@ -198,7 +198,7 @@ export function AssetsPage() {
             <button
               type="button"
               onClick={() => setPromptTab("generate")}
-              className={`flex-1 py-2 text-sm font-medium transition-colors ${
+              className={`flex-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
                 promptTab === "generate"
                   ? "bg-blue-600 text-white"
                   : "bg-white text-slate-600 hover:bg-slate-50"
@@ -209,7 +209,7 @@ export function AssetsPage() {
             <button
               type="button"
               onClick={() => setPromptTab("import")}
-              className={`flex-1 py-2 text-sm font-medium transition-colors ${
+              className={`flex-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
                 promptTab === "import"
                   ? "bg-blue-600 text-white"
                   : "bg-white text-slate-600 hover:bg-slate-50"
@@ -228,7 +228,7 @@ export function AssetsPage() {
                 <button
                   type="button"
                   onClick={() => setPromptTab("import")}
-                  className="text-blue-600 font-medium underline underline-offset-2"
+                  className="text-blue-600 font-medium underline underline-offset-2 cursor-pointer"
                 >
                   {t.asset_ai_tab_link}
                 </button>{" "}

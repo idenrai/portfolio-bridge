@@ -40,7 +40,7 @@ export function Modal({
               </h2>
               <button
                 onClick={onClose}
-                className="text-slate-400 hover:text-slate-600 text-lg leading-none"
+                className="text-slate-400 hover:text-slate-600 text-lg leading-none cursor-pointer"
               >
                 ✕
               </button>

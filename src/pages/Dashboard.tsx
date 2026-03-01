@@ -46,7 +46,7 @@ export function DashboardPage() {
           <button
             type="button"
             onClick={handleLoadSample}
-            className="px-5 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors"
+            className="px-5 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer"
           >
             {t.dash_sample_btn}
           </button>

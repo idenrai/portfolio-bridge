@@ -81,7 +81,7 @@ export function GurusPage() {
           <button
             key={guru.id}
             onClick={() => setSelectedGuru(guru)}
-            className={`text-left p-4 rounded-xl border transition-all ${
+            className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
               selectedGuru?.id === guru.id
                 ? "border-blue-500 bg-blue-50 shadow-md"
                 : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"

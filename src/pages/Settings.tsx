@@ -20,18 +20,23 @@ export function SettingsPage() {
   const [allocations, setAllocations] = useState<TargetAllocation[]>([
     ...settings.targetAllocations,
   ]);
+  const [saved, setSaved] = useState(false);
 
   const handleAllocationChange = (index: number, value: string) => {
     const updated = [...allocations];
     updated[index] = { ...updated[index], targetPercent: Number(value) || 0 };
     setAllocations(updated);
+    setSaved(false);
   };
 
   const saveAllocations = () => {
     settings.setTargetAllocations(allocations);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
   };
 
   const totalPercent = allocations.reduce((s, a) => s + a.targetPercent, 0);
+  const isExact = Math.abs(totalPercent - 100) < 0.01;
   const t = useT();
 
   const handleResetAll = () => {
@@ -41,8 +46,6 @@ export function SettingsPage() {
       window.location.reload();
     }
   };
-
-  // handleRateChange는 더 이상 사용하지 않음 (자동 조회만 지원)
 
   return (
     <div className="space-y-6 max-w-2xl">
@@ -108,25 +111,7 @@ export function SettingsPage() {
       </Card>
 
       {/* 목표 비중 */}
-      <Card
-        title={t.settings_target_title}
-        action={
-          <div className="flex items-center gap-2">
-            <span
-              className={`text-xs ${
-                Math.abs(totalPercent - 100) < 0.01
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {t.settings_target_sum(totalPercent.toFixed(0))}
-            </span>
-            <Button size="sm" onClick={saveAllocations}>
-              {t.settings_target_save}
-            </Button>
-          </div>
-        }
-      >
+      <Card title={t.settings_target_title}>
         <div className="space-y-2">
           {allocations.map((a, i) => (
             <label key={a.tag} className="flex items-center gap-3">
@@ -144,6 +129,27 @@ export function SettingsPage() {
               <span className="text-xs text-slate-400">%</span>
             </label>
           ))}
+
+          {/* 합계 + 저장 */}
+          <div className="flex items-center justify-between pt-3 mt-1 border-t border-slate-100">
+            <span
+              className={`text-sm font-medium ${
+                isExact ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {t.settings_target_sum(totalPercent.toFixed(0))}
+            </span>
+            <div className="flex items-center gap-2">
+              {saved && (
+                <span className="text-xs text-green-600 font-medium animate-pulse">
+                  ✓ {t.settings_target_saved}
+                </span>
+              )}
+              <Button size="sm" onClick={saveAllocations} disabled={!isExact}>
+                {t.settings_target_save}
+              </Button>
+            </div>
+          </div>
         </div>
       </Card>
 
@@ -162,3 +168,4 @@ export function SettingsPage() {
     </div>
   );
 }
+

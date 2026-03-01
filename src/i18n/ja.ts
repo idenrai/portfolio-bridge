@@ -219,6 +219,7 @@ export const ja: Translations = {
   settings_target_title: "目標配分",
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",
+  settings_target_saved: "保存しました",
   settings_data_title: "データ管理",
   settings_data_desc:
     "すべてのデータはブラウザのローカルストレージに保存されます。",

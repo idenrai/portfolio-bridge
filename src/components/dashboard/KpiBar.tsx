@@ -21,9 +21,9 @@ export function KpiBar({ summary }: Props) {
 
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
 
-  // 외화 노출 합산 (KRW 제외)
+  // 외화 노출 합산 (baseCurrency 제외)
   const fxExposure = summary.currencyExposure
-    .filter((e) => e.currency !== "KRW")
+    .filter((e) => e.currency !== baseCurrency)
     .reduce((sum, e) => sum + e.percent, 0);
 
   const items: KpiItem[] = [
@@ -56,7 +56,7 @@ export function KpiBar({ summary }: Props) {
       label: t.kpi_fx_exposure,
       value: `${fxExposure.toFixed(1)}%`,
       sub: summary.currencyExposure
-        .filter((e) => e.currency !== "KRW")
+        .filter((e) => e.currency !== baseCurrency)
         .map((e) => `${e.currency} ${e.percent.toFixed(0)}%`)
         .join(" · "),
       color: fxExposure > 40 ? "text-amber-600" : "text-slate-900",
