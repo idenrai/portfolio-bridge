@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
-import { useLanguageStore } from "@/stores";
+import { useLanguageStore, useSettingsStore } from "@/stores";
 import { buildInsightPrompt } from "@/utils";
 import type { PortfolioSummary, Asset, TargetAllocation } from "@/types";
 
@@ -26,6 +26,8 @@ const CLOSE_BTN = {
 export function InsightsPanel({ summary, assets, targets }: Props) {
   const t = useT();
   const lang = useLanguageStore((s) => s.lang);
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
+  const rates = useSettingsStore((s) => s.exchangeRates);
   const [dismissed, setDismissed] = useState<Set<number>>(new Set());
   const [showPrompt, setShowPrompt] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -35,7 +37,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
     [],
   );
 
-  const promptText = buildInsightPrompt(summary, assets, targets, lang);
+  const promptText = buildInsightPrompt(summary, assets, targets, lang, baseCurrency, rates);
 
   const copyPrompt = async () => {
     await navigator.clipboard.writeText(promptText);

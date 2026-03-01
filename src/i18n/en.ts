@@ -67,11 +67,11 @@ export const en: Translations = {
   insights_ai_copy: "Copy to clipboard",
   insights_ai_copied: "✓ Copied!",
   insights_ai_desc:
-    "Copy the prompt below and paste it into ChatGPT, Claude, or any AI assistant.",
+    "Copy the prompt below and paste it into ChatGPT, Claude, Gemini, Grok, or any AI assistant.",
   insights_ai_close: "Close",
   insights_ai_banner_title: "AI Portfolio Analysis",
   insights_ai_banner_desc:
-    "Generate a prompt packed with your holdings data. Paste it into ChatGPT or Claude to get an ideal allocation model and actionable insights.",
+    "Generate a prompt packed with your holdings data. Paste it into ChatGPT, Claude, Gemini, or Grok to get an ideal allocation model and actionable insights.",
   insight_concentration: (name, pct) =>
     `${name} weight ${pct}% — high single-stock concentration`,
   insight_big_loss: (name, pct) => `${name} return ${pct}% — significant loss`,
@@ -87,6 +87,9 @@ export const en: Translations = {
 
   asset_title: "Assets",
   asset_btn_ai: "🤖 AI Classification Prompt",
+  asset_ai_banner_title: "AI Asset Classification",
+  asset_ai_banner_desc:
+    "Automatically classify untagged assets with AI. Copy the prompt and paste it into ChatGPT, Claude, Gemini, or Grok to get recommended tags for each holding.",
   asset_btn_import_csv: "Import CSV",
   asset_btn_export_csv: "Export CSV",
   asset_btn_add: "+ Add Asset",
@@ -97,7 +100,7 @@ export const en: Translations = {
   asset_ai_tab_generate: "① Generate Prompt",
   asset_ai_tab_import: "② Import AI Response",
   asset_ai_copy_desc:
-    "Copy the prompt below and paste it into ChatGPT, Claude, or another AI.",
+    "Copy the prompt below and paste it into ChatGPT, Claude, Gemini, Grok, or another AI.",
   asset_ai_tab_link: "② Import AI Response",
   asset_ai_copy: "Copy to Clipboard",
   asset_ai_copied: "✓ Copied!",

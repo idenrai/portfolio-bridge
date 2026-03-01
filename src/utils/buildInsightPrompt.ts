@@ -9,6 +9,27 @@ const LANG_NAMES: Record<Lang, string> = {
   ja: "Japanese (日本語)",
 };
 
+const CURRENCY_SYMBOLS: Record<string, string> = {
+  KRW: "₩",
+  USD: "$",
+  JPY: "¥",
+};
+
+/** KRW 기준 금액을 baseCurrency로 변환하여 포맷팅 */
+function formatInBase(
+  krwAmount: number,
+  baseCurrency: string,
+  rates: Record<string, number>,
+): string {
+  const symbol = CURRENCY_SYMBOLS[baseCurrency] ?? baseCurrency;
+  if (baseCurrency === "KRW") {
+    return `${symbol}${Math.round(krwAmount).toLocaleString()}`;
+  }
+  const rate = rates[baseCurrency] ?? 1;
+  const amount = krwAmount / rate;
+  return `${symbol}${Math.round(amount).toLocaleString()}`;
+}
+
 /**
  * AI에게 포트폴리오 인사이트를 요청하는 프롬프트 생성
  */
@@ -17,6 +38,8 @@ export function buildInsightPrompt(
   assets: Asset[],
   targets: TargetAllocation[],
   lang: Lang = "ko",
+  baseCurrency: string = "KRW",
+  rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
 ): string {
   const totalKRW = summary.totalValueKRW;
   const pnlKRW = summary.totalPnLKRW;
@@ -84,8 +107,8 @@ export function buildInsightPrompt(
 4. Any notable risks or opportunities you observe
 
 --- PORTFOLIO OVERVIEW ---
-Total value (KRW): ₩${Math.round(totalKRW).toLocaleString()}
-Total P&L (KRW):   ${pnlKRW >= 0 ? "+" : ""}₩${Math.round(pnlKRW).toLocaleString()} (${returnPct >= 0 ? "+" : ""}${returnPct.toFixed(2)}%)
+Total value (${baseCurrency}): ${formatInBase(totalKRW, baseCurrency, rates)}
+Total P&L (${baseCurrency}):   ${pnlKRW >= 0 ? "+" : ""}${formatInBase(pnlKRW, baseCurrency, rates)} (${returnPct >= 0 ? "+" : ""}${returnPct.toFixed(2)}%)
 Number of positions: ${summary.holdingCount}
 Cash %: ${summary.cashPercent.toFixed(1)}%
 

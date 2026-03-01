@@ -125,14 +125,6 @@ export function AssetsPage() {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-slate-800">{t.asset_title}</h2>
         <div className="flex gap-2">
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => setPromptOpen(true)}
-            disabled={assets.length === 0}
-          >
-            {t.asset_btn_ai}
-          </Button>
           <Button variant="secondary" size="sm" onClick={handleImport}>
             {t.asset_btn_import_csv}
           </Button>
@@ -147,6 +139,33 @@ export function AssetsPage() {
           <Button size="sm" onClick={handleAdd}>
             {t.asset_btn_add}
           </Button>
+        </div>
+      </div>
+
+      {/* AI 분류 배너 */}
+      <div className="rounded-xl bg-gradient-to-r from-violet-600 to-purple-500 p-px shadow-md">
+        <div className="rounded-[11px] bg-white/95 px-4 py-3">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-start gap-3 min-w-0">
+              <span className="text-2xl flex-shrink-0 mt-0.5">🤖</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-800 leading-tight">
+                  {t.asset_ai_banner_title}
+                </p>
+                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                  {t.asset_ai_banner_desc}
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setPromptOpen(true)}
+              disabled={assets.length === 0}
+              className="flex-shrink-0 rounded-lg bg-gradient-to-r from-violet-600 to-purple-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {t.asset_btn_ai}
+            </button>
+          </div>
         </div>
       </div>
 

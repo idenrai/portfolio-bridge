@@ -68,11 +68,11 @@ export const ja: Translations = {
   insights_ai_copy: "クリップボードにコピー",
   insights_ai_copied: "✓ コピー済み!",
   insights_ai_desc:
-    "下のプロンプトをコピーして、ChatGPTやClaudeなどのAIに貳り付けてください。",
+    "下のプロンプトをコピーして、ChatGPT・Claude・Gemini・GrokなどのAIに貼り付けてください。",
   insights_ai_close: "閉じる",
   insights_ai_banner_title: "AI ポートフォリオ分析",
   insights_ai_banner_desc:
-    "保有銘柄の詳細データを含むプロンプトを生成します。ChatGPT · Claudeに貳り付けて理想的な資産配分モデルと調整のインサイトを得ましょう。",
+    "保有銘柄の詳細データを含むプロンプトを生成します。ChatGPT · Claude · Gemini · Grokに貼り付けて理想的な資産配分モデルと調整のインサイトを得ましょう。",
   insight_concentration: (name, pct) =>
     `${name} 比率${pct}% — 個別銘柄集中度が高い`,
   insight_big_loss: (name, pct) =>
@@ -88,6 +88,9 @@ export const ja: Translations = {
 
   asset_title: "資産管理",
   asset_btn_ai: "🤖 AI分類プロンプト",
+  asset_ai_banner_title: "AI 資産分類",
+  asset_ai_banner_desc:
+    "タグのない資産をAIが自動的に分類します。プロンプトをChatGPT・Claude・Gemini・Grokに貼り付けると、各資産に適したタグを提案してもらえます。",
   asset_btn_import_csv: "CSVインポート",
   asset_btn_export_csv: "CSVエクスポート",
   asset_btn_add: "+ 資産追加",
@@ -98,7 +101,7 @@ export const ja: Translations = {
   asset_ai_tab_generate: "① プロンプト生成",
   asset_ai_tab_import: "② AI回答インポート",
   asset_ai_copy_desc:
-    "以下のプロンプトをコピーして ChatGPT や Claude などの AI に貼り付けてください。",
+    "以下のプロンプトをコピーして ChatGPT・Claude・Gemini・Grok などの AI に貼り付けてください。",
   asset_ai_tab_link: "② AI回答インポート",
   asset_ai_copy: "クリップボードにコピー",
   asset_ai_copied: "✓ コピーしました！",

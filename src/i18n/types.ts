@@ -96,6 +96,8 @@ export interface Translations {
   // ─── Assets Page ───────────────────────────────────────────────────────────
   asset_title: string;
   asset_btn_ai: string;
+  asset_ai_banner_title: string;
+  asset_ai_banner_desc: string;
   asset_btn_import_csv: string;
   asset_btn_export_csv: string;
   asset_btn_add: string;

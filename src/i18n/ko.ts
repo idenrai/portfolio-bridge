@@ -67,11 +67,11 @@ export const ko: Translations = {
   insights_ai_copy: "클립보드에 복사",
   insights_ai_copied: "✓ 복사됨!",
   insights_ai_desc:
-    "아래 프롬프트를 복사해 ChatGPT, Claude 등 AI에 붙여넣으세요.",
+    "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여넣으세요.",
   insights_ai_close: "닫기",
   insights_ai_banner_title: "AI 포트폴리오 분석",
   insights_ai_banner_desc:
-    "보유 종목 저눅 데이터를 포함한 프롬프트를 생성합니다. ChatGPT · Claude에 바로 붙여넣어 이상적 자산 배분 모델과 구체적인 조정 인사이트를 받아보세요.",
+    "보유 종목 상세 데이터를 포함한 프롬프트를 생성합니다. ChatGPT · Claude · Gemini · Grok에 바로 붙여넣어 이상적 자산 배분 모델과 구체적인 조정 인사이트를 받아보세요.",
   insight_concentration: (name, pct) =>
     `${name} 비중 ${pct}% — 개별 종목 집중도 높음`,
   insight_big_loss: (name, pct) => `${name} 수익률 ${pct}% — 큰 손실 발생 중`,
@@ -86,6 +86,9 @@ export const ko: Translations = {
 
   asset_title: "자산 관리",
   asset_btn_ai: "🤖 AI 분류 프롬프트",
+  asset_ai_banner_title: "AI 자산 분류",
+  asset_ai_banner_desc:
+    "태그가 없는 자산을 AI가 자동으로 분류합니다. 프롬프트를 ChatGPT · Claude · Gemini · Grok에 붙여넣으면 각 자산에 적합한 태그를 추천받을 수 있습니다.",
   asset_btn_import_csv: "CSV 가져오기",
   asset_btn_export_csv: "CSV 내보내기",
   asset_btn_add: "+ 자산 추가",
@@ -96,7 +99,7 @@ export const ko: Translations = {
   asset_ai_tab_generate: "① 프롬프트 생성",
   asset_ai_tab_import: "② AI 응답 가져오기",
   asset_ai_copy_desc:
-    "아래 프롬프트를 복사해 ChatGPT, Claude 등 AI에 붙여 넣으세요.",
+    "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여 넣으세요.",
   asset_ai_tab_link: "② AI 응답 가져오기",
   asset_ai_copy: "클립보드에 복사",
   asset_ai_copied: "✓ 복사됨!",
