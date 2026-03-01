@@ -1,0 +1,92 @@
+import type { Asset, AssetTag, TargetAllocation } from "@/types";
+import type { PortfolioSummary } from "@/types";
+import { ASSET_TYPE_LABELS, MARKET_LABELS, TAG_LABELS } from "@/types";
+
+/**
+ * AI에게 포트폴리오 인사이트를 요청하는 프롬프트 생성
+ */
+export function buildInsightPrompt(
+  summary: PortfolioSummary,
+  assets: Asset[],
+  targets: TargetAllocation[],
+): string {
+  const totalKRW = summary.totalValueKRW;
+  const pnlKRW = summary.totalPnLKRW;
+  const returnPct = summary.totalReturnPercent;
+
+  // 태그별 배분 (목표 vs 실제)
+  const tagSection = summary.tagAllocation
+    .map((t) => {
+      const tgt = targets.find((x) => x.tag === t.tag);
+      const label = TAG_LABELS[t.tag as AssetTag] ?? t.tag;
+      const targetStr = tgt ? ` (target: ${tgt.targetPercent}%)` : "";
+      return `  - ${label}: ${t.percent.toFixed(1)}%${targetStr}`;
+    })
+    .join("\n");
+
+  // 시장별 배분
+  const marketSection = summary.marketAllocation
+    .map((m) => `  - ${MARKET_LABELS[m.market as keyof typeof MARKET_LABELS] ?? m.market}: ${m.percent.toFixed(1)}%`)
+    .join("\n");
+
+  // 외화 노출
+  const fxSection = summary.currencyExposure
+    .map((e) => `  - ${e.currency}: ${e.percent.toFixed(1)}%`)
+    .join("\n");
+
+  // 보유 종목 상세 (현금 제외 + 평가액 기준 정렬, 최대 30건)
+  const holdings = [...summary.holdings]
+    .filter((h) => h.type !== "cash")
+    .sort((a, b) => b.valueKRW - a.valueKRW)
+    .slice(0, 30);
+
+  const holdingRows = holdings
+    .map((h, i) => {
+      const type = ASSET_TYPE_LABELS[h.type as keyof typeof ASSET_TYPE_LABELS] ?? h.type;
+      const market = MARKET_LABELS[h.market as keyof typeof MARKET_LABELS] ?? h.market;
+      const tag = h.tag ? (TAG_LABELS[h.tag as AssetTag] ?? h.tag) : "—";
+      return (
+        `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
+        ` | ${type} | ${market} | ${h.currency}` +
+        ` | weight: ${h.weightPercent.toFixed(1)}%` +
+        ` | return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%` +
+        ` | tag: ${tag}`
+      );
+    })
+    .join("\n");
+
+  // 현금자산
+  const cashAssets = assets.filter((a) => a.type === "cash");
+  const cashSection = cashAssets.length > 0
+    ? cashAssets.map((a) => `  - ${a.currency} ${a.quantity.toLocaleString()}`).join("\n")
+    : "  (none)";
+
+  return `You are a professional portfolio analyst. Please analyze the following portfolio and provide:
+1. An assessment of the current portfolio composition (diversification, risk concentration, currency exposure)
+2. An ideal asset allocation model tailored to the portfolio's profile
+3. Specific, actionable portfolio adjustment insights (what to buy more, reduce, or rebalance)
+4. Any notable risks or opportunities you observe
+
+--- PORTFOLIO OVERVIEW ---
+Total value (KRW): ₩${Math.round(totalKRW).toLocaleString()}
+Total P&L (KRW):   ${pnlKRW >= 0 ? "+" : ""}₩${Math.round(pnlKRW).toLocaleString()} (${returnPct >= 0 ? "+" : ""}${returnPct.toFixed(2)}%)
+Number of positions: ${summary.holdingCount}
+Cash %: ${summary.cashPercent.toFixed(1)}%
+
+--- ALLOCATION BY TAG ---
+${tagSection || "  (no data)"}
+
+--- ALLOCATION BY MARKET ---
+${marketSection || "  (no data)"}
+
+--- CURRENCY EXPOSURE ---
+${fxSection || "  (no data)"}
+
+--- HOLDINGS (sorted by weight, top ${holdings.length}) ---
+${holdingRows || "  (no data)"}
+
+--- CASH POSITIONS ---
+${cashSection}
+
+Please respond in the same language as this message or in the user's preferred language. Be concise but specific, and prioritize actionable recommendations.`;
+}

@@ -22,7 +22,12 @@ export interface InsightMessages {
   cashLow: (pct: string) => string;
   fxHigh: (currency: string, pct: string) => string;
   tagOver: (label: string, pct: string, target: string, diff: string) => string;
-  tagUnder: (label: string, pct: string, target: string, diff: string) => string;
+  tagUnder: (
+    label: string,
+    pct: string,
+    target: string,
+    diff: string,
+  ) => string;
   getTagLabel: (tag: string) => string;
 }
 
@@ -32,8 +37,10 @@ const DEFAULT_INSIGHT_MESSAGES: InsightMessages = {
   cashHigh: (pct) => `현금 비중 ${pct}% — 유동성 과다, 투자 기회 검토`,
   cashLow: (pct) => `현금 비중 ${pct}% — 비상자금 부족 주의`,
   fxHigh: (currency, pct) => `${currency} 노출 ${pct}% — 환율 변동 민감`,
-  tagOver: (label, pct, target, diff) => `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
-  tagUnder: (label, pct, target, diff) => `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
+  tagOver: (label, pct, target, diff) =>
+    `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
+  tagUnder: (label, pct, target, diff) =>
+    `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
   getTagLabel: (tag) => TAG_LABELS[tag as AssetTag] ?? tag,
 };
 
@@ -140,13 +147,23 @@ function generateInsights(
         insights.push({
           type: "warning",
           icon: "📊",
-          message: msg.tagOver(label, currentPercent.toFixed(1), String(t.targetPercent), diff.toFixed(1)),
+          message: msg.tagOver(
+            label,
+            currentPercent.toFixed(1),
+            String(t.targetPercent),
+            diff.toFixed(1),
+          ),
         });
       } else {
         insights.push({
           type: "info",
           icon: "📊",
-          message: msg.tagUnder(label, currentPercent.toFixed(1), String(t.targetPercent), Math.abs(diff).toFixed(1)),
+          message: msg.tagUnder(
+            label,
+            currentPercent.toFixed(1),
+            String(t.targetPercent),
+            Math.abs(diff).toFixed(1),
+          ),
         });
       }
     }

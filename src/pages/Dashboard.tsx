@@ -1,5 +1,5 @@
 import { usePortfolio, useT } from "@/hooks";
-import { useAssetStore } from "@/stores";
+import { useAssetStore, useSettingsStore } from "@/stores";
 import { KpiBar } from "@/components/dashboard/KpiBar";
 import { AllocationPieCharts } from "@/components/dashboard/AllocationPieCharts";
 import { TopHoldingsTable } from "@/components/dashboard/TopHoldingsTable";
@@ -12,6 +12,7 @@ import { SAMPLE_ASSETS } from "@/utils/sampleData";
 export function DashboardPage() {
   const { assets, summary, rebalancing } = usePortfolio();
   const { addAsset } = useAssetStore();
+  const targets = useSettingsStore((s) => s.targetAllocations);
   const t = useT();
 
   const handleLoadSample = () => {
@@ -63,21 +64,21 @@ export function DashboardPage() {
       {/* ① KPI 바 */}
       <KpiBar summary={summary} />
 
-      {/* ② 파이 차트 (국가별 · 태그별) */}
+      {/* ② 인사이트 (상단 고정) */}
+      <InsightsPanel summary={summary} assets={assets} targets={targets} />
+
+      {/* ③ 파이 차트 (국가별 · 태그별) */}
       <AllocationPieCharts summary={summary} />
 
-      {/* ③ 보유종목 테이블 */}
+      {/* ④ 보유종목 테이블 */}
       <TopHoldingsTable summary={summary} />
 
-      {/* ④ 하단 2열 그리드 */}
+      {/* ⑤ 하단 3열 그리드 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <TagAnalysisCard rebalancing={rebalancing} />
         <CurrencyExposureCard summary={summary} />
         <RebalanceCard rebalancing={rebalancing} />
       </div>
-
-      {/* ⑤ 인사이트 (단독) */}
-      <InsightsPanel summary={summary} />
     </div>
   );
 }

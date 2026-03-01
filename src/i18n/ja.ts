@@ -64,13 +64,23 @@ export const ja: Translations = {
 
   insights_title: "インサイト",
   insights_ok: "✅ 特記事項なし",
-  insight_concentration: (name, pct) => `${name} 比率${pct}% — 個別銘柄集中度が高い`,
-  insight_big_loss: (name, pct) => `${name} リターン${pct}% — 大幅な損失が発生中`,
+  insights_ai_btn: "🤖 AI分析プロンプト",
+  insights_ai_copy: "クリップボードにコピー",
+  insights_ai_copied: "✓ コピー済み!",
+  insights_ai_desc: "下のプロンプトをコピーして、ChatGPTやClaudeなどのAIに貳り付けてください。",
+  insights_ai_close: "閉じる",
+  insight_concentration: (name, pct) =>
+    `${name} 比率${pct}% — 個別銘柄集中度が高い`,
+  insight_big_loss: (name, pct) =>
+    `${name} リターン${pct}% — 大幅な損失が発生中`,
   insight_cash_high: (pct) => `現金比率${pct}% — 流動性過多、投資機会の検討を`,
   insight_cash_low: (pct) => `現金比率${pct}% — 緊急資金不足に注意`,
-  insight_fx_high: (currency, pct) => `${currency} エクスポージャー${pct}% — 為替変動リスク大`,
-  insight_tag_over: (label, pct, target, diff) => `${label} ${pct}% (目標${target}%) → +${diff}%p オーバーウェイト`,
-  insight_tag_under: (label, pct, target, diff) => `${label} ${pct}% (目標${target}%) → ${diff}%p アンダーウェイト`,
+  insight_fx_high: (currency, pct) =>
+    `${currency} エクスポージャー${pct}% — 為替変動リスク大`,
+  insight_tag_over: (label, pct, target, diff) =>
+    `${label} ${pct}% (目標${target}%) → +${diff}%p オーバーウェイト`,
+  insight_tag_under: (label, pct, target, diff) =>
+    `${label} ${pct}% (目標${target}%) → ${diff}%p アンダーウェイト`,
 
   asset_title: "資産管理",
   asset_btn_ai: "🤖 AI分類プロンプト",

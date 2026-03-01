@@ -68,13 +68,28 @@ export interface Translations {
   // ─── InsightsPanel ─────────────────────────────────────────────────────────
   insights_title: string;
   insights_ok: string;
+  insights_ai_btn: string;
+  insights_ai_copy: string;
+  insights_ai_copied: string;
+  insights_ai_desc: string;
+  insights_ai_close: string;
   insight_concentration: (name: string, pct: string) => string;
   insight_big_loss: (name: string, pct: string) => string;
   insight_cash_high: (pct: string) => string;
   insight_cash_low: (pct: string) => string;
   insight_fx_high: (currency: string, pct: string) => string;
-  insight_tag_over: (label: string, pct: string, target: string, diff: string) => string;
-  insight_tag_under: (label: string, pct: string, target: string, diff: string) => string;
+  insight_tag_over: (
+    label: string,
+    pct: string,
+    target: string,
+    diff: string,
+  ) => string;
+  insight_tag_under: (
+    label: string,
+    pct: string,
+    target: string,
+    diff: string,
+  ) => string;
 
   // ─── Assets Page ───────────────────────────────────────────────────────────
   asset_title: string;

@@ -18,3 +18,4 @@ export {
 } from "./yahooFinance";
 export type { TickerSearchItem, QuoteData } from "./yahooFinance";
 export { buildClassificationPrompt, parseAiResponse } from "./aiClassification";
+export { buildInsightPrompt } from "./buildInsightPrompt";
