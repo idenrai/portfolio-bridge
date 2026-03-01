@@ -6,12 +6,18 @@ export const ko: Translations = {
   nav_gurus: "투자 구루",
   nav_settings: "설정",
   app_tagline: "다국가 자산 통합 관리",
-  app_version_local: "로컬 전용",
+  app_version_info: "브라우저 저장",
 
   dash_title: "대시보드",
   dash_empty_title: "포트폴리오를 시작하세요",
   dash_empty_desc:
     '"자산 관리" 메뉴에서 보유 자산을 등록하면 여기에 요약이 표시됩니다.',
+  dash_notice_storage:
+    "💾 데이터는 이 기기의 브라우저에만 저장됩니다. 다른 기기와 동기화되지 않으므로, 같은 기기 · 같은 브라우저에서 이용해 주세요.",
+  dash_notice_csv:
+    "📁 자산 데이터는 CSV 파일로 내보내기/가져오기가 가능합니다. 백업이나 기기 이전 시 활용하세요.",
+  dash_notice_mobile:
+    "🖥️ 현재 PC 브라우저에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
 
   kpi_total_value: "총 평가액",
   kpi_pnl: "평가 손익",

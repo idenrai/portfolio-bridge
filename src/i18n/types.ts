@@ -7,12 +7,15 @@ export interface Translations {
   nav_gurus: string;
   nav_settings: string;
   app_tagline: string;
-  app_version_local: string;
+  app_version_info: string;
 
   // ─── Dashboard ─────────────────────────────────────────────────────────────
   dash_title: string;
   dash_empty_title: string;
   dash_empty_desc: string;
+  dash_notice_storage: string;
+  dash_notice_csv: string;
+  dash_notice_mobile: string;
 
   // ─── KPI Bar ───────────────────────────────────────────────────────────────
   kpi_total_value: string;

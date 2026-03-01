@@ -6,12 +6,18 @@ export const en: Translations = {
   nav_gurus: "Gurus",
   nav_settings: "Settings",
   app_tagline: "Multi-country asset management",
-  app_version_local: "Local only",
+  app_version_info: "Browser storage",
 
   dash_title: "Dashboard",
   dash_empty_title: "Start your portfolio",
   dash_empty_desc:
     'Register your holdings in "Assets" and a summary will appear here.',
+  dash_notice_storage:
+    "💾 Data is stored only in this browser on this device. It does not sync across devices — please use the same device and browser.",
+  dash_notice_csv:
+    "📁 Asset data can be exported/imported as CSV files. Use this for backups or device migration.",
+  dash_notice_mobile:
+    "🖥️ Optimized for desktop browsers. Mobile screens are not currently supported.",
 
   kpi_total_value: "Total Value",
   kpi_pnl: "Unrealized P&L",

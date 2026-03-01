@@ -19,6 +19,20 @@ export function DashboardPage() {
           {t.dash_empty_title}
         </h2>
         <p className="text-sm">{t.dash_empty_desc}</p>
+
+        {/* 이용 안내 */}
+        <div className="mt-8 w-full max-w-lg space-y-2">
+          {[t.dash_notice_storage, t.dash_notice_csv, t.dash_notice_mobile].map(
+            (notice, i) => (
+              <p
+                key={i}
+                className="text-xs text-slate-500 bg-slate-100 rounded-lg px-4 py-2.5 text-left leading-relaxed"
+              >
+                {notice}
+              </p>
+            ),
+          )}
+        </div>
       </div>
     );
   }

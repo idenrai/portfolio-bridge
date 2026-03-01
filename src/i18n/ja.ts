@@ -6,12 +6,18 @@ export const ja: Translations = {
   nav_gurus: "投資家",
   nav_settings: "設定",
   app_tagline: "多国籍資産一元管理",
-  app_version_local: "ローカル専用",
+  app_version_info: "ブラウザ保存",
 
   dash_title: "ダッシュボード",
   dash_empty_title: "ポートフォリオを始めましょう",
   dash_empty_desc:
     "「資産管理」メニューで保有資産を登録すると、ここにサマリーが表示されます。",
+  dash_notice_storage:
+    "💾 データはこの端末のブラウザにのみ保存されます。他の端末とは同期されないため、同じ端末・同じブラウザでご利用ください。",
+  dash_notice_csv:
+    "📁 資産データはCSVファイルでエクスポート/インポートが可能です。バックアップや端末移行時にご活用ください。",
+  dash_notice_mobile:
+    "🖥️ PCブラウザに最適化されています。モバイル画面には現在対応しておりません。",
 
   kpi_total_value: "総評価額",
   kpi_pnl: "評価損益",

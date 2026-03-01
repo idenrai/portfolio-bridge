@@ -45,7 +45,7 @@ export function Sidebar() {
 
       {/* 하단 */}
       <div className="px-6 py-4 border-t border-slate-700">
-        <p className="text-xs text-slate-600">v0.1.0 · {t.app_version_local}</p>
+        <p className="text-xs text-slate-600">v0.2.0 · {t.app_version_info}</p>
       </div>
     </aside>
   );
