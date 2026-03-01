@@ -66,14 +66,6 @@ export function AboutPage() {
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <a
-            href="https://portfolio-bridge-sigma.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition-colors"
-          >
-            🌐 {t.about_links_live}
-          </a>
-          <a
             href="https://github.com/idenrai/portfolio-bridge"
             target="_blank"
             rel="noopener noreferrer"
