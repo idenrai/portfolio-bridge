@@ -139,7 +139,7 @@ export const ko: Translations = {
   asset_ai_import_desc: "AI가 응답한 JSON을 아래에 붙여 넣고",
   asset_ai_format_label: "형식:",
   asset_ai_json_placeholder:
-    "AI 응답 JSON을 여기에 붙여 넣으세요...\n\n예시:\n[\n  { \"index\": 1, \"name\": \"AAPL\", \"tag\": \"growth\", \"reason\": \"...\" },\n  { \"index\": 2, \"name\": \"MSFT\", \"tag\": \"growth\", \"reason\": \"...\" }\n]",
+    'AI 응답 JSON을 여기에 붙여 넣으세요...\n\n예시:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
   asset_ai_apply_btn: "태그 적용",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ ${applied}건 태그가 적용되었습니다.${skipped > 0 ? ` (${skipped}건 건너뜀)` : ""}`,

@@ -139,12 +139,15 @@ export const ja: Translations = {
   asset_ai_copied: "✓ コピーしました！",
   asset_ai_close: "閉じる",
   asset_ai_import_desc: "AIが返答したJSONを下に貼り付けて",
-  asset_ai_format_label: "形式:",  asset_ai_json_placeholder:
-    "AIの応答JSONをここに貼り付けてください...\n\n例:\n[\n  { \"index\": 1, \"name\": \"AAPL\", \"tag\": \"growth\", \"reason\": \"...\" },\n  { \"index\": 2, \"name\": \"MSFT\", \"tag\": \"growth\", \"reason\": \"...\" }\n]",  asset_ai_apply_btn: "タグを適用",
+  asset_ai_format_label: "形式:",
+  asset_ai_json_placeholder:
+    'AIの応答JSONをここに貼り付けてください...\n\n例:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
+  asset_ai_apply_btn: "タグを適用",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ ${applied}件にタグを適用しました。${skipped > 0 ? `（${skipped}件スキップ）` : ""}`,
   asset_ai_parse_error: "パースエラー",
-  exchange_rate_error: "為替レートの取得に失敗しました。手動で入力してください。",
+  exchange_rate_error:
+    "為替レートの取得に失敗しました。手動で入力してください。",
   asset_ai_copy_link_pre: "回答が届いたら",
   asset_ai_copy_link_post: "タブで自動適用できます。",
   asset_ai_import_btn_suffix: "ボタンを押してください。",

@@ -111,6 +111,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 ```
 
 `yahooFetch()` auto-detects the runtime Environment:
+
 - **Local dev**: Vite proxy (`/api/yahoo/…`)
 - **Vercel**: Serverless Functions proxy
 - **Tauri desktop**: Direct request via `tauri-plugin-http` (bypasses CORS)
@@ -120,6 +121,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 ### Feature Details
 
 #### Dashboard
+
 - 5-slot KPI bar (total value, P&L, holdings count, cash ratio, FX exposure)
 - Pie charts by market & tag
 - Holdings table (sortable by value / P&L / return / weight, weight bar)
@@ -131,6 +133,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 - **Onboarding sample data**: "Try with sample data" button on empty dashboard
 
 #### Asset Management
+
 - Ticker search (Yahoo Finance US + Yahoo Japan HTML scraping)
 - Manual add / edit / delete
 - **AI auto-tagging**: English structured prompt → apply tags in bulk via JSON response (reasons in app language)
@@ -138,6 +141,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 - CSV export
 
 #### Investment Gurus
+
 - 15 gurus: Buffett, Munger, Lynch, Graham, Dalio, Li Lu, Ackman, Burry, Ken Fisher, Steven Cohen, Howard Marks, Seth Klarman, John Templeton, George Soros, Cathie Wood
 - Philosophy (5 detailed points per guru)
 - Top 5 holdings per guru (ticker, name, weight) — Yahoo Finance links
@@ -145,12 +149,14 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 - Guru-based rebalancing suggestions
 
 #### Multi-language (i18n)
+
 - Korean 🇰🇷 · English 🇺🇸 · 日本語 🇯🇵
 - Instant switch via flag buttons in the header
 - Full UI localization including guru names & philosophies
 - Language setting persisted via Zustand
 
 #### Settings
+
 - Display currency toggle (KRW / JPY / USD)
 - **Exchange rate caching**: auto-fetch on startup, reuse within 1 h, fallback to 24 h cache on failure (amber warning)
 - Target allocation per tag

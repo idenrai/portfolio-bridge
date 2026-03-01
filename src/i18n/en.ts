@@ -140,7 +140,7 @@ export const en: Translations = {
   asset_ai_import_desc: "Paste the JSON returned by the AI below and",
   asset_ai_format_label: "Format:",
   asset_ai_json_placeholder:
-    "Paste AI response JSON here...\n\nExample:\n[\n  { \"index\": 1, \"name\": \"AAPL\", \"tag\": \"growth\", \"reason\": \"...\" },\n  { \"index\": 2, \"name\": \"MSFT\", \"tag\": \"growth\", \"reason\": \"...\" }\n]",
+    'Paste AI response JSON here...\n\nExample:\n[\n  { "index": 1, "name": "AAPL", "tag": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "tag": "growth", "reason": "..." }\n]',
   asset_ai_apply_btn: "Apply Tags",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ Tags applied to ${applied} assets.${skipped > 0 ? ` (${skipped} skipped)` : ""}`,

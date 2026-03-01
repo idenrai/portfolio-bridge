@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { type CurrencyCode, type TargetAllocation, type AssetTag, DEFAULT_RATES } from "@/types";
+import {
+  type CurrencyCode,
+  type TargetAllocation,
+  type AssetTag,
+  DEFAULT_RATES,
+} from "@/types";
 
 interface SettingsState {
   /** 표시 기준 통화 */

@@ -277,7 +277,8 @@ export function AssetsPage() {
                 {t.asset_ai_import_btn_suffix}
                 <br />
                 <span className="text-xs text-slate-400">
-                  {t.asset_ai_format_label} {`[{ "index": 1, "tag": "dividend", ... }, ...]`}
+                  {t.asset_ai_format_label}{" "}
+                  {`[{ "index": 1, "tag": "dividend", ... }, ...]`}
                 </span>
               </p>
               <textarea

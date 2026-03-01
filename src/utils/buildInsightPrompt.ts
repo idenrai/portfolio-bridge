@@ -1,5 +1,15 @@
-import type { Asset, AssetTag, TargetAllocation, PortfolioSummary } from "@/types";
-import { ASSET_TYPE_LABELS, MARKET_LABELS, TAG_LABELS, CURRENCY_SYMBOLS } from "@/types";
+import type {
+  Asset,
+  AssetTag,
+  TargetAllocation,
+  PortfolioSummary,
+} from "@/types";
+import {
+  ASSET_TYPE_LABELS,
+  MARKET_LABELS,
+  TAG_LABELS,
+  CURRENCY_SYMBOLS,
+} from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 
@@ -9,7 +19,8 @@ function formatInBase(
   baseCurrency: string,
   rates: Record<string, number>,
 ): string {
-  const symbol = (CURRENCY_SYMBOLS as Record<string, string>)[baseCurrency] ?? baseCurrency;
+  const symbol =
+    (CURRENCY_SYMBOLS as Record<string, string>)[baseCurrency] ?? baseCurrency;
   if (baseCurrency === "KRW") {
     return `${symbol}${Math.round(krwAmount).toLocaleString()}`;
   }
