@@ -5,8 +5,40 @@ export const en: Translations = {
   nav_assets: "Assets",
   nav_gurus: "Gurus",
   nav_settings: "Settings",
-  app_tagline: "Multi-country asset management",
+  nav_about: "About",
+  app_tagline: "Assets · AI Insights · Gurus",
   app_version_info: "Browser storage",
+
+  about_tagline: "Unified multi-country asset management + AI & guru insights",
+  about_intro:
+    "Portfolio Bridge is a privacy-first web app for managing financial assets across Korea, the US, and Japan in a single dashboard. Get actionable portfolio insights powered by AI and the wisdom of legendary investors. All your data stays in the browser — no account required.",
+  about_features_title: "Features",
+  about_feat1_title: "Unified Dashboard",
+  about_feat1_desc:
+    "KPI summary, tag & market allocation charts, holdings table, and rebalancing suggestions — all at a glance.",
+  about_feat2_title: "Asset Management",
+  about_feat2_desc:
+    "Search tickers via Yahoo Finance or add assets manually. AI auto-tagging, CSV import & export supported.",
+  about_feat3_title: "Investment Gurus",
+  about_feat3_desc:
+    "Reference the philosophies and model portfolios of 15 legendary investors — Buffett, Dalio, Lynch, and more — and compare them with your own portfolio.",
+  about_feat4_title: "AI Portfolio Analysis",
+  about_feat4_desc:
+    "Generate a structured prompt packed with your holdings data, ready to paste into ChatGPT, Claude, Gemini, or Grok for ideal allocation advice.",
+  about_feat5_title: "Automatic Insights",
+  about_feat5_desc:
+    "Automatically detects concentration risk, large losses, low cash, and high FX exposure — displayed as dismissible insight cards.",
+  about_feat6_title: "Multi-language & Currency",
+  about_feat6_desc:
+    "Full UI in Korean, English, and Japanese. Display currency switchable between KRW, USD, and JPY.",
+  about_privacy_title: "Privacy First",
+  about_privacy_desc:
+    "All asset data is stored only in your browser's localStorage. Nothing is sent to an external server. No account creation needed.",
+  about_tech_title: "Tech Stack",
+  about_links_live: "Live Demo",
+  about_links_github: "GitHub",
+  about_disclaimer:
+    "This app is built for personal learning and portfolio tracking. Market data, exchange rates, and analysis are for reference only and should not be used as the basis for investment decisions.",
 
   dash_title: "Dashboard",
   dash_empty_title: "Start your portfolio",

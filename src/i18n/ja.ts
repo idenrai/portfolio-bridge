@@ -5,8 +5,40 @@ export const ja: Translations = {
   nav_assets: "資産管理",
   nav_gurus: "投資家",
   nav_settings: "設定",
-  app_tagline: "多国籍資産一元管理",
+  nav_about: "アプリについて",
+  app_tagline: "資産管理 · AIインサイト · 投資家",
   app_version_info: "ブラウザ保存",
+
+  about_tagline: "多国籍資産一元管理 + AI・投資家インサイト",
+  about_intro:
+    "Portfolio Bridgeは、韓国・米国・日本の金融資産を一画面で管理し、AIや伝賭の投資家たちの知恵からポートフォリオのインサイトを得るプライバシー重視のウェブアプリです。すべてのデータはブラウザ内にのみ保存され、外部サーバーへは送信されません。",
+  about_features_title: "主な機能",
+  about_feat1_title: "統合ダッシュボード",
+  about_feat1_desc:
+    "KPIサマリー、タグ・市場別配分チャート、保有銘柄テーブル、リバランス提案を一目で確認できます。",
+  about_feat2_title: "資産管理",
+  about_feat2_desc:
+    "Yahoo Financeで銘柄を検索するか、手動登録で多国籍資産を一元管理。AI自動タグ分類、CSVインポート・エクスポートに対応。",
+  about_feat3_title: "投資家",
+  about_feat3_desc:
+    "バフェット、ダリオ、リンチなど伝賭の投資家１15名の哲学と代表ポートフォリオを参考に、自分のポートフォリオと比較できます。",
+  about_feat4_title: "AI ポートフォリオ分析",
+  about_feat4_desc:
+    "保有銘柄データを盛り込んだ構造化プロンプトを生成。ChatGPT・Claude・Gemini・Grokに貼り付けるだけで、理想配分のアドバイスを得られます。",
+  about_feat5_title: "自動インサイト",
+  about_feat5_desc:
+    "集中リスク、大きな損失、現金不足、為替エクスポージャー超過などを自動検知。インサイトカードとして表示されます。",
+  about_feat6_title: "多言語・多通貨",
+  about_feat6_desc:
+    "韓国語・English・日本語の3ヵ国語とKRW・USD・JPYの通貨表示に対応しています。",
+  about_privacy_title: "プライバシー重視",
+  about_privacy_desc:
+    "すべての資産データはブラウザのlocalStorageのみに保存されます。外部サーバーへの送信は一切なく、アカウント不要で即座にご利用いただけます。",
+  about_tech_title: "技術スタック",
+  about_links_live: "ライブデモ",
+  about_links_github: "GitHub",
+  about_disclaimer:
+    "このアプリは個人学習およびポートフォリオ管理を目的として制作されました。提供される相場情報・为替レート・分析は参考用であり、投資判断の根拠として使用しないでください。",
 
   dash_title: "ダッシュボード",
   dash_empty_title: "ポートフォリオを始めましょう",

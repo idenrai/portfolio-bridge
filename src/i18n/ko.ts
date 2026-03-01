@@ -5,8 +5,40 @@ export const ko: Translations = {
   nav_assets: "자산 관리",
   nav_gurus: "투자 구루",
   nav_settings: "설정",
-  app_tagline: "다국가 자산 통합 관리",
+  nav_about: "소개",
+  app_tagline: "자산 관리 · AI 인사이트 · 투자 구루",
   app_version_info: "브라우저 저장",
+
+  about_tagline: "다국가 자산 통합 관리 + AI · 구루 인사이트",
+  about_intro:
+    "Portfolio Bridge는 한국 · 미국 · 일본의 금융자산을 하나의 화면에서 관리하고, AI와 전설적인 투자가들의 관점에서 포트폴리오 인사이트를 얻을 수 있는 privacy-first 웹 앱입니다. 모든 데이터는 브라우저 내에만 저장되며 외부 서버로 전송되지 않습니다.",
+  about_features_title: "주요 기능",
+  about_feat1_title: "통합 대시보드",
+  about_feat1_desc:
+    "KPI 요약, 태그·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안을 한눈에 확인하세요.",
+  about_feat2_title: "자산 관리",
+  about_feat2_desc:
+    "Yahoo Finance 종목 검색 및 수동 등록으로 다국가 자산을 통합 관리합니다. AI 자동 태그 분류, CSV 가져오기·내보내기 지원.",
+  about_feat3_title: "투자 구루",
+  about_feat3_desc:
+    "버폾, 달리오, 린치 등 15명의 투자 철학과 대표 포트폴리오를 참고해 내 포트폴리오와 비교할 수 있습니다.",
+  about_feat4_title: "AI 포트폴리오 분석",
+  about_feat4_desc:
+    "ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 수 있는 구조화된 프롬프트를 생성합니다. 이상적 배분과 조정 인사이트를 AI에게 물어보세요.",
+  about_feat5_title: "자동 인사이트",
+  about_feat5_desc:
+    "과대비중, 큰 손실, 현금 부족, 환 노출 초과 등을 자동으로 감지해 콘스리업스 명시에서 확인할 수 있습니다.",
+  about_feat6_title: "다국어 · 다통화",
+  about_feat6_desc:
+    "한국어 · English · 日本어 3개국어와 KRW · USD · JPY 통화 표시를 지원합니다.",
+  about_privacy_title: "프라이버시 우선",
+  about_privacy_desc:
+    "모든 자산 데이터는 브라우저 localStorage에만 저장됩니다. 외부 서버로 개인 자산 데이터가 전송되지 않으며, 계정 생성 없이 바로 사용할 수 있습니다.",
+  about_tech_title: "기술 스택",
+  about_links_live: "라이브 데모",
+  about_links_github: "GitHub",
+  about_disclaimer:
+    "이 앱은 개인 학습 및 포트폴리오 관리 목적으로 제작되었습니다. 제공되는 시세·환율·분석 데이터는 참고용이며 투자 결정의 근거로 사용해서는 안 됩니다.",
 
   dash_title: "대시보드",
   dash_empty_title: "포트폴리오를 시작하세요",

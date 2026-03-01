@@ -5,6 +5,7 @@ import { DashboardPage } from "@/pages/Dashboard";
 import { AssetsPage } from "@/pages/Assets";
 import { GurusPage } from "@/pages/Gurus";
 import { SettingsPage } from "@/pages/Settings";
+import { AboutPage } from "@/pages/About";
 import { useExchangeRates } from "@/hooks";
 
 function AppInitializer() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="assets" element={<AssetsPage />} />
           <Route path="gurus" element={<GurusPage />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="about" element={<AboutPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

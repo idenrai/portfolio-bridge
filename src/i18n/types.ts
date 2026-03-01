@@ -6,8 +6,32 @@ export interface Translations {
   nav_assets: string;
   nav_gurus: string;
   nav_settings: string;
+  nav_about: string;
   app_tagline: string;
   app_version_info: string;
+
+  // ─── About Page ───────────────────────────────────────────────────────────
+  about_tagline: string;
+  about_intro: string;
+  about_features_title: string;
+  about_feat1_title: string;
+  about_feat1_desc: string;
+  about_feat2_title: string;
+  about_feat2_desc: string;
+  about_feat3_title: string;
+  about_feat3_desc: string;
+  about_feat4_title: string;
+  about_feat4_desc: string;
+  about_feat5_title: string;
+  about_feat5_desc: string;
+  about_feat6_title: string;
+  about_feat6_desc: string;
+  about_privacy_title: string;
+  about_privacy_desc: string;
+  about_tech_title: string;
+  about_links_live: string;
+  about_links_github: string;
+  about_disclaimer: string;
 
   // ─── Dashboard ─────────────────────────────────────────────────────────────
   dash_title: string;

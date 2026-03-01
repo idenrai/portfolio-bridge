@@ -9,6 +9,7 @@ export function Sidebar() {
     { to: "/assets", label: t.nav_assets, icon: "💼" },
     { to: "/gurus", label: t.nav_gurus, icon: "💡" },
     { to: "/settings", label: t.nav_settings, icon: "⚙️" },
+    { to: "/about", label: t.nav_about, icon: "ℹ️" },
   ];
 
   return (
