@@ -193,7 +193,7 @@ export function AssetsPage() {
           setEditingAsset(undefined);
         }}
         title={editingAsset ? t.asset_modal_edit : t.asset_modal_add}
-        maxWidth="max-w-xl"
+        maxWidth="max-w-2xl"
       >
         <AssetForm
           initial={editingAsset}
