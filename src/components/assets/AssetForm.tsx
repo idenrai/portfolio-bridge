@@ -239,7 +239,7 @@ function CashForm({
             <span className="text-slate-400 text-xs">▼</span>
           </button>
           {open && (
-            <div className="absolute z-10 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-lg">
+            <div className="mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-lg">
               <div className="p-2 border-b border-slate-100">
                 <input
                   type="text"
@@ -250,7 +250,7 @@ function CashForm({
                   className="w-full rounded border border-slate-200 px-2 py-1.5 text-sm focus:outline-none focus:border-blue-400"
                 />
               </div>
-              <div className="max-h-48 overflow-y-auto">
+              <div>
                 {filtered.map((c) => (
                   <button
                     key={c.code}
