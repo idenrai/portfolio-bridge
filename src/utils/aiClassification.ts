@@ -1,8 +1,12 @@
-import { TAG_LABELS, ASSET_TYPE_LABELS, MARKET_LABELS } from "@/types";
+import { ASSET_TYPE_LABELS, MARKET_LABELS } from "@/types";
 import type { Asset, AssetTag } from "@/types";
+import type { Lang } from "@/i18n";
 
 /** 유효한 AssetTag인지 확인 */
-const VALID_TAGS = new Set<string>(Object.keys(TAG_LABELS));
+const VALID_TAGS = new Set<string>([
+  "dividend", "growth", "value", "index", "bond",
+  "reit", "cash", "crypto", "commodity", "other",
+]);
 function isValidTag(tag: string): tag is AssetTag {
   return VALID_TAGS.has(tag);
 }
@@ -15,36 +19,69 @@ interface AiClassificationItem {
   reason?: string;
 }
 
+const LANG_NAMES: Record<Lang, string> = {
+  ko: "Korean (한국어)",
+  en: "English",
+  ja: "Japanese (日本語)",
+};
+
+const TAG_DESCRIPTIONS: Record<string, string> = {
+  dividend: "dividend - income-generating stocks / REITs with regular dividends",
+  growth:   "growth - high-growth stocks (tech, biotech, etc.)",
+  value:    "value - undervalued, low-multiple stocks",
+  index:    "index - index funds / broad market ETFs",
+  bond:     "bond - government or corporate bonds / bond ETFs",
+  reit:     "reit - real estate investment trusts",
+  cash:     "cash - cash equivalents, money market, savings",
+  crypto:   "crypto - cryptocurrency assets",
+  commodity:"commodity - gold, oil, silver, commodities ETFs",
+  other:    "other - does not fit any category above",
+};
+
+const ASSET_TYPE_EN: Record<string, string> = {
+  stock: "Stock", etf: "ETF", bond: "Bond", fund: "Fund",
+  cash: "Cash/Deposit", crypto: "Crypto", real_estate: "Real Estate", other: "Other",
+};
+
+const MARKET_EN: Record<string, string> = {
+  KR: "Korea", JP: "Japan", US: "US", OTHER: "Other",
+};
+
 /** 자산 목록을 AI 분류 요청 프롬프트로 변환 */
-export function buildClassificationPrompt(assets: Asset[]): string {
-  const tagList = Object.entries(TAG_LABELS)
-    .map(([k, v]) => `  - ${k}: ${v}`)
+export function buildClassificationPrompt(assets: Asset[], lang: Lang = "ko"): string {
+  const tagList = Object.entries(TAG_DESCRIPTIONS)
+    .map(([, desc]) => `  - ${desc}`)
     .join("\n");
 
   const assetLines = assets
     .map((a, i) => {
-      const currentTag = a.tags[0]
-        ? `(현재 태그: ${TAG_LABELS[a.tags[0]]})`
-        : "(미분류)";
-      return `${i + 1}. ${a.name}${a.ticker ? ` [${a.ticker}]` : ""} | 유형: ${ASSET_TYPE_LABELS[a.type]} | 시장: ${MARKET_LABELS[a.market]} | 통화: ${a.currency} ${currentTag}`;
+      const type = ASSET_TYPE_EN[a.type] ?? ASSET_TYPE_LABELS[a.type];
+      const market = MARKET_EN[a.market] ?? MARKET_LABELS[a.market];
+      const currentTag = a.tags[0] ? `(current tag: ${a.tags[0]})` : "(untagged)";
+      return `${i + 1}. ${a.name}${a.ticker ? ` [${a.ticker}]` : ""} | type: ${type} | market: ${market} | currency: ${a.currency} ${currentTag}`;
     })
     .join("\n");
 
-  return `아래 자산 목록의 각 항목에 대해, 투자 성격에 맞는 분류 태그를 하나 골라 주세요.
+  return `You are a portfolio asset classifier. For each asset below, choose the single most appropriate tag that best describes its investment characteristic.
 
-■ 사용 가능한 태그 목록:
+Available tags:
 ${tagList}
 
-■ 자산 목록:
+Asset list:
 ${assetLines}
 
-■ 출력 형식 (JSON 배열로 응답해 주세요):
+Output format — respond with a JSON array only, no extra text:
 [
-  { "index": 1, "name": "종목명", "tag": "태그키", "reason": "짧은 이유" },
+  { "index": 1, "name": "asset name", "tag": "tag_key", "reason": "brief reason" },
   ...
 ]
 
-각 항목의 tag 필드에는 위 태그 목록의 키(영문) 중 하나만 기입해 주세요.`;
+Rules:
+- The "tag" field must be exactly one of the tag keys listed above (e.g. "dividend", "growth").
+- Classify every asset, including already-tagged ones.
+- Keep reasons concise (one sentence).
+
+IMPORTANT: Please write the "reason" field entirely in ${LANG_NAMES[lang]}.`;
 }
 
 /** AI 응답 JSON 파싱 → 각 자산에 태그 매핑 */

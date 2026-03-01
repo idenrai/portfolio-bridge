@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useAssetStore } from "@/stores";
+import { useAssetStore, useLanguageStore } from "@/stores";
 import { Card, Button, Modal } from "@/components/common";
 import { AssetForm } from "@/components/assets/AssetForm";
 import { AssetTable } from "@/components/assets/AssetTable";
@@ -28,7 +28,8 @@ export function AssetsPage() {
     null,
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const promptText = buildClassificationPrompt(assets);
+  const lang = useLanguageStore((s) => s.lang);
+  const promptText = buildClassificationPrompt(assets, lang);
   const t = useT();
 
   const handleCopyPrompt = async () => {

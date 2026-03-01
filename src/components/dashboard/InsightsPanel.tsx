@@ -37,7 +37,14 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
     [],
   );
 
-  const promptText = buildInsightPrompt(summary, assets, targets, lang, baseCurrency, rates);
+  const promptText = buildInsightPrompt(
+    summary,
+    assets,
+    targets,
+    lang,
+    baseCurrency,
+    rates,
+  );
 
   const copyPrompt = async () => {
     await navigator.clipboard.writeText(promptText);
