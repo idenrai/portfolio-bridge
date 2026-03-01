@@ -213,7 +213,8 @@ export const en: Translations = {
   settings_fx_refresh: "🔄 Refresh Now",
   settings_fx_auto: "Rates are fetched automatically on app start.",
   settings_fx_time: (time) => `As of ${time}`,
-  settings_fx_cache_warn: (time) => `⚠️ Rate fetch failed — using cached value (as of ${time})`,
+  settings_fx_cache_warn: (time) =>
+    `⚠️ Rate fetch failed — using cached value (as of ${time})`,
   settings_target_title: "Target Allocation",
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",

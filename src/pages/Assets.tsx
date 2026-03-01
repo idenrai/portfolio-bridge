@@ -24,7 +24,9 @@ export function AssetsPage() {
     skipped: number;
   } | null>(null);
   const [importError, setImportError] = useState<string | null>(null);
-  const [importPreview, setImportPreview] = useState<AssetFormData[] | null>(null);
+  const [importPreview, setImportPreview] = useState<AssetFormData[] | null>(
+    null,
+  );
   const fileInputRef = useRef<HTMLInputElement>(null);
   const promptText = buildClassificationPrompt(assets);
   const t = useT();
@@ -318,23 +320,45 @@ export function AssetsPage() {
                     <th className="px-3 py-2">티커</th>
                     <th className="px-3 py-2">{t.at_col_market}</th>
                     <th className="px-3 py-2">{t.af_currency_label}</th>
-                    <th className="px-3 py-2 text-right">{t.af_quantity_label}</th>
-                    <th className="px-3 py-2 text-right">{t.af_avg_price_label}</th>
-                    <th className="px-3 py-2 text-right">{t.af_current_price_label}</th>
+                    <th className="px-3 py-2 text-right">
+                      {t.af_quantity_label}
+                    </th>
+                    <th className="px-3 py-2 text-right">
+                      {t.af_avg_price_label}
+                    </th>
+                    <th className="px-3 py-2 text-right">
+                      {t.af_current_price_label}
+                    </th>
                     <th className="px-3 py-2">{t.at_col_tag}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {importPreview.slice(0, 5).map((row, i) => (
                     <tr key={i} className="hover:bg-slate-50">
-                      <td className="px-3 py-1.5 text-slate-800 font-medium">{row.name}</td>
-                      <td className="px-3 py-1.5 font-mono text-slate-500">{row.ticker ?? "—"}</td>
-                      <td className="px-3 py-1.5 text-slate-600">{row.market}</td>
-                      <td className="px-3 py-1.5 text-slate-600">{row.currency}</td>
-                      <td className="px-3 py-1.5 text-right text-slate-700">{row.quantity.toLocaleString()}</td>
-                      <td className="px-3 py-1.5 text-right text-slate-700">{row.avgBuyPrice.toLocaleString()}</td>
-                      <td className="px-3 py-1.5 text-right text-slate-700">{row.currentPrice.toLocaleString()}</td>
-                      <td className="px-3 py-1.5 text-slate-500">{row.tags.join(", ")}</td>
+                      <td className="px-3 py-1.5 text-slate-800 font-medium">
+                        {row.name}
+                      </td>
+                      <td className="px-3 py-1.5 font-mono text-slate-500">
+                        {row.ticker ?? "—"}
+                      </td>
+                      <td className="px-3 py-1.5 text-slate-600">
+                        {row.market}
+                      </td>
+                      <td className="px-3 py-1.5 text-slate-600">
+                        {row.currency}
+                      </td>
+                      <td className="px-3 py-1.5 text-right text-slate-700">
+                        {row.quantity.toLocaleString()}
+                      </td>
+                      <td className="px-3 py-1.5 text-right text-slate-700">
+                        {row.avgBuyPrice.toLocaleString()}
+                      </td>
+                      <td className="px-3 py-1.5 text-right text-slate-700">
+                        {row.currentPrice.toLocaleString()}
+                      </td>
+                      <td className="px-3 py-1.5 text-slate-500">
+                        {row.tags.join(", ")}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -346,7 +370,10 @@ export function AssetsPage() {
               </p>
             )}
             <div className="flex justify-end gap-2">
-              <Button variant="secondary" onClick={() => setImportPreview(null)}>
+              <Button
+                variant="secondary"
+                onClick={() => setImportPreview(null)}
+              >
                 {t.af_btn_cancel}
               </Button>
               <Button onClick={handleConfirmImport}>

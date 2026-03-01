@@ -212,7 +212,8 @@ export const ko: Translations = {
   settings_fx_refresh: "🔄 지금 갱신",
   settings_fx_auto: "앱 시작 시 자동 조회됩니다.",
   settings_fx_time: (time) => `${time} 기준`,
-  settings_fx_cache_warn: (time) => `⚠️ 환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
+  settings_fx_cache_warn: (time) =>
+    `⚠️ 환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
   settings_target_title: "목표 비중 배분",
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",

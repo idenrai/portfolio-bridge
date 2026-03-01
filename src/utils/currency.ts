@@ -36,20 +36,20 @@ export function formatCurrency(
   const abs = Math.abs(amount);
   if (currency === "KRW") {
     if (compact && abs >= 1_0000_0000)
-      return `${symbol}${(amount / 1_0000_0000).toFixed(1)}억`;
+      return `${symbol}${(amount / 1_0000_0000).toLocaleString("ko-KR", { maximumFractionDigits: 1 })}억`;
     if (compact && abs >= 1_0000)
-      return `${symbol}${(amount / 1_0000).toFixed(0)}만`;
+      return `${symbol}${Math.round(amount / 1_0000).toLocaleString("ko-KR")}만`;
   } else if (currency === "JPY") {
     if (compact && abs >= 1_0000_0000)
-      return `${symbol}${(amount / 1_0000_0000).toFixed(1)}億`;
+      return `${symbol}${(amount / 1_0000_0000).toLocaleString("ja-JP", { maximumFractionDigits: 1 })}億`;
     if (compact && abs >= 1_0000)
-      return `${symbol}${(amount / 1_0000).toFixed(0)}万`;
+      return `${symbol}${Math.round(amount / 1_0000).toLocaleString("ja-JP")}万`;
   } else {
     // USD, etc.
     if (compact && abs >= 1_000_000)
-      return `${symbol}${(amount / 1_000_000).toFixed(1)}M`;
+      return `${symbol}${(amount / 1_000_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`;
     if (compact && abs >= 1_000)
-      return `${symbol}${(amount / 1_000).toFixed(1)}K`;
+      return `${symbol}${(amount / 1_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}K`;
   }
   return `${symbol}${amount.toLocaleString("ko-KR", {
     maximumFractionDigits: currency === "JPY" || currency === "KRW" ? 0 : 2,

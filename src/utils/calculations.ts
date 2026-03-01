@@ -53,6 +53,7 @@ function generateInsights(
   tagAllocation: { tag: AssetTag; percent: number }[],
   currencyExposure: CurrencyExposure[],
   targets: TargetAllocation[],
+  baseCurrency: CurrencyCode,
 ): PortfolioInsight[] {
   const insights: PortfolioInsight[] = [];
 
@@ -95,7 +96,7 @@ function generateInsights(
 
   // 4. 환율 노출 (> 40%)
   for (const exp of currencyExposure) {
-    if (exp.currency !== "KRW" && exp.percent > 40) {
+    if (exp.currency !== baseCurrency && exp.percent > 40) {
       insights.push({
         type: "warning",
         icon: "💱",
@@ -137,6 +138,7 @@ export function calculateSummary(
   assets: Asset[],
   rates: Record<CurrencyCode, number>,
   targets: TargetAllocation[] = [],
+  baseCurrency: CurrencyCode = "KRW",
 ): PortfolioSummary {
   let totalValueKRW = 0;
   let totalCostKRW = 0;
@@ -259,10 +261,10 @@ export function calculateSummary(
     }))
     .sort((a, b) => b.totalKRW - a.totalKRW);
 
-  // 환율 시나리오 (±5%)
+  // 환율 시나리오 (±5%) — baseCurrency 제외한 외화만
   const currencyScenarios: CurrencyScenario[] = [];
   for (const exp of currencyExposure) {
-    if (exp.currency === "KRW") continue;
+    if (exp.currency === baseCurrency) continue;
     for (const changePercent of [5, -5]) {
       const impactKRW = exp.totalKRW * (changePercent / 100);
       currencyScenarios.push({
@@ -283,6 +285,7 @@ export function calculateSummary(
     tagAllocation,
     currencyExposure,
     targets,
+    baseCurrency,
   );
 
   return {

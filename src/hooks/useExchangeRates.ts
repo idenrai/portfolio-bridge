@@ -74,4 +74,3 @@ export function useExchangeRates(): UseExchangeRateResult {
 
   return { refreshRates, isLoading, lastUpdated, error, isCached };
 }
-

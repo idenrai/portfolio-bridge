@@ -10,10 +10,11 @@ export function usePortfolio() {
   const assets = useAssetStore((s) => s.assets);
   const rates = useSettingsStore((s) => s.exchangeRates);
   const targets = useSettingsStore((s) => s.targetAllocations);
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
 
   const summary = useMemo(
-    () => calculateSummary(assets, rates, targets),
-    [assets, rates, targets],
+    () => calculateSummary(assets, rates, targets, baseCurrency),
+    [assets, rates, targets, baseCurrency],
   );
 
   const rebalancing = useMemo(

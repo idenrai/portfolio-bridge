@@ -19,7 +19,8 @@ export const ja: Translations = {
   dash_notice_mobile:
     "🖥️ PCブラウザに最適化されています。モバイル画面には現在対応しておりません。",
   dash_sample_btn: "📈 サンプルデータで確認",
-  dash_sample_hint: "サンプルデータは「設定 › 全データリセット」で削除できます。",
+  dash_sample_hint:
+    "サンプルデータは「設定 › 全データリセット」で削除できます。",
 
   kpi_total_value: "総評価額",
   kpi_pnl: "評価損益",
@@ -213,7 +214,8 @@ export const ja: Translations = {
   settings_fx_refresh: "🔄 今すぐ更新",
   settings_fx_auto: "アプリ起動時に自動取得されます。",
   settings_fx_time: (time) => `${time} 時点`,
-  settings_fx_cache_warn: (time) => `⚠️ 為替レート取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
+  settings_fx_cache_warn: (time) =>
+    `⚠️ 為替レート取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
   settings_target_title: "目標配分",
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",

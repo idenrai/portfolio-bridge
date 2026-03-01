@@ -1,6 +1,6 @@
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
-import { CURRENCY_LABELS } from "@/types";
+import { CURRENCY_LABELS, CURRENCY_SYMBOLS } from "@/types";
 import { useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
 import type { PortfolioSummary, CurrencyCode } from "@/types";
@@ -78,9 +78,9 @@ export function CurrencyExposureCard({ summary }: Props) {
                   </div>
                 </td>
                 <td className="px-2 py-1.5 text-right text-[11px] text-slate-500">
-                  {exp.currency === "KRW"
+                  {exp.currency === baseCurrency
                     ? "-"
-                    : `₩${exp.rate.toLocaleString()}`}
+                    : `${CURRENCY_SYMBOLS[baseCurrency]}${fromKRW(exp.rate, baseCurrency, rates).toLocaleString(undefined, { maximumFractionDigits: baseCurrency === "USD" ? 4 : 0 })}`}
                 </td>
               </tr>
             ))}
