@@ -112,8 +112,7 @@ export const de: Translations = {
     `${name} Rendite ${pct}% — erheblicher Verlust`,
   insight_cash_high: (pct) =>
     `Bargeld ${pct}% — überschüssige Liquidität, Einsatz erwägen`,
-  insight_cash_low: (pct) =>
-    `Bargeld ${pct}% — niedrige Notfallreserve`,
+  insight_cash_low: (pct) => `Bargeld ${pct}% — niedrige Notfallreserve`,
   insight_fx_high: (currency, pct) =>
     `${currency} Exponierung ${pct}% — anfällig für Währungsschwankungen`,
   insight_tag_over: (label, pct, target, diff) =>
@@ -131,8 +130,7 @@ export const de: Translations = {
   asset_btn_add: "+ Vermögen hinzufügen",
   asset_modal_add: "Neues Vermögen hinzufügen",
   asset_modal_edit: "Vermögen bearbeiten",
-  asset_delete_confirm:
-    "Möchten Sie diesen Vermögenswert wirklich löschen?",
+  asset_delete_confirm: "Möchten Sie diesen Vermögenswert wirklich löschen?",
   asset_ai_modal_title: "🤖 KI-Klassifizierung",
   asset_ai_tab_generate: "① Prompt erstellen",
   asset_ai_tab_import: "② KI-Antwort importieren",
@@ -142,7 +140,8 @@ export const de: Translations = {
   asset_ai_copy: "In Zwischenablage kopieren",
   asset_ai_copied: "✓ Kopiert!",
   asset_ai_close: "Schließen",
-  asset_ai_import_desc: "Fügen Sie das von der KI zurückgegebene JSON unten ein und",
+  asset_ai_import_desc:
+    "Fügen Sie das von der KI zurückgegebene JSON unten ein und",
   asset_ai_format_label: "Format:",
   asset_ai_json_placeholder:
     'KI-Antwort-JSON hier einfügen...\n\nBeispiel:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "..." }\n]',
@@ -286,7 +285,8 @@ export const de: Translations = {
   settings_target_save: "Speichern",
   settings_target_saved: "Gespeichert",
   settings_data_title: "Datenverwaltung",
-  settings_data_desc: "Alle Daten werden im lokalen Browser-Speicher gespeichert.",
+  settings_data_desc:
+    "Alle Daten werden im lokalen Browser-Speicher gespeichert.",
   settings_data_count: (n) => `Registrierte Vermögenswerte: ${n}`,
   settings_data_reset: "Alle Daten zurücksetzen",
   settings_data_reset_confirm:
@@ -313,7 +313,8 @@ export const de: Translations = {
   af_mode_cash: "Bargeld / Einlage",
   af_mode_crypto: "Kryptowährung",
   af_mode_manual: "Manuelle Eingabe",
-  af_search_hint: "Geben Sie einen Ticker oder Unternehmensnamen ein und suchen.",
+  af_search_hint:
+    "Geben Sie einen Ticker oder Unternehmensnamen ein und suchen.",
   af_search_placeholder: "Ticker oder Name...",
   af_search_btn: "Suchen",
   af_searching: "Suche läuft…",
@@ -340,7 +341,8 @@ export const de: Translations = {
   af_btn_submit: "Speichern",
   af_manual_link: "Nicht auf Yahoo Finance gefunden? → Manuell eingeben",
   af_cash_amount_label: "Betrag",
-  af_crypto_hint: "Geben Sie einen Münzticker ein und wählen Sie ein Handelspaar.",
+  af_crypto_hint:
+    "Geben Sie einen Münzticker ein und wählen Sie ein Handelspaar.",
   af_crypto_search_btn: "Paare suchen",
   af_crypto_searching: "Wird abgerufen…",
   af_crypto_pair_title: "Handelspaar auswählen",

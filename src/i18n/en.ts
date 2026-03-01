@@ -11,7 +11,7 @@ export const en: Translations = {
 
   about_tagline: "Unified multi-country asset management + AI & guru insights",
   about_intro:
-    "Portfolio Bridge is a privacy-first web app for managing financial assets across Korea, the US, and Japan in a single dashboard. Get actionable portfolio insights powered by AI and the wisdom of legendary investors. All your data stays in the browser — no account required.",
+    "Portfolio Bridge is a privacy-first web app for managing financial assets across Korea, the US, Japan, and Europe in a single dashboard. Get actionable portfolio insights powered by AI and the wisdom of legendary investors. All your data stays in the browser — no account required.",
   about_features_title: "Features",
   about_feat1_title: "Unified Dashboard",
   about_feat1_desc:

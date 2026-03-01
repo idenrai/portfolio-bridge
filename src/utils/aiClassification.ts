@@ -24,7 +24,7 @@ interface AiClassificationItem {
   index: number;
   name: string;
   category?: string; // 신규 필드명
-  tag?: string;      // 하위 호환용
+  tag?: string; // 하위 호환용
   reason?: string;
 }
 
@@ -133,7 +133,10 @@ export function parseAiResponse(
       skipped++;
       continue;
     }
-    results.push({ id: asset.id, tag: (item.category ?? item.tag) as AssetTag });
+    results.push({
+      id: asset.id,
+      tag: (item.category ?? item.tag) as AssetTag,
+    });
   }
 
   return { applied: results.length, skipped, results };

@@ -9,12 +9,19 @@ const LANG_LABELS: Record<Lang, string> = {
   de: "🇩🇪",
 };
 
-/** 언어별 기본 표시 화폐 */
+/**
+ * 언어 전환 시 기본으로 설정되는 표시 화폐
+ *
+ * 설계 원칙:
+ *   EUR은 독일어(de)에만 국한된 통화가 아니라 유럽 20개국이 공유하는 통화입니다.
+ *   추후 프랑스어(fr)·스페인어(es)·이탈리아어(it) 등 유로권 언어를 추가할 때는
+ *   해당 Lang: "EUR" 엔트리를 이 맵에 추가하면 됩니다.
+ */
 const LANG_CURRENCY: Record<Lang, CurrencyCode> = {
   ko: "KRW",
   en: "USD",
   ja: "JPY",
-  de: "EUR",
+  de: "EUR", // EUR 통화권 첫 번째 언어 — 프랑스어·스페인어 등 추가 시도 EUR 매핑
 };
 
 export function Header() {

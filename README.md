@@ -8,7 +8,7 @@
 
 ## English
 
-> Manage multi-country financial assets (Korea · Japan · US) in one dashboard,  
+> Manage multi-country financial assets (Korea · Japan · US · Europe) in one dashboard,  
 > and gain portfolio insights from AI and legendary investors — a **privacy-first web app**
 
 🌐 **Live Demo**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)
@@ -27,7 +27,7 @@ No account required. Market data and exchange rates are fetched client-side via 
 | 💡 **Investment Gurus** | Compare your portfolio with 15 gurus (Buffett, Dalio, Lynch, etc.) |
 | 🤖 **AI Portfolio Analysis** | Structured prompts ready to paste into ChatGPT · Claude · Gemini · Grok |
 | 🔔 **Auto Insights** | Alerts for overweight, large losses, low cash, currency exposure |
-| 🌐 **Multi-language & Currency** | Korean · English · 日本語 / KRW · USD · JPY |
+| 🌐 **Multi-language & Currency** | Korean · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
 
 ---
 
@@ -150,14 +150,14 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 
 #### Multi-language (i18n)
 
-- Korean 🇰🇷 · English 🇺🇸 · 日本語 🇯🇵
+- Korean 🇰🇷 · English 🇺🇸 · 日本語 🇯🇵 · Deutsch 🇩🇪
 - Instant switch via flag buttons in the header
 - Full UI localization including guru names & philosophies
 - Language setting persisted via Zustand
 
 #### Settings
 
-- Display currency toggle (KRW / JPY / USD)
+- Display currency toggle (KRW / JPY / USD / EUR)
 - **Exchange rate caching**: auto-fetch on startup, reuse within 1 h, fallback to 24 h cache on failure (amber warning)
 - Target allocation per tag
 - Full data reset
@@ -173,7 +173,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 | State | Zustand 5 (localStorage persist) |
 | Charts | Recharts |
 | Routing | React Router v7 |
-| i18n | Custom (ko / en / ja) |
+| i18n | Custom (ko / en / ja / de) |
 | Market Data | Yahoo Finance API (US) + Yahoo Japan HTML scraping (JP) |
 | Desktop | Tauri v2 (Rust) + tauri-plugin-http |
 | Deployment | Vercel (Serverless Functions + static CDN) |
@@ -194,7 +194,7 @@ src/
 │   └── assets/         # AssetForm, AssetTable
 ├── hooks/              # usePortfolio, useExchangeRates, useTickerSearch
 ├── stores/             # useAssetStore, useSettingsStore, useLanguageStore
-├── i18n/               # types.ts, ko.ts, en.ts, ja.ts, index.ts
+├── i18n/               # types.ts, ko.ts, en.ts, ja.ts, de.ts, index.ts
 ├── types/              # Asset, Currency, Portfolio, Guru types
 ├── utils/              # Calculations, FX, CSV, Guru, Yahoo Finance, AI
 ├── App.tsx
@@ -250,7 +250,7 @@ vercel.json                     # Vercel config (SPA rewrite, API routing)
 
 ## 한국어
 
-> 한국 · 일본 · 미국 다국가 금융자산을 하나의 대시보드에서 통합 관리하고,  
+> 한국 · 일본 · 미국 · 유럽 다국가 금융자산을 하나의 대시보드에서 통합 관리하고,  
 > AI 및 전설적인 투자가들의 관점에서 포트폴리오 인사이트를 얻는 **privacy-first 웹 앱**
 
 🌐 **라이브 데모**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)
@@ -270,7 +270,7 @@ Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 
 | 💡 **투자 구루** | 버핏·달리오·린치 등 15명의 철학·대표 포트폴리오와 내 포트폴리오 비교 |
 | 🤖 **AI 포트폴리오 분석** | ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 구조화 프롬프트 생성 |
 | 🔔 **자동 인사이트** | 과대비중, 큰 손실, 현금 부족, 환 노출 초과를 자동 감지·경고 |
-| 🌐 **다국어 · 다통화** | 한국어 · English · 日本語 / KRW · USD · JPY |
+| 🌐 **다국어 · 다통화** | 한국어 · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
 
 ---
 
@@ -393,14 +393,14 @@ npm run tauri:build
 
 #### 다국어 (i18n)
 
-- 한국어 🇰🇷 · English 🇺🇸 · 日本語 🇯🇵 3개국어 지원
+- 한국어 🇰🇷 · English 🇺🇸 · 日本語 🇯🇵 · Deutsch 🇩🇪 4개국어 지원
 - 헤더의 국기 버튼으로 즉시 전환
 - 투자 구루 이름/철학 포함 전체 UI 다국어 대응
 - Zustand persist로 언어 설정 유지
 
 #### 설정
 
-- 표시 화폐 전환 (KRW / JPY / USD)
+- 표시 화폐 전환 (KRW / JPY / USD / EUR)
 - **환율 캐시 전략**: 앱 시작 시 자동 조회, 1시간 이내 캐시는 재사용, 조회 실패 시 24시간 이내 캐시로 폴백 (amber 경고 표시)
 - 태그별 목표 비중 설정
 - 전체 데이터 초기화
@@ -416,7 +416,7 @@ npm run tauri:build
 | 상태 관리 | Zustand 5 (localStorage persist) |
 | 차트 | Recharts |
 | 라우팅 | React Router v7 |
-| 다국어 | 커스텀 i18n (ko / en / ja) |
+| 다국어 | 커스텀 i18n (ko / en / ja / de) |
 | 시세 조회 | Yahoo Finance API (US) + Yahoo Japan HTML 스크래핑 (JP) |
 | 데스크톱 | Tauri v2 (Rust) + tauri-plugin-http |
 | 웹 배포 | Vercel (Serverless Functions + 정적 CDN) |
