@@ -62,7 +62,6 @@ Auto-redeploys on every `git push`.
 | Path | Target | File |
 | --- | --- | --- |
 | `/api/yahoo/*` | `query1.finance.yahoo.com` | `api/yahoo/[...path].ts` |
-| `/api/yahoo-jp/*` | `finance.yahoo.co.jp` | `api/yahoo-jp/[...path].ts` |
 
 SPA routing fallback and API rewrites are configured in `vercel.json`.
 
@@ -134,7 +133,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 
 #### Asset Management
 
-- Ticker search (Yahoo Finance US + Yahoo Japan HTML scraping)
+- Ticker search (Yahoo Finance)
 - Manual add / edit / delete
 - **AI auto-classification**: English structured prompt → apply categories in bulk via JSON response (reasons in app language)
 - **CSV import preview**: 5-row preview → confirm to import
@@ -185,7 +184,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 | Charts | Recharts |
 | Routing | React Router v7 |
 | i18n | Custom (ko / en / ja / de) |
-| Market Data | Yahoo Finance API (US) + Yahoo Japan HTML scraping (JP) |
+| Market Data | Yahoo Finance API (US) |
 | Desktop | Tauri v2 (Rust) + tauri-plugin-http |
 | Deployment | Vercel (Serverless Functions + static CDN) |
 
@@ -213,8 +212,7 @@ src/
 └── main.tsx
 
 api/
-├── yahoo/[...path].ts          # Vercel Serverless — Yahoo Finance US proxy
-└── yahoo-jp/[...path].ts       # Vercel Serverless — Yahoo Finance Japan proxy
+└── yahoo/[...path].ts          # Vercel Serverless — Yahoo Finance proxy
 
 src-tauri/
 ├── Cargo.toml                  # Rust deps (tauri, tauri-plugin-http)
@@ -234,10 +232,11 @@ vercel.json                     # Vercel config (SPA rewrite, API routing)
 
 | Path | Endpoint | Usage |
 | --- | --- | --- |
-| US API | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | US/KR ticker search & quotes, exchange rates |
-| JP Scraping | `finance.yahoo.co.jp` (custom plugin / Vercel Serverless) | JP fund/stock search & quotes (HTML `__PRELOADED_STATE__` parsing) |
+| Yahoo Finance | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | US/KR ticker search & quotes, exchange rates |
 
 > **Note**: Uses unofficial Yahoo Finance endpoints; API changes may break data fetching.
+
+> **Manual entry**: Assets not found in Yahoo Finance (e.g. Japanese investment trusts) can be registered manually.
 
 ---
 
@@ -317,7 +316,6 @@ Vercel에 배포하면 별도의 서버 없이 정적 SPA + API 프록시가 함
 | 경로 | 대상 | 파일 |
 | --- | --- | --- |
 | `/api/yahoo/*` | `query1.finance.yahoo.com` | `api/yahoo/[...path].ts` |
-| `/api/yahoo-jp/*` | `finance.yahoo.co.jp` | `api/yahoo-jp/[...path].ts` |
 
 `vercel.json`에서 SPA 라우팅 fallback과 API 리라이트를 설정합니다.
 
@@ -389,7 +387,7 @@ npm run tauri:build
 
 #### 자산 관리
 
-- 종목 검색 (Yahoo Finance US + Yahoo Japan HTML 스크래핑)
+- 종목 검색 (Yahoo Finance)
 - 수동 등록 · 수정 · 삭제
 - **AI 자동 카테고리 분류**: 영문 구조화 프롬프트 생성 → JSON 응답으로 카테고리 일괄 적용 (앱 표시 언어로 reason 응답)
 - **CSV 가져오기 미리보기**: 파일 선택 후 5행 미리보기 → 확인 후 임포트 확정
@@ -441,7 +439,7 @@ npm run tauri:build
 | 차트 | Recharts |
 | 라우팅 | React Router v7 |
 | 다국어 | 커스텀 i18n (ko / en / ja / de) |
-| 시세 조회 | Yahoo Finance API (US) + Yahoo Japan HTML 스크래핑 (JP) |
+| 시세 조회 | Yahoo Finance API (US) |
 | 데스크톱 | Tauri v2 (Rust) + tauri-plugin-http |
 | 웹 배포 | Vercel (Serverless Functions + 정적 CDN) |
 
@@ -451,10 +449,11 @@ npm run tauri:build
 
 | 경로 | 엔드포인트 | 용도 |
 | --- | --- | --- |
-| US API | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | 미국·한국 종목 검색/시세, 환율 |
-| JP 스크래핑 | `finance.yahoo.co.jp` (커스텀 플러그인 / Vercel Serverless) | 일본 펀드·주식 검색/시세 (HTML `__PRELOADED_STATE__` 파싱) |
+| Yahoo Finance | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | 미국·한국 종목 검색/시세, 환율 |
 
 > **참고**: Yahoo Finance의 비공식 엔드포인트를 사용하므로 API 구조가 변경되면 조회가 실패할 수 있습니다.
+
+> **수동 입력**: Yahoo Finance에서 검색되지 않는 자산(일본 투자신탁 등)은 수동으로 등록할 수 있습니다.
 
 ---
 
