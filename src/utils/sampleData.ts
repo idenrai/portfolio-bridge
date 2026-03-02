@@ -42,18 +42,6 @@ export const SAMPLE_ASSETS: AssetFormData[] = [
     memo: "샘플 데이터",
   },
   {
-    name: "eMAXIS Slim 全世界株式(オール・カントリー)",
-    ticker: "0331418A",
-    type: "fund",
-    market: "JP",
-    currency: "JPY",
-    quantity: 300000,
-    avgBuyPrice: 18500,
-    currentPrice: 21200,
-    tags: ["index"],
-    memo: "샘플 데이터",
-  },
-  {
     name: "달러 예금",
     ticker: undefined,
     type: "cash",
