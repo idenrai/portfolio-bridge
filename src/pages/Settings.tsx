@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, Button } from "@/components/common";
 import { useSettingsStore, useAssetStore, useLanguageStore } from "@/stores";
-import { useExchangeRates, usePriceRefresh, useT } from "@/hooks";
+import { useDataRefresh, useT } from "@/hooks";
 import { CURRENCY_LABELS, CURRENCY_SYMBOLS } from "@/types";
 import type { AssetTag, TargetAllocation } from "@/types";
 import { LANG_LOCALES } from "@/i18n";
@@ -13,21 +13,14 @@ export function SettingsPage() {
   const lang = useLanguageStore((s) => s.lang);
   const langLocale = LANG_LOCALES[lang];
   const {
-    refreshRates,
+    refreshAll,
     isLoading,
     lastUpdated,
-    error: rateError,
+    error,
     isCached,
-  } = useExchangeRates();
-  const {
-    refreshPrices,
-    isLoading: isPriceLoading,
-    lastUpdated: priceLastUpdated,
-    error: priceError,
-    isCached: priceCached,
     updatedCount,
     totalCount,
-  } = usePriceRefresh();
+  } = useDataRefresh();
   const [allocations, setAllocations] = useState<TargetAllocation[]>([
     ...settings.targetAllocations,
   ]);
@@ -62,36 +55,40 @@ export function SettingsPage() {
     <div className="space-y-6 max-w-2xl">
       <h2 className="text-lg font-bold text-slate-800">{t.settings_title}</h2>
 
-      {/* 환율 */}
+      {/* 환율 · 시세 통합 갱신 */}
       <Card
-        title={t.settings_fx_title}
+        title={t.settings_data_refresh_title}
         action={
           <div className="flex items-center gap-2">
             {lastUpdated && (
               <span className="text-xs text-slate-400">
-                {t.settings_fx_time(format(new Date(lastUpdated), "HH:mm"))}
+                {t.settings_data_refresh_time(
+                  format(new Date(lastUpdated), "HH:mm"),
+                )}
               </span>
             )}
             <Button
               size="sm"
               variant="secondary"
-              onClick={refreshRates}
+              onClick={refreshAll}
               disabled={isLoading}
             >
-              {isLoading ? t.settings_fx_refreshing : t.settings_fx_refresh}
+              {isLoading
+                ? t.settings_data_refresh_refreshing
+                : t.settings_data_refresh_refresh}
             </Button>
           </div>
         }
       >
-        <div className="space-y-2">
-          {rateError && (
+        <div className="space-y-3">
+          {error && (
             <p className="text-xs text-red-600 bg-red-50 rounded px-3 py-2">
-              {rateError}
+              {error}
             </p>
           )}
           {isCached && lastUpdated && (
             <p className="text-xs text-amber-700 bg-amber-50 rounded px-3 py-2">
-              {t.settings_fx_cache_warn(
+              {t.settings_data_refresh_cache_warn(
                 new Date(lastUpdated).toLocaleTimeString(langLocale, {
                   hour: "2-digit",
                   minute: "2-digit",
@@ -99,70 +96,32 @@ export function SettingsPage() {
               )}
             </p>
           )}
-          {(
-            Object.entries(CURRENCY_LABELS).filter(([k]) => k !== "KRW") as [
-              keyof typeof CURRENCY_SYMBOLS,
-              string,
-            ][]
-          ).map(([code, label]) => (
-            <div key={code} className="flex items-center gap-3">
-              <span className="text-sm text-slate-600 w-32">{label}</span>
-              <span className="text-sm font-mono text-slate-800 w-24 text-right">
-                {settings.exchangeRates[code]?.toLocaleString(langLocale, {
-                  maximumFractionDigits: 2,
-                }) ?? "—"}
-              </span>
-              <span className="text-xs text-slate-400">KRW</span>
-            </div>
-          ))}
-          {!lastUpdated && !rateError && !isCached && (
-            <p className="text-xs text-slate-400">{t.settings_fx_auto}</p>
-          )}
-        </div>
-      </Card>
 
-      {/* 시세 (현재가) */}
-      <Card
-        title={t.settings_price_title}
-        action={
-          <div className="flex items-center gap-2">
-            {priceLastUpdated && (
-              <span className="text-xs text-slate-400">
-                {t.settings_price_time(
-                  format(new Date(priceLastUpdated), "HH:mm"),
-                )}
-              </span>
-            )}
-            <Button
-              size="sm"
-              variant="secondary"
-              onClick={refreshPrices}
-              disabled={isPriceLoading}
-            >
-              {isPriceLoading
-                ? t.settings_price_refreshing
-                : t.settings_price_refresh}
-            </Button>
+          {/* 환율 표시 */}
+          <div>
+            <p className="text-xs font-medium text-slate-500 mb-1.5">
+              {t.settings_fx_title}
+            </p>
+            {(
+              Object.entries(CURRENCY_LABELS).filter(([k]) => k !== "KRW") as [
+                keyof typeof CURRENCY_SYMBOLS,
+                string,
+              ][]
+            ).map(([code, label]) => (
+              <div key={code} className="flex items-center gap-3 py-0.5">
+                <span className="text-sm text-slate-600 w-32">{label}</span>
+                <span className="text-sm font-mono text-slate-800 w-24 text-right">
+                  {settings.exchangeRates[code]?.toLocaleString(langLocale, {
+                    maximumFractionDigits: 2,
+                  }) ?? "—"}
+                </span>
+                <span className="text-xs text-slate-400">KRW</span>
+              </div>
+            ))}
           </div>
-        }
-      >
-        <div className="space-y-2">
-          {priceError && (
-            <p className="text-xs text-red-600 bg-red-50 rounded px-3 py-2">
-              {priceError}
-            </p>
-          )}
-          {priceCached && priceLastUpdated && (
-            <p className="text-xs text-amber-700 bg-amber-50 rounded px-3 py-2">
-              {t.settings_price_cache_warn(
-                new Date(priceLastUpdated).toLocaleTimeString(langLocale, {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                }),
-              )}
-            </p>
-          )}
-          {isPriceLoading && totalCount > 0 && (
+
+          {/* 시세 진행률 */}
+          {isLoading && totalCount > 0 && (
             <div className="space-y-1">
               <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                 <div
@@ -173,27 +132,24 @@ export function SettingsPage() {
                 />
               </div>
               <p className="text-xs text-slate-400">
-                {t.settings_price_result(updatedCount, totalCount)}
+                {t.settings_data_refresh_result(updatedCount, totalCount)}
               </p>
             </div>
           )}
-          {!isPriceLoading && priceLastUpdated && totalCount > 0 && (
+          {!isLoading && lastUpdated && totalCount > 0 && (
             <p className="text-xs text-green-600">
-              {t.settings_price_result(updatedCount, totalCount)}
+              {t.settings_data_refresh_result(updatedCount, totalCount)}
             </p>
           )}
-          {!isPriceLoading &&
-            !priceLastUpdated &&
-            !priceError &&
-            !priceCached && (
-              <p className="text-xs text-slate-400">
-                {assetStore.assets.some(
-                  (a) => a.ticker && !a.tags.includes("cash"),
-                )
-                  ? t.settings_price_auto
-                  : t.settings_price_no_ticker}
-              </p>
-            )}
+          {!isLoading && !lastUpdated && !error && !isCached && (
+            <p className="text-xs text-slate-400">
+              {assetStore.assets.some(
+                (a) => a.ticker && !a.tags.includes("cash"),
+              )
+                ? t.settings_data_refresh_auto
+                : t.settings_data_refresh_no_ticker}
+            </p>
+          )}
         </div>
       </Card>
 

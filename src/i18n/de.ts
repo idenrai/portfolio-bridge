@@ -54,8 +54,7 @@ export const de: Translations = {
   dash_sample_btn: "📈 Mit Beispieldaten erkunden",
   dash_sample_hint:
     "Beispieldaten können über Einstellungen › Alle Daten zurücksetzen entfernt werden.",
-  dash_refresh_rates: "Kurse",
-  dash_refresh_prices: "Preise",
+  dash_refresh: "Alles aktualisieren",
   dash_refreshing: "Abruf…",
   dash_updated_at: (time) => `${time}`,
 
@@ -278,24 +277,20 @@ export const de: Translations = {
   settings_display_currency_desc:
     "Wählen Sie die Basiswährung für die Anzeige von Portfoliowerten.",
   settings_fx_title: "Wechselkurse (automatisch von Yahoo Finance abgerufen)",
-  settings_fx_refreshing: "Wird abgerufen…",
-  settings_fx_refresh: "🔄 Jetzt aktualisieren",
-  settings_fx_auto: "Kurse werden beim App-Start automatisch abgerufen.",
-  settings_fx_time: (time) => `Stand: ${time}`,
   settings_fx_cache_warn: (time) =>
     `⚠️ Kursabruf fehlgeschlagen — gecachten Wert verwenden (Stand: ${time})`,
-  settings_price_title: "Kurse (automatisch von Yahoo Finance abgerufen)",
-  settings_price_refreshing: "Kurse werden abgerufen…",
-  settings_price_refresh: "🔄 Kurse aktualisieren",
-  settings_price_auto: "Kurse werden beim App-Start automatisch abgerufen.",
-  settings_price_time: (time) => `Stand: ${time}`,
-  settings_price_cache_warn: (time) =>
-    `⚠️ Kursabruf fehlgeschlagen — gecachte Werte verwenden (Stand: ${time})`,
-  settings_price_result: (updated, total) =>
-    `${updated} von ${total} aktualisiert`,
-  settings_price_no_ticker: "Keine Vermögenswerte mit Ticker registriert.",
-  price_refresh_error:
-    "Kursabruf fehlgeschlagen. Bitte prüfen Sie Ihre Netzwerkverbindung.",
+  settings_data_refresh_title: "Kurse & Preise (automatisch von Yahoo Finance abgerufen)",
+  settings_data_refresh_refreshing: "Wird abgerufen…",
+  settings_data_refresh_refresh: "🔄 Jetzt aktualisieren",
+  settings_data_refresh_auto: "Kurse und Preise werden beim App-Start automatisch abgerufen.",
+  settings_data_refresh_time: (time) => `Stand: ${time}`,
+  settings_data_refresh_cache_warn: (time) =>
+    `⚠️ Abruf fehlgeschlagen — gecachte Werte verwenden (Stand: ${time})`,
+  settings_data_refresh_result: (updated, total) =>
+    `${updated} von ${total} Preise aktualisiert`,
+  settings_data_refresh_no_ticker: "Keine Vermögenswerte mit Ticker registriert.",
+  data_refresh_error:
+    "Abruf von Kursen/Preisen fehlgeschlagen. Bitte prüfen Sie Ihre Netzwerkverbindung.",
   settings_target_title: "Zielallokation",
   settings_target_sum: (n) => `Gesamt: ${n}%`,
   settings_target_save: "Speichern",

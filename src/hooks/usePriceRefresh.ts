@@ -108,12 +108,12 @@ export function usePriceRefresh(): UsePriceRefreshResult {
         if (cacheAge < CACHE_FALLBACK_MS) {
           setIsCached(true);
         } else {
-          setError(TRANSLATIONS[lang].price_refresh_error);
+          setError(TRANSLATIONS[lang].data_refresh_error);
         }
       }
     } catch (e) {
       console.error("[PriceRefresh]", e);
-      setError(TRANSLATIONS[lang].price_refresh_error);
+      setError(TRANSLATIONS[lang].data_refresh_error);
     } finally {
       setIsLoading(false);
       setProgress(1);

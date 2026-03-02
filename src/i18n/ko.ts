@@ -52,8 +52,7 @@ export const ko: Translations = {
     "🖥️ 현재 PC 브라우저에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
   dash_sample_btn: "📈 샘플 데이터로 둘러보기",
   dash_sample_hint: "샘플 데이터는 '설정 › 전체 초기화'로 제거할 수 있습니다.",
-  dash_refresh_rates: "환율",
-  dash_refresh_prices: "시세",
+  dash_refresh: "환율 · 시세 갱신",
   dash_refreshing: "조회 중…",
   dash_updated_at: (time) => `${time}`,
 
@@ -272,24 +271,20 @@ export const ko: Translations = {
   settings_display_currency_desc:
     "대시보드 금액을 표시할 기준 통화를 선택합니다.",
   settings_fx_title: "환율 (Yahoo Finance 자동 조회)",
-  settings_fx_refreshing: "조회 중…",
-  settings_fx_refresh: "🔄 지금 갱신",
-  settings_fx_auto: "앱 시작 시 자동 조회됩니다.",
-  settings_fx_time: (time) => `${time} 기준`,
   settings_fx_cache_warn: (time) =>
     `⚠️ 환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
-  settings_price_title: "시세 (Yahoo Finance 자동 조회)",
-  settings_price_refreshing: "시세 조회 중…",
-  settings_price_refresh: "🔄 시세 갱신",
-  settings_price_auto: "앱 시작 시 자동 조회됩니다.",
-  settings_price_time: (time) => `${time} 기준`,
-  settings_price_cache_warn: (time) =>
-    `⚠️ 시세 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
-  settings_price_result: (updated, total) =>
-    `${total}건 중 ${updated}건 갱신 완료`,
-  settings_price_no_ticker: "티커가 등록된 자산이 없습니다.",
-  price_refresh_error:
-    "시세 조회에 실패했습니다. 네트워크 상태를 확인해 주세요.",
+  settings_data_refresh_title: "환율 · 시세 갱신 (Yahoo Finance 자동 조회)",
+  settings_data_refresh_refreshing: "조회 중…",
+  settings_data_refresh_refresh: "🔄 지금 갱신",
+  settings_data_refresh_auto: "앱 시작 시 자동 조회됩니다.",
+  settings_data_refresh_time: (time) => `${time} 기준`,
+  settings_data_refresh_cache_warn: (time) =>
+    `⚠️ 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
+  settings_data_refresh_result: (updated, total) =>
+    `${total}건 중 ${updated}건 시세 갱신`,
+  settings_data_refresh_no_ticker: "티커가 등록된 자산이 없습니다.",
+  data_refresh_error:
+    "환율/시세 조회에 실패했습니다. 네트워크 상태를 확인해 주세요.",
   settings_target_title: "목표 비중 배분",
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",

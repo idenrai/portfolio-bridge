@@ -53,8 +53,7 @@ export const ja: Translations = {
   dash_sample_btn: "📈 サンプルデータで確認",
   dash_sample_hint:
     "サンプルデータは「設定 › 全データリセット」で削除できます。",
-  dash_refresh_rates: "為替",
-  dash_refresh_prices: "時価",
+  dash_refresh: "為替・時価更新",
   dash_refreshing: "取得中…",
   dash_updated_at: (time) => `${time}`,
 
@@ -275,23 +274,20 @@ export const ja: Translations = {
   settings_display_currency_desc:
     "ダッシュボードの金額表示に使用する基準通貨を選択します。",
   settings_fx_title: "為替レート（Yahoo Finance 自動取得）",
-  settings_fx_refreshing: "取得中…",
-  settings_fx_refresh: "🔄 今すぐ更新",
-  settings_fx_auto: "アプリ起動時に自動取得されます。",
-  settings_fx_time: (time) => `${time} 時点`,
   settings_fx_cache_warn: (time) =>
     `⚠️ 為替レート取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
-  settings_price_title: "時価（Yahoo Finance 自動取得）",
-  settings_price_refreshing: "時価取得中…",
-  settings_price_refresh: "🔄 時価更新",
-  settings_price_auto: "アプリ起動時に自動取得されます。",
-  settings_price_time: (time) => `${time} 時点`,
-  settings_price_cache_warn: (time) =>
-    `⚠️ 時価取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
-  settings_price_result: (updated, total) => `${total}件中${updated}件更新完了`,
-  settings_price_no_ticker: "ティッカーが登録された資産がありません。",
-  price_refresh_error:
-    "時価の取得に失敗しました。ネットワーク状態を確認してください。",
+  settings_data_refresh_title: "為替・時価更新（Yahoo Finance 自動取得）",
+  settings_data_refresh_refreshing: "取得中…",
+  settings_data_refresh_refresh: "🔄 今すぐ更新",
+  settings_data_refresh_auto: "アプリ起動時に自動取得されます。",
+  settings_data_refresh_time: (time) => `${time} 時点`,
+  settings_data_refresh_cache_warn: (time) =>
+    `⚠️ 取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
+  settings_data_refresh_result: (updated, total) =>
+    `${total}件中${updated}件時価更新`,
+  settings_data_refresh_no_ticker: "ティッカーが登録された資産がありません。",
+  data_refresh_error:
+    "為替/時価の取得に失敗しました。ネットワーク状態を確認してください。",
   settings_target_title: "目標配分",
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",
