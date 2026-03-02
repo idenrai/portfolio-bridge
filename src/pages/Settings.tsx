@@ -191,9 +191,7 @@ export function SettingsPage() {
                 </span>
               ) : drive.syncedAt ? (
                 <span className="text-xs text-slate-400">
-                  {t.drive_synced_at(
-                    format(new Date(drive.syncedAt), "HH:mm"),
-                  )}
+                  {t.drive_synced_at(format(new Date(drive.syncedAt), "HH:mm"))}
                 </span>
               ) : null}
               <Button
@@ -214,11 +212,7 @@ export function SettingsPage() {
               </Button>
             </div>
           ) : (
-            <Button
-              size="sm"
-              variant="secondary"
-              onClick={drive.connect}
-            >
+            <Button size="sm" variant="secondary" onClick={drive.connect}>
               {t.drive_connect}
             </Button>
           )

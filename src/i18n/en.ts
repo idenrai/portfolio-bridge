@@ -348,8 +348,7 @@ export const en: Translations = {
   drive_use_local: "Keep Local Data",
   drive_error_no_client_id:
     "Google Client ID is not configured. Please check your .env file.",
-  drive_error_gis_not_loaded:
-    "Google Identity Services script is not loaded.",
+  drive_error_gis_not_loaded: "Google Identity Services script is not loaded.",
   settings_target_title: "Target Allocation",
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",

@@ -341,9 +341,9 @@ export const ko: Translations = {
   drive_error_prefix: "동기화 오류:",
   drive_conflict_title: "데이터 충돌 감지",
   drive_conflict_desc: (driveTime, localTime) =>
-    `Drive 데이터(${driveTime})가 로컈 데이터(${localTime})보다 최신입니다. 어느 데이터를 사용하시겠습니까?`,
-  drive_use_drive: "Drive 데이터 사용",
-  drive_use_local: "로컈 데이터 유지",
+    `Google Drive 데이터(${driveTime})가 로컬 데이터(${localTime})보다 최신입니다. 어느 데이터를 사용하시겠습니까?`,
+  drive_use_drive: "Google Drive 데이터 사용",
+  drive_use_local: "로컬 데이터 유지",
   drive_error_no_client_id:
     "Google Client ID가 설정되지 않았습니다. .env를 확인해 주세요.",
   drive_error_gis_not_loaded:
