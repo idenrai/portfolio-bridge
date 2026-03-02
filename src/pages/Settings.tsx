@@ -218,7 +218,6 @@ export function SettingsPage() {
               size="sm"
               variant="secondary"
               onClick={drive.connect}
-              disabled={!drive.hasClientId}
             >
               {t.drive_connect}
             </Button>
@@ -236,13 +235,6 @@ export function SettingsPage() {
                 {t.drive_connected}
               </span>
             </div>
-          )}
-
-          {/* Client ID 미설정 경고 */}
-          {!drive.hasClientId && (
-            <p className="text-xs text-amber-700 bg-amber-50 rounded px-3 py-2">
-              {t.drive_no_client_id}
-            </p>
           )}
 
           {/* 에러 */}

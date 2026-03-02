@@ -10,7 +10,8 @@ import {
 } from "@/utils/googleDrive";
 import type { Asset } from "@/types";
 
-const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID ?? "";
+const CLIENT_ID =
+  "897974484199-ikb59r4mvok827d0s69nhqdbljbqah8t.apps.googleusercontent.com";
 
 /** Google Drive 자동 동기화 훅 */
 export function useGoogleDrive() {
