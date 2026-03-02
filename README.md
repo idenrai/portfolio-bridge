@@ -160,7 +160,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 
 - Each `guru_philosophy_*` must keep a strict 6-line structure:
     1)–5) principle bullets, 6) quote bullet (`Quote:` / `명언:` / `名言：` / `Zitat:`)
-- Keep one bullet per line using `• ` and `\n` concatenation style used in i18n files
+- Keep one bullet per line using `•` and `\n` concatenation style used in i18n files
 - Keep investment terminology consistent by locale (e.g., ROIC, Margin of Safety, Risk Parity)
 - Avoid machine-literal translation; prefer natural, domain-accurate phrasing for investors
 - If localized copy is missing, UI should gracefully fall back to English (already implemented in `GurusPage`)
@@ -413,9 +413,9 @@ npm run tauri:build
 #### 번역 스타일 가이드 (구루 철학)
 
 - 각 `guru_philosophy_*`는 6줄 구조를 유지합니다.
-    - 1~5줄: 투자 원칙 bullet
-    - 6줄: 명언 bullet (`Quote:` / `명언:` / `名言：` / `Zitat:`)
-- 각 줄은 `• `로 시작하고, i18n 파일의 `\n` 연결 스타일을 유지합니다.
+  - 1~5줄: 투자 원칙 bullet
+  - 6줄: 명언 bullet (`Quote:` / `명언:` / `名言：` / `Zitat:`)
+- 각 줄은 `•`로 시작하고, i18n 파일의 `\n` 연결 스타일을 유지합니다.
 - 투자 도메인 용어(예: ROIC, 안전마진, 리스크 패리티)는 언어별로 일관되게 번역합니다.
 - 직역보다 투자 문맥에서 자연스럽고 정확한 의역을 우선합니다.
 - 특정 언어 키가 누락되더라도 UI는 영어 철학으로 안전하게 폴백합니다 (`GurusPage` 반영).
