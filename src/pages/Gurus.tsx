@@ -76,6 +76,20 @@ export function GurusPage() {
       })
     : [];
 
+  const selectedPhilosophyKey = selectedGuru
+    ? (`guru_philosophy_${selectedGuru.id}` as keyof typeof en)
+    : null;
+
+  const localizedPhilosophy = selectedPhilosophyKey
+    ? ((t[selectedPhilosophyKey as keyof typeof t] as string | undefined) ??
+      (en[selectedPhilosophyKey] as string | undefined) ??
+      "")
+    : "";
+
+  const englishPhilosophy = selectedPhilosophyKey
+    ? ((en[selectedPhilosophyKey] as string | undefined) ?? "")
+    : "";
+
   return (
     <div className="space-y-6">
       <h2 className="text-lg font-bold text-slate-800">{t.guru_title}</h2>
@@ -107,15 +121,12 @@ export function GurusPage() {
           {/* 철학 */}
           <Card title={t.guru_philosophy_title(guruName(selectedGuru))}>
             <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
-              {(t[
-                `guru_philosophy_${selectedGuru.id}` as keyof typeof t
-              ] as string)}
+              {localizedPhilosophy}
             </p>
           </Card>
 
           {/* AI 구루 프롬프트 배너 */}
           {(() => {
-            const philosophyKey = `guru_philosophy_${selectedGuru.id}` as keyof typeof en;
             const promptText = buildGuruPrompt(
               selectedGuru,
               summary,
@@ -123,7 +134,7 @@ export function GurusPage() {
               lang,
               baseCurrency,
               rates,
-              (en[philosophyKey] as string) ?? "",
+              englishPhilosophy,
             );
             const copyPrompt = async () => {
               await navigator.clipboard.writeText(promptText);

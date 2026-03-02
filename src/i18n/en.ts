@@ -276,7 +276,7 @@ export const en: Translations = {
     "• Global Macro: Read political, economic, and social shifts for macro investment opportunities\n" +
     "• Quick Stop-Losses: Exit positions immediately when the thesis proves wrong\n" +
     "• Exploiting Market Instability: Find profit opportunities in market imbalances and inefficiencies\n" +
-    '• Quote: "It\'s not whether you\'re right or wrong, but how much you make when you\'re right and how much you lose when you\'re wrong."',
+    "• Quote: \"It's not whether you're right or wrong, but how much you make when you're right and how much you lose when you're wrong.\"",
   guru_philosophy_wood:
     "• Disruptive Innovation: Concentrate on technologies that will transform the world in 5–10 years\n" +
     "• Five Key Themes: AI, robotics, energy storage, genomics, and blockchain innovation platforms\n" +

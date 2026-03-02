@@ -300,7 +300,7 @@ export const de: Translations = {
   guru_philosophy_smith:
     '• Qualitäts-Compounder: "Gute Unternehmen kaufen, nicht überbezahlen, dann nichts tun" als Kernprinzip\n' +
     "• Hoher ROIC-Fokus: Bevorzugt Unternehmen mit dauerhaft hoher Kapitalrendite und starkem Reinvestitionspotenzial\n" +
-    '• Konzentriertes Portfolio: Rund 25–30 Positionen; Qualität der Ideen vor bloßer Streuung\n' +
+    "• Konzentriertes Portfolio: Rund 25–30 Positionen; Qualität der Ideen vor bloßer Streuung\n" +
     "• Qualität vor Schnäppchenjagd: Lieber faire Preise für exzellente Geschäftsmodelle als billige, schwache Unternehmen\n" +
     "• Zinseszins-Effekt: Langfristiges Halten von Unternehmen, die interne Cashflows zu hohen Renditen reinvestieren\n" +
     '• Zitat: "Zur Risikoreduktion blind zu diversifizieren überzeugt mich nicht. Wenn man investiert, dann in die besten Unternehmen."',
@@ -309,7 +309,7 @@ export const de: Translations = {
     '• Systematisches Value Investing: Regelgebundener, emotionsfreier Prozess statt Bauchgefühl; bekannt aus "The Little Book That Beats the Market"\n' +
     "• Übersehene Qualitätswerte: Sucht gezielt günstige, hochwertige Unternehmen, die der Markt vernachlässigt\n" +
     "• Diversifizierte Umsetzung: 20–30 Positionen, um Einzeltitelrisiken zu reduzieren und die Strategie robust umzusetzen\n" +
-    '• Geduld als Voraussetzung: Die Strategie kann über 3–4 Jahre hinter dem Markt liegen, bevor sie aufholt\n' +
+    "• Geduld als Voraussetzung: Die Strategie kann über 3–4 Jahre hinter dem Markt liegen, bevor sie aufholt\n" +
     '• Zitat: "Ermitteln Sie den Wert eines Unternehmens und zahlen Sie deutlich weniger — kurzfristig ist der Markt nur Mr. Market."',
 
   settings_title: "Einstellungen",
