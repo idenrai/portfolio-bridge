@@ -274,6 +274,17 @@ export const ko: Translations = {
   settings_fx_time: (time) => `${time} 기준`,
   settings_fx_cache_warn: (time) =>
     `⚠️ 환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
+  settings_price_title: "시세 (Yahoo Finance 자동 조회)",
+  settings_price_refreshing: "시세 조회 중…",
+  settings_price_refresh: "🔄 시세 갱신",
+  settings_price_auto: "앱 시작 시 자동 조회됩니다.",
+  settings_price_time: (time) => `${time} 기준`,
+  settings_price_cache_warn: (time) =>
+    `⚠️ 시세 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
+  settings_price_result: (updated, total) =>
+    `${total}건 중 ${updated}건 갱신 완료`,
+  settings_price_no_ticker: "티커가 등록된 자산이 없습니다.",
+  price_refresh_error: "시세 조회에 실패했습니다. 네트워크 상태를 확인해 주세요.",
   settings_target_title: "목표 비중 배분",
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",

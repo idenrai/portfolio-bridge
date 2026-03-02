@@ -211,6 +211,15 @@ export interface Translations {
   settings_fx_auto: string;
   settings_fx_time: (time: string) => string;
   settings_fx_cache_warn: (time: string) => string;
+  settings_price_title: string;
+  settings_price_refreshing: string;
+  settings_price_refresh: string;
+  settings_price_auto: string;
+  settings_price_time: (time: string) => string;
+  settings_price_cache_warn: (time: string) => string;
+  settings_price_result: (updated: number, total: number) => string;
+  settings_price_no_ticker: string;
+  price_refresh_error: string;
   settings_target_title: string;
   settings_target_sum: (n: string) => string;
   settings_target_save: string;

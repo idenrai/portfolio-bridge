@@ -6,12 +6,14 @@ import { AssetsPage } from "@/pages/Assets";
 import { GurusPage } from "@/pages/Gurus";
 import { SettingsPage } from "@/pages/Settings";
 import { AboutPage } from "@/pages/About";
-import { useExchangeRates } from "@/hooks";
+import { useExchangeRates, usePriceRefresh } from "@/hooks";
 
 function AppInitializer() {
   const { refreshRates } = useExchangeRates();
+  const { refreshPrices } = usePriceRefresh();
   useEffect(() => {
     refreshRates();
+    refreshPrices();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return null;

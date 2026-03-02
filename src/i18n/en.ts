@@ -275,6 +275,17 @@ export const en: Translations = {
   settings_fx_time: (time) => `As of ${time}`,
   settings_fx_cache_warn: (time) =>
     `⚠️ Rate fetch failed — using cached value (as of ${time})`,
+  settings_price_title: "Market Prices (auto-fetched from Yahoo Finance)",
+  settings_price_refreshing: "Fetching prices…",
+  settings_price_refresh: "🔄 Refresh Prices",
+  settings_price_auto: "Prices are fetched automatically on app start.",
+  settings_price_time: (time) => `As of ${time}`,
+  settings_price_cache_warn: (time) =>
+    `⚠️ Price fetch failed — using cached values (as of ${time})`,
+  settings_price_result: (updated, total) =>
+    `${updated} of ${total} updated`,
+  settings_price_no_ticker: "No assets with tickers registered.",
+  price_refresh_error: "Failed to fetch prices. Please check your network.",
   settings_target_title: "Target Allocation",
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",

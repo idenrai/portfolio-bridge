@@ -277,6 +277,17 @@ export const ja: Translations = {
   settings_fx_time: (time) => `${time} 時点`,
   settings_fx_cache_warn: (time) =>
     `⚠️ 為替レート取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
+  settings_price_title: "時価（Yahoo Finance 自動取得）",
+  settings_price_refreshing: "時価取得中…",
+  settings_price_refresh: "🔄 時価更新",
+  settings_price_auto: "アプリ起動時に自動取得されます。",
+  settings_price_time: (time) => `${time} 時点`,
+  settings_price_cache_warn: (time) =>
+    `⚠️ 時価取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
+  settings_price_result: (updated, total) =>
+    `${total}件中${updated}件更新完了`,
+  settings_price_no_ticker: "ティッカーが登録された資産がありません。",
+  price_refresh_error: "時価の取得に失敗しました。ネットワーク状態を確認してください。",
   settings_target_title: "目標配分",
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",

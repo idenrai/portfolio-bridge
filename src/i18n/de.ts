@@ -280,6 +280,17 @@ export const de: Translations = {
   settings_fx_time: (time) => `Stand: ${time}`,
   settings_fx_cache_warn: (time) =>
     `⚠️ Kursabruf fehlgeschlagen — gecachten Wert verwenden (Stand: ${time})`,
+  settings_price_title: "Kurse (automatisch von Yahoo Finance abgerufen)",
+  settings_price_refreshing: "Kurse werden abgerufen…",
+  settings_price_refresh: "🔄 Kurse aktualisieren",
+  settings_price_auto: "Kurse werden beim App-Start automatisch abgerufen.",
+  settings_price_time: (time) => `Stand: ${time}`,
+  settings_price_cache_warn: (time) =>
+    `⚠️ Kursabruf fehlgeschlagen — gecachte Werte verwenden (Stand: ${time})`,
+  settings_price_result: (updated, total) =>
+    `${updated} von ${total} aktualisiert`,
+  settings_price_no_ticker: "Keine Vermögenswerte mit Ticker registriert.",
+  price_refresh_error: "Kursabruf fehlgeschlagen. Bitte prüfen Sie Ihre Netzwerkverbindung.",
   settings_target_title: "Zielallokation",
   settings_target_sum: (n) => `Gesamt: ${n}%`,
   settings_target_save: "Speichern",

@@ -44,6 +44,7 @@ export function useExchangeRates(): UseExchangeRateResult {
       const rates = await fetchAllExchangeRates();
       if (rates.JPY) setExchangeRate("JPY", rates.JPY);
       if (rates.USD) setExchangeRate("USD", rates.USD);
+      if (rates.EUR) setExchangeRate("EUR", rates.EUR);
       setLastUpdated(new Date().toISOString());
     } catch (e) {
       console.error("[ExchangeRate]", e);

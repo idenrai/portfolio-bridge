@@ -14,12 +14,15 @@ interface SettingsState {
   exchangeRates: Record<CurrencyCode, number>;
   /** 환율 마지막 갱신 시각 (ISO 문자열, 영속화) */
   exchangeRatesUpdatedAt: string | null;
+  /** 자산 시세 마지막 갱신 시각 (ISO 문자열, 영속화) */
+  pricesUpdatedAt: string | null;
   /** 목표 비중 배분 */
   targetAllocations: TargetAllocation[];
 
   setBaseCurrency: (c: CurrencyCode) => void;
   setExchangeRate: (currency: CurrencyCode, rate: number) => void;
   setExchangeRatesUpdatedAt: (iso: string) => void;
+  setPricesUpdatedAt: (iso: string) => void;
   setTargetAllocations: (allocations: TargetAllocation[]) => void;
 }
 
@@ -38,6 +41,7 @@ export const useSettingsStore = create<SettingsState>()(
       baseCurrency: "KRW",
       exchangeRates: { ...DEFAULT_RATES },
       exchangeRatesUpdatedAt: null,
+      pricesUpdatedAt: null,
       targetAllocations: DEFAULT_TARGET,
 
       setBaseCurrency: (baseCurrency) => set({ baseCurrency }),
@@ -46,6 +50,7 @@ export const useSettingsStore = create<SettingsState>()(
           exchangeRates: { ...state.exchangeRates, [currency]: rate },
         })),
       setExchangeRatesUpdatedAt: (iso) => set({ exchangeRatesUpdatedAt: iso }),
+      setPricesUpdatedAt: (iso) => set({ pricesUpdatedAt: iso }),
       setTargetAllocations: (targetAllocations) => set({ targetAllocations }),
     }),
     {
