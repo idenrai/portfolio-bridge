@@ -115,13 +115,13 @@ export function SettingsPage() {
                 const currencyName = currencyDisplayNames.of(code) ?? code;
                 return (
                   <div key={code} className="flex items-center gap-3 py-0.5">
-                    <span className="text-sm text-slate-600 w-32">
+                    <span className="text-sm text-slate-600 w-52">
                       {currencyName} ({code})
                     </span>
                     <span className="text-xs text-slate-400 shrink-0">
                       1 {baseCurrency} =
                     </span>
-                    <span className="text-sm font-mono text-slate-800 w-24 text-right">
+                    <span className="text-sm font-mono text-slate-800 w-28 text-right">
                       {ratePerBase.toLocaleString(langLocale, {
                         maximumSignificantDigits: 4,
                       })}
