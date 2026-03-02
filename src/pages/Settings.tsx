@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Card, Button } from "@/components/common";
 import { useSettingsStore, useAssetStore, useLanguageStore } from "@/stores";
 import { useDataRefresh, useT } from "@/hooks";
-import { CURRENCY_LABELS, CURRENCY_SYMBOLS } from "@/types";
-import type { AssetTag, TargetAllocation } from "@/types";
+import type { AssetTag, CurrencyCode, TargetAllocation } from "@/types";
 import { LANG_LOCALES } from "@/i18n";
 import { format } from "date-fns";
 
@@ -12,6 +11,11 @@ export function SettingsPage() {
   const assetStore = useAssetStore();
   const lang = useLanguageStore((s) => s.lang);
   const langLocale = LANG_LOCALES[lang];
+  const baseCurrency = settings.baseCurrency;
+  const baseCurrencyRate = settings.exchangeRates[baseCurrency] ?? 1;
+  const currencyDisplayNames = new Intl.DisplayNames([langLocale], {
+    type: "currency",
+  });
   const {
     refreshAll,
     isLoading,
@@ -102,22 +106,27 @@ export function SettingsPage() {
             <p className="text-xs font-medium text-slate-500 mb-1.5">
               {t.settings_fx_title}
             </p>
-            {(
-              Object.entries(CURRENCY_LABELS).filter(([k]) => k !== "KRW") as [
-                keyof typeof CURRENCY_SYMBOLS,
-                string,
-              ][]
-            ).map(([code, label]) => (
-              <div key={code} className="flex items-center gap-3 py-0.5">
-                <span className="text-sm text-slate-600 w-32">{label}</span>
-                <span className="text-sm font-mono text-slate-800 w-24 text-right">
-                  {settings.exchangeRates[code]?.toLocaleString(langLocale, {
-                    maximumFractionDigits: 2,
-                  }) ?? "—"}
-                </span>
-                <span className="text-xs text-slate-400">KRW</span>
-              </div>
-            ))}
+            {(Object.keys(settings.exchangeRates) as CurrencyCode[])
+              .filter((code) => code !== baseCurrency)
+              .map((code) => {
+                const rateInBase =
+                  (settings.exchangeRates[code] ?? 1) / baseCurrencyRate;
+                const currencyName =
+                  currencyDisplayNames.of(code) ?? code;
+                return (
+                  <div key={code} className="flex items-center gap-3 py-0.5">
+                    <span className="text-sm text-slate-600 w-32">
+                      {currencyName} ({code})
+                    </span>
+                    <span className="text-sm font-mono text-slate-800 w-24 text-right">
+                      {rateInBase.toLocaleString(langLocale, {
+                        maximumFractionDigits: 2,
+                      })}
+                    </span>
+                    <span className="text-xs text-slate-400">{baseCurrency}</span>
+                  </div>
+                );
+              })}
           </div>
 
           {/* 시세 진행률 */}
