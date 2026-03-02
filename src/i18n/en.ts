@@ -64,7 +64,7 @@ export const en: Translations = {
   kpi_asset_type_unit: "asset types",
 
   chart_market: "By Market",
-  chart_tag: "By Category",
+  chart_category: "By Category",
   chart_no_data: "No data",
 
   holdings_title: "Holdings",
@@ -77,12 +77,12 @@ export const en: Translations = {
   holdings_show_all: (n) => `View all ${n}`,
   holdings_show_top10: "Top 10 only",
 
-  tag_title: "Category Target vs Actual",
-  tag_empty: "Set target allocations in Settings.",
-  tag_legend_target: "Target",
-  tag_legend_normal: "Normal",
-  tag_legend_over: "Over",
-  tag_legend_under: "Under",
+  category_title: "Category Target vs Actual",
+  category_empty: "Set target allocations in Settings.",
+  category_legend_target: "Target",
+  category_legend_normal: "Normal",
+  category_legend_over: "Over",
+  category_legend_under: "Under",
 
   fx_title: "FX Exposure & Scenario",
   fx_col_currency: "Currency",
@@ -115,9 +115,9 @@ export const en: Translations = {
   insight_cash_low: (pct) => `Cash ${pct}% — low emergency buffer`,
   insight_fx_high: (currency, pct) =>
     `${currency} exposure ${pct}% — sensitive to FX moves`,
-  insight_tag_over: (label, pct, target, diff) =>
+  insight_category_over: (label, pct, target, diff) =>
     `${label} ${pct}% vs target ${target}% → +${diff}%p overweight`,
-  insight_tag_under: (label, pct, target, diff) =>
+  insight_category_under: (label, pct, target, diff) =>
     `${label} ${pct}% vs target ${target}% → ${diff}%p underweight`,
 
   asset_title: "Assets",
@@ -165,7 +165,7 @@ export const en: Translations = {
   guru_radar_title: "My Portfolio vs Guru",
   guru_my_portfolio: "My Portfolio",
   guru_rebalance_title: (name) => `Rebalance Suggestions (${name})`,
-  guru_col_tag: "Category",
+  guru_col_category: "Category",
   guru_col_current: "Current",
   guru_col_guru_target: "Guru Target",
   guru_col_diff: "Diff",
@@ -340,7 +340,7 @@ export const en: Translations = {
 
   at_col_name: "Name",
   at_col_market: "Market",
-  at_col_tag: "Category",
+  at_col_category: "Category",
   at_col_quantity: "Qty",
   at_col_current_price: "Current Price",
   at_col_value: "Value",

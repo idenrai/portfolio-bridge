@@ -28,7 +28,7 @@ interface AiClassificationItem {
   reason?: string;
 }
 
-const TAG_DESCRIPTIONS: Record<string, string> = {
+const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   dividend:
     "dividend - income-generating stocks / REITs with regular dividends",
   growth: "growth - high-growth stocks (tech, biotech, etc.)",
@@ -66,7 +66,7 @@ export function buildClassificationPrompt(
   assets: Asset[],
   lang: Lang = "ko",
 ): string {
-  const tagList = Object.entries(TAG_DESCRIPTIONS)
+  const categoryList = Object.entries(CATEGORY_DESCRIPTIONS)
     .map(([, desc]) => `  - ${desc}`)
     .join("\n");
 
@@ -84,7 +84,7 @@ export function buildClassificationPrompt(
   return `You are a portfolio asset classifier. For each asset below, choose the single most appropriate category that best describes its investment characteristic.
 
 Available categories:
-${tagList}
+${categoryList}
 
 Asset list:
 ${assetLines}

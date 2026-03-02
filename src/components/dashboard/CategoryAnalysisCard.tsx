@@ -6,13 +6,13 @@ interface Props {
   rebalancing: RebalanceSuggestion[];
 }
 
-export function TagAnalysisCard({ rebalancing }: Props) {
+export function CategoryAnalysisCard({ rebalancing }: Props) {
   const t = useT();
 
   if (rebalancing.length === 0) {
     return (
-      <Card title={t.tag_title}>
-        <p className="text-sm text-slate-400 py-4 text-center">{t.tag_empty}</p>
+      <Card title={t.category_title}>
+        <p className="text-sm text-slate-400 py-4 text-center">{t.category_empty}</p>
       </Card>
     );
   }
@@ -23,7 +23,7 @@ export function TagAnalysisCard({ rebalancing }: Props) {
   );
 
   return (
-    <Card title={t.tag_title}>
+    <Card title={t.category_title}>
       <div className="space-y-3">
         {rebalancing.map((r) => {
           const diff = r.currentPercent - r.targetPercent;
@@ -87,19 +87,19 @@ export function TagAnalysisCard({ rebalancing }: Props) {
       <div className="flex items-center gap-4 mt-4 text-[10px] text-slate-400">
         <span className="flex items-center gap-1">
           <span className="w-0.5 h-3 bg-slate-500/70 inline-block" />
-          {t.tag_legend_target}
+          {t.category_legend_target}
         </span>
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 bg-emerald-400 rounded-full inline-block" />
-          {t.tag_legend_normal}
+          {t.category_legend_normal}
         </span>
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 bg-amber-400 rounded-full inline-block" />
-          {t.tag_legend_over}
+          {t.category_legend_over}
         </span>
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 bg-blue-400 rounded-full inline-block" />
-          {t.tag_legend_under}
+          {t.category_legend_under}
         </span>
       </div>
     </Card>

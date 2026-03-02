@@ -66,7 +66,7 @@ export const de: Translations = {
   kpi_asset_type_unit: "Vermögensklassen",
 
   chart_market: "Nach Markt",
-  chart_tag: "Nach Kategorie",
+  chart_category: "Nach Kategorie",
   chart_no_data: "Keine Daten",
 
   holdings_title: "Bestände",
@@ -79,12 +79,12 @@ export const de: Translations = {
   holdings_show_all: (n) => `Alle ${n} anzeigen`,
   holdings_show_top10: "Nur Top 10",
 
-  tag_title: "Kategorie: Ziel vs. Ist",
-  tag_empty: "Zielallokationen in den Einstellungen festlegen.",
-  tag_legend_target: "Ziel",
-  tag_legend_normal: "Normal",
-  tag_legend_over: "Übergewichtet",
-  tag_legend_under: "Untergewichtet",
+  category_title: "Kategorie: Ziel vs. Ist",
+  category_empty: "Zielallokationen in den Einstellungen festlegen.",
+  category_legend_target: "Ziel",
+  category_legend_normal: "Normal",
+  category_legend_over: "Übergewichtet",
+  category_legend_under: "Untergewichtet",
 
   fx_title: "Währungsexponierung & Szenario",
   fx_col_currency: "Währung",
@@ -118,9 +118,9 @@ export const de: Translations = {
   insight_cash_low: (pct) => `Bargeld ${pct}% — niedrige Notfallreserve`,
   insight_fx_high: (currency, pct) =>
     `${currency} Exponierung ${pct}% — anfällig für Währungsschwankungen`,
-  insight_tag_over: (label, pct, target, diff) =>
+  insight_category_over: (label, pct, target, diff) =>
     `${label} ${pct}% vs. Ziel ${target}% → +${diff}%p übergewichtet`,
-  insight_tag_under: (label, pct, target, diff) =>
+  insight_category_under: (label, pct, target, diff) =>
     `${label} ${pct}% vs. Ziel ${target}% → ${diff}%p untergewichtet`,
 
   asset_title: "Vermögen",
@@ -170,7 +170,7 @@ export const de: Translations = {
   guru_radar_title: "Mein Portfolio vs. Guru",
   guru_my_portfolio: "Mein Portfolio",
   guru_rebalance_title: (name) => `Neuausrichtungsvorschläge (${name})`,
-  guru_col_tag: "Kategorie",
+  guru_col_category: "Kategorie",
   guru_col_current: "Aktuell",
   guru_col_guru_target: "Guru-Ziel",
   guru_col_diff: "Differenz",
@@ -347,7 +347,7 @@ export const de: Translations = {
 
   at_col_name: "Name",
   at_col_market: "Markt",
-  at_col_tag: "Kategorie",
+  at_col_category: "Kategorie",
   at_col_quantity: "Menge",
   at_col_current_price: "Aktueller Kurs",
   at_col_value: "Wert",

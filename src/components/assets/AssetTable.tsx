@@ -43,7 +43,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
           <tr className="text-left text-xs text-slate-500 border-b border-slate-200">
             <th className="pb-2 font-medium">{t.at_col_name}</th>
             <th className="pb-2 font-medium">{t.at_col_market}</th>
-            <th className="pb-2 font-medium">{t.at_col_tag}</th>
+            <th className="pb-2 font-medium">{t.at_col_category}</th>
             <th className="pb-2 font-medium text-right">{t.at_col_quantity}</th>
             <th className="pb-2 font-medium text-right">
               {t.at_col_current_price}
@@ -65,7 +65,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
             return (
               <tr key={a.id} className="hover:bg-slate-50">
                 <td className="py-2.5 max-w-[180px]">
-                  <p className="font-medium text-slate-800 break-words whitespace-normal leading-snug">
+                  <p className="font-medium text-slate-800 wrap-break-word whitespace-normal leading-snug">
                     {a.name}
                   </p>
                   {a.ticker && (
@@ -86,7 +86,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
                         e.target.value as AssetCategory | "",
                       )
                     }
-                    className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-[90px]"
+                    className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-22.5"
                   >
                     <option value="">{t.at_unclassified}</option>
                     {CATEGORY_OPTIONS.map(([val, label]) => (

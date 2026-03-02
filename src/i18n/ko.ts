@@ -64,7 +64,7 @@ export const ko: Translations = {
   kpi_asset_type_unit: "개 자산군",
 
   chart_market: "국가(시장)별 배분",
-  chart_tag: "분류별 배분",
+  chart_category: "분류별 배분",
   chart_no_data: "데이터 없음",
 
   holdings_title: "보유 종목",
@@ -77,12 +77,12 @@ export const ko: Translations = {
   holdings_show_all: (n) => `전체 ${n}개 보기`,
   holdings_show_top10: "상위 10개만",
 
-  tag_title: "분류 목표 vs 실제",
-  tag_empty: "설정에서 목표 배분을 등록하세요",
-  tag_legend_target: "목표",
-  tag_legend_normal: "정상",
-  tag_legend_over: "초과",
-  tag_legend_under: "부족",
+  category_title: "분류 목표 vs 실제",
+  category_empty: "설정에서 목표 배분을 등록하세요",
+  category_legend_target: "목표",
+  category_legend_normal: "정상",
+  category_legend_over: "초과",
+  category_legend_under: "부족",
 
   fx_title: "환율 노출 & 시나리오",
   fx_col_currency: "통화",
@@ -114,9 +114,9 @@ export const ko: Translations = {
   insight_cash_low: (pct) => `현금 비중 ${pct}% — 비상자금 부족 주의`,
   insight_fx_high: (currency, pct) =>
     `${currency} 노출 ${pct}% — 환율 변동 민감`,
-  insight_tag_over: (label, pct, target, diff) =>
+  insight_category_over: (label, pct, target, diff) =>
     `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
-  insight_tag_under: (label, pct, target, diff) =>
+  insight_category_under: (label, pct, target, diff) =>
     `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
 
   asset_title: "자산 관리",
@@ -164,7 +164,7 @@ export const ko: Translations = {
   guru_radar_title: "내 포트폴리오 vs 구루 비교",
   guru_my_portfolio: "내 포트폴리오",
   guru_rebalance_title: (name) => `${name} 기준 리밸런싱 제안`,
-  guru_col_tag: "분류",
+  guru_col_category: "분류",
   guru_col_current: "현재",
   guru_col_guru_target: "구루 목표",
   guru_col_diff: "차이",
@@ -338,7 +338,7 @@ export const ko: Translations = {
 
   at_col_name: "종목",
   at_col_market: "시장",
-  at_col_tag: "분류",
+  at_col_category: "분류",
   at_col_quantity: "수량",
   at_col_current_price: "현재가",
   at_col_value: "평가액",

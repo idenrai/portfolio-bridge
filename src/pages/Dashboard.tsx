@@ -8,7 +8,7 @@ import { LANG_LOCALES } from "@/i18n";
 import { KpiBar } from "@/components/dashboard/KpiBar";
 import { AllocationPieCharts } from "@/components/dashboard/AllocationPieCharts";
 import { TopHoldingsTable } from "@/components/dashboard/TopHoldingsTable";
-import { TagAnalysisCard } from "@/components/dashboard/TagAnalysisCard";
+import { CategoryAnalysisCard } from "@/components/dashboard/CategoryAnalysisCard";
 import { CurrencyExposureCard } from "@/components/dashboard/CurrencyExposureCard";
 import { RebalanceCard } from "@/components/dashboard/RebalanceCard";
 import { InsightsPanel } from "@/components/dashboard/InsightsPanel";
@@ -111,7 +111,7 @@ export function DashboardPage() {
 
       {/* ⑤ 하단 3열 그리드 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <TagAnalysisCard rebalancing={rebalancing} />
+        <CategoryAnalysisCard rebalancing={rebalancing} />
         <CurrencyExposureCard summary={summary} />
         <RebalanceCard rebalancing={rebalancing} />
       </div>

@@ -21,9 +21,9 @@ No account required. Market data and exchange rates are fetched client-side via 
 ### Key Features
 
 | Feature | Description |
-|---|---|
-| 📊 **Unified Dashboard** | KPI bar, tag/market allocation charts, holdings table, rebalance suggestions |
-| 💼 **Asset Management** | Ticker search (Yahoo Finance), manual entry, AI auto-tagging, CSV import/export |
+| --- | --- |
+| 📊 **Unified Dashboard** | KPI bar, category/market allocation charts, holdings table, rebalance suggestions |
+| 💼 **Asset Management** | Ticker search (Yahoo Finance), manual entry, AI auto-classification, CSV import/export |
 | 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.) |
 | 🤖 **AI Portfolio Analysis** | Structured prompts ready to paste into ChatGPT · Claude · Gemini · Grok |
 | 🔔 **Auto Insights** | Alerts for overweight, large losses, low cash, currency exposure |
@@ -60,7 +60,7 @@ Auto-redeploys on every `git push`.
 #### Proxy Structure
 
 | Path | Target | File |
-|---|---|---|
+| --- | --- | --- |
 | `/api/yahoo/*` | `query1.finance.yahoo.com` | `api/yahoo/[...path].ts` |
 | `/api/yahoo-jp/*` | `finance.yahoo.co.jp` | `api/yahoo-jp/[...path].ts` |
 
@@ -75,7 +75,7 @@ Build native macOS (.app / .dmg) and Windows (.exe / .msi) desktops using Tauri 
 #### Prerequisites
 
 | OS | Requirements |
-|---|---|
+| --- | --- |
 | **All** | [Node.js](https://nodejs.org/) 18+, [Rust](https://rustup.rs/) 1.77.2+ |
 | **macOS** | Xcode Command Line Tools (`xcode-select --install`) |
 | **Windows** | [VS Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (C++ desktop workload), [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) |
@@ -89,7 +89,7 @@ npm run tauri:build
 ```
 
 | OS | Output Path | Format |
-|---|---|---|
+| --- | --- | --- |
 | macOS | `src-tauri/target/release/bundle/dmg/` | `.app`, `.dmg` |
 | Windows | `src-tauri/target/release/bundle/nsis/` | `.exe` (NSIS installer) |
 | Windows | `src-tauri/target/release/bundle/msi/` | `.msi` |
@@ -98,7 +98,7 @@ npm run tauri:build
 
 #### Architecture
 
-```
+```text
 Browser (local dev)                 Vercel deployment                  Tauri desktop
 ┌──────────────────┐          ┌──────────────────────┐          ┌──────────────────────┐
 │  React SPA       │          │  React SPA (CDN)     │          │  React SPA (WebView) │
@@ -123,12 +123,12 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 #### Dashboard
 
 - 5-slot KPI bar (total value, P&L, holdings count, cash ratio, FX exposure)
-- Pie charts by market & tag
+- Pie charts by market & category
 - Holdings table (sortable by value / P&L / return / weight, weight bar)
 - Tag target vs actual deviation visualization
 - Currency exposure table + ±5 % scenario analysis
 - Rebalance buy/sell suggestions
-- **Auto insights** (overweight >15 %, loss >20 %, cash <3 % / >20 %, FX exposure >40 %, tag deviation >10 %p) — per-item dismiss
+- **Auto insights** (overweight >15 %, loss >20 %, cash <3 % / >20 %, FX exposure >40 %, category deviation >10 %p) — per-item dismiss
 - **AI analysis banner**: structured prompt containing all holdings → paste into ChatGPT · Claude · Gemini · Grok
 - **Onboarding sample data**: "Try with sample data" button on empty dashboard
 
@@ -136,7 +136,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 
 - Ticker search (Yahoo Finance US + Yahoo Japan HTML scraping)
 - Manual add / edit / delete
-- **AI auto-tagging**: English structured prompt → apply tags in bulk via JSON response (reasons in app language)
+- **AI auto-classification**: English structured prompt → apply categories in bulk via JSON response (reasons in app language)
 - **CSV import preview**: 5-row preview → confirm to import
 - CSV export
 
@@ -170,7 +170,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 
 - Display currency toggle (KRW / JPY / USD / EUR)
 - **Exchange rate caching**: auto-fetch on startup, reuse within 1 h, fallback to 24 h cache on failure (amber warning)
-- Target allocation per tag
+- Target allocation per category
 - Full data reset
 
 ---
@@ -178,7 +178,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 ### Tech Stack
 
 | Area | Technology |
-|---|---|
+| --- | --- |
 | Frontend | React 19 · TypeScript · Vite 7 |
 | Styling | Tailwind CSS v4 |
 | State | Zustand 5 (localStorage persist) |
@@ -193,7 +193,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 
 ### Project Structure
 
-```
+```text
 src/
 ├── pages/              # Dashboard, Assets, Gurus, Settings, About
 ├── components/
@@ -204,7 +204,8 @@ src/
 │   │                   # RebalanceCard, InsightsPanel
 │   └── assets/         # AssetForm, AssetTable
 ├── hooks/              # usePortfolio, useExchangeRates, useTickerSearch
-├── stores/             # useAssetStore, useSettingsStore, useLanguageStore
+├── pages/
+│   └── stores/       # useAssetStore, useSettingsStore, useLanguageStore
 ├── i18n/               # types.ts, ko.ts, en.ts, ja.ts, de.ts, index.ts
 ├── types/              # Asset, Currency, Portfolio, Guru types
 ├── utils/              # Calculations, FX, CSV, Guru, Yahoo Finance, AI
@@ -232,7 +233,7 @@ vercel.json                     # Vercel config (SPA rewrite, API routing)
 ### Yahoo Finance Data
 
 | Path | Endpoint | Usage |
-|---|---|---|
+| --- | --- | --- |
 | US API | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | US/KR ticker search & quotes, exchange rates |
 | JP Scraping | `finance.yahoo.co.jp` (custom plugin / Vercel Serverless) | JP fund/stock search & quotes (HTML `__PRELOADED_STATE__` parsing) |
 
@@ -275,9 +276,9 @@ Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 
 ### 핵심 기능 요약
 
 | 기능 | 설명 |
-|---|---|
-| 📊 **통합 대시보드** | KPI 바, 태그·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안 |
-| 💼 **자산 관리** | 종목 검색(Yahoo Finance), 수동 등록, AI 자동 태그 분류, CSV 가져오기·내보내기 |
+| --- | --- |
+| 📊 **통합 대시보드** | KPI 바, 카테고리·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안 |
+| 💼 **자산 관리** | 종목 검색(Yahoo Finance), 수동 등록, AI 자동 카테고리 분류, CSV 가져오기·내보내기 |
 | 💡 **투자 구루** | 버핏·달리오·린치·드러큰밀러·스미스·그린블라트 등 18명의 철학과 내 포트폴리오 비교 |
 | 🤖 **AI 포트폴리오 분석** | ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 구조화 프롬프트 생성 |
 | 🔔 **자동 인사이트** | 과대비중, 큰 손실, 현금 부족, 환 노출 초과를 자동 감지·경고 |
@@ -314,7 +315,7 @@ Vercel에 배포하면 별도의 서버 없이 정적 SPA + API 프록시가 함
 #### 프록시 구조
 
 | 경로 | 대상 | 파일 |
-|---|---|---|
+| --- | --- | --- |
 | `/api/yahoo/*` | `query1.finance.yahoo.com` | `api/yahoo/[...path].ts` |
 | `/api/yahoo-jp/*` | `finance.yahoo.co.jp` | `api/yahoo-jp/[...path].ts` |
 
@@ -329,7 +330,7 @@ Tauri v2를 사용하여 macOS (.app / .dmg) 및 Windows (.exe / .msi) 데스크
 #### 사전 요구 사항
 
 | OS | 필수 설치 |
-|---|---|
+| --- | --- |
 | **공통** | [Node.js](https://nodejs.org/) 18+, [Rust](https://rustup.rs/) 1.77.2+ |
 | **macOS** | Xcode Command Line Tools (`xcode-select --install`) |
 | **Windows** | [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (C++ 데스크톱 개발 워크로드), [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) (Win 10+에 기본 포함) |
@@ -343,7 +344,7 @@ npm run tauri:build
 ```
 
 | OS | 출력 경로 | 형식 |
-|---|---|---|
+| --- | --- | --- |
 | macOS | `src-tauri/target/release/bundle/dmg/` | `.app`, `.dmg` |
 | Windows | `src-tauri/target/release/bundle/nsis/` | `.exe` (NSIS 설치 프로그램) |
 | Windows | `src-tauri/target/release/bundle/msi/` | `.msi` |
@@ -352,7 +353,7 @@ npm run tauri:build
 
 #### 아키텍처
 
-```
+```text
 브라우저 (로컬 개발)                   Vercel 웹 배포                     Tauri 데스크톱 앱
 ┌──────────────────┐            ┌──────────────────────┐          ┌──────────────────────┐
 │  React SPA       │            │  React SPA (CDN)     │          │  React SPA (WebView) │
@@ -377,12 +378,12 @@ npm run tauri:build
 #### 대시보드
 
 - 5칸 KPI 바 (총 평가액, 손익, 보유 종목 수, 현금 비중, 외화 노출)
-- 국가별 · 태그별 파이 차트
+- 국가별 · 카테고리별 파이 차트
 - 보유 종목 테이블 (평가액/손익/수익률/비중 정렬, 비중 바)
-- 태그 목표 vs 실제 편차 시각화
+- 카테고리 목표 vs 실제 편차 시각화
 - 환율 노출 테이블 + ±5% 시나리오 분석
 - 리밸런스 매수/매도 제안
-- **자동 인사이트** 경고 (과대비중 >15%, 손실 >20%, 현금 <3%/>20%, 환노출 >40%, 태그 편차 >10%p) — 항목별 개별 닫기 지원
+- **자동 인사이트** 경고 (과대비중 >15%, 손실 >20%, 현금 <3%/>20%, 환노출 >40%, 카테고리 편차 >10%p) — 항목별 개별 닫기 지원
 - **AI 포트폴리오 분석 배너**: 보유 종목 전체 데이터를 포함한 구조화 프롬프트 생성 → ChatGPT · Claude · Gemini · Grok에 바로 붙여넣기
 - **온보딩 샘플 데이터**: 빈 대시보드에서 "샘플 데이터로 둘러보기" 버튼으로 즉시 데모 체험
 
@@ -390,7 +391,7 @@ npm run tauri:build
 
 - 종목 검색 (Yahoo Finance US + Yahoo Japan HTML 스크래핑)
 - 수동 등록 · 수정 · 삭제
-- **AI 자동 태그 분류**: 영문 구조화 프롬프트 생성 → JSON 응답으로 태그 일괄 적용 (앱 표시 언어로 reason 응답)
+- **AI 자동 카테고리 분류**: 영문 구조화 프롬프트 생성 → JSON 응답으로 카테고리 일괄 적용 (앱 표시 언어로 reason 응답)
 - **CSV 가져오기 미리보기**: 파일 선택 후 5행 미리보기 → 확인 후 임포트 확정
 - CSV 내보내기
 
@@ -425,7 +426,7 @@ npm run tauri:build
 
 - 표시 화폐 전환 (KRW / JPY / USD / EUR)
 - **환율 캐시 전략**: 앱 시작 시 자동 조회, 1시간 이내 캐시는 재사용, 조회 실패 시 24시간 이내 캐시로 폴백 (amber 경고 표시)
-- 태그별 목표 비중 설정
+- 카테고리별 목표 비중 설정
 - 전체 데이터 초기화
 
 ---
@@ -433,7 +434,7 @@ npm run tauri:build
 ### 기술 스택
 
 | 영역 | 기술 |
-|---|---|
+| --- | --- |
 | 프런트엔드 | React 19 · TypeScript · Vite 7 |
 | 스타일링 | Tailwind CSS v4 |
 | 상태 관리 | Zustand 5 (localStorage persist) |
@@ -449,7 +450,7 @@ npm run tauri:build
 ### Yahoo Finance 데이터 조회
 
 | 경로 | 엔드포인트 | 용도 |
-|---|---|---|
+| --- | --- | --- |
 | US API | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | 미국·한국 종목 검색/시세, 환율 |
 | JP 스크래핑 | `finance.yahoo.co.jp` (커스텀 플러그인 / Vercel Serverless) | 일본 펀드·주식 검색/시세 (HTML `__PRELOADED_STATE__` 파싱) |
 

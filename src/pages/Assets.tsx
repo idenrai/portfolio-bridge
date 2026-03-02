@@ -144,11 +144,11 @@ export function AssetsPage() {
       </div>
 
       {/* AI 분류 배너 */}
-      <div className="rounded-xl bg-gradient-to-r from-violet-600 to-purple-500 p-px shadow-md">
+      <div className="rounded-xl bg-linear-to-r from-violet-600 to-purple-500 p-px shadow-md">
         <div className="rounded-[11px] bg-white/95 px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-start gap-3 min-w-0">
-              <span className="text-2xl flex-shrink-0 mt-0.5">🤖</span>
+              <span className="text-2xl shrink-0 mt-0.5">🤖</span>
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-slate-800 leading-tight">
                   {t.asset_ai_banner_title}
@@ -162,7 +162,7 @@ export function AssetsPage() {
               type="button"
               onClick={() => setPromptOpen(true)}
               disabled={assets.length === 0}
-              className="flex-shrink-0 rounded-lg bg-gradient-to-r from-violet-600 to-purple-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
+              className="shrink-0 rounded-lg bg-linear-to-r from-violet-600 to-purple-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {t.asset_btn_ai}
             </button>
@@ -350,7 +350,7 @@ export function AssetsPage() {
                     <th className="px-3 py-2 text-right">
                       {t.af_current_price_label}
                     </th>
-                    <th className="px-3 py-2">{t.at_col_tag}</th>
+                    <th className="px-3 py-2">{t.at_col_category}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">

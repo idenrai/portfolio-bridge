@@ -21,8 +21,8 @@ export interface InsightMessages {
   cashHigh: (pct: string) => string;
   cashLow: (pct: string) => string;
   fxHigh: (currency: string, pct: string) => string;
-  tagOver: (label: string, pct: string, target: string, diff: string) => string;
-  tagUnder: (
+  categoryOver: (label: string, pct: string, target: string, diff: string) => string;
+  categoryUnder: (
     label: string,
     pct: string,
     target: string,
@@ -37,9 +37,9 @@ const DEFAULT_INSIGHT_MESSAGES: InsightMessages = {
   cashHigh: (pct) => `현금 비중 ${pct}% — 유동성 과다, 투자 기회 검토`,
   cashLow: (pct) => `현금 비중 ${pct}% — 비상자금 부족 주의`,
   fxHigh: (currency, pct) => `${currency} 노출 ${pct}% — 환율 변동 민감`,
-  tagOver: (label, pct, target, diff) =>
+  categoryOver: (label, pct, target, diff) =>
     `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
-  tagUnder: (label, pct, target, diff) =>
+  categoryUnder: (label, pct, target, diff) =>
     `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
   getCategoryLabel: (category) =>
     CATEGORY_LABELS[category as AssetCategory] ?? category,
@@ -148,7 +148,7 @@ function generateInsights(
         insights.push({
           type: "warning",
           icon: "📊",
-          message: msg.tagOver(
+          message: msg.categoryOver(
             label,
             currentPercent.toFixed(1),
             String(t.targetPercent),
@@ -159,7 +159,7 @@ function generateInsights(
         insights.push({
           type: "info",
           icon: "📊",
-          message: msg.tagUnder(
+          message: msg.categoryUnder(
             label,
             currentPercent.toFixed(1),
             String(t.targetPercent),
@@ -187,7 +187,7 @@ export function calculateSummary(
   let totalCostKRW = 0;
 
   // 지도: 카테고리 / 시장 / 통화별
-  const tagMap = new Map<AssetCategory, number>();
+  const categoryMap = new Map<AssetCategory, number>();
   const marketMap = new Map<string, number>();
   const currencyMap = new Map<string, number>();
 
@@ -226,10 +226,10 @@ export function calculateSummary(
     const categoryShare =
       a.categories.length > 0 ? valKRW / a.categories.length : 0;
     for (const cat of a.categories) {
-      tagMap.set(cat, (tagMap.get(cat) ?? 0) + categoryShare);
+      categoryMap.set(cat, (categoryMap.get(cat) ?? 0) + categoryShare);
     }
     if (a.categories.length === 0) {
-      tagMap.set("other", (tagMap.get("other") ?? 0) + valKRW);
+      categoryMap.set("other", (categoryMap.get("other") ?? 0) + valKRW);
     }
 
     // 시장
@@ -288,7 +288,7 @@ export function calculateSummary(
       }))
       .sort((a, b) => b.valueKRW - a.valueKRW);
 
-  const categoryAllocation = toAllocation(tagMap).map((x) => ({
+  const categoryAllocation = toAllocation(categoryMap).map((x) => ({
     category: x.key as AssetCategory,
     percent: x.percent,
     valueKRW: x.valueKRW,

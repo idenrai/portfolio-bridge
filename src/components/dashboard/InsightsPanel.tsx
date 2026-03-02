@@ -57,12 +57,12 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
   return (
     <Card title={t.insights_title}>
       {/* ── AI 분석 배너 (항상 표시) ── */}
-      <div className="mb-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-500 p-px shadow-md">
+      <div className="mb-4 rounded-xl bg-linear-to-r from-indigo-600 to-blue-500 p-px shadow-md">
         <div className="rounded-[11px] bg-white/95 px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             {/* 좌측: 아이콘 + 텍스트 */}
             <div className="flex items-start gap-3 min-w-0">
-              <span className="text-2xl flex-shrink-0 mt-0.5">🤖</span>
+              <span className="text-2xl shrink-0 mt-0.5">🤖</span>
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-slate-800 leading-tight">
                   {t.insights_ai_banner_title}
@@ -76,7 +76,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
             <button
               type="button"
               onClick={() => setShowPrompt((v) => !v)}
-              className="flex-shrink-0 rounded-lg bg-gradient-to-r from-indigo-600 to-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+              className="shrink-0 rounded-lg bg-linear-to-r from-indigo-600 to-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
             >
               {showPrompt ? t.insights_ai_close : t.insights_ai_btn}
             </button>
@@ -119,14 +119,14 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                 key={i}
                 className={`flex items-start gap-2 px-3 py-2 rounded-lg border text-xs ${TYPE_STYLES[insight.type]}`}
               >
-                <span className="text-sm flex-shrink-0">{insight.icon}</span>
+                <span className="text-sm shrink-0">{insight.icon}</span>
                 <span className="leading-relaxed flex-1">
                   {insight.message}
                 </span>
                 <button
                   type="button"
                   onClick={() => dismiss(i)}
-                  className={`flex-shrink-0 text-base leading-none cursor-pointer transition-colors ${CLOSE_BTN[insight.type]}`}
+                  className={`shrink-0 text-base leading-none cursor-pointer transition-colors ${CLOSE_BTN[insight.type]}`}
                   aria-label="dismiss"
                 >
                   ×

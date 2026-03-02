@@ -50,7 +50,7 @@ export function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8 pb-10">
       {/* Hero */}
-      <div className="rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white px-8 py-10 shadow-lg">
+      <div className="rounded-2xl bg-linear-to-br from-slate-900 to-slate-800 text-white px-8 py-10 shadow-lg">
         <div className="flex items-center gap-3 mb-4">
           <div className="text-4xl">📈</div>
           <div>
@@ -87,7 +87,7 @@ export function AboutPage() {
               key={f.titleKey}
               className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm"
             >
-              <span className="text-xl flex-shrink-0 mt-0.5">{f.icon}</span>
+              <span className="text-xl shrink-0 mt-0.5">{f.icon}</span>
               <div>
                 <p className="text-sm font-semibold text-slate-800">
                   {t[f.titleKey]}
@@ -103,7 +103,7 @@ export function AboutPage() {
 
       {/* Privacy */}
       <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 flex items-start gap-3">
-        <span className="text-xl flex-shrink-0 mt-0.5">🔒</span>
+        <span className="text-xl shrink-0 mt-0.5">🔒</span>
         <div>
           <p className="text-sm font-semibold text-emerald-800">
             {t.about_privacy_title}

@@ -65,7 +65,7 @@ export const ja: Translations = {
   kpi_asset_type_unit: "資産クラス",
 
   chart_market: "国別配分",
-  chart_tag: "カテゴリー別配分",
+  chart_category: "カテゴリー別配分",
   chart_no_data: "データなし",
 
   holdings_title: "保有銘柄",
@@ -78,12 +78,12 @@ export const ja: Translations = {
   holdings_show_all: (n) => `全${n}件を表示`,
   holdings_show_top10: "上位10件のみ",
 
-  tag_title: "カテゴリー目標 vs 実績",
-  tag_empty: "設定から目標配分を登録してください",
-  tag_legend_target: "目標",
-  tag_legend_normal: "正常",
-  tag_legend_over: "超過",
-  tag_legend_under: "不足",
+  category_title: "カテゴリー目標 vs 実績",
+  category_empty: "設定から目標配分を登録してください",
+  category_legend_target: "目標",
+  category_legend_normal: "正常",
+  category_legend_over: "超過",
+  category_legend_under: "不足",
 
   fx_title: "外貨エクスポージャー & シナリオ",
   fx_col_currency: "通貨",
@@ -116,9 +116,9 @@ export const ja: Translations = {
   insight_cash_low: (pct) => `現金比率${pct}% — 緊急資金不足に注意`,
   insight_fx_high: (currency, pct) =>
     `${currency} エクスポージャー${pct}% — 為替変動リスク大`,
-  insight_tag_over: (label, pct, target, diff) =>
+  insight_category_over: (label, pct, target, diff) =>
     `${label} ${pct}% (目標${target}%) → +${diff}%p オーバーウェイト`,
-  insight_tag_under: (label, pct, target, diff) =>
+  insight_category_under: (label, pct, target, diff) =>
     `${label} ${pct}% (目標${target}%) → ${diff}%p アンダーウェイト`,
 
   asset_title: "資産管理",
@@ -167,7 +167,7 @@ export const ja: Translations = {
   guru_radar_title: "マイポートフォリオ vs 投資家比較",
   guru_my_portfolio: "マイポートフォリオ",
   guru_rebalance_title: (name) => `${name}基準のリバランス提案`,
-  guru_col_tag: "カテゴリー",
+  guru_col_category: "カテゴリー",
   guru_col_current: "現在",
   guru_col_guru_target: "投資家目標",
   guru_col_diff: "差異",
@@ -341,7 +341,7 @@ export const ja: Translations = {
 
   at_col_name: "銘柄",
   at_col_market: "市場",
-  at_col_tag: "分類",
+  at_col_category: "分類",
   at_col_quantity: "数量",
   at_col_current_price: "現在値",
   at_col_value: "評価額",

@@ -46,7 +46,7 @@ function MiniPie({
 }) {
   if (data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-[220px] text-slate-400 text-sm">
+      <div className="flex items-center justify-center h-55 text-slate-400 text-sm">
         {noDataText}
       </div>
     );
@@ -115,7 +115,7 @@ export function AllocationPieCharts({ summary }: Props) {
           noDataText={t.chart_no_data}
         />
       </Card>
-      <Card title={t.chart_tag}>
+      <Card title={t.chart_category}>
         <MiniPie
           data={categoryData}
           valueLabel={fmt}

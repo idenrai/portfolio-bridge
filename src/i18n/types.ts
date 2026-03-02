@@ -72,7 +72,7 @@ export interface Translations {
 
   // ─── Allocation Charts ─────────────────────────────────────────────────────
   chart_market: string;
-  chart_tag: string;
+  chart_category: string;
   chart_no_data: string;
 
   // ─── TopHoldingsTable ──────────────────────────────────────────────────────
@@ -86,13 +86,13 @@ export interface Translations {
   holdings_show_all: (n: number) => string;
   holdings_show_top10: string;
 
-  // ─── TagAnalysisCard ───────────────────────────────────────────────────────
-  tag_title: string;
-  tag_empty: string;
-  tag_legend_target: string;
-  tag_legend_normal: string;
-  tag_legend_over: string;
-  tag_legend_under: string;
+  // ─── CategoryAnalysisCard ────────────────────────────────────────────────
+  category_title: string;
+  category_empty: string;
+  category_legend_target: string;
+  category_legend_normal: string;
+  category_legend_over: string;
+  category_legend_under: string;
 
   // ─── CurrencyExposureCard ──────────────────────────────────────────────────
   fx_title: string;
@@ -123,13 +123,13 @@ export interface Translations {
   insight_cash_high: (pct: string) => string;
   insight_cash_low: (pct: string) => string;
   insight_fx_high: (currency: string, pct: string) => string;
-  insight_tag_over: (
+  insight_category_over: (
     label: string,
     pct: string,
     target: string,
     diff: string,
   ) => string;
-  insight_tag_under: (
+  insight_category_under: (
     label: string,
     pct: string,
     target: string,
@@ -178,7 +178,7 @@ export interface Translations {
   guru_radar_title: string;
   guru_my_portfolio: string;
   guru_rebalance_title: (name: string) => string;
-  guru_col_tag: string;
+  guru_col_category: string;
   guru_col_current: string;
   guru_col_guru_target: string;
   guru_col_diff: string;
@@ -237,7 +237,7 @@ export interface Translations {
   // ─── Asset Table ───────────────────────────────────────────────────────────
   at_col_name: string;
   at_col_market: string;
-  at_col_tag: string;
+  at_col_category: string;
   at_col_quantity: string;
   at_col_current_price: string;
   at_col_value: string;

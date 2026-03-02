@@ -144,11 +144,11 @@ export function GurusPage() {
               setTimeout(() => setCopied(false), 2000);
             };
             return (
-              <div className="rounded-xl bg-gradient-to-r from-purple-600 to-indigo-500 p-px shadow-md">
+              <div className="rounded-xl bg-linear-to-r from-purple-600 to-indigo-500 p-px shadow-md">
                 <div className="rounded-[11px] bg-white/95 px-4 py-3">
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-start gap-3 min-w-0">
-                      <span className="text-2xl flex-shrink-0 mt-0.5">🧘</span>
+                      <span className="text-2xl shrink-0 mt-0.5">🧘</span>
                       <div className="min-w-0">
                         <p className="text-sm font-semibold text-slate-800 leading-tight">
                           {t.guru_ai_banner_title}
@@ -161,7 +161,7 @@ export function GurusPage() {
                     <button
                       type="button"
                       onClick={() => setShowPrompt((v) => !v)}
-                      className="flex-shrink-0 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                      className="shrink-0 rounded-lg bg-linear-to-r from-purple-600 to-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
                     >
                       {showPrompt ? t.guru_ai_close : t.guru_ai_btn}
                     </button>
@@ -253,7 +253,7 @@ export function GurusPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-left text-xs text-slate-500 border-b">
-                    <th className="pb-2 font-medium">{t.guru_col_tag}</th>
+                    <th className="pb-2 font-medium">{t.guru_col_category}</th>
                     <th className="pb-2 font-medium text-right">
                       {t.guru_col_current}
                     </th>

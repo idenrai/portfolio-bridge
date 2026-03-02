@@ -72,7 +72,7 @@ export function TopHoldingsTable({ summary }: Props) {
       }
     >
       <div className="overflow-x-auto -mx-5 px-5">
-        <table className="w-full min-w-[640px]">
+        <table className="w-full min-w-160">
           <thead>
             <tr className="border-b border-slate-100">
               <th className="text-[11px] text-slate-500 font-medium px-3 py-2 text-left">
@@ -94,7 +94,7 @@ export function TopHoldingsTable({ summary }: Props) {
                 className="border-b border-slate-50 hover:bg-slate-50/50"
               >
                 <td className="px-3 py-2 text-left">
-                  <div className="text-sm font-medium text-slate-800 truncate max-w-[200px]">
+                  <div className="text-sm font-medium text-slate-800 truncate max-w-50">
                     {h.type === "cash"
                       ? ({
                           KRW: t.currency_krw,
