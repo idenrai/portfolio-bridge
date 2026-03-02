@@ -24,7 +24,7 @@ No account required. Market data and exchange rates are fetched client-side via 
 |---|---|
 | 📊 **Unified Dashboard** | KPI bar, tag/market allocation charts, holdings table, rebalance suggestions |
 | 💼 **Asset Management** | Ticker search (Yahoo Finance), manual entry, AI auto-tagging, CSV import/export |
-| 💡 **Investment Gurus** | Compare your portfolio with 15 gurus (Buffett, Dalio, Lynch, etc.) |
+| 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.) |
 | 🤖 **AI Portfolio Analysis** | Structured prompts ready to paste into ChatGPT · Claude · Gemini · Grok |
 | 🔔 **Auto Insights** | Alerts for overweight, large losses, low cash, currency exposure |
 | 🌐 **Multi-language & Currency** | Korean · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
@@ -142,11 +142,11 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 
 #### Investment Gurus
 
-- 15 gurus: Buffett, Munger, Lynch, Graham, Dalio, Li Lu, Ackman, Burry, Ken Fisher, Steven Cohen, Howard Marks, Seth Klarman, John Templeton, George Soros, Cathie Wood
-- Philosophy (5 detailed points per guru)
-- Top 5 holdings per guru (ticker, name, weight) — Yahoo Finance links
+- 18 gurus: Buffett, Munger, Lynch, Graham, Dalio, Li Lu, Ackman, Burry, Ken Fisher, Steven Cohen, Howard Marks, Seth Klarman, John Templeton, George Soros, Cathie Wood, Stanley Druckenmiller, Terry Smith, Joel Greenblatt
+- Philosophy (5 principles + 1 representative quote per guru)
 - Ideal allocation pie chart vs portfolio radar comparison
 - Guru-based rebalancing suggestions
+- AI prompt generation always injects **English** guru philosophy (independent of UI language)
 
 #### Multi-language (i18n)
 
@@ -154,6 +154,17 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 - Instant switch via flag buttons in the header
 - Full UI localization including guru names & philosophies
 - Language setting persisted via Zustand
+- Guru philosophy rendering uses locale text first, then falls back to English if a locale key is missing
+
+#### Translation Style Guide (Guru Philosophy)
+
+- Each `guru_philosophy_*` must keep a strict 6-line structure:
+    1)–5) principle bullets, 6) quote bullet (`Quote:` / `명언:` / `名言：` / `Zitat:`)
+- Keep one bullet per line using `• ` and `\n` concatenation style used in i18n files
+- Keep investment terminology consistent by locale (e.g., ROIC, Margin of Safety, Risk Parity)
+- Avoid machine-literal translation; prefer natural, domain-accurate phrasing for investors
+- If localized copy is missing, UI should gracefully fall back to English (already implemented in `GurusPage`)
+- Prompt generation must remain English-philosophy based for cross-language consistency
 
 #### Settings
 
@@ -267,7 +278,7 @@ Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 
 |---|---|
 | 📊 **통합 대시보드** | KPI 바, 태그·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안 |
 | 💼 **자산 관리** | 종목 검색(Yahoo Finance), 수동 등록, AI 자동 태그 분류, CSV 가져오기·내보내기 |
-| 💡 **투자 구루** | 버핏·달리오·린치 등 15명의 철학·대표 포트폴리오와 내 포트폴리오 비교 |
+| 💡 **투자 구루** | 버핏·달리오·린치·드러큰밀러·스미스·그린블라트 등 18명의 철학과 내 포트폴리오 비교 |
 | 🤖 **AI 포트폴리오 분석** | ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 구조화 프롬프트 생성 |
 | 🔔 **자동 인사이트** | 과대비중, 큰 손실, 현금 부족, 환 노출 초과를 자동 감지·경고 |
 | 🌐 **다국어 · 다통화** | 한국어 · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
@@ -385,11 +396,11 @@ npm run tauri:build
 
 #### 투자 구루
 
-- 15명의 투자 구루: 버핏, 멍거, 린치, 그레이엄, 달리오, 리루, 빌 애크먼, 마이클 버리, 켄 피셔, 스티븐 코헨, 하워드 막스, 세스 클라먼, 존 템플턴, 조지 소로스, 캐시 우드
-- 구루별 투자 철학 (5개 항목 상세 설명)
-- 구루별 대표 보유 종목 Top 5 (티커, 종목명, 비중) — Yahoo Finance 종목 페이지 링크
+- 18명의 투자 구루: 버핏, 멍거, 린치, 그레이엄, 달리오, 리루, 빌 애크먼, 마이클 버리, 켄 피셔, 스티븐 코헨, 하워드 막스, 세스 클라먼, 존 템플턴, 조지 소로스, 캐시 우드, 스탠리 드러큰밀러, 테리 스미스, 조엘 그린블라트
+- 구루별 투자 철학 (핵심 원칙 5개 + 대표 명언 1개)
 - 구루 이상적 배분 파이 차트 vs 내 포트폴리오 레이더 비교
 - 구루 기준 리밸런싱 제안
+- AI 구루 프롬프트는 UI 언어와 무관하게 영어 철학 텍스트를 기준으로 생성
 
 #### 다국어 (i18n)
 
@@ -397,6 +408,18 @@ npm run tauri:build
 - 헤더의 국기 버튼으로 즉시 전환
 - 투자 구루 이름/철학 포함 전체 UI 다국어 대응
 - Zustand persist로 언어 설정 유지
+- 구루 철학 텍스트는 해당 언어 우선, 누락 시 영어로 자동 폴백
+
+#### 번역 스타일 가이드 (구루 철학)
+
+- 각 `guru_philosophy_*`는 6줄 구조를 유지합니다.
+    - 1~5줄: 투자 원칙 bullet
+    - 6줄: 명언 bullet (`Quote:` / `명언:` / `名言：` / `Zitat:`)
+- 각 줄은 `• `로 시작하고, i18n 파일의 `\n` 연결 스타일을 유지합니다.
+- 투자 도메인 용어(예: ROIC, 안전마진, 리스크 패리티)는 언어별로 일관되게 번역합니다.
+- 직역보다 투자 문맥에서 자연스럽고 정확한 의역을 우선합니다.
+- 특정 언어 키가 누락되더라도 UI는 영어 철학으로 안전하게 폴백합니다 (`GurusPage` 반영).
+- AI 프롬프트는 언어 일관성을 위해 영어 철학 텍스트를 기준으로 유지합니다.
 
 #### 설정
 
