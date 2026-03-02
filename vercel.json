@@ -1,11 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" }
+      ]
+    }
+  ],
   "rewrites": [
-    { "source": "/api/yahoo-jp/(.*)", "destination": "/api/yahoo-jp/$1" },
-    { "source": "/api/yahoo/(.*)", "destination": "/api/yahoo/$1" },
+    { "source": "/api/yahoo-jp/(.*)", "destination": "https://finance.yahoo.co.jp/$1" },
+    { "source": "/api/yahoo/(.*)", "destination": "https://query1.finance.yahoo.com/$1" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
