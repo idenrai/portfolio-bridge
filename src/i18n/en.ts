@@ -184,91 +184,106 @@ export const en: Translations = {
     "• Long-Term Holding: Buy understandable businesses at fair prices and hold for 10+ years\n" +
     "• Dividend Growth & Buybacks: Favor companies with consistent shareholder return policies\n" +
     "• Circle of Competence: Only invest in industries you truly understand\n" +
-    "• Cash Reserves: Always maintain substantial cash to seize great opportunities",
+    "• Cash Reserves: Always maintain substantial cash to seize great opportunities\n" +
+    '• Quote: "Rule No.1: Never lose money. Rule No.2: Never forget Rule No.1."',
   guru_philosophy_munger:
     "• Concentrated Investing: Make large bets only when highly confident in a few outstanding businesses\n" +
     "• Mental Models (Multidisciplinary Thinking): Leverage frameworks from psychology, physics, economics, and more\n" +
     "• Patience: Often the best move is to do nothing at all\n" +
     "• Contrarian Thinking: Be fearful when others are greedy, and greedy when others are fearful\n" +
-    "• The Art of Avoidance: Avoiding bad investments matters more than finding great ones",
+    "• The Art of Avoidance: Avoiding bad investments matters more than finding great ones\n" +
+    '• Quote: "Invert, always invert."',
   guru_philosophy_lynch:
     "• Everyday Investment Ideas: Discover growing products and services in daily life\n" +
     "• PEG Ratio: Divide the P/E ratio by earnings growth rate to assess fair valuation\n" +
     "• Tenbagger Hunting: Seek stocks with the potential for 10x returns\n" +
     "• Broad Diversification: Spread risk across dozens to hundreds of stocks\n" +
-    "• Thorough Research: Emphasize company visits and hands-on financial analysis",
+    "• Thorough Research: Emphasize company visits and hands-on financial analysis\n" +
+    '• Quote: "Know what you own, and know why you own it."',
   guru_philosophy_graham:
     "• Margin of Safety: Only buy at a significant discount to intrinsic value\n" +
     "• Defensive Investing: Prioritize capital preservation with a conservative approach\n" +
     "• Stock-Bond Balance: Allocate 25–75% to stocks, rest in bonds, adjust with market conditions\n" +
     "• Quantitative Analysis: Remove emotion; evaluate companies based on financial data\n" +
-    '• The Market Is a "Weighing Machine": Long-term, stock prices reflect true business value',
+    '• The Market Is a "Weighing Machine": Long-term, stock prices reflect true business value\n' +
+    '• Quote: "The investor’s chief problem—and even his worst enemy—is likely to be himself."',
   guru_philosophy_dalio:
     "• All Weather Strategy: Prepare for all economic regimes (growth/slowdown × inflation/deflation)\n" +
     "• Risk Parity: Equalize risk contributions across asset classes\n" +
     "• Broad Diversification: Invest across stocks, bonds, gold, and commodities with low correlations\n" +
     "• Principles: Establish systematic decision-making and organizational principles\n" +
-    "• Understanding Cycles: Analyze short-term and long-term debt cycles to guide decisions",
+    "• Understanding Cycles: Analyze short-term and long-term debt cycles to guide decisions\n" +
+    '• Quote: "He who lives by the crystal ball will eat shattered glass."',
   guru_philosophy_lilu:
     "• Buffett-Munger Approach in Asia: Apply value investing principles to Chinese and Asian markets\n" +
     "• Deep Business Analysis: Thoroughly understand business models and long-term competitiveness\n" +
     "• Ultra-Concentrated Portfolio: Invest heavily in a small number of high-conviction ideas\n" +
     "• Long-Term Holding: Maintain 5–10+ year investment horizons\n" +
-    "• Intellectual Honesty: Acknowledge the limits of your knowledge and stay within your circle",
+    "• Intellectual Honesty: Acknowledge the limits of your knowledge and stay within your circle\n" +
+    '• Quote: "The biggest risk in investing is not volatility, but permanent loss of capital."',
   guru_philosophy_ackman:
     "• Activist Investing: Actively engage with company management to unlock value\n" +
     "• Concentrated Portfolio: Large-scale investments in 5–10 quality companies\n" +
     "• Business Model Analysis: Prefer simple, predictable cash flow businesses\n" +
     "• Asymmetric Risk-Reward: Seek opportunities with limited downside and large upside potential\n" +
-    "• Macro Hedging: Use defensive positions to protect against extreme scenarios",
+    "• Macro Hedging: Use defensive positions to protect against extreme scenarios\n" +
+    '• Quote: "Concentration builds wealth; diversification preserves it."',
   guru_philosophy_burry:
     "• Contrarian Investing: Willingly take positions opposite to the market consensus\n" +
     "• Value-Based Analysis: Meticulously calculate intrinsic and asset values\n" +
     "• Macro Bets: Analyze macroeconomic trends and market bubbles for directional bets\n" +
     "• Independent Thinking: Rely on your own analysis without succumbing to herd mentality\n" +
-    "• High Cash Position: Hold cash patiently until truly compelling opportunities arise",
+    "• High Cash Position: Hold cash patiently until truly compelling opportunities arise\n" +
+    '• Quote: "I may be early, but I\'m not wrong."',
   guru_philosophy_fisher:
     "• Global Macro: Analyze global economic trends and market cycles to guide asset allocation\n" +
     "• Exploiting Investor Sentiment: Use excessive optimism and pessimism as profit opportunities\n" +
     "• Long-Term Equity Overweight: Stocks deliver superior long-term returns over other assets\n" +
     "• Broad Global Diversification: Avoid country-specific concentration; invest worldwide\n" +
-    "• Three Questions: Distinguish what the market knows, doesn't know, and wrongly believes",
+    "• Three Questions: Distinguish what the market knows, doesn't know, and wrongly believes\n" +
+    '• Quote: "Markets climb a wall of worry."',
   guru_philosophy_cohen:
     "• Multi-Manager Model: Operate multiple investment strategies and managers in parallel\n" +
     "• Risk Management First: Strictly manage per-position stop-losses and overall portfolio risk\n" +
     "• Short-to-Mid-Term Trading: Pursue returns through rapid decision-making and position turnover\n" +
     "• Information Edge: Investment decisions grounded in thorough research and data analysis\n" +
-    "• Flexible Strategies: Employ long/short, event-driven, quantitative, and other approaches",
+    "• Flexible Strategies: Employ long/short, event-driven, quantitative, and other approaches\n" +
+    '• Quote: "The key is not predicting markets perfectly, but managing risk relentlessly."',
   guru_philosophy_marks:
     "• Market Cycle Theory: Understand the pendulum-like swings of markets and identify your position\n" +
     "• Second-Level Thinking: Think differently and better than the consensus\n" +
     "• Distressed Investing: Pioneer in distressed debt and crisis asset investing\n" +
     "• Risk = Permanent Loss: Define true risk as permanent capital loss, not volatility\n" +
-    "• Defensive Investing: Focus on limiting losses in bad times over maximizing gains in good times",
+    "• Defensive Investing: Focus on limiting losses in bad times over maximizing gains in good times\n" +
+    '• Quote: "You can’t predict. You can prepare."',
   guru_philosophy_klarman:
     "• Margin of Safety Heir: Modernize Graham's margin of safety philosophy for today's markets\n" +
     "• Absolute Returns: Focus on absolute returns rather than relative benchmark performance\n" +
     "• High Cash Reserves: Willingly hold up to 50% cash when no compelling opportunities exist\n" +
     "• Capitalize on Fear: Aggressively buy undervalued assets during market panics\n" +
-    "• Downside Protection First: Prioritize capital preservation over return maximization",
+    "• Downside Protection First: Prioritize capital preservation over return maximization\n" +
+    '• Quote: "Value investing is at its core the marriage of a contrarian streak and a calculator."',
   guru_philosophy_templeton:
     "• Global Contrarian: Buy at the 'Point of Maximum Pessimism'\n" +
     "• Borderless Investing: Search for undervalued opportunities across all global markets\n" +
     "• Long-Term Value Investing: Hold for 5–10+ years, waiting for intrinsic value realization\n" +
     "• Quantitative Screening: Use low P/E, P/B and other metrics to screen candidates\n" +
-    "• Humble Investing: Exploit market mistakes rather than trying to beat the market",
+    "• Humble Investing: Exploit market mistakes rather than trying to beat the market\n" +
+    '• Quote: "The time of maximum pessimism is the best time to buy."',
   guru_philosophy_soros:
     "• Reflexivity Theory: Market participants' perceptions alter reality in feedback loops\n" +
     "• Massive Directional Bets: Take enormous positions across currencies, bonds, and equities when conviction is high\n" +
     "• Global Macro: Read political, economic, and social shifts for macro investment opportunities\n" +
     "• Quick Stop-Losses: Exit positions immediately when the thesis proves wrong\n" +
-    "• Exploiting Market Instability: Find profit opportunities in market imbalances and inefficiencies",
+    "• Exploiting Market Instability: Find profit opportunities in market imbalances and inefficiencies\n" +
+    '• Quote: "It\'s not whether you\'re right or wrong, but how much you make when you\'re right and how much you lose when you\'re wrong."',
   guru_philosophy_wood:
     "• Disruptive Innovation: Concentrate on technologies that will transform the world in 5–10 years\n" +
     "• Five Key Themes: AI, robotics, energy storage, genomics, and blockchain innovation platforms\n" +
     "• Long-Term Growth Investing: Accept short-term volatility; bet on long-term growth potential\n" +
     "• Proactive Research: Proprietary future forecasts and price modeling by in-house research teams\n" +
-    "• Transparent Management: Publicly disclose daily trades for full fund transparency",
+    "• Transparent Management: Publicly disclose daily trades for full fund transparency\n" +
+    '• Quote: "Innovation solves problems and creates entirely new market opportunities."',
 
   guru_philosophy_druckenmiller:
     "\u2022 Macro Trading Mastery: Directional bets via analysis of correlations between currencies, rates, and equities\n" +
