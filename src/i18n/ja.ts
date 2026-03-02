@@ -329,6 +329,27 @@ export const ja: Translations = {
     "為替/時価の取得に失敗しました。ネットワーク状態を確認してください。",
   data_refresh_partial_fail: (names) =>
     `以下の銘柄の時価取得に失敗しました。資産詳細から現在価格を手動で入力してください: ${names.join("、")}`,
+
+  drive_title: "Google Drive 同期",
+  drive_desc:
+    "ポートフォリオデータを個人のGoogle Driveのアプリ専用フォルダに自動保存します。他の端末で同じGoogleアカウントでサインインするとデータを復元できます。",
+  drive_connect: "Googleで接続",
+  drive_disconnect: "接続解除",
+  drive_connected: "Drive接続済み",
+  drive_syncing: "同期中…",
+  drive_synced_at: (time) => `${time}に同期済み`,
+  drive_sync_now: "今すぐ同期",
+  drive_no_client_id: "VITE_GOOGLE_CLIENT_IDが設定されていません。",
+  drive_error_prefix: "同期エラー:",
+  drive_conflict_title: "データ競合を検出",
+  drive_conflict_desc: (driveTime, localTime) =>
+    `Driveデータ（${driveTime}）はローカルデータ（${localTime}）より新しいです。どちらのデータを使用しますか？`,
+  drive_use_drive: "Driveデータを使用",
+  drive_use_local: "ローカルデータを維持",
+  drive_error_no_client_id:
+    "Google Client IDが設定されていません。.envファイルを確認してください。",
+  drive_error_gis_not_loaded:
+    "Google Identity Servicesスクリプトがロードされていません。",
   settings_target_title: "目標配分",
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",

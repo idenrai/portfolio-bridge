@@ -327,6 +327,27 @@ export const ko: Translations = {
     "환율/시세 조회에 실패했습니다. 네트워크 상태를 확인해 주세요.",
   data_refresh_partial_fail: (names) =>
     `다음 항목은 시세 조회에 실패했습니다. 자산 상세에서 현재가를 수동으로 입력해 주세요: ${names.join(", ")}`,
+
+  drive_title: "Google Drive 동기화",
+  drive_desc:
+    "자산 데이터를 본인 Google Drive의 앱 전용 폴더에 자동 저장합니다. 다른 기기에서 동일 Google 계정으로 접속하면 데이터를 복원할 수 있습니다.",
+  drive_connect: "Google으로 연결",
+  drive_disconnect: "연결 해제",
+  drive_connected: "Drive 연결됨",
+  drive_syncing: "동기화 중…",
+  drive_synced_at: (time) => `${time} 동기화됨`,
+  drive_sync_now: "지금 동기화",
+  drive_no_client_id: "VITE_GOOGLE_CLIENT_ID 환경변수가 설정되지 않았습니다.",
+  drive_error_prefix: "동기화 오류:",
+  drive_conflict_title: "데이터 충돌 감지",
+  drive_conflict_desc: (driveTime, localTime) =>
+    `Drive 데이터(${driveTime})가 로컈 데이터(${localTime})보다 최신입니다. 어느 데이터를 사용하시겠습니까?`,
+  drive_use_drive: "Drive 데이터 사용",
+  drive_use_local: "로컈 데이터 유지",
+  drive_error_no_client_id:
+    "Google Client ID가 설정되지 않았습니다. .env를 확인해 주세요.",
+  drive_error_gis_not_loaded:
+    "Google Identity Services 스크립트가 로드되지 않았습니다.",
   settings_target_title: "목표 비중 배분",
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",

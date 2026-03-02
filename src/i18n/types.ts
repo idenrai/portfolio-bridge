@@ -225,6 +225,24 @@ export interface Translations {
   settings_data_refresh_no_ticker: string;
   data_refresh_error: string;
   data_refresh_partial_fail: (names: string[]) => string;
+
+  // ─── Google Drive Sync ────────────────────────────────────────────────────
+  drive_title: string;
+  drive_desc: string;
+  drive_connect: string;
+  drive_disconnect: string;
+  drive_connected: string;
+  drive_syncing: string;
+  drive_synced_at: (time: string) => string;
+  drive_sync_now: string;
+  drive_no_client_id: string;
+  drive_error_prefix: string;
+  drive_conflict_title: string;
+  drive_conflict_desc: (driveTime: string, localTime: string) => string;
+  drive_use_drive: string;
+  drive_use_local: string;
+  drive_error_no_client_id: string;
+  drive_error_gis_not_loaded: string;
   settings_target_title: string;
   settings_target_sum: (n: string) => string;
   settings_target_save: string;

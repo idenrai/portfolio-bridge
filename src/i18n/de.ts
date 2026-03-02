@@ -335,6 +335,27 @@ export const de: Translations = {
     "Abruf von Kursen/Preisen fehlgeschlagen. Bitte prüfen Sie Ihre Netzwerkverbindung.",
   data_refresh_partial_fail: (names) =>
     `Für folgende Positionen konnte kein Kurs abgerufen werden. Bitte den aktuellen Preis in den Asset-Details manuell eingeben: ${names.join(", ")}`,
+
+  drive_title: "Google Drive-Synchronisierung",
+  drive_desc:
+    "Speichert Ihre Portfolio-Daten automatisch in Ihrem persönlichen Google Drive App-Ordner. Melden Sie sich auf einem anderen Gerät mit demselben Google-Konto an, um Ihre Daten wiederherzustellen.",
+  drive_connect: "Mit Google verbinden",
+  drive_disconnect: "Trennen",
+  drive_connected: "Drive verbunden",
+  drive_syncing: "Synchronisiere\u2026",
+  drive_synced_at: (time) => `Synchronisiert um ${time}`,
+  drive_sync_now: "Jetzt synchronisieren",
+  drive_no_client_id: "VITE_GOOGLE_CLIENT_ID ist nicht gesetzt.",
+  drive_error_prefix: "Sync-Fehler:",
+  drive_conflict_title: "Datenkonflikt erkannt",
+  drive_conflict_desc: (driveTime, localTime) =>
+    `Drive-Daten (${driveTime}) sind neuer als lokale Daten (${localTime}). Welche Daten möchten Sie verwenden?`,
+  drive_use_drive: "Drive-Daten verwenden",
+  drive_use_local: "Lokale Daten behalten",
+  drive_error_no_client_id:
+    "Google Client ID ist nicht konfiguriert. Bitte prüfen Sie Ihre .env-Datei.",
+  drive_error_gis_not_loaded:
+    "Google Identity Services-Skript ist nicht geladen.",
   settings_target_title: "Zielallokation",
   settings_target_sum: (n) => `Gesamt: ${n}%`,
   settings_target_save: "Speichern",

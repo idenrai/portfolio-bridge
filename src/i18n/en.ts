@@ -329,6 +329,27 @@ export const en: Translations = {
     "Failed to fetch rates/prices. Please check your network.",
   data_refresh_partial_fail: (names) =>
     `The following assets could not be updated. Please enter the current price manually in asset details: ${names.join(", ")}`,
+
+  drive_title: "Google Drive Sync",
+  drive_desc:
+    "Automatically saves your portfolio data to your personal Google Drive app folder. Sign in with the same Google account on any device to restore your data.",
+  drive_connect: "Connect with Google",
+  drive_disconnect: "Disconnect",
+  drive_connected: "Drive Connected",
+  drive_syncing: "Syncing\u2026",
+  drive_synced_at: (time) => `Synced at ${time}`,
+  drive_sync_now: "Sync Now",
+  drive_no_client_id: "VITE_GOOGLE_CLIENT_ID is not set.",
+  drive_error_prefix: "Sync error:",
+  drive_conflict_title: "Data Conflict Detected",
+  drive_conflict_desc: (driveTime, localTime) =>
+    `Drive data (${driveTime}) is newer than local data (${localTime}). Which data would you like to use?`,
+  drive_use_drive: "Use Drive Data",
+  drive_use_local: "Keep Local Data",
+  drive_error_no_client_id:
+    "Google Client ID is not configured. Please check your .env file.",
+  drive_error_gis_not_loaded:
+    "Google Identity Services script is not loaded.",
   settings_target_title: "Target Allocation",
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",
