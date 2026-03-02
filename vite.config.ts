@@ -9,7 +9,7 @@ const YAHOO_UA =
 /**
  * Yahoo Finance 통합 프록시 플러그인 (US + JP)
  *
- * - Yahoo JP: finance.yahoo.co.jp HTML 스크래핑 (네이티브 fetch)
+
  * - Yahoo US: query1.finance.yahoo.com API (cookie + crumb 인증 포함)
  *
  * Yahoo Finance v8 API는 cookie + crumb 인증이 필요합니다.
@@ -85,9 +85,7 @@ function yahooProxy(): Plugin {
         const targetPath = req.url ?? "/";
         try {
           await ensureCrumb();
-          const url = new URL(
-            `https://query1.finance.yahoo.com${targetPath}`,
-          );
+          const url = new URL(`https://query1.finance.yahoo.com${targetPath}`);
           url.searchParams.set("crumb", crumb);
 
           let response = await fetch(url.toString(), {

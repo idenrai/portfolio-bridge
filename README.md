@@ -243,7 +243,7 @@ vercel.json                     # Vercel config (SPA rewrite, API routing)
 ### Disclaimer
 
 - This project is for **personal learning and portfolio management** only.
-- Market data is fetched via unofficial APIs and web scraping from Yahoo Finance. Commercial use may violate Yahoo's Terms of Service. **Use for personal, non-commercial purposes only.**
+- Market data is fetched via unofficial Yahoo Finance APIs. Commercial use may violate Yahoo's Terms of Service. **Use for personal, non-commercial purposes only.**
 - Quotes, exchange rates, and analysis are for reference only — not investment advice.
 - The developer assumes no liability for any losses resulting from use of this software.
 
@@ -460,7 +460,7 @@ npm run tauri:build
 ### 면책 조항
 
 - 이 프로젝트는 **개인 학습 및 포트폴리오 관리 목적**으로 제작되었습니다.
-- Yahoo Finance의 데이터를 비공식 API 및 웹 스크래핑으로 조회합니다. 이는 Yahoo의 이용약관에 따라 상업적 이용이 제한될 수 있습니다. **개인 비상업적 용도**로만 사용하십시오.
+- Yahoo Finance의 데이터를 비공식 API로 조회합니다. 이는 Yahoo의 이용약관에 따라 상업적 이용이 제한될 수 있습니다. **개인 비상업적 용도**로만 사용하십시오.
 - 제공되는 시세·환율·분석 데이터는 참고용이며, 투자 결정의 근거로 사용해서는 안 됩니다.
 - 이 소프트웨어의 사용으로 인한 어떠한 손실에 대해서도 개발자는 책임을 지지 않습니다.
 
