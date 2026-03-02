@@ -23,10 +23,18 @@ export function usePortfolio() {
       cashLow: (pct: string) => t.insight_cash_low(pct),
       fxHigh: (currency: string, pct: string) =>
         t.insight_fx_high(currency, pct),
-      categoryOver: (label: string, pct: string, target: string, diff: string) =>
-        t.insight_category_over(label, pct, target, diff),
-      categoryUnder: (label: string, pct: string, target: string, diff: string) =>
-        t.insight_category_under(label, pct, target, diff),
+      categoryOver: (
+        label: string,
+        pct: string,
+        target: string,
+        diff: string,
+      ) => t.insight_category_over(label, pct, target, diff),
+      categoryUnder: (
+        label: string,
+        pct: string,
+        target: string,
+        diff: string,
+      ) => t.insight_category_under(label, pct, target, diff),
       getCategoryLabel: (category: string) =>
         t.category_labels[category as AssetCategory] ?? category,
     }),
