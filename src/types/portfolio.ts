@@ -133,8 +133,6 @@ export interface GuruProfile {
   nameJa: string;
   /** 운용사/소속 펀드 */
   firm: string;
-  philosophy: string;
   /** 추천 태그 비중 */
   idealAllocation: TargetAllocation[];
-
 }

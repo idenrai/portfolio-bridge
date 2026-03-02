@@ -170,10 +170,12 @@ export const ko: Translations = {
   guru_col_diff: "차이",
   guru_col_amount: "조정 금액",
   guru_ai_banner_title: "구루에게 묻기",
-  guru_ai_banner_desc: "선택한 구루의 관점으로 내 포트폴리오를 분석해 드립니다.",
+  guru_ai_banner_desc:
+    "선택한 구루의 관점으로 내 포트폴리오를 분석해 드립니다.",
   guru_ai_btn: "프롬프트 생성",
   guru_ai_close: "닫기",
-  guru_ai_desc: "아래 프롬프트를 복사하여 ChatGPT, Claude 등 AI에 붙여넣으세요.",
+  guru_ai_desc:
+    "아래 프롬프트를 복사하여 ChatGPT, Claude 등 AI에 붙여넣으세요.",
   guru_ai_copy: "클립보드에 복사",
   guru_ai_copied: "✓ 복사됨!",
   guru_philosophy_buffett:

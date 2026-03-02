@@ -176,7 +176,8 @@ export const ja: Translations = {
   guru_ai_banner_desc: "選択した投資家の視点でポートフォリオを分析します。",
   guru_ai_btn: "プロンプト生成",
   guru_ai_close: "閉じる",
-  guru_ai_desc: "以下のプロンプトをコピーして、ChatGPT・Claudeなど任意のAIに貼り付けてください。",
+  guru_ai_desc:
+    "以下のプロンプトをコピーして、ChatGPT・Claudeなど任意のAIに貼り付けてください。",
   guru_ai_copy: "クリップボードにコピー",
   guru_ai_copied: "✓ コピー済み!",
   guru_philosophy_buffett:

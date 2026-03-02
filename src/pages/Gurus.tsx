@@ -18,6 +18,7 @@ import { useLanguageStore, useSettingsStore } from "@/stores";
 import { GURU_PROFILES, formatCurrency, buildGuruPrompt } from "@/utils";
 import { calculateRebalancing } from "@/utils";
 import type { GuruProfile } from "@/types";
+import { en } from "@/i18n";
 
 const COLORS = [
   "#3b82f6",
@@ -108,12 +109,13 @@ export function GurusPage() {
             <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
               {(t[
                 `guru_philosophy_${selectedGuru.id}` as keyof typeof t
-              ] as string) || selectedGuru.philosophy}
+              ] as string)}
             </p>
           </Card>
 
           {/* AI 구루 프롬프트 배너 */}
           {(() => {
+            const philosophyKey = `guru_philosophy_${selectedGuru.id}` as keyof typeof en;
             const promptText = buildGuruPrompt(
               selectedGuru,
               summary,
@@ -121,6 +123,7 @@ export function GurusPage() {
               lang,
               baseCurrency,
               rates,
+              (en[philosophyKey] as string) ?? "",
             );
             const copyPrompt = async () => {
               await navigator.clipboard.writeText(promptText);

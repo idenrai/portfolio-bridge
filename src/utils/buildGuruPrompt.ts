@@ -30,6 +30,7 @@ export function buildGuruPrompt(
   lang: Lang = "ko",
   baseCurrency: string = "KRW",
   rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
+  philosophyEn: string = "",
 ): string {
   const totalKRW = summary.totalValueKRW;
   const pnlKRW = summary.totalPnLKRW;
@@ -40,7 +41,9 @@ export function buildGuruPrompt(
     .map((t) => {
       const tgt = guru.idealAllocation.find((x) => x.tag === t.tag);
       const label = TAG_LABELS[t.tag as AssetTag] ?? t.tag;
-      const targetStr = tgt ? ` (your ideal target: ${tgt.targetPercent}%)` : "";
+      const targetStr = tgt
+        ? ` (your ideal target: ${tgt.targetPercent}%)`
+        : "";
       return `  - ${label}: ${t.percent.toFixed(1)}%${targetStr}`;
     })
     .join("\n");
@@ -96,7 +99,7 @@ export function buildGuruPrompt(
   return `You are ${guruEnName}, the legendary investor.
 Embody ${guruEnName}'s investment philosophy, communication style, and worldview completely.
 Your investing principles:
-${guru.philosophy}
+${philosophyEn}
 
 A user has shared their portfolio with you and is asking for your personal review. Analyze it from YOUR perspective — as ${guruEnName} — and provide:
 
