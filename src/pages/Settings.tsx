@@ -109,21 +109,24 @@ export function SettingsPage() {
             {(Object.keys(settings.exchangeRates) as CurrencyCode[])
               .filter((code) => code !== baseCurrency)
               .map((code) => {
-                const rateInBase =
+                // 간접 호가: 1 baseCurrency = X code (미국/국제 표준 방향)
+                const ratePerBase =
                   (settings.exchangeRates[code] ?? 1) / baseCurrencyRate;
-                const currencyName =
-                  currencyDisplayNames.of(code) ?? code;
+                const currencyName = currencyDisplayNames.of(code) ?? code;
                 return (
                   <div key={code} className="flex items-center gap-3 py-0.5">
                     <span className="text-sm text-slate-600 w-32">
                       {currencyName} ({code})
                     </span>
+                    <span className="text-xs text-slate-400 shrink-0">
+                      1 {baseCurrency} =
+                    </span>
                     <span className="text-sm font-mono text-slate-800 w-24 text-right">
-                      {rateInBase.toLocaleString(langLocale, {
-                        maximumFractionDigits: 2,
+                      {ratePerBase.toLocaleString(langLocale, {
+                        maximumSignificantDigits: 4,
                       })}
                     </span>
-                    <span className="text-xs text-slate-400">{baseCurrency}</span>
+                    <span className="text-xs text-slate-400">{code}</span>
                   </div>
                 );
               })}
