@@ -333,6 +333,8 @@ export const de: Translations = {
     "Keine Vermögenswerte mit Ticker registriert.",
   data_refresh_error:
     "Abruf von Kursen/Preisen fehlgeschlagen. Bitte prüfen Sie Ihre Netzwerkverbindung.",
+  data_refresh_partial_fail: (names) =>
+    `Für folgende Positionen konnte kein Kurs abgerufen werden. Bitte den aktuellen Preis in den Asset-Details manuell eingeben: ${names.join(", ")}`,
   settings_target_title: "Zielallokation",
   settings_target_sum: (n) => `Gesamt: ${n}%`,
   settings_target_save: "Speichern",

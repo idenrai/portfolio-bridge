@@ -327,6 +327,8 @@ export const en: Translations = {
   settings_data_refresh_no_ticker: "No assets with tickers registered.",
   data_refresh_error:
     "Failed to fetch rates/prices. Please check your network.",
+  data_refresh_partial_fail: (names) =>
+    `The following assets could not be updated. Please enter the current price manually in asset details: ${names.join(", ")}`,
   settings_target_title: "Target Allocation",
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",

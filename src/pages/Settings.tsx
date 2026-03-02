@@ -28,6 +28,7 @@ export function SettingsPage() {
     isCached,
     updatedCount,
     totalCount,
+    failedAssets,
   } = useDataRefresh();
   const [allocations, setAllocations] = useState<TargetAllocation[]>([
     ...settings.targetAllocations,
@@ -92,6 +93,13 @@ export function SettingsPage() {
           {error && (
             <p className="text-xs text-red-600 bg-red-50 rounded px-3 py-2">
               {error}
+            </p>
+          )}
+          {!isLoading && failedAssets.length > 0 && (
+            <p className="text-xs text-amber-700 bg-amber-50 rounded px-3 py-2">
+              {t.data_refresh_partial_fail(
+                failedAssets.map((a) => `${a.name} (${a.ticker})`),
+              )}
             </p>
           )}
           {isCached && lastUpdated && (

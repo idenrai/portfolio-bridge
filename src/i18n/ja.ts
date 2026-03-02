@@ -327,6 +327,8 @@ export const ja: Translations = {
   settings_data_refresh_no_ticker: "ティッカーが登録された資産がありません。",
   data_refresh_error:
     "為替/時価の取得に失敗しました。ネットワーク状態を確認してください。",
+  data_refresh_partial_fail: (names) =>
+    `以下の銘柄の時価取得に失敗しました。資産詳細から現在価格を手動で入力してください: ${names.join("、")}`,
   settings_target_title: "目標配分",
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",

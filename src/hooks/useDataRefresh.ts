@@ -23,6 +23,8 @@ interface UseDataRefreshResult {
   updatedCount: number;
   /** 갱신 대상 종목 수 */
   totalCount: number;
+  /** 시세 조회 실패 항목 */
+  failedAssets: { ticker: string; name: string }[];
 }
 
 /**
@@ -71,5 +73,6 @@ export function useDataRefresh(): UseDataRefreshResult {
     progress: prices.progress,
     updatedCount: prices.updatedCount,
     totalCount: prices.totalCount,
+    failedAssets: prices.failedAssets,
   };
 }

@@ -325,6 +325,8 @@ export const ko: Translations = {
   settings_data_refresh_no_ticker: "티커가 등록된 자산이 없습니다.",
   data_refresh_error:
     "환율/시세 조회에 실패했습니다. 네트워크 상태를 확인해 주세요.",
+  data_refresh_partial_fail: (names) =>
+    `다음 항목은 시세 조회에 실패했습니다. 자산 상세에서 현재가를 수동으로 입력해 주세요: ${names.join(", ")}`,
   settings_target_title: "목표 비중 배분",
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",

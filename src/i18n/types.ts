@@ -224,6 +224,7 @@ export interface Translations {
   settings_data_refresh_result: (updated: number, total: number) => string;
   settings_data_refresh_no_ticker: string;
   data_refresh_error: string;
+  data_refresh_partial_fail: (names: string[]) => string;
   settings_target_title: string;
   settings_target_sum: (n: string) => string;
   settings_target_save: string;

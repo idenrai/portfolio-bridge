@@ -14,6 +14,11 @@ const CACHE_FALLBACK_MS = 24 * 60 * 1000;
 /** 동시 요청 제한 */
 const CONCURRENCY = 5;
 
+interface FailedAsset {
+  ticker: string;
+  name: string;
+}
+
 interface UsePriceRefreshResult {
   /** 수동 새로고침 */
   refreshPrices: () => Promise<void>;
@@ -29,6 +34,8 @@ interface UsePriceRefreshResult {
   /** 갱신된 종목 수 / 전체 종목 수 */
   updatedCount: number;
   totalCount: number;
+  /** 시세 조회 실패 항목 */
+  failedAssets: FailedAsset[];
 }
 
 /**
@@ -51,6 +58,7 @@ export function usePriceRefresh(): UsePriceRefreshResult {
   const [isCached, setIsCached] = useState(false);
   const [updatedCount, setUpdatedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
+  const [failedAssets, setFailedAssets] = useState<FailedAsset[]>([]);
 
   // 중복 실행 방지
   const runningRef = useRef(false);
@@ -70,10 +78,11 @@ export function usePriceRefresh(): UsePriceRefreshResult {
     setProgress(0);
     setTotalCount(targets.length);
     setUpdatedCount(0);
+    setFailedAssets([]);
 
     const updates: { id: string; currentPrice: number }[] = [];
+    const failed: FailedAsset[] = [];
     let completed = 0;
-    let failed = 0;
 
     // 동시성 제한 병렬 처리
     const queue = [...targets];
@@ -86,10 +95,10 @@ export function usePriceRefresh(): UsePriceRefreshResult {
           if (quote && quote.price > 0) {
             updates.push({ id: asset.id, currentPrice: quote.price });
           } else {
-            failed++;
+            failed.push({ ticker: asset.ticker!, name: asset.name });
           }
         } catch {
-          failed++;
+          failed.push({ ticker: asset.ticker!, name: asset.name });
         }
         completed++;
         setProgress(completed / targets.length);
@@ -106,8 +115,12 @@ export function usePriceRefresh(): UsePriceRefreshResult {
         setUpdatedCount(updates.length);
       }
 
-      // 전부 실패한 경우
-      if (updates.length === 0 && failed > 0) {
+      // 일부/전부 실패한 경우
+      if (failed.length > 0) {
+        setFailedAssets(failed);
+      }
+      // 전부 실패한 경우 캐시 폴백 또는 에러
+      if (updates.length === 0 && failed.length > 0) {
         const cacheAge = lastUpdated
           ? Date.now() - new Date(lastUpdated).getTime()
           : Infinity;
@@ -147,5 +160,6 @@ export function usePriceRefresh(): UsePriceRefreshResult {
     isCached,
     updatedCount,
     totalCount,
+    failedAssets,
   };
 }

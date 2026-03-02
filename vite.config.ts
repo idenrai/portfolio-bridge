@@ -65,7 +65,10 @@ function yahooProxy(): Plugin {
             );
             continue;
           }
-          if (!r2.ok) { lastErr = `crumb ${r2.status}`; break; }
+          if (!r2.ok) {
+            lastErr = `crumb ${r2.status}`;
+            break;
+          }
           crumb = (await r2.text()).trim();
           crumbTs = Date.now();
           return;
