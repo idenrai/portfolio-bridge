@@ -29,7 +29,8 @@ export function TagAnalysisCard({ rebalancing }: Props) {
           const diff = r.currentPercent - r.targetPercent;
           const absDiff = Math.abs(diff);
           const isOver = diff > 0;
-          const label = t.category_labels[r.category as AssetCategory] ?? r.category;
+          const label =
+            t.category_labels[r.category as AssetCategory] ?? r.category;
 
           return (
             <div key={r.category}>

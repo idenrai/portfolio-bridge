@@ -57,7 +57,9 @@ export function usePriceRefresh(): UsePriceRefreshResult {
 
   const refreshPrices = useCallback(async () => {
     // 시세를 가져올 대상: ticker가 있고 categories에 cash가 아닌 자산
-    const targets = assets.filter((a) => a.ticker && !a.categories.includes("cash"));
+    const targets = assets.filter(
+      (a) => a.ticker && !a.categories.includes("cash"),
+    );
     if (targets.length === 0) return;
     if (runningRef.current) return;
     runningRef.current = true;

@@ -41,7 +41,8 @@ const DEFAULT_INSIGHT_MESSAGES: InsightMessages = {
     `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
   tagUnder: (label, pct, target, diff) =>
     `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
-  getCategoryLabel: (category) => CATEGORY_LABELS[category as AssetCategory] ?? category,
+  getCategoryLabel: (category) =>
+    CATEGORY_LABELS[category as AssetCategory] ?? category,
 };
 
 /**
@@ -221,8 +222,9 @@ export function calculateSummary(
       localMap.set(a.currency, { totalLocal: localVal, totalKRW: valKRW });
     }
 
-      // 카테고리 (복수 카테고리면 균등 분배)
-    const categoryShare = a.categories.length > 0 ? valKRW / a.categories.length : 0;
+    // 카테고리 (복수 카테고리면 균등 분배)
+    const categoryShare =
+      a.categories.length > 0 ? valKRW / a.categories.length : 0;
     for (const cat of a.categories) {
       tagMap.set(cat, (tagMap.get(cat) ?? 0) + categoryShare);
     }

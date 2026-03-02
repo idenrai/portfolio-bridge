@@ -88,7 +88,11 @@ export interface PortfolioSummary {
   cashPercent: number;
 
   /** 카테고리별 비중 */
-  categoryAllocation: { category: AssetCategory; percent: number; valueKRW: number }[];
+  categoryAllocation: {
+    category: AssetCategory;
+    percent: number;
+    valueKRW: number;
+  }[];
   /** 시장(국가)별 비중 */
   marketAllocation: { market: string; percent: number; valueKRW: number }[];
   /** 통화별 비중 */

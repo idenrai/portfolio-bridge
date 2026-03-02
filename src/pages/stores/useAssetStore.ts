@@ -59,6 +59,25 @@ export const useAssetStore = create<AssetState>()(
         }));
       },
     }),
-    { name: "portfolio-bridge-assets" },
+    {
+      name: "portfolio-bridge-assets",
+      version: 1,
+      migrate: (persistedState: unknown, version: number) => {
+        if (version === 0) {
+          // tags → categories 마이그레이션
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const s = persistedState as any;
+          return {
+            ...s,
+            assets: (s.assets ?? []).map((a: any) => ({
+              ...a,
+              categories: a.categories ?? a.tags ?? [],
+              tags: undefined,
+            })),
+          };
+        }
+        return persistedState;
+      },
+    },
   ),
 );

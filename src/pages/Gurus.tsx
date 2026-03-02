@@ -67,7 +67,9 @@ export function GurusPage() {
   // 레이더 차트용 데이터: 내 포트폴리오 vs 선택 구루
   const radarData = selectedGuru
     ? selectedGuru.idealAllocation.map((ga) => {
-        const myAlloc = summary.categoryAllocation.find((t_) => t_.category === ga.category);
+        const myAlloc = summary.categoryAllocation.find(
+          (t_) => t_.category === ga.category,
+        );
         return {
           category: t.category_labels[ga.category] ?? ga.category,
           guru: ga.targetPercent,
@@ -271,7 +273,9 @@ export function GurusPage() {
                     const diff = s.targetPercent - s.currentPercent;
                     return (
                       <tr key={s.category}>
-                        <td className="py-2">{t.category_labels[s.category] ?? s.category}</td>
+                        <td className="py-2">
+                          {t.category_labels[s.category] ?? s.category}
+                        </td>
                         <td className="py-2 text-right tabular-nums">
                           {s.currentPercent.toFixed(1)}%
                         </td>

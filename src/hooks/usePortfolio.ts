@@ -27,7 +27,8 @@ export function usePortfolio() {
         t.insight_tag_over(label, pct, target, diff),
       tagUnder: (label: string, pct: string, target: string, diff: string) =>
         t.insight_tag_under(label, pct, target, diff),
-      getCategoryLabel: (category: string) => t.category_labels[category as AssetCategory] ?? category,
+      getCategoryLabel: (category: string) =>
+        t.category_labels[category as AssetCategory] ?? category,
     }),
     [t],
   );

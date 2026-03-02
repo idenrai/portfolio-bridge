@@ -59,7 +59,9 @@ export function parseCsv(csv: string): AssetFormData[] {
       quantity: Number(cols[5]) || 0,
       avgBuyPrice: Number(cols[6]) || 0,
       currentPrice: Number(cols[7]) || 0,
-      categories: cols[8] ? (cols[8].split(";").filter(Boolean) as AssetCategory[]) : [],
+      categories: cols[8]
+        ? (cols[8].split(";").filter(Boolean) as AssetCategory[])
+        : [],
       memo: cols[9] || undefined,
     };
   });

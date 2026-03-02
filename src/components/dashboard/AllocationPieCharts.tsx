@@ -116,7 +116,11 @@ export function AllocationPieCharts({ summary }: Props) {
         />
       </Card>
       <Card title={t.chart_tag}>
-        <MiniPie data={categoryData} valueLabel={fmt} noDataText={t.chart_no_data} />
+        <MiniPie
+          data={categoryData}
+          valueLabel={fmt}
+          noDataText={t.chart_no_data}
+        />
       </Card>
     </div>
   );

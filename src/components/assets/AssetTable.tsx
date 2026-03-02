@@ -18,7 +18,10 @@ interface Props {
 export function AssetTable({ assets, onEdit, onDelete }: Props) {
   const updateAsset = useAssetStore((s) => s.updateAsset);
   const t = useT();
-  const CATEGORY_OPTIONS = Object.entries(t.category_labels) as [AssetCategory, string][];
+  const CATEGORY_OPTIONS = Object.entries(t.category_labels) as [
+    AssetCategory,
+    string,
+  ][];
 
   const handleCategoryChange = (id: string, category: AssetCategory | "") => {
     updateAsset(id, { categories: category ? [category] : [] });
@@ -78,7 +81,10 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
                   <select
                     value={a.categories[0] ?? ""}
                     onChange={(e) =>
-                      handleCategoryChange(a.id, e.target.value as AssetCategory | "")
+                      handleCategoryChange(
+                        a.id,
+                        e.target.value as AssetCategory | "",
+                      )
                     }
                     className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-[90px]"
                   >

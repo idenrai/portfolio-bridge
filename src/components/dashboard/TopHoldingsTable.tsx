@@ -3,7 +3,12 @@ import { Card } from "@/components/common";
 import { formatCurrency, formatPercent, fromKRW } from "@/utils";
 import { useSettingsStore } from "@/pages/stores";
 import { useT } from "@/hooks";
-import type { PortfolioSummary, AssetCategory, AssetType, Market } from "@/types";
+import type {
+  PortfolioSummary,
+  AssetCategory,
+  AssetType,
+  Market,
+} from "@/types";
 
 interface Props {
   summary: PortfolioSummary;
@@ -103,7 +108,8 @@ export function TopHoldingsTable({ summary }: Props) {
                     {h.ticker && <span>{h.ticker}</span>}
                     {h.category && (
                       <span className="ml-1 px-1 py-0.5 bg-slate-100 rounded text-[9px]">
-                        {t.category_labels[h.category as AssetCategory] ?? h.category}
+                        {t.category_labels[h.category as AssetCategory] ??
+                          h.category}
                       </span>
                     )}
                   </div>

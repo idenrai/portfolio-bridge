@@ -36,7 +36,8 @@ export function RebalanceCard({ rebalancing }: Props) {
           .sort((a, b) => Math.abs(b.diffAmountKRW) - Math.abs(a.diffAmountKRW))
           .map((r) => {
             const isBuy = r.diffAmountKRW > 0;
-            const label = t.category_labels[r.category as AssetCategory] ?? r.category;
+            const label =
+              t.category_labels[r.category as AssetCategory] ?? r.category;
             return (
               <div
                 key={r.category}

@@ -55,6 +55,23 @@ export const useSettingsStore = create<SettingsState>()(
     }),
     {
       name: "portfolio-bridge-settings",
+      version: 1,
+      migrate: (persistedState: unknown, version: number) => {
+        if (version === 0) {
+          // tag → category 마이그레이션
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const s = persistedState as any;
+          return {
+            ...s,
+            targetAllocations: (s.targetAllocations ?? []).map((a: any) => ({
+              ...a,
+              category: a.category ?? a.tag ?? "",
+              tag: undefined,
+            })),
+          };
+        }
+        return persistedState;
+      },
       merge: (persistedState, currentState) => ({
         ...currentState,
         ...(persistedState as Partial<SettingsState>),

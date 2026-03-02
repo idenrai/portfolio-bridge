@@ -79,7 +79,8 @@ export function buildGuruPrompt(
   const categorySection = summary.categoryAllocation
     .map((t) => {
       const tgt = guru.idealAllocation.find((x) => x.category === t.category);
-      const label = CATEGORY_LABELS_EN[t.category as AssetCategory] ?? t.category;
+      const label =
+        CATEGORY_LABELS_EN[t.category as AssetCategory] ?? t.category;
       const targetStr = tgt
         ? ` (your ideal target: ${tgt.targetPercent}%)`
         : "";
@@ -113,7 +114,9 @@ export function buildGuruPrompt(
         h.type;
       const market =
         MARKET_LABELS_EN[h.market as keyof typeof MARKET_LABELS_EN] ?? h.market;
-      const category = h.category ? (CATEGORY_LABELS_EN[h.category as AssetCategory] ?? h.category) : "—";
+      const category = h.category
+        ? (CATEGORY_LABELS_EN[h.category as AssetCategory] ?? h.category)
+        : "—";
       return (
         `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
         ` | ${type} | ${market} | ${h.currency}` +
