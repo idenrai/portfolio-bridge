@@ -55,7 +55,7 @@ function EditForm({
       quantity,
       avgBuyPrice,
       currentPrice: initial.currentPrice,
-      tags: initial.tags,
+      categories: initial.categories,
     });
   };
 
@@ -217,7 +217,7 @@ function CashForm({
       quantity: Number(amount) || 0,
       avgBuyPrice: 1,
       currentPrice: 1,
-      tags: [],
+      categories: [],
     });
   };
 
@@ -377,7 +377,7 @@ function CryptoForm({
       quantity: Number(quantity) || 0,
       avgBuyPrice: Number(avgBuyPrice) || 0,
       currentPrice: selectedPair.price ?? 0,
-      tags: [],
+      categories: [],
     });
   };
 
@@ -597,7 +597,7 @@ function ManualEntryForm({
       quantity: Number(quantity) || 0,
       avgBuyPrice: Number(avgBuyPrice) || 0,
       currentPrice: Number(currentPrice) || 0,
-      tags: [],
+      categories: [],
     });
   };
 
@@ -931,7 +931,7 @@ function ConfirmStep({
       quantity: Number(quantity) || 0,
       avgBuyPrice: Number(avgBuyPrice) || 0,
       currentPrice: item.currentPrice,
-      tags: [],
+      categories: [],
     });
   };
 

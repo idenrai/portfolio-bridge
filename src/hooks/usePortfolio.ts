@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { useAssetStore, useSettingsStore } from "@/stores";
+import { useAssetStore, useSettingsStore } from "@/pages/stores";
 import { calculateSummary, calculateRebalancing } from "@/utils";
 import { useT } from "@/hooks/useT";
-import type { AssetTag } from "@/types";
+import type { AssetCategory } from "@/types";
 
 /**
  * 포트폴리오 요약 & 리밸런싱 계산 훅
@@ -27,7 +27,7 @@ export function usePortfolio() {
         t.insight_tag_over(label, pct, target, diff),
       tagUnder: (label: string, pct: string, target: string, diff: string) =>
         t.insight_tag_under(label, pct, target, diff),
-      getTagLabel: (tag: string) => t.tag_labels[tag as AssetTag] ?? tag,
+      getCategoryLabel: (category: string) => t.category_labels[category as AssetCategory] ?? category,
     }),
     [t],
   );

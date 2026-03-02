@@ -1,5 +1,9 @@
 import { usePortfolio, useDataRefresh, useT } from "@/hooks";
-import { useAssetStore, useSettingsStore, useLanguageStore } from "@/stores";
+import {
+  useAssetStore,
+  useSettingsStore,
+  useLanguageStore,
+} from "@/pages/stores";
 import { LANG_LOCALES } from "@/i18n";
 import { KpiBar } from "@/components/dashboard/KpiBar";
 import { AllocationPieCharts } from "@/components/dashboard/AllocationPieCharts";

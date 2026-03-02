@@ -412,7 +412,7 @@ export const en: Translations = {
   currency_krw: "Won (KRW)",
   currency_eur: "Euro (EUR)",
 
-  tag_labels: {
+  category_labels: {
     dividend: "Dividend",
     growth: "Growth",
     value: "Value",

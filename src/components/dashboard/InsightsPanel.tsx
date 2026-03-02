@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
-import { useLanguageStore, useSettingsStore } from "@/stores";
+import { useLanguageStore, useSettingsStore } from "@/pages/stores";
 import { buildInsightPrompt } from "@/utils";
 import type { PortfolioSummary, Asset, TargetAllocation } from "@/types";
 

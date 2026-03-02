@@ -14,7 +14,7 @@ import {
   Radar,
 } from "recharts";
 import { usePortfolio, useT } from "@/hooks";
-import { useLanguageStore, useSettingsStore } from "@/stores";
+import { useLanguageStore, useSettingsStore } from "@/pages/stores";
 import { GURU_PROFILES, formatCurrency, buildGuruPrompt } from "@/utils";
 import { calculateRebalancing } from "@/utils";
 import type { GuruProfile } from "@/types";
@@ -67,9 +67,9 @@ export function GurusPage() {
   // 레이더 차트용 데이터: 내 포트폴리오 vs 선택 구루
   const radarData = selectedGuru
     ? selectedGuru.idealAllocation.map((ga) => {
-        const myAlloc = summary.tagAllocation.find((t_) => t_.tag === ga.tag);
+        const myAlloc = summary.categoryAllocation.find((t_) => t_.category === ga.category);
         return {
-          tag: t.tag_labels[ga.tag] ?? ga.tag,
+          category: t.category_labels[ga.category] ?? ga.category,
           guru: ga.targetPercent,
           mine: myAlloc ? Number(myAlloc.percent.toFixed(1)) : 0,
         };
@@ -196,7 +196,7 @@ export function GurusPage() {
                 <PieChart>
                   <Pie
                     data={selectedGuru.idealAllocation.map((a) => ({
-                      name: t.tag_labels[a.tag] ?? a.tag,
+                      name: t.category_labels[a.category] ?? a.category,
                       value: a.targetPercent,
                     }))}
                     cx="50%"
@@ -222,7 +222,7 @@ export function GurusPage() {
               <ResponsiveContainer width="100%" height={260}>
                 <RadarChart data={radarData}>
                   <PolarGrid />
-                  <PolarAngleAxis dataKey="tag" tick={{ fontSize: 11 }} />
+                  <PolarAngleAxis dataKey="category" tick={{ fontSize: 11 }} />
                   <PolarRadiusAxis angle={90} domain={[0, 60]} />
                   <Radar
                     name={guruName(selectedGuru)}
@@ -270,8 +270,8 @@ export function GurusPage() {
                   {guruRebalancing.map((s) => {
                     const diff = s.targetPercent - s.currentPercent;
                     return (
-                      <tr key={s.tag}>
-                        <td className="py-2">{t.tag_labels[s.tag] ?? s.tag}</td>
+                      <tr key={s.category}>
+                        <td className="py-2">{t.category_labels[s.category] ?? s.category}</td>
                         <td className="py-2 text-right tabular-nums">
                           {s.currentPercent.toFixed(1)}%
                         </td>

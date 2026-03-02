@@ -1,5 +1,9 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { useAssetStore, useSettingsStore, useLanguageStore } from "@/stores";
+import {
+  useAssetStore,
+  useSettingsStore,
+  useLanguageStore,
+} from "@/pages/stores";
 import { TRANSLATIONS } from "@/i18n";
 import { fetchCurrentPrice } from "@/utils";
 
@@ -52,8 +56,8 @@ export function usePriceRefresh(): UsePriceRefreshResult {
   const runningRef = useRef(false);
 
   const refreshPrices = useCallback(async () => {
-    // 시세를 가져올 대상: ticker가 있고.tags에 cash가 아닌 자산
-    const targets = assets.filter((a) => a.ticker && !a.tags.includes("cash"));
+    // 시세를 가져올 대상: ticker가 있고 categories에 cash가 아닌 자산
+    const targets = assets.filter((a) => a.ticker && !a.categories.includes("cash"));
     if (targets.length === 0) return;
     if (runningRef.current) return;
     runningRef.current = true;

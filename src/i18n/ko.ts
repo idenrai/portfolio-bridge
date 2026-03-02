@@ -410,7 +410,7 @@ export const ko: Translations = {
   currency_krw: "원화 (KRW)",
   currency_eur: "유로 (EUR)",
 
-  tag_labels: {
+  category_labels: {
     dividend: "배당",
     growth: "성장",
     value: "가치",

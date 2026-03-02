@@ -1,6 +1,6 @@
 import type {
   Asset,
-  AssetTag,
+  AssetCategory,
   AssetType,
   CurrencyCode,
   PortfolioSummary,
@@ -11,7 +11,7 @@ import type {
   CurrencyScenario,
   PortfolioInsight,
 } from "@/types";
-import { TAG_LABELS } from "@/types";
+import { CATEGORY_LABELS } from "@/types";
 import { toKRW } from "./currency";
 
 /** 인사이트 메시지 템플릿 (i18n 주입용) */
@@ -28,7 +28,7 @@ export interface InsightMessages {
     target: string,
     diff: string,
   ) => string;
-  getTagLabel: (tag: string) => string;
+  getCategoryLabel: (category: string) => string;
 }
 
 const DEFAULT_INSIGHT_MESSAGES: InsightMessages = {
@@ -41,7 +41,7 @@ const DEFAULT_INSIGHT_MESSAGES: InsightMessages = {
     `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
   tagUnder: (label, pct, target, diff) =>
     `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
-  getTagLabel: (tag) => TAG_LABELS[tag as AssetTag] ?? tag,
+  getCategoryLabel: (category) => CATEGORY_LABELS[category as AssetCategory] ?? category,
 };
 
 /**
@@ -80,7 +80,7 @@ function generateInsights(
   assets: Asset[],
   holdings: HoldingDetail[],
   cashPercent: number,
-  tagAllocation: { tag: AssetTag; percent: number }[],
+  categoryAllocation: { category: AssetCategory; percent: number }[],
   currencyExposure: CurrencyExposure[],
   targets: TargetAllocation[],
   baseCurrency: CurrencyCode,
@@ -136,13 +136,13 @@ function generateInsights(
     }
   }
 
-  // 5. 태그 목표 대비 편차 (|diff| > 10%)
+  // 5. 카테고리 목표 대비 편차 (|diff| > 10%)
   for (const t of targets) {
-    const current = tagAllocation.find((a) => a.tag === t.tag);
+    const current = categoryAllocation.find((a) => a.category === t.category);
     const currentPercent = current?.percent ?? 0;
     const diff = currentPercent - t.targetPercent;
     if (Math.abs(diff) > 10) {
-      const label = msg.getTagLabel(t.tag);
+      const label = msg.getCategoryLabel(t.category);
       if (diff > 0) {
         insights.push({
           type: "warning",
@@ -185,8 +185,8 @@ export function calculateSummary(
   let totalValueKRW = 0;
   let totalCostKRW = 0;
 
-  // 기존: 태그 / 시장 / 통화별
-  const tagMap = new Map<AssetTag, number>();
+  // 지도: 카테고리 / 시장 / 통화별
+  const tagMap = new Map<AssetCategory, number>();
   const marketMap = new Map<string, number>();
   const currencyMap = new Map<string, number>();
 
@@ -221,12 +221,12 @@ export function calculateSummary(
       localMap.set(a.currency, { totalLocal: localVal, totalKRW: valKRW });
     }
 
-    // 태그 (복수 태그면 균등 분배)
-    const tagShare = a.tags.length > 0 ? valKRW / a.tags.length : 0;
-    for (const tag of a.tags) {
-      tagMap.set(tag, (tagMap.get(tag) ?? 0) + tagShare);
+      // 카테고리 (복수 카테고리면 균등 분배)
+    const categoryShare = a.categories.length > 0 ? valKRW / a.categories.length : 0;
+    for (const cat of a.categories) {
+      tagMap.set(cat, (tagMap.get(cat) ?? 0) + categoryShare);
     }
-    if (a.tags.length === 0) {
+    if (a.categories.length === 0) {
       tagMap.set("other", (tagMap.get("other") ?? 0) + valKRW);
     }
 
@@ -255,7 +255,7 @@ export function calculateSummary(
       quantity: a.quantity,
       avgBuyPrice: a.avgBuyPrice,
       currentPrice: a.currentPrice,
-      tag: a.tags[0] ?? null,
+      category: a.categories[0] ?? null,
       valueKRW: valKRW,
       costKRW,
       pnlKRW,
@@ -286,8 +286,8 @@ export function calculateSummary(
       }))
       .sort((a, b) => b.valueKRW - a.valueKRW);
 
-  const tagAllocation = toAllocation(tagMap).map((x) => ({
-    tag: x.key as AssetTag,
+  const categoryAllocation = toAllocation(tagMap).map((x) => ({
+    category: x.key as AssetCategory,
     percent: x.percent,
     valueKRW: x.valueKRW,
   }));
@@ -325,7 +325,7 @@ export function calculateSummary(
     assets,
     holdings,
     cashPercent,
-    tagAllocation,
+    categoryAllocation,
     currencyExposure,
     targets,
     baseCurrency,
@@ -340,7 +340,7 @@ export function calculateSummary(
     holdingCount: holdingCountNonCash,
     assetTypeCount: typeSet.size,
     cashPercent,
-    tagAllocation,
+    categoryAllocation,
     marketAllocation: toAllocation(marketMap).map((x) => ({
       market: x.key,
       percent: x.percent,
@@ -366,15 +366,15 @@ export function calculateRebalancing(
   targets: TargetAllocation[],
 ): RebalanceSuggestion[] {
   const currentMap = new Map(
-    summary.tagAllocation.map((t) => [t.tag, t.percent]),
+    summary.categoryAllocation.map((t) => [t.category, t.percent]),
   );
 
   return targets.map((t) => {
-    const currentPercent = currentMap.get(t.tag) ?? 0;
+    const currentPercent = currentMap.get(t.category) ?? 0;
     const diffPercent = t.targetPercent - currentPercent;
     const diffAmountKRW = (diffPercent / 100) * summary.totalValueKRW;
     return {
-      tag: t.tag,
+      category: t.category,
       currentPercent,
       targetPercent: t.targetPercent,
       diffAmountKRW,

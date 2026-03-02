@@ -14,7 +14,7 @@ export const SAMPLE_ASSETS: AssetFormData[] = [
     quantity: 50,
     avgBuyPrice: 68000,
     currentPrice: 71500,
-    tags: ["value"],
+    categories: ["value"],
     memo: "샘플 데이터",
   },
   {
@@ -26,7 +26,7 @@ export const SAMPLE_ASSETS: AssetFormData[] = [
     quantity: 10,
     avgBuyPrice: 178,
     currentPrice: 193,
-    tags: ["growth"],
+    categories: ["growth"],
     memo: "샘플 데이터",
   },
   {
@@ -38,7 +38,7 @@ export const SAMPLE_ASSETS: AssetFormData[] = [
     quantity: 5,
     avgBuyPrice: 450,
     currentPrice: 472,
-    tags: ["index"],
+    categories: ["index"],
     memo: "샘플 데이터",
   },
   {
@@ -50,7 +50,7 @@ export const SAMPLE_ASSETS: AssetFormData[] = [
     quantity: 3000,
     avgBuyPrice: 1,
     currentPrice: 1,
-    tags: ["cash"],
+    categories: ["cash"],
     memo: "샘플 데이터",
   },
   {
@@ -62,7 +62,7 @@ export const SAMPLE_ASSETS: AssetFormData[] = [
     quantity: 5000000,
     avgBuyPrice: 1,
     currentPrice: 1,
-    tags: ["cash"],
+    categories: ["cash"],
     memo: "샘플 데이터",
   },
 ];

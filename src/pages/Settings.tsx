@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Card, Button } from "@/components/common";
-import { useSettingsStore, useAssetStore, useLanguageStore } from "@/stores";
+import {
+  useSettingsStore,
+  useAssetStore,
+  useLanguageStore,
+} from "@/pages/stores";
 import { useDataRefresh, useT } from "@/hooks";
-import type { AssetTag, CurrencyCode, TargetAllocation } from "@/types";
+import type { AssetCategory, CurrencyCode, TargetAllocation } from "@/types";
 import { LANG_LOCALES } from "@/i18n";
 import { format } from "date-fns";
 
@@ -156,7 +160,7 @@ export function SettingsPage() {
           {!isLoading && !lastUpdated && !error && !isCached && (
             <p className="text-xs text-slate-400">
               {assetStore.assets.some(
-                (a) => a.ticker && !a.tags.includes("cash"),
+                (a) => a.ticker && !a.categories.includes("cash"),
               )
                 ? t.settings_data_refresh_auto
                 : t.settings_data_refresh_no_ticker}
@@ -169,9 +173,9 @@ export function SettingsPage() {
       <Card title={t.settings_target_title}>
         <div className="space-y-2">
           {allocations.map((a, i) => (
-            <label key={a.tag} className="flex items-center gap-3">
+            <label key={a.category} className="flex items-center gap-3">
               <span className="text-sm text-slate-600 w-32">
-                {t.tag_labels[a.tag as AssetTag] ?? a.tag}
+                {t.category_labels[a.category as AssetCategory] ?? a.category}
               </span>
               <input
                 type="number"

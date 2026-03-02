@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useAssetStore, useLanguageStore } from "@/stores";
+import { useAssetStore, useLanguageStore } from "@/pages/stores";
 import { Card, Button, Modal } from "@/components/common";
 import { AssetForm } from "@/components/assets/AssetForm";
 import { AssetTable } from "@/components/assets/AssetTable";
@@ -46,8 +46,8 @@ export function AssetsPage() {
         aiJsonInput,
         assets,
       );
-      for (const { id, tag } of results) {
-        updateAsset(id, { tags: [tag] });
+      for (const { id, category } of results) {
+        updateAsset(id, { categories: [category] });
       }
       setImportResult({ applied, skipped });
     } catch (err) {
@@ -378,7 +378,7 @@ export function AssetsPage() {
                         {row.currentPrice.toLocaleString()}
                       </td>
                       <td className="px-3 py-1.5 text-slate-500">
-                        {row.tags.join(", ")}
+                        {row.categories.join(", ")}
                       </td>
                     </tr>
                   ))}

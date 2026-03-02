@@ -1,7 +1,7 @@
 import type {
   Asset,
   AssetFormData,
-  AssetTag,
+  AssetCategory,
   AssetType,
   CurrencyCode,
   Market,
@@ -16,7 +16,7 @@ const CSV_HEADERS = [
   "quantity",
   "avgBuyPrice",
   "currentPrice",
-  "tags",
+  "categories",
   "memo",
 ] as const;
 
@@ -34,7 +34,7 @@ export function exportToCsv(assets: Asset[]): string {
       a.quantity,
       a.avgBuyPrice,
       a.currentPrice,
-      a.tags.join(";"),
+      a.categories.join(";"),
       quote(a.memo ?? ""),
     ].join(","),
   );
@@ -59,7 +59,7 @@ export function parseCsv(csv: string): AssetFormData[] {
       quantity: Number(cols[5]) || 0,
       avgBuyPrice: Number(cols[6]) || 0,
       currentPrice: Number(cols[7]) || 0,
-      tags: cols[8] ? (cols[8].split(";").filter(Boolean) as AssetTag[]) : [],
+      categories: cols[8] ? (cols[8].split(";").filter(Boolean) as AssetCategory[]) : [],
       memo: cols[9] || undefined,
     };
   });

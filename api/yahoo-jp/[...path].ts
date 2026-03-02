@@ -48,7 +48,10 @@ export default async function handler(request: Request) {
         error: "Yahoo JP proxy failed",
         detail: String(err),
       }),
-      { status: 502, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
+      {
+        status: 502,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      },
     );
   }
 }

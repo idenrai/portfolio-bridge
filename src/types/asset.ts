@@ -4,8 +4,8 @@ export type CurrencyCode = "KRW" | "JPY" | "USD" | "EUR";
 /** 자산이 속한 국가/시장 */
 export type Market = "KR" | "JP" | "US" | "EU" | "OTHER";
 
-/** 자산 분류 태그 */
-export type AssetTag =
+/** 자산 분류 카테고리 */
+export type AssetCategory =
   | "dividend" // 배당주
   | "growth" // 성장주
   | "value" // 가치주
@@ -47,8 +47,8 @@ export interface Asset {
   avgBuyPrice: number;
   /** 현재가 (현지 통화) — 수동 입력 또는 시세 갱신 */
   currentPrice: number;
-  /** 분류 태그 (복수 가능) */
-  tags: AssetTag[];
+  /** 분류 카테고리 (복수 가능) */
+  categories: AssetCategory[];
   /** 메모 */
   memo?: string;
   /** 생성일 */
@@ -60,8 +60,8 @@ export interface Asset {
 /** 자산 등록/수정 시 사용하는 폼 데이터 */
 export type AssetFormData = Omit<Asset, "id" | "createdAt" | "updatedAt">;
 
-/** 태그별 한글 라벨 */
-export const TAG_LABELS: Record<AssetTag, string> = {
+/** 카테고리별 한글 라벨 */
+export const CATEGORY_LABELS: Record<AssetCategory, string> = {
   dividend: "배당",
   growth: "성장",
   value: "가치",

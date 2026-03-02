@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Card } from "@/components/common";
 import { formatCurrency, formatPercent, fromKRW } from "@/utils";
-import { useSettingsStore } from "@/stores";
+import { useSettingsStore } from "@/pages/stores";
 import { useT } from "@/hooks";
-import type { PortfolioSummary, AssetTag, AssetType, Market } from "@/types";
+import type { PortfolioSummary, AssetCategory, AssetType, Market } from "@/types";
 
 interface Props {
   summary: PortfolioSummary;
@@ -101,9 +101,9 @@ export function TopHoldingsTable({ summary }: Props) {
                   </div>
                   <div className="text-[10px] text-slate-400">
                     {h.ticker && <span>{h.ticker}</span>}
-                    {h.tag && (
+                    {h.category && (
                       <span className="ml-1 px-1 py-0.5 bg-slate-100 rounded text-[9px]">
-                        {t.tag_labels[h.tag as AssetTag] ?? h.tag}
+                        {t.category_labels[h.category as AssetCategory] ?? h.category}
                       </span>
                     )}
                   </div>

@@ -1,6 +1,6 @@
 import { Button } from "@/components/common";
-import { type Asset, type AssetTag, CURRENCY_SYMBOLS } from "@/types";
-import { useAssetStore } from "@/stores";
+import { type Asset, type AssetCategory, CURRENCY_SYMBOLS } from "@/types";
+import { useAssetStore } from "@/pages/stores";
 import { useT } from "@/hooks";
 import {
   assetValue,
@@ -18,10 +18,10 @@ interface Props {
 export function AssetTable({ assets, onEdit, onDelete }: Props) {
   const updateAsset = useAssetStore((s) => s.updateAsset);
   const t = useT();
-  const TAG_OPTIONS = Object.entries(t.tag_labels) as [AssetTag, string][];
+  const CATEGORY_OPTIONS = Object.entries(t.category_labels) as [AssetCategory, string][];
 
-  const handleTagChange = (id: string, tag: AssetTag | "") => {
-    updateAsset(id, { tags: tag ? [tag] : [] });
+  const handleCategoryChange = (id: string, category: AssetCategory | "") => {
+    updateAsset(id, { categories: category ? [category] : [] });
   };
   if (assets.length === 0) {
     return (
@@ -76,14 +76,14 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
                 </td>
                 <td className="py-2.5">
                   <select
-                    value={a.tags[0] ?? ""}
+                    value={a.categories[0] ?? ""}
                     onChange={(e) =>
-                      handleTagChange(a.id, e.target.value as AssetTag | "")
+                      handleCategoryChange(a.id, e.target.value as AssetCategory | "")
                     }
                     className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-[90px]"
                   >
                     <option value="">{t.at_unclassified}</option>
-                    {TAG_OPTIONS.map(([val, label]) => (
+                    {CATEGORY_OPTIONS.map(([val, label]) => (
                       <option key={val} value={val}>
                         {label}
                       </option>

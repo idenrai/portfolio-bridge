@@ -29,10 +29,9 @@ async function getCrumb(
   const cookie = parts.join("; ");
 
   // 2) Crumb 토큰 발급
-  const r2 = await fetch(
-    "https://query2.finance.yahoo.com/v1/test/getcrumb",
-    { headers: { "User-Agent": UA, Cookie: cookie } },
-  );
+  const r2 = await fetch("https://query2.finance.yahoo.com/v1/test/getcrumb", {
+    headers: { "User-Agent": UA, Cookie: cookie },
+  });
   if (!r2.ok) throw new Error(`crumb fetch failed: ${r2.status}`);
   const crumb = (await r2.text()).trim();
 
@@ -104,7 +103,10 @@ export default async function handler(request: Request) {
         error: "Yahoo Finance proxy failed",
         detail: String(err),
       }),
-      { status: 502, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
+      {
+        status: 502,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      },
     );
   }
 }

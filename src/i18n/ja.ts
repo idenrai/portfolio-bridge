@@ -414,7 +414,7 @@ export const ja: Translations = {
   currency_krw: "ウォン (KRW)",
   currency_eur: "ユーロ (EUR)",
 
-  tag_labels: {
+  category_labels: {
     dividend: "配当",
     growth: "グロース",
     value: "バリュー",

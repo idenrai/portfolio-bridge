@@ -1,8 +1,8 @@
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
-import { useSettingsStore } from "@/stores";
+import { useSettingsStore } from "@/pages/stores";
 import { useT } from "@/hooks";
-import type { RebalanceSuggestion, AssetTag } from "@/types";
+import type { RebalanceSuggestion, AssetCategory } from "@/types";
 
 interface Props {
   rebalancing: RebalanceSuggestion[];
@@ -36,10 +36,10 @@ export function RebalanceCard({ rebalancing }: Props) {
           .sort((a, b) => Math.abs(b.diffAmountKRW) - Math.abs(a.diffAmountKRW))
           .map((r) => {
             const isBuy = r.diffAmountKRW > 0;
-            const label = t.tag_labels[r.tag as AssetTag] ?? r.tag;
+            const label = t.category_labels[r.category as AssetCategory] ?? r.category;
             return (
               <div
-                key={r.tag}
+                key={r.category}
                 className="flex items-center justify-between py-1.5 border-b border-slate-50 last:border-0"
               >
                 <div>

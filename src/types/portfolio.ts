@@ -1,15 +1,15 @@
-import type { AssetTag, AssetType, CurrencyCode, Market } from "./asset";
+import type { AssetCategory, AssetType, CurrencyCode, Market } from "./asset";
 
 /** 목표 배분 한 건 */
 export interface TargetAllocation {
-  tag: AssetTag;
+  category: AssetCategory;
   /** 목표 비중 (0–100 %) */
   targetPercent: number;
 }
 
 /** 리밸런싱 권장 결과 한 건 */
 export interface RebalanceSuggestion {
-  tag: AssetTag;
+  category: AssetCategory;
   currentPercent: number;
   targetPercent: number;
   /** 양수 = 추가 매수 권장, 음수 = 매도 권장 (KRW 기준 금액) */
@@ -27,7 +27,7 @@ export interface HoldingDetail {
   quantity: number;
   avgBuyPrice: number;
   currentPrice: number;
-  tag: AssetTag | null;
+  category: AssetCategory | null;
   /** 평가액 (KRW) */
   valueKRW: number;
   /** 투자원금 (KRW) */
@@ -87,8 +87,8 @@ export interface PortfolioSummary {
   /** 현금 비중 (%) */
   cashPercent: number;
 
-  /** 태그별 비중 */
-  tagAllocation: { tag: AssetTag; percent: number; valueKRW: number }[];
+  /** 카테고리별 비중 */
+  categoryAllocation: { category: AssetCategory; percent: number; valueKRW: number }[];
   /** 시장(국가)별 비중 */
   marketAllocation: { market: string; percent: number; valueKRW: number }[];
   /** 통화별 비중 */
@@ -133,6 +133,6 @@ export interface GuruProfile {
   nameJa: string;
   /** 운용사/소속 펀드 */
   firm: string;
-  /** 추천 태그 비중 */
+  /** 추천 카테고리 비중 */
   idealAllocation: TargetAllocation[];
 }

@@ -1,6 +1,6 @@
 import type {
   Asset,
-  AssetTag,
+  AssetCategory,
   AssetType,
   Market,
   PortfolioSummary,
@@ -11,7 +11,7 @@ import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 
 /** English-only label maps for AI prompts */
-const TAG_LABELS_EN: Record<AssetTag, string> = {
+const CATEGORY_LABELS_EN: Record<AssetCategory, string> = {
   dividend: "Dividend",
   growth: "Growth",
   value: "Value",
@@ -75,11 +75,11 @@ export function buildGuruPrompt(
   const pnlKRW = summary.totalPnLKRW;
   const returnPct = summary.totalReturnPercent;
 
-  // 태그별 배분 (현재 vs 구루 목표)
-  const tagSection = summary.tagAllocation
+  // 카테고리별 배분 (현재 vs 구루 목표)
+  const categorySection = summary.categoryAllocation
     .map((t) => {
-      const tgt = guru.idealAllocation.find((x) => x.tag === t.tag);
-      const label = TAG_LABELS_EN[t.tag as AssetTag] ?? t.tag;
+      const tgt = guru.idealAllocation.find((x) => x.category === t.category);
+      const label = CATEGORY_LABELS_EN[t.category as AssetCategory] ?? t.category;
       const targetStr = tgt
         ? ` (your ideal target: ${tgt.targetPercent}%)`
         : "";
@@ -109,16 +109,17 @@ export function buildGuruPrompt(
   const holdingRows = holdings
     .map((h, i) => {
       const type =
-        ASSET_TYPE_LABELS_EN[h.type as keyof typeof ASSET_TYPE_LABELS_EN] ?? h.type;
+        ASSET_TYPE_LABELS_EN[h.type as keyof typeof ASSET_TYPE_LABELS_EN] ??
+        h.type;
       const market =
         MARKET_LABELS_EN[h.market as keyof typeof MARKET_LABELS_EN] ?? h.market;
-      const tag = h.tag ? (TAG_LABELS_EN[h.tag as AssetTag] ?? h.tag) : "—";
+      const category = h.category ? (CATEGORY_LABELS_EN[h.category as AssetCategory] ?? h.category) : "—";
       return (
         `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
         ` | ${type} | ${market} | ${h.currency}` +
         ` | weight: ${h.weightPercent.toFixed(1)}%` +
         ` | return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%` +
-        ` | category: ${tag}`
+        ` | category: ${category}`
       );
     })
     .join("\n");
@@ -155,7 +156,7 @@ Number of positions: ${summary.holdingCount}
 Cash %: ${summary.cashPercent.toFixed(1)}%
 
 --- ALLOCATION BY CATEGORY (vs your ideal target) ---
-${tagSection || "  (no data)"}
+${categorySection || "  (no data)"}
 
 --- ALLOCATION BY MARKET ---
 ${marketSection || "  (no data)"}

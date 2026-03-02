@@ -311,7 +311,7 @@ export interface Translations {
   currency_eur: string;
 
   // ─── Label maps (charts, dropdowns) ───────────────────────────────────────
-  tag_labels: Record<string, string>;
+  category_labels: Record<string, string>;
   asset_type_labels: Record<string, string>;
   market_labels: Record<string, string>;
 }

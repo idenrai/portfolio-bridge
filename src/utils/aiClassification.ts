@@ -1,9 +1,9 @@
-import type { Asset, AssetTag } from "@/types";
+import type { Asset, AssetCategory } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 
-/** 유효한 AssetTag인지 확인 */
-const VALID_TAGS = new Set<string>([
+/** 유효한 AssetCategory인지 확인 */
+const VALID_CATEGORIES = new Set<string>([
   "dividend",
   "growth",
   "value",
@@ -15,8 +15,8 @@ const VALID_TAGS = new Set<string>([
   "commodity",
   "other",
 ]);
-function isValidTag(tag: string): tag is AssetTag {
-  return VALID_TAGS.has(tag);
+function isValidCategory(category: string): category is AssetCategory {
+  return VALID_CATEGORIES.has(category);
 }
 
 /** AI 응답 JSON 내 한 건 */
@@ -74,8 +74,8 @@ export function buildClassificationPrompt(
     .map((a, i) => {
       const type = ASSET_TYPE_EN[a.type] ?? a.type;
       const market = MARKET_EN[a.market] ?? a.market;
-      const currentCategory = a.tags[0]
-        ? `(current category: ${a.tags[0]})`
+      const currentCategory = a.categories[0]
+        ? `(current category: ${a.categories[0]})`
         : "(no category)";
       return `${i + 1}. ${a.name}${a.ticker ? ` [${a.ticker}]` : ""} | type: ${type} | market: ${market} | currency: ${a.currency} ${currentCategory}`;
     })
@@ -103,14 +103,14 @@ Rules:
 IMPORTANT: Please write the "reason" field entirely in ${LANG_NAMES[lang]}.`;
 }
 
-/** AI 응답 JSON 파싱 → 각 자산에 태그 매핑 */
+/** AI 응답 JSON 파싱 → 각 자산에 카테고리 매핑 */
 export function parseAiResponse(
   jsonText: string,
   assets: Asset[],
 ): {
   applied: number;
   skipped: number;
-  results: { id: string; tag: AssetTag }[];
+  results: { id: string; category: AssetCategory }[];
 } {
   // JSON 배열 부분만 추출 (마크다운 코드블록 등 제거)
   const arrMatch = jsonText.match(/\[[\s\S]*\]/);
@@ -119,7 +119,7 @@ export function parseAiResponse(
   const parsed: AiClassificationItem[] = JSON.parse(arrMatch[0]);
   if (!Array.isArray(parsed)) throw new Error("Parsed result is not an array.");
 
-  const results: { id: string; tag: AssetTag }[] = [];
+  const results: { id: string; category: AssetCategory }[] = [];
   let skipped = 0;
 
   for (const item of parsed) {
@@ -129,13 +129,13 @@ export function parseAiResponse(
       skipped++;
       continue;
     }
-    if (!isValidTag(item.category ?? item.tag ?? "")) {
+    if (!isValidCategory(item.category ?? item.tag ?? "")) {
       skipped++;
       continue;
     }
     results.push({
       id: asset.id,
-      tag: (item.category ?? item.tag) as AssetTag,
+      category: (item.category ?? item.tag) as AssetCategory,
     });
   }
 

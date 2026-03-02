@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 import {
   type CurrencyCode,
   type TargetAllocation,
-  type AssetTag,
+  type AssetCategory,
   DEFAULT_RATES,
 } from "@/types";
 
@@ -27,12 +27,12 @@ interface SettingsState {
 }
 
 const DEFAULT_TARGET: TargetAllocation[] = [
-  { tag: "dividend" as AssetTag, targetPercent: 30 },
-  { tag: "growth" as AssetTag, targetPercent: 30 },
-  { tag: "value" as AssetTag, targetPercent: 15 },
-  { tag: "index" as AssetTag, targetPercent: 15 },
-  { tag: "bond" as AssetTag, targetPercent: 5 },
-  { tag: "cash" as AssetTag, targetPercent: 5 },
+  { category: "dividend" as AssetCategory, targetPercent: 30 },
+  { category: "growth" as AssetCategory, targetPercent: 30 },
+  { category: "value" as AssetCategory, targetPercent: 15 },
+  { category: "index" as AssetCategory, targetPercent: 15 },
+  { category: "bond" as AssetCategory, targetPercent: 5 },
+  { category: "cash" as AssetCategory, targetPercent: 5 },
 ];
 
 export const useSettingsStore = create<SettingsState>()(

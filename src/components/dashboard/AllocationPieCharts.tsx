@@ -8,9 +8,9 @@ import {
 } from "recharts";
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
-import { useSettingsStore } from "@/stores";
+import { useSettingsStore } from "@/pages/stores";
 import { useT } from "@/hooks";
-import type { PortfolioSummary, Market, AssetTag } from "@/types";
+import type { PortfolioSummary, Market, AssetCategory } from "@/types";
 
 const COLORS = [
   "#3b82f6",
@@ -99,9 +99,9 @@ export function AllocationPieCharts({ summary }: Props) {
     percent: x.percent,
   }));
 
-  // 태그별
-  const tagData: ChartEntry[] = summary.tagAllocation.map((x) => ({
-    name: t.tag_labels[x.tag as AssetTag] ?? x.tag,
+  // 카테고리별
+  const categoryData: ChartEntry[] = summary.categoryAllocation.map((x) => ({
+    name: t.category_labels[x.category as AssetCategory] ?? x.category,
     value: x.valueKRW,
     percent: x.percent,
   }));
@@ -116,7 +116,7 @@ export function AllocationPieCharts({ summary }: Props) {
         />
       </Card>
       <Card title={t.chart_tag}>
-        <MiniPie data={tagData} valueLabel={fmt} noDataText={t.chart_no_data} />
+        <MiniPie data={categoryData} valueLabel={fmt} noDataText={t.chart_no_data} />
       </Card>
     </div>
   );

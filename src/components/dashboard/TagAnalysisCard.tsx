@@ -1,6 +1,6 @@
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
-import type { RebalanceSuggestion, AssetTag } from "@/types";
+import type { RebalanceSuggestion, AssetCategory } from "@/types";
 
 interface Props {
   rebalancing: RebalanceSuggestion[];
@@ -29,10 +29,10 @@ export function TagAnalysisCard({ rebalancing }: Props) {
           const diff = r.currentPercent - r.targetPercent;
           const absDiff = Math.abs(diff);
           const isOver = diff > 0;
-          const label = t.tag_labels[r.tag as AssetTag] ?? r.tag;
+          const label = t.category_labels[r.category as AssetCategory] ?? r.category;
 
           return (
-            <div key={r.tag}>
+            <div key={r.category}>
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-medium text-slate-700">
                   {label}
