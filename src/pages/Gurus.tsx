@@ -38,9 +38,9 @@ export function GurusPage() {
 
   /** 언어별 구루 이름 */
   const guruName = (guru: GuruProfile) => {
-    if (lang === "en") return guru.name;
+    if (lang === "ko") return guru.nameKo;
     if (lang === "ja") return guru.nameJa;
-    return guru.nameKo;
+    return guru.name; // en, de → 영문명
   };
 
   if (assets.length === 0) {
@@ -87,8 +87,17 @@ export function GurusPage() {
                 : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"
             }`}
           >
-            <p className="font-semibold text-slate-800">{guruName(guru)}</p>
-            <p className="text-xs text-slate-500 mt-0.5">{guru.name}</p>
+            <p className="font-semibold text-slate-800 text-sm leading-tight">
+              {guruName(guru)}
+            </p>
+            <p className="text-xs text-slate-500 mt-0.5 leading-tight">
+              {guru.firm}
+            </p>
+            {guru.aum !== "—" && (
+              <span className="inline-block mt-2 text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
+                AUM {guru.aum}
+              </span>
+            )}
           </button>
         ))}
       </div>

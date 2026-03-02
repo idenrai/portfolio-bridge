@@ -203,6 +203,9 @@ export interface Translations {
   guru_philosophy_templeton: string;
   guru_philosophy_soros: string;
   guru_philosophy_wood: string;
+  guru_philosophy_druckenmiller: string;
+  guru_philosophy_smith: string;
+  guru_philosophy_greenblatt: string;
 
   // ─── Settings Page ─────────────────────────────────────────────────────────
   settings_title: string;

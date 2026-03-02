@@ -267,6 +267,25 @@ export const en: Translations = {
     "• Proactive Research: Proprietary future forecasts and price modeling by in-house research teams\n" +
     "• Transparent Management: Publicly disclose daily trades for full fund transparency",
 
+  guru_philosophy_druckenmiller:
+    "\u2022 Macro Trading Mastery: Directional bets through analysis of correlations between currencies, rates, and equities\n" +
+    "\u2022 Soros Prot\u00e9g\u00e9: Inherited and evolved currency & rate strategies proven at the Quantum Fund\n" +
+    "\u2022 Concentrated Bets: A significant portion of assets bet on the single best idea at any time\n" +
+    "\u2022 Momentum-Aware: Ride trends with momentum; pivot immediately when signals reverse\n" +
+    "\u2022 Asymmetric Risk Management: Limit losses while maximizing upside through asymmetric position sizing",
+  guru_philosophy_smith:
+    "\u2022 Quality Compounders: \"Buy good companies, don't overpay, do nothing\" \u2014 a remarkably simple philosophy\n" +
+    "\u2022 High ROIC Focus: Only invests in companies with sustainably high returns on invested capital\n" +
+    "\u2022 Concentrated Portfolio: ~25 holdings maintained with disciplined focus\n" +
+    "\u2022 Quality Over Cheapness: Pays up for quality rather than hunting for cheap stocks\n" +
+    "\u2022 Compounding Machine: Outstanding companies that reinvest their own cash flows at high rates",
+  guru_philosophy_greenblatt:
+    "\u2022 Magic Formula: Combining high earnings yield with high return on invested capital (ROIC)\n" +
+    "\u2022 Systematic Value Investing: Rules-based, emotion-free approach to disciplined investing\n" +
+    "\u2022 Unloved Stocks: Systematically identifies cheap, high-quality companies ignored by the market\n" +
+    "\u2022 Diversified Approach: 20\u201330 positions to reduce individual stock risk\n" +
+    "\u2022 Patience Required: \"The magic formula works over most periods but can lag the market for 3\u20134 years\"",
+
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",
   settings_display_currency_desc:

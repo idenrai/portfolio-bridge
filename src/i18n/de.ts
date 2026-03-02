@@ -272,6 +272,25 @@ export const de: Translations = {
     "• Proaktive Forschung: Eigenentwickelte Zukunftsprognosen und Preismodellierungen durch interne Forschungsteams\n" +
     "• Transparentes Management: Tägliche Trades öffentlich offenlegen für vollständige Fondstransparenz",
 
+  guru_philosophy_druckenmiller:
+    "• Makro-Trading-Meisterschaft: Direktionale Wetten durch Analyse der Korrelationen zwischen Währungen, Zinsen und Aktien\n" +
+    "• Soros-Schüler: Bewährte Währungs- & Zinsinvestitionsstrategien aus dem Quantum Fund übernommen\n" +
+    "• Konzentrierte Wetten: Ein erheblicher Anteil des Vermögens auf die eine beste Idee setzen\n" +
+    "• Momentum-bewusst: Trends mit Momentum reiten; sofort umschalten wenn Signale sich umkehren\n" +
+    "• Asymmetrisches Risikomanagement: Verluste begrenzen bei gleichzeitiger Maximierung der Gewinne",
+  guru_philosophy_smith:
+    "• Qualitäts-Compounder: \"Kaufe gute Unternehmen, überzahle nicht, tue nichts\" — ein einfacher Ansatz\n" +
+    "• Hoher ROIC-Fokus: Investiert nur in Unternehmen mit nachhaltig hohen Kapitalrenditen\n" +
+    "• Konzentriertes Portfolio: ~25 Positionen mit diszipliniertem Fokus\n" +
+    "• Qualität vor Billigkeit: Zahlt für Qualität statt nach billigen Aktien zu suchen\n" +
+    "• Zinseszins-Maschine: Ausgezeichnete Unternehmen, die eigene Cashflows zu hohen Renditen reinvestieren",
+  guru_philosophy_greenblatt:
+    "• Magische Formel: Kombination aus hoher Gewinnrendite (Earnings Yield) und hoher Kapitalrendite (ROIC)\n" +
+    "• Systematisches Value-Investing: Regelbasierter, emotionsfreier Investitionsansatz\n" +
+    "• Ungeliebte Aktien: Systematische Identifizierung günstiger, hochwertiger Unternehmen die vom Markt ignoriert werden\n" +
+    "• Diversifizierter Ansatz: 20–30 Positionen zur Reduzierung des Einzeltitelrisikos\n" +
+    "• Geduld erforderlich: \"Die magische Formel funktioniert über die meisten Zeiträume, kann dem Markt aber 3–4 Jahre hinterherhinken\"",
+
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",
   settings_display_currency_desc:

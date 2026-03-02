@@ -120,7 +120,10 @@ export type GuruId =
   | "klarman"
   | "templeton"
   | "soros"
-  | "wood";
+  | "wood"
+  | "druckenmiller"
+  | "smith"
+  | "greenblatt";
 
 /** 구루 대표 보유 종목 */
 export interface TopHolding {
@@ -136,6 +139,10 @@ export interface GuruProfile {
   name: string;
   nameKo: string;
   nameJa: string;
+  /** 운용사/소속 펀드 */
+  firm: string;
+  /** 운용 자산 규모 (표시용 문자열) */
+  aum: string;
   philosophy: string;
   /** 추천 태그 비중 */
   idealAllocation: TargetAllocation[];
