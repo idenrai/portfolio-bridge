@@ -175,12 +175,13 @@ export const de: Translations = {
   guru_col_guru_target: "Guru-Ziel",
   guru_col_diff: "Differenz",
   guru_col_amount: "Betrag",
-  guru_top_holdings_title: (name) => `${name}s Top-5-Positionen`,
-  guru_holdings_col_ticker: "Ticker",
-  guru_holdings_col_name: "Name",
-  guru_holdings_col_weight: "Anteil",
-  guru_holdings_note:
-    "※ Basierend auf öffentlichen Einreichungen und Offenlegungen. Spiegelt möglicherweise nicht die aktuellen Bestände wider.",
+  guru_ai_banner_title: "Guru befragen",
+  guru_ai_banner_desc: "Analysieren Sie Ihr Portfolio aus der Perspektive des gewählten Gurus.",
+  guru_ai_btn: "Prompt generieren",
+  guru_ai_close: "Schließen",
+  guru_ai_desc: "Kopieren Sie den Prompt und fügen Sie ihn in ChatGPT, Claude oder einen anderen KI-Assistenten ein.",
+  guru_ai_copy: "In Zwischenablage kopieren",
+  guru_ai_copied: "✓ Kopiert!",
   guru_philosophy_buffett:
     "• Wirtschaftlicher Burggraben: Konzentration auf Unternehmen mit dauerhaften Wettbewerbsvorteilen und hohen Markteintrittsbarrieren\n" +
     "• Langfristiges Halten: Verständliche Unternehmen zu fairen Preisen kaufen und 10+ Jahre halten\n" +
@@ -273,23 +274,26 @@ export const de: Translations = {
     "• Transparentes Management: Tägliche Trades öffentlich offenlegen für vollständige Fondstransparenz",
 
   guru_philosophy_druckenmiller:
-    "• Makro-Trading-Meisterschaft: Direktionale Wetten durch Analyse der Korrelationen zwischen Währungen, Zinsen und Aktien\n" +
-    "• Soros-Schüler: Bewährte Währungs- & Zinsinvestitionsstrategien aus dem Quantum Fund übernommen\n" +
-    "• Konzentrierte Wetten: Ein erheblicher Anteil des Vermögens auf die eine beste Idee setzen\n" +
-    "• Momentum-bewusst: Trends mit Momentum reiten; sofort umschalten wenn Signale sich umkehren\n" +
-    "• Asymmetrisches Risikomanagement: Verluste begrenzen bei gleichzeitiger Maximierung der Gewinne",
+    "• Makro-Trading-Meisterschaft: Direktionale Wetten durch Analyse von Korrelationen zwischen Währungen, Zinsen und Aktien. Ca. 30% p.a. über 30 Jahre\n" +
+    "• Soros-Schüler: Währungs- & Zinsinvestitionsstrategien aus dem Quantum Fund übernommen und weiterentwickelt\n" +
+    "• Konzentrierte Wetten: \"Wenn Sie große Überzeugung haben, müssen Sie auf den Jugular gehen.\"\n" +
+    "• Momentum-bewusst: Trends mit Schwung folgen; sofort umschalten wenn Signale sich umkehren — kein Platz für Ego\n" +
+    "• Asymmetrisches Risikomanagement: Verluste begrenzen bei gleichzeitiger Maximierung der Gewinne\n" +
+    "• Zitat: \"Der Weg zu langfristigen Renditen ist Kapitalerhaltung und Home Runs schlagen.\"",
   guru_philosophy_smith:
-    "• Qualitäts-Compounder: \"Kaufe gute Unternehmen, überzahle nicht, tue nichts\" — ein einfacher Ansatz\n" +
-    "• Hoher ROIC-Fokus: Investiert nur in Unternehmen mit nachhaltig hohen Kapitalrenditen\n" +
-    "• Konzentriertes Portfolio: ~25 Positionen mit diszipliniertem Fokus\n" +
-    "• Qualität vor Billigkeit: Zahlt für Qualität statt nach billigen Aktien zu suchen\n" +
-    "• Zinseszins-Maschine: Ausgezeichnete Unternehmen, die eigene Cashflows zu hohen Renditen reinvestieren",
+    "• Qualitäts-Compounder: \"Kaufe gute Unternehmen, überzahle nicht, tue nichts\" — ein einfacher aber wirkungsvoller Ansatz\n" +
+    "• Hoher ROIC-Fokus: Nur Unternehmen mit nachhaltig hohen Kapitalrenditen (ROIC ≥ 20%) kommen infrage\n" +
+    "• Konzentriertes Portfolio: ~25–30 Positionen; \"Diversifikation ist ein Eingeständnis, nicht zu wissen, was man tut\"\n" +
+    "• Qualität vor Billigkeit: Zahlt für Qualität — hält so lange wie die Fundamentaldaten intakt sind\n" +
+    "• Zinseszins-Maschine: Ausgezeichnete Unternehmen, die eigene Cashflows zu hohen Renditen reinvestieren\n" +
+    "• Zitat: \"Ich habe ein Problem mit der Idee, zur Risikoreduzierung zu diversifizieren. Wenn Sie investieren, besitzen Sie das Beste.\"",
   guru_philosophy_greenblatt:
-    "• Magische Formel: Kombination aus hoher Gewinnrendite (Earnings Yield) und hoher Kapitalrendite (ROIC)\n" +
-    "• Systematisches Value-Investing: Regelbasierter, emotionsfreier Investitionsansatz\n" +
+    "• Magische Formel: Kombination aus hoher Gewinnrendite (Earnings Yield) und hoher Kapitalrendite (ROIC) — systematische Aktienauswahl\n" +
+    "• Systematisches Value-Investing: Regelbasierter, emotionsfreier Ansatz. Im Buch \"The Little Book That Beats the Market\" beschrieben\n" +
     "• Ungeliebte Aktien: Systematische Identifizierung günstiger, hochwertiger Unternehmen die vom Markt ignoriert werden\n" +
     "• Diversifizierter Ansatz: 20–30 Positionen zur Reduzierung des Einzeltitelrisikos\n" +
-    "• Geduld erforderlich: \"Die magische Formel funktioniert über die meisten Zeiträume, kann dem Markt aber 3–4 Jahre hinterherhinken\"",
+    "• Geduld erforderlich: \"Die magische Formel funktioniert über die meisten Zeiträume, kann dem Markt aber 3–4 Jahre hinterherhinken\"\n" +
+    "• Zitat: \"Finden Sie heraus, was etwas wert ist, und zahlen Sie viel weniger — der Markt ist kurzfristig Mr. Market.\"",
 
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",

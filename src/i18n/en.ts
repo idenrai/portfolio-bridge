@@ -170,12 +170,13 @@ export const en: Translations = {
   guru_col_guru_target: "Guru Target",
   guru_col_diff: "Diff",
   guru_col_amount: "Amount",
-  guru_top_holdings_title: (name) => `${name}'s Top 5 Holdings`,
-  guru_holdings_col_ticker: "Ticker",
-  guru_holdings_col_name: "Name",
-  guru_holdings_col_weight: "Weight",
-  guru_holdings_note:
-    "※ Based on public filings and disclosures. May not reflect current holdings.",
+  guru_ai_banner_title: "Ask the Guru",
+  guru_ai_banner_desc: "Analyze your portfolio through the lens of the selected guru.",
+  guru_ai_btn: "Generate Prompt",
+  guru_ai_close: "Close",
+  guru_ai_desc: "Copy the prompt below and paste it into ChatGPT, Claude, or any AI assistant.",
+  guru_ai_copy: "Copy to Clipboard",
+  guru_ai_copied: "✓ Copied!",
   guru_philosophy_buffett:
     "• Economic Moat: Focus on companies with durable competitive advantages and high barriers to entry\n" +
     "• Long-Term Holding: Buy understandable businesses at fair prices and hold for 10+ years\n" +
@@ -268,23 +269,26 @@ export const en: Translations = {
     "• Transparent Management: Publicly disclose daily trades for full fund transparency",
 
   guru_philosophy_druckenmiller:
-    "\u2022 Macro Trading Mastery: Directional bets through analysis of correlations between currencies, rates, and equities\n" +
-    "\u2022 Soros Prot\u00e9g\u00e9: Inherited and evolved currency & rate strategies proven at the Quantum Fund\n" +
-    "\u2022 Concentrated Bets: A significant portion of assets bet on the single best idea at any time\n" +
-    "\u2022 Momentum-Aware: Ride trends with momentum; pivot immediately when signals reverse\n" +
-    "\u2022 Asymmetric Risk Management: Limit losses while maximizing upside through asymmetric position sizing",
+    "\u2022 Macro Trading Mastery: Directional bets via analysis of correlations between currencies, rates, and equities\n" +
+    "\u2022 Soros Prot\u00e9g\u00e9: Inherited and evolved strategies proven at the Quantum Fund \u2014 averaged ~30% annual returns over 30 years\n" +
+    "\u2022 Concentrated Bets: \"When you have tremendous conviction on a trade, you have to go for the jugular.\"\n" +
+    "\u2022 Momentum-Aware: Ride trends with conviction; pivot immediately when signals reverse \u2014 ego is the enemy\n" +
+    "\u2022 Asymmetric Risk Management: Limit losses while maximizing upside through asymmetric position sizing\n" +
+    "\u2022 Quote: \"The way to build long-term returns is through preservation of capital and home runs.\"",
   guru_philosophy_smith:
-    "\u2022 Quality Compounders: \"Buy good companies, don't overpay, do nothing\" \u2014 a remarkably simple philosophy\n" +
-    "\u2022 High ROIC Focus: Only invests in companies with sustainably high returns on invested capital\n" +
-    "\u2022 Concentrated Portfolio: ~25 holdings maintained with disciplined focus\n" +
-    "\u2022 Quality Over Cheapness: Pays up for quality rather than hunting for cheap stocks\n" +
-    "\u2022 Compounding Machine: Outstanding companies that reinvest their own cash flows at high rates",
+    "\u2022 Quality Compounders: \"Buy good companies, don't overpay, do nothing\" \u2014 a remarkably simple yet powerful philosophy\n" +
+    "\u2022 High ROIC Focus: Only invests in companies with sustainably high returns on invested capital (ROIC \u2265 20%)\n" +
+    "\u2022 Concentrated Portfolio: ~25\u201330 holdings; \"Diversification is a confession of not knowing what you're doing\"\n" +
+    "\u2022 Quality Over Cheapness: Pays up for quality rather than hunting for cheap stocks \u2014 hold as long as fundamentals intact\n" +
+    "\u2022 Compounding Machine: Outstanding companies that reinvest their own cash flows at high rates of return\n" +
+    "\u2022 Quote: \"I have a problem with the idea you should diversify to reduce risk. If you own a business, own the best.\"",
   guru_philosophy_greenblatt:
-    "\u2022 Magic Formula: Combining high earnings yield with high return on invested capital (ROIC)\n" +
-    "\u2022 Systematic Value Investing: Rules-based, emotion-free approach to disciplined investing\n" +
+    "\u2022 Magic Formula: Combining high earnings yield with high return on invested capital (ROIC) \u2014 systematic stock selection\n" +
+    "\u2022 Systematic Value Investing: Rules-based, emotion-free approach. Codified in \"The Little Book That Beats the Market\"\n" +
     "\u2022 Unloved Stocks: Systematically identifies cheap, high-quality companies ignored by the market\n" +
     "\u2022 Diversified Approach: 20\u201330 positions to reduce individual stock risk\n" +
-    "\u2022 Patience Required: \"The magic formula works over most periods but can lag the market for 3\u20134 years\"",
+    "\u2022 Patience Required: \"The magic formula works over most periods but can lag the market for 3\u20134 years\"\n" +
+    "\u2022 Quote: \"Figure out what something is worth and pay a lot less, because the stock market is Mr. Market in the short run.\"",
 
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",

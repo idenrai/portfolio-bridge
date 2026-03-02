@@ -1,0 +1,131 @@
+import type { Asset, AssetTag, PortfolioSummary, GuruProfile } from "@/types";
+import { ASSET_TYPE_LABELS, MARKET_LABELS, TAG_LABELS } from "@/types";
+import { CURRENCY_SYMBOLS } from "@/types";
+import type { Lang } from "@/i18n";
+import { LANG_NAMES } from "@/i18n";
+
+/** KRW 기준 금액을 baseCurrency로 변환하여 포맷팅 */
+function formatInBase(
+  krwAmount: number,
+  baseCurrency: string,
+  rates: Record<string, number>,
+): string {
+  const symbol =
+    (CURRENCY_SYMBOLS as Record<string, string>)[baseCurrency] ?? baseCurrency;
+  if (baseCurrency === "KRW") {
+    return `${symbol}${Math.round(krwAmount).toLocaleString()}`;
+  }
+  const rate = rates[baseCurrency] ?? 1;
+  const amount = krwAmount / rate;
+  return `${symbol}${Math.round(amount).toLocaleString()}`;
+}
+
+/**
+ * 선택된 구루의 페르소나로 포트폴리오를 분석·평가해 달라는 AI 프롬프트 생성
+ */
+export function buildGuruPrompt(
+  guru: GuruProfile,
+  summary: PortfolioSummary,
+  assets: Asset[],
+  lang: Lang = "ko",
+  baseCurrency: string = "KRW",
+  rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
+): string {
+  const totalKRW = summary.totalValueKRW;
+  const pnlKRW = summary.totalPnLKRW;
+  const returnPct = summary.totalReturnPercent;
+
+  // 태그별 배분 (현재 vs 구루 목표)
+  const tagSection = summary.tagAllocation
+    .map((t) => {
+      const tgt = guru.idealAllocation.find((x) => x.tag === t.tag);
+      const label = TAG_LABELS[t.tag as AssetTag] ?? t.tag;
+      const targetStr = tgt ? ` (your ideal target: ${tgt.targetPercent}%)` : "";
+      return `  - ${label}: ${t.percent.toFixed(1)}%${targetStr}`;
+    })
+    .join("\n");
+
+  // 시장별 배분
+  const marketSection = summary.marketAllocation
+    .map(
+      (m) =>
+        `  - ${MARKET_LABELS[m.market as keyof typeof MARKET_LABELS] ?? m.market}: ${m.percent.toFixed(1)}%`,
+    )
+    .join("\n");
+
+  // 외화 노출
+  const fxSection = summary.currencyExposure
+    .map((e) => `  - ${e.currency}: ${e.percent.toFixed(1)}%`)
+    .join("\n");
+
+  // 보유 종목 상세 (현금 제외 + 평가액 기준 정렬, 최대 30건)
+  const holdings = [...summary.holdings]
+    .filter((h) => h.type !== "cash")
+    .sort((a, b) => b.valueKRW - a.valueKRW)
+    .slice(0, 30);
+
+  const holdingRows = holdings
+    .map((h, i) => {
+      const type =
+        ASSET_TYPE_LABELS[h.type as keyof typeof ASSET_TYPE_LABELS] ?? h.type;
+      const market =
+        MARKET_LABELS[h.market as keyof typeof MARKET_LABELS] ?? h.market;
+      const tag = h.tag ? (TAG_LABELS[h.tag as AssetTag] ?? h.tag) : "—";
+      return (
+        `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
+        ` | ${type} | ${market} | ${h.currency}` +
+        ` | weight: ${h.weightPercent.toFixed(1)}%` +
+        ` | return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%` +
+        ` | tag: ${tag}`
+      );
+    })
+    .join("\n");
+
+  // 현금자산
+  const cashAssets = assets.filter((a) => a.type === "cash");
+  const cashSection =
+    cashAssets.length > 0
+      ? cashAssets
+          .map((a) => `  - ${a.currency} ${a.quantity.toLocaleString()}`)
+          .join("\n")
+      : "  (none)";
+
+  // 구루 영문 이름 (페르소나용)
+  const guruEnName = guru.name;
+
+  return `You are ${guruEnName}, the legendary investor.
+Embody ${guruEnName}'s investment philosophy, communication style, and worldview completely.
+Your investing principles:
+${guru.philosophy}
+
+A user has shared their portfolio with you and is asking for your personal review. Analyze it from YOUR perspective — as ${guruEnName} — and provide:
+
+1. An honest assessment of the portfolio in your own voice and philosophy
+2. What you like and dislike about the current holdings mix
+3. Specific recommendations for what to buy more, reduce, or rebalance — grounded in your investment principles
+4. What the top 10 holdings in this portfolio SHOULD look like in your view (suggest a realistic ideal weight % for each in order of priority)
+5. Any key risks or opportunities you observe from your perspective
+
+--- PORTFOLIO OVERVIEW ---
+Total value (${baseCurrency}): ${formatInBase(totalKRW, baseCurrency, rates)}
+Total P&L (${baseCurrency}):   ${pnlKRW >= 0 ? "+" : ""}${formatInBase(pnlKRW, baseCurrency, rates)} (${returnPct >= 0 ? "+" : ""}${returnPct.toFixed(2)}%)
+Number of positions: ${summary.holdingCount}
+Cash %: ${summary.cashPercent.toFixed(1)}%
+
+--- ALLOCATION BY TAG (vs your ideal target) ---
+${tagSection || "  (no data)"}
+
+--- ALLOCATION BY MARKET ---
+${marketSection || "  (no data)"}
+
+--- CURRENCY EXPOSURE ---
+${fxSection || "  (no data)"}
+
+--- HOLDINGS (sorted by weight, top ${holdings.length}) ---
+${holdingRows || "  (no data)"}
+
+--- CASH POSITIONS ---
+${cashSection}
+
+IMPORTANT: Respond entirely in ${LANG_NAMES[lang]}. Be direct, specific, and speak as ${guruEnName} would — use your characteristic phrases and reasoning style. For the top 10 holdings recommendation, format as a table with rank, ticker/name, suggested weight %, and brief reasoning.`;
+}

@@ -183,11 +183,13 @@ export interface Translations {
   guru_col_guru_target: string;
   guru_col_diff: string;
   guru_col_amount: string;
-  guru_top_holdings_title: (name: string) => string;
-  guru_holdings_col_ticker: string;
-  guru_holdings_col_name: string;
-  guru_holdings_col_weight: string;
-  guru_holdings_note: string;
+  guru_ai_banner_title: string;
+  guru_ai_banner_desc: string;
+  guru_ai_btn: string;
+  guru_ai_close: string;
+  guru_ai_desc: string;
+  guru_ai_copy: string;
+  guru_ai_copied: string;
   guru_philosophy_buffett: string;
   guru_philosophy_munger: string;
   guru_philosophy_lynch: string;

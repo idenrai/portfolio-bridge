@@ -14,8 +14,8 @@ import {
   Radar,
 } from "recharts";
 import { usePortfolio, useT } from "@/hooks";
-import { useLanguageStore } from "@/stores";
-import { GURU_PROFILES, formatCurrency } from "@/utils";
+import { useLanguageStore, useSettingsStore } from "@/stores";
+import { GURU_PROFILES, formatCurrency, buildGuruPrompt } from "@/utils";
 import { calculateRebalancing } from "@/utils";
 import type { GuruProfile } from "@/types";
 
@@ -35,6 +35,10 @@ export function GurusPage() {
   const [selectedGuru, setSelectedGuru] = useState<GuruProfile | null>(null);
   const t = useT();
   const lang = useLanguageStore((s) => s.lang);
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
+  const rates = useSettingsStore((s) => s.exchangeRates);
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   /** 언어별 구루 이름 */
   const guruName = (guru: GuruProfile) => {
@@ -93,11 +97,6 @@ export function GurusPage() {
             <p className="text-xs text-slate-500 mt-0.5 leading-tight">
               {guru.firm}
             </p>
-            {guru.aum !== "—" && (
-              <span className="inline-block mt-2 text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
-                AUM {guru.aum}
-              </span>
-            )}
           </button>
         ))}
       </div>
@@ -113,49 +112,68 @@ export function GurusPage() {
             </p>
           </Card>
 
-          {/* 대표 보유 종목 */}
-          <Card title={t.guru_top_holdings_title(guruName(selectedGuru))}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="text-left text-xs text-slate-500 border-b">
-                    <th className="pb-2 font-medium">
-                      {t.guru_holdings_col_ticker}
-                    </th>
-                    <th className="pb-2 font-medium">
-                      {t.guru_holdings_col_name}
-                    </th>
-                    <th className="pb-2 font-medium text-right">
-                      {t.guru_holdings_col_weight}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {selectedGuru.topHoldings.map((h) => (
-                    <tr key={h.ticker}>
-                      <td className="py-2 font-mono font-medium">
-                        <a
-                          href={`https://finance.yahoo.com/quote/${h.ticker}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline"
+          {/* AI 구루 프롬프트 배너 */}
+          {(() => {
+            const promptText = buildGuruPrompt(
+              selectedGuru,
+              summary,
+              assets,
+              lang,
+              baseCurrency,
+              rates,
+            );
+            const copyPrompt = async () => {
+              await navigator.clipboard.writeText(promptText);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 2000);
+            };
+            return (
+              <div className="rounded-xl bg-gradient-to-r from-purple-600 to-indigo-500 p-px shadow-md">
+                <div className="rounded-[11px] bg-white/95 px-4 py-3">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-start gap-3 min-w-0">
+                      <span className="text-2xl flex-shrink-0 mt-0.5">🧘</span>
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold text-slate-800 leading-tight">
+                          {t.guru_ai_banner_title}
+                        </p>
+                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                          {t.guru_ai_banner_desc}
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowPrompt((v) => !v)}
+                      className="flex-shrink-0 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                    >
+                      {showPrompt ? t.guru_ai_close : t.guru_ai_btn}
+                    </button>
+                  </div>
+                  {showPrompt && (
+                    <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
+                      <p className="text-xs text-slate-500">{t.guru_ai_desc}</p>
+                      <textarea
+                        readOnly
+                        value={promptText}
+                        rows={12}
+                        className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
+                      />
+                      <div className="flex justify-end">
+                        <button
+                          type="button"
+                          onClick={copyPrompt}
+                          className="rounded-lg bg-slate-800 hover:bg-slate-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
                         >
-                          {h.ticker}
-                        </a>
-                      </td>
-                      <td className="py-2 text-slate-700">{h.name}</td>
-                      <td className="py-2 text-right tabular-nums font-medium text-slate-800">
-                        {h.percent.toFixed(1)}%
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="text-xs text-slate-400 mt-3">
-              {t.guru_holdings_note}
-            </p>
-          </Card>
+                          {copied ? t.guru_ai_copied : t.guru_ai_copy}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* 이상적 배분 파이 차트 */}

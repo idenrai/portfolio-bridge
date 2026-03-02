@@ -125,14 +125,6 @@ export type GuruId =
   | "smith"
   | "greenblatt";
 
-/** 구루 대표 보유 종목 */
-export interface TopHolding {
-  ticker: string;
-  name: string;
-  /** 비중 (%) */
-  percent: number;
-}
-
 /** 투자 구루 프로필 */
 export interface GuruProfile {
   id: GuruId;
@@ -141,11 +133,8 @@ export interface GuruProfile {
   nameJa: string;
   /** 운용사/소속 펀드 */
   firm: string;
-  /** 운용 자산 규모 (표시용 문자열) */
-  aum: string;
   philosophy: string;
   /** 추천 태그 비중 */
   idealAllocation: TargetAllocation[];
-  /** 대표 보유 종목 */
-  topHoldings: TopHolding[];
+
 }
