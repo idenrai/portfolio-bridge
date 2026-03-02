@@ -1,8 +1,47 @@
-import type { Asset, AssetTag, PortfolioSummary, GuruProfile } from "@/types";
-import { ASSET_TYPE_LABELS, MARKET_LABELS, TAG_LABELS } from "@/types";
+import type {
+  Asset,
+  AssetTag,
+  AssetType,
+  Market,
+  PortfolioSummary,
+  GuruProfile,
+} from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
+
+/** English-only label maps for AI prompts */
+const TAG_LABELS_EN: Record<AssetTag, string> = {
+  dividend: "Dividend",
+  growth: "Growth",
+  value: "Value",
+  index: "Index/ETF",
+  bond: "Bond",
+  reit: "REIT",
+  cash: "Cash",
+  crypto: "Crypto",
+  commodity: "Commodity",
+  other: "Other",
+};
+
+const ASSET_TYPE_LABELS_EN: Record<AssetType, string> = {
+  stock: "Stock",
+  etf: "ETF",
+  bond: "Bond",
+  fund: "Fund",
+  cash: "Cash/Deposit",
+  crypto: "Crypto",
+  real_estate: "Real Estate",
+  other: "Other",
+};
+
+const MARKET_LABELS_EN: Record<Market, string> = {
+  KR: "Korea",
+  JP: "Japan",
+  US: "US",
+  EU: "Europe",
+  OTHER: "Other",
+};
 
 /** KRW 기준 금액을 baseCurrency로 변환하여 포맷팅 */
 function formatInBase(
@@ -40,7 +79,7 @@ export function buildGuruPrompt(
   const tagSection = summary.tagAllocation
     .map((t) => {
       const tgt = guru.idealAllocation.find((x) => x.tag === t.tag);
-      const label = TAG_LABELS[t.tag as AssetTag] ?? t.tag;
+      const label = TAG_LABELS_EN[t.tag as AssetTag] ?? t.tag;
       const targetStr = tgt
         ? ` (your ideal target: ${tgt.targetPercent}%)`
         : "";
@@ -52,7 +91,7 @@ export function buildGuruPrompt(
   const marketSection = summary.marketAllocation
     .map(
       (m) =>
-        `  - ${MARKET_LABELS[m.market as keyof typeof MARKET_LABELS] ?? m.market}: ${m.percent.toFixed(1)}%`,
+        `  - ${MARKET_LABELS_EN[m.market as keyof typeof MARKET_LABELS_EN] ?? m.market}: ${m.percent.toFixed(1)}%`,
     )
     .join("\n");
 
@@ -70,16 +109,16 @@ export function buildGuruPrompt(
   const holdingRows = holdings
     .map((h, i) => {
       const type =
-        ASSET_TYPE_LABELS[h.type as keyof typeof ASSET_TYPE_LABELS] ?? h.type;
+        ASSET_TYPE_LABELS_EN[h.type as keyof typeof ASSET_TYPE_LABELS_EN] ?? h.type;
       const market =
-        MARKET_LABELS[h.market as keyof typeof MARKET_LABELS] ?? h.market;
-      const tag = h.tag ? (TAG_LABELS[h.tag as AssetTag] ?? h.tag) : "—";
+        MARKET_LABELS_EN[h.market as keyof typeof MARKET_LABELS_EN] ?? h.market;
+      const tag = h.tag ? (TAG_LABELS_EN[h.tag as AssetTag] ?? h.tag) : "—";
       return (
         `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
         ` | ${type} | ${market} | ${h.currency}` +
         ` | weight: ${h.weightPercent.toFixed(1)}%` +
         ` | return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%` +
-        ` | tag: ${tag}`
+        ` | category: ${tag}`
       );
     })
     .join("\n");
@@ -115,7 +154,7 @@ Total P&L (${baseCurrency}):   ${pnlKRW >= 0 ? "+" : ""}${formatInBase(pnlKRW, b
 Number of positions: ${summary.holdingCount}
 Cash %: ${summary.cashPercent.toFixed(1)}%
 
---- ALLOCATION BY TAG (vs your ideal target) ---
+--- ALLOCATION BY CATEGORY (vs your ideal target) ---
 ${tagSection || "  (no data)"}
 
 --- ALLOCATION BY MARKET ---
