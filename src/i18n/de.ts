@@ -214,7 +214,7 @@ export const de: Translations = {
     '• Zitat: "Das größte Problem des Investors – und oft sein schlimmster Feind – ist er selbst."',
   guru_philosophy_dalio:
     "• Allwetter-Strategie: Auf alle Wirtschaftsregimes vorbereiten (Wachstum/Abschwung × Inflation/Deflation)\n" +
-    "• Risikoparität: Risikocontributionen über Anlageklassen hinweg angleichen\n" +
+    "• Risikoparität: Risikobeiträge über Anlageklassen hinweg angleichen\n" +
     "• Breite Diversifikation: In Aktien, Anleihen, Gold und Rohstoffe mit geringen Korrelationen investieren\n" +
     "• Prinzipien: Systematische Entscheidungsfindung und Organisationsprinzipien etablieren\n" +
     "• Zyklen verstehen: Kurz- und langfristige Schuldenzyklen analysieren, um Entscheidungen zu leiten\n" +

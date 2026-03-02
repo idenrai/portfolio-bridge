@@ -286,26 +286,26 @@ export const en: Translations = {
     '• Quote: "Innovation solves problems and creates entirely new market opportunities."',
 
   guru_philosophy_druckenmiller:
-    "\u2022 Macro Trading Mastery: Directional bets via analysis of correlations between currencies, rates, and equities\n" +
-    "\u2022 Soros Prot\u00e9g\u00e9: Inherited and evolved strategies proven at the Quantum Fund \u2014 averaged ~30% annual returns over 30 years\n" +
-    '\u2022 Concentrated Bets: "When you have tremendous conviction on a trade, you have to go for the jugular."\n' +
-    "\u2022 Momentum-Aware: Ride trends with conviction; pivot immediately when signals reverse \u2014 ego is the enemy\n" +
-    "\u2022 Asymmetric Risk Management: Limit losses while maximizing upside through asymmetric position sizing\n" +
-    '\u2022 Quote: "The way to build long-term returns is through preservation of capital and home runs."',
+    "• Macro Trading Mastery: Directional bets via analysis of correlations between currencies, rates, and equities\n" +
+    "• Soros Protégé: Inherited and evolved strategies proven at the Quantum Fund — averaged ~30% annual returns over 30 years\n" +
+    '• Concentrated Bets: "When you have tremendous conviction on a trade, you have to go for the jugular."\n' +
+    "• Momentum-Aware: Ride trends with conviction; pivot immediately when signals reverse — ego is the enemy\n" +
+    "• Asymmetric Risk Management: Limit losses while maximizing upside through asymmetric position sizing\n" +
+    '• Quote: "The way to build long-term returns is through preservation of capital and home runs."',
   guru_philosophy_smith:
-    '\u2022 Quality Compounders: "Buy good companies, don\'t overpay, do nothing" \u2014 a remarkably simple yet powerful philosophy\n' +
-    "\u2022 High ROIC Focus: Only invests in companies with sustainably high returns on invested capital (ROIC \u2265 20%)\n" +
-    '\u2022 Concentrated Portfolio: ~25\u201330 holdings; "Diversification is a confession of not knowing what you\'re doing"\n' +
-    "\u2022 Quality Over Cheapness: Pays up for quality rather than hunting for cheap stocks \u2014 hold as long as fundamentals intact\n" +
-    "\u2022 Compounding Machine: Outstanding companies that reinvest their own cash flows at high rates of return\n" +
-    '\u2022 Quote: "I have a problem with the idea you should diversify to reduce risk. If you own a business, own the best."',
+    '• Quality Compounders: "Buy good companies, don\'t overpay, do nothing" — a remarkably simple yet powerful philosophy\n' +
+    "• High ROIC Focus: Only invests in companies with sustainably high returns on invested capital (ROIC ≥ 20%)\n" +
+    '• Concentrated Portfolio: ~25–30 holdings; "Diversification is a confession of not knowing what you\'re doing"\n' +
+    "• Quality Over Cheapness: Pays up for quality rather than hunting for cheap stocks — hold as long as fundamentals intact\n" +
+    "• Compounding Machine: Outstanding companies that reinvest their own cash flows at high rates of return\n" +
+    '• Quote: "I have a problem with the idea you should diversify to reduce risk. If you own a business, own the best."',
   guru_philosophy_greenblatt:
-    "\u2022 Magic Formula: Combining high earnings yield with high return on invested capital (ROIC) \u2014 systematic stock selection\n" +
-    '\u2022 Systematic Value Investing: Rules-based, emotion-free approach. Codified in "The Little Book That Beats the Market"\n' +
-    "\u2022 Unloved Stocks: Systematically identifies cheap, high-quality companies ignored by the market\n" +
-    "\u2022 Diversified Approach: 20\u201330 positions to reduce individual stock risk\n" +
-    '\u2022 Patience Required: "The magic formula works over most periods but can lag the market for 3\u20134 years"\n' +
-    '\u2022 Quote: "Figure out what something is worth and pay a lot less, because the stock market is Mr. Market in the short run."',
+    "• Magic Formula: Combining high earnings yield with high return on invested capital (ROIC) — systematic stock selection\n" +
+    '• Systematic Value Investing: Rules-based, emotion-free approach. Codified in "The Little Book That Beats the Market"\n' +
+    "• Unloved Stocks: Systematically identifies cheap, high-quality companies ignored by the market\n" +
+    "• Diversified Approach: 20–30 positions to reduce individual stock risk\n" +
+    '• Patience Required: "The magic formula works over most periods but can lag the market for 3–4 years"\n' +
+    '• Quote: "Figure out what something is worth and pay a lot less, because the stock market is Mr. Market in the short run."',
 
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",
