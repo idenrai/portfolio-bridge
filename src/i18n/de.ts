@@ -276,19 +276,21 @@ export const de: Translations = {
   settings_display_currency_title: "Anzeigewährung",
   settings_display_currency_desc:
     "Wählen Sie die Basiswährung für die Anzeige von Portfoliowerten.",
-  settings_fx_title: "Wechselkurse (automatisch von Yahoo Finance abgerufen)",
+  settings_fx_title: "Wechselkurse",
   settings_fx_cache_warn: (time) =>
     `⚠️ Kursabruf fehlgeschlagen — gecachten Wert verwenden (Stand: ${time})`,
-  settings_data_refresh_title: "Kurse & Preise (automatisch von Yahoo Finance abgerufen)",
+  settings_data_refresh_title: "Kurse & Preise",
   settings_data_refresh_refreshing: "Wird abgerufen…",
   settings_data_refresh_refresh: "🔄 Jetzt aktualisieren",
-  settings_data_refresh_auto: "Kurse und Preise werden beim App-Start automatisch abgerufen.",
+  settings_data_refresh_auto:
+    "Kurse und Preise werden beim App-Start automatisch abgerufen.",
   settings_data_refresh_time: (time) => `Stand: ${time}`,
   settings_data_refresh_cache_warn: (time) =>
     `⚠️ Abruf fehlgeschlagen — gecachte Werte verwenden (Stand: ${time})`,
   settings_data_refresh_result: (updated, total) =>
     `${updated} von ${total} Preise aktualisiert`,
-  settings_data_refresh_no_ticker: "Keine Vermögenswerte mit Ticker registriert.",
+  settings_data_refresh_no_ticker:
+    "Keine Vermögenswerte mit Ticker registriert.",
   data_refresh_error:
     "Abruf von Kursen/Preisen fehlgeschlagen. Bitte prüfen Sie Ihre Netzwerkverbindung.",
   settings_target_title: "Zielallokation",

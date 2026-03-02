@@ -273,10 +273,10 @@ export const ja: Translations = {
   settings_display_currency_title: "表示通貨",
   settings_display_currency_desc:
     "ダッシュボードの金額表示に使用する基準通貨を選択します。",
-  settings_fx_title: "為替レート（Yahoo Finance 自動取得）",
+  settings_fx_title: "為替レート",
   settings_fx_cache_warn: (time) =>
     `⚠️ 為替レート取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
-  settings_data_refresh_title: "為替・時価更新（Yahoo Finance 自動取得）",
+  settings_data_refresh_title: "為替・時価更新",
   settings_data_refresh_refreshing: "取得中…",
   settings_data_refresh_refresh: "🔄 今すぐ更新",
   settings_data_refresh_auto: "アプリ起動時に自動取得されます。",

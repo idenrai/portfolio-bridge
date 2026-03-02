@@ -271,20 +271,22 @@ export const en: Translations = {
   settings_display_currency_title: "Display Currency",
   settings_display_currency_desc:
     "Select the base currency for displaying portfolio values.",
-  settings_fx_title: "Exchange Rates (auto-fetched from Yahoo Finance)",
+  settings_fx_title: "Exchange Rates",
   settings_fx_cache_warn: (time) =>
     `⚠️ Rate fetch failed — using cached value (as of ${time})`,
-  settings_data_refresh_title: "Rates & Prices (auto-fetched from Yahoo Finance)",
+  settings_data_refresh_title: "Rates & Prices",
   settings_data_refresh_refreshing: "Fetching…",
   settings_data_refresh_refresh: "🔄 Refresh Now",
-  settings_data_refresh_auto: "Rates and prices are fetched automatically on app start.",
+  settings_data_refresh_auto:
+    "Rates and prices are fetched automatically on app start.",
   settings_data_refresh_time: (time) => `As of ${time}`,
   settings_data_refresh_cache_warn: (time) =>
     `⚠️ Fetch failed — using cached values (as of ${time})`,
   settings_data_refresh_result: (updated, total) =>
     `${updated} of ${total} prices updated`,
   settings_data_refresh_no_ticker: "No assets with tickers registered.",
-  data_refresh_error: "Failed to fetch rates/prices. Please check your network.",
+  data_refresh_error:
+    "Failed to fetch rates/prices. Please check your network.",
   settings_target_title: "Target Allocation",
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",

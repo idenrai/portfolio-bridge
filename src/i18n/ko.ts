@@ -270,10 +270,10 @@ export const ko: Translations = {
   settings_display_currency_title: "표시 화폐",
   settings_display_currency_desc:
     "대시보드 금액을 표시할 기준 통화를 선택합니다.",
-  settings_fx_title: "환율 (Yahoo Finance 자동 조회)",
+  settings_fx_title: "환율",
   settings_fx_cache_warn: (time) =>
     `⚠️ 환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
-  settings_data_refresh_title: "환율 · 시세 갱신 (Yahoo Finance 자동 조회)",
+  settings_data_refresh_title: "환율 · 시세 갱신",
   settings_data_refresh_refreshing: "조회 중…",
   settings_data_refresh_refresh: "🔄 지금 갱신",
   settings_data_refresh_auto: "앱 시작 시 자동 조회됩니다.",
