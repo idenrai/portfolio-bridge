@@ -54,6 +54,10 @@ export const de: Translations = {
   dash_sample_btn: "📈 Mit Beispieldaten erkunden",
   dash_sample_hint:
     "Beispieldaten können über Einstellungen › Alle Daten zurücksetzen entfernt werden.",
+  dash_refresh_rates: "Kurse",
+  dash_refresh_prices: "Preise",
+  dash_refreshing: "Abruf…",
+  dash_updated_at: (time) => `${time}`,
 
   kpi_total_value: "Gesamtwert",
   kpi_pnl: "Nicht realisierter G&V",
@@ -290,7 +294,8 @@ export const de: Translations = {
   settings_price_result: (updated, total) =>
     `${updated} von ${total} aktualisiert`,
   settings_price_no_ticker: "Keine Vermögenswerte mit Ticker registriert.",
-  price_refresh_error: "Kursabruf fehlgeschlagen. Bitte prüfen Sie Ihre Netzwerkverbindung.",
+  price_refresh_error:
+    "Kursabruf fehlgeschlagen. Bitte prüfen Sie Ihre Netzwerkverbindung.",
   settings_target_title: "Zielallokation",
   settings_target_sum: (n) => `Gesamt: ${n}%`,
   settings_target_save: "Speichern",

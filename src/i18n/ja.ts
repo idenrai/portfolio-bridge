@@ -53,6 +53,10 @@ export const ja: Translations = {
   dash_sample_btn: "📈 サンプルデータで確認",
   dash_sample_hint:
     "サンプルデータは「設定 › 全データリセット」で削除できます。",
+  dash_refresh_rates: "為替",
+  dash_refresh_prices: "時価",
+  dash_refreshing: "取得中…",
+  dash_updated_at: (time) => `${time}`,
 
   kpi_total_value: "総評価額",
   kpi_pnl: "評価損益",
@@ -284,10 +288,10 @@ export const ja: Translations = {
   settings_price_time: (time) => `${time} 時点`,
   settings_price_cache_warn: (time) =>
     `⚠️ 時価取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
-  settings_price_result: (updated, total) =>
-    `${total}件中${updated}件更新完了`,
+  settings_price_result: (updated, total) => `${total}件中${updated}件更新完了`,
   settings_price_no_ticker: "ティッカーが登録された資産がありません。",
-  price_refresh_error: "時価の取得に失敗しました。ネットワーク状態を確認してください。",
+  price_refresh_error:
+    "時価の取得に失敗しました。ネットワーク状態を確認してください。",
   settings_target_title: "目標配分",
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",

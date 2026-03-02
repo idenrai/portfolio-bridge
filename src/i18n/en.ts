@@ -52,6 +52,10 @@ export const en: Translations = {
     "🖥️ Optimized for desktop browsers. Mobile screens are not currently supported.",
   dash_sample_btn: "📈 Explore with sample data",
   dash_sample_hint: "Sample data can be removed via Settings › Reset all data.",
+  dash_refresh_rates: "Rates",
+  dash_refresh_prices: "Prices",
+  dash_refreshing: "Fetching…",
+  dash_updated_at: (time) => `${time}`,
 
   kpi_total_value: "Total Value",
   kpi_pnl: "Unrealized P&L",
@@ -282,8 +286,7 @@ export const en: Translations = {
   settings_price_time: (time) => `As of ${time}`,
   settings_price_cache_warn: (time) =>
     `⚠️ Price fetch failed — using cached values (as of ${time})`,
-  settings_price_result: (updated, total) =>
-    `${updated} of ${total} updated`,
+  settings_price_result: (updated, total) => `${updated} of ${total} updated`,
   settings_price_no_ticker: "No assets with tickers registered.",
   price_refresh_error: "Failed to fetch prices. Please check your network.",
   settings_target_title: "Target Allocation",

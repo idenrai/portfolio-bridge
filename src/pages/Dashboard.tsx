@@ -1,5 +1,6 @@
-import { usePortfolio, useT } from "@/hooks";
-import { useAssetStore, useSettingsStore } from "@/stores";
+import { usePortfolio, useExchangeRates, usePriceRefresh, useT } from "@/hooks";
+import { useAssetStore, useSettingsStore, useLanguageStore } from "@/stores";
+import { LANG_LOCALES } from "@/i18n";
 import { KpiBar } from "@/components/dashboard/KpiBar";
 import { AllocationPieCharts } from "@/components/dashboard/AllocationPieCharts";
 import { TopHoldingsTable } from "@/components/dashboard/TopHoldingsTable";
@@ -13,7 +14,20 @@ export function DashboardPage() {
   const { assets, summary, rebalancing } = usePortfolio();
   const { addAsset } = useAssetStore();
   const targets = useSettingsStore((s) => s.targetAllocations);
+  const lang = useLanguageStore((s) => s.lang);
+  const langLocale = LANG_LOCALES[lang];
   const t = useT();
+
+  const {
+    refreshRates,
+    isLoading: isRateLoading,
+    lastUpdated: rateLastUpdated,
+  } = useExchangeRates();
+  const {
+    refreshPrices,
+    isLoading: isPriceLoading,
+    lastUpdated: priceLastUpdated,
+  } = usePriceRefresh();
 
   const handleLoadSample = () => {
     SAMPLE_ASSETS.forEach((data) => addAsset(data));
@@ -59,7 +73,62 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-lg font-bold text-slate-800">{t.dash_title}</h2>
+      {/* 타이틀 + 갱신 바 */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-lg font-bold text-slate-800">{t.dash_title}</h2>
+
+        <div className="flex items-center gap-2">
+          {/* 환율 갱신 */}
+          <button
+            type="button"
+            onClick={() => refreshRates()}
+            disabled={isRateLoading}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50 transition-colors cursor-pointer"
+          >
+            <span>🔄</span>
+            <span>{t.dash_refresh_rates}</span>
+            {isRateLoading ? (
+              <span className="text-blue-500">{t.dash_refreshing}</span>
+            ) : (
+              rateLastUpdated && (
+                <span className="text-slate-400">
+                  {t.dash_updated_at(
+                    new Date(rateLastUpdated).toLocaleTimeString(langLocale, {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }),
+                  )}
+                </span>
+              )
+            )}
+          </button>
+
+          {/* 시세 갱신 */}
+          <button
+            type="button"
+            onClick={() => refreshPrices()}
+            disabled={isPriceLoading}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50 transition-colors cursor-pointer"
+          >
+            <span>📊</span>
+            <span>{t.dash_refresh_prices}</span>
+            {isPriceLoading ? (
+              <span className="text-blue-500">{t.dash_refreshing}</span>
+            ) : (
+              priceLastUpdated && (
+                <span className="text-slate-400">
+                  {t.dash_updated_at(
+                    new Date(priceLastUpdated).toLocaleTimeString(langLocale, {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }),
+                  )}
+                </span>
+              )
+            )}
+          </button>
+        </div>
+      </div>
 
       {/* ① KPI 바 */}
       <KpiBar summary={summary} />

@@ -52,6 +52,10 @@ export const ko: Translations = {
     "🖥️ 현재 PC 브라우저에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
   dash_sample_btn: "📈 샘플 데이터로 둘러보기",
   dash_sample_hint: "샘플 데이터는 '설정 › 전체 초기화'로 제거할 수 있습니다.",
+  dash_refresh_rates: "환율",
+  dash_refresh_prices: "시세",
+  dash_refreshing: "조회 중…",
+  dash_updated_at: (time) => `${time}`,
 
   kpi_total_value: "총 평가액",
   kpi_pnl: "평가 손익",
@@ -284,7 +288,8 @@ export const ko: Translations = {
   settings_price_result: (updated, total) =>
     `${total}건 중 ${updated}건 갱신 완료`,
   settings_price_no_ticker: "티커가 등록된 자산이 없습니다.",
-  price_refresh_error: "시세 조회에 실패했습니다. 네트워크 상태를 확인해 주세요.",
+  price_refresh_error:
+    "시세 조회에 실패했습니다. 네트워크 상태를 확인해 주세요.",
   settings_target_title: "목표 비중 배분",
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",

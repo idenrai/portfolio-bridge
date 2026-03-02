@@ -58,6 +58,10 @@ export interface Translations {
   dash_notice_mobile: string;
   dash_sample_btn: string;
   dash_sample_hint: string;
+  dash_refresh_rates: string;
+  dash_refresh_prices: string;
+  dash_refreshing: string;
+  dash_updated_at: (time: string) => string;
 
   // ─── KPI Bar ───────────────────────────────────────────────────────────────
   kpi_total_value: string;
