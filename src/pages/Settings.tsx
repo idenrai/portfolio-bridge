@@ -123,9 +123,15 @@ export function SettingsPage() {
             {(Object.keys(settings.exchangeRates) as CurrencyCode[])
               .filter((code) => code !== baseCurrency)
               .map((code) => {
-                // 직접 호가: 1 code = X baseCurrency
+                // 통화별 표시 단위 (소액 통화는 묶어서 표시)
+                const UNIT: Partial<Record<CurrencyCode, number>> = {
+                  KRW: 1000,
+                  JPY: 100,
+                };
+                const unit = UNIT[code] ?? 1;
                 const rateInBase =
-                  (settings.exchangeRates[code] ?? 1) / baseCurrencyRate;
+                  ((settings.exchangeRates[code] ?? 1) / baseCurrencyRate) *
+                  unit;
                 const currencyName = currencyDisplayNames.of(code) ?? code;
                 return (
                   <div key={code} className="flex items-center gap-3 py-0.5">
@@ -133,7 +139,7 @@ export function SettingsPage() {
                       {currencyName} ({code})
                     </span>
                     <span className="text-xs text-slate-400 shrink-0">
-                      1 {code} =
+                      {unit > 1 ? unit : 1} {code} =
                     </span>
                     <span className="text-sm font-mono text-slate-800 w-28 text-right">
                       {rateInBase.toLocaleString(langLocale, {
