@@ -49,17 +49,17 @@ export function useGoogleDrive() {
   const applyRemote = useCallback((backup: DriveBackup) => {
     isApplyingRemoteRef.current = true;
     try {
-      // assets 교체
+      // Zustand persist 미들웨어가 setState 호출 시 localStorage 자동 저장
       useAssetStore.setState({ assets: backup.assets as Asset[] });
-      // settings 교체 (exchangeRates 는 그대로 유지)
-      useSettingsStore.setState({
+      useSettingsStore.setState((s) => ({
+        ...s,
         baseCurrency: backup.settings.baseCurrency as never,
         targetAllocations: backup.settings.targetAllocations as never,
-      });
+      }));
     } finally {
       setTimeout(() => {
         isApplyingRemoteRef.current = false;
-      }, 200);
+      }, 500);
     }
   }, []);
 
@@ -137,8 +137,14 @@ export function useGoogleDrive() {
           : 0;
 
         if (remoteTs > localTs) {
-          // Drive 데이터가 더 최신 → 충돌 확인 요청
-          driveStore.setPendingConflict(remote);
+          if (localTs === 0) {
+            // 이 기기에서 동기화 기록이 없음 → 충돌 없이 Drive 데이터 바로 적용
+            applyRemote(remote);
+            driveStore.setSyncedAt(remote.syncedAt);
+          } else {
+            // 양쪽 모두 데이터가 있고 Drive가 더 최신 → 사용자에게 선택 요청
+            driveStore.setPendingConflict(remote);
+          }
         } else {
           // 로컬이 최신 또는 동일 → Drive에 업로드
           await uploadNow();
@@ -149,7 +155,7 @@ export function useGoogleDrive() {
         driveStore.setSyncing(false);
       }
     },
-    [buildBackup, driveStore, uploadNow],
+    [buildBackup, driveStore, uploadNow, applyRemote],
   );
 
   // ── GIS 토큰 수신 콜백 ────────────────────────────────────────────────────
