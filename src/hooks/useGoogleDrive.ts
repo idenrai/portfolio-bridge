@@ -29,6 +29,8 @@ export function useGoogleDrive() {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // 초기 연결 완료 후 콜백 큐
   const onConnectedRef = useRef<(() => void) | null>(null);
+  // re-auth 후 실행할 동작: 'initialSync' | 'uploadOnly'
+  const postAuthActionRef = useRef<"initialSync" | "uploadOnly">("initialSync");
 
   const isTokenValid = () =>
     !!tokenRef.current && Date.now() < tokenExpiresRef.current - 30_000;
@@ -164,11 +166,17 @@ export function useGoogleDrive() {
       tokenRef.current = token;
       tokenExpiresRef.current = Date.now() + 3600_000; // 1시간
       driveStore.setConnected(true);
-      await initialSync(token);
+      if (postAuthActionRef.current === "uploadOnly") {
+        // syncNow 버튼으로 재인증한 경우 → 업로드만
+        postAuthActionRef.current = "initialSync"; // 초기화
+        await uploadNow();
+      } else {
+        await initialSync(token);
+      }
       onConnectedRef.current?.();
       onConnectedRef.current = null;
     },
-    [driveStore, initialSync],
+    [driveStore, initialSync, uploadNow],
   );
 
   const onTokenError = useCallback(
@@ -250,6 +258,21 @@ export function useGoogleDrive() {
     uploadNow();
   }, [driveStore, uploadNow]);
 
+  /** 지금 동기화 버튼 핸들러: 토큰 유효 시 즉시 업로드, 만료 시 silent re-auth 후 업로드 */
+  const syncNow = useCallback(async () => {
+    if (isTokenValid()) {
+      await uploadNow();
+      return;
+    }
+    // 토큰 만료 → 계정 선택 없이 silent re-auth 후 uploadOnly
+    if (!tokenClientRef.current) {
+      driveStore.setSyncError("gis_not_loaded");
+      return;
+    }
+    postAuthActionRef.current = "uploadOnly";
+    tokenClientRef.current.requestAccessToken({ prompt: "" });
+  }, [uploadNow, driveStore]);
+
   const hasClientId = !!CLIENT_ID;
 
   return {
@@ -261,7 +284,7 @@ export function useGoogleDrive() {
     hasClientId,
     connect,
     disconnect,
-    syncNow: uploadNow,
+    syncNow,
     resolveWithDrive,
     resolveWithLocal,
   };
