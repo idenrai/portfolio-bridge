@@ -22,7 +22,7 @@ export const de: Translations = {
     "Ticker über Yahoo Finance suchen oder Vermögenswerte manuell hinzufügen. KI-Autoclassifizierung, CSV-Import & -Export unterstützt.",
   about_feat3_title: "Investmentgurus",
   about_feat3_desc:
-    "Referenzieren Sie die Philosophien und Musterportfolios von 15 legendären Investoren — Buffett, Dalio, Lynch und mehr — und vergleichen Sie sie mit Ihrem eigenen Portfolio.",
+    "Referenzieren Sie die Philosophien und Musterportfolios von 15 legendären Investoren — Buffett, Dalio, Lynch und mehr — und vergleichen Sie sie mit Ihrem eigenen Portfolio. Erstellt außerdem KI-Chatprompts in der Persona des gewählten Gurus.",
   about_feat4_title: "KI-Portfolioanalyse",
   about_feat4_desc:
     "Erstellen Sie einen strukturierten Prompt mit Ihren Bestandsdaten, bereit zum Einfügen in ChatGPT, Claude, Gemini oder Grok für ideale Allokationsratschläge.",
@@ -34,7 +34,7 @@ export const de: Translations = {
     "Vollständige Benutzeroberfläche auf Koreanisch, Englisch, Japanisch und Deutsch. Anzeigewährung zwischen KRW, USD, JPY und EUR umschaltbar.",
   about_privacy_title: "Datenschutz an erster Stelle",
   about_privacy_desc:
-    "Alle Vermögensdaten werden nur im localStorage Ihres Browsers gespeichert. Es werden keine Daten an einen externen Server gesendet. Keine Kontoanmeldung erforderlich. Optional kann ein Google Drive-Backup aktiviert werden — Daten werden ausschließlich in einem app-spezifischen versteckten Ordner (appDataFolder) gespeichert, ohne Zugriff auf reguläre Drive-Dateien.",
+    "Alle Vermögensdaten werden nur im localStorage Ihres Browsers gespeichert. Es werden keine Daten an externe Server gesendet. Kein Konto erforderlich. Optional können Sie Ihr persönliches Google Drive verknüpfen, um Ihre Daten zu sichern.",
   about_tech_title: "Technologie-Stack",
   about_links_live: "Live-Demo",
   about_links_github: "GitHub",

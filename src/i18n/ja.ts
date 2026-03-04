@@ -21,7 +21,7 @@ export const ja: Translations = {
     "Yahoo Financeで銘柄を検索するか、手動登録で多国籍資産を一元管理。AI自動分類、CSVインポート・エクスポートに対応。",
   about_feat3_title: "投資家",
   about_feat3_desc:
-    "バフェット、ダリオ、リンチなど伝説の投資家１５名の哲学と代表ポートフォリオを参考に、自分のポートフォリオと比較できます。",
+    "バフェット、ダリオ、リンチなど伝説の投資家１５名の哲学と代表ポートフォリオを参考に、自分のポートフォリオと比較できます。また、選んだ投資家のペルソナでAIと対話できるプロンプトも提供します。",
   about_feat4_title: "AI ポートフォリオ分析",
   about_feat4_desc:
     "保有銘柄データを盛り込んだ構造化プロンプトを生成。ChatGPT・Claude・Gemini・Grokに貼り付けるだけで、理想配分のアドバイスを得られます。",
@@ -33,7 +33,7 @@ export const ja: Translations = {
     "韓国語・English・日本語・Deutschの4ヵ国語とKRW・USD・JPY・EURの通貨表示に対応しています。",
   about_privacy_title: "プライバシー重視",
   about_privacy_desc:
-    "すべての資産データはブラウザのlocalStorageのみに保存されます。外部サーバーへの送信は一切なく、アカウント不要で即座にご利用いただけます。任意でGoogle Driveバックアップを有効にできます。データはアプリ専用の隠しフォルダ（appDataFolder）のみに保存され、通常のDriveファイルにはアクセスしません。",
+    "すべての資産データはブラウザのlocalStorageのみに保存されます。外部サーバーへの送信は一切なく、アカウント不要で即座にご利用いただけます。任意で個人のGoogle Driveと連携してデータをバックアップすることもできます。",
   about_tech_title: "技術スタック",
   about_links_live: "ライブデモ",
   about_links_github: "GitHub",

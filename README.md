@@ -14,7 +14,8 @@
 🌐 **Live Demo**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)
 
 All data is stored **only in browser localStorage** — never sent to external servers.  
-No account required. Market data and exchange rates are fetched client-side via proxy from Yahoo Finance.
+No account required. Optionally, you can link your personal Google Drive to back up your data.  
+Market data and exchange rates are fetched client-side via proxy from Yahoo Finance.
 
 ---
 
@@ -24,7 +25,7 @@ No account required. Market data and exchange rates are fetched client-side via 
 | --- | --- |
 | 📊 **Unified Dashboard** | KPI bar, category/market allocation charts, holdings table, rebalance suggestions |
 | 💼 **Asset Management** | Ticker search (Yahoo Finance), manual entry, AI auto-classification, CSV import/export |
-| 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.) |
+| 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.); also provides AI chat prompts in the persona of your chosen guru |
 | 🤖 **AI Portfolio Analysis** | Structured prompts ready to paste into ChatGPT · Claude · Gemini · Grok |
 | 🔔 **Auto Insights** | Alerts for overweight, large losses, low cash, currency exposure |
 | 🌐 **Multi-language & Currency** | Korean · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
@@ -267,7 +268,7 @@ vercel.json                     # Vercel config (SPA rewrite, API routing)
 🌐 **라이브 데모**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)
 
 모든 데이터는 **브라우저 localStorage**에만 저장되며 외부 서버로 전송되지 않습니다.  
-계정 생성 없이 바로 사용할 수 있습니다.  
+계정 생성 없이 바로 사용할 수 있습니다. 선택적으로 개인의 Google Drive를 연동해 데이터를 백업할 수도 있습니다.  
 Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 직접 수행합니다.
 
 ---
@@ -278,7 +279,7 @@ Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 
 | --- | --- |
 | 📊 **통합 대시보드** | KPI 바, 카테고리·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안 |
 | 💼 **자산 관리** | 종목 검색(Yahoo Finance), 수동 등록, AI 자동 카테고리 분류, CSV 가져오기·내보내기 |
-| 💡 **투자 구루** | 버핏·달리오·린치·드러큰밀러·스미스·그린블라트 등 18명의 철학과 내 포트폴리오 비교 |
+| 💡 **투자 구루** | 버핏·달리오·린치·드러큰밀러·스미스·그린블라트 등 18명의 철학과 내 포트폴리오 비교; 원하는 구루의 페르소나로 AI와 대화하는 프롬프트 제공 |
 | 🤖 **AI 포트폴리오 분석** | ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 구조화 프롬프트 생성 |
 | 🔔 **자동 인사이트** | 과대비중, 큰 손실, 현금 부족, 환 노출 초과를 자동 감지·경고 |
 | 🌐 **다국어 · 다통화** | 한국어 · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |

@@ -21,7 +21,7 @@ export const ko: Translations = {
     "Yahoo Finance 종목 검색 및 수동 등록으로 다국가 자산을 통합 관리합니다. AI 자동 분류, CSV 가져오기·내보내기 지원.",
   about_feat3_title: "투자 구루",
   about_feat3_desc:
-    "버핏, 달리오, 린치 등 15명의 투자 철학과 대표 포트폴리오를 참고해 내 포트폴리오와 비교할 수 있습니다.",
+    "버핏, 달리오, 린치 등 15명의 투자 철학과 대표 포트폴리오를 참고해 내 포트폴리오와 비교할 수 있습니다. 또한 원하는 구루의 페르소나로 AI와 대화할 수 있는 프롬프트를 제공합니다.",
   about_feat4_title: "AI 포트폴리오 분석",
   about_feat4_desc:
     "ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 수 있는 구조화된 프롬프트를 생성합니다. 이상적 배분과 조정 인사이트를 AI에게 물어보세요.",
@@ -33,7 +33,7 @@ export const ko: Translations = {
     "한국어 · English · 日本語 · Deutsch 4개국어와 KRW · USD · JPY · EUR 통화 표시를 지원합니다.",
   about_privacy_title: "프라이버시 우선",
   about_privacy_desc:
-    "모든 자산 데이터는 브라우저 localStorage에만 저장됩니다. 외부 서버로 개인 자산 데이터가 전송되지 않으며, 계정 생성 없이 바로 사용할 수 있습니다. 선택적으로 Google Drive 백업을 활성화할 수 있으며, 이 경우 앱 전용 숨김 폴더(appDataFolder)에만 저장되어 일반 Drive 파일에는 접근하지 않습니다.",
+    "모든 자산 데이터는 브라우저 localStorage에만 저장됩니다. 외부 서버로 개인 자산 데이터가 전송되지 않으며, 계정 생성 없이 바로 사용할 수 있습니다. 선택적으로 개인의 Google Drive를 연동해 데이터를 백업할 수도 있습니다.",
   about_tech_title: "기술 스택",
   about_links_live: "라이브 데모",
   about_links_github: "GitHub",
