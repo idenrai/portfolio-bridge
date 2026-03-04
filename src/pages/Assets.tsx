@@ -125,7 +125,7 @@ export function AssetsPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-slate-800">{t.asset_title}</h2>
         <Button size="sm" onClick={handleAdd}>

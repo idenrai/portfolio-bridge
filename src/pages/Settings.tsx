@@ -41,7 +41,7 @@ export function SettingsPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl">
+    <div className="space-y-4 md:space-y-6 max-w-2xl">
       <h2 className="text-lg font-bold text-slate-800">{t.settings_title}</h2>
 
       {/* 환율 · 시세 통합 갱신 */}
@@ -114,16 +114,16 @@ export function SettingsPage() {
                   return (
                     <div
                       key={code}
-                      className="grid py-0.5 items-center gap-x-2"
-                      style={{ gridTemplateColumns: "1fr 6rem 7rem 2.5rem" }}
+                      className="grid py-0.5 items-center gap-x-1 sm:gap-x-2"
+                      style={{ gridTemplateColumns: "1fr auto auto auto" }}
                     >
-                      <span className="text-sm text-slate-600 truncate">
+                      <span className="text-xs sm:text-sm text-slate-600 truncate">
                         {currencyName} ({code})
                       </span>
-                      <span className="text-xs text-slate-400 text-right tabular-nums">
+                      <span className="text-[10px] sm:text-xs text-slate-400 text-right tabular-nums">
                         {unit} {code} =
                       </span>
-                      <span className="text-sm font-mono text-slate-800 text-right tabular-nums">
+                      <span className="text-xs sm:text-sm font-mono text-slate-800 text-right tabular-nums">
                         {rateInBase.toLocaleString(langLocale, {
                           maximumSignificantDigits: 4,
                         })}

@@ -13,7 +13,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="w-60 min-h-screen bg-slate-900 text-slate-200 flex flex-col">
+    <aside className="hidden md:flex w-60 min-h-screen bg-slate-900 text-slate-200 flex-col">
       {/* 로고 */}
       <div className="px-6 py-5 border-b border-slate-700">
         <h1 className="text-lg font-bold tracking-tight">

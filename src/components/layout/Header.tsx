@@ -34,8 +34,15 @@ export function Header() {
   };
 
   return (
-    <header className="h-14 bg-white border-b border-slate-200 flex items-center justify-between px-6">
-      <div />
+    <header className="h-14 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-6">
+      {/* 모바일: 로고 표시 / 데스크톱: 빈 공간 */}
+      <div className="md:hidden">
+        <span className="text-sm font-bold tracking-tight">
+          <span className="text-blue-600">Portfolio</span>
+          <span className="text-slate-400">Bridge</span>
+        </span>
+      </div>
+      <div className="hidden md:block" />
       <div className="flex items-center gap-4">
         {/* 언어 전환 버튼 (화폐 동시 전환) */}
         <div className="flex gap-1">

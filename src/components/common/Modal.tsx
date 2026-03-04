@@ -29,12 +29,12 @@ export function Modal({
     <dialog
       ref={dialogRef}
       onClose={onClose}
-      className={`${maxWidth} w-full rounded-xl border-none shadow-xl backdrop:bg-black/40 p-0 max-h-[90vh] flex flex-col`}
+      className={`${maxWidth} w-[calc(100%-1rem)] sm:w-full rounded-xl border-none shadow-xl backdrop:bg-black/40 p-0 max-h-[85vh] sm:max-h-[90vh] flex flex-col`}
     >
       {open && (
-        <div className="bg-white rounded-xl flex flex-col min-h-0 max-h-[90vh]">
+        <div className="bg-white rounded-xl flex flex-col min-h-0 max-h-[85vh] sm:max-h-[90vh]">
           {title && (
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 shrink-0">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-100 shrink-0">
               <h2 className="text-base font-semibold text-slate-800">
                 {title}
               </h2>
@@ -46,7 +46,7 @@ export function Modal({
               </button>
             </div>
           )}
-          <div className="px-6 py-5 overflow-y-auto">{children}</div>
+          <div className="px-4 sm:px-6 py-4 sm:py-5 overflow-y-auto">{children}</div>
         </div>
       )}
     </dialog>

@@ -50,12 +50,12 @@ export function GurusPage() {
 
   if (assets.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-slate-400">
-        <p className="text-6xl mb-4">💡</p>
-        <h2 className="text-xl font-semibold text-slate-600 mb-2">
+      <div className="flex flex-col items-center justify-center min-h-[40vh] md:min-h-[60vh] text-slate-400 px-4">
+        <p className="text-5xl md:text-6xl mb-4">💡</p>
+        <h2 className="text-lg md:text-xl font-semibold text-slate-600 mb-2 text-center">
           {t.guru_empty_title}
         </h2>
-        <p className="text-sm">{t.guru_empty_desc}</p>
+        <p className="text-xs md:text-sm text-center">{t.guru_empty_desc}</p>
       </div>
     );
   }
@@ -93,11 +93,11 @@ export function GurusPage() {
     : "";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <h2 className="text-lg font-bold text-slate-800">{t.guru_title}</h2>
 
       {/* 구루 선택 카드 */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3">
         {GURU_PROFILES.map((guru) => (
           <button
             key={guru.id}
@@ -146,7 +146,7 @@ export function GurusPage() {
             return (
               <div className="rounded-xl bg-linear-to-r from-purple-600 to-indigo-500 p-px shadow-md">
                 <div className="rounded-[11px] bg-white/95 px-4 py-3">
-                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
                     <div className="flex items-start gap-3 min-w-0">
                       <span className="text-2xl shrink-0 mt-0.5">🧘</span>
                       <div className="min-w-0">
@@ -161,7 +161,7 @@ export function GurusPage() {
                     <button
                       type="button"
                       onClick={() => setShowPrompt((v) => !v)}
-                      className="shrink-0 rounded-lg bg-linear-to-r from-purple-600 to-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                      className="shrink-0 rounded-lg bg-linear-to-r from-purple-600 to-indigo-500 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap w-full sm:w-auto text-center"
                     >
                       {showPrompt ? t.guru_ai_close : t.guru_ai_btn}
                     </button>
@@ -191,10 +191,10 @@ export function GurusPage() {
             );
           })()}
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
             {/* 이상적 배분 파이 차트 */}
             <Card title={t.guru_ideal_alloc(guruName(selectedGuru))}>
-              <ResponsiveContainer width="100%" height={260}>
+              <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie
                     data={selectedGuru.idealAllocation.map((a) => ({
@@ -221,7 +221,7 @@ export function GurusPage() {
 
             {/* 레이더 비교 차트 */}
             <Card title={t.guru_radar_title}>
-              <ResponsiveContainer width="100%" height={260}>
+              <ResponsiveContainer width="100%" height={220}>
                 <RadarChart data={radarData}>
                   <PolarGrid />
                   <PolarAngleAxis dataKey="category" tick={{ fontSize: 11 }} />
@@ -249,8 +249,8 @@ export function GurusPage() {
 
           {/* 조정 제안 */}
           <Card title={t.guru_rebalance_title(guruName(selectedGuru))}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+            <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
+              <table className="w-full text-sm min-w-[500px]">
                 <thead>
                   <tr className="text-left text-xs text-slate-500 border-b">
                     <th className="pb-2 font-medium">{t.guru_col_category}</th>

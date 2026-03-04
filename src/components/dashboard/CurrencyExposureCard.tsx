@@ -33,7 +33,7 @@ export function CurrencyExposureCard({ summary }: Props) {
   return (
     <Card title={t.fx_title}>
       {/* 환율 노출 테이블 */}
-      <div className="overflow-x-auto -mx-5 px-5 mb-4">
+      <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5 mb-4">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-slate-100">

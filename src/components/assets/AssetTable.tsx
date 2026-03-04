@@ -37,8 +37,8 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
+    <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
+      <table className="w-full text-sm min-w-[700px]">
         <thead>
           <tr className="text-left text-xs text-slate-500 border-b border-slate-200">
             <th className="pb-2 font-medium">{t.at_col_name}</th>

@@ -71,7 +71,7 @@ export function TopHoldingsTable({ summary }: Props) {
         )
       }
     >
-      <div className="overflow-x-auto -mx-5 px-5">
+      <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
         <table className="w-full min-w-160">
           <thead>
             <tr className="border-b border-slate-100">
