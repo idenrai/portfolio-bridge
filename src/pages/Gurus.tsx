@@ -146,7 +146,7 @@ export function GurusPage() {
             return (
               <div className="rounded-xl bg-linear-to-r from-purple-600 to-indigo-500 p-px shadow-md">
                 <div className="rounded-[11px] bg-white/95 px-4 py-3">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
                     <div className="flex items-start gap-3 min-w-0">
                       <span className="text-2xl shrink-0 mt-0.5">🧘</span>
                       <div className="min-w-0">

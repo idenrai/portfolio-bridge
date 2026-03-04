@@ -46,7 +46,9 @@ export function Modal({
               </button>
             </div>
           )}
-          <div className="px-4 sm:px-6 py-4 sm:py-5 overflow-y-auto">{children}</div>
+          <div className="px-4 sm:px-6 py-4 sm:py-5 overflow-y-auto">
+            {children}
+          </div>
         </div>
       )}
     </dialog>

@@ -38,7 +38,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
 
   return (
     <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
-      <table className="w-full text-sm min-w-[700px]">
+      <table className="w-full text-sm min-w-[900px]">
         <thead>
           <tr className="text-left text-xs text-slate-500 border-b border-slate-200">
             <th className="pb-2 font-medium">{t.at_col_name}</th>
@@ -64,20 +64,20 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
 
             return (
               <tr key={a.id} className="hover:bg-slate-50">
-                <td className="py-2.5 max-w-[180px]">
-                  <p className="font-medium text-slate-800 wrap-break-word whitespace-normal leading-snug">
+                <td className="py-2.5 max-w-[260px]">
+                  <p className="font-medium text-slate-800 break-words whitespace-normal leading-snug">
                     {a.name}
                   </p>
                   {a.ticker && (
                     <p className="text-xs text-slate-400">{a.ticker}</p>
                   )}
                 </td>
-                <td className="py-2.5">
+                <td className="py-2.5 whitespace-nowrap">
                   <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
                     {t.market_labels[a.market]}
                   </span>
                 </td>
-                <td className="py-2.5">
+                <td className="py-2.5 whitespace-nowrap">
                   <select
                     value={a.categories[0] ?? ""}
                     onChange={(e) =>
@@ -116,7 +116,7 @@ export function AssetTable({ assets, onEdit, onDelete }: Props) {
                 >
                   {formatPercent(ret)}
                 </td>
-                <td className="py-2.5 text-center">
+                <td className="py-2.5 text-center whitespace-nowrap">
                   <div className="flex items-center justify-center gap-1">
                     <Button variant="ghost" size="sm" onClick={() => onEdit(a)}>
                       {t.at_btn_edit}
