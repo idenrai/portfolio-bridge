@@ -23,10 +23,8 @@ export function useGoogleDrive() {
   const tokenExpiresRef = useRef<number>(0);
   // GIS 토큰 클라이언트 인스턴스
   const tokenClientRef = useRef<TokenClient | null>(null);
-  // 원격 데이터 적용 중일 때 true → 자동 업로드 방지
+  // 원격 데이터 적용 중일 때 true → 업로드 방지
   const isApplyingRemoteRef = useRef(false);
-  // 디바운스 타이머
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // 초기 연결 완료 후 콜백 큐
   const onConnectedRef = useRef<(() => void) | null>(null);
   // re-auth 후 실행할 동작: 'initialSync' | 'uploadOnly'
@@ -89,15 +87,6 @@ export function useGoogleDrive() {
       driveStore.setSyncing(false);
     }
   }, [buildBackup, driveStore]);
-
-  // ── 디바운스 업로드 (3초) ─────────────────────────────────────────────────
-  const scheduleUpload = useCallback(() => {
-    if (!driveStore.isConnected || isApplyingRemoteRef.current) return;
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      uploadNow();
-    }, 3000);
-  }, [driveStore.isConnected, uploadNow]);
 
   // ── 초기 동기화 (연결 직후) ───────────────────────────────────────────────
   const initialSync = useCallback(
@@ -200,24 +189,22 @@ export function useGoogleDrive() {
       }
     };
 
-    if (window.google?.accounts?.oauth2) {
+    const run = () => {
       init();
+      // 이미 연결된 상태로 앱이 재시작된 경우 silent re-auth
+      if (useGoogleDriveStore.getState().isConnected) {
+        tokenClientRef.current?.requestAccessToken({ prompt: "" });
+      }
+    };
+
+    if (window.google?.accounts?.oauth2) {
+      run();
     } else {
       // GIS 스크립트 로드 이벤트 대기
-      window.addEventListener("googleScriptLoaded", init, { once: true });
-      return () => window.removeEventListener("googleScriptLoaded", init);
+      window.addEventListener("googleScriptLoaded", run, { once: true });
+      return () => window.removeEventListener("googleScriptLoaded", run);
     }
   }, [onToken, onTokenError]);
-
-  // ── 자동 동기화: assets / baseCurrency / targetAllocations 변경 감지 ─────
-  useEffect(() => {
-    const unsubAssets = useAssetStore.subscribe(() => scheduleUpload());
-    const unsubSettings = useSettingsStore.subscribe(() => scheduleUpload());
-    return () => {
-      unsubAssets();
-      unsubSettings();
-    };
-  }, [scheduleUpload]);
 
   // ── 공개 API ──────────────────────────────────────────────────────────────
 

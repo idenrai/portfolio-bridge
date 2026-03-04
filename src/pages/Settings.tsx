@@ -202,14 +202,6 @@ export function SettingsPage() {
               ) : null}
               <Button
                 size="sm"
-                variant="secondary"
-                onClick={drive.syncNow}
-                disabled={drive.isSyncing}
-              >
-                {t.drive_sync_now}
-              </Button>
-              <Button
-                size="sm"
                 variant="danger"
                 onClick={drive.disconnect}
                 disabled={drive.isSyncing}

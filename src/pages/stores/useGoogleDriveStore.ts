@@ -52,10 +52,11 @@ export const useGoogleDriveStore = create<DriveStoreState>()(
     }),
     {
       name: "portfolio-bridge-drive",
-      // fileId, syncedAt 만 영속화
+      // fileId, syncedAt, isConnected 영속화 (재시작 시 연결 상태 유지)
       partialize: (state) => ({
         fileId: state.fileId,
         syncedAt: state.syncedAt,
+        isConnected: state.isConnected,
       }),
     },
   ),

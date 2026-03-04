@@ -339,6 +339,7 @@ export const en: Translations = {
   drive_syncing: "Syncing\u2026",
   drive_synced_at: (time) => `Synced at ${time}`,
   drive_sync_now: "Sync Now",
+  drive_save_to_drive: "Save to Drive",
   drive_no_client_id: "VITE_GOOGLE_CLIENT_ID is not set.",
   drive_error_prefix: "Sync error:",
   drive_conflict_title: "Data Conflict Detected",

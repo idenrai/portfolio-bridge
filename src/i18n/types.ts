@@ -235,6 +235,7 @@ export interface Translations {
   drive_syncing: string;
   drive_synced_at: (time: string) => string;
   drive_sync_now: string;
+  drive_save_to_drive: string;
   drive_no_client_id: string;
   drive_error_prefix: string;
   drive_conflict_title: string;

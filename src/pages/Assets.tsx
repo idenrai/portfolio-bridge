@@ -8,7 +8,7 @@ import {
   buildClassificationPrompt,
   parseAiResponse,
 } from "@/utils/aiClassification";
-import { useT } from "@/hooks";
+import { useT, useGoogleDrive } from "@/hooks";
 import type { Asset, AssetFormData } from "@/types";
 
 export function AssetsPage() {
@@ -31,6 +31,7 @@ export function AssetsPage() {
   const lang = useLanguageStore((s) => s.lang);
   const promptText = buildClassificationPrompt(assets, lang);
   const t = useT();
+  const drive = useGoogleDrive();
 
   const handleCopyPrompt = async () => {
     await navigator.clipboard.writeText(promptText);
@@ -126,6 +127,20 @@ export function AssetsPage() {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-slate-800">{t.asset_title}</h2>
         <div className="flex gap-2">
+          {drive.isConnected && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={drive.syncNow}
+              disabled={drive.isSyncing}
+            >
+              {drive.isSyncing ? (
+                <span className="animate-pulse">{t.drive_syncing}</span>
+              ) : (
+                t.drive_save_to_drive
+              )}
+            </Button>
+          )}
           <Button variant="secondary" size="sm" onClick={handleImport}>
             {t.asset_btn_import_csv}
           </Button>

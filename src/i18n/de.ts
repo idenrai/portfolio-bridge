@@ -345,6 +345,7 @@ export const de: Translations = {
   drive_syncing: "Synchronisiere\u2026",
   drive_synced_at: (time) => `Synchronisiert um ${time}`,
   drive_sync_now: "Jetzt synchronisieren",
+  drive_save_to_drive: "In Drive speichern",
   drive_no_client_id: "VITE_GOOGLE_CLIENT_ID ist nicht gesetzt.",
   drive_error_prefix: "Sync-Fehler:",
   drive_conflict_title: "Datenkonflikt erkannt",
