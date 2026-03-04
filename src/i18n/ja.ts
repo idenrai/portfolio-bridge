@@ -79,7 +79,8 @@ export const ja: Translations = {
   holdings_show_top10: "上位10件のみ",
 
   category_title: "カテゴリー目標 vs 実績",
-  category_empty: "設定から目標配分を登録してください",
+  category_set_target: "目標設定",
+  category_empty: "「目標設定」から目標配分を登録してください",
   category_legend_target: "目標",
   category_legend_normal: "正常",
   category_legend_over: "超過",

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import {
   useAssetStore,
   useSettingsStore,
@@ -7,9 +7,7 @@ import {
 import { TRANSLATIONS } from "@/i18n";
 import { fetchCurrentPrice } from "@/utils";
 
-/** 캐시 유효 기간: 1시간 */
-const CACHE_TTL_MS = 60 * 60 * 1000;
-/** 캐시 폴백 한도: 24시간 */
+/** 캐시 폴백 한도: 24분 */
 const CACHE_FALLBACK_MS = 24 * 60 * 1000;
 /** 동시 요청 제한 */
 const CONCURRENCY = 5;
@@ -139,17 +137,6 @@ export function usePriceRefresh(): UsePriceRefreshResult {
       runningRef.current = false;
     }
   }, [assets, updatePrices, setLastUpdated, lastUpdated, lang]);
-
-  // 마운트 시 자동 조회: 캐시가 없거나 1시간 이상 경과
-  useEffect(() => {
-    const cacheAge = lastUpdated
-      ? Date.now() - new Date(lastUpdated).getTime()
-      : Infinity;
-    if (cacheAge > CACHE_TTL_MS) {
-      refreshPrices();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return {
     refreshPrices,

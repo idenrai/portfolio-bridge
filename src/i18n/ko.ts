@@ -78,7 +78,8 @@ export const ko: Translations = {
   holdings_show_top10: "상위 10개만",
 
   category_title: "분류 목표 vs 실제",
-  category_empty: "설정에서 목표 배분을 등록하세요",
+  category_set_target: "목표 설정",
+  category_empty: "목표 설정 버튼으로 직접 등록하세요",
   category_legend_target: "목표",
   category_legend_normal: "정상",
   category_legend_over: "초과",

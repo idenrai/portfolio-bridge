@@ -78,7 +78,8 @@ export const en: Translations = {
   holdings_show_top10: "Top 10 only",
 
   category_title: "Category Target vs Actual",
-  category_empty: "Set target allocations in Settings.",
+  category_set_target: "Set Targets",
+  category_empty: "Click \"Set Targets\" to configure target allocations.",
   category_legend_target: "Target",
   category_legend_normal: "Normal",
   category_legend_over: "Over",

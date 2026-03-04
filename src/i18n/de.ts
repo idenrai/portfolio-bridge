@@ -80,7 +80,8 @@ export const de: Translations = {
   holdings_show_top10: "Nur Top 10",
 
   category_title: "Kategorie: Ziel vs. Ist",
-  category_empty: "Zielallokationen in den Einstellungen festlegen.",
+  category_set_target: "Ziele festlegen",
+  category_empty: "Zielallokationen über \"Ziele festlegen\" eingeben.",
   category_legend_target: "Ziel",
   category_legend_normal: "Normal",
   category_legend_over: "Übergewichtet",

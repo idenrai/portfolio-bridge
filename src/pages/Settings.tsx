@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Card, Button } from "@/components/common";
 import {
   useSettingsStore,
@@ -6,7 +5,7 @@ import {
   useLanguageStore,
 } from "@/pages/stores";
 import { useDataRefresh, useGoogleDrive, useT } from "@/hooks";
-import type { AssetCategory, CurrencyCode, TargetAllocation } from "@/types";
+import type { CurrencyCode } from "@/types";
 import { LANG_LOCALES } from "@/i18n";
 import { format } from "date-fns";
 
@@ -32,26 +31,6 @@ export function SettingsPage() {
     totalCount,
     failedAssets,
   } = useDataRefresh();
-  const [allocations, setAllocations] = useState<TargetAllocation[]>([
-    ...settings.targetAllocations,
-  ]);
-  const [saved, setSaved] = useState(false);
-
-  const handleAllocationChange = (index: number, value: string) => {
-    const updated = [...allocations];
-    updated[index] = { ...updated[index], targetPercent: Number(value) || 0 };
-    setAllocations(updated);
-    setSaved(false);
-  };
-
-  const saveAllocations = () => {
-    settings.setTargetAllocations(allocations);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
-  };
-
-  const totalPercent = allocations.reduce((s, a) => s + a.targetPercent, 0);
-  const isExact = Math.abs(totalPercent - 100) < 0.01;
   const t = useT();
 
   const handleResetAll = () => {
@@ -117,41 +96,46 @@ export function SettingsPage() {
 
           {/* 환율 표시 */}
           <div>
-            <p className="text-xs font-medium text-slate-500 mb-1.5">
+            <p className="text-xs font-medium text-slate-500 mb-2">
               {t.settings_fx_title}
             </p>
-            {(Object.keys(settings.exchangeRates) as CurrencyCode[])
-              .filter((code) => code !== baseCurrency)
-              .map((code) => {
-                // 통화별 표시 단위 (소액 통화는 묶어서 표시)
-                const UNIT: Partial<Record<CurrencyCode, number>> = {
-                  KRW: 1000,
-                  JPY: 100,
-                };
-                const unit = UNIT[code] ?? 1;
-                const rateInBase =
-                  ((settings.exchangeRates[code] ?? 1) / baseCurrencyRate) *
-                  unit;
-                const currencyName = currencyDisplayNames.of(code) ?? code;
-                return (
-                  <div key={code} className="flex items-center gap-3 py-0.5">
-                    <span className="text-sm text-slate-600 w-52">
-                      {currencyName} ({code})
-                    </span>
-                    <span className="text-xs text-slate-400 shrink-0">
-                      {unit > 1 ? unit : 1} {code} =
-                    </span>
-                    <span className="text-sm font-mono text-slate-800 w-28 text-right">
-                      {rateInBase.toLocaleString(langLocale, {
-                        maximumSignificantDigits: 4,
-                      })}
-                    </span>
-                    <span className="text-xs text-slate-400">
-                      {baseCurrency}
-                    </span>
-                  </div>
-                );
-              })}
+            <div className="space-y-1">
+              {(Object.keys(settings.exchangeRates) as CurrencyCode[])
+                .filter((code) => code !== baseCurrency)
+                .map((code) => {
+                  const UNIT: Partial<Record<CurrencyCode, number>> = {
+                    KRW: 1000,
+                    JPY: 100,
+                  };
+                  const unit = UNIT[code] ?? 1;
+                  const rateInBase =
+                    ((settings.exchangeRates[code] ?? 1) / baseCurrencyRate) *
+                    unit;
+                  const currencyName = currencyDisplayNames.of(code) ?? code;
+                  return (
+                    <div
+                      key={code}
+                      className="grid py-0.5 items-center gap-x-2"
+                      style={{ gridTemplateColumns: "1fr 6rem 7rem 2.5rem" }}
+                    >
+                      <span className="text-sm text-slate-600 truncate">
+                        {currencyName} ({code})
+                      </span>
+                      <span className="text-xs text-slate-400 text-right tabular-nums">
+                        {unit} {code} =
+                      </span>
+                      <span className="text-sm font-mono text-slate-800 text-right tabular-nums">
+                        {rateInBase.toLocaleString(langLocale, {
+                          maximumSignificantDigits: 4,
+                        })}
+                      </span>
+                      <span className="text-xs text-slate-400">
+                        {baseCurrency}
+                      </span>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
 
           {/* 시세 진행률 */}
@@ -274,49 +258,6 @@ export function SettingsPage() {
               </div>
             </div>
           )}
-        </div>
-      </Card>
-
-      {/* 목표 비중 */}
-      <Card title={t.settings_target_title}>
-        <div className="space-y-2">
-          {allocations.map((a, i) => (
-            <label key={a.category} className="flex items-center gap-3">
-              <span className="text-sm text-slate-600 w-32">
-                {t.category_labels[a.category as AssetCategory] ?? a.category}
-              </span>
-              <input
-                type="number"
-                min={0}
-                max={100}
-                value={a.targetPercent}
-                onChange={(e) => handleAllocationChange(i, e.target.value)}
-                className="w-24 rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
-              />
-              <span className="text-xs text-slate-400">%</span>
-            </label>
-          ))}
-
-          {/* 합계 + 저장 */}
-          <div className="flex items-center justify-between pt-3 mt-1 border-t border-slate-100">
-            <span
-              className={`text-sm font-medium ${
-                isExact ? "text-green-600" : "text-red-600"
-              }`}
-            >
-              {t.settings_target_sum(totalPercent.toFixed(0))}
-            </span>
-            <div className="flex items-center gap-2">
-              {saved && (
-                <span className="text-xs text-green-600 font-medium animate-pulse">
-                  ✓ {t.settings_target_saved}
-                </span>
-              )}
-              <Button size="sm" onClick={saveAllocations} disabled={!isExact}>
-                {t.settings_target_save}
-              </Button>
-            </div>
-          </div>
         </div>
       </Card>
 

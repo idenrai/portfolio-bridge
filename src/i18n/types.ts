@@ -87,8 +87,7 @@ export interface Translations {
   holdings_show_top10: string;
 
   // ─── CategoryAnalysisCard ────────────────────────────────────────────────
-  category_title: string;
-  category_empty: string;
+  category_title: string;  category_set_target: string;  category_empty: string;
   category_legend_target: string;
   category_legend_normal: string;
   category_legend_over: string;

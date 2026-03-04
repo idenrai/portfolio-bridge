@@ -1,10 +1,8 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useSettingsStore, useLanguageStore } from "@/pages/stores";
 import { TRANSLATIONS } from "@/i18n";
 import { fetchAllExchangeRates } from "@/utils";
 
-/** 캐시 유효 기간: 1시간 (이 시간 이내이면 자동 재조회 생략) */
-const CACHE_TTL_MS = 60 * 60 * 1000;
 /** 캐시 폴백 한도: 24시간 (조회 실패 시 이 시간 이내 캐시는 경고 후 사용) */
 const CACHE_FALLBACK_MS = 24 * 60 * 60 * 1000;
 
@@ -62,18 +60,6 @@ export function useExchangeRates(): UseExchangeRateResult {
       setIsLoading(false);
     }
   }, [setExchangeRate, setLastUpdated, lastUpdated, lang]);
-
-  // 마운트 시 자동 조회: 캐시가 없거나 1시간 이상 경과한 경우
-  useEffect(() => {
-    const cacheAge = lastUpdated
-      ? Date.now() - new Date(lastUpdated).getTime()
-      : Infinity;
-    if (cacheAge > CACHE_TTL_MS) {
-      refreshRates();
-    }
-    // 의존성 배열 의도적 생략: 마운트 1회만 실행
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return { refreshRates, isLoading, lastUpdated, error, isCached };
 }
