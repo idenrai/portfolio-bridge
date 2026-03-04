@@ -232,6 +232,7 @@ export interface Translations {
   drive_disconnect: string;
   drive_connected: string;
   drive_syncing: string;
+  drive_saving: string;
   drive_synced_at: (time: string) => string;
   drive_sync_now: string;
   drive_save_to_drive: string;
