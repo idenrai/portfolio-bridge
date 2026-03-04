@@ -33,7 +33,7 @@ export const en: Translations = {
     "Full UI in Korean, English, Japanese, and German. Display currency switchable between KRW, USD, JPY, and EUR.",
   about_privacy_title: "Privacy First",
   about_privacy_desc:
-    "All asset data is stored only in your browser's localStorage. Nothing is sent to an external server. No account creation needed.",
+    "All asset data is stored only in your browser's localStorage. Nothing is sent to an external server. No account creation needed. Optionally, you can enable Google Drive backup — data is saved only in an app-specific hidden folder (appDataFolder) with no access to your regular Drive files.",
   about_tech_title: "Tech Stack",
   about_links_live: "Live Demo",
   about_links_github: "GitHub",

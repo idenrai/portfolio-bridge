@@ -34,7 +34,7 @@ export const de: Translations = {
     "Vollständige Benutzeroberfläche auf Koreanisch, Englisch, Japanisch und Deutsch. Anzeigewährung zwischen KRW, USD, JPY und EUR umschaltbar.",
   about_privacy_title: "Datenschutz an erster Stelle",
   about_privacy_desc:
-    "Alle Vermögensdaten werden nur im localStorage Ihres Browsers gespeichert. Es werden keine Daten an einen externen Server gesendet. Keine Kontoanmeldung erforderlich.",
+    "Alle Vermögensdaten werden nur im localStorage Ihres Browsers gespeichert. Es werden keine Daten an einen externen Server gesendet. Keine Kontoanmeldung erforderlich. Optional kann ein Google Drive-Backup aktiviert werden — Daten werden ausschließlich in einem app-spezifischen versteckten Ordner (appDataFolder) gespeichert, ohne Zugriff auf reguläre Drive-Dateien.",
   about_tech_title: "Technologie-Stack",
   about_links_live: "Live-Demo",
   about_links_github: "GitHub",

@@ -33,7 +33,7 @@ export const ja: Translations = {
     "韓国語・English・日本語・Deutschの4ヵ国語とKRW・USD・JPY・EURの通貨表示に対応しています。",
   about_privacy_title: "プライバシー重視",
   about_privacy_desc:
-    "すべての資産データはブラウザのlocalStorageのみに保存されます。外部サーバーへの送信は一切なく、アカウント不要で即座にご利用いただけます。",
+    "すべての資産データはブラウザのlocalStorageのみに保存されます。外部サーバーへの送信は一切なく、アカウント不要で即座にご利用いただけます。任意でGoogle Driveバックアップを有効にできます。データはアプリ専用の隠しフォルダ（appDataFolder）のみに保存され、通常のDriveファイルにはアクセスしません。",
   about_tech_title: "技術スタック",
   about_links_live: "ライブデモ",
   about_links_github: "GitHub",

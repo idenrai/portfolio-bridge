@@ -33,7 +33,7 @@ export const ko: Translations = {
     "한국어 · English · 日本語 · Deutsch 4개국어와 KRW · USD · JPY · EUR 통화 표시를 지원합니다.",
   about_privacy_title: "프라이버시 우선",
   about_privacy_desc:
-    "모든 자산 데이터는 브라우저 localStorage에만 저장됩니다. 외부 서버로 개인 자산 데이터가 전송되지 않으며, 계정 생성 없이 바로 사용할 수 있습니다.",
+    "모든 자산 데이터는 브라우저 localStorage에만 저장됩니다. 외부 서버로 개인 자산 데이터가 전송되지 않으며, 계정 생성 없이 바로 사용할 수 있습니다. 선택적으로 Google Drive 백업을 활성화할 수 있으며, 이 경우 앱 전용 숨김 폴더(appDataFolder)에만 저장되어 일반 Drive 파일에는 접근하지 않습니다.",
   about_tech_title: "기술 스택",
   about_links_live: "라이브 데모",
   about_links_github: "GitHub",
