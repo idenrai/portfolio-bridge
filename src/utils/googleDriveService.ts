@@ -153,10 +153,8 @@ export function initGoogleDriveService() {
   const setup = () => {
     if (!window.google?.accounts?.oauth2) return;
     tokenClient = createTokenClient(CLIENT_ID, onToken, onTokenError);
-    // 이미 연결된 상태로 재시작 → silent re-auth (팝업 없음)
-    if (useGoogleDriveStore.getState().isConnected) {
-      tokenClient.requestAccessToken({ prompt: "" });
-    }
+    // 앱 시작 시 자동 토큰 요청 안 함 — GIS는 silent re-auth도 잠깐 오버레이를 띄우므로
+    // 사용자가 저장/불러오기 버튼을 누를 때 필요 시 토큰을 요청함
   };
 
   if (window.google?.accounts?.oauth2) {
