@@ -365,6 +365,8 @@ export const ja: Translations = {
   settings_data_reset: "全データ初期化",
   settings_data_reset_confirm:
     "すべてのデータ（資産・設定）を初期化します。この操作は元に戻せません。",
+  settings_data_drive_note:
+    "Google Driveに保存されたデータを削除するには、Googleアカウントのアプリ連携管理ページ（myaccount.google.com/permissions）でこのアプリのアクセス権限を解除してください。権限を解除するとDriveに保存されたバックアップファイルも削除されます。",
 
   at_col_name: "銘柄",
   at_col_market: "市場",

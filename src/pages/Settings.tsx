@@ -180,6 +180,18 @@ export function SettingsPage() {
           <Button variant="danger" size="sm" onClick={handleResetAll}>
             {t.settings_data_reset}
           </Button>
+          <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 space-y-1">
+            <p className="text-xs font-medium text-slate-600">💡 Google Drive 데이터 삭제</p>
+            <p className="text-xs text-slate-500 leading-relaxed">{t.settings_data_drive_note}</p>
+            <a
+              href="https://myaccount.google.com/permissions"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-xs text-blue-600 hover:underline mt-0.5"
+            >
+              myaccount.google.com/permissions →
+            </a>
+          </div>
         </div>
       </Card>
     </div>

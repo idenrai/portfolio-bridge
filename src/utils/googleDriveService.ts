@@ -20,11 +20,11 @@ const CLIENT_ID =
 let tokenValue: string | null = null;
 let tokenExpires = 0;
 let tokenClient: TokenClient | null = null;
-let postAuthAction: "initialSync" | "uploadOnly" | "downloadOnly" = "initialSync";
+let postAuthAction: "initialSync" | "uploadOnly" | "downloadOnly" =
+  "initialSync";
 let initialized = false;
 
-const isTokenValid = () =>
-  !!tokenValue && Date.now() < tokenExpires - 30_000;
+const isTokenValid = () => !!tokenValue && Date.now() < tokenExpires - 30_000;
 
 // ── 헬퍼 ─────────────────────────────────────────────────────────────────────
 const store = () => useGoogleDriveStore.getState();
@@ -90,15 +90,21 @@ async function initialSync(token: string): Promise<void> {
     if (!fileId) {
       const backup = buildBackup();
       const newId = await uploadDriveBackup(token, backup, null);
-      if (newId) { s.setFileId(newId); s.setSyncedAt(backup.syncedAt); }
+      if (newId) {
+        s.setFileId(newId);
+        s.setSyncedAt(backup.syncedAt);
+      }
       return;
     }
 
     const remote = await downloadDriveBackup(token, fileId);
-    if (!remote) { await uploadNow(); return; }
+    if (!remote) {
+      await uploadNow();
+      return;
+    }
 
     const remoteTs = remote.syncedAt ? new Date(remote.syncedAt).getTime() : 0;
-    const localTs  = s.syncedAt     ? new Date(s.syncedAt).getTime()      : 0;
+    const localTs = s.syncedAt ? new Date(s.syncedAt).getTime() : 0;
 
     if (remoteTs > localTs) {
       if (localTs === 0) {
@@ -162,8 +168,14 @@ export function initGoogleDriveService() {
 
 // ── 공개 액션 ─────────────────────────────────────────────────────────────────
 export function driveConnect() {
-  if (!CLIENT_ID) { store().setSyncError("no_client_id"); return; }
-  if (!tokenClient)  { store().setSyncError("gis_not_loaded"); return; }
+  if (!CLIENT_ID) {
+    store().setSyncError("no_client_id");
+    return;
+  }
+  if (!tokenClient) {
+    store().setSyncError("gis_not_loaded");
+    return;
+  }
   tokenClient.requestAccessToken({ prompt: "select_account" });
 }
 
@@ -187,9 +199,15 @@ async function downloadAndApply(token: string): Promise<void> {
       fileId = await findDriveFile(token);
       if (fileId) s.setFileId(fileId);
     }
-    if (!fileId) { s.setSyncError("no_file_in_drive"); return; }
+    if (!fileId) {
+      s.setSyncError("no_file_in_drive");
+      return;
+    }
     const remote = await downloadDriveBackup(token, fileId);
-    if (!remote) { s.setSyncError("download_failed"); return; }
+    if (!remote) {
+      s.setSyncError("download_failed");
+      return;
+    }
     applyRemote(remote);
     s.setSyncedAt(remote.syncedAt);
   } catch (e) {
@@ -200,15 +218,27 @@ async function downloadAndApply(token: string): Promise<void> {
 }
 
 export async function driveSyncNow(): Promise<void> {
-  if (isTokenValid()) { await uploadNow(); return; }
-  if (!tokenClient) { store().setSyncError("gis_not_loaded"); return; }
+  if (isTokenValid()) {
+    await uploadNow();
+    return;
+  }
+  if (!tokenClient) {
+    store().setSyncError("gis_not_loaded");
+    return;
+  }
   postAuthAction = "uploadOnly";
   tokenClient.requestAccessToken({ prompt: "" });
 }
 
 export async function driveLoadFromDrive(): Promise<void> {
-  if (isTokenValid()) { await downloadAndApply(tokenValue!); return; }
-  if (!tokenClient) { store().setSyncError("gis_not_loaded"); return; }
+  if (isTokenValid()) {
+    await downloadAndApply(tokenValue!);
+    return;
+  }
+  if (!tokenClient) {
+    store().setSyncError("gis_not_loaded");
+    return;
+  }
   postAuthAction = "downloadOnly";
   tokenClient.requestAccessToken({ prompt: "" });
 }

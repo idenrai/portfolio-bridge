@@ -79,7 +79,7 @@ export const en: Translations = {
 
   category_title: "Category Target vs Actual",
   category_set_target: "Set Targets",
-  category_empty: "Click \"Set Targets\" to configure target allocations.",
+  category_empty: 'Click "Set Targets" to configure target allocations.',
   category_legend_target: "Target",
   category_legend_normal: "Normal",
   category_legend_over: "Over",
@@ -363,6 +363,8 @@ export const en: Translations = {
   settings_data_reset: "Reset All Data",
   settings_data_reset_confirm:
     "This will reset all data (assets, settings). This action cannot be undone.",
+  settings_data_drive_note:
+    "To delete data saved on Google Drive, go to your Google Account's app permissions page (myaccount.google.com/permissions) and revoke access for this app. Revoking access will also delete the backup file stored in Drive.",
 
   at_col_name: "Name",
   at_col_market: "Market",

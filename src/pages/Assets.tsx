@@ -202,7 +202,9 @@ export function AssetsPage() {
                   </Button>
                   {drive.syncedAt && (
                     <span className="text-xs text-slate-400">
-                      {t.drive_synced_at(format(new Date(drive.syncedAt), "HH:mm"))}
+                      {t.drive_synced_at(
+                        format(new Date(drive.syncedAt), "HH:mm"),
+                      )}
                     </span>
                   )}
                   <Button
@@ -238,16 +240,28 @@ export function AssetsPage() {
         {/* 충돌 해소 (Drive 선택 시) */}
         {dataSource === "drive" && drive.pendingConflict && (
           <div className="mt-2 rounded-lg border border-amber-300 bg-amber-50 p-3 space-y-2">
-            <p className="text-xs font-semibold text-amber-800">{t.drive_conflict_title}</p>
+            <p className="text-xs font-semibold text-amber-800">
+              {t.drive_conflict_title}
+            </p>
             <p className="text-xs text-amber-700">
               {t.drive_conflict_desc(
                 format(new Date(drive.pendingConflict.syncedAt), "MM/dd HH:mm"),
-                drive.syncedAt ? format(new Date(drive.syncedAt), "MM/dd HH:mm") : "-",
+                drive.syncedAt
+                  ? format(new Date(drive.syncedAt), "MM/dd HH:mm")
+                  : "-",
               )}
             </p>
             <div className="flex gap-2">
-              <Button size="sm" onClick={drive.resolveWithDrive}>{t.drive_use_drive}</Button>
-              <Button size="sm" variant="secondary" onClick={drive.resolveWithLocal}>{t.drive_use_local}</Button>
+              <Button size="sm" onClick={drive.resolveWithDrive}>
+                {t.drive_use_drive}
+              </Button>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={drive.resolveWithLocal}
+              >
+                {t.drive_use_local}
+              </Button>
             </div>
           </div>
         )}

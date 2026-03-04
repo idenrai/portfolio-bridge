@@ -81,7 +81,7 @@ export const de: Translations = {
 
   category_title: "Kategorie: Ziel vs. Ist",
   category_set_target: "Ziele festlegen",
-  category_empty: "Zielallokationen über \"Ziele festlegen\" eingeben.",
+  category_empty: 'Zielallokationen über "Ziele festlegen" eingeben.',
   category_legend_target: "Ziel",
   category_legend_normal: "Normal",
   category_legend_over: "Übergewichtet",
@@ -371,6 +371,8 @@ export const de: Translations = {
   settings_data_reset: "Alle Daten zurücksetzen",
   settings_data_reset_confirm:
     "Dadurch werden alle Daten (Vermögen, Einstellungen) zurückgesetzt. Diese Aktion kann nicht rückgängig gemacht werden.",
+  settings_data_drive_note:
+    "Um die auf Google Drive gespeicherten Daten zu löschen, wechseln Sie zur App-Berechtigungsseite Ihres Google-Kontos (myaccount.google.com/permissions) und widerrufen Sie den Zugriff für diese App. Beim Widerrufen wird auch die in Drive gespeicherte Sicherungsdatei gelöscht.",
 
   at_col_name: "Name",
   at_col_market: "Markt",
