@@ -146,7 +146,9 @@ export function SettingsPage() {
                         maximumSignificantDigits: 4,
                       })}
                     </span>
-                    <span className="text-xs text-slate-400">{baseCurrency}</span>
+                    <span className="text-xs text-slate-400">
+                      {baseCurrency}
+                    </span>
                   </div>
                 );
               })}

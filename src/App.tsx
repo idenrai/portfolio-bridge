@@ -7,11 +7,13 @@ import { GurusPage } from "@/pages/Gurus";
 import { SettingsPage } from "@/pages/Settings";
 import { AboutPage } from "@/pages/About";
 import { useDataRefresh } from "@/hooks";
+import { initGoogleDriveService } from "@/utils/googleDriveService";
 
 function AppInitializer() {
   const { refreshAll } = useDataRefresh();
   useEffect(() => {
     refreshAll();
+    initGoogleDriveService(); // Drive 서비스 초기화 (앱 전체에서 1회)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return null;
