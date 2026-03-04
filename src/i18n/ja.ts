@@ -341,6 +341,7 @@ export const ja: Translations = {
   drive_synced_at: (time) => `${time}に同期済み`,
   drive_sync_now: "今すぐ同期",
   drive_save_to_drive: "Driveに保存",
+  drive_load_from_drive: "Driveから読み込む",
   drive_no_client_id: "VITE_GOOGLE_CLIENT_IDが設定されていません。",
   drive_error_prefix: "同期エラー:",
   drive_conflict_title: "データ競合を検出",

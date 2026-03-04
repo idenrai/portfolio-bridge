@@ -339,6 +339,7 @@ export const ko: Translations = {
   drive_synced_at: (time) => `${time} 동기화됨`,
   drive_sync_now: "지금 동기화",
   drive_save_to_drive: "드라이브에 저장",
+  drive_load_from_drive: "드라이브에서 불러오기",
   drive_no_client_id: "VITE_GOOGLE_CLIENT_ID 환경변수가 설정되지 않았습니다.",
   drive_error_prefix: "동기화 오류:",
   drive_conflict_title: "데이터 충돌 감지",

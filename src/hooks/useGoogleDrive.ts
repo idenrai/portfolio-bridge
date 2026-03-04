@@ -8,6 +8,7 @@ import {
   driveConnect,
   driveDisconnect,
   driveSyncNow,
+  driveLoadFromDrive,
   driveResolveWithDrive,
   driveResolveWithLocal,
 } from "@/utils/googleDriveService";
@@ -26,6 +27,7 @@ export function useGoogleDrive() {
     connect: driveConnect,
     disconnect: driveDisconnect,
     syncNow: driveSyncNow,
+    loadFromDrive: driveLoadFromDrive,
     resolveWithDrive: driveResolveWithDrive,
     resolveWithLocal: driveResolveWithLocal,
   };

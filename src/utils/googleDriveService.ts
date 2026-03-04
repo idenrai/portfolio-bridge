@@ -20,7 +20,7 @@ const CLIENT_ID =
 let tokenValue: string | null = null;
 let tokenExpires = 0;
 let tokenClient: TokenClient | null = null;
-let postAuthAction: "initialSync" | "uploadOnly" = "initialSync";
+let postAuthAction: "initialSync" | "uploadOnly" | "downloadOnly" = "initialSync";
 let initialized = false;
 
 const isTokenValid = () =>
@@ -126,6 +126,9 @@ async function onToken(token: string): Promise<void> {
   if (postAuthAction === "uploadOnly") {
     postAuthAction = "initialSync";
     await uploadNow();
+  } else if (postAuthAction === "downloadOnly") {
+    postAuthAction = "initialSync";
+    await downloadAndApply(token);
   } else {
     await initialSync(token);
   }
@@ -173,10 +176,40 @@ export function driveDisconnect() {
   store().resetSession();
 }
 
+// ── Drive 다운로드 + 적용 ────────────────────────────────────────────────────
+async function downloadAndApply(token: string): Promise<void> {
+  const s = store();
+  s.setSyncing(true);
+  s.setSyncError(null);
+  try {
+    let fileId = s.fileId;
+    if (!fileId) {
+      fileId = await findDriveFile(token);
+      if (fileId) s.setFileId(fileId);
+    }
+    if (!fileId) { s.setSyncError("no_file_in_drive"); return; }
+    const remote = await downloadDriveBackup(token, fileId);
+    if (!remote) { s.setSyncError("download_failed"); return; }
+    applyRemote(remote);
+    s.setSyncedAt(remote.syncedAt);
+  } catch (e) {
+    s.setSyncError(String(e));
+  } finally {
+    s.setSyncing(false);
+  }
+}
+
 export async function driveSyncNow(): Promise<void> {
   if (isTokenValid()) { await uploadNow(); return; }
   if (!tokenClient) { store().setSyncError("gis_not_loaded"); return; }
   postAuthAction = "uploadOnly";
+  tokenClient.requestAccessToken({ prompt: "" });
+}
+
+export async function driveLoadFromDrive(): Promise<void> {
+  if (isTokenValid()) { await downloadAndApply(tokenValue!); return; }
+  if (!tokenClient) { store().setSyncError("gis_not_loaded"); return; }
+  postAuthAction = "downloadOnly";
   tokenClient.requestAccessToken({ prompt: "" });
 }
 

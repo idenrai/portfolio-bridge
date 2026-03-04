@@ -9,6 +9,7 @@ import {
   parseAiResponse,
 } from "@/utils/aiClassification";
 import { useT, useGoogleDrive } from "@/hooks";
+import { format } from "date-fns";
 import type { Asset, AssetFormData } from "@/types";
 
 export function AssetsPage() {
@@ -127,20 +128,6 @@ export function AssetsPage() {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-slate-800">{t.asset_title}</h2>
         <div className="flex gap-2">
-          {drive.isConnected && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={drive.syncNow}
-              disabled={drive.isSyncing}
-            >
-              {drive.isSyncing ? (
-                <span className="animate-pulse">{t.drive_syncing}</span>
-              ) : (
-                t.drive_save_to_drive
-              )}
-            </Button>
-          )}
           <Button variant="secondary" size="sm" onClick={handleImport}>
             {t.asset_btn_import_csv}
           </Button>
@@ -158,7 +145,81 @@ export function AssetsPage() {
         </div>
       </div>
 
-      {/* AI 분류 배너 */}
+      {/* Google Drive 세션 */}
+      <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-medium text-slate-500 mr-1">Google Drive</span>
+          {drive.isConnected ? (
+            <>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={drive.loadFromDrive}
+                disabled={drive.isSyncing}
+              >
+                {t.drive_load_from_drive}
+              </Button>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={drive.syncNow}
+                disabled={drive.isSyncing}
+              >
+                {drive.isSyncing
+                  ? <span className="animate-pulse">{t.drive_syncing}</span>
+                  : t.drive_save_to_drive
+                }
+              </Button>
+              {drive.syncedAt && (
+                <span className="text-xs text-slate-400">
+                  {t.drive_synced_at(format(new Date(drive.syncedAt), "HH:mm"))}
+                </span>
+              )}
+              <Button
+                size="sm"
+                variant="danger"
+                onClick={drive.disconnect}
+                disabled={drive.isSyncing}
+              >
+                {t.drive_disconnect}
+              </Button>
+            </>
+          ) : (
+            <Button size="sm" variant="secondary" onClick={drive.connect}>
+              {t.drive_connect}
+            </Button>
+          )}
+        </div>
+
+        {/* 에러 */}
+        {drive.syncError && (
+          <p className="mt-2 text-xs text-red-600 bg-red-50 rounded px-3 py-1.5">
+            {t.drive_error_prefix}{" "}
+            {drive.syncError === "no_client_id"
+              ? t.drive_error_no_client_id
+              : drive.syncError === "gis_not_loaded"
+                ? t.drive_error_gis_not_loaded
+                : drive.syncError}
+          </p>
+        )}
+
+        {/* 충돌 해소 */}
+        {drive.pendingConflict && (
+          <div className="mt-2 rounded-lg border border-amber-300 bg-amber-50 p-3 space-y-2">
+            <p className="text-xs font-semibold text-amber-800">{t.drive_conflict_title}</p>
+            <p className="text-xs text-amber-700">
+              {t.drive_conflict_desc(
+                format(new Date(drive.pendingConflict.syncedAt), "MM/dd HH:mm"),
+                drive.syncedAt ? format(new Date(drive.syncedAt), "MM/dd HH:mm") : "-",
+              )}
+            </p>
+            <div className="flex gap-2">
+              <Button size="sm" onClick={drive.resolveWithDrive}>{t.drive_use_drive}</Button>
+              <Button size="sm" variant="secondary" onClick={drive.resolveWithLocal}>{t.drive_use_local}</Button>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="rounded-xl bg-linear-to-r from-violet-600 to-purple-500 p-px shadow-md">
         <div className="rounded-[11px] bg-white/95 px-4 py-3">
           <div className="flex items-center justify-between gap-4">
