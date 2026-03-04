@@ -32,8 +32,14 @@ const DEFAULT_TARGET: TargetAllocation[] = [
   { category: "value" as AssetCategory, targetPercent: 15 },
   { category: "index" as AssetCategory, targetPercent: 15 },
   { category: "bond" as AssetCategory, targetPercent: 5 },
+  { category: "reit" as AssetCategory, targetPercent: 0 },
   { category: "cash" as AssetCategory, targetPercent: 5 },
+  { category: "crypto" as AssetCategory, targetPercent: 0 },
+  { category: "commodity" as AssetCategory, targetPercent: 0 },
 ];
+
+/** 기본 카테고리 집합 (순서 포함) */
+const DEFAULT_CATEGORIES = DEFAULT_TARGET.map((t) => t.category);
 
 export const useSettingsStore = create<SettingsState>()(
   persist(
@@ -55,13 +61,13 @@ export const useSettingsStore = create<SettingsState>()(
     }),
     {
       name: "portfolio-bridge-settings",
-      version: 1,
+      version: 2,
       migrate: (persistedState: unknown, version: number) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let s = persistedState as any;
         if (version === 0) {
           // tag → category 마이그레이션
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const s = persistedState as any;
-          return {
+          s = {
             ...s,
             targetAllocations: (s.targetAllocations ?? []).map((a: any) => ({
               ...a,
@@ -70,7 +76,24 @@ export const useSettingsStore = create<SettingsState>()(
             })),
           };
         }
-        return persistedState;
+        if (version <= 1) {
+          // reit / crypto / commodity 기본값 추가 (없는 항목만)
+          const existing: string[] = (s.targetAllocations ?? []).map(
+            (a: any) => a.category,
+          );
+          const toAdd = DEFAULT_CATEGORIES.filter(
+            (cat) => !existing.includes(cat),
+          ).map((cat) => ({
+            category: cat,
+            targetPercent: DEFAULT_TARGET.find((d) => d.category === cat)
+              ?.targetPercent ?? 0,
+          }));
+          s = {
+            ...s,
+            targetAllocations: [...(s.targetAllocations ?? []), ...toAdd],
+          };
+        }
+        return s;
       },
       merge: (persistedState, currentState) => ({
         ...currentState,
