@@ -10,7 +10,13 @@ import {
 } from "@/utils/aiClassification";
 import { useT, useGoogleDrive } from "@/hooks";
 import { format } from "date-fns";
-import type { Asset, AssetFormData, Market, AssetType, AssetCategory } from "@/types";
+import type {
+  Asset,
+  AssetFormData,
+  Market,
+  AssetType,
+  AssetCategory,
+} from "@/types";
 
 export function AssetsPage() {
   const { assets, addAsset, updateAsset, deleteAsset } = useAssetStore();
@@ -39,18 +45,28 @@ export function AssetsPage() {
   const [filterMarket, setFilterMarket] = useState<Market | "">("");
   const [filterType, setFilterType] = useState<AssetType | "">("");
   const [filterCategory, setFilterCategory] = useState<AssetCategory | "">("");
-  const [sortKey, setSortKey] = useState<"name" | "value" | "pnl" | "return">("value");
+  const [sortKey, setSortKey] = useState<"name" | "value" | "pnl" | "return">(
+    "value",
+  );
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
 
   const handleSort = (key: "name" | "value" | "pnl" | "return") => {
-    if (sortKey === key) setSortDir((d: "asc" | "desc") => (d === "asc" ? "desc" : "asc"));
-    else { setSortKey(key); setSortDir("desc"); }
+    if (sortKey === key)
+      setSortDir((d: "asc" | "desc") => (d === "asc" ? "desc" : "asc"));
+    else {
+      setSortKey(key);
+      setSortDir("desc");
+    }
   };
 
   const filteredAssets = assets
     .filter((a) => !filterMarket || a.market === filterMarket)
     .filter((a) => !filterType || a.type === filterType)
-    .filter((a) => !filterCategory || a.categories.includes(filterCategory as AssetCategory));
+    .filter(
+      (a) =>
+        !filterCategory ||
+        a.categories.includes(filterCategory as AssetCategory),
+    );
 
   const handleCopyPrompt = async () => {
     await navigator.clipboard.writeText(promptText);

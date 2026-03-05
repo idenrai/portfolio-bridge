@@ -23,7 +23,15 @@ export function PortfolioHistoryChart() {
   const lang = useLanguageStore((s) => s.lang);
   const locale = LANG_LOCALES[lang];
 
-  if (snapshots.length < 2) return null;
+  if (snapshots.length < 2) {
+    return (
+      <Card title={t.history_title}>
+        <div className="flex items-center justify-center h-[200px] text-sm text-slate-400">
+          {t.history_no_data}
+        </div>
+      </Card>
+    );
+  }
 
   const data = snapshots.map((s) => ({
     date: s.date,
@@ -36,13 +44,15 @@ export function PortfolioHistoryChart() {
     return `${m}/${day}`;
   };
 
-  const formatValue = (v: number) =>
-    formatCurrency(v, baseCurrency, true);
+  const formatValue = (v: number) => formatCurrency(v, baseCurrency, true);
 
   return (
     <Card title={t.history_title}>
       <ResponsiveContainer width="100%" height={200}>
-        <AreaChart data={data} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
+        <AreaChart
+          data={data}
+          margin={{ top: 4, right: 4, left: 0, bottom: 0 }}
+        >
           <defs>
             <linearGradient id="gradValue" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#6366f1" stopOpacity={0.25} />
@@ -70,7 +80,10 @@ export function PortfolioHistoryChart() {
             width={70}
           />
           <Tooltip
-            formatter={(value: number | undefined, name: string | undefined) => [
+            formatter={(
+              value: number | undefined,
+              name: string | undefined,
+            ) => [
               formatValue(value ?? 0),
               name === "value" ? t.history_value : t.history_cost,
             ]}

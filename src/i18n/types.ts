@@ -285,6 +285,7 @@ export interface Translations {
   history_title: string;
   history_value: string;
   history_cost: string;
+  history_no_data: string;
 
   // ─── PnL Waterfall Chart ──────────────────────────────────────────────────
   pnl_chart_title: string;

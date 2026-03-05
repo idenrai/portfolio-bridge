@@ -390,6 +390,7 @@ export const ko: Translations = {
   history_title: "자산 구성 추이",
   history_value: "평가액",
   history_cost: "매입원가",
+  history_no_data: "데이터를 수집 중입니다. 내일부터 추이를 확인할 수 있어요.",
 
   pnl_chart_title: "종목별 손익 현황",
   pnl_chart_pnl: "손익",

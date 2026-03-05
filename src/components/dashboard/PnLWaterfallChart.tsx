@@ -44,15 +44,22 @@ export function PnLWaterfallChart({ assets }: Props) {
 
   const maxAbs = Math.max(...data.map((d) => Math.abs(d.pnl)), 1);
 
+  const barHeight = 34;
+  const chartHeight = data.length * barHeight + 24;
+
   return (
     <Card title={t.pnl_chart_title}>
-      <ResponsiveContainer width="100%" height={220}>
+      <ResponsiveContainer width="100%" height={chartHeight}>
         <BarChart
           data={data}
           layout="vertical"
           margin={{ top: 0, right: 8, left: 0, bottom: 0 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" horizontal={false} />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#f1f5f9"
+            horizontal={false}
+          />
           <XAxis
             type="number"
             domain={[-maxAbs * 1.1, maxAbs * 1.1]}
@@ -67,7 +74,7 @@ export function PnLWaterfallChart({ assets }: Props) {
             tick={{ fontSize: 10, fill: "#475569" }}
             tickLine={false}
             axisLine={false}
-            width={60}
+            width={80}
           />
           <Tooltip
             formatter={(value: number | undefined) => [

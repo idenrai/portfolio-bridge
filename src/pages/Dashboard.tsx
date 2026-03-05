@@ -38,7 +38,12 @@ export function DashboardPage() {
       totalValueKRW: summary.totalValueKRW,
       totalCostKRW: summary.totalCostKRW,
     });
-  }, [summary.totalValueKRW, summary.totalCostKRW, assets.length, upsertSnapshot]);
+  }, [
+    summary.totalValueKRW,
+    summary.totalCostKRW,
+    assets.length,
+    upsertSnapshot,
+  ]);
 
   const handleLoadSample = () => {
     SAMPLE_ASSETS.forEach((data) => addAsset(data));

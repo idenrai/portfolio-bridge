@@ -391,6 +391,7 @@ export const en: Translations = {
   history_title: "Portfolio Value History",
   history_value: "Value",
   history_cost: "Cost Basis",
+  history_no_data: "Collecting data. The chart will appear from tomorrow.",
 
   pnl_chart_title: "P&L by Asset",
   pnl_chart_pnl: "P&L",

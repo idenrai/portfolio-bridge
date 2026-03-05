@@ -393,6 +393,7 @@ export const ja: Translations = {
   history_title: "資産構成の推移",
   history_value: "評価額",
   history_cost: "取得原価",
+  history_no_data: "データを収集中です。明日からグラフが表示されます。",
 
   pnl_chart_title: "銀柄別損益状況",
   pnl_chart_pnl: "損益",
