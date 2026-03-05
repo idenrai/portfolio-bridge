@@ -4,7 +4,7 @@ import {
   useAssetStore,
   useLanguageStore,
 } from "@/pages/stores";
-import { useDataRefresh, useT } from "@/hooks";
+import { useDataRefresh, useT, useGoogleDrive } from "@/hooks";
 import type { CurrencyCode } from "@/types";
 import { LANG_LOCALES } from "@/i18n";
 import { format } from "date-fns";
@@ -31,6 +31,7 @@ export function SettingsPage() {
     totalCount,
     failedAssets,
   } = useDataRefresh();
+  const drive = useGoogleDrive();
 
   const handleResetAll = () => {
     if (window.confirm(t.settings_data_reset_confirm)) {
@@ -166,6 +167,101 @@ export function SettingsPage() {
                 ? t.settings_data_refresh_auto
                 : t.settings_data_refresh_no_ticker}
             </p>
+          )}
+        </div>
+      </Card>
+
+      {/* Google Drive 동기화 */}
+      <Card title="Google Drive">
+        <div className="space-y-3">
+          {drive.isConnected ? (
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={drive.loadFromDrive}
+                  disabled={drive.isSyncing}
+                >
+                  {drive.isSyncing ? (
+                    <span className="animate-pulse">{t.drive_syncing}</span>
+                  ) : (
+                    t.drive_load_from_drive
+                  )}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={drive.syncNow}
+                  disabled={drive.isSyncing}
+                >
+                  {drive.isSyncing ? (
+                    <span className="animate-pulse">{t.drive_saving}</span>
+                  ) : (
+                    t.drive_save_to_drive
+                  )}
+                </Button>
+                {drive.syncedAt && (
+                  <span className="text-xs text-slate-400">
+                    {t.drive_synced_at(
+                      format(new Date(drive.syncedAt), "HH:mm"),
+                    )}
+                  </span>
+                )}
+                <Button
+                  size="sm"
+                  variant="danger"
+                  onClick={drive.disconnect}
+                  disabled={drive.isSyncing}
+                >
+                  {t.drive_disconnect}
+                </Button>
+              </div>
+              {drive.syncError && (
+                <p className="text-xs text-red-600 bg-red-50 rounded px-3 py-1.5">
+                  {t.drive_error_prefix}{" "}
+                  {drive.syncError === "no_client_id"
+                    ? t.drive_error_no_client_id
+                    : drive.syncError === "gis_not_loaded"
+                      ? t.drive_error_gis_not_loaded
+                      : drive.syncError}
+                </p>
+              )}
+              {drive.pendingConflict && (
+                <div className="rounded-lg border border-amber-300 bg-amber-50 p-3 space-y-2">
+                  <p className="text-xs font-semibold text-amber-800">
+                    {t.drive_conflict_title}
+                  </p>
+                  <p className="text-xs text-amber-700">
+                    {t.drive_conflict_desc(
+                      format(new Date(drive.pendingConflict.syncedAt), "MM/dd HH:mm"),
+                      drive.syncedAt
+                        ? format(new Date(drive.syncedAt), "MM/dd HH:mm")
+                        : "-",
+                    )}
+                  </p>
+                  <div className="flex gap-2">
+                    <Button size="sm" onClick={drive.resolveWithDrive}>
+                      {t.drive_use_drive}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={drive.resolveWithLocal}
+                    >
+                      {t.drive_use_local}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <p className="text-sm text-slate-500">{t.drive_desc}</p>
+              <Button size="sm" variant="secondary" onClick={drive.connect}>
+                {t.drive_connect}
+              </Button>
+            </div>
           )}
         </div>
       </Card>

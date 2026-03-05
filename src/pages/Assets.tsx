@@ -8,8 +8,7 @@ import {
   buildClassificationPrompt,
   parseAiResponse,
 } from "@/utils/aiClassification";
-import { useT, useGoogleDrive } from "@/hooks";
-import { format } from "date-fns";
+import { useT } from "@/hooks";
 import type {
   Asset,
   AssetFormData,
@@ -34,12 +33,10 @@ export function AssetsPage() {
   const [importPreview, setImportPreview] = useState<AssetFormData[] | null>(
     null,
   );
-  const [dataSource, setDataSource] = useState<"csv" | "drive">("csv");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const lang = useLanguageStore((s) => s.lang);
   const promptText = buildClassificationPrompt(assets, lang);
   const t = useT();
-  const drive = useGoogleDrive();
 
   // ── 필터 / 정렬 상태 ──────────────────────────────────────────────────────
   const [filterMarket, setFilterMarket] = useState<Market | "">("");
@@ -159,145 +156,24 @@ export function AssetsPage() {
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2 flex-wrap">
         <h2 className="text-lg font-bold text-slate-800">{t.asset_title}</h2>
-        <Button size="sm" onClick={handleAdd}>
-          {t.asset_btn_add}
-        </Button>
-      </div>
-
-      {/* CSV / Google Drive 통합 패널 */}
-      <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-        <div className="flex flex-wrap items-center gap-3">
-          {/* 세그먼트 컨트롤 */}
-          <div className="flex overflow-hidden rounded-lg border border-slate-200 text-xs">
-            {(["csv", "drive"] as const).map((src) => (
-              <button
-                key={src}
-                type="button"
-                onClick={() => setDataSource(src)}
-                className={`px-3 py-1.5 font-medium transition-colors cursor-pointer ${
-                  dataSource === src
-                    ? "bg-slate-800 text-white"
-                    : "bg-white text-slate-500 hover:bg-slate-50"
-                }`}
-              >
-                {src === "csv" ? "CSV" : "Google Drive"}
-              </button>
-            ))}
-          </div>
-
-          {/* CSV 패널 */}
-          {dataSource === "csv" && (
-            <div className="flex gap-2">
-              <Button variant="secondary" size="sm" onClick={handleImport}>
-                {t.asset_btn_import_csv}
-              </Button>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleExport}
-                disabled={assets.length === 0}
-              >
-                {t.asset_btn_export_csv}
-              </Button>
-            </div>
-          )}
-
-          {/* Drive 패널 */}
-          {dataSource === "drive" && (
-            <div className="flex flex-wrap items-center gap-2">
-              {drive.isConnected ? (
-                <>
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={drive.loadFromDrive}
-                    disabled={drive.isSyncing}
-                  >
-                    {drive.isSyncing ? (
-                      <span className="animate-pulse">{t.drive_syncing}</span>
-                    ) : (
-                      t.drive_load_from_drive
-                    )}
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={drive.syncNow}
-                    disabled={drive.isSyncing}
-                  >
-                    {drive.isSyncing ? (
-                      <span className="animate-pulse">{t.drive_saving}</span>
-                    ) : (
-                      t.drive_save_to_drive
-                    )}
-                  </Button>
-                  {drive.syncedAt && (
-                    <span className="text-xs text-slate-400">
-                      {t.drive_synced_at(
-                        format(new Date(drive.syncedAt), "HH:mm"),
-                      )}
-                    </span>
-                  )}
-                  <Button
-                    size="sm"
-                    variant="danger"
-                    onClick={drive.disconnect}
-                    disabled={drive.isSyncing}
-                  >
-                    {t.drive_disconnect}
-                  </Button>
-                </>
-              ) : (
-                <Button size="sm" variant="secondary" onClick={drive.connect}>
-                  {t.drive_connect}
-                </Button>
-              )}
-            </div>
-          )}
+        <div className="flex items-center gap-2">
+          <Button variant="secondary" size="sm" onClick={handleImport}>
+            {t.asset_btn_import_csv}
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleExport}
+            disabled={assets.length === 0}
+          >
+            {t.asset_btn_export_csv}
+          </Button>
+          <Button size="sm" onClick={handleAdd}>
+            {t.asset_btn_add}
+          </Button>
         </div>
-
-        {/* 에러 (Drive 선택 시) */}
-        {dataSource === "drive" && drive.syncError && (
-          <p className="mt-2 text-xs text-red-600 bg-red-50 rounded px-3 py-1.5">
-            {t.drive_error_prefix}{" "}
-            {drive.syncError === "no_client_id"
-              ? t.drive_error_no_client_id
-              : drive.syncError === "gis_not_loaded"
-                ? t.drive_error_gis_not_loaded
-                : drive.syncError}
-          </p>
-        )}
-
-        {/* 충돌 해소 (Drive 선택 시) */}
-        {dataSource === "drive" && drive.pendingConflict && (
-          <div className="mt-2 rounded-lg border border-amber-300 bg-amber-50 p-3 space-y-2">
-            <p className="text-xs font-semibold text-amber-800">
-              {t.drive_conflict_title}
-            </p>
-            <p className="text-xs text-amber-700">
-              {t.drive_conflict_desc(
-                format(new Date(drive.pendingConflict.syncedAt), "MM/dd HH:mm"),
-                drive.syncedAt
-                  ? format(new Date(drive.syncedAt), "MM/dd HH:mm")
-                  : "-",
-              )}
-            </p>
-            <div className="flex gap-2">
-              <Button size="sm" onClick={drive.resolveWithDrive}>
-                {t.drive_use_drive}
-              </Button>
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={drive.resolveWithLocal}
-              >
-                {t.drive_use_local}
-              </Button>
-            </div>
-          </div>
-        )}
       </div>
       <div className="rounded-xl bg-linear-to-r from-violet-600 to-purple-500 p-px shadow-md">
         <div className="rounded-[11px] bg-white/95 px-4 py-3">

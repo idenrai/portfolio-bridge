@@ -266,10 +266,21 @@ export function AssetTable({
                       </select>
                     </td>
                     <td className="py-2.5 text-right tabular-nums">
-                      {isCash ? <span className="text-slate-400">-</span> : a.quantity.toLocaleString()}
+                      {isCash ? (
+                        <span className="text-slate-400">-</span>
+                      ) : (
+                        a.quantity.toLocaleString()
+                      )}
                     </td>
                     <td className="py-2.5 text-right tabular-nums">
-                      {isCash ? <span className="text-slate-400">-</span> : <>{sym}{a.currentPrice.toLocaleString()}</>}
+                      {isCash ? (
+                        <span className="text-slate-400">-</span>
+                      ) : (
+                        <>
+                          {sym}
+                          {a.currentPrice.toLocaleString()}
+                        </>
+                      )}
                     </td>
                     <td className="py-2.5 text-right tabular-nums font-medium">
                       {sym}
