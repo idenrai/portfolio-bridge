@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { usePortfolio, useDataRefresh, useT } from "@/hooks";
 import {
   useAssetStore,
   useSettingsStore,
   useLanguageStore,
+  useSnapshotStore,
 } from "@/pages/stores";
 import { LANG_LOCALES } from "@/i18n";
 import { KpiBar } from "@/components/dashboard/KpiBar";
@@ -12,6 +14,8 @@ import { CategoryAnalysisCard } from "@/components/dashboard/CategoryAnalysisCar
 import { CurrencyExposureCard } from "@/components/dashboard/CurrencyExposureCard";
 import { RebalanceCard } from "@/components/dashboard/RebalanceCard";
 import { InsightsPanel } from "@/components/dashboard/InsightsPanel";
+import { PortfolioHistoryChart } from "@/components/dashboard/PortfolioHistoryChart";
+import { PnLWaterfallChart } from "@/components/dashboard/PnLWaterfallChart";
 import { SAMPLE_ASSETS } from "@/utils/sampleData";
 
 export function DashboardPage() {
@@ -21,8 +25,20 @@ export function DashboardPage() {
   const lang = useLanguageStore((s) => s.lang);
   const langLocale = LANG_LOCALES[lang];
   const t = useT();
+  const upsertSnapshot = useSnapshotStore((s) => s.upsertSnapshot);
 
   const { refreshAll, isLoading, lastUpdated } = useDataRefresh();
+
+  // 대시보드를 열 때마다 오늘 날짜 스냅샷 저장/갱신
+  useEffect(() => {
+    if (assets.length === 0 || summary.totalValueKRW === 0) return;
+    const today = new Date().toISOString().slice(0, 10);
+    upsertSnapshot({
+      date: today,
+      totalValueKRW: summary.totalValueKRW,
+      totalCostKRW: summary.totalCostKRW,
+    });
+  }, [summary.totalValueKRW, summary.totalCostKRW, assets.length, upsertSnapshot]);
 
   const handleLoadSample = () => {
     SAMPLE_ASSETS.forEach((data) => addAsset(data));
@@ -106,15 +122,21 @@ export function DashboardPage() {
       {/* ③ 파이 차트 (국가별 · 태그별) */}
       <AllocationPieCharts summary={summary} />
 
-      {/* ④ 보유종목 테이블 */}
+      {/* ④ 자산 구성 추이 차트 */}
+      <PortfolioHistoryChart />
+
+      {/* ⑤ 보유종목 테이블 */}
       <TopHoldingsTable summary={summary} />
 
-      {/* ⑤ 하단 3열 그리드 */}
+      {/* ⑥ 하단 그리드 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <CategoryAnalysisCard rebalancing={rebalancing} />
         <CurrencyExposureCard summary={summary} />
         <RebalanceCard rebalancing={rebalancing} />
       </div>
+
+      {/* ⑦ 종목별 손익 차트 */}
+      <PnLWaterfallChart assets={assets} />
     </div>
   );
 }

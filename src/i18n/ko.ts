@@ -380,6 +380,22 @@ export const ko: Translations = {
   at_btn_edit: "편집",
   at_btn_delete: "삭제",
   at_unclassified: "미분류",
+  at_filter_all_market: "전체 시장",
+  at_filter_all_type: "전체 유형",
+  at_filter_all_category: "전체 분류",
+  at_filter_clear: "필터 해제",
+  at_filter_count: (shown, total) => `${shown} / ${total}종목`,
+  at_filter_no_result: "필터 조건에 맞는 자산이 없습니다.",
+
+  history_title: "자산 구성 추이",
+  history_value: "평가액",
+  history_cost: "매입원가",
+
+  pnl_chart_title: "종목별 손익 현황",
+  pnl_chart_pnl: "손익",
+  pnl_chart_profit: "수익",
+  pnl_chart_loss: "손실",
+  pnl_chart_top12: "손익 절대값 상위 12개",
 
   af_mode_stock: "종목 검색",
   af_mode_cash: "현금/예금",

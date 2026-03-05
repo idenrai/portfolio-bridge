@@ -274,6 +274,24 @@ export interface Translations {
   at_btn_edit: string;
   at_btn_delete: string;
   at_unclassified: string;
+  at_filter_all_market: string;
+  at_filter_all_type: string;
+  at_filter_all_category: string;
+  at_filter_clear: string;
+  at_filter_count: (shown: number, total: number) => string;
+  at_filter_no_result: string;
+
+  // ─── Portfolio History Chart ───────────────────────────────────────────────
+  history_title: string;
+  history_value: string;
+  history_cost: string;
+
+  // ─── PnL Waterfall Chart ──────────────────────────────────────────────────
+  pnl_chart_title: string;
+  pnl_chart_pnl: string;
+  pnl_chart_profit: string;
+  pnl_chart_loss: string;
+  pnl_chart_top12: string;
 
   // ─── Asset Form ────────────────────────────────────────────────────────────
   af_mode_stock: string;

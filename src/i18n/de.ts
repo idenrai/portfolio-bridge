@@ -390,6 +390,22 @@ export const de: Translations = {
   at_btn_edit: "Bearbeiten",
   at_btn_delete: "Löschen",
   at_unclassified: "Nicht klassifiziert",
+  at_filter_all_market: "Alle Märkte",
+  at_filter_all_type: "Alle Typen",
+  at_filter_all_category: "Alle Kategorien",
+  at_filter_clear: "Filter zurücksetzen",
+  at_filter_count: (shown, total) => `${shown} / ${total} Werte`,
+  at_filter_no_result: "Keine Werte entsprechen den Filterkriterien.",
+
+  history_title: "Portfolioverlauf",
+  history_value: "Bewertung",
+  history_cost: "Einstandswert",
+
+  pnl_chart_title: "G&V nach Wertpapier",
+  pnl_chart_pnl: "G&V",
+  pnl_chart_profit: "Gewinn",
+  pnl_chart_loss: "Verlust",
+  pnl_chart_top12: "Top 12 nach absolutem G&V",
 
   af_mode_stock: "Ticker suchen",
   af_mode_cash: "Bargeld / Einlage",

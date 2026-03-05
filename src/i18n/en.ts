@@ -381,6 +381,22 @@ export const en: Translations = {
   at_btn_edit: "Edit",
   at_btn_delete: "Delete",
   at_unclassified: "Unclassified",
+  at_filter_all_market: "All Markets",
+  at_filter_all_type: "All Types",
+  at_filter_all_category: "All Categories",
+  at_filter_clear: "Clear filters",
+  at_filter_count: (shown, total) => `${shown} / ${total} assets`,
+  at_filter_no_result: "No assets match the selected filters.",
+
+  history_title: "Portfolio Value History",
+  history_value: "Value",
+  history_cost: "Cost Basis",
+
+  pnl_chart_title: "P&L by Asset",
+  pnl_chart_pnl: "P&L",
+  pnl_chart_profit: "Profit",
+  pnl_chart_loss: "Loss",
+  pnl_chart_top12: "Top 12 by absolute P&L",
 
   af_mode_stock: "Search Ticker",
   af_mode_cash: "Cash / Deposit",

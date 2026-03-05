@@ -15,10 +15,6 @@ export function CurrencyExposureCard({ summary }: Props) {
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
   const t = useT();
 
-  const getCurrencyLabel = (code: string) =>
-    ({ KRW: t.currency_krw, USD: t.currency_usd, JPY: t.currency_jpy })[code] ??
-    code;
-
   if (summary.currencyExposure.length === 0) return null;
 
   // 시나리오를 통화별로 그룹핑
@@ -56,9 +52,6 @@ export function CurrencyExposureCard({ summary }: Props) {
               <tr key={exp.currency} className="border-b border-slate-50">
                 <td className="px-2 py-1.5 text-left">
                   <span className="font-medium text-slate-700">
-                    {getCurrencyLabel(exp.currency)}
-                  </span>
-                  <span className="ml-1 text-[10px] text-slate-400">
                     {exp.currency}
                   </span>
                 </td>

@@ -383,6 +383,22 @@ export const ja: Translations = {
   at_btn_edit: "編集",
   at_btn_delete: "削除",
   at_unclassified: "未分類",
+  at_filter_all_market: "全市場",
+  at_filter_all_type: "全種類",
+  at_filter_all_category: "全カテゴリ",
+  at_filter_clear: "フィルター解除",
+  at_filter_count: (shown, total) => `${shown} / ${total}銀柄`,
+  at_filter_no_result: "該当する資産がありません。",
+
+  history_title: "資産構成の推移",
+  history_value: "評価額",
+  history_cost: "取得原価",
+
+  pnl_chart_title: "銀柄別損益状況",
+  pnl_chart_pnl: "損益",
+  pnl_chart_profit: "利益",
+  pnl_chart_loss: "損失",
+  pnl_chart_top12: "損益絶対値上何12銀柄",
 
   af_mode_stock: "銘柄検索",
   af_mode_cash: "現金/預金",
