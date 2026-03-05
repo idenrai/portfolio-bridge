@@ -128,7 +128,9 @@ export function TopHoldingsTable({ summary }: Props) {
                 <td
                   className={`${tdCls} ${h.type === "cash" ? "text-slate-400" : h.pnlKRW >= 0 ? "text-red-600" : "text-blue-600"}`}
                 >
-                  {h.type === "cash" ? "-" : formatCurrency(convert(h.pnlKRW), baseCurrency)}
+                  {h.type === "cash"
+                    ? "-"
+                    : formatCurrency(convert(h.pnlKRW), baseCurrency)}
                 </td>
                 <td
                   className={`${tdCls} font-medium ${h.type === "cash" ? "text-slate-400" : h.returnPercent >= 0 ? "text-red-600" : "text-blue-600"}`}
