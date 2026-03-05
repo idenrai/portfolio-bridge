@@ -126,14 +126,14 @@ export function TopHoldingsTable({ summary }: Props) {
                   {formatCurrency(convert(h.valueKRW), baseCurrency)}
                 </td>
                 <td
-                  className={`${tdCls} ${h.pnlKRW >= 0 ? "text-red-600" : "text-blue-600"}`}
+                  className={`${tdCls} ${h.type === "cash" ? "text-slate-400" : h.pnlKRW >= 0 ? "text-red-600" : "text-blue-600"}`}
                 >
-                  {formatCurrency(convert(h.pnlKRW), baseCurrency)}
+                  {h.type === "cash" ? "-" : formatCurrency(convert(h.pnlKRW), baseCurrency)}
                 </td>
                 <td
-                  className={`${tdCls} font-medium ${h.returnPercent >= 0 ? "text-red-600" : "text-blue-600"}`}
+                  className={`${tdCls} font-medium ${h.type === "cash" ? "text-slate-400" : h.returnPercent >= 0 ? "text-red-600" : "text-blue-600"}`}
                 >
-                  {formatPercent(h.returnPercent)}
+                  {h.type === "cash" ? "-" : formatPercent(h.returnPercent)}
                 </td>
                 <td className={tdCls}>
                   <div className="flex items-center justify-end gap-1.5">

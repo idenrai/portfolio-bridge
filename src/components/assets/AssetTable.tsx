@@ -229,6 +229,7 @@ export function AssetTable({
                 const ret = assetReturnPercent(a);
                 const sym = CURRENCY_SYMBOLS[a.currency];
                 const pnlColor = pnl >= 0 ? "text-red-600" : "text-blue-600";
+                const isCash = a.type === "cash";
 
                 return (
                   <tr key={a.id} className="hover:bg-slate-50">
@@ -276,15 +277,14 @@ export function AssetTable({
                       {val.toLocaleString()}
                     </td>
                     <td
-                      className={`py-2.5 text-right tabular-nums ${pnlColor}`}
+                      className={`py-2.5 text-right tabular-nums ${isCash ? "text-slate-400" : pnlColor}`}
                     >
-                      {sym}
-                      {pnl.toLocaleString()}
+                      {isCash ? "-" : <>{sym}{pnl.toLocaleString()}</>}
                     </td>
                     <td
-                      className={`py-2.5 text-right tabular-nums font-medium ${pnlColor}`}
+                      className={`py-2.5 text-right tabular-nums font-medium ${isCash ? "text-slate-400" : pnlColor}`}
                     >
-                      {formatPercent(ret)}
+                      {isCash ? "-" : formatPercent(ret)}
                     </td>
                     <td className="py-2.5 text-center whitespace-nowrap">
                       <div className="flex items-center justify-center gap-1">
