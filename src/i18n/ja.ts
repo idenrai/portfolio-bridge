@@ -6,10 +6,10 @@ export const ja: Translations = {
   nav_gurus: "投資家",
   nav_settings: "設定",
   nav_about: "アプリについて",
-  app_tagline: "資産管理 · AIインサイト · 投資家",
+  app_tagline: "資産統合管理 + AI・グルーインサイト",
   app_version_info: "ブラウザ保存",
 
-  about_tagline: "多国籍資産一元管理 + AI・投資家インサイト",
+  about_tagline: "資産統合管理 + AI・グルーインサイト",
   about_intro:
     "Portfolio Bridgeは、韓国・米国・日本・ドイツの金融資産を一画面で管理し、AIや伝説の投資家たちの知恵からポートフォリオのインサイトを得るプライバシー重視のウェブアプリです。すべてのデータはブラウザ内にのみ保存され、外部サーバーへは送信されません。",
   about_features_title: "主な機能",

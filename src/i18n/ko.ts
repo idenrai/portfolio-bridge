@@ -6,10 +6,10 @@ export const ko: Translations = {
   nav_gurus: "투자 구루",
   nav_settings: "설정",
   nav_about: "소개",
-  app_tagline: "자산 관리 · AI 인사이트 · 투자 구루",
+  app_tagline: "자산 통합 관리 + AI · 구루 인사이트",
   app_version_info: "브라우저 저장",
 
-  about_tagline: "다국가 자산 통합 관리 + AI · 구루 인사이트",
+  about_tagline: "자산 통합 관리 + AI · 구루 인사이트",
   about_intro:
     "Portfolio Bridge는 한국 · 미국 · 일본 · 독일의 금융자산을 하나의 화면에서 관리하고, AI와 전설적인 투자가들의 관점에서 포트폴리오 인사이트를 얻을 수 있는 privacy-first 웹 앱입니다. 모든 데이터는 브라우저 내에만 저장되며 외부 서버로 전송되지 않습니다.",
   about_features_title: "주요 기능",

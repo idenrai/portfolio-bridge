@@ -52,7 +52,7 @@ export function AboutPage() {
       {/* Hero */}
       <div className="rounded-2xl bg-linear-to-br from-slate-900 to-slate-800 text-white px-5 py-7 md:px-8 md:py-10 shadow-lg">
         <div className="flex items-center gap-3 mb-4">
-          <div className="text-3xl md:text-4xl">📈</div>
+          <img src="/favicon.svg" className="w-10 h-10 md:w-12 md:h-12 rounded-xl" alt="" aria-hidden="true" />
           <div>
             <h1 className="text-xl md:text-2xl font-bold tracking-tight">
               <span className="text-blue-400">Portfolio</span>

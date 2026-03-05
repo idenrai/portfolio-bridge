@@ -6,11 +6,10 @@ export const de: Translations = {
   nav_gurus: "Gurus",
   nav_settings: "Einstellungen",
   nav_about: "Über",
-  app_tagline: "Vermögen · KI-Einblicke · Gurus",
+  app_tagline: "Integrierte Vermögensverwaltung + KI & Guru-Einblicke",
   app_version_info: "Browser-Speicher",
 
-  about_tagline:
-    "Einheitliches Multi-Länder-Vermögensmanagement + KI & Guru-Einblicke",
+  about_tagline: "Integrierte Vermögensverwaltung + KI & Guru-Einblicke",
   about_intro:
     "Portfolio Bridge ist eine datenschutzorientierte Web-App zur Verwaltung von Finanzanlagen aus Korea, den USA, Japan und Deutschland in einem einzigen Dashboard. Erhalten Sie umsetzbare Portfolio-Einblicke durch KI und die Weisheit legendärer Investoren. Alle Daten verbleiben im Browser — kein Konto erforderlich.",
   about_features_title: "Funktionen",
