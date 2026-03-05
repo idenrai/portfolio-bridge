@@ -174,10 +174,11 @@ export function SettingsPage() {
       {/* 데이터 관리 */}
       <Card title={t.settings_data_title}>
         <div className="space-y-5">
-
           {/* Google Drive 연동 */}
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Google Drive</p>
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+              Google Drive
+            </p>
             {drive.isConnected ? (
               <div className="space-y-3">
                 <div className="flex flex-wrap items-center gap-2">
@@ -292,16 +293,14 @@ export function SettingsPage() {
 
           {/* 로컬 스토리지 초기화 */}
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">{t.settings_data_local_title}</p>
-            <p className="text-sm text-slate-500">{t.settings_data_desc}</p>
-            <p className="text-sm text-slate-500">
-              {t.settings_data_count(assetStore.assets.length)}
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+              {t.settings_data_local_title}
             </p>
+            <p className="text-sm text-slate-500">{t.settings_data_desc}</p>
             <Button variant="danger" size="sm" onClick={handleResetAll}>
               {t.settings_data_reset}
             </Button>
           </div>
-
         </div>
       </Card>
     </div>

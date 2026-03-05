@@ -357,14 +357,14 @@ export const ko: Translations = {
   settings_target_save: "저장",
   settings_target_saved: "저장되었습니다",
   settings_data_title: "데이터 관리",
-  settings_data_local_title: "브라우저 저장소",
-  settings_data_desc: "모든 데이터는 브라우저 로컬 스토리지에 저장됩니다.",
+  settings_data_local_title: "로컬 스토리지",
+  settings_data_desc: "모든 데이터는 로컬 스토리지에 저장됩니다.",
   settings_data_count: (n) => `현재 등록된 자산: ${n}건`,
   settings_data_reset: "전체 데이터 초기화",
   settings_data_reset_confirm:
     "모든 데이터(자산, 설정)를 초기화합니다. 이 작업은 되돌릴 수 없습니다.",
   settings_data_drive_note:
-    "Google Drive에 저장된 데이터를 삭제하려면 구글 계정의 앱 연결 관리 페이지(myaccount.google.com/permissions)에서 이 앱의 접근 권한을 해제하세요. 권한 해제 시 Drive에 저장된 백업 파일도 함께 삭제됩니다.",
+    "Google Drive에 저장된 데이터를 삭제하려면 Google 계정의 앱 연결 관리 페이지(myaccount.google.com/permissions)에서 이 앱의 접근 권한을 해제하세요. 권한 해제 시 Google Drive에 저장된 백업 파일도 함께 삭제됩니다.",
 
   at_col_name: "종목",
   at_col_market: "시장",
