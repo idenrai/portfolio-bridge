@@ -61,7 +61,7 @@ export const useSettingsStore = create<SettingsState>()(
     }),
     {
       name: "portfolio-bridge-settings",
-      version: 2,
+      version: 3,
       migrate: (persistedState: unknown, version: number) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let s = persistedState as any;
@@ -76,8 +76,9 @@ export const useSettingsStore = create<SettingsState>()(
             })),
           };
         }
-        if (version <= 1) {
+        if (version <= 2) {
           // reit / crypto / commodity 기본값 추가 (없는 항목만)
+          // v2→v3: version 2 사용자도 crypto 등 신규 카테고리를 받도록 확장
           const existing: string[] = (s.targetAllocations ?? []).map(
             (a: any) => a.category,
           );
@@ -85,8 +86,9 @@ export const useSettingsStore = create<SettingsState>()(
             (cat) => !existing.includes(cat),
           ).map((cat) => ({
             category: cat,
-            targetPercent: DEFAULT_TARGET.find((d) => d.category === cat)
-              ?.targetPercent ?? 0,
+            targetPercent:
+              DEFAULT_TARGET.find((d) => d.category === cat)?.targetPercent ??
+              0,
           }));
           s = {
             ...s,

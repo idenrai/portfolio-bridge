@@ -36,7 +36,8 @@ function buildBackup(): DriveBackup {
     version: 1,
     syncedAt: new Date().toISOString(),
     assets,
-    settings: { baseCurrency, targetAllocations },
+    // targetAllocations가 undefined이면 빈 배열로 대체 (JSON.stringify 시 키 누락 방지)
+    settings: { baseCurrency, targetAllocations: targetAllocations ?? [] },
   };
 }
 
@@ -46,7 +47,11 @@ function applyRemote(backup: DriveBackup) {
     useSettingsStore.setState((s) => ({
       ...s,
       baseCurrency: backup.settings.baseCurrency as never,
-      targetAllocations: backup.settings.targetAllocations as never,
+      // 구버전 백업에 targetAllocations가 없으면 기존 로컬 값을 유지한다
+      // (undefined로 덮어쓰면 이후 저장 시 JSON key가 누락되어 영구 소실됨)
+      ...(Array.isArray(backup.settings.targetAllocations) && {
+        targetAllocations: backup.settings.targetAllocations as never,
+      }),
     }));
   } catch (e) {
     console.error("applyRemote failed", e);
