@@ -62,7 +62,7 @@ function applyRemote(backup: DriveBackup) {
 export async function uploadNow(): Promise<void> {
   if (!isTokenValid()) return;
   const s = store();
-  s.setSyncing(true);
+  s.setSyncingAction("upload");
   s.setSyncError(null);
   try {
     const backup = buildBackup();
@@ -76,14 +76,14 @@ export async function uploadNow(): Promise<void> {
   } catch (e) {
     s.setSyncError(String(e));
   } finally {
-    s.setSyncing(false);
+    s.setSyncingAction(null);
   }
 }
 
 // ── 초기 동기화 (연결 직후) ───────────────────────────────────────────────────
 async function initialSync(token: string): Promise<void> {
   const s = store();
-  s.setSyncing(true);
+  s.setSyncingAction("upload");
   s.setSyncError(null);
   try {
     let fileId = s.fileId;
@@ -124,7 +124,7 @@ async function initialSync(token: string): Promise<void> {
   } catch (e) {
     s.setSyncError(String(e));
   } finally {
-    s.setSyncing(false);
+    s.setSyncingAction(null);
   }
 }
 
@@ -194,7 +194,7 @@ export function driveDisconnect() {
 // ── Drive 다운로드 + 적용 ────────────────────────────────────────────────────
 async function downloadAndApply(token: string): Promise<void> {
   const s = store();
-  s.setSyncing(true);
+  s.setSyncingAction("download");
   s.setSyncError(null);
   try {
     let fileId = s.fileId;
@@ -216,7 +216,7 @@ async function downloadAndApply(token: string): Promise<void> {
   } catch (e) {
     s.setSyncError(String(e));
   } finally {
-    s.setSyncing(false);
+    s.setSyncingAction(null);
   }
 }
 

@@ -9,8 +9,8 @@ export interface DriveStoreState {
   syncedAt: string | null;
   /** OAuth 연결 여부 (비영속, 페이지 로드 시 재인증 필요) */
   isConnected: boolean;
-  /** 동기화 진행 중 */
-  isSyncing: boolean;
+  /** 진행 중인 작업: null=없음, "upload"=저장 중, "download"=불러오는 중 */
+  syncingAction: "upload" | "download" | null;
   /** 동기화 에러 메시지 */
   syncError: string | null;
   /** Drive vs 로컬 충돌 시 Drive 데이터 (해소 후 null) */
@@ -19,7 +19,7 @@ export interface DriveStoreState {
   setFileId: (id: string | null) => void;
   setSyncedAt: (iso: string) => void;
   setConnected: (v: boolean) => void;
-  setSyncing: (v: boolean) => void;
+  setSyncingAction: (v: "upload" | "download" | null) => void;
   setSyncError: (e: string | null) => void;
   setPendingConflict: (data: DriveBackup | null) => void;
   resetSession: () => void;
@@ -31,21 +31,21 @@ export const useGoogleDriveStore = create<DriveStoreState>()(
       fileId: null,
       syncedAt: null,
       isConnected: false,
-      isSyncing: false,
+      syncingAction: null,
       syncError: null,
       pendingConflict: null,
 
       setFileId: (fileId) => set({ fileId }),
       setSyncedAt: (syncedAt) => set({ syncedAt }),
       setConnected: (isConnected) => set({ isConnected }),
-      setSyncing: (isSyncing) => set({ isSyncing }),
+      setSyncingAction: (syncingAction) => set({ syncingAction }),
       setSyncError: (syncError) => set({ syncError }),
       setPendingConflict: (pendingConflict) => set({ pendingConflict }),
       /** 연결 해제 시 세션 초기화 (fileId·syncedAt 유지, 나머지 초기화) */
       resetSession: () =>
         set({
           isConnected: false,
-          isSyncing: false,
+          syncingAction: null,
           syncError: null,
           pendingConflict: null,
         }),

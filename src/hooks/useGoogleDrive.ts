@@ -14,12 +14,14 @@ import {
 } from "@/utils/googleDriveService";
 
 export function useGoogleDrive() {
-  const { isConnected, isSyncing, syncError, syncedAt, pendingConflict } =
+  const { isConnected, syncingAction, syncError, syncedAt, pendingConflict } =
     useGoogleDriveStore();
 
   return {
     isConnected,
-    isSyncing,
+    isSyncing: syncingAction !== null,
+    isSaving: syncingAction === "upload",
+    isLoading: syncingAction === "download",
     syncError,
     syncedAt,
     pendingConflict,

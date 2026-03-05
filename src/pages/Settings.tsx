@@ -188,7 +188,7 @@ export function SettingsPage() {
                     onClick={drive.loadFromDrive}
                     disabled={drive.isSyncing}
                   >
-                    {drive.isSyncing ? (
+                    {drive.isLoading ? (
                       <span className="animate-pulse">{t.drive_syncing}</span>
                     ) : (
                       t.drive_load_from_drive
@@ -200,7 +200,7 @@ export function SettingsPage() {
                     onClick={drive.syncNow}
                     disabled={drive.isSyncing}
                   >
-                    {drive.isSyncing ? (
+                    {drive.isSaving ? (
                       <span className="animate-pulse">{t.drive_saving}</span>
                     ) : (
                       t.drive_save_to_drive
