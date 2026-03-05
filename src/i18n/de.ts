@@ -400,7 +400,8 @@ export const de: Translations = {
   history_title: "Portfolioverlauf",
   history_value: "Bewertung",
   history_cost: "Einstandswert",
-  history_no_data: "Daten werden gesammelt. Ab morgen wird das Chart angezeigt.",
+  history_no_data:
+    "Daten werden gesammelt. Ab morgen wird das Chart angezeigt.",
 
   pnl_chart_title: "G&V nach Wertpapier",
   pnl_chart_pnl: "G&V",

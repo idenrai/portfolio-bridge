@@ -26,8 +26,9 @@ export function PnLWaterfallChart({ assets }: Props) {
 
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
 
-  // 손익 절댓값 기준 상위 10개만 표시
+  // 현금·예금은 손익 0이므로 제외, 손익 절댓값 기준 상위 12개 표시
   const data = assets
+    .filter((a) => a.type !== "cash")
     .map((a) => ({
       name: a.ticker ?? a.name,
       fullName: a.name,
