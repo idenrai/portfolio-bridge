@@ -252,6 +252,7 @@ export interface Translations {
   settings_target_save: string;
   settings_target_saved: string;
   settings_data_title: string;
+  settings_data_local_title: string;
   settings_data_desc: string;
   settings_data_count: (n: number) => string;
   settings_data_reset: string;

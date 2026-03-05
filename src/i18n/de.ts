@@ -365,6 +365,7 @@ export const de: Translations = {
   settings_target_save: "Speichern",
   settings_target_saved: "Gespeichert",
   settings_data_title: "Datenverwaltung",
+  settings_data_local_title: "Browser-Speicher",
   settings_data_desc:
     "Alle Daten werden im lokalen Browser-Speicher gespeichert.",
   settings_data_count: (n) => `Registrierte Vermögenswerte: ${n}`,

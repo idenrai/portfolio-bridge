@@ -357,6 +357,7 @@ export const ko: Translations = {
   settings_target_save: "저장",
   settings_target_saved: "저장되었습니다",
   settings_data_title: "데이터 관리",
+  settings_data_local_title: "브라우저 저장소",
   settings_data_desc: "모든 데이터는 브라우저 로컬 스토리지에 저장됩니다.",
   settings_data_count: (n) => `현재 등록된 자산: ${n}건`,
   settings_data_reset: "전체 데이터 초기화",

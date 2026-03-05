@@ -359,6 +359,7 @@ export const ja: Translations = {
   settings_target_save: "保存",
   settings_target_saved: "保存しました",
   settings_data_title: "データ管理",
+  settings_data_local_title: "ブラウザストレージ",
   settings_data_desc:
     "すべてのデータはブラウザのローカルストレージに保存されます。",
   settings_data_count: (n) => `登録資産数: ${n}件`,
