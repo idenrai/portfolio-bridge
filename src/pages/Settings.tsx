@@ -270,20 +270,6 @@ export function SettingsPage() {
                 </Button>
               </div>
             )}
-          </div>
-
-          <hr className="border-slate-100" />
-
-          {/* 로컬 스토리지 초기화 */}
-          <div className="space-y-2">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">{t.settings_data_local_title}</p>
-            <p className="text-sm text-slate-500">{t.settings_data_desc}</p>
-            <p className="text-sm text-slate-500">
-              {t.settings_data_count(assetStore.assets.length)}
-            </p>
-            <Button variant="danger" size="sm" onClick={handleResetAll}>
-              {t.settings_data_reset}
-            </Button>
             <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 space-y-1">
               <p className="text-xs font-medium text-slate-600">
                 💡 Google Drive 데이터 삭제
@@ -300,6 +286,20 @@ export function SettingsPage() {
                 myaccount.google.com/permissions →
               </a>
             </div>
+          </div>
+
+          <hr className="border-slate-100" />
+
+          {/* 로컬 스토리지 초기화 */}
+          <div className="space-y-2">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">{t.settings_data_local_title}</p>
+            <p className="text-sm text-slate-500">{t.settings_data_desc}</p>
+            <p className="text-sm text-slate-500">
+              {t.settings_data_count(assetStore.assets.length)}
+            </p>
+            <Button variant="danger" size="sm" onClick={handleResetAll}>
+              {t.settings_data_reset}
+            </Button>
           </div>
 
         </div>
