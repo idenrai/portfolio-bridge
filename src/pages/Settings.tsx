@@ -176,7 +176,7 @@ export function SettingsPage() {
         <div className="space-y-5">
           {/* Google Drive 연동 */}
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+            <p className="text-xs font-semibold text-slate-500 tracking-wide">
               Google Drive
             </p>
             {drive.isConnected ? (
@@ -293,7 +293,7 @@ export function SettingsPage() {
 
           {/* 로컬 스토리지 초기화 */}
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+            <p className="text-xs font-semibold text-slate-500 tracking-wide">
               {t.settings_data_local_title}
             </p>
             <p className="text-sm text-slate-500">{t.settings_data_desc}</p>
