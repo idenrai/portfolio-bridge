@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
-import { screenAll, type LynchScreenResult, type LynchCriterionKey } from "@/utils/lynchScreener";
+import { screenAll, type LynchScreenResult, type LynchCriterionKey, type ScreenProgress } from "@/utils/lynchScreener";
 import { getUniverse } from "@/utils/stockUniverse";
 import type { Market } from "@/types";
 
@@ -105,7 +105,7 @@ export function LynchTenBaggerCard() {
   const [results, setResults] = useState<LynchScreenResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [ran, setRan] = useState(false);
-  const [progress, setProgress] = useState({ done: 0, total: 0 });
+  const [progress, setProgress] = useState<ScreenProgress>({ phase: "batch", done: 0, total: 0 });
 
   // 선택한 시장의 유니버스
   const universe = getUniverse(market);
@@ -118,10 +118,10 @@ export function LynchTenBaggerCard() {
     }
     setLoading(true);
     setRan(false);
-    setProgress({ done: 0, total: universe.length });
+    setProgress({ phase: "batch", done: 0, total: universe.length });
     try {
-      const res = await screenAll(universe, (done, total) => {
-        setProgress({ done, total });
+      const res = await screenAll(universe, (p) => {
+        setProgress(p);
       });
       setResults(res);
     } finally {
@@ -135,7 +135,7 @@ export function LynchTenBaggerCard() {
   useEffect(() => {
     setResults([]);
     setRan(false);
-    setProgress({ done: 0, total: 0 });
+    setProgress({ phase: "batch", done: 0, total: 0 });
   }, [market]);
 
   const criterionLabel = (key: LynchCriterionKey): string => {
@@ -192,17 +192,25 @@ export function LynchTenBaggerCard() {
         className="mb-4 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
       >
         {loading
-          ? `⏳ ${progress.done} / ${progress.total} 분석 중…`
+          ? progress.phase === "batch"
+            ? `⏳ 1단계: ${progress.done}/${progress.total} 종목 조회 중…`
+            : `⏳ 2단계: 상위 ${progress.total}종목 상세 분석 (${progress.done}/${progress.total})`
           : "🔍 Screening"}
       </button>
 
       {/* 로딩 — 진행률 바 */}
       {loading && (
         <div className="mb-4">
-          <p className="text-xs text-slate-400 mb-1 animate-pulse">{t.lynch_loading}</p>
+          <p className="text-xs text-slate-400 mb-1 animate-pulse">
+            {progress.phase === "batch"
+              ? `📡 ${universe.length}개 종목 기본 데이터 수집 중…`
+              : `🔍 상위 종목 상세 재무 데이터 보강 중…`}
+          </p>
           <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
             <div
-              className="h-full rounded-full bg-green-500 transition-all duration-300"
+              className={`h-full rounded-full transition-all duration-300 ${
+                progress.phase === "batch" ? "bg-blue-500" : "bg-green-500"
+              }`}
               style={{
                 width: progress.total > 0
                   ? `${Math.round((progress.done / progress.total) * 100)}%`

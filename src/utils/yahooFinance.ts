@@ -508,3 +508,113 @@ export async function fetchFundamentals(
 
   return null;
 }
+
+// ─── 배치 quote API ───────────────────────────────────────────────────────────
+
+/**
+ * Yahoo Finance `/v7/finance/quote` 배치 엔드포인트로
+ * 여러 종목의 기본 재무 데이터를 **한 번의 요청**으로 가져옵니다.
+ *
+ * 반환 필드:
+ *  - marketCap ✓ (거의 항상)
+ *  - pegRatio  ✓ (key statistics에 있을 때)
+ *  - earningsQuarterlyGrowth (분기 EPS 성장 → epsGrowth 대용)
+ *  - 추가 필드는 있으면 사용, 없으면 null
+ *
+ * @param symbols 티커 배열 (최대 ~20개씩 청크)
+ * @param chunkDelay  청크 간 딜레이 ms (기본 1500)
+ * @param onChunkDone 청크 완료 콜백
+ */
+export async function fetchBatchQuote(
+  symbols: string[],
+  chunkDelay = 1500,
+  onChunkDone?: (done: number, total: number) => void,
+): Promise<Map<string, FundamentalsData>> {
+  const CHUNK_SIZE = 15;
+  const map = new Map<string, FundamentalsData>();
+  let done = 0;
+
+  for (let i = 0; i < symbols.length; i += CHUNK_SIZE) {
+    const chunk = symbols.slice(i, i + CHUNK_SIZE);
+    const joined = chunk.map(s => encodeURIComponent(s)).join(",");
+
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const res = await yahooFetch(
+          `/api/yahoo/v7/finance/quote?symbols=${joined}`,
+        );
+
+        if (res.status === 429) {
+          // rate limit → 지수 백오프 후 재시도
+          await new Promise(r => setTimeout(r, 2000 * 2 ** attempt));
+          continue;
+        }
+
+        if (!res.ok) break;
+
+        const data = await res.json() as {
+          quoteResponse?: {
+            result?: Array<Record<string, unknown>>;
+          };
+        };
+
+        for (const q of data.quoteResponse?.result ?? []) {
+          const sym = q.symbol as string;
+          if (!sym) continue;
+
+          const num = (v: unknown) => typeof v === "number" ? v : null;
+          const str = (v: unknown) => typeof v === "string" ? v : null;
+
+          map.set(sym, {
+            pegRatio:       num(q.pegRatio),
+            // earningsQuarterlyGrowth을 EPS 성장률 대용으로 사용
+            epsGrowth:      num(q.earningsQuarterlyGrowth),
+            revenueGrowth:  num(q.revenueQuarterlyGrowth) ?? null,
+            debtToEquity:   null, // batch에서는 미제공
+            operatingMargin:null, // batch에서는 미제공
+            marketCap:      num(q.marketCap),
+            currency:       str(q.financialCurrency) ?? str(q.currency),
+          });
+        }
+        break; // 성공하면 재시도 루프 탈출
+      } catch {
+        if (attempt < 2) {
+          await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+        }
+      }
+    }
+
+    done += chunk.length;
+    onChunkDone?.(Math.min(done, symbols.length), symbols.length);
+
+    // 청크 간 딜레이 (마지막 청크 제외)
+    if (i + CHUNK_SIZE < symbols.length) {
+      await new Promise(r => setTimeout(r, chunkDelay));
+    }
+  }
+
+  return map;
+}
+
+/**
+ * 단일 종목 quoteSummary 보강 (debtToEquity, operatingMargins, 정밀 성장률)
+ *
+ * 기존 batch 데이터 위에 덮어씌우되, batch에서 이미 있는 값은 유지합니다.
+ */
+export async function enrichFundamentals(
+  symbol: string,
+  base: FundamentalsData,
+): Promise<FundamentalsData> {
+  const detail = await fetchFundamentals(symbol);
+  if (!detail) return base;
+
+  return {
+    pegRatio:       detail.pegRatio       ?? base.pegRatio,
+    epsGrowth:      detail.epsGrowth      ?? base.epsGrowth,
+    revenueGrowth:  detail.revenueGrowth  ?? base.revenueGrowth,
+    debtToEquity:   detail.debtToEquity   ?? base.debtToEquity,
+    operatingMargin:detail.operatingMargin ?? base.operatingMargin,
+    marketCap:      detail.marketCap      ?? base.marketCap,
+    currency:       detail.currency       ?? base.currency,
+  };
+}

@@ -1,4 +1,4 @@
-import { fetchFundamentals, type FundamentalsData } from "./yahooFinance";
+import { fetchBatchQuote, enrichFundamentals, type FundamentalsData } from "./yahooFinance";
 import type { UniverseStock } from "./stockUniverse";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
@@ -113,22 +113,13 @@ function scoreMarketCap(cap: number | null, currency: string | null): Pick<Lynch
   return { pass: false, score: 0 };
 }
 
-// ─── 메인 스크리너 ────────────────────────────────────────────────────────────
+// ─── 스코어링 함수 ──────────────────────────────────────────────────────────
 
-/**
- * 단일 종목을 피터 린치 기준으로 스크리닝
- * 펀더멘털 조회 실패 시에도 (모든 기준 null) 결과를 반환합니다.
- */
-export async function screenAsset(
+/** FundamentalsData → 스코어링 */
+export function scoreStock(
   stock: UniverseStock,
-): Promise<LynchScreenResult | null> {
-  if (!stock.ticker) return null;
-
-  const fundamentals = await fetchFundamentals(stock.ticker) ?? {
-    pegRatio: null, epsGrowth: null, revenueGrowth: null,
-    debtToEquity: null, operatingMargin: null, marketCap: null, currency: null,
-  };
-
+  fundamentals: FundamentalsData,
+): LynchScreenResult {
   const { pegRatio, epsGrowth, revenueGrowth, debtToEquity, operatingMargin, marketCap, currency } =
     fundamentals;
 
@@ -153,34 +144,74 @@ export async function screenAsset(
   return { stock, fundamentals, criteria, totalScore };
 }
 
+// ─── 2단계 스크리너 ────────────────────────────────────────────────────────────
+
+export type ScreenPhase = "batch" | "enrich";
+
+export interface ScreenProgress {
+  phase: ScreenPhase;
+  done: number;
+  total: number;
+}
+
 /**
- * 종목 목록을 배치(8개씩)로 스크리닝하고 결과를 내림차순 정렬합니다.
+ * 2단계 스크리닝:
  *
- * @param onProgress - 진행 상황 콜백 (완료 수, 전체 수)
+ * **Phase 1 (batch)**: `/v7/finance/quote` 배치 호출로 전 종목 기본 데이터
+ *   (marketCap, pegRatio, earningsQuarterlyGrowth) 확보 → 1차 점수 산출
+ *
+ * **Phase 2 (enrich)**: 1차 상위 10종목에 대해 `quoteSummary`로
+ *   debtToEquity, operatingMargins, 정밀 성장률 보강 → 최종 점수 확정
+ *
+ * @param onProgress 진행 상황 콜백
  */
 export async function screenAll(
   stocks: UniverseStock[],
-  onProgress?: (done: number, total: number) => void,
+  onProgress?: (p: ScreenProgress) => void,
 ): Promise<LynchScreenResult[]> {
-  const BATCH = 4; // Yahoo Finance rate limit 완화를 위해 소규모 배치
-  const results: LynchScreenResult[] = [];
-  let done = 0;
+  const tickers = stocks.map(s => s.ticker);
 
-  for (let i = 0; i < stocks.length; i += BATCH) {
-    const batch = stocks.slice(i, i + BATCH);
-    const settled = await Promise.allSettled(batch.map(screenAsset));
-    for (const r of settled) {
-      if (r.status === "fulfilled" && r.value !== null) {
-        results.push(r.value);
-      }
-    }
-    done += batch.length;
-    onProgress?.(Math.min(done, stocks.length), stocks.length);
-    // 배치 간 대기 (첫 배치 이후부터만)
-    if (i + BATCH < stocks.length) {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+  // ─── Phase 1: 배치 quote ─────────────────────────────────────
+  onProgress?.({ phase: "batch", done: 0, total: tickers.length });
+
+  const batchMap = await fetchBatchQuote(tickers, 1500, (done, total) => {
+    onProgress?.({ phase: "batch", done, total });
+  });
+
+  // 1차 스코어링
+  const results: LynchScreenResult[] = [];
+  for (const stock of stocks) {
+    const data = batchMap.get(stock.ticker) ?? {
+      pegRatio: null, epsGrowth: null, revenueGrowth: null,
+      debtToEquity: null, operatingMargin: null, marketCap: null, currency: null,
+    };
+    results.push(scoreStock(stock, data));
+  }
+
+  // 1차 정렬
+  results.sort((a, b) => b.totalScore - a.totalScore);
+
+  // ─── Phase 2: 상위 10종목 quoteSummary 보강 ─────────────────
+  const TOP_N = 10;
+  const enrichTargets = results.slice(0, TOP_N);
+  onProgress?.({ phase: "enrich", done: 0, total: enrichTargets.length });
+
+  for (let i = 0; i < enrichTargets.length; i++) {
+    const r = enrichTargets[i];
+    const enriched = await enrichFundamentals(r.stock.ticker, r.fundamentals);
+    const updated = scoreStock(r.stock, enriched);
+    // 원본 배열에서 갱신
+    const idx = results.indexOf(r);
+    if (idx !== -1) results[idx] = updated;
+
+    onProgress?.({ phase: "enrich", done: i + 1, total: enrichTargets.length });
+
+    // 순차 딜레이 (Yahoo rate limit)
+    if (i < enrichTargets.length - 1) {
+      await new Promise(resolve => setTimeout(resolve, 1500));
     }
   }
 
+  // 최종 정렬
   return results.sort((a, b) => b.totalScore - a.totalScore);
 }
