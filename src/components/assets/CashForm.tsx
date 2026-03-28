@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Button } from "@/components/common";
 import { useT } from "@/hooks";
 import type { AssetFormData, CurrencyCode, Market } from "@/types";
@@ -24,14 +24,10 @@ export function CashForm({
     { code: "EUR", label: t.currency_eur },
   ];
 
-  const filtered = useMemo(
-    () =>
-      CURRENCY_OPTIONS.filter(
-        (c) =>
-          c.code.toLowerCase().includes(search.toLowerCase()) ||
-          c.label.toLowerCase().includes(search.toLowerCase()),
-      ),
-    [search],
+  const filtered = CURRENCY_OPTIONS.filter(
+    (c) =>
+      c.code.toLowerCase().includes(search.toLowerCase()) ||
+      c.label.toLowerCase().includes(search.toLowerCase()),
   );
 
   const selected = CURRENCY_OPTIONS.find((c) => c.code === currency);

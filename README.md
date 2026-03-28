@@ -237,7 +237,7 @@ vercel.json                     # Vercel config (SPA rewrite, API routing)
 | Yahoo Finance | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | US/KR ticker search & quotes, exchange rates |
 
 > **Note**: Uses unofficial Yahoo Finance endpoints; API changes may break data fetching.
-
+>
 > **Manual entry**: Assets not found in Yahoo Finance (e.g. Japanese investment trusts) can be registered manually.
 
 ---
@@ -455,7 +455,7 @@ npm run tauri:build
 | Yahoo Finance | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | 미국·한국 종목 검색/시세, 환율 |
 
 > **참고**: Yahoo Finance의 비공식 엔드포인트를 사용하므로 API 구조가 변경되면 조회가 실패할 수 있습니다.
-
+>
 > **수동 입력**: Yahoo Finance에서 검색되지 않는 자산(일본 투자신탁 등)은 수동으로 등록할 수 있습니다.
 
 ---
