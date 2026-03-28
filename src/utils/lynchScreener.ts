@@ -157,10 +157,10 @@ export interface ScreenProgress {
  * 2단계 동적 스크리닝:
  *
  * **Phase 1 (fetch)**: Yahoo Finance Screener API 호출 →
- *   시가총액 $300M–$30B 범위의 종목 30개를 실시간으로 가져와 1차 점수 산출.
+ *   시가총액 $300M–$30B 범위의 종목 20개를 실시간으로 가져와 1차 점수 산출.
  *   Screener API 실패 시 `/v7/finance/quote` 배치 호출 폴백.
  *
- * **Phase 2 (enrich)**: 1차 상위 10종목에 대해 `quoteSummary`로
+ * **Phase 2 (enrich)**: 1차 상위 8종목에 대해 `quoteSummary`로
  *   debtToEquity, operatingMargins, 정밀 성장률 보강 → 최종 점수 확정
  */
 export async function screenAll(
@@ -171,7 +171,7 @@ export async function screenAll(
   // ─── Phase 1: Yahoo Screener API로 종목 동적 가져오기 ──────
   onProgress?.({ phase: "fetch", done: 0, total: 1 });
 
-  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, 30);
+  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, 20);
 
   onProgress?.({ phase: "fetch", done: 1, total: 1 });
 
@@ -187,7 +187,7 @@ export async function screenAll(
   results.sort((a, b) => b.totalScore - a.totalScore);
 
   // ─── Phase 2: 상위 10종목 quoteSummary 보강 ─────────────────
-  const TOP_N = Math.min(10, results.length);
+  const TOP_N = Math.min(8, results.length);
   const enrichTargets = results.slice(0, TOP_N);
   onProgress?.({ phase: "enrich", done: 0, total: enrichTargets.length });
 
