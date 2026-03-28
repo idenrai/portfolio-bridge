@@ -85,10 +85,6 @@ export default async function handler(request: Request) {
     );
   }
 
-  // __path를 제외한 나머지 쿼리 파라미터를 원본 search에 복원
-  const params = new URLSearchParams(url.search);
-  params.delete("__path");
-  const remainingSearch = params.toString();
   // ⚠️ URLSearchParams.toString()은 쉼표(,)를 %2C로 재인코딩합니다.
   // 원본 URL에서 __path= 부분만 제거하여 쉼표를 보존합니다.
   const originalSearch = url.search
