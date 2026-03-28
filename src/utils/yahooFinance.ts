@@ -391,34 +391,77 @@ export interface FundamentalsData {
 
 /**
  * Yahoo Finance quoteSummary 기반 재무 펀더멘털 조회
- * (defaultKeyStatistics + financialData 모듈)
+ * v10 실패 시 v11 폴백, 그 외 quote 엔드포인트 폴백 시도
  */
 export async function fetchFundamentals(
   symbol: string,
 ): Promise<FundamentalsData | null> {
-  const path =
-    `/v10/finance/quoteSummary/${encodeURIComponent(symbol)}` +
-    `?modules=defaultKeyStatistics%2CfinancialData`;
-  try {
-    const res = await yahooFetch(`/api/yahoo${path}`);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const result = data?.quoteSummary?.result?.[0];
+  const encoded = encodeURIComponent(symbol);
+  const modules = "defaultKeyStatistics,financialData";
+
+  // quoteSummary 파서
+  const parseQuoteSummary = (data: unknown): FundamentalsData | null => {
+    const result = (data as { quoteSummary?: { result?: unknown[] } })
+      ?.quoteSummary?.result?.[0] as Record<string, Record<string, { raw?: number } | string>> | undefined;
     if (!result) return null;
-
-    const ks = result.defaultKeyStatistics ?? {};
-    const fd = result.financialData ?? {};
-
+    const ks = (result.defaultKeyStatistics ?? {}) as Record<string, { raw?: number }>;
+    const fd = (result.financialData ?? {}) as Record<string, { raw?: number } | string>;
     return {
-      pegRatio: ks.pegRatio?.raw ?? null,
-      epsGrowth: fd.earningsGrowth?.raw ?? null,
-      revenueGrowth: fd.revenueGrowth?.raw ?? null,
-      debtToEquity: fd.debtToEquity?.raw ?? null,
-      operatingMargin: fd.operatingMargins?.raw ?? null,
-      marketCap: ks.marketCap?.raw ?? null,
-      currency: fd.financialCurrency ?? null,
+      pegRatio: (ks.pegRatio?.raw) ?? null,
+      epsGrowth: (fd.earningsGrowth as { raw?: number } | undefined)?.raw ?? null,
+      revenueGrowth: (fd.revenueGrowth as { raw?: number } | undefined)?.raw ?? null,
+      debtToEquity: (fd.debtToEquity as { raw?: number } | undefined)?.raw ?? null,
+      operatingMargin: (fd.operatingMargins as { raw?: number } | undefined)?.raw ?? null,
+      marketCap: (ks.marketCap?.raw) ?? null,
+      currency: typeof fd.financialCurrency === "string" ? fd.financialCurrency : null,
     };
-  } catch {
-    return null;
-  }
+  };
+
+  // 1) v10 시도
+  try {
+    const res = await yahooFetch(
+      `/api/yahoo/v10/finance/quoteSummary/${encoded}?modules=${encodeURIComponent(modules)}`,
+    );
+    if (res.ok) {
+      const parsed = parseQuoteSummary(await res.json());
+      if (parsed) return parsed;
+    }
+  } catch { /* continue */ }
+
+  // 2) v11 폴백
+  try {
+    const res = await yahooFetch(
+      `/api/yahoo/v11/finance/quoteSummary/${encoded}?modules=${encodeURIComponent(modules)}`,
+    );
+    if (res.ok) {
+      const parsed = parseQuoteSummary(await res.json());
+      if (parsed) return parsed;
+    }
+  } catch { /* continue */ }
+
+  // 3) /v7/finance/quote 폴백 — 일부 필드만 활용
+  try {
+    const fields = "trailingPE,earningsGrowth,revenueGrowth,debtToEquity,operatingMargins,marketCap,pegRatio,financialCurrency";
+    const res = await yahooFetch(
+      `/api/yahoo/v7/finance/quote?symbols=${encoded}&fields=${fields}`,
+    );
+    if (res.ok) {
+      const data = await res.json();
+      const q = (data as { quoteResponse?: { result?: Record<string, number | string>[] } })
+        ?.quoteResponse?.result?.[0];
+      if (q) {
+        return {
+          pegRatio: typeof q.pegRatio === "number" ? q.pegRatio : null,
+          epsGrowth: typeof q.earningsGrowth === "number" ? q.earningsGrowth : null,
+          revenueGrowth: typeof q.revenueGrowth === "number" ? q.revenueGrowth : null,
+          debtToEquity: typeof q.debtToEquity === "number" ? q.debtToEquity : null,
+          operatingMargin: typeof q.operatingMargins === "number" ? q.operatingMargins : null,
+          marketCap: typeof q.marketCap === "number" ? q.marketCap : null,
+          currency: typeof q.financialCurrency === "string" ? q.financialCurrency : null,
+        };
+      }
+    }
+  } catch { /* ignore */ }
+
+  return null;
 }

@@ -118,14 +118,17 @@ function scoreMarketCap(cap: number | null, currency: string | null): Pick<Lynch
 /**
  * 단일 자산을 피터 린치 기준으로 스크리닝
  * - 주식(stock)이면서 ticker가 있는 자산만 대상
+ * - 펀더멘털 조회 실패 시에도 결과 반환 (모든 기준 null)
  */
 export async function screenAsset(
   asset: Asset,
 ): Promise<LynchScreenResult | null> {
   if (asset.type !== "stock" || !asset.ticker) return null;
 
-  const fundamentals = await fetchFundamentals(asset.ticker);
-  if (!fundamentals) return null;
+  const fundamentals = await fetchFundamentals(asset.ticker) ?? {
+    pegRatio: null, epsGrowth: null, revenueGrowth: null,
+    debtToEquity: null, operatingMargin: null, marketCap: null, currency: null,
+  };
 
   const { pegRatio, epsGrowth, revenueGrowth, debtToEquity, operatingMargin, marketCap, currency } =
     fundamentals;

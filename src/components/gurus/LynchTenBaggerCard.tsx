@@ -198,9 +198,16 @@ export function LynchTenBaggerCard({ assets }: Props) {
         </div>
       )}
 
-      {/* 결과 없음 */}
+      {/* 결과 없음 — 종목 자체가 없음 */}
       {!loading && ran && candidates.length === 0 && (
         <p className="text-sm text-slate-400 text-center py-6">{t.lynch_no_stocks}</p>
+      )}
+
+      {/* 결과 없음 — 종목은 있지만 API 데이터 전혀 없음 (이 케이스는 screenAsset 수정으로 거의 발생 안 함) */}
+      {!loading && ran && candidates.length > 0 && results.length === 0 && (
+        <p className="text-sm text-slate-400 text-center py-6">
+          ⚠️ Yahoo Finance에서 재무 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.
+        </p>
       )}
 
       {/* 결과 테이블 */}
