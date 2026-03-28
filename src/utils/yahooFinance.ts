@@ -642,10 +642,10 @@ export async function enrichFundamentals(
   };
 }
 
-// ─── Yahoo Screener API ───────────────────────────────────────────────────────
+// ─── GET 기반 동적 종목 발굴 ──────────────────────────────────────────────────
 
 import type { UniverseStock } from "./stockUniverse";
-import { buildScreenerBody } from "./stockUniverse";
+import { PREDEFINED_SCREENERS, TRENDING_REGIONS, MCAP_MIN, MCAP_MAX } from "./stockUniverse";
 
 export interface ScreenerResult {
   stock: UniverseStock;
@@ -653,72 +653,177 @@ export interface ScreenerResult {
 }
 
 /**
- * Yahoo Finance Screener API (`/v1/finance/screener`)를 통해
- * 시가총액 $300M–$30B 범위의 주식을 동적으로 가져옵니다.
+ * Yahoo Finance 사전정의 스크리너(GET)에서 종목 가져오기.
+ * 하나의 스크리너 호출: GET /v1/finance/screener/predefined/saved/{name}?count=N
+ */
+async function fetchPredefinedScreener(name: string, count: number): Promise<Record<string, unknown>[]> {
+  try {
+    const res = await yahooFetch(
+      `/api/yahoo/v1/finance/screener/predefined/saved/${name}?count=${count}`,
+    );
+    if (!res.ok) {
+      console.warn(`[Screener] predefined/${name} HTTP ${res.status}`);
+      return [];
+    }
+    const json = await res.json() as {
+      finance?: {
+        result?: Array<{
+          quotes?: Array<Record<string, unknown>>;
+        }>;
+      };
+    };
+    return json.finance?.result?.[0]?.quotes ?? [];
+  } catch (e) {
+    console.warn(`[Screener] predefined/${name} error:`, e);
+    return [];
+  }
+}
+
+/**
+ * Yahoo Finance Trending API (GET)에서 해당 지역의 인기 종목 가져오기.
+ * GET /v1/finance/trending/{region}?count=N
+ */
+async function fetchTrendingTickers(region: string, count: number): Promise<string[]> {
+  try {
+    const res = await yahooFetch(
+      `/api/yahoo/v1/finance/trending/${region}?count=${count}`,
+    );
+    if (!res.ok) {
+      console.warn(`[Trending] ${region} HTTP ${res.status}`);
+      return [];
+    }
+    const json = await res.json() as {
+      finance?: {
+        result?: Array<{
+          quotes?: Array<{ symbol?: string }>;
+        }>;
+      };
+    };
+    return (json.finance?.result?.[0]?.quotes ?? [])
+      .map((q) => q.symbol)
+      .filter((s): s is string => !!s);
+  } catch (e) {
+    console.warn(`[Trending] ${region} error:`, e);
+    return [];
+  }
+}
+
+/**
+ * 동적 종목 발굴 — GET 전용 (POST 스크리너 불필요)
  *
- * 하드코딩 종목 없이 실시간 시장 데이터 기반 스크리닝.
+ * **전략 1:** Yahoo 사전정의 스크리너 여러 개를 병렬 호출하여 후보 수집
+ * **전략 2:** 전략 1 실패 시 Trending API + v7 일괄 시세 조회 폴백
+ *
+ * 가져온 후 시가총액 $300M–$30B 범위로 필터링합니다.
  */
 export async function fetchScreenerStocks(
   market: "ALL" | Market,
   count = 30,
 ): Promise<ScreenerResult[]> {
-  const body = buildScreenerBody(market, count);
+  const seen = new Set<string>();
+  const all: ScreenerResult[] = [];
 
-  try {
-    const res = await yahooFetch("/api/yahoo/v1/finance/screener", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+  /** quote 객체 → ScreenerResult 변환 (시가총액 필터 포함) */
+  const mapQuote = (q: Record<string, unknown>): ScreenerResult | null => {
+    const sym = q.symbol as string | undefined;
+    if (!sym || seen.has(sym)) return null;
 
-    if (!res.ok) {
-      console.warn(`[Screener] HTTP ${res.status}`, await res.text().catch(() => ""));
-      return [];
+    const num = (v: unknown) => (typeof v === "number" ? v : null);
+    const str = (v: unknown) => (typeof v === "string" ? v : null);
+    const cap = num(q.marketCap);
+
+    // 시가총액 필터: $300M – $30B (USD 기준, 비USD는 근사 환산)
+    if (cap !== null) {
+      let capUSD = cap;
+      const cur = str(q.financialCurrency) ?? str(q.currency);
+      if (cur === "KRW") capUSD = cap / 1350;
+      else if (cur === "JPY") capUSD = cap / 150;
+      else if (cur === "EUR") capUSD = cap / 0.92;
+      if (capUSD < MCAP_MIN || capUSD > MCAP_MAX) return null;
     }
 
-    const json = await res.json() as {
-      finance?: {
-        result?: Array<{
-          quotes?: Array<Record<string, unknown>>;
-          total?: number;
-        }>;
-      };
+    // 시장 필터
+    const stockMarket = toMarket(
+      q.exchange as string | undefined,
+      q.currency as string | undefined,
+      sym,
+    );
+    if (market !== "ALL" && market !== "OTHER" && stockMarket !== market) return null;
+
+    seen.add(sym);
+    return {
+      stock: {
+        ticker: sym,
+        name: (q.longName ?? q.shortName ?? sym) as string,
+        market: stockMarket,
+      },
+      data: {
+        pegRatio: num(q.pegRatio),
+        epsGrowth: num(q.earningsQuarterlyGrowth),
+        revenueGrowth: num(q.revenueQuarterlyGrowth),
+        debtToEquity: null,
+        operatingMargin: null,
+        marketCap: cap,
+        currency: str(q.financialCurrency) ?? str(q.currency),
+      },
     };
+  };
 
-    const quotes = json.finance?.result?.[0]?.quotes ?? [];
-    const total = json.finance?.result?.[0]?.total ?? 0;
-    console.log(`[Screener] market=${market} → ${quotes.length}/${total} stocks`);
+  // ─── 전략 1: 사전정의 스크리너 병렬 호출 ──────────────────
+  console.log(`[Screener] Trying predefined screeners for market=${market}`);
 
-    return quotes
-      .filter((q) => q.symbol)
-      .map((q) => {
-        const sym = q.symbol as string;
-        const num = (v: unknown) => (typeof v === "number" ? v : null);
-        const str = (v: unknown) => (typeof v === "string" ? v : null);
+  const screenerPromises = PREDEFINED_SCREENERS.map((name) =>
+    fetchPredefinedScreener(name, 25),
+  );
+  const screenerResults = await Promise.all(screenerPromises);
 
-        return {
-          stock: {
-            ticker: sym,
-            name: ((q.longName ?? q.shortName ?? sym) as string),
-            market: toMarket(
-              q.exchange as string | undefined,
-              q.currency as string | undefined,
-              sym,
-            ),
-          },
-          data: {
-            pegRatio: num(q.pegRatio),
-            epsGrowth: num(q.earningsQuarterlyGrowth),
-            revenueGrowth: num(q.revenueQuarterlyGrowth),
-            debtToEquity: null,
-            operatingMargin: null,
-            marketCap: num(q.marketCap),
-            currency: str(q.financialCurrency) ?? str(q.currency),
-          },
-        };
-      });
-  } catch (e) {
-    console.warn("[Screener] error:", e);
-    return [];
+  for (const quotes of screenerResults) {
+    for (const q of quotes) {
+      const r = mapQuote(q);
+      if (r) all.push(r);
+    }
   }
+
+  console.log(`[Screener] predefined → ${all.length} stocks after mCap filter`);
+
+  // ─── 전략 2: Trending + v7 배치 폴백 ──────────────────────
+  if (all.length < count) {
+    console.log(`[Screener] Trying trending tickers fallback...`);
+
+    // market에 따라 trending region 결정
+    const regions =
+      market === "ALL" || market === "OTHER"
+        ? Object.values(TRENDING_REGIONS)
+        : [TRENDING_REGIONS[market] ?? "US"];
+
+    const trendingPromises = regions.map((r) => fetchTrendingTickers(r, 30));
+    const trendingResults = await Promise.all(trendingPromises);
+    const tickers = trendingResults.flat().filter((t) => !seen.has(t));
+    const uniqueTickers = [...new Set(tickers)].slice(0, 50);
+
+    if (uniqueTickers.length > 0) {
+      // v7 배치 시세로 기본 데이터 가져오기
+      const joined = uniqueTickers.join(",");
+      try {
+        const res = await yahooFetch(
+          `/api/yahoo/v7/finance/quote?formatted=false&lang=en-US&symbols=${joined}`,
+        );
+        if (res.ok) {
+          const json = await res.json() as {
+            quoteResponse?: { result?: Array<Record<string, unknown>> };
+          };
+          for (const q of json.quoteResponse?.result ?? []) {
+            const r = mapQuote(q);
+            if (r) all.push(r);
+          }
+        }
+      } catch (e) {
+        console.warn("[Screener] trending batch error:", e);
+      }
+    }
+
+    console.log(`[Screener] trending fallback → total ${all.length} stocks`);
+  }
+
+  return all.slice(0, count);
 }
