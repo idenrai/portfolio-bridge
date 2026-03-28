@@ -168,7 +168,7 @@ export async function screenAll(
   // ─── 후보 가져오기 ──────────────────────────────────────────
   onProgress?.({ phase: "fetch", done: 0, total: 1 });
 
-  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, 20);
+  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, 10);
 
   onProgress?.({ phase: "fetch", done: 1, total: 1 });
 
