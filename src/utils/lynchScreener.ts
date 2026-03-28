@@ -162,7 +162,7 @@ export async function screenAll(
   stocks: UniverseStock[],
   onProgress?: (done: number, total: number) => void,
 ): Promise<LynchScreenResult[]> {
-  const BATCH = 8;
+  const BATCH = 4; // Yahoo Finance rate limit 완화를 위해 소규모 배치
   const results: LynchScreenResult[] = [];
   let done = 0;
 
@@ -176,9 +176,9 @@ export async function screenAll(
     }
     done += batch.length;
     onProgress?.(Math.min(done, stocks.length), stocks.length);
-    // 배치 간 짧은 대기 (Yahoo Finance rate limit 완화)
+    // 배치 간 대기 (첫 배치 이후부터만)
     if (i + BATCH < stocks.length) {
-      await new Promise((resolve) => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 500));
     }
   }
 

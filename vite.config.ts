@@ -88,18 +88,23 @@ function yahooProxy(): Plugin {
         const targetPath = req.url ?? "/";
         try {
           await ensureCrumb();
-          const url = new URL(`https://query1.finance.yahoo.com${targetPath}`);
-          url.searchParams.set("crumb", crumb);
 
-          let response = await fetch(url.toString(), {
+          // ⚠️ new URL() + url.searchParams.set() 는 기존 쿼리파라미터의 쉼표(,)를
+          // %2C로 재인코딩해서 Yahoo Finance quoteSummary modules 파라미터가 깨진다.
+          // 따라서 crumb을 문자열로 직접 이어붙임.
+          const buildUrl = (c: string) => {
+            const sep = targetPath.includes("?") ? "&" : "?";
+            return `https://query1.finance.yahoo.com${targetPath}${sep}crumb=${encodeURIComponent(c)}`;
+          };
+
+          let response = await fetch(buildUrl(crumb), {
             headers: { "User-Agent": YAHOO_UA, Cookie: cookie },
           });
 
           // 401/403 → crumb 만료, 새 crumb으로 재시도
           if (response.status === 401 || response.status === 403) {
             await ensureCrumb(true);
-            url.searchParams.set("crumb", crumb);
-            response = await fetch(url.toString(), {
+            response = await fetch(buildUrl(crumb), {
               headers: { "User-Agent": YAHOO_UA, Cookie: cookie },
             });
           }
@@ -108,8 +113,7 @@ function yahooProxy(): Plugin {
           if (response.status === 429) {
             await new Promise((resolve) => setTimeout(resolve, 2000));
             await ensureCrumb(true);
-            url.searchParams.set("crumb", crumb);
-            response = await fetch(url.toString(), {
+            response = await fetch(buildUrl(crumb), {
               headers: { "User-Agent": YAHOO_UA, Cookie: cookie },
             });
           }

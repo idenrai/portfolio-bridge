@@ -464,46 +464,43 @@ export async function fetchFundamentals(
   };
 
   // 1) v10 시도
-  try {
-    const res = await yahooFetch(
-      `/api/yahoo/v10/finance/quoteSummary/${encoded}?modules=${modules}`,
-    );
-    if (res.ok) {
-      const parsed = parseQuoteSummary(await res.json());
-      if (parsed) return parsed;
+  for (const ver of ["v10", "v11"] as const) {
+    try {
+      const res = await yahooFetch(
+        `/api/yahoo/${ver}/finance/quoteSummary/${encoded}?modules=${modules}`,
+      );
+      if (res.ok) {
+        const json = await res.json();
+        const parsed = parseQuoteSummary(json);
+        if (parsed) return parsed;
+        // DEV 환경: 응답이 왔지만 파싱 실패 시 실제 응답을 출력
+        if (import.meta.env.DEV) {
+          console.warn(`[Lynch] ${symbol} ${ver} 파싱 실패:`, JSON.stringify(json).slice(0, 400));
+        }
+      } else if (import.meta.env.DEV) {
+        console.warn(`[Lynch] ${symbol} ${ver} HTTP ${res.status}`);
+      }
+    } catch (e) {
+      if (import.meta.env.DEV) console.warn(`[Lynch] ${symbol} ${ver} 오류:`, e);
     }
-  } catch { /* continue */ }
+  }
 
-  // 2) v11 폴백
+  // 3) v8 chart 폴백 — meta에서 marketCap만 구출
   try {
     const res = await yahooFetch(
-      `/api/yahoo/v11/finance/quoteSummary/${encoded}?modules=${modules}`,
-    );
-    if (res.ok) {
-      const parsed = parseQuoteSummary(await res.json());
-      if (parsed) return parsed;
-    }
-  } catch { /* continue */ }
-
-  // 3) /v8/finance/quote 폴백 — marketCap + 일부 필드만
-  try {
-    const res = await yahooFetch(
-      `/api/yahoo/v8/finance/chart/${encoded}?interval=1d&range=1d&modules=price`,
+      `/api/yahoo/v8/finance/chart/${encoded}?interval=1d&range=1d`,
     );
     if (res.ok) {
       const data = await res.json() as {
-        chart?: { result?: Array<{ price?: Record<string, { raw?: number; fmt?: string }> }> }
+        chart?: { result?: Array<{ meta?: Record<string, number | string> }> }
       };
-      const price = data.chart?.result?.[0]?.price;
-      if (price) {
+      const meta = data.chart?.result?.[0]?.meta;
+      if (meta?.marketCap) {
         return {
-          pegRatio: null,
-          epsGrowth: null,
-          revenueGrowth: null,
-          debtToEquity: null,
-          operatingMargin: null,
-          marketCap: price.marketCap?.raw ?? null,
-          currency: null,
+          pegRatio: null, epsGrowth: null, revenueGrowth: null,
+          debtToEquity: null, operatingMargin: null,
+          marketCap: typeof meta.marketCap === "number" ? meta.marketCap : null,
+          currency: typeof meta.currency === "string" ? meta.currency : null,
         };
       }
     }
