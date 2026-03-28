@@ -154,21 +154,18 @@ export interface ScreenProgress {
 }
 
 /**
- * 2단계 동적 스크리닝:
+ * 동적 스크리닝 — 시장별 20종목 반환
  *
- * **Phase 1 (fetch)**: Yahoo Finance Screener API 호출 →
- *   시가총액 $300M–$30B 범위의 종목 20개를 실시간으로 가져와 1차 점수 산출.
- *   Screener API 실패 시 `/v7/finance/quote` 배치 호출 폴백.
- *
- * **Phase 2 (enrich)**: 1차 상위 8종목에 대해 `quoteSummary`로
- *   debtToEquity, operatingMargins, 정밀 성장률 보강 → 최종 점수 확정
+ * 1. Yahoo Finance Screener / quote API로 후보 20개 fetch
+ * 2. 각 종목 quoteSummary로 재무 데이터 보강
+ * 3. 점수 내림차순 정렬 후 20개 반환
  */
 export async function screenAll(
   market: "ALL" | Market,
   onProgress?: (p: ScreenProgress) => void,
 ): Promise<LynchScreenResult[]> {
 
-  // ─── Phase 1: Yahoo Screener API로 종목 동적 가져오기 ──────
+  // ─── 후보 가져오기 ──────────────────────────────────────────
   onProgress?.({ phase: "fetch", done: 0, total: 1 });
 
   const candidates: ScreenerResult[] = await fetchScreenerStocks(market, 20);
@@ -186,21 +183,17 @@ export async function screenAll(
   );
   results.sort((a, b) => b.totalScore - a.totalScore);
 
-  // ─── Phase 2: 상위 10종목 quoteSummary 보강 ─────────────────
-  const TOP_N = Math.min(8, results.length);
-  const enrichTargets = results.slice(0, TOP_N);
-  onProgress?.({ phase: "enrich", done: 0, total: enrichTargets.length });
+  // ─── quoteSummary 보강 ──────────────────────────────────────
+  onProgress?.({ phase: "enrich", done: 0, total: results.length });
 
-  for (let i = 0; i < enrichTargets.length; i++) {
-    const r = enrichTargets[i];
+  for (let i = 0; i < results.length; i++) {
+    const r = results[i];
     const enriched = await enrichFundamentals(r.stock.ticker, r.fundamentals);
-    const updated = scoreStock(r.stock, enriched);
-    const idx = results.indexOf(r);
-    if (idx !== -1) results[idx] = updated;
+    results[i] = scoreStock(r.stock, enriched);
 
-    onProgress?.({ phase: "enrich", done: i + 1, total: enrichTargets.length });
+    onProgress?.({ phase: "enrich", done: i + 1, total: results.length });
 
-    if (i < enrichTargets.length - 1) {
+    if (i < results.length - 1) {
       await new Promise(resolve => setTimeout(resolve, 1500));
     }
   }
