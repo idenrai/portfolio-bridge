@@ -311,7 +311,7 @@ export function GurusPage() {
 
           {/* 피터 린치 전용: 10루타 후보 스크리너 */}
           {selectedGuru.id === "lynch" && (
-            <LynchTenBaggerCard assets={assets} />
+            <LynchTenBaggerCard />
           )}
         </>
       )}

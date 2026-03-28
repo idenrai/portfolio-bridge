@@ -1,5 +1,5 @@
-import type { Asset } from "@/types";
 import { fetchFundamentals, type FundamentalsData } from "./yahooFinance";
+import type { UniverseStock } from "./stockUniverse";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
 
@@ -22,7 +22,7 @@ export interface LynchCriterion {
 }
 
 export interface LynchScreenResult {
-  asset: Asset;
+  stock: UniverseStock;
   fundamentals: FundamentalsData;
   criteria: LynchCriterion[];
   /** 0 – 100 합산 점수 */
@@ -116,16 +116,15 @@ function scoreMarketCap(cap: number | null, currency: string | null): Pick<Lynch
 // ─── 메인 스크리너 ────────────────────────────────────────────────────────────
 
 /**
- * 단일 자산을 피터 린치 기준으로 스크리닝
- * - 주식(stock)이면서 ticker가 있는 자산만 대상
- * - 펀더멘털 조회 실패 시에도 결과 반환 (모든 기준 null)
+ * 단일 종목을 피터 린치 기준으로 스크리닝
+ * 펀더멘털 조회 실패 시에도 (모든 기준 null) 결과를 반환합니다.
  */
 export async function screenAsset(
-  asset: Asset,
+  stock: UniverseStock,
 ): Promise<LynchScreenResult | null> {
-  if (asset.type !== "stock" || !asset.ticker) return null;
+  if (!stock.ticker) return null;
 
-  const fundamentals = await fetchFundamentals(asset.ticker) ?? {
+  const fundamentals = await fetchFundamentals(stock.ticker) ?? {
     pegRatio: null, epsGrowth: null, revenueGrowth: null,
     debtToEquity: null, operatingMargin: null, marketCap: null, currency: null,
   };
@@ -133,39 +132,55 @@ export async function screenAsset(
   const { pegRatio, epsGrowth, revenueGrowth, debtToEquity, operatingMargin, marketCap, currency } =
     fundamentals;
 
-  const peg = scorePEG(pegRatio);
-  const eps = scoreEpsGrowth(epsGrowth);
-  const rev = scoreRevenueGrowth(revenueGrowth);
-  const debt = scoreDebtToEquity(debtToEquity);
+  const peg    = scorePEG(pegRatio);
+  const eps    = scoreEpsGrowth(epsGrowth);
+  const rev    = scoreRevenueGrowth(revenueGrowth);
+  const debt   = scoreDebtToEquity(debtToEquity);
   const margin = scoreOperatingMargin(operatingMargin);
-  const cap = scoreMarketCap(marketCap, currency);
+  const cap    = scoreMarketCap(marketCap, currency);
 
   const criteria: LynchCriterion[] = [
-    { key: "peg",            value: pegRatio,       maxScore: 25, ...peg   },
-    { key: "epsGrowth",      value: epsGrowth,      maxScore: 20, ...eps   },
-    { key: "revenueGrowth",  value: revenueGrowth,  maxScore: 20, ...rev   },
-    { key: "debtToEquity",   value: debtToEquity,   maxScore: 15, ...debt  },
-    { key: "operatingMargin",value: operatingMargin, maxScore: 10, ...margin},
-    { key: "marketCap",      value: marketCap,      maxScore: 10, ...cap   },
+    { key: "peg",             value: pegRatio,        maxScore: 25, ...peg    },
+    { key: "epsGrowth",       value: epsGrowth,       maxScore: 20, ...eps    },
+    { key: "revenueGrowth",   value: revenueGrowth,   maxScore: 20, ...rev    },
+    { key: "debtToEquity",    value: debtToEquity,    maxScore: 15, ...debt   },
+    { key: "operatingMargin", value: operatingMargin, maxScore: 10, ...margin },
+    { key: "marketCap",       value: marketCap,       maxScore: 10, ...cap    },
   ];
 
   const totalScore = criteria.reduce((sum, c) => sum + c.score, 0);
 
-  return { asset, fundamentals, criteria, totalScore };
+  return { stock, fundamentals, criteria, totalScore };
 }
 
 /**
- * 자산 목록 전체를 병렬 스크리닝 (결과 내림차순 정렬)
+ * 종목 목록을 배치(8개씩)로 스크리닝하고 결과를 내림차순 정렬합니다.
+ *
+ * @param onProgress - 진행 상황 콜백 (완료 수, 전체 수)
  */
 export async function screenAll(
-  assets: Asset[],
+  stocks: UniverseStock[],
+  onProgress?: (done: number, total: number) => void,
 ): Promise<LynchScreenResult[]> {
-  const results = await Promise.allSettled(assets.map(screenAsset));
-  return results
-    .filter(
-      (r): r is PromiseFulfilledResult<LynchScreenResult> =>
-        r.status === "fulfilled" && r.value !== null,
-    )
-    .map((r) => r.value)
-    .sort((a, b) => b.totalScore - a.totalScore);
+  const BATCH = 8;
+  const results: LynchScreenResult[] = [];
+  let done = 0;
+
+  for (let i = 0; i < stocks.length; i += BATCH) {
+    const batch = stocks.slice(i, i + BATCH);
+    const settled = await Promise.allSettled(batch.map(screenAsset));
+    for (const r of settled) {
+      if (r.status === "fulfilled" && r.value !== null) {
+        results.push(r.value);
+      }
+    }
+    done += batch.length;
+    onProgress?.(Math.min(done, stocks.length), stocks.length);
+    // 배치 간 짧은 대기 (Yahoo Finance rate limit 완화)
+    if (i + BATCH < stocks.length) {
+      await new Promise((resolve) => setTimeout(resolve, 200));
+    }
+  }
+
+  return results.sort((a, b) => b.totalScore - a.totalScore);
 }
