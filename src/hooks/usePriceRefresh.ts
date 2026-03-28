@@ -3,7 +3,7 @@ import {
   useAssetStore,
   useSettingsStore,
   useLanguageStore,
-} from "@/pages/stores";
+} from "@/stores";
 import { TRANSLATIONS } from "@/i18n";
 import { fetchCurrentPrice } from "@/utils";
 

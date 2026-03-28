@@ -644,6 +644,7 @@ export async function enrichFundamentals(
 
 // ─── GET 기반 동적 종목 발굴 ──────────────────────────────────────────────────
 
+import { approxToUSD } from "@/constants";
 import type { UniverseStock } from "./stockUniverse";
 import { TRENDING_REGIONS, MARKET_SEEDS, MCAP_MIN, MCAP_MAX } from "./stockUniverse";
 
@@ -742,13 +743,10 @@ export async function fetchScreenerStocks(
     const str = (v: unknown) => (typeof v === "string" ? v : null);
     const cap = num(q.marketCap);
 
-    // 시가총액 필터: $300M – $30B (USD 기준, 비USD는 근사 환산)
+    // 시가총액 필터: $300M – $30B (USD 기준)
     if (cap !== null) {
-      let capUSD = cap;
       const cur = str(q.financialCurrency) ?? str(q.currency);
-      if (cur === "KRW") capUSD = cap / 1350;
-      else if (cur === "JPY") capUSD = cap / 150;
-      else if (cur === "EUR") capUSD = cap / 0.92;
+      const capUSD = approxToUSD(cap, cur ?? "USD");
       if (capUSD < MCAP_MIN || capUSD > MCAP_MAX) return null;
     }
 

@@ -15,7 +15,7 @@ import {
   Radar,
 } from "recharts";
 import { usePortfolio, useT } from "@/hooks";
-import { useLanguageStore, useSettingsStore } from "@/pages/stores";
+import { useLanguageStore, useSettingsStore } from "@/stores";
 import { GURU_PROFILES, formatCurrency, buildGuruPrompt } from "@/utils";
 import { calculateRebalancing } from "@/utils";
 import type { GuruProfile } from "@/types";

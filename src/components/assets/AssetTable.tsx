@@ -6,7 +6,7 @@ import {
   type AssetType,
   CURRENCY_SYMBOLS,
 } from "@/types";
-import { useAssetStore, useSettingsStore } from "@/pages/stores";
+import { useAssetStore, useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
 import {
   assetValue,

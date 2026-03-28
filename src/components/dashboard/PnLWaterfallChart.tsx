@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Card } from "@/components/common";
-import { useSettingsStore } from "@/pages/stores";
+import { useSettingsStore } from "@/stores";
 import { formatCurrency, fromKRW, assetPnL, toKRW } from "@/utils";
 import { useT } from "@/hooks";
 import type { Asset } from "@/types";

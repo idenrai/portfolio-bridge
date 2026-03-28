@@ -3,7 +3,7 @@ import {
   useSettingsStore,
   useAssetStore,
   useLanguageStore,
-} from "@/pages/stores";
+} from "@/stores";
 import { useDataRefresh, useT, useGoogleDrive } from "@/hooks";
 import type { CurrencyCode } from "@/types";
 import { LANG_LOCALES } from "@/i18n";

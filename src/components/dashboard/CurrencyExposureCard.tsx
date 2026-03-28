@@ -1,7 +1,7 @@
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
 import { CURRENCY_SYMBOLS } from "@/types";
-import { useSettingsStore } from "@/pages/stores";
+import { useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
 import type { PortfolioSummary } from "@/types";
 

@@ -2,6 +2,8 @@ import { fetchScreenerStocks, enrichFundamentals, type FundamentalsData, type Sc
 import type { UniverseStock } from "./stockUniverse";
 import type { Market } from "@/types";
 
+import { approxToUSD } from "@/constants";
+
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
 
 export type LynchCriterionKey =
@@ -100,12 +102,8 @@ function scoreOperatingMargin(m: number | null): Pick<LynchCriterion, "pass" | "
 function scoreMarketCap(cap: number | null, currency: string | null): Pick<LynchCriterion, "pass" | "score"> {
   if (cap === null) return { pass: null, score: 0 };
 
-  // 통화별 2B USD 환산 근사값
   const BILLION = 1_000_000_000;
-  let capUSD = cap;
-  if (currency === "KRW") capUSD = cap / 1350;       // 약 1350 KRW/USD
-  else if (currency === "JPY") capUSD = cap / 150;    // 약 150 JPY/USD
-  else if (currency === "EUR") capUSD = cap / 0.92;   // 약 0.92 EUR/USD
+  const capUSD = approxToUSD(cap, currency ?? "USD");
 
   if (capUSD < 2 * BILLION) return { pass: true, score: 10 };
   if (capUSD < 10 * BILLION) return { pass: true, score: 8 };

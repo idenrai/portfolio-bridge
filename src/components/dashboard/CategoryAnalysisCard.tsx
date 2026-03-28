@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, Button, Modal } from "@/components/common";
 import { useT } from "@/hooks";
-import { useSettingsStore } from "@/pages/stores";
+import { useSettingsStore } from "@/stores";
 import type {
   RebalanceSuggestion,
   AssetCategory,

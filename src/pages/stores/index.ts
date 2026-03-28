@@ -1,5 +1,8 @@
-export { useAssetStore } from "./useAssetStore";
-export { useSettingsStore } from "./useSettingsStore";
-export { useLanguageStore } from "./useLanguageStore";
-export { useGoogleDriveStore } from "./useGoogleDriveStore";
-export { useSnapshotStore } from "./useSnapshotStore";
+/** @deprecated — use "@/stores" instead */
+export {
+  useAssetStore,
+  useSettingsStore,
+  useLanguageStore,
+  useGoogleDriveStore,
+  useSnapshotStore,
+} from "@/stores";

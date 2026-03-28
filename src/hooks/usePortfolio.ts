@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useAssetStore, useSettingsStore } from "@/pages/stores";
+import { useAssetStore, useSettingsStore } from "@/stores";
 import { calculateSummary, calculateRebalancing } from "@/utils";
 import { useT } from "@/hooks/useT";
 import type { AssetCategory } from "@/types";

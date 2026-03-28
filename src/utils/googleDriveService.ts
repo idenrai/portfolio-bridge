@@ -2,8 +2,7 @@
  * Google Drive 서비스 싱글턴
  * - 모듈 레벨에서 상태를 관리하므로 여러 컴포넌트가 훅을 사용해도 단 1회만 초기화됨
  */
-import { useAssetStore, useSettingsStore } from "@/pages/stores";
-import { useGoogleDriveStore } from "@/pages/stores/useGoogleDriveStore";
+import { useAssetStore, useSettingsStore, useGoogleDriveStore } from "@/stores";
 import {
   findDriveFile,
   downloadDriveBackup,

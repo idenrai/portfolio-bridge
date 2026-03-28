@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useAssetStore, useLanguageStore } from "@/pages/stores";
+import { useAssetStore, useLanguageStore } from "@/stores";
 import { Card, Button, Modal } from "@/components/common";
 import { AssetForm } from "@/components/assets/AssetForm";
 import { AssetTable } from "@/components/assets/AssetTable";

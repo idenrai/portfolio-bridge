@@ -1,0 +1,149 @@
+/**
+ * AI 프롬프트 공통 라벨·포맷 유틸리티
+ *
+ * buildGuruPrompt, buildInsightPrompt, aiClassification에서 중복되던
+ * CATEGORY_LABELS_EN, ASSET_TYPE_LABELS_EN, MARKET_LABELS_EN, formatInBase를 통합
+ */
+import type { AssetCategory, AssetType, Market } from "@/types";
+import { CURRENCY_SYMBOLS } from "@/types";
+
+/** AI 프롬프트용 영문 카테고리 라벨 */
+export const CATEGORY_LABELS_EN: Record<AssetCategory, string> = {
+  dividend: "Dividend",
+  growth: "Growth",
+  value: "Value",
+  index: "Index/ETF",
+  bond: "Bond",
+  reit: "REIT",
+  cash: "Cash",
+  crypto: "Crypto",
+  commodity: "Commodity",
+  other: "Other",
+};
+
+/** AI 프롬프트용 영문 자산유형 라벨 */
+export const ASSET_TYPE_LABELS_EN: Record<AssetType, string> = {
+  stock: "Stock",
+  etf: "ETF",
+  bond: "Bond",
+  fund: "Fund",
+  cash: "Cash/Deposit",
+  crypto: "Crypto",
+  real_estate: "Real Estate",
+  other: "Other",
+};
+
+/** AI 프롬프트용 영문 시장 라벨 */
+export const MARKET_LABELS_EN: Record<Market, string> = {
+  KR: "Korea",
+  JP: "Japan",
+  US: "US",
+  EU: "Europe",
+  OTHER: "Other",
+};
+
+/** KRW 기준 금액을 baseCurrency로 변환하여 포맷팅 */
+export function formatInBase(
+  krwAmount: number,
+  baseCurrency: string,
+  rates: Record<string, number>,
+): string {
+  const symbol =
+    (CURRENCY_SYMBOLS as Record<string, string>)[baseCurrency] ?? baseCurrency;
+  if (baseCurrency === "KRW") {
+    return `${symbol}${Math.round(krwAmount).toLocaleString()}`;
+  }
+  const rate = rates[baseCurrency] ?? 1;
+  const amount = krwAmount / rate;
+  return `${symbol}${Math.round(amount).toLocaleString()}`;
+}
+
+import type { PortfolioSummary, Asset } from "@/types";
+
+/** 카테고리별 배분 섹션 빌드 (목표 비중과 비교) */
+export function buildCategorySection(
+  summary: PortfolioSummary,
+  targets: { category: string; targetPercent?: number }[],
+  targetLabel = "target",
+): string {
+  return (
+    summary.categoryAllocation
+      .map((t) => {
+        const tgt = targets.find((x) => x.category === t.category);
+        const label =
+          CATEGORY_LABELS_EN[t.category as AssetCategory] ?? t.category;
+        const targetStr =
+          tgt?.targetPercent != null
+            ? ` (${targetLabel}: ${tgt.targetPercent}%)`
+            : "";
+        return `  - ${label}: ${t.percent.toFixed(1)}%${targetStr}`;
+      })
+      .join("\n") || "  (no data)"
+  );
+}
+
+/** 시장별 배분 섹션 빌드 */
+export function buildMarketSection(summary: PortfolioSummary): string {
+  return (
+    summary.marketAllocation
+      .map(
+        (m) =>
+          `  - ${MARKET_LABELS_EN[m.market as keyof typeof MARKET_LABELS_EN] ?? m.market}: ${m.percent.toFixed(1)}%`,
+      )
+      .join("\n") || "  (no data)"
+  );
+}
+
+/** 외화 노출 섹션 빌드 */
+export function buildFxSection(summary: PortfolioSummary): string {
+  return (
+    summary.currencyExposure
+      .map((e) => `  - ${e.currency}: ${e.percent.toFixed(1)}%`)
+      .join("\n") || "  (no data)"
+  );
+}
+
+/** 보유 종목 상세 행 빌드 (현금 제외, 평가액 순, 최대 maxItems) */
+export function buildHoldingRows(
+  summary: PortfolioSummary,
+  maxItems = 30,
+): { rows: string; count: number } {
+  const holdings = [...summary.holdings]
+    .filter((h) => h.type !== "cash")
+    .sort((a, b) => b.valueKRW - a.valueKRW)
+    .slice(0, maxItems);
+
+  const rows =
+    holdings
+      .map((h, i) => {
+        const type =
+          ASSET_TYPE_LABELS_EN[h.type as keyof typeof ASSET_TYPE_LABELS_EN] ??
+          h.type;
+        const market =
+          MARKET_LABELS_EN[h.market as keyof typeof MARKET_LABELS_EN] ??
+          h.market;
+        const category = h.category
+          ? (CATEGORY_LABELS_EN[h.category as AssetCategory] ?? h.category)
+          : "—";
+        return (
+          `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
+          ` | ${type} | ${market} | ${h.currency}` +
+          ` | weight: ${h.weightPercent.toFixed(1)}%` +
+          ` | return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%` +
+          ` | category: ${category}`
+        );
+      })
+      .join("\n") || "  (no data)";
+
+  return { rows, count: holdings.length };
+}
+
+/** 현금자산 섹션 빌드 */
+export function buildCashSection(assets: Asset[]): string {
+  const cashAssets = assets.filter((a) => a.type === "cash");
+  return cashAssets.length > 0
+    ? cashAssets
+        .map((a) => `  - ${a.currency} ${a.quantity.toLocaleString()}`)
+        .join("\n")
+    : "  (none)";
+}

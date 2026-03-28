@@ -12,6 +12,7 @@ import type {
   PortfolioInsight,
 } from "@/types";
 import { CATEGORY_LABELS } from "@/types";
+import { INSIGHT_THRESHOLDS } from "@/constants";
 import { toKRW } from "./currency";
 
 /** 인사이트 메시지 템플릿 (i18n 주입용) */
@@ -89,9 +90,9 @@ function generateInsights(
 ): PortfolioInsight[] {
   const insights: PortfolioInsight[] = [];
 
-  // 1. 개별 종목 과대 비중 (> 15%)
+  // 1. 개별 종목 과대 비중
   for (const h of holdings) {
-    if (h.type !== "cash" && h.weightPercent > 15) {
+    if (h.type !== "cash" && h.weightPercent > INSIGHT_THRESHOLDS.CONCENTRATION) {
       insights.push({
         type: "warning",
         icon: "⚠️",
@@ -100,9 +101,9 @@ function generateInsights(
     }
   }
 
-  // 2. 큰 손실 종목 (< -20%)
+  // 2. 큰 손실 종목
   for (const h of holdings) {
-    if (h.type !== "cash" && h.returnPercent < -20) {
+    if (h.type !== "cash" && h.returnPercent < INSIGHT_THRESHOLDS.BIG_LOSS) {
       insights.push({
         type: "danger",
         icon: "🔻",
@@ -112,13 +113,13 @@ function generateInsights(
   }
 
   // 3. 현금 비중 경고
-  if (cashPercent > 20) {
+  if (cashPercent > INSIGHT_THRESHOLDS.CASH_HIGH) {
     insights.push({
       type: "info",
       icon: "💰",
       message: msg.cashHigh(cashPercent.toFixed(1)),
     });
-  } else if (cashPercent < 3 && assets.length > 3) {
+  } else if (cashPercent < INSIGHT_THRESHOLDS.CASH_LOW && assets.length > INSIGHT_THRESHOLDS.CASH_LOW_MIN_ASSETS) {
     insights.push({
       type: "warning",
       icon: "💰",
@@ -126,9 +127,9 @@ function generateInsights(
     });
   }
 
-  // 4. 환율 노출 (> 40%)
+  // 4. 환율 노출
   for (const exp of currencyExposure) {
-    if (exp.currency !== baseCurrency && exp.percent > 40) {
+    if (exp.currency !== baseCurrency && exp.percent > INSIGHT_THRESHOLDS.FX_HIGH) {
       insights.push({
         type: "warning",
         icon: "💱",
@@ -137,12 +138,12 @@ function generateInsights(
     }
   }
 
-  // 5. 카테고리 목표 대비 편차 (|diff| > 10%)
+  // 5. 카테고리 목표 대비 편차
   for (const t of targets) {
     const current = categoryAllocation.find((a) => a.category === t.category);
     const currentPercent = current?.percent ?? 0;
     const diff = currentPercent - t.targetPercent;
-    if (Math.abs(diff) > 10) {
+    if (Math.abs(diff) > INSIGHT_THRESHOLDS.CATEGORY_DIFF) {
       const label = msg.getCategoryLabel(t.category);
       if (diff > 0) {
         insights.push({

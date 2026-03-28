@@ -8,11 +8,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Card } from "@/components/common";
-import { useSettingsStore } from "@/pages/stores";
-import { useSnapshotStore } from "@/pages/stores/useSnapshotStore";
+import { useSettingsStore, useSnapshotStore, useLanguageStore } from "@/stores";
 import { formatCurrency, fromKRW } from "@/utils";
 import { useT } from "@/hooks";
-import { useLanguageStore } from "@/pages/stores";
 import { LANG_LOCALES } from "@/i18n";
 
 export function PortfolioHistoryChart() {

@@ -5,7 +5,7 @@ import {
   useSettingsStore,
   useLanguageStore,
   useSnapshotStore,
-} from "@/pages/stores";
+} from "@/stores";
 import { LANG_LOCALES } from "@/i18n";
 import { KpiBar } from "@/components/dashboard/KpiBar";
 import { AllocationPieCharts } from "@/components/dashboard/AllocationPieCharts";

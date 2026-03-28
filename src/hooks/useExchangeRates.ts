@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { useSettingsStore, useLanguageStore } from "@/pages/stores";
+import { useSettingsStore, useLanguageStore } from "@/stores";
 import { TRANSLATIONS } from "@/i18n";
 import { fetchAllExchangeRates } from "@/utils";
 

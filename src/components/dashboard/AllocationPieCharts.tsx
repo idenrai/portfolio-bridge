@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
-import { useSettingsStore } from "@/pages/stores";
+import { useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
 import type { PortfolioSummary, Market, AssetCategory } from "@/types";
 

@@ -1,4 +1,4 @@
-import { useSettingsStore } from "@/pages/stores";
+import { useSettingsStore } from "@/stores";
 import { formatCurrency, formatPercent, fromKRW } from "@/utils";
 import { useT } from "@/hooks";
 import type { PortfolioSummary } from "@/types";

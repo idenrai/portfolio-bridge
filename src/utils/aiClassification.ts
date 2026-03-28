@@ -1,6 +1,7 @@
 import type { Asset, AssetCategory } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
+import { ASSET_TYPE_LABELS_EN, MARKET_LABELS_EN } from "./promptHelpers";
 
 /** 유효한 AssetCategory인지 확인 */
 const VALID_CATEGORIES = new Set<string>([
@@ -42,25 +43,6 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   other: "other - does not fit any category above",
 };
 
-const ASSET_TYPE_EN: Record<string, string> = {
-  stock: "Stock",
-  etf: "ETF",
-  bond: "Bond",
-  fund: "Fund",
-  cash: "Cash/Deposit",
-  crypto: "Crypto",
-  real_estate: "Real Estate",
-  other: "Other",
-};
-
-const MARKET_EN: Record<string, string> = {
-  KR: "Korea",
-  JP: "Japan",
-  US: "US",
-  EU: "Europe (EU)",
-  OTHER: "Other",
-};
-
 /** 자산 목록을 AI 분류 요청 프롬프트로 변환 */
 export function buildClassificationPrompt(
   assets: Asset[],
@@ -72,8 +54,8 @@ export function buildClassificationPrompt(
 
   const assetLines = assets
     .map((a, i) => {
-      const type = ASSET_TYPE_EN[a.type] ?? a.type;
-      const market = MARKET_EN[a.market] ?? a.market;
+      const type = ASSET_TYPE_LABELS_EN[a.type] ?? a.type;
+      const market = MARKET_LABELS_EN[a.market] ?? a.market;
       const currentCategory = a.categories[0]
         ? `(current category: ${a.categories[0]})`
         : "(no category)";

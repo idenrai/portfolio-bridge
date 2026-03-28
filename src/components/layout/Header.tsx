@@ -1,4 +1,4 @@
-import { useLanguageStore, useSettingsStore } from "@/pages/stores";
+import { useLanguageStore, useSettingsStore } from "@/stores";
 import type { Lang } from "@/i18n";
 import type { CurrencyCode } from "@/types";
 
