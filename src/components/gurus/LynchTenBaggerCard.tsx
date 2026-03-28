@@ -172,7 +172,7 @@ export function LynchTenBaggerCard() {
 
       {/* 종목 수 표시 */}
       <p className="text-[11px] text-slate-400 mb-2">
-        시가총액 $300M–$30B 범위에서 동적 검색 (최대 30개)
+        {t.lynch_cap_range_hint}
       </p>
 
       {/* 스크리닝 실행 버튼 */}
@@ -183,9 +183,9 @@ export function LynchTenBaggerCard() {
       >
         {loading
           ? progress.phase === "fetch"
-            ? `⏳ 종목 검색 중…`
-            : `⏳ 상위 ${progress.total}종목 상세 분석 (${progress.done}/${progress.total})`
-          : "🔍 Screening"}
+            ? t.lynch_progress_fetch
+            : t.lynch_progress_enrich(progress.done, progress.total)
+          : t.lynch_btn_screen}
       </button>
 
       {/* 로딩 — 진행률 바 */}
@@ -193,8 +193,8 @@ export function LynchTenBaggerCard() {
         <div className="mb-4">
           <p className="text-xs text-slate-400 mb-1 animate-pulse">
             {progress.phase === "fetch"
-              ? `📡 Yahoo Screener API에서 소/중형주 검색 중…`
-              : `🔍 상위 종목 상세 재무 데이터 보강 중…`}
+              ? t.lynch_phase_fetch
+              : t.lynch_phase_enrich}
           </p>
           <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
             <div
@@ -219,7 +219,7 @@ export function LynchTenBaggerCard() {
       {/* 결과 없음 — 스크리닝 완료했지만 결과 0 */}
       {!loading && ran && results.length === 0 && (
         <p className="text-sm text-slate-400 text-center py-6">
-          ⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.
+          {t.lynch_no_result}
         </p>
       )}
 
@@ -252,7 +252,7 @@ export function LynchTenBaggerCard() {
                 {/* 10루타 배지 */}
                 {r.totalScore >= 70 && (
                   <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-                    🚀 10루타 후보
+                    {t.lynch_tenbagger_badge}
                   </span>
                 )}
 
@@ -294,7 +294,7 @@ export function LynchTenBaggerCard() {
       {/* 초기 상태 (아직 실행 전) */}
       {!loading && !ran && (
         <p className="text-xs text-slate-400 text-center py-4">
-          위 버튼을 눌러 스크리닝을 시작하세요.
+          {t.lynch_initial_guide}
         </p>
       )}
     </Card>

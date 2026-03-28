@@ -324,6 +324,15 @@ export const en: Translations = {
   lynch_no_data: "No data",
   lynch_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
+  lynch_cap_range_hint: "Dynamic search in $300M–$30B market cap range (up to 30)",
+  lynch_progress_fetch: "⏳ Searching stocks…",
+  lynch_progress_enrich: (done, total) => `⏳ Analyzing top ${total} stocks (${done}/${total})`,
+  lynch_btn_screen: "🔍 Screening",
+  lynch_phase_fetch: "📡 Searching small/mid-cap stocks via Yahoo Screener API…",
+  lynch_phase_enrich: "🔍 Enriching top stocks with detailed fundamentals…",
+  lynch_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  lynch_tenbagger_badge: "🚀 Tenbagger Candidate",
+  lynch_initial_guide: "Press the button above to start screening.",
 
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",

@@ -324,6 +324,15 @@ export const ja: Translations = {
   lynch_no_data: "データなし",
   lynch_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
+  lynch_cap_range_hint: "時価総額 $300M–$30B の範囲で動的検索（最大30件）",
+  lynch_progress_fetch: "⏳ 銘柄検索中…",
+  lynch_progress_enrich: (done, total) => `⏳ 上位${total}銘柄を詳細分析中 (${done}/${total})`,
+  lynch_btn_screen: "🔍 スクリーニング",
+  lynch_phase_fetch: "📡 Yahoo Screener APIで小型・中型株を検索中…",
+  lynch_phase_enrich: "🔍 上位銘柄の詳細な財務データを補強中…",
+  lynch_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  lynch_tenbagger_badge: "🚀 テンバガー候補",
+  lynch_initial_guide: "上のボタンを押してスクリーニングを開始してください。",
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",
   settings_display_currency_desc:

@@ -323,6 +323,15 @@ export const ko: Translations = {
   lynch_no_data: "데이터 없음",
   lynch_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
+  lynch_cap_range_hint: "시가총액 $300M–$30B 범위에서 동적 검색 (최대 30개)",
+  lynch_progress_fetch: "⏳ 종목 검색 중…",
+  lynch_progress_enrich: (done, total) => `⏳ 상위 ${total}종목 상세 분석 (${done}/${total})`,
+  lynch_btn_screen: "🔍 스크리닝",
+  lynch_phase_fetch: "📡 Yahoo Screener API에서 소/중형주 검색 중…",
+  lynch_phase_enrich: "🔍 상위 종목 상세 재무 데이터 보강 중…",
+  lynch_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  lynch_tenbagger_badge: "🚀 10루타 후보",
+  lynch_initial_guide: "위 버튼을 눌러 스크리닝을 시작하세요.",
 
   settings_title: "설정",
   settings_display_currency_title: "표시 화폐",

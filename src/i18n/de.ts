@@ -328,6 +328,15 @@ export const de: Translations = {
   lynch_no_data: "Keine Daten",
   lynch_disclaimer:
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
+  lynch_cap_range_hint: "Dynamische Suche im Marktkapitalisierungsbereich $300M–$30B (max. 30)",
+  lynch_progress_fetch: "⏳ Aktien werden gesucht…",
+  lynch_progress_enrich: (done, total) => `⏳ Top-${total}-Aktien werden analysiert (${done}/${total})`,
+  lynch_btn_screen: "🔍 Screening",
+  lynch_phase_fetch: "📡 Klein-/Mittelkapitalisierte Aktien über Yahoo Screener API suchen…",
+  lynch_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Top-Aktien ergänzen…",
+  lynch_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  lynch_tenbagger_badge: "🚀 Tenbagger-Kandidat",
+  lynch_initial_guide: "Drücken Sie die Taste oben, um das Screening zu starten.",
 
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",
