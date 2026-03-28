@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
 import { screenAll, type LynchScreenResult, type LynchCriterionKey, type ScreenProgress } from "@/utils/lynchScreener";
-import { getUniverse } from "@/utils/stockUniverse";
 import type { Market } from "@/types";
 
 // ─── 상수 ─────────────────────────────────────────────────────────────────────
@@ -105,22 +104,14 @@ export function LynchTenBaggerCard() {
   const [results, setResults] = useState<LynchScreenResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [ran, setRan] = useState(false);
-  const [progress, setProgress] = useState<ScreenProgress>({ phase: "batch", done: 0, total: 0 });
-
-  // 선택한 시장의 유니버스
-  const universe = getUniverse(market);
+  const [progress, setProgress] = useState<ScreenProgress>({ phase: "fetch", done: 0, total: 0 });
 
   const run = useCallback(async () => {
-    if (universe.length === 0) {
-      setResults([]);
-      setRan(true);
-      return;
-    }
     setLoading(true);
     setRan(false);
-    setProgress({ phase: "batch", done: 0, total: universe.length });
+    setProgress({ phase: "fetch", done: 0, total: 1 });
     try {
-      const res = await screenAll(universe, (p) => {
+      const res = await screenAll(market, (p) => {
         setProgress(p);
       });
       setResults(res);
@@ -128,14 +119,13 @@ export function LynchTenBaggerCard() {
       setLoading(false);
       setRan(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [market]);
 
   // 시장 탭 변경 시 결과 초기화
   useEffect(() => {
     setResults([]);
     setRan(false);
-    setProgress({ phase: "batch", done: 0, total: 0 });
+    setProgress({ phase: "fetch", done: 0, total: 0 });
   }, [market]);
 
   const criterionLabel = (key: LynchCriterionKey): string => {
@@ -182,21 +172,19 @@ export function LynchTenBaggerCard() {
 
       {/* 종목 수 표시 */}
       <p className="text-[11px] text-slate-400 mb-2">
-        {universe.length}개 종목 대상
+        시가총액 $300M–$30B 범위에서 동적 검색 (최대 30개)
       </p>
 
       {/* 스크리닝 실행 버튼 */}
       <button
         onClick={run}
-        disabled={loading || universe.length === 0}
+        disabled={loading}
         className="mb-4 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
       >
         {loading
-          ? progress.phase === "batch"
-            ? `⏳ 1단계: ${progress.done}/${progress.total} 종목 조회 중…`
-            : progress.phase === "individual"
-            ? `⏳ 개별 조회 중… (${progress.done}/${progress.total})`
-            : `⏳ 2단계: 상위 ${progress.total}종목 상세 분석 (${progress.done}/${progress.total})`
+          ? progress.phase === "fetch"
+            ? `⏳ 종목 검색 중…`
+            : `⏳ 상위 ${progress.total}종목 상세 분석 (${progress.done}/${progress.total})`
           : "🔍 Screening"}
       </button>
 
@@ -204,18 +192,14 @@ export function LynchTenBaggerCard() {
       {loading && (
         <div className="mb-4">
           <p className="text-xs text-slate-400 mb-1 animate-pulse">
-            {progress.phase === "batch"
-              ? `📡 ${universe.length}개 종목 기본 데이터 수집 중…`
-              : progress.phase === "individual"
-              ? `📡 배치 조회 실패 → 개별 종목 조회 폴백 중…`
+            {progress.phase === "fetch"
+              ? `📡 Yahoo Screener API에서 소/중형주 검색 중…`
               : `🔍 상위 종목 상세 재무 데이터 보강 중…`}
           </p>
           <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-300 ${
-                progress.phase === "enrich" ? "bg-green-500"
-                : progress.phase === "individual" ? "bg-amber-500"
-                : "bg-blue-500"
+                progress.phase === "enrich" ? "bg-green-500" : "bg-blue-500"
               }`}
               style={{
                 width: progress.total > 0
@@ -224,21 +208,18 @@ export function LynchTenBaggerCard() {
               }}
             />
           </div>
-          <p className="text-[10px] text-slate-300 mt-0.5 text-right">
-            {progress.done} / {progress.total}
-          </p>
+          {progress.phase === "enrich" && (
+            <p className="text-[10px] text-slate-300 mt-0.5 text-right">
+              {progress.done} / {progress.total}
+            </p>
+          )}
         </div>
       )}
 
-      {/* 결과 없음 — 유니버스가 없는 시장 */}
-      {!loading && ran && universe.length === 0 && (
-        <p className="text-sm text-slate-400 text-center py-6">{t.lynch_no_stocks}</p>
-      )}
-
       {/* 결과 없음 — 스크리닝 완료했지만 결과 0 */}
-      {!loading && ran && universe.length > 0 && results.length === 0 && (
+      {!loading && ran && results.length === 0 && (
         <p className="text-sm text-slate-400 text-center py-6">
-          ⚠️ Yahoo Finance에서 재무 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.
+          ⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.
         </p>
       )}
 
@@ -311,9 +292,9 @@ export function LynchTenBaggerCard() {
       )}
 
       {/* 초기 상태 (아직 실행 전) */}
-      {!loading && !ran && universe.length > 0 && (
+      {!loading && !ran && (
         <p className="text-xs text-slate-400 text-center py-4">
-          위 버튼을 눌러 {universe.length}개 종목을 스크리닝하세요.
+          위 버튼을 눌러 스크리닝을 시작하세요.
         </p>
       )}
     </Card>

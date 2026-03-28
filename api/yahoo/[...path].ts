@@ -57,7 +57,7 @@ async function getCrumb(
 
 const CORS_HEADERS: Record<string, string> = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
 };
 
@@ -88,10 +88,19 @@ export default async function handler(request: Request) {
     const sep = originalSearch ? "&" : "?";
     const targetUrl = `https://query1.finance.yahoo.com/${pathStr}${originalSearch}${sep}crumb=${encodeURIComponent(crumb)}`;
 
-    return fetch(targetUrl, {
+    const init: RequestInit = {
       method: request.method,
-      headers: { "User-Agent": UA, Cookie: cookie },
-    });
+      headers: { "User-Agent": UA, Cookie: cookie } as Record<string, string>,
+    };
+
+    // POST 요청 시 body + Content-Type 전달
+    if (request.method === "POST" && request.body) {
+      init.body = request.body;
+      const ct = request.headers.get("content-type");
+      if (ct) (init.headers as Record<string, string>)["Content-Type"] = ct;
+    }
+
+    return fetch(targetUrl, init);
   };
 
   try {

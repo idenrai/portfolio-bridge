@@ -641,3 +641,84 @@ export async function enrichFundamentals(
     currency:       detail.currency       ?? base.currency,
   };
 }
+
+// ─── Yahoo Screener API ───────────────────────────────────────────────────────
+
+import type { UniverseStock } from "./stockUniverse";
+import { buildScreenerBody } from "./stockUniverse";
+
+export interface ScreenerResult {
+  stock: UniverseStock;
+  data: FundamentalsData;
+}
+
+/**
+ * Yahoo Finance Screener API (`/v1/finance/screener`)를 통해
+ * 시가총액 $300M–$30B 범위의 주식을 동적으로 가져옵니다.
+ *
+ * 하드코딩 종목 없이 실시간 시장 데이터 기반 스크리닝.
+ */
+export async function fetchScreenerStocks(
+  market: "ALL" | Market,
+  count = 30,
+): Promise<ScreenerResult[]> {
+  const body = buildScreenerBody(market, count);
+
+  try {
+    const res = await yahooFetch("/api/yahoo/v1/finance/screener", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      console.warn(`[Screener] HTTP ${res.status}`, await res.text().catch(() => ""));
+      return [];
+    }
+
+    const json = await res.json() as {
+      finance?: {
+        result?: Array<{
+          quotes?: Array<Record<string, unknown>>;
+          total?: number;
+        }>;
+      };
+    };
+
+    const quotes = json.finance?.result?.[0]?.quotes ?? [];
+    const total = json.finance?.result?.[0]?.total ?? 0;
+    console.log(`[Screener] market=${market} → ${quotes.length}/${total} stocks`);
+
+    return quotes
+      .filter((q) => q.symbol)
+      .map((q) => {
+        const sym = q.symbol as string;
+        const num = (v: unknown) => (typeof v === "number" ? v : null);
+        const str = (v: unknown) => (typeof v === "string" ? v : null);
+
+        return {
+          stock: {
+            ticker: sym,
+            name: ((q.longName ?? q.shortName ?? sym) as string),
+            market: toMarket(
+              q.exchange as string | undefined,
+              q.currency as string | undefined,
+              sym,
+            ),
+          },
+          data: {
+            pegRatio: num(q.pegRatio),
+            epsGrowth: num(q.earningsQuarterlyGrowth),
+            revenueGrowth: num(q.revenueQuarterlyGrowth),
+            debtToEquity: null,
+            operatingMargin: null,
+            marketCap: num(q.marketCap),
+            currency: str(q.financialCurrency) ?? str(q.currency),
+          },
+        };
+      });
+  } catch (e) {
+    console.warn("[Screener] error:", e);
+    return [];
+  }
+}

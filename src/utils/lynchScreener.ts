@@ -1,5 +1,6 @@
-import { fetchBatchQuote, enrichFundamentals, type FundamentalsData } from "./yahooFinance";
+import { fetchScreenerStocks, enrichFundamentals, type FundamentalsData, type ScreenerResult } from "./yahooFinance";
 import type { UniverseStock } from "./stockUniverse";
+import type { Market } from "@/types";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
 
@@ -144,9 +145,9 @@ export function scoreStock(
   return { stock, fundamentals, criteria, totalScore };
 }
 
-// ─── 2단계 스크리너 ────────────────────────────────────────────────────────────
+// ─── 동적 스크리너 ─────────────────────────────────────────────────────────────
 
-export type ScreenPhase = "batch" | "enrich" | "individual";
+export type ScreenPhase = "fetch" | "enrich";
 
 export interface ScreenProgress {
   phase: ScreenPhase;
@@ -155,44 +156,40 @@ export interface ScreenProgress {
 }
 
 /**
- * 2단계 스크리닝:
+ * 2단계 동적 스크리닝:
  *
- * **Phase 1 (batch)**: `/v7/finance/quote` 배치 호출로 전 종목 기본 데이터
- *   (marketCap, pegRatio, earningsQuarterlyGrowth) 확보 → 1차 점수 산출
+ * **Phase 1 (fetch)**: Yahoo Finance Screener API 호출 →
+ *   시가총액 $300M–$30B 범위의 종목 30개를 실시간으로 가져와 1차 점수 산출.
+ *   Screener API 실패 시 `/v7/finance/quote` 배치 호출 폴백.
  *
  * **Phase 2 (enrich)**: 1차 상위 10종목에 대해 `quoteSummary`로
  *   debtToEquity, operatingMargins, 정밀 성장률 보강 → 최종 점수 확정
- *
- * @param onProgress 진행 상황 콜백
  */
 export async function screenAll(
-  stocks: UniverseStock[],
+  market: "ALL" | Market,
   onProgress?: (p: ScreenProgress) => void,
 ): Promise<LynchScreenResult[]> {
-  const tickers = stocks.map(s => s.ticker);
 
-  // ─── Phase 1: 배치 quote ─────────────────────────────────────
-  onProgress?.({ phase: "batch", done: 0, total: tickers.length });
+  // ─── Phase 1: Yahoo Screener API로 종목 동적 가져오기 ──────
+  onProgress?.({ phase: "fetch", done: 0, total: 1 });
 
-  const batchMap = await fetchBatchQuote(tickers, 1500, (done, total) => {
-    onProgress?.({ phase: "batch", done, total });
-  });
+  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, 30);
 
-  // 1차 스코어링
-  const results: LynchScreenResult[] = [];
-  for (const stock of stocks) {
-    const data = batchMap.get(stock.ticker) ?? {
-      pegRatio: null, epsGrowth: null, revenueGrowth: null,
-      debtToEquity: null, operatingMargin: null, marketCap: null, currency: null,
-    };
-    results.push(scoreStock(stock, data));
+  onProgress?.({ phase: "fetch", done: 1, total: 1 });
+
+  if (candidates.length === 0) {
+    console.warn("[Lynch] Screener returned 0 candidates");
+    return [];
   }
 
-  // 1차 정렬
+  // 1차 스코어링
+  const results: LynchScreenResult[] = candidates.map((c) =>
+    scoreStock(c.stock, c.data),
+  );
   results.sort((a, b) => b.totalScore - a.totalScore);
 
   // ─── Phase 2: 상위 10종목 quoteSummary 보강 ─────────────────
-  const TOP_N = 10;
+  const TOP_N = Math.min(10, results.length);
   const enrichTargets = results.slice(0, TOP_N);
   onProgress?.({ phase: "enrich", done: 0, total: enrichTargets.length });
 
@@ -200,18 +197,15 @@ export async function screenAll(
     const r = enrichTargets[i];
     const enriched = await enrichFundamentals(r.stock.ticker, r.fundamentals);
     const updated = scoreStock(r.stock, enriched);
-    // 원본 배열에서 갱신
     const idx = results.indexOf(r);
     if (idx !== -1) results[idx] = updated;
 
     onProgress?.({ phase: "enrich", done: i + 1, total: enrichTargets.length });
 
-    // 순차 딜레이 (Yahoo rate limit)
     if (i < enrichTargets.length - 1) {
       await new Promise(resolve => setTimeout(resolve, 1500));
     }
   }
 
-  // 최종 정렬
   return results.sort((a, b) => b.totalScore - a.totalScore);
 }
