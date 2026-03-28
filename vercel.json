@@ -11,6 +11,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/api/yahoo/:path*", "destination": "/api/proxy?__path=:path*" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

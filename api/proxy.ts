@@ -1,6 +1,6 @@
-// Vercel Edge Runtime — Web Standard Request/Response API 사용
-// Vercel은 서브디렉토리 catch-all([...path])을 인식하지 못하는 경우가 있어
-// 루트 레벨 catch-all로 변경. 특정 라우트(api/health.ts)가 우선 매칭됩니다.
+// Vercel Edge Runtime — Yahoo Finance 프록시
+// catch-all 파일명([...path])이 Vite 프리셋에서 작동하지 않아
+// 일반 파일명 + vercel.json rewrites 조합으로 라우팅합니다.
 export const config = { runtime: "edge" };
 
 const UA =
@@ -20,7 +20,6 @@ async function getCrumb(
     return { crumb: _crumb, cookie: _cookie };
   }
 
-  // 1) Yahoo 쿠키 획득
   const r1 = await fetch("https://fc.yahoo.com/", {
     redirect: "manual",
     headers: { "User-Agent": UA },
@@ -33,7 +32,6 @@ async function getCrumb(
   }
   const cookie = parts.join("; ");
 
-  // 2) Crumb 토큰 발급 (429 시 재시도)
   let crumb = "";
   for (let attempt = 0; attempt < 3; attempt++) {
     const r2 = await fetch("https://query2.finance.yahoo.com/v1/test/getcrumb", {
@@ -64,45 +62,49 @@ const CORS_HEADERS: Record<string, string> = {
 };
 
 /**
- * Vercel Serverless Function — Yahoo Finance US 프록시
- * /api/yahoo/* → https://query1.finance.yahoo.com/*
+ * Yahoo Finance 프록시 핸들러
  *
- * Yahoo Finance v8 API는 cookie + crumb 인증이 필요합니다.
- * 모듈 레벨에서 crumb을 캐시하고, 만료 시 자동 갱신합니다.
+ * vercel.json rewrite:
+ *   /api/yahoo/:path* → /api/proxy?__path=:path*
+ *
+ * `__path` 쿼리 파라미터에서 Yahoo API 경로를 추출합니다.
  */
 export default async function handler(request: Request) {
-  // CORS preflight
   if (request.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
   }
 
   const url = new URL(request.url);
 
-  // catch-all path: /api/yahoo/v8/finance/chart/AAPL → v8/finance/chart/AAPL
-  // 루트 레벨 catch-all이므로 /api/ 를 먼저 제거하고, yahoo/ 접두사도 제거
-  let pathStr = url.pathname.replace(/^\/api\/?/, "");
-
-  // yahoo/ 접두사가 있어야만 프록시 처리
-  if (!pathStr.startsWith("yahoo/") && pathStr !== "yahoo") {
-    return new Response("Not Found", { status: 404, headers: CORS_HEADERS });
+  // rewrite를 통해 전달된 Yahoo API 경로
+  const yahooPath = url.searchParams.get("__path") ?? "";
+  if (!yahooPath) {
+    return new Response(
+      JSON.stringify({ error: "Missing __path parameter" }),
+      { status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
+    );
   }
-  pathStr = pathStr.replace(/^yahoo\/?/, "");
 
-  // ⚠️ url.search 를 그대로 유지해야 쉼표(,)가 %2C로 재인코딩되지 않음
-  // URLSearchParams.toString()은 , → %2C 변환 버그가 있음
-  const originalSearch = url.search; // "?modules=a,b,c" 형태
+  // __path를 제외한 나머지 쿼리 파라미터를 원본 search에 복원
+  const params = new URLSearchParams(url.search);
+  params.delete("__path");
+  const remainingSearch = params.toString();
+  // ⚠️ URLSearchParams.toString()은 쉼표(,)를 %2C로 재인코딩합니다.
+  // 원본 URL에서 __path= 부분만 제거하여 쉼표를 보존합니다.
+  const originalSearch = url.search
+    .replace(/[?&]__path=[^&]*/, "")
+    .replace(/^&/, "?");
 
   const doFetch = async (forceNewCrumb: boolean) => {
     const { crumb, cookie } = await getCrumb(forceNewCrumb);
     const sep = originalSearch ? "&" : "?";
-    const targetUrl = `https://query1.finance.yahoo.com/${pathStr}${originalSearch}${sep}crumb=${encodeURIComponent(crumb)}`;
+    const targetUrl = `https://query1.finance.yahoo.com/${yahooPath}${originalSearch}${sep}crumb=${encodeURIComponent(crumb)}`;
 
     const init: RequestInit = {
       method: request.method,
       headers: { "User-Agent": UA, Cookie: cookie } as Record<string, string>,
     };
 
-    // POST 요청 시 body + Content-Type 전달
     if (request.method === "POST" && request.body) {
       init.body = request.body;
       const ct = request.headers.get("content-type");
@@ -115,7 +117,6 @@ export default async function handler(request: Request) {
   try {
     let response = await doFetch(false);
 
-    // 401/403 → crumb 만료, 새 crumb으로 재시도
     if (response.status === 401 || response.status === 403) {
       response = await doFetch(true);
     }
