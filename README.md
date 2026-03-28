@@ -25,7 +25,7 @@ Market data and exchange rates are fetched client-side via proxy from Yahoo Fina
 | --- | --- |
 | 📊 **Unified Dashboard** | KPI bar, category/market allocation charts, holdings table, rebalance suggestions |
 | 💼 **Asset Management** | Ticker search (Yahoo Finance), manual entry, AI auto-classification, CSV import/export |
-| 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.); also provides AI chat prompts in the persona of your chosen guru |
+| 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.); Peter Lynch 10-bagger screener scans market stocks; AI chat prompts in the persona of your chosen guru |
 | 🤖 **AI Portfolio Analysis** | Structured prompts ready to paste into ChatGPT · Claude · Gemini · Grok |
 | 🔔 **Auto Insights** | Alerts for overweight, large losses, low cash, currency exposure |
 | 🌐 **Multi-language & Currency** | Korean · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
@@ -146,6 +146,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 - Philosophy (5 principles + 1 representative quote per guru)
 - Ideal allocation pie chart vs portfolio radar comparison
 - Guru-based rebalancing suggestions
+- **Peter Lynch 10-bagger screener**: Screens trending stocks from each market (not portfolio holdings) against PEG, growth, and financial health criteria — scored out of 100
 - AI prompt generation always injects **English** guru philosophy (independent of UI language)
 
 #### Multi-language (i18n)
@@ -279,7 +280,7 @@ Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 
 | --- | --- |
 | 📊 **통합 대시보드** | KPI 바, 카테고리·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안 |
 | 💼 **자산 관리** | 종목 검색(Yahoo Finance), 수동 등록, AI 자동 카테고리 분류, CSV 가져오기·내보내기 |
-| 💡 **투자 구루** | 버핏·달리오·린치·드러큰밀러·스미스·그린블라트 등 18명의 철학과 내 포트폴리오 비교; 원하는 구루의 페르소나로 AI와 대화하는 프롬프트 제공 |
+| 💡 **투자 구루** | 버핏·달리오·린치·드러큰밀러·스미스·그린블라트 등 18명의 철학과 내 포트폴리오 비교; 피터 린치 10루타 스크리너로 시장 종목 발굴; 구루 페르소나 AI 프롬프트 제공 |
 | 🤖 **AI 포트폴리오 분석** | ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 구조화 프롬프트 생성 |
 | 🔔 **자동 인사이트** | 과대비중, 큰 손실, 현금 부족, 환 노출 초과를 자동 감지·경고 |
 | 🌐 **다국어 · 다통화** | 한국어 · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
@@ -400,6 +401,7 @@ npm run tauri:build
 - 구루별 투자 철학 (핵심 원칙 5개 + 대표 명언 1개)
 - 구루 이상적 배분 파이 차트 vs 내 포트폴리오 레이더 비교
 - 구루 기준 리밸런싱 제안
+- **피터 린치 10루타 스크리너**: 각 시장의 주요 종목(포트폴리오 보유 종목이 아닌 시장 종목)을 PEG·성장·재무건전성 기준으로 100점 만점 채점
 - AI 구루 프롬프트는 UI 언어와 무관하게 영어 철학 텍스트를 기준으로 생성
 
 #### 다국어 (i18n)
