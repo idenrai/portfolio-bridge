@@ -308,7 +308,22 @@ export const ja: Translations = {
     "• 分散運用：20〜30銘柄で個別リスクを抑えつつ、戦略の再現性を高める\n" +
     "• 忍耐が前提：有効な戦略でも3〜4年程度は市場に劣後し得ることを受け入れる\n" +
     "• 名言：「価値を見積もり、それより十分に安く買え。短期の株式市場は“ミスター・マーケット”に過ぎない」",
-
+  lynch_tenbagger_title: "ピーター・リンチ テンバガー・スクリーナー",
+  lynch_tenbagger_desc:
+    "保有株をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
+  lynch_market_all: "全市場",
+  lynch_loading: "Yahoo Financeから財務データを取得中…",
+  lynch_no_stocks: "この市場にスクリーニング対象の株式銘柄がありません。",
+  lynch_col_score: "リンチスコア",
+  lynch_criterion_peg: "PEGレシオ",
+  lynch_criterion_eps: "EPS成長率",
+  lynch_criterion_rev: "売上成長率",
+  lynch_criterion_debt: "負債比率 (D/E)",
+  lynch_criterion_margin: "営業利益率",
+  lynch_criterion_cap: "時価総額",
+  lynch_no_data: "データなし",
+  lynch_disclaimer:
+    "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",
   settings_display_currency_desc:

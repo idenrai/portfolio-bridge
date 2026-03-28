@@ -210,6 +210,22 @@ export interface Translations {
   guru_philosophy_smith: string;
   guru_philosophy_greenblatt: string;
 
+  // ─── Lynch 10-Bagger Screener ──────────────────────────────────────────────
+  lynch_tenbagger_title: string;
+  lynch_tenbagger_desc: string;
+  lynch_market_all: string;
+  lynch_loading: string;
+  lynch_no_stocks: string;
+  lynch_col_score: string;
+  lynch_criterion_peg: string;
+  lynch_criterion_eps: string;
+  lynch_criterion_rev: string;
+  lynch_criterion_debt: string;
+  lynch_criterion_margin: string;
+  lynch_criterion_cap: string;
+  lynch_no_data: string;
+  lynch_disclaimer: string;
+
   // ─── Settings Page ─────────────────────────────────────────────────────────
   settings_title: string;
   settings_display_currency_title: string;

@@ -308,6 +308,23 @@ export const en: Translations = {
     '• Patience Required: "The magic formula works over most periods but can lag the market for 3–4 years"\n' +
     '• Quote: "Figure out what something is worth and pay a lot less, because the stock market is Mr. Market in the short run."',
 
+  lynch_tenbagger_title: "Peter Lynch Tenbagger Screener",
+  lynch_tenbagger_desc:
+    "Scores your stock holdings against Peter Lynch's PEG, growth, and financial health criteria. The higher the score, the stronger the tenbagger potential.",
+  lynch_market_all: "All Markets",
+  lynch_loading: "Fetching fundamentals from Yahoo Finance…",
+  lynch_no_stocks: "No screenable stock holdings found in this market.",
+  lynch_col_score: "Lynch Score",
+  lynch_criterion_peg: "PEG Ratio",
+  lynch_criterion_eps: "EPS Growth",
+  lynch_criterion_rev: "Revenue Growth",
+  lynch_criterion_debt: "Debt/Equity",
+  lynch_criterion_margin: "Operating Margin",
+  lynch_criterion_cap: "Market Cap",
+  lynch_no_data: "No data",
+  lynch_disclaimer:
+    "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
+
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",
   settings_display_currency_desc:

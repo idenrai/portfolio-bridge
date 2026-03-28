@@ -368,3 +368,57 @@ export async function fetchAllExchangeRates(): Promise<
   if (eur !== null) result.EUR = eur;
   return result;
 }
+
+// ─── 펀더멘털 조회 ────────────────────────────────────────────────────────────
+
+/** fetchFundamentals 반환 타입 */
+export interface FundamentalsData {
+  /** PEG 비율 (P/E ÷ EPS 성장률) */
+  pegRatio: number | null;
+  /** 전년 대비 EPS 성장률 (0.25 = 25%) */
+  epsGrowth: number | null;
+  /** 전년 대비 매출 성장률 (0.15 = 15%) */
+  revenueGrowth: number | null;
+  /** 부채비율 — Yahoo 기준 (50 = D/E 0.5x) */
+  debtToEquity: number | null;
+  /** 영업이익률 (0.20 = 20%) */
+  operatingMargin: number | null;
+  /** 시가총액 (현지 통화) */
+  marketCap: number | null;
+  /** 현지 통화 코드 (예: "USD") */
+  currency: string | null;
+}
+
+/**
+ * Yahoo Finance quoteSummary 기반 재무 펀더멘털 조회
+ * (defaultKeyStatistics + financialData 모듈)
+ */
+export async function fetchFundamentals(
+  symbol: string,
+): Promise<FundamentalsData | null> {
+  const path =
+    `/v10/finance/quoteSummary/${encodeURIComponent(symbol)}` +
+    `?modules=defaultKeyStatistics%2CfinancialData`;
+  try {
+    const res = await yahooFetch(`/api/yahoo${path}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const result = data?.quoteSummary?.result?.[0];
+    if (!result) return null;
+
+    const ks = result.defaultKeyStatistics ?? {};
+    const fd = result.financialData ?? {};
+
+    return {
+      pegRatio: ks.pegRatio?.raw ?? null,
+      epsGrowth: fd.earningsGrowth?.raw ?? null,
+      revenueGrowth: fd.revenueGrowth?.raw ?? null,
+      debtToEquity: fd.debtToEquity?.raw ?? null,
+      operatingMargin: fd.operatingMargins?.raw ?? null,
+      marketCap: ks.marketCap?.raw ?? null,
+      currency: fd.financialCurrency ?? null,
+    };
+  } catch {
+    return null;
+  }
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card } from "@/components/common";
+import { LynchTenBaggerCard } from "@/components/gurus/LynchTenBaggerCard";
 import {
   PieChart,
   Pie,
@@ -250,7 +251,7 @@ export function GurusPage() {
           {/* 조정 제안 */}
           <Card title={t.guru_rebalance_title(guruName(selectedGuru))}>
             <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
-              <table className="w-full text-sm min-w-[500px]">
+              <table className="w-full text-sm min-w-125">
                 <thead>
                   <tr className="text-left text-xs text-slate-500 border-b">
                     <th className="pb-2 font-medium">{t.guru_col_category}</th>
@@ -307,6 +308,11 @@ export function GurusPage() {
               </table>
             </div>
           </Card>
+
+          {/* 피터 린치 전용: 10루타 후보 스크리너 */}
+          {selectedGuru.id === "lynch" && (
+            <LynchTenBaggerCard assets={assets} />
+          )}
         </>
       )}
     </div>

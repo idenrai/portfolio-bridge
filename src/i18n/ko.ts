@@ -307,6 +307,23 @@ export const ko: Translations = {
     "• 인내가 핵심: 전략이 유효해도 3~4년가량 시장 대비 부진할 수 있음을 전제로 운용\n" +
     "• 명언: '가치를 먼저 계산하고, 그보다 훨씬 싼 가격에 사라. 단기 시장은 미스터 마켓의 감정에 흔들린다.'",
 
+  lynch_tenbagger_title: "피터 린치 10루타 후보 스크리너",
+  lynch_tenbagger_desc:
+    "내 포트폴리오의 주식 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. 100점에 가까울수록 10루타 가능성이 높은 종목입니다.",
+  lynch_market_all: "전체 시장",
+  lynch_loading: "Yahoo Finance에서 재무 데이터 조회 중…",
+  lynch_no_stocks: "해당 시장에 스크리닝 가능한 주식 종목이 없습니다.",
+  lynch_col_score: "린치 점수",
+  lynch_criterion_peg: "PEG 비율",
+  lynch_criterion_eps: "EPS 성장률",
+  lynch_criterion_rev: "매출 성장률",
+  lynch_criterion_debt: "부채비율 (D/E)",
+  lynch_criterion_margin: "영업이익률",
+  lynch_criterion_cap: "시가총액",
+  lynch_no_data: "데이터 없음",
+  lynch_disclaimer:
+    "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
+
   settings_title: "설정",
   settings_display_currency_title: "표시 화폐",
   settings_display_currency_desc:

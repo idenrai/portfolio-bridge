@@ -312,6 +312,23 @@ export const de: Translations = {
     "• Geduld als Voraussetzung: Die Strategie kann über 3–4 Jahre hinter dem Markt liegen, bevor sie aufholt\n" +
     '• Zitat: "Ermitteln Sie den Wert eines Unternehmens und zahlen Sie deutlich weniger — kurzfristig ist der Markt nur Mr. Market."',
 
+  lynch_tenbagger_title: "Peter Lynch Tenbagger-Screener",
+  lynch_tenbagger_desc:
+    "Bewertet Ihre Aktien anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Je höher der Score, desto größer das Tenbagger-Potenzial.",
+  lynch_market_all: "Alle Märkte",
+  lynch_loading: "Finanzdaten von Yahoo Finance werden abgerufen…",
+  lynch_no_stocks: "Keine screenbaren Aktienpositionen in diesem Markt gefunden.",
+  lynch_col_score: "Lynch-Score",
+  lynch_criterion_peg: "PEG-Verhältnis",
+  lynch_criterion_eps: "EPS-Wachstum",
+  lynch_criterion_rev: "Umsatzwachstum",
+  lynch_criterion_debt: "Verschuldungsgrad (D/E)",
+  lynch_criterion_margin: "Betriebsmarge",
+  lynch_criterion_cap: "Marktkapitalisierung",
+  lynch_no_data: "Keine Daten",
+  lynch_disclaimer:
+    "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
+
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",
   settings_display_currency_desc:
