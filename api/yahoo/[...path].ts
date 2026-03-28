@@ -28,12 +28,21 @@ async function getCrumb(
   }
   const cookie = parts.join("; ");
 
-  // 2) Crumb 토큰 발급
-  const r2 = await fetch("https://query2.finance.yahoo.com/v1/test/getcrumb", {
-    headers: { "User-Agent": UA, Cookie: cookie },
-  });
-  if (!r2.ok) throw new Error(`crumb fetch failed: ${r2.status}`);
-  const crumb = (await r2.text()).trim();
+  // 2) Crumb 토큰 발급 (429 시 재시도)
+  let crumb = "";
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const r2 = await fetch("https://query2.finance.yahoo.com/v1/test/getcrumb", {
+      headers: { "User-Agent": UA, Cookie: cookie },
+    });
+    if (r2.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 2000 * (attempt + 1)));
+      continue;
+    }
+    if (!r2.ok) throw new Error(`crumb fetch failed: ${r2.status}`);
+    crumb = (await r2.text()).trim();
+    break;
+  }
+  if (!crumb) throw new Error("crumb fetch failed: all attempts got 429");
 
   _crumb = crumb;
   _cookie = cookie;
@@ -67,13 +76,14 @@ export default async function handler(request: Request) {
   // catch-all path: /api/yahoo/v8/finance/chart/AAPL → v8/finance/chart/AAPL
   const pathStr = url.pathname.replace(/^\/api\/yahoo\/?/, "");
 
-  // 쿼리스트링 (crumb은 아래에서 주입)
-  const qs = new URLSearchParams(url.search);
+  // ⚠️ url.search 를 그대로 유지해야 쉼표(,)가 %2C로 재인코딩되지 않음
+  // URLSearchParams.toString()은 , → %2C 변환 버그가 있음
+  const originalSearch = url.search; // "?modules=a,b,c" 형태
 
   const doFetch = async (forceNewCrumb: boolean) => {
     const { crumb, cookie } = await getCrumb(forceNewCrumb);
-    qs.set("crumb", crumb);
-    const targetUrl = `https://query1.finance.yahoo.com/${pathStr}?${qs.toString()}`;
+    const sep = originalSearch ? "&" : "?";
+    const targetUrl = `https://query1.finance.yahoo.com/${pathStr}${originalSearch}${sep}crumb=${encodeURIComponent(crumb)}`;
 
     return fetch(targetUrl, {
       method: request.method,
