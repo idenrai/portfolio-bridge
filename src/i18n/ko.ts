@@ -323,7 +323,7 @@ export const ko: Translations = {
   lynch_no_data: "데이터 없음",
   lynch_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  lynch_cap_range_hint: "시가총액 $300M–$30B 범위에서 동적 검색 (최대 30개)",
+  lynch_cap_range_hint: "시가총액 $300M–$30B 범위에서 동적 검색 (최대 10개)",
   lynch_progress_fetch: "⏳ 종목 검색 중…",
   lynch_progress_enrich: (done, total) => `⏳ 상위 ${total}종목 상세 분석 (${done}/${total})`,
   lynch_btn_screen: "🔍 스크리닝",

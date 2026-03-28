@@ -328,7 +328,7 @@ export const de: Translations = {
   lynch_no_data: "Keine Daten",
   lynch_disclaimer:
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
-  lynch_cap_range_hint: "Dynamische Suche im Marktkapitalisierungsbereich $300M–$30B (max. 30)",
+  lynch_cap_range_hint: "Dynamische Suche im Marktkapitalisierungsbereich $300M–$30B (max. 10)",
   lynch_progress_fetch: "⏳ Aktien werden gesucht…",
   lynch_progress_enrich: (done, total) => `⏳ Top-${total}-Aktien werden analysiert (${done}/${total})`,
   lynch_btn_screen: "🔍 Screening",

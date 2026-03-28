@@ -324,7 +324,7 @@ export const en: Translations = {
   lynch_no_data: "No data",
   lynch_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  lynch_cap_range_hint: "Dynamic search in $300M–$30B market cap range (up to 30)",
+  lynch_cap_range_hint: "Dynamic search in $300M–$30B market cap range (up to 10)",
   lynch_progress_fetch: "⏳ Searching stocks…",
   lynch_progress_enrich: (done, total) => `⏳ Analyzing top ${total} stocks (${done}/${total})`,
   lynch_btn_screen: "🔍 Screening",
