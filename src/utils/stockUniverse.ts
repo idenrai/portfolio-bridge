@@ -8,29 +8,168 @@ export interface UniverseStock {
 }
 
 // ─── GET 기반 동적 종목 발굴 ─────────────────────────────────────────────────
-// Yahoo Finance Predefined Screener (GET) + Trending API 조합으로
-// 하드코딩 없이 종목을 동적으로 가져옵니다.
+// US: Yahoo Trending API → v7 배치
+// KR/JP/EU: 시드 티커 풀 → v7 배치 → 실시간 데이터 기반 필터링
+//
+// 시드 티커는 "검색 시작점"이지 하드코딩된 결과가 아닙니다.
+// v7 배치에서 실시간 시가총액·PEG·성장률 등을 받아와 필터링하므로
+// 재무 상태가 바뀐 종목은 자연스럽게 탈락합니다.
 
-/**
- * Yahoo 사전정의 스크리너 이름 목록.
- * GET /v1/finance/screener/predefined/saved/{name}?count=N 으로 호출.
- */
-export const PREDEFINED_SCREENERS = [
-  "small_cap_gainers",
-  "undervalued_growth_stocks",
-  "growth_technology_stocks",
-  "aggressive_small_caps",
-  "most_actives",
-] as const;
-
-/** 시장별 Yahoo trending region 코드 */
+/** 시장별 Yahoo trending region 코드 (US 전용) */
 export const TRENDING_REGIONS: Record<string, string> = {
   US: "US",
-  KR: "KR",
-  JP: "JP",
-  EU: "DE",
 };
 
 /** 시가총액 필터 범위 (USD) */
 export const MCAP_MIN = 300_000_000;   // $300M
 export const MCAP_MAX = 30_000_000_000; // $30B
+
+// ─── 비미국 시장 시드 티커 ──────────────────────────────────────────────────
+// Yahoo Trending API가 KR/JP/EU에서 빈 결과를 반환하므로
+// 소·중형 성장주 위주의 시드 풀을 사용합니다.
+// v7 배치로 실시간 데이터를 가져온 뒤 시가총액 $300M–$30B로 필터링합니다.
+
+/** 한국 (KOSPI/KOSDAQ) — 소중형 성장주 + IT/바이오/소비재 */
+const KR_SEEDS = [
+  // IT·반도체·소프트웨어
+  "035720.KS", // 카카오
+  "035420.KS", // NAVER
+  "068270.KS", // 셀트리온
+  "028260.KS", // 삼성물산
+  "034730.KS", // SK
+  "003670.KS", // 포스코퓨처엠
+  "012330.KS", // 현대모비스
+  "096770.KS", // SK이노베이션
+  "011170.KS", // 롯데케미칼
+  "033780.KS", // KT&G
+  "009150.KS", // 삼성전기
+  "010130.KS", // 고려아연
+  "018260.KS", // 삼성에스디에스
+  "036570.KS", // 엔씨소프트
+  "251270.KS", // 넷마블
+  "263750.KS", // 펄어비스
+  "293490.KS", // 카카오게임즈
+  "352820.KS", // 하이브
+  "373220.KS", // LG에너지솔루션
+  "247540.KS", // 에코프로비엠
+  // KOSDAQ 성장주
+  "086520.KQ", // 에코프로
+  "041510.KQ", // 에스엠
+  "112040.KQ", // 위메이드
+  "328130.KQ", // 루닛
+  "950160.KQ", // 코오롱티슈진
+  "059210.KQ", // 메타바이오메드
+  "039030.KQ", // 이오테크닉스
+  "357780.KQ", // 솔브레인
+  "196170.KQ", // 알테오젠
+  "403870.KQ", // HPSP
+  "067160.KQ", // 아프리카TV
+  "145020.KQ", // 휴젤
+  "330860.KQ", // 네이처셀
+  "053800.KQ", // 안랩
+  "095340.KQ", // ISC
+  "060310.KQ", // 3S
+  "200670.KQ", // 휴메딕스
+  "222080.KQ", // 씨아이에스
+  "083310.KQ", // 엘오티베큠
+  "058470.KQ", // 리노공업
+];
+
+/** 일본 (TSE) — 소중형 성장주 + IT/제조/게임 */
+const JP_SEEDS = [
+  // 중형 성장주
+  "2413.T",  // エムスリー
+  "4689.T",  // LY (ex-Z Holdings)
+  "3659.T",  // ネクソン
+  "4385.T",  // メルカリ
+  "6920.T",  // レーザーテック (Lasertec)
+  "6532.T",  // ベイカレント
+  "4755.T",  // 楽天グループ
+  "9613.T",  // NTTデータ
+  "4661.T",  // オリエンタルランド
+  "6526.T",  // ソシオネクスト
+  "6146.T",  // ディスコ
+  "7741.T",  // HOYA
+  "4543.T",  // テルモ
+  "6857.T",  // アドバンテスト
+  "7832.T",  // バンナムHD
+  "9766.T",  // コナミHD
+  "3635.T",  // コーエーテクモ
+  "7342.T",  // ウェルスナビ
+  "4480.T",  // メドレー
+  "4478.T",  // フリー
+  "4565.T",  // そーせいグループ
+  "4485.T",  // JTOWER
+  "7071.T",  // ANYCOLOR
+  "5765.T",  // フジミインコーポ
+  "6323.T",  // ローツェ
+  "6981.T",  // 村田製作所
+  "6645.T",  // オムロン
+  "6869.T",  // シスメックス
+  "4523.T",  // エーザイ
+  "2801.T",  // キッコーマン
+  "6098.T",  // リクルートHD
+  "4684.T",  // オービック
+  "6752.T",  // パナソニック
+  "7267.T",  // ホンダ
+  "6902.T",  // デンソー
+  "8802.T",  // 三菱地所
+  "9101.T",  // 日本郵船
+  "2502.T",  // アサヒグループ
+  "4911.T",  // 資生堂
+  "7269.T",  // スズキ
+];
+
+/** 유럽 (DAX/CAC/AMS 등) — 소중형 성장주 + 테크/럭셔리/산업재 */
+const EU_SEEDS = [
+  // 독일
+  "IFX.DE",  // Infineon
+  "RWE.DE",  // RWE
+  "HFG.DE",  // HelloFresh
+  "PUM.DE",  // Puma
+  "1COV.DE", // Covestro
+  "TKA.DE",  // ThyssenKrupp
+  "EVK.DE",  // Evonik
+  "ZAL.DE",  // Zalando
+  "DB1.DE",  // Deutsche Börse
+  "FRE.DE",  // Fresenius
+  "LEG.DE",  // LEG Immobilien
+  "MTX.DE",  // MTU Aero Engines
+  "RHM.DE",  // Rheinmetall
+  "ENR.DE",  // Siemens Energy
+  // 프랑스
+  "DSY.PA",  // Dassault Systèmes
+  "CAP.PA",  // Capgemini
+  "PUB.PA",  // Publicis
+  "ATO.PA",  // Atos
+  "SOI.PA",  // Soitec
+  "GFC.PA",  // Gecina
+  "VIV.PA",  // Vivendi
+  "BN.PA",   // Danone
+  "EN.PA",   // Bouygues
+  // 네덜란드·벨기에
+  "BESI.AS", // BE Semiconductor
+  "LIGHT.AS",// Signify
+  "WKL.AS",  // Wolters Kluwer
+  "AD.AS",   // Ahold Delhaize
+  "GLPG.AS", // Galapagos
+  "UCB.BR",  // UCB
+  "ABI.BR",  // AB InBev
+  // 스위스·이탈리아·스페인
+  "LONN.SW", // Lonza
+  "SREN.SW", // Swiss Re
+  "GEBN.SW", // Geberit
+  "EOAN.DE", // E.ON
+  "ISP.MI",  // Intesa Sanpaolo
+  "IBE.MC",  // Iberdrola
+  "CABK.MC", // CaixaBank
+  "FER.MC",  // Ferrovial
+  "AMS.MC",  // Amadeus IT
+];
+
+/** 시장별 시드 티커 맵 */
+export const MARKET_SEEDS: Record<string, string[]> = {
+  KR: KR_SEEDS,
+  JP: JP_SEEDS,
+  EU: EU_SEEDS,
+};

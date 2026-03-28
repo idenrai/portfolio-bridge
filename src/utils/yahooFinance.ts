@@ -645,38 +645,11 @@ export async function enrichFundamentals(
 // ─── GET 기반 동적 종목 발굴 ──────────────────────────────────────────────────
 
 import type { UniverseStock } from "./stockUniverse";
-import { PREDEFINED_SCREENERS, TRENDING_REGIONS, MCAP_MIN, MCAP_MAX } from "./stockUniverse";
+import { TRENDING_REGIONS, MARKET_SEEDS, MCAP_MIN, MCAP_MAX } from "./stockUniverse";
 
 export interface ScreenerResult {
   stock: UniverseStock;
   data: FundamentalsData;
-}
-
-/**
- * Yahoo Finance 사전정의 스크리너(GET)에서 종목 가져오기.
- * 하나의 스크리너 호출: GET /v1/finance/screener/predefined/saved/{name}?count=N
- */
-async function fetchPredefinedScreener(name: string, count: number): Promise<Record<string, unknown>[]> {
-  try {
-    const res = await yahooFetch(
-      `/api/yahoo/v1/finance/screener/predefined/saved/${name}?count=${count}`,
-    );
-    if (!res.ok) {
-      console.warn(`[Screener] predefined/${name} HTTP ${res.status}`);
-      return [];
-    }
-    const json = await res.json() as {
-      finance?: {
-        result?: Array<{
-          quotes?: Array<Record<string, unknown>>;
-        }>;
-      };
-    };
-    return json.finance?.result?.[0]?.quotes ?? [];
-  } catch (e) {
-    console.warn(`[Screener] predefined/${name} error:`, e);
-    return [];
-  }
 }
 
 /**
@@ -709,12 +682,46 @@ async function fetchTrendingTickers(region: string, count: number): Promise<stri
 }
 
 /**
- * 동적 종목 발굴 — GET 전용 (POST 스크리너 불필요)
+ * v7 배치 시세 조회 → mapQuote 변환
+ */
+async function fetchQuoteBatch(
+  symbols: string[],
+  mapQuote: (q: Record<string, unknown>) => ScreenerResult | null,
+  results: ScreenerResult[],
+): Promise<void> {
+  for (let i = 0; i < symbols.length; i += 50) {
+    const chunk = symbols.slice(i, i + 50);
+    const joined = chunk.join(",");
+    try {
+      const res = await yahooFetch(
+        `/api/yahoo/v7/finance/quote?formatted=false&lang=en-US&symbols=${joined}`,
+      );
+      if (res.ok) {
+        const json = await res.json() as {
+          quoteResponse?: { result?: Array<Record<string, unknown>> };
+        };
+        for (const q of json.quoteResponse?.result ?? []) {
+          const r = mapQuote(q);
+          if (r) results.push(r);
+        }
+      }
+    } catch (e) {
+      console.warn("[Screener] batch error:", e);
+    }
+    if (i + 50 < symbols.length) {
+      await new Promise((r) => setTimeout(r, 500));
+    }
+  }
+}
+
+/**
+ * 동적 종목 발굴
  *
- * **전략 1 (주력):** Trending API로 인기 종목 대량 수집 → v7 배치 시세 조회 → 필터링
- * **전략 2 (보조):** Yahoo 사전정의 스크리너 병렬 호출 (현재 502 반환하지만 복구 시 활용)
+ * **US 시장:** Yahoo Trending API → v7 배치 시세 → 시가총액 필터링
+ * **KR/JP/EU 시장:** 시드 티커 풀 → v7 배치 시세 → 실시간 데이터 기반 필터링
+ * **ALL:** US Trending + 각 시장 시드 티커 병합
  *
- * 가져온 후 EQUITY 종목만 선별하고, 시가총액 $300M–$30B 범위로 필터링합니다.
+ * EQUITY만 선별, 시가총액 $300M–$30B 범위로 필터링합니다.
  */
 export async function fetchScreenerStocks(
   market: "ALL" | Market,
@@ -728,7 +735,7 @@ export async function fetchScreenerStocks(
     const sym = q.symbol as string | undefined;
     if (!sym || seen.has(sym)) return null;
 
-    // EQUITY만 허용 (암호화폐, ETF... 등 제외)
+    // EQUITY만 허용 (암호화폐, ETF 등 제외)
     if (q.quoteType !== "EQUITY") return null;
 
     const num = (v: unknown) => (typeof v === "number" ? v : null);
@@ -772,68 +779,38 @@ export async function fetchScreenerStocks(
     };
   };
 
-  // ─── 전략 1 (주력): Trending + v7 배치 시세 ──────────────────
-  console.log(`[Screener] Fetching trending tickers for market=${market}`);
+  const needsUS = market === "ALL" || market === "US";
+  const needsSeeds = market === "ALL" || market === "OTHER" || market in MARKET_SEEDS;
 
-  const regions =
-    market === "ALL" || market === "OTHER"
-      ? Object.values(TRENDING_REGIONS)
-      : [TRENDING_REGIONS[market] ?? "US"];
+  // ─── US: Trending API ──────────────────────────────────────
+  if (needsUS) {
+    console.log(`[Screener] Fetching US trending tickers`);
+    const tickers = await fetchTrendingTickers(TRENDING_REGIONS.US, 50);
+    const unique = [...new Set(tickers.filter((t) => !seen.has(t)))];
+    if (unique.length > 0) {
+      await fetchQuoteBatch(unique, mapQuote, all);
+    }
+    console.log(`[Screener] US trending → ${all.length} equities`);
+  }
 
-  // 각 리전에서 50개씩 요청 (crypto 등 제외 후에도 충분한 수 확보)
-  const trendingPromises = regions.map((r) => fetchTrendingTickers(r, 50));
-  const trendingResults = await Promise.all(trendingPromises);
-  const tickers = trendingResults.flat().filter((t) => !seen.has(t));
-  const uniqueTickers = [...new Set(tickers)].slice(0, 100);
+  // ─── KR/JP/EU: 시드 티커 풀 ──────────────────────────────
+  if (needsSeeds) {
+    const seedMarkets =
+      market === "ALL" || market === "OTHER"
+        ? Object.keys(MARKET_SEEDS)
+        : [market];
 
-  if (uniqueTickers.length > 0) {
-    // v7 배치 시세로 기본 데이터 가져오기 (최대 100개를 50개씩 청크)
-    for (let i = 0; i < uniqueTickers.length; i += 50) {
-      const chunk = uniqueTickers.slice(i, i + 50);
-      const joined = chunk.join(",");
-      try {
-        const res = await yahooFetch(
-          `/api/yahoo/v7/finance/quote?formatted=false&lang=en-US&symbols=${joined}`,
-        );
-        if (res.ok) {
-          const json = await res.json() as {
-            quoteResponse?: { result?: Array<Record<string, unknown>> };
-          };
-          for (const q of json.quoteResponse?.result ?? []) {
-            const r = mapQuote(q);
-            if (r) all.push(r);
-          }
-        }
-      } catch (e) {
-        console.warn("[Screener] trending batch error:", e);
-      }
-      // 청크 간 딜레이
-      if (i + 50 < uniqueTickers.length) {
-        await new Promise((r) => setTimeout(r, 500));
-      }
+    for (const m of seedMarkets) {
+      const seeds = MARKET_SEEDS[m];
+      if (!seeds?.length) continue;
+
+      console.log(`[Screener] Fetching ${m} seed tickers (${seeds.length})`);
+      const unseen = seeds.filter((t) => !seen.has(t));
+      await fetchQuoteBatch(unseen, mapQuote, all);
+      console.log(`[Screener] ${m} seeds → total ${all.length} equities`);
     }
   }
 
-  console.log(`[Screener] trending → ${all.length} equities after filters`);
-
-  // ─── 전략 2 (보조): 사전정의 스크리너 (현재 Yahoo에서 502 반환) ──────
-  if (all.length < count) {
-    console.log(`[Screener] Trying predefined screeners as supplement...`);
-
-    const screenerPromises = PREDEFINED_SCREENERS.map((name) =>
-      fetchPredefinedScreener(name, 25),
-    );
-    const screenerResults = await Promise.all(screenerPromises);
-
-    for (const quotes of screenerResults) {
-      for (const q of quotes) {
-        const r = mapQuote(q);
-        if (r) all.push(r);
-      }
-    }
-
-    console.log(`[Screener] predefined supplement → total ${all.length} stocks`);
-  }
-
+  console.log(`[Screener] Final: ${all.length} stocks for market=${market}`);
   return all.slice(0, count);
 }
