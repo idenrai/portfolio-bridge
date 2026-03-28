@@ -194,6 +194,8 @@ export function LynchTenBaggerCard() {
         {loading
           ? progress.phase === "batch"
             ? `⏳ 1단계: ${progress.done}/${progress.total} 종목 조회 중…`
+            : progress.phase === "individual"
+            ? `⏳ 개별 조회 중… (${progress.done}/${progress.total})`
             : `⏳ 2단계: 상위 ${progress.total}종목 상세 분석 (${progress.done}/${progress.total})`
           : "🔍 Screening"}
       </button>
@@ -204,12 +206,16 @@ export function LynchTenBaggerCard() {
           <p className="text-xs text-slate-400 mb-1 animate-pulse">
             {progress.phase === "batch"
               ? `📡 ${universe.length}개 종목 기본 데이터 수집 중…`
+              : progress.phase === "individual"
+              ? `📡 배치 조회 실패 → 개별 종목 조회 폴백 중…`
               : `🔍 상위 종목 상세 재무 데이터 보강 중…`}
           </p>
           <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-300 ${
-                progress.phase === "batch" ? "bg-blue-500" : "bg-green-500"
+                progress.phase === "enrich" ? "bg-green-500"
+                : progress.phase === "individual" ? "bg-amber-500"
+                : "bg-blue-500"
               }`}
               style={{
                 width: progress.total > 0

@@ -146,7 +146,7 @@ export function scoreStock(
 
 // ─── 2단계 스크리너 ────────────────────────────────────────────────────────────
 
-export type ScreenPhase = "batch" | "enrich";
+export type ScreenPhase = "batch" | "enrich" | "individual";
 
 export interface ScreenProgress {
   phase: ScreenPhase;

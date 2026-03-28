@@ -541,16 +541,19 @@ export async function fetchBatchQuote(
     for (let attempt = 0; attempt < 3; attempt++) {
       try {
         const res = await yahooFetch(
-          `/api/yahoo/v7/finance/quote?symbols=${joined}`,
+          `/api/yahoo/v7/finance/quote?formatted=false&lang=en-US&region=US&symbols=${joined}`,
         );
 
         if (res.status === 429) {
-          // rate limit → 지수 백오프 후 재시도
+          console.warn(`[BatchQuote] 429 rate limit, attempt ${attempt + 1}`);
           await new Promise(r => setTimeout(r, 2000 * 2 ** attempt));
           continue;
         }
 
-        if (!res.ok) break;
+        if (!res.ok) {
+          console.warn(`[BatchQuote] HTTP ${res.status} for chunk`, chunk.join(","));
+          break;
+        }
 
         const data = await res.json() as {
           quoteResponse?: {
@@ -558,7 +561,10 @@ export async function fetchBatchQuote(
           };
         };
 
-        for (const q of data.quoteResponse?.result ?? []) {
+        const results = data.quoteResponse?.result ?? [];
+        console.log(`[BatchQuote] chunk got ${results.length} results for ${chunk.length} symbols`);
+
+        for (const q of results) {
           const sym = q.symbol as string;
           if (!sym) continue;
 
@@ -567,17 +573,17 @@ export async function fetchBatchQuote(
 
           map.set(sym, {
             pegRatio:       num(q.pegRatio),
-            // earningsQuarterlyGrowth을 EPS 성장률 대용으로 사용
             epsGrowth:      num(q.earningsQuarterlyGrowth),
             revenueGrowth:  num(q.revenueQuarterlyGrowth) ?? null,
-            debtToEquity:   null, // batch에서는 미제공
-            operatingMargin:null, // batch에서는 미제공
+            debtToEquity:   null,
+            operatingMargin:null,
             marketCap:      num(q.marketCap),
             currency:       str(q.financialCurrency) ?? str(q.currency),
           });
         }
-        break; // 성공하면 재시도 루프 탈출
-      } catch {
+        break;
+      } catch (e) {
+        console.warn(`[BatchQuote] error attempt ${attempt + 1}:`, e);
         if (attempt < 2) {
           await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
         }
@@ -587,9 +593,26 @@ export async function fetchBatchQuote(
     done += chunk.length;
     onChunkDone?.(Math.min(done, symbols.length), symbols.length);
 
-    // 청크 간 딜레이 (마지막 청크 제외)
     if (i + CHUNK_SIZE < symbols.length) {
       await new Promise(r => setTimeout(r, chunkDelay));
+    }
+  }
+
+  // v7 배치가 전혀 데이터를 못 가져온 경우 → 개별 quoteSummary 폴백
+  if (map.size === 0 && symbols.length > 0) {
+    console.warn(`[BatchQuote] v7 batch returned 0 data, falling back to individual quoteSummary`);
+    let fallbackDone = 0;
+    for (const sym of symbols) {
+      try {
+        const detail = await fetchFundamentals(sym);
+        if (detail) map.set(sym, detail);
+      } catch { /* ignore */ }
+      fallbackDone++;
+      onChunkDone?.(fallbackDone, symbols.length);
+      // rate limit 딜레이
+      if (fallbackDone < symbols.length) {
+        await new Promise(r => setTimeout(r, 1200));
+      }
     }
   }
 
