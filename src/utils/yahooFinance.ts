@@ -711,10 +711,10 @@ async function fetchTrendingTickers(region: string, count: number): Promise<stri
 /**
  * 동적 종목 발굴 — GET 전용 (POST 스크리너 불필요)
  *
- * **전략 1:** Yahoo 사전정의 스크리너 여러 개를 병렬 호출하여 후보 수집
- * **전략 2:** 전략 1 실패 시 Trending API + v7 일괄 시세 조회 폴백
+ * **전략 1 (주력):** Trending API로 인기 종목 대량 수집 → v7 배치 시세 조회 → 필터링
+ * **전략 2 (보조):** Yahoo 사전정의 스크리너 병렬 호출 (현재 502 반환하지만 복구 시 활용)
  *
- * 가져온 후 시가총액 $300M–$30B 범위로 필터링합니다.
+ * 가져온 후 EQUITY 종목만 선별하고, 시가총액 $300M–$30B 범위로 필터링합니다.
  */
 export async function fetchScreenerStocks(
   market: "ALL" | Market,
@@ -723,10 +723,13 @@ export async function fetchScreenerStocks(
   const seen = new Set<string>();
   const all: ScreenerResult[] = [];
 
-  /** quote 객체 → ScreenerResult 변환 (시가총액 필터 포함) */
+  /** quote 객체 → ScreenerResult 변환 (종목 유형 + 시가총액 필터 포함) */
   const mapQuote = (q: Record<string, unknown>): ScreenerResult | null => {
     const sym = q.symbol as string | undefined;
     if (!sym || seen.has(sym)) return null;
+
+    // EQUITY만 허용 (암호화폐, ETF... 등 제외)
+    if (q.quoteType !== "EQUITY") return null;
 
     const num = (v: unknown) => (typeof v === "number" ? v : null);
     const str = (v: unknown) => (typeof v === "string" ? v : null);
@@ -769,41 +772,25 @@ export async function fetchScreenerStocks(
     };
   };
 
-  // ─── 전략 1: 사전정의 스크리너 병렬 호출 ──────────────────
-  console.log(`[Screener] Trying predefined screeners for market=${market}`);
+  // ─── 전략 1 (주력): Trending + v7 배치 시세 ──────────────────
+  console.log(`[Screener] Fetching trending tickers for market=${market}`);
 
-  const screenerPromises = PREDEFINED_SCREENERS.map((name) =>
-    fetchPredefinedScreener(name, 25),
-  );
-  const screenerResults = await Promise.all(screenerPromises);
+  const regions =
+    market === "ALL" || market === "OTHER"
+      ? Object.values(TRENDING_REGIONS)
+      : [TRENDING_REGIONS[market] ?? "US"];
 
-  for (const quotes of screenerResults) {
-    for (const q of quotes) {
-      const r = mapQuote(q);
-      if (r) all.push(r);
-    }
-  }
+  // 각 리전에서 50개씩 요청 (crypto 등 제외 후에도 충분한 수 확보)
+  const trendingPromises = regions.map((r) => fetchTrendingTickers(r, 50));
+  const trendingResults = await Promise.all(trendingPromises);
+  const tickers = trendingResults.flat().filter((t) => !seen.has(t));
+  const uniqueTickers = [...new Set(tickers)].slice(0, 100);
 
-  console.log(`[Screener] predefined → ${all.length} stocks after mCap filter`);
-
-  // ─── 전략 2: Trending + v7 배치 폴백 ──────────────────────
-  if (all.length < count) {
-    console.log(`[Screener] Trying trending tickers fallback...`);
-
-    // market에 따라 trending region 결정
-    const regions =
-      market === "ALL" || market === "OTHER"
-        ? Object.values(TRENDING_REGIONS)
-        : [TRENDING_REGIONS[market] ?? "US"];
-
-    const trendingPromises = regions.map((r) => fetchTrendingTickers(r, 30));
-    const trendingResults = await Promise.all(trendingPromises);
-    const tickers = trendingResults.flat().filter((t) => !seen.has(t));
-    const uniqueTickers = [...new Set(tickers)].slice(0, 50);
-
-    if (uniqueTickers.length > 0) {
-      // v7 배치 시세로 기본 데이터 가져오기
-      const joined = uniqueTickers.join(",");
+  if (uniqueTickers.length > 0) {
+    // v7 배치 시세로 기본 데이터 가져오기 (최대 100개를 50개씩 청크)
+    for (let i = 0; i < uniqueTickers.length; i += 50) {
+      const chunk = uniqueTickers.slice(i, i + 50);
+      const joined = chunk.join(",");
       try {
         const res = await yahooFetch(
           `/api/yahoo/v7/finance/quote?formatted=false&lang=en-US&symbols=${joined}`,
@@ -820,9 +807,32 @@ export async function fetchScreenerStocks(
       } catch (e) {
         console.warn("[Screener] trending batch error:", e);
       }
+      // 청크 간 딜레이
+      if (i + 50 < uniqueTickers.length) {
+        await new Promise((r) => setTimeout(r, 500));
+      }
+    }
+  }
+
+  console.log(`[Screener] trending → ${all.length} equities after filters`);
+
+  // ─── 전략 2 (보조): 사전정의 스크리너 (현재 Yahoo에서 502 반환) ──────
+  if (all.length < count) {
+    console.log(`[Screener] Trying predefined screeners as supplement...`);
+
+    const screenerPromises = PREDEFINED_SCREENERS.map((name) =>
+      fetchPredefinedScreener(name, 25),
+    );
+    const screenerResults = await Promise.all(screenerPromises);
+
+    for (const quotes of screenerResults) {
+      for (const q of quotes) {
+        const r = mapQuote(q);
+        if (r) all.push(r);
+      }
     }
 
-    console.log(`[Screener] trending fallback → total ${all.length} stocks`);
+    console.log(`[Screener] predefined supplement → total ${all.length} stocks`);
   }
 
   return all.slice(0, count);
