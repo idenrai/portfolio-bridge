@@ -3,12 +3,87 @@ import type { FundamentalsData } from "./yahooCore";
 import type { Market } from "@/types";
 import { approxToUSD } from "@/constants";
 import type { UniverseStock } from "./stockUniverse";
-import { TRENDING_REGIONS, MARKET_SEEDS, MCAP_MIN, MCAP_MAX } from "./stockUniverse";
+import { MARKET_REGIONS, TRENDING_REGIONS, MCAP_MIN, MCAP_MAX } from "./stockUniverse";
 
 export interface ScreenerResult {
   stock: UniverseStock;
   data: FundamentalsData;
 }
+
+// ─── Yahoo Finance POST Screener API ────────────────────────────────────────
+
+interface ScreenerOperand {
+  operator: string;
+  operands: (ScreenerOperand | string | number)[];
+}
+
+/**
+ * Yahoo Finance POST /v1/finance/screener API로 종목 심볼 동적 발굴.
+ * 시가총액 범위 + 지역 필터로 하드코딩 없이 실시간 종목 후보를 가져온다.
+ */
+async function fetchScreenerByPost(
+  market: Market,
+  size: number,
+): Promise<string[]> {
+  const regions = MARKET_REGIONS[market];
+
+  const regionOperands: ScreenerOperand[] = regions.map((r) => ({
+    operator: "EQ",
+    operands: ["region", r],
+  }));
+  const regionFilter: ScreenerOperand =
+    regionOperands.length === 1
+      ? regionOperands[0]
+      : { operator: "or", operands: regionOperands };
+
+  const body = {
+    size,
+    offset: 0,
+    sortField: "intradaymarketcap",
+    sortType: "DESC",
+    quoteType: "EQUITY",
+    query: {
+      operator: "AND",
+      operands: [
+        regionFilter,
+        { operator: "GT", operands: ["intradaymarketcap", MCAP_MIN] },
+        { operator: "LT", operands: ["intradaymarketcap", MCAP_MAX] },
+      ],
+    },
+    userId: "",
+    userIdType: "guid",
+  };
+
+  try {
+    const res = await yahooFetch("/api/yahoo/v1/finance/screener", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      console.warn(`[Screener] POST API ${res.status} for ${market}`);
+      return [];
+    }
+
+    const json = (await res.json()) as {
+      finance?: {
+        result?: Array<{
+          quotes?: Array<{ symbol?: string }>;
+        }>;
+      };
+    };
+
+    return (json.finance?.result?.[0]?.quotes ?? [])
+      .map((q) => q.symbol)
+      .filter((s): s is string => !!s);
+  } catch (e) {
+    console.warn(`[Screener] POST API error for ${market}:`, e);
+    return [];
+  }
+}
+
+// ─── Trending API (fallback) ────────────────────────────────────────────────
 
 /**
  * Yahoo Finance Trending API (GET)에서 해당 지역의 인기 종목 가져오기.
@@ -37,6 +112,8 @@ async function fetchTrendingTickers(region: string, count: number): Promise<stri
     return [];
   }
 }
+
+// ─── v7 배치 시세 조회 ──────────────────────────────────────────────────────
 
 /**
  * v7 배치 시세 조회 → mapQuote 변환
@@ -71,11 +148,16 @@ async function fetchQuoteBatch(
   }
 }
 
+// ─── 종목 발굴 메인 로직 ────────────────────────────────────────────────────
+
 /**
- * 단일 시장에서 종목 후보 가져오기 (내부용)
+ * 단일 시장에서 종목 후보 가져오기.
+ *
+ * 1차: POST Screener API (시가총액 + 지역 동적 필터)
+ * 2차: Trending API fallback (POST 실패 시)
  */
 async function fetchMarketStocks(
-  targetMarket: Market | "OTHER",
+  targetMarket: Market,
 ): Promise<ScreenerResult[]> {
   const seen = new Set<string>();
   const results: ScreenerResult[] = [];
@@ -100,7 +182,7 @@ async function fetchMarketStocks(
       q.currency as string | undefined,
       sym,
     );
-    if (targetMarket !== "OTHER" && stockMarket !== targetMarket) return null;
+    if (stockMarket !== targetMarket) return null;
 
     seen.add(sym);
     return {
@@ -121,20 +203,30 @@ async function fetchMarketStocks(
     };
   };
 
-  if (targetMarket === "US") {
-    const tickers = await fetchTrendingTickers(TRENDING_REGIONS.US, 50);
-    const unique = [...new Set(tickers)];
-    if (unique.length > 0) {
-      await fetchQuoteBatch(unique, mapQuote, results);
-    }
-    console.log(`[Screener] US trending → ${results.length} equities`);
+  // 1차: POST Screener API
+  const screenerSymbols = await fetchScreenerByPost(targetMarket, 100);
+  if (screenerSymbols.length > 0) {
+    await fetchQuoteBatch(screenerSymbols, mapQuote, results);
+    console.log(
+      `[Screener] ${targetMarket} POST API → ${screenerSymbols.length} symbols → ${results.length} equities`,
+    );
   }
 
-  const seeds = MARKET_SEEDS[targetMarket];
-  if (seeds?.length) {
-    const unseen = seeds.filter((t) => !seen.has(t));
-    await fetchQuoteBatch(unseen, mapQuote, results);
-    console.log(`[Screener] ${targetMarket} seeds → ${results.length} equities`);
+  // 2차: Trending API fallback (결과 부족 시)
+  if (results.length < 10) {
+    const regions = TRENDING_REGIONS[targetMarket];
+    for (const region of regions) {
+      const tickers = await fetchTrendingTickers(region, 50);
+      const unseen = tickers.filter((t) => !seen.has(t));
+      if (unseen.length > 0) {
+        await fetchQuoteBatch(unseen, mapQuote, results);
+      }
+    }
+    if (results.length > 0) {
+      console.log(
+        `[Screener] ${targetMarket} trending fallback → ${results.length} equities`,
+      );
+    }
   }
 
   return results;
@@ -143,8 +235,8 @@ async function fetchMarketStocks(
 /**
  * 동적 종목 발굴
  *
- * US: Trending API → v7 배치, KR/JP/EU: 시드 티커 풀 → v7 배치
- * EQUITY만 선별, 시가총액 $300M–$30B 범위로 필터링
+ * POST Screener API로 시가총액 $300M–$30B + 지역 필터 → v7 배치로 상세 데이터
+ * 실패 시 Trending API fallback
  */
 export async function fetchScreenerStocks(
   market: Market,
