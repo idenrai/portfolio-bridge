@@ -3,7 +3,7 @@ import type { FundamentalsData } from "./yahooCore";
 
 type RawVal = { raw?: number };
 type RawStr = { raw?: number } | string;
-type Stmt = { totalRevenue?: RawVal; dilutedEPS?: RawVal };
+type Stmt = { totalRevenue?: RawVal; dilutedEPS?: RawVal; operatingIncome?: RawVal };
 
 /** quoteSummary JSON → FundamentalsData 변환 */
 function parseQuoteSummary(data: unknown): FundamentalsData | null {
@@ -17,6 +17,7 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
 
   let epsGrowth     = (fd.earningsGrowth as RawVal | undefined)?.raw ?? null;
   let revenueGrowth = (fd.revenueGrowth  as RawVal | undefined)?.raw ?? null;
+  let operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
 
   const stmts = (result.incomeStatementHistory as
     { incomeStatementHistory?: Stmt[] } | undefined
@@ -41,6 +42,14 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
     }
   }
 
+  // 영업이익률 폴백: operatingIncome / totalRevenue (income statement 기준)
+  if (stmts && stmts.length >= 1 && operatingMargin === null) {
+    const curr = stmts[0];
+    if (curr.operatingIncome?.raw != null && curr.totalRevenue?.raw != null && curr.totalRevenue.raw !== 0) {
+      operatingMargin = curr.operatingIncome.raw / curr.totalRevenue.raw;
+    }
+  }
+
   const marketCap = sd.marketCap?.raw ?? ks.marketCap?.raw ?? null;
 
   // PEG: Yahoo 제공값 우선, 없으면 trailingPE / (epsGrowth * 100) 로 계산
@@ -55,7 +64,7 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
     epsGrowth,
     revenueGrowth,
     debtToEquity:   (fd.debtToEquity   as RawVal | undefined)?.raw ?? null,
-    operatingMargin:(fd.operatingMargins as RawVal | undefined)?.raw ?? null,
+    operatingMargin,
     marketCap,
     currency: typeof fd.financialCurrency === "string" ? fd.financialCurrency : null,
   };
