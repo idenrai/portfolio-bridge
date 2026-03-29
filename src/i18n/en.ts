@@ -311,9 +311,6 @@ export const en: Translations = {
   lynch_tenbagger_title: "Peter Lynch Tenbagger Screener",
   lynch_tenbagger_desc:
     "Screens trending stocks from each market against Peter Lynch's PEG, growth, and financial health criteria. The higher the score, the stronger the tenbagger potential.",
-  lynch_loading: "Fetching fundamentals from Yahoo Finance…",
-  lynch_no_stocks: "No screenable stocks found in this market.",
-  lynch_col_score: "Lynch Score",
   lynch_criterion_peg: "PEG Ratio",
   lynch_criterion_eps: "EPS Growth",
   lynch_criterion_rev: "Revenue Growth",
@@ -346,7 +343,6 @@ export const en: Translations = {
   mf_title: "Joel Greenblatt Magic Formula Screener",
   mf_desc:
     "Screens stocks with high earnings yield and high return on capital — the two pillars of Greenblatt's Magic Formula. The higher the score, the better the fit.",
-  mf_col_score: "Magic Score",
   mf_criterion_ey: "Earnings Yield",
   mf_criterion_roc: "Return on Capital",
   mf_criterion_margin: "Operating Margin",

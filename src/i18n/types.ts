@@ -213,9 +213,6 @@ export interface Translations {
   // ─── Lynch 10-Bagger Screener ──────────────────────────────────────────────
   lynch_tenbagger_title: string;
   lynch_tenbagger_desc: string;
-  lynch_loading: string;
-  lynch_no_stocks: string;
-  lynch_col_score: string;
   lynch_criterion_peg: string;
   lynch_criterion_eps: string;
   lynch_criterion_rev: string;
@@ -246,7 +243,6 @@ export interface Translations {
   // ─── Magic Formula Screener ─────────────────────────────────────────────────
   mf_title: string;
   mf_desc: string;
-  mf_col_score: string;
   mf_criterion_ey: string;
   mf_criterion_roc: string;
   mf_criterion_margin: string;

@@ -311,9 +311,6 @@ export const ja: Translations = {
   lynch_tenbagger_title: "ピーター・リンチ テンバガー・スクリーナー",
   lynch_tenbagger_desc:
     "各市場の主要銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
-  lynch_loading: "Yahoo Financeから財務データを取得中…",
-  lynch_no_stocks: "この市場にスクリーニング対象の株式銘柄がありません。",
-  lynch_col_score: "リンチスコア",
   lynch_criterion_peg: "PEGレシオ",
   lynch_criterion_eps: "EPS成長率",
   lynch_criterion_rev: "売上成長率",
@@ -346,7 +343,6 @@ export const ja: Translations = {
   mf_title: "ジョエル・グリーンブラット マジック・フォーミュラ・スクリーナー",
   mf_desc:
     "高い益回りと高い資本収益率を兼ね備えた銘柄をスクリーニングします。100点に近いほどマジック・フォーミュラに適合する銘柄です。",
-  mf_col_score: "Magicスコア",
   mf_criterion_ey: "益回り",
   mf_criterion_roc: "資本収益率",
   mf_criterion_margin: "営業利益率",

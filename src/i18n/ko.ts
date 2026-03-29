@@ -310,9 +310,6 @@ export const ko: Translations = {
   lynch_tenbagger_title: "피터 린치 10루타 후보 스크리너",
   lynch_tenbagger_desc:
     "각 시장의 주요 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. 100점에 가까울수록 10루타 가능성이 높은 종목입니다.",
-  lynch_loading: "Yahoo Finance에서 재무 데이터 조회 중…",
-  lynch_no_stocks: "해당 시장에 스크리닝 가능한 주식 종목이 없습니다.",
-  lynch_col_score: "린치 점수",
   lynch_criterion_peg: "PEG 비율",
   lynch_criterion_eps: "EPS 성장률",
   lynch_criterion_rev: "매출 성장률",
@@ -345,7 +342,6 @@ export const ko: Translations = {
   mf_title: "조엘 그린블라트 마법 공식 스크리너",
   mf_desc:
     "높은 이익수익률(Earnings Yield)과 높은 자본수익률(Return on Capital)을 동시에 갖춘 종목을 스크리닝합니다. 100점에 가까울수록 마법 공식에 부합합니다.",
-  mf_col_score: "Magic 점수",
   mf_criterion_ey: "이익수익률",
   mf_criterion_roc: "자본수익률",
   mf_criterion_margin: "영업이익률",

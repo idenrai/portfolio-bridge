@@ -315,9 +315,6 @@ export const de: Translations = {
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Screener",
   lynch_tenbagger_desc:
     "Bewertet wichtige Aktien aus jedem Markt anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Je höher der Score, desto größer das Tenbagger-Potenzial.",
-  lynch_loading: "Finanzdaten von Yahoo Finance werden abgerufen…",
-  lynch_no_stocks: "Keine screenbaren Aktien in diesem Markt gefunden.",
-  lynch_col_score: "Lynch-Score",
   lynch_criterion_peg: "PEG-Verhältnis",
   lynch_criterion_eps: "EPS-Wachstum",
   lynch_criterion_rev: "Umsatzwachstum",
@@ -350,7 +347,6 @@ export const de: Translations = {
   mf_title: "Joel Greenblatt Magic-Formula-Screener",
   mf_desc:
     "Screent Aktien mit hoher Gewinnrendite und hoher Kapitalrendite — die zwei Säulen von Greenblatts Magic Formula. Je höher der Score, desto besser.",
-  mf_col_score: "Magic-Score",
   mf_criterion_ey: "Gewinnrendite",
   mf_criterion_roc: "Kapitalrendite",
   mf_criterion_margin: "Betriebsmarge",
