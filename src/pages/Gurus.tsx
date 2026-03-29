@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Card } from "@/components/common";
 import { LynchTenBaggerCard } from "@/components/gurus/LynchTenBaggerCard";
 import { MagicFormulaCard } from "@/components/gurus/MagicFormulaCard";
+import { GrahamDefensiveCard } from "@/components/gurus/GrahamDefensiveCard";
+import { SmithQualityCard } from "@/components/gurus/SmithQualityCard";
 import {
   PieChart,
   Pie,
@@ -319,7 +321,15 @@ export function GurusPage() {
           {selectedGuru.id === "greenblatt" && (
             <MagicFormulaCard />
           )}
-        </>
+          {/* 그레이엄 전용: 방어적 투자 채점기 */}
+          {selectedGuru.id === "graham" && (
+            <GrahamDefensiveCard />
+          )}
+
+          {/* 테리 스미스 전용: 퀸리티 컴파운더 채점기 */}
+          {selectedGuru.id === "smith" && (
+            <SmithQualityCard />
+          )}        </>
       )}
     </div>
   );

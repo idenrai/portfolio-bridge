@@ -250,7 +250,38 @@ export interface Translations {
   mf_no_result: string;
   mf_magic_badge: string;
   mf_initial_guide: string;
+  // ─── Graham Defensive Analyzer ───────────────────────────────────────────────────────────
+  graham_analyzer_title: string;
+  graham_analyzer_desc: string;
+  graham_criterion_pe: string;
+  graham_criterion_pb: string;
+  graham_criterion_gn: string;
+  graham_criterion_cr: string;
+  graham_criterion_debt: string;
+  graham_criterion_div: string;
+  graham_no_data: string;
+  graham_disclaimer: string;
+  graham_progress_enrich: (done: number, total: number) => string;
+  graham_phase_enrich: string;
+  graham_no_result: string;
+  graham_defensive_badge: string;
+  graham_initial_guide: string;
 
+  // ─── Smith Quality Compounder Analyzer ─────────────────────────────────────────────────────
+  smith_analyzer_title: string;
+  smith_analyzer_desc: string;
+  smith_criterion_roe: string;
+  smith_criterion_margin: string;
+  smith_criterion_fcf: string;
+  smith_criterion_rev: string;
+  smith_criterion_debt: string;
+  smith_no_data: string;
+  smith_disclaimer: string;
+  smith_progress_enrich: (done: number, total: number) => string;
+  smith_phase_enrich: string;
+  smith_no_result: string;
+  smith_quality_badge: string;
+  smith_initial_guide: string;
   // ─── Settings Page ─────────────────────────────────────────────────────────
   settings_title: string;
   settings_display_currency_title: string;

@@ -356,6 +356,43 @@ export const de: Translations = {
   mf_magic_badge: "🪄 Magic-Formula-Kandidat",
   mf_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
+  // Graham
+  graham_analyzer_title: "Benjamin Graham Defensiver Investor Analyzer",
+  graham_analyzer_desc:
+    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Grahams Sicherheitsmarge: P/E, P/B, Graham Number, Liquiditätsquote, Verschuldung und Dividende.",
+  graham_criterion_pe: "P/E-Verhältnis",
+  graham_criterion_pb: "P/B-Verhältnis",
+  graham_criterion_gn: "Graham Number",
+  graham_criterion_cr: "Liquiditätsquote",
+  graham_criterion_debt: "Verschuldungsgrad (D/E)",
+  graham_criterion_div: "Dividendenrendite",
+  graham_no_data: "Keine Daten",
+  graham_disclaimer:
+    "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
+  graham_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
+  graham_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
+  graham_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  graham_defensive_badge: "🛡️ Defensiver Kandidat",
+  graham_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
+
+  // Smith
+  smith_analyzer_title: "Terry Smith Quality Compounder Analyzer",
+  smith_analyzer_desc:
+    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Smiths Qualitätskriterien: ROE, Betriebsmarge, FCF-Konversion, Umsatzwachstum und niedrige Verschuldung.",
+  smith_criterion_roe: "ROE",
+  smith_criterion_margin: "Betriebsmarge",
+  smith_criterion_fcf: "FCF-Konversion",
+  smith_criterion_rev: "Umsatzwachstum",
+  smith_criterion_debt: "Verschuldungsgrad (D/E)",
+  smith_no_data: "Keine Daten",
+  smith_disclaimer:
+    "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
+  smith_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
+  smith_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
+  smith_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  smith_quality_badge: "✨ Quality Compounder",
+  smith_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
+
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",
   settings_display_currency_desc:

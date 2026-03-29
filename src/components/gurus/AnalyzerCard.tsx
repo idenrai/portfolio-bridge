@@ -17,7 +17,7 @@ interface ThemeColors {
   progressEnrich: string;
 }
 
-const THEMES: Record<"green" | "violet", ThemeColors> = {
+const THEMES: Record<"green" | "violet" | "blue" | "amber", ThemeColors> = {
   green: {
     btn: "bg-green-600 hover:bg-green-700",
     tabActive: "bg-green-600 text-white",
@@ -42,6 +42,30 @@ const THEMES: Record<"green" | "violet", ThemeColors> = {
     inputFocus: "focus:border-violet-400 focus:ring-1 focus:ring-violet-200",
     progressEnrich: "bg-violet-500",
   },
+  blue: {
+    btn: "bg-blue-600 hover:bg-blue-700",
+    tabActive: "bg-blue-600 text-white",
+    scoreHigh: "bg-blue-500",
+    scoreTextHigh: "text-blue-600",
+    badgePass: "bg-blue-50 text-blue-700",
+    highScoreBadge: "bg-blue-100 text-blue-700",
+    resultHover: "hover:border-blue-200 hover:bg-blue-50/30",
+    suggestHover: "hover:bg-blue-50",
+    inputFocus: "focus:border-blue-400 focus:ring-1 focus:ring-blue-200",
+    progressEnrich: "bg-blue-500",
+  },
+  amber: {
+    btn: "bg-amber-600 hover:bg-amber-700",
+    tabActive: "bg-amber-600 text-white",
+    scoreHigh: "bg-amber-500",
+    scoreTextHigh: "text-amber-600",
+    badgePass: "bg-amber-50 text-amber-700",
+    highScoreBadge: "bg-amber-100 text-amber-700",
+    resultHover: "hover:border-amber-200 hover:bg-amber-50/30",
+    suggestHover: "hover:bg-amber-50",
+    inputFocus: "focus:border-amber-400 focus:ring-1 focus:ring-amber-200",
+    progressEnrich: "bg-amber-500",
+  },
 };
 
 // ─── 텍스트 인터페이스 ──────────────────────────────────────────────────────────
@@ -61,7 +85,7 @@ export interface AnalyzerTexts {
 // ─── Props ─────────────────────────────────────────────────────────────────────
 
 interface AnalyzerCardProps<CKey extends string> {
-  theme: "green" | "violet";
+  theme: "green" | "violet" | "blue" | "amber";
   texts: AnalyzerTexts;
   criterionHints: Record<CKey, string>;
   criterionLabel: (key: CKey) => string;

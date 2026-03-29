@@ -351,6 +351,43 @@ export const ko: Translations = {
   mf_magic_badge: "🪄 마법 공식 적합",
   mf_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
+  // Graham
+  graham_analyzer_title: "벤저민 그레이엄 방어적 투자 채점기",
+  graham_analyzer_desc:
+    "보유 주식 또는 임의 티커를 그레이엄의 안전마진(P/E, P/B, 그레이엄 넘버, 유동비율, 부채, 배당) 기준으로 채점합니다.",
+  graham_criterion_pe: "P/E 비율",
+  graham_criterion_pb: "P/B 비율",
+  graham_criterion_gn: "그레이엄 넘버",
+  graham_criterion_cr: "유동비율",
+  graham_criterion_debt: "부채비율 (D/E)",
+  graham_criterion_div: "배당수익률",
+  graham_no_data: "데이터 없음",
+  graham_disclaimer:
+    "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
+  graham_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
+  graham_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  graham_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  graham_defensive_badge: "🛡️ 방어적 투자 적합",
+  graham_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
+
+  // Smith
+  smith_analyzer_title: "테리 스미스 퀸리티 컴파운더 채점기",
+  smith_analyzer_desc:
+    "보유 주식 또는 임의 티커를 스미스의 퀸리티 컴파운더(ROE, 영업이익률, FCF 전환율, 매출성장, 부채) 기준으로 채점합니다.",
+  smith_criterion_roe: "ROE",
+  smith_criterion_margin: "영업이익률",
+  smith_criterion_fcf: "FCF 전환율",
+  smith_criterion_rev: "매출 성장률",
+  smith_criterion_debt: "부채비율 (D/E)",
+  smith_no_data: "데이터 없음",
+  smith_disclaimer:
+    "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
+  smith_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
+  smith_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  smith_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  smith_quality_badge: "✨ 퀸리티 컴파운더",
+  smith_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
+
   settings_title: "설정",
   settings_display_currency_title: "표시 화폐",
   settings_display_currency_desc:

@@ -352,6 +352,43 @@ export const en: Translations = {
   mf_magic_badge: "🪄 Magic Formula Pick",
   mf_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
+  // Graham
+  graham_analyzer_title: "Benjamin Graham Defensive Investor Analyzer",
+  graham_analyzer_desc:
+    "Scores your stock holdings or any ticker against Graham's margin of safety criteria: P/E, P/B, Graham Number, current ratio, debt, and dividends.",
+  graham_criterion_pe: "P/E Ratio",
+  graham_criterion_pb: "P/B Ratio",
+  graham_criterion_gn: "Graham Number",
+  graham_criterion_cr: "Current Ratio",
+  graham_criterion_debt: "Debt/Equity",
+  graham_criterion_div: "Dividend Yield",
+  graham_no_data: "No data",
+  graham_disclaimer:
+    "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
+  graham_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
+  graham_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
+  graham_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  graham_defensive_badge: "🛡️ Defensive Pick",
+  graham_initial_guide: "Analyze your portfolio or search a ticker to start.",
+
+  // Smith
+  smith_analyzer_title: "Terry Smith Quality Compounder Analyzer",
+  smith_analyzer_desc:
+    "Scores your stock holdings or any ticker against Smith's quality compounder criteria: ROE, operating margin, FCF conversion, revenue growth, and low debt.",
+  smith_criterion_roe: "ROE",
+  smith_criterion_margin: "Operating Margin",
+  smith_criterion_fcf: "FCF Conversion",
+  smith_criterion_rev: "Revenue Growth",
+  smith_criterion_debt: "Debt/Equity",
+  smith_no_data: "No data",
+  smith_disclaimer:
+    "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
+  smith_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
+  smith_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
+  smith_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  smith_quality_badge: "✨ Quality Compounder",
+  smith_initial_guide: "Analyze your portfolio or search a ticker to start.",
+
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",
   settings_display_currency_desc:

@@ -351,6 +351,44 @@ export const ja: Translations = {
   mf_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   mf_magic_badge: "🪄 マジック・フォーミュラ適合",
   mf_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
+
+  // Graham
+  graham_analyzer_title: "ベンジャミン・グレアム 防御的投資 採点器",
+  graham_analyzer_desc:
+    "保有株式または任意のティッカーをグレアムの安全余裕基準（P/E、P/B、グレアムナンバー、流動比率、負債、配当）で採点します。",
+  graham_criterion_pe: "P/E比率",
+  graham_criterion_pb: "P/B比率",
+  graham_criterion_gn: "グレアムナンバー",
+  graham_criterion_cr: "流動比率",
+  graham_criterion_debt: "負債比率 (D/E)",
+  graham_criterion_div: "配当利回り",
+  graham_no_data: "データなし",
+  graham_disclaimer:
+    "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
+  graham_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
+  graham_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
+  graham_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  graham_defensive_badge: "🛡️ 防御的投資適合",
+  graham_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
+
+  // Smith
+  smith_analyzer_title: "テリー・スミス クオリティコンパウンダー 採点器",
+  smith_analyzer_desc:
+    "保有株式または任意のティッカーをスミスのクオリティ基準（ROE、営業利益率、FCF転換率、売上成長、低負債）で採点します。",
+  smith_criterion_roe: "ROE",
+  smith_criterion_margin: "営業利益率",
+  smith_criterion_fcf: "FCF転換率",
+  smith_criterion_rev: "売上成長率",
+  smith_criterion_debt: "負債比率 (D/E)",
+  smith_no_data: "データなし",
+  smith_disclaimer:
+    "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
+  smith_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
+  smith_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
+  smith_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  smith_quality_badge: "✨ クオリティコンパウンダー",
+  smith_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
+
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",
   settings_display_currency_desc:
