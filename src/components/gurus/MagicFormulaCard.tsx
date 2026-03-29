@@ -103,7 +103,7 @@ export function MagicFormulaCard() {
   const t = useT();
   const assets = useAssetStore((s) => s.assets);
 
-  const [mode, setMode] = useState<ScreenMode>("market");
+  const [mode, setMode] = useState<ScreenMode>("portfolio");
   const [market, setMarket] = useState<Market>("US");
   const [results, setResults] = useState<MFScreenResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -204,7 +204,7 @@ export function MagicFormulaCard() {
 
       {/* 모드 탭 */}
       <div className="flex gap-1.5 mb-3">
-        {(["market", "portfolio", "search"] as const).map((m) => {
+        {(["portfolio", "market", "search"] as const).map((m) => {
           const label =
             m === "market"    ? `📊 ${t.screener_mode_market}` :
             m === "portfolio" ? `💼 ${t.screener_mode_portfolio}` :
