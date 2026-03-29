@@ -22,6 +22,7 @@ export const MARKET_REGIONS: Record<Market, string[]> = {
   KR: ["kr"],
   JP: ["jp"],
   EU: ["de", "fr", "nl", "be", "ch", "it", "es", "at", "fi", "ie", "pt"],
+  OTHER: [],
 };
 
 /** 시장 → Yahoo Trending API region 코드 (POST Screener 실패 시 fallback) */
@@ -30,4 +31,5 @@ export const TRENDING_REGIONS: Record<Market, string[]> = {
   KR: ["KR"],
   JP: ["JP"],
   EU: ["DE", "FR", "GB"],
+  OTHER: [],
 };
