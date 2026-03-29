@@ -1,6 +1,6 @@
-import { useT, useScreener } from "@/hooks";
-import { screenByTickers, type LynchCriterionKey, type LynchScreenResult } from "@/utils/lynchScreener";
-import { ScreenerCard, type ScreenerTexts } from "./ScreenerCard";
+import { useT, useAnalyzer } from "@/hooks";
+import { analyzeByTickers, type LynchCriterionKey, type LynchAnalyzerResult } from "@/utils/lynchAnalyzer";
+import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────
 
@@ -29,9 +29,9 @@ function formatValue(key: LynchCriterionKey, value: number): string {
 
 export function LynchTenBaggerCard() {
   const t = useT();
-  const screener = useScreener<LynchScreenResult>({ screenByTickers });
+  const analyzer = useAnalyzer<LynchAnalyzerResult>({ analyzeByTickers });
 
-  const texts: ScreenerTexts = {
+  const texts: AnalyzerTexts = {
     title:           t.lynch_tenbagger_title,
     desc:            t.lynch_tenbagger_desc,
     progressEnrich:  t.lynch_progress_enrich,
@@ -56,13 +56,13 @@ export function LynchTenBaggerCard() {
   };
 
   return (
-    <ScreenerCard<LynchCriterionKey>
+    <AnalyzerCard<LynchCriterionKey>
       theme="green"
       texts={texts}
       criterionHints={CRITERION_HINT}
       criterionLabel={criterionLabel}
       formatValue={formatValue}
-      {...screener}
+      {...analyzer}
     />
   );
 }

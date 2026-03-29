@@ -23,7 +23,7 @@ export interface LynchCriterion {
   maxScore: number;
 }
 
-export interface LynchScreenResult {
+export interface LynchAnalyzerResult {
   stock: UniverseStock;
   fundamentals: FundamentalsData;
   criteria: LynchCriterion[];
@@ -117,7 +117,7 @@ function scoreMarketCap(cap: number | null, currency: string | null): Pick<Lynch
 export function scoreStock(
   stock: UniverseStock,
   fundamentals: FundamentalsData,
-): LynchScreenResult {
+): LynchAnalyzerResult {
   const { pegRatio, epsGrowth, revenueGrowth, debtToEquity, operatingMargin, marketCap, currency } =
     fundamentals;
 
@@ -148,15 +148,15 @@ export function scoreStock(
  * 주어진 티커 목록에 대해 Lynch 스코어링 실행.
  * 포트폴리오 스크리닝 / 단일 티커 검색에 사용.
  */
-export async function screenByTickers(
+export async function analyzeByTickers(
   tickers: Array<{ ticker: string; name?: string }>,
   onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void,
-): Promise<LynchScreenResult[]> {
+): Promise<LynchAnalyzerResult[]> {
   if (tickers.length === 0) return [];
 
   onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
 
-  const results: LynchScreenResult[] = [];
+  const results: LynchAnalyzerResult[] = [];
 
   for (let i = 0; i < tickers.length; i++) {
     const { ticker, name } = tickers[i];
@@ -186,3 +186,4 @@ export async function screenByTickers(
 
   return results.sort((a, b) => b.totalScore - a.totalScore);
 }
+

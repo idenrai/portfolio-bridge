@@ -1,6 +1,6 @@
-import { useT, useScreener } from "@/hooks";
-import { screenByTickersMF, type MFCriterionKey, type MFScreenResult } from "@/utils/magicFormulaScreener";
-import { ScreenerCard, type ScreenerTexts } from "./ScreenerCard";
+import { useT, useAnalyzer } from "@/hooks";
+import { analyzeByTickersMF, type MFCriterionKey, type MFAnalyzerResult } from "@/utils/magicFormulaAnalyzer";
+import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────
 
@@ -27,9 +27,9 @@ function formatValue(key: MFCriterionKey, value: number): string {
 
 export function MagicFormulaCard() {
   const t = useT();
-  const screener = useScreener<MFScreenResult>({ screenByTickers: screenByTickersMF });
+  const analyzer = useAnalyzer<MFAnalyzerResult>({ analyzeByTickers: analyzeByTickersMF });
 
-  const texts: ScreenerTexts = {
+  const texts: AnalyzerTexts = {
     title:           t.mf_title,
     desc:            t.mf_desc,
     progressEnrich:  t.mf_progress_enrich,
@@ -53,13 +53,13 @@ export function MagicFormulaCard() {
   };
 
   return (
-    <ScreenerCard<MFCriterionKey>
+    <AnalyzerCard<MFCriterionKey>
       theme="violet"
       texts={texts}
       criterionHints={CRITERION_HINT}
       criterionLabel={criterionLabel}
       formatValue={formatValue}
-      {...screener}
+      {...analyzer}
     />
   );
 }

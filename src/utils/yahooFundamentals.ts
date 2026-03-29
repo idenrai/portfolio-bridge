@@ -43,8 +43,15 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
 
   const marketCap = sd.marketCap?.raw ?? ks.marketCap?.raw ?? null;
 
+  // PEG: Yahoo 제공값 우선, 없으면 trailingPE / (epsGrowth * 100) 로 계산
+  const peRatio = sd.trailingPE?.raw ?? sd.forwardPE?.raw ?? null;
+  const pegRatio = ks.pegRatio?.raw
+    ?? (peRatio !== null && epsGrowth !== null && epsGrowth > 0
+        ? peRatio / (epsGrowth * 100)
+        : null);
+
   return {
-    pegRatio:       ks.pegRatio?.raw ?? null,
+    pegRatio,
     epsGrowth,
     revenueGrowth,
     debtToEquity:   (fd.debtToEquity   as RawVal | undefined)?.raw ?? null,

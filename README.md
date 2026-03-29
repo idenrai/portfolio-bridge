@@ -25,7 +25,7 @@ Market data and exchange rates are fetched client-side via proxy from Yahoo Fina
 | --- | --- |
 | 📊 **Unified Dashboard** | KPI bar, category/market allocation charts, holdings table, rebalance suggestions |
 | 💼 **Asset Management** | Ticker search (Yahoo Finance), manual entry, AI auto-classification, CSV import/export |
-| 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.); Peter Lynch 10-bagger screener scans market stocks; AI chat prompts in the persona of your chosen guru |
+| 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.); Peter Lynch 10-bagger analyzer scores portfolio stocks; AI chat prompts in the persona of your chosen guru |
 | 🤖 **AI Portfolio Analysis** | Structured prompts ready to paste into ChatGPT · Claude · Gemini · Grok |
 | 🔔 **Auto Insights** | Alerts for overweight, large losses, low cash, currency exposure |
 | 🌐 **Multi-language & Currency** | Korean · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
@@ -146,7 +146,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 - Philosophy (5 principles + 1 representative quote per guru)
 - Ideal allocation pie chart vs portfolio radar comparison
 - Guru-based rebalancing suggestions
-- **Peter Lynch 10-bagger screener**: Screens trending stocks from each market (not portfolio holdings) against PEG, growth, and financial health criteria — scored out of 100
+- **Peter Lynch 10-bagger analyzer**: Scores portfolio stocks against PEG, growth, and financial health criteria — scored out of 100
 - AI prompt generation always injects **English** guru philosophy (independent of UI language)
 
 #### Multi-language (i18n)

@@ -331,12 +331,12 @@ export const de: Translations = {
   lynch_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
-  screener_mode_portfolio: "Mein Portfolio",
-  screener_mode_search: "Ticker-Suche",
-  screener_portfolio_desc: (count) => `${count} Aktien in Ihrem Portfolio bewerten.`,
-  screener_btn_portfolio: "Portfolio bewerten",
-  screener_btn_search: "Analysieren",
-  screener_search_placeholder: "Ticker oder Aktienname eingeben (z.B. AAPL, Siemens)",
+  analyzer_mode_portfolio: "Mein Portfolio",
+  analyzer_mode_search: "Ticker-Suche",
+  analyzer_portfolio_desc: (count) => `${count} Aktien in Ihrem Portfolio bewerten.`,
+  analyzer_btn_portfolio: "Portfolio bewerten",
+  analyzer_btn_search: "Analysieren",
+  analyzer_search_placeholder: "Ticker oder Aktienname eingeben (z.B. AAPL, Siemens)",
 
   // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: "Joel Greenblatt Magic-Formula-Bewertung",

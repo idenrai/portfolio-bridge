@@ -327,12 +327,12 @@ export const ja: Translations = {
   lynch_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
   // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
-  screener_mode_portfolio: "マイポートフォリオ",
-  screener_mode_search: "ティッカー検索",
-  screener_portfolio_desc: (count) => `ポートフォリオ内の株式 ${count}銘柄を採点します。`,
-  screener_btn_portfolio: "ポートフォリオ採点",
-  screener_btn_search: "分析",
-  screener_search_placeholder: "ティッカーまたは銘柄名を入力（例：AAPL、トヨタ）",
+  analyzer_mode_portfolio: "マイポートフォリオ",
+  analyzer_mode_search: "ティッカー検索",
+  analyzer_portfolio_desc: (count) => `ポートフォリオ内の株式 ${count}銘柄を採点します。`,
+  analyzer_btn_portfolio: "ポートフォリオ採点",
+  analyzer_btn_search: "分析",
+  analyzer_search_placeholder: "ティッカーまたは銘柄名を入力（例：AAPL、トヨタ）",
 
   // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: "ジョエル・グリーンブラット マジック・フォーミュラ採点",

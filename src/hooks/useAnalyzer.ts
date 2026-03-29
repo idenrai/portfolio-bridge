@@ -4,16 +4,16 @@ import { useAssetStore } from "@/stores";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
 
-export type ScreenMode = "portfolio" | "search";
+export type AnalyzerMode = "portfolio" | "search";
 
-export interface ScreenerProgress {
+export interface AnalyzerProgress {
   phase: "enrich";
   done: number;
   total: number;
 }
 
-/** useScreener 결과에서 사용하는 최소 결과 형태 */
-export interface BaseScreenResult {
+/** useAnalyzer 결과에서 사용하는 최소 결과 형태 */
+export interface BaseAnalyzerResult {
   stock: { ticker: string; name: string };
   totalScore: number;
   criteria: Array<{
@@ -25,25 +25,25 @@ export interface BaseScreenResult {
   }>;
 }
 
-interface UseScreenerConfig<TResult extends BaseScreenResult> {
-  screenByTickers: (
+interface UseAnalyzerConfig<TResult extends BaseAnalyzerResult> {
+  analyzeByTickers: (
     tickers: Array<{ ticker: string; name?: string }>,
-    onProgress: (p: ScreenerProgress) => void,
+    onProgress: (p: AnalyzerProgress) => void,
   ) => Promise<TResult[]>;
 }
 
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 
-export function useScreener<TResult extends BaseScreenResult>(
-  config: UseScreenerConfig<TResult>,
+export function useAnalyzer<TResult extends BaseAnalyzerResult>(
+  config: UseAnalyzerConfig<TResult>,
 ) {
   const assets = useAssetStore((s) => s.assets);
 
-  const [mode, setMode] = useState<ScreenMode>("portfolio");
+  const [mode, setMode] = useState<AnalyzerMode>("portfolio");
   const [results, setResults] = useState<TResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [ran, setRan] = useState(false);
-  const [progress, setProgress] = useState<ScreenerProgress>({
+  const [progress, setProgress] = useState<AnalyzerProgress>({
     phase: "enrich",
     done: 0,
     total: 0,
@@ -70,7 +70,7 @@ export function useScreener<TResult extends BaseScreenResult>(
         ticker: a.ticker!,
         name: a.name,
       }));
-      const res = await config.screenByTickers(tickers, (p) =>
+      const res = await config.analyzeByTickers(tickers, (p) =>
         setProgress(p),
       );
       setResults(res);
@@ -80,7 +80,7 @@ export function useScreener<TResult extends BaseScreenResult>(
     }
   }, [assets, config]);
 
-  /** 검색 모드 — 단일 티커 스크리닝 */
+  /** 검색 모드 — 단일 티커 분석 */
   const runSearch = useCallback(
     async (ticker: string, name?: string) => {
       setLoading(true);
@@ -88,7 +88,7 @@ export function useScreener<TResult extends BaseScreenResult>(
       setProgress({ phase: "enrich", done: 0, total: 1 });
       setSearchSuggestions([]);
       try {
-        const res = await config.screenByTickers(
+        const res = await config.analyzeByTickers(
           [{ ticker, name }],
           (p) => setProgress(p),
         );

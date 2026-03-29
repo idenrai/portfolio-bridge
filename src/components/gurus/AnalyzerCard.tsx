@@ -1,6 +1,6 @@
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
-import type { ScreenMode, ScreenerProgress, BaseScreenResult } from "@/hooks/useScreener";
+import type { AnalyzerMode, AnalyzerProgress, BaseAnalyzerResult } from "@/hooks/useAnalyzer";
 
 // ─── 컬러 테마 ─────────────────────────────────────────────────────────────────
 
@@ -46,7 +46,7 @@ const THEMES: Record<"green" | "violet", ThemeColors> = {
 
 // ─── 텍스트 인터페이스 ──────────────────────────────────────────────────────────
 
-export interface ScreenerTexts {
+export interface AnalyzerTexts {
   title: string;
   desc: string;
   progressEnrich: (done: number, total: number) => string;
@@ -60,20 +60,20 @@ export interface ScreenerTexts {
 
 // ─── Props ─────────────────────────────────────────────────────────────────────
 
-interface ScreenerCardProps<CKey extends string> {
+interface AnalyzerCardProps<CKey extends string> {
   theme: "green" | "violet";
-  texts: ScreenerTexts;
+  texts: AnalyzerTexts;
   criterionHints: Record<CKey, string>;
   criterionLabel: (key: CKey) => string;
   formatValue: (key: CKey, value: number) => string;
 
-  // useScreener hook 결과
-  mode: ScreenMode;
-  setMode: (m: ScreenMode) => void;
-  results: BaseScreenResult[];
+  // useAnalyzer hook 결과
+  mode: AnalyzerMode;
+  setMode: (m: AnalyzerMode) => void;
+  results: BaseAnalyzerResult[];
   loading: boolean;
   ran: boolean;
-  progress: ScreenerProgress;
+  progress: AnalyzerProgress;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
   searchSuggestions: Array<{ ticker: string; name: string }>;
@@ -147,7 +147,7 @@ function CriterionBadge<CKey extends string>({
 
 // ─── 메인 컴포넌트 ──────────────────────────────────────────────────────────────
 
-export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>) {
+export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>) {
   const {
     theme, texts, criterionHints, criterionLabel, formatValue,
     mode, setMode,
@@ -168,8 +168,8 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
       <div className="flex gap-1.5 mb-3">
         {(["portfolio", "search"] as const).map((m) => {
           const label =
-            m === "portfolio" ? `💼 ${t.screener_mode_portfolio}` :
-                                `🔍 ${t.screener_mode_search}`;
+            m === "portfolio" ? `💼 ${t.analyzer_mode_portfolio}` :
+                                `🔍 ${t.analyzer_mode_search}`;
           return (
             <button
               key={m}
@@ -188,7 +188,7 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
       {mode === "portfolio" && (
         <>
           <p className="text-[11px] text-slate-400 mb-2">
-            {t.screener_portfolio_desc(portfolioStockCount)}
+            {t.analyzer_portfolio_desc(portfolioStockCount)}
           </p>
           <button
             onClick={runPortfolio}
@@ -197,7 +197,7 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
           >
             {loading
               ? texts.progressEnrich(progress.done, progress.total)
-              : t.screener_btn_portfolio}
+              : t.analyzer_btn_portfolio}
           </button>
         </>
       )}
@@ -211,7 +211,7 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
-              placeholder={t.screener_search_placeholder}
+              placeholder={t.analyzer_search_placeholder}
               className={`flex-1 rounded-lg border border-slate-200 px-3 py-1.5 text-sm outline-none ${colors.inputFocus}`}
             />
             <button
@@ -219,7 +219,7 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
               disabled={loading || isSearching || !searchQuery.trim()}
               className={`rounded-lg ${colors.btn} px-4 py-1.5 text-sm font-semibold text-white shadow-sm active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer`}
             >
-              {isSearching ? "..." : t.screener_btn_search}
+              {isSearching ? "..." : t.analyzer_btn_search}
             </button>
           </div>
           {searchSuggestions.length > 0 && (

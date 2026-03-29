@@ -19,7 +19,7 @@ export interface MFCriterion {
   maxScore: number;
 }
 
-export interface MFScreenResult {
+export interface MFAnalyzerResult {
   stock: UniverseStock;
   criteria: MFCriterion[];
   /** 0 – 100 합산 점수 */
@@ -148,7 +148,7 @@ function scoreMarketCap(cap: number | null, currency: string | null): Pick<MFCri
 
 // ─── 스코어링 함수 ──────────────────────────────────────────────────────────
 
-function scoreStock(stock: UniverseStock, data: MFRawData): MFScreenResult {
+function scoreStock(stock: UniverseStock, data: MFRawData): MFAnalyzerResult {
   const ey     = scoreEarningsYield(data.earningsYield);
   const roc    = scoreReturnOnCapital(data.returnOnCapital);
   const margin = scoreOperatingMargin(data.operatingMargin);
@@ -173,15 +173,15 @@ function scoreStock(stock: UniverseStock, data: MFRawData): MFScreenResult {
  * 주어진 티커 목록에 대해 Magic Formula 스코어링 실행.
  * 포트폴리오 스크리닝 / 단일 티커 검색에 사용.
  */
-export async function screenByTickersMF(
+export async function analyzeByTickersMF(
   tickers: Array<{ ticker: string; name?: string }>,
   onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void,
-): Promise<MFScreenResult[]> {
+): Promise<MFAnalyzerResult[]> {
   if (tickers.length === 0) return [];
 
   onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
 
-  const results: MFScreenResult[] = [];
+  const results: MFAnalyzerResult[] = [];
 
   for (let i = 0; i < tickers.length; i++) {
     const { ticker, name } = tickers[i];

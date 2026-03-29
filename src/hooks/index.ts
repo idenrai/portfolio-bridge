@@ -5,5 +5,5 @@ export { useDataRefresh } from "./useDataRefresh";
 export { useTickerSearch } from "./useTickerSearch";
 export { useT } from "./useT";
 export { useGoogleDrive } from "./useGoogleDrive";
-export { useScreener } from "./useScreener";
-export type { ScreenMode, ScreenerProgress, BaseScreenResult } from "./useScreener";
+export { useAnalyzer } from "./useAnalyzer";
+export type { AnalyzerMode, AnalyzerProgress, BaseAnalyzerResult } from "./useAnalyzer";

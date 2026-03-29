@@ -228,12 +228,12 @@ export interface Translations {
   lynch_initial_guide: string;
 
   // ─── Analyzer Common (mode tabs) ────────────────────────────────────────────
-  screener_mode_portfolio: string;
-  screener_mode_search: string;
-  screener_portfolio_desc: (count: number) => string;
-  screener_btn_portfolio: string;
-  screener_btn_search: string;
-  screener_search_placeholder: string;
+  analyzer_mode_portfolio: string;
+  analyzer_mode_search: string;
+  analyzer_portfolio_desc: (count: number) => string;
+  analyzer_btn_portfolio: string;
+  analyzer_btn_search: string;
+  analyzer_search_placeholder: string;
 
   // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: string;

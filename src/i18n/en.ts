@@ -327,12 +327,12 @@ export const en: Translations = {
   lynch_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
-  screener_mode_portfolio: "My Portfolio",
-  screener_mode_search: "Ticker Search",
-  screener_portfolio_desc: (count) => `Score ${count} stocks in your portfolio.`,
-  screener_btn_portfolio: "Score Portfolio",
-  screener_btn_search: "Analyze",
-  screener_search_placeholder: "Enter ticker or stock name (e.g. AAPL, Tesla)",
+  analyzer_mode_portfolio: "My Portfolio",
+  analyzer_mode_search: "Ticker Search",
+  analyzer_portfolio_desc: (count) => `Score ${count} stocks in your portfolio.`,
+  analyzer_btn_portfolio: "Score Portfolio",
+  analyzer_btn_search: "Analyze",
+  analyzer_search_placeholder: "Enter ticker or stock name (e.g. AAPL, Tesla)",
 
   // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: "Joel Greenblatt Magic Formula Analyzer",
