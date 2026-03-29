@@ -24,10 +24,67 @@ export const TRENDING_REGIONS: Record<string, string> = {
 export const MCAP_MIN = 300_000_000;   // $300M
 export const MCAP_MAX = 30_000_000_000; // $30B
 
-// ─── 비미국 시장 시드 티커 ──────────────────────────────────────────────────
-// Yahoo Trending API가 KR/JP/EU에서 빈 결과를 반환하므로
-// 소·중형 성장주 위주의 시드 풀을 사용합니다.
+// ─── 시장별 시드 티커 ───────────────────────────────────────────────────────
+// Yahoo Trending API는 대형주 위주이므로, 소·중형 성장주 시드 풀을 병행합니다.
 // v7 배치로 실시간 데이터를 가져온 뒤 시가총액 $300M–$30B로 필터링합니다.
+
+/** 미국 (NYSE/NASDAQ) — 소중형 성장주 + 테크/바이오/소비재/산업재 */
+const US_SEEDS = [
+  // 테크·소프트웨어
+  "CRWD",  // CrowdStrike
+  "DDOG",  // Datadog
+  "ZS",    // Zscaler
+  "NET",   // Cloudflare
+  "MDB",   // MongoDB
+  "OKTA",  // Okta
+  "HUBS",  // HubSpot
+  "BILL",  // Bill Holdings
+  "PCOR",  // Procore Technologies
+  "GTLB",  // GitLab
+  "CFLT",  // Confluent
+  "ESTC",  // Elastic
+  "FRSH",  // Freshworks
+  "DOCN",  // DigitalOcean
+  "BRZE",  // Braze
+  // 반도체·하드웨어
+  "SMCI",  // Super Micro Computer
+  "ONTO",  // Onto Innovation
+  "RMBS",  // Rambus
+  "CRUS",  // Cirrus Logic
+  "ACLS",  // Axcelis Technologies
+  "POWI",  // Power Integrations
+  "LSCC",  // Lattice Semiconductor
+  "CEVA",  // CEVA
+  "SLAB",  // Silicon Laboratories
+  // 바이오·헬스케어
+  "EXAS",  // Exact Sciences
+  "NTRA",  // Natera
+  "INSP",  // Inspire Medical
+  "RGEN",  // Repligen
+  "MEDP",  // Medpace
+  "IOVA",  // Iovance Biotherapeutics
+  "TGTX",  // TG Therapeutics
+  "PCVX",  // Vaxcyte
+  "RYTM",  // Rhythm Pharma
+  "KRTX",  // Karuna Therapeutics
+  // 금융·핀테크
+  "SSNC",  // SS&C Technologies
+  "TOST",  // Toast
+  "RELY",  // Remitly
+  "AFRM",  // Affirm
+  "LPRO",  // Open Lending
+  // 소비재·산업재
+  "DUOL",  // Duolingo
+  "CELH",  // Celsius Holdings
+  "ELF",   // e.l.f. Beauty
+  "WFRD",  // Weatherford International
+  "CRNX",  // Crinetics Pharmaceuticals
+  "KRYS",  // Krystal Biotech
+  "BRBR",  // BellRing Brands
+  "SHAK",  // Shake Shack
+  "BOOT",  // Boot Barn
+  "CARG",  // CarGurus
+];
 
 /** 한국 (KOSPI/KOSDAQ) — 소중형 성장주 + IT/바이오/소비재 */
 const KR_SEEDS = [
@@ -169,6 +226,7 @@ const EU_SEEDS = [
 
 /** 시장별 시드 티커 맵 */
 export const MARKET_SEEDS: Record<string, string[]> = {
+  US: US_SEEDS,
   KR: KR_SEEDS,
   JP: JP_SEEDS,
   EU: EU_SEEDS,
