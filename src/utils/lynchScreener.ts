@@ -161,7 +161,7 @@ export interface ScreenProgress {
  * 3. 점수 내림차순 정렬 후 20개 반환
  */
 export async function screenAll(
-  market: "ALL" | Market,
+  market: Market,
   onProgress?: (p: ScreenProgress) => void,
 ): Promise<LynchScreenResult[]> {
 

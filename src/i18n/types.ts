@@ -213,7 +213,6 @@ export interface Translations {
   // ─── Lynch 10-Bagger Screener ──────────────────────────────────────────────
   lynch_tenbagger_title: string;
   lynch_tenbagger_desc: string;
-  lynch_market_all: string;
   lynch_loading: string;
   lynch_no_stocks: string;
   lynch_col_score: string;

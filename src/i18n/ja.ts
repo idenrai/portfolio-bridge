@@ -311,7 +311,6 @@ export const ja: Translations = {
   lynch_tenbagger_title: "ピーター・リンチ テンバガー・スクリーナー",
   lynch_tenbagger_desc:
     "各市場の主要銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
-  lynch_market_all: "全市場",
   lynch_loading: "Yahoo Financeから財務データを取得中…",
   lynch_no_stocks: "この市場にスクリーニング対象の株式銘柄がありません。",
   lynch_col_score: "リンチスコア",

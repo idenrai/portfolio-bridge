@@ -6,8 +6,7 @@ import type { Market } from "@/types";
 
 // ─── 상수 ─────────────────────────────────────────────────────────────────────
 
-const MARKET_OPTIONS: Array<{ value: "ALL" | Market; flag: string }> = [
-  { value: "ALL", flag: "" },
+const MARKET_OPTIONS: Array<{ value: Market; flag: string }> = [
   { value: "KR",  flag: "🇰🇷" },
   { value: "US",  flag: "🇺🇸" },
   { value: "JP",  flag: "🇯🇵" },
@@ -100,7 +99,7 @@ function formatValue(label: string, value: number): string {
 
 export function LynchTenBaggerCard() {
   const t = useT();
-  const [market, setMarket] = useState<"ALL" | Market>("ALL");
+  const [market, setMarket] = useState<Market>("US");
   const [results, setResults] = useState<LynchScreenResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [ran, setRan] = useState(false);
@@ -149,7 +148,6 @@ export function LynchTenBaggerCard() {
       <div className="flex flex-wrap gap-1.5 mb-3">
         {MARKET_OPTIONS.map((m) => {
           const label =
-            m.value === "ALL" ? t.lynch_market_all :
             m.value === "KR"  ? `🇰🇷 ${t.market_kr}` :
             m.value === "US"  ? `🇺🇸 ${t.market_us}` :
             m.value === "JP"  ? `🇯🇵 ${t.market_jp}` :

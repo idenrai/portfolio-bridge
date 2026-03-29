@@ -310,7 +310,6 @@ export const ko: Translations = {
   lynch_tenbagger_title: "피터 린치 10루타 후보 스크리너",
   lynch_tenbagger_desc:
     "각 시장의 주요 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. 100점에 가까울수록 10루타 가능성이 높은 종목입니다.",
-  lynch_market_all: "전체 시장",
   lynch_loading: "Yahoo Finance에서 재무 데이터 조회 중…",
   lynch_no_stocks: "해당 시장에 스크리닝 가능한 주식 종목이 없습니다.",
   lynch_col_score: "린치 점수",

@@ -315,7 +315,6 @@ export const de: Translations = {
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Screener",
   lynch_tenbagger_desc:
     "Bewertet wichtige Aktien aus jedem Markt anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Je höher der Score, desto größer das Tenbagger-Potenzial.",
-  lynch_market_all: "Alle Märkte",
   lynch_loading: "Finanzdaten von Yahoo Finance werden abgerufen…",
   lynch_no_stocks: "Keine screenbaren Aktien in diesem Markt gefunden.",
   lynch_col_score: "Lynch-Score",

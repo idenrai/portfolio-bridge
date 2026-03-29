@@ -311,7 +311,6 @@ export const en: Translations = {
   lynch_tenbagger_title: "Peter Lynch Tenbagger Screener",
   lynch_tenbagger_desc:
     "Screens trending stocks from each market against Peter Lynch's PEG, growth, and financial health criteria. The higher the score, the stronger the tenbagger potential.",
-  lynch_market_all: "All Markets",
   lynch_loading: "Fetching fundamentals from Yahoo Finance…",
   lynch_no_stocks: "No screenable stocks found in this market.",
   lynch_col_score: "Lynch Score",

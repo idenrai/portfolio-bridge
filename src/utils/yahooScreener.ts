@@ -72,17 +72,13 @@ async function fetchQuoteBatch(
 }
 
 /**
- * 동적 종목 발굴
- *
- * US: Trending API → v7 배치, KR/JP/EU: 시드 티커 풀 → v7 배치
- * EQUITY만 선별, 시가총액 $300M–$30B 범위로 필터링
+ * 단일 시장에서 종목 후보 가져오기 (내부용)
  */
-export async function fetchScreenerStocks(
-  market: "ALL" | Market,
-  count = 30,
+async function fetchMarketStocks(
+  targetMarket: Market | "OTHER",
 ): Promise<ScreenerResult[]> {
   const seen = new Set<string>();
-  const all: ScreenerResult[] = [];
+  const results: ScreenerResult[] = [];
 
   const mapQuote = (q: Record<string, unknown>): ScreenerResult | null => {
     const sym = q.symbol as string | undefined;
@@ -104,7 +100,7 @@ export async function fetchScreenerStocks(
       q.currency as string | undefined,
       sym,
     );
-    if (market !== "ALL" && market !== "OTHER" && stockMarket !== market) return null;
+    if (targetMarket !== "OTHER" && stockMarket !== targetMarket) return null;
 
     seen.add(sym);
     return {
@@ -125,36 +121,36 @@ export async function fetchScreenerStocks(
     };
   };
 
-  const needsUS = market === "ALL" || market === "US";
-  const needsSeeds = market === "ALL" || market === "OTHER" || market in MARKET_SEEDS;
-
-  if (needsUS) {
-    console.log(`[Screener] Fetching US trending tickers`);
+  if (targetMarket === "US") {
     const tickers = await fetchTrendingTickers(TRENDING_REGIONS.US, 50);
-    const unique = [...new Set(tickers.filter((t) => !seen.has(t)))];
+    const unique = [...new Set(tickers)];
     if (unique.length > 0) {
-      await fetchQuoteBatch(unique, mapQuote, all);
+      await fetchQuoteBatch(unique, mapQuote, results);
     }
-    console.log(`[Screener] US trending → ${all.length} equities`);
+    console.log(`[Screener] US trending → ${results.length} equities`);
   }
 
-  if (needsSeeds) {
-    const seedMarkets =
-      market === "ALL" || market === "OTHER"
-        ? Object.keys(MARKET_SEEDS)
-        : [market];
-
-    for (const m of seedMarkets) {
-      const seeds = MARKET_SEEDS[m];
-      if (!seeds?.length) continue;
-
-      console.log(`[Screener] Fetching ${m} seed tickers (${seeds.length})`);
-      const unseen = seeds.filter((t) => !seen.has(t));
-      await fetchQuoteBatch(unseen, mapQuote, all);
-      console.log(`[Screener] ${m} seeds → total ${all.length} equities`);
-    }
+  const seeds = MARKET_SEEDS[targetMarket];
+  if (seeds?.length) {
+    const unseen = seeds.filter((t) => !seen.has(t));
+    await fetchQuoteBatch(unseen, mapQuote, results);
+    console.log(`[Screener] ${targetMarket} seeds → ${results.length} equities`);
   }
 
-  console.log(`[Screener] Final: ${all.length} stocks for market=${market}`);
-  return all.slice(0, count);
+  return results;
+}
+
+/**
+ * 동적 종목 발굴
+ *
+ * US: Trending API → v7 배치, KR/JP/EU: 시드 티커 풀 → v7 배치
+ * EQUITY만 선별, 시가총액 $300M–$30B 범위로 필터링
+ */
+export async function fetchScreenerStocks(
+  market: Market,
+  count = 30,
+): Promise<ScreenerResult[]> {
+  const results = await fetchMarketStocks(market);
+  console.log(`[Screener] Final: ${results.length} stocks for market=${market}`);
+  return results.slice(0, count);
 }

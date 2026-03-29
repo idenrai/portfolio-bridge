@@ -187,7 +187,7 @@ function scoreStock(stock: UniverseStock, data: MFRawData): MFScreenResult {
  * 3. 점수 내림차순 정렬 후 반환
  */
 export async function screenAllMF(
-  market: "ALL" | Market,
+  market: Market,
   onProgress?: (p: MFScreenProgress) => void,
 ): Promise<MFScreenResult[]> {
   onProgress?.({ phase: "fetch", done: 0, total: 1 });
