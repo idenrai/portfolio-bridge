@@ -221,18 +221,13 @@ export interface Translations {
   lynch_criterion_cap: string;
   lynch_no_data: string;
   lynch_disclaimer: string;
-  lynch_cap_range_hint: string;
-  lynch_progress_fetch: string;
   lynch_progress_enrich: (done: number, total: number) => string;
-  lynch_btn_screen: string;
-  lynch_phase_fetch: string;
   lynch_phase_enrich: string;
   lynch_no_result: string;
   lynch_tenbagger_badge: string;
   lynch_initial_guide: string;
 
   // ─── Screener Common (mode tabs) ────────────────────────────────────────────
-  screener_mode_market: string;
   screener_mode_portfolio: string;
   screener_mode_search: string;
   screener_portfolio_desc: (count: number) => string;
@@ -250,11 +245,7 @@ export interface Translations {
   mf_criterion_cap: string;
   mf_no_data: string;
   mf_disclaimer: string;
-  mf_cap_range_hint: string;
-  mf_progress_fetch: string;
   mf_progress_enrich: (done: number, total: number) => string;
-  mf_btn_screen: string;
-  mf_phase_fetch: string;
   mf_phase_enrich: string;
   mf_no_result: string;
   mf_magic_badge: string;

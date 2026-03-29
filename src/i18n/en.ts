@@ -310,7 +310,7 @@ export const en: Translations = {
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger Screener",
   lynch_tenbagger_desc:
-    "Screens trending stocks from each market against Peter Lynch's PEG, growth, and financial health criteria. The higher the score, the stronger the tenbagger potential.",
+    "Scores your holdings or any ticker against Peter Lynch's PEG, growth, and financial health criteria. The higher the score, the stronger the tenbagger potential.",
   lynch_criterion_peg: "PEG Ratio",
   lynch_criterion_eps: "EPS Growth",
   lynch_criterion_rev: "Revenue Growth",
@@ -320,18 +320,13 @@ export const en: Translations = {
   lynch_no_data: "No data",
   lynch_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  lynch_cap_range_hint: "$300M–$30B cap → 50 candidates → 1st-pass scoring → top 10 detailed",
-  lynch_progress_fetch: "⏳ Searching stocks…",
   lynch_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
-  lynch_btn_screen: "🔍 Screening",
-  lynch_phase_fetch: "📡 Searching small/mid-cap stocks via Yahoo Screener API…",
   lynch_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
   lynch_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
   lynch_tenbagger_badge: "🚀 Tenbagger Candidate",
-  lynch_initial_guide: "Press the button above to start screening.",
+  lynch_initial_guide: "Analyze your portfolio or search a ticker to start screening.",
 
   // ─── Screener Common (mode tabs) ────────────────────────────────────────────
-  screener_mode_market: "Market Screening",
   screener_mode_portfolio: "My Portfolio",
   screener_mode_search: "Ticker Search",
   screener_portfolio_desc: (count) => `Analyze ${count} stock/ETF holdings in your portfolio.`,
@@ -351,15 +346,11 @@ export const en: Translations = {
   mf_no_data: "No data",
   mf_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  mf_cap_range_hint: "$300M–$30B cap → 50 candidates → 1st-pass scoring → top 10 detailed",
-  mf_progress_fetch: "⏳ Searching stocks…",
   mf_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
-  mf_btn_screen: "🔍 Screening",
-  mf_phase_fetch: "📡 Searching small/mid-cap stocks via Yahoo Screener API…",
   mf_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
   mf_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
   mf_magic_badge: "🪄 Magic Formula Pick",
-  mf_initial_guide: "Press the button above to start screening.",
+  mf_initial_guide: "Analyze your portfolio or search a ticker to start screening.",
 
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",

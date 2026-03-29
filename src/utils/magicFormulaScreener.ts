@@ -1,7 +1,5 @@
-import { fetchScreenerStocks, type ScreenerResult } from "./yahooFinance";
 import { yahooFetch } from "./yahooCore";
 import type { UniverseStock } from "./stockUniverse";
-import type { Market } from "@/types";
 import { approxToUSD } from "@/constants";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
@@ -26,14 +24,6 @@ export interface MFScreenResult {
   criteria: MFCriterion[];
   /** 0 – 100 합산 점수 */
   totalScore: number;
-}
-
-export type MFScreenPhase = "fetch" | "enrich";
-
-export interface MFScreenProgress {
-  phase: MFScreenPhase;
-  done: number;
-  total: number;
 }
 
 // ─── quoteSummary에서 Magic Formula 데이터 추출 ─────────────────────────────
@@ -177,89 +167,7 @@ function scoreStock(stock: UniverseStock, data: MFRawData): MFScreenResult {
   return { stock, criteria, totalScore };
 }
 
-// ─── 동적 스크리너 ─────────────────────────────────────────────────────────────
-
-/**
- * Magic Formula 스크리닝
- *
-/** 후보 풀 크기 / 상세 분석 대상 수 */
-const CANDIDATE_POOL = 50;
-const ENRICH_TOP = 10;
-
-/**
- * Magic Formula 스크리닝
- *
- * 1. Yahoo Finance Screener로 후보 50개 fetch (v7 배치 — 빠름)
- * 2. v7 데이터 기반 1차 스코어링 (시가총액 등)
- * 3. 상위 10개만 선별 → quoteSummary로 EY/ROC 보강 (느림)
- * 4. 최종 점수 내림차순 정렬
- */
-export async function screenAllMF(
-  market: Market,
-  onProgress?: (p: MFScreenProgress) => void,
-): Promise<MFScreenResult[]> {
-  onProgress?.({ phase: "fetch", done: 0, total: 1 });
-
-  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, CANDIDATE_POOL);
-
-  onProgress?.({ phase: "fetch", done: 1, total: 1 });
-
-  if (candidates.length === 0) {
-    console.warn("[MagicFormula] Screener returned 0 candidates");
-    return [];
-  }
-
-  // ─── 1차 스코어링 (v7 배치 데이터 기반) ─────────────────────
-  const preScored = candidates.map((c) => ({
-    candidate: c,
-    preScore: scoreStock(c.stock, {
-      earningsYield: null,
-      returnOnCapital: null,
-      operatingMargin: c.data.operatingMargin,
-      debtToEquity: c.data.debtToEquity,
-      marketCap: c.data.marketCap,
-      currency: c.data.currency,
-    }).totalScore,
-  }));
-  preScored.sort((a, b) => b.preScore - a.preScore);
-
-  // 상위 N개만 선별
-  const top = preScored.slice(0, ENRICH_TOP);
-
-  console.log(
-    `[MagicFormula] ${candidates.length} candidates → top ${top.length} selected`,
-  );
-
-  // ─── quoteSummary 보강 (상위 종목만) ─────────────────────────
-  const results: MFScreenResult[] = [];
-  onProgress?.({ phase: "enrich", done: 0, total: top.length });
-
-  for (let i = 0; i < top.length; i++) {
-    const c = top[i].candidate;
-    const mfData = await fetchMFData(c.stock.ticker);
-
-    if (mfData) {
-      results.push(scoreStock(c.stock, mfData));
-    } else {
-      results.push(scoreStock(c.stock, {
-        earningsYield: null,
-        returnOnCapital: null,
-        operatingMargin: c.data.operatingMargin,
-        debtToEquity: c.data.debtToEquity,
-        marketCap: c.data.marketCap,
-        currency: c.data.currency,
-      }));
-    }
-
-    onProgress?.({ phase: "enrich", done: i + 1, total: top.length });
-
-    if (i < top.length - 1) {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-    }
-  }
-
-  return results.sort((a, b) => b.totalScore - a.totalScore);
-}
+// ─── 포트폴리오·검색 스크리너 ──────────────────────────────────────────────
 
 /**
  * 주어진 티커 목록에 대해 Magic Formula 스코어링 실행.
@@ -267,7 +175,7 @@ export async function screenAllMF(
  */
 export async function screenByTickersMF(
   tickers: Array<{ ticker: string; name?: string }>,
-  onProgress?: (p: MFScreenProgress) => void,
+  onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void,
 ): Promise<MFScreenResult[]> {
   if (tickers.length === 0) return [];
 

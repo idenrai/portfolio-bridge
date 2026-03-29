@@ -310,7 +310,7 @@ export const ja: Translations = {
     "• 名言：「価値を見積もり、それより十分に安く買え。短期の株式市場は“ミスター・マーケット”に過ぎない」",
   lynch_tenbagger_title: "ピーター・リンチ テンバガー・スクリーナー",
   lynch_tenbagger_desc:
-    "各市場の主要銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
+    "保有銘柄や気になる銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
   lynch_criterion_peg: "PEGレシオ",
   lynch_criterion_eps: "EPS成長率",
   lynch_criterion_rev: "売上成長率",
@@ -320,18 +320,13 @@ export const ja: Translations = {
   lynch_no_data: "データなし",
   lynch_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
-  lynch_cap_range_hint: "時価総額 $300M–$30B 範囲 50候補 → 1次スコアリング → 上位10件詳細分析",
-  lynch_progress_fetch: "⏳ 銘柄検索中…",
   lynch_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
-  lynch_btn_screen: "🔍 スクリーニング",
-  lynch_phase_fetch: "📡 Yahoo Screener APIで小型・中型株を検索中…",
   lynch_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
   lynch_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   lynch_tenbagger_badge: "🚀 テンバガー候補",
-  lynch_initial_guide: "上のボタンを押してスクリーニングを開始してください。",
+  lynch_initial_guide: "ポートフォリオ分析またはティッカー検索でスクリーニングを開始してください。",
 
   // ─── Screener Common (mode tabs) ────────────────────────────────────────────
-  screener_mode_market: "市場スクリーニング",
   screener_mode_portfolio: "マイポートフォリオ",
   screener_mode_search: "ティッカー検索",
   screener_portfolio_desc: (count) => `ポートフォリオ内の株式/ETF ${count}銘柄を分析します。`,
@@ -351,15 +346,11 @@ export const ja: Translations = {
   mf_no_data: "データなし",
   mf_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
-  mf_cap_range_hint: "時価総額 $300M–$30B 範囲 50候補 → 1次スコアリング → 上位10件詳細分析",
-  mf_progress_fetch: "⏳ 銘柄検索中…",
   mf_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
-  mf_btn_screen: "🔍 スクリーニング",
-  mf_phase_fetch: "📡 Yahoo Screener APIで小型・中型株を検索中…",
   mf_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
   mf_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   mf_magic_badge: "🪄 マジック・フォーミュラ適合",
-  mf_initial_guide: "上のボタンを押してスクリーニングを開始してください。",
+  mf_initial_guide: "ポートフォリオ分析またはティッカー検索でスクリーニングを開始してください。",
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",
   settings_display_currency_desc:

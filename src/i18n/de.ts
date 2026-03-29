@@ -314,7 +314,7 @@ export const de: Translations = {
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Screener",
   lynch_tenbagger_desc:
-    "Bewertet wichtige Aktien aus jedem Markt anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Je höher der Score, desto größer das Tenbagger-Potenzial.",
+    "Bewertet Ihre Bestände oder beliebige Ticker anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Je höher der Score, desto größer das Tenbagger-Potenzial.",
   lynch_criterion_peg: "PEG-Verhältnis",
   lynch_criterion_eps: "EPS-Wachstum",
   lynch_criterion_rev: "Umsatzwachstum",
@@ -324,18 +324,13 @@ export const de: Translations = {
   lynch_no_data: "Keine Daten",
   lynch_disclaimer:
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
-  lynch_cap_range_hint: "$300M–$30B Marktkapitalisierung → 50 Kandidaten → 1. Bewertung → Top 10 detailliert",
-  lynch_progress_fetch: "⏳ Aktien werden gesucht…",
   lynch_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
-  lynch_btn_screen: "🔍 Screening",
-  lynch_phase_fetch: "📡 Klein-/Mittelkapitalisierte Aktien über Yahoo Screener API suchen…",
   lynch_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
   lynch_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   lynch_tenbagger_badge: "🚀 Tenbagger-Kandidat",
-  lynch_initial_guide: "Drücken Sie die Taste oben, um das Screening zu starten.",
+  lynch_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um das Screening zu starten.",
 
   // ─── Screener Common (mode tabs) ────────────────────────────────────────────
-  screener_mode_market: "Markt-Screening",
   screener_mode_portfolio: "Mein Portfolio",
   screener_mode_search: "Ticker-Suche",
   screener_portfolio_desc: (count) => `${count} Aktien/ETFs in Ihrem Portfolio analysieren.`,
@@ -355,15 +350,11 @@ export const de: Translations = {
   mf_no_data: "Keine Daten",
   mf_disclaimer:
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
-  mf_cap_range_hint: "$300M–$30B Marktkapitalisierung → 50 Kandidaten → 1. Bewertung → Top 10 detailliert",
-  mf_progress_fetch: "⏳ Aktien werden gesucht…",
   mf_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
-  mf_btn_screen: "🔍 Screening",
-  mf_phase_fetch: "📡 Klein-/Mittelkapitalisierte Aktien über Yahoo Screener API suchen…",
   mf_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
   mf_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   mf_magic_badge: "🪄 Magic-Formula-Kandidat",
-  mf_initial_guide: "Drücken Sie die Taste oben, um das Screening zu starten.",
+  mf_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um das Screening zu starten.",
 
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",

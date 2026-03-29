@@ -1,6 +1,5 @@
-import { fetchScreenerStocks, enrichFundamentals, type FundamentalsData, type ScreenerResult } from "./yahooFinance";
+import { enrichFundamentals, type FundamentalsData } from "./yahooFinance";
 import type { UniverseStock } from "./stockUniverse";
-import type { Market } from "@/types";
 
 import { approxToUSD } from "@/constants";
 
@@ -143,75 +142,7 @@ export function scoreStock(
   return { stock, fundamentals, criteria, totalScore };
 }
 
-// ─── 동적 스크리너 ─────────────────────────────────────────────────────────────
-
-export type ScreenPhase = "fetch" | "enrich";
-
-export interface ScreenProgress {
-  phase: ScreenPhase;
-  done: number;
-  total: number;
-}
-
-/** 후보 풀 크기 / 상세 분석 대상 수 */
-const CANDIDATE_POOL = 50;
-const ENRICH_TOP = 10;
-
-/**
- * 동적 스크리닝
- *
- * 1. Yahoo Finance Screener로 후보 50개 fetch (v7 배치 — 빠름)
- * 2. v7 데이터 기반 1차 스코어링 (API 호출 없음)
- * 3. 상위 10개만 선별 → quoteSummary로 상세 보강 (느림)
- * 4. 최종 점수 내림차순 정렬
- */
-export async function screenAll(
-  market: Market,
-  onProgress?: (p: ScreenProgress) => void,
-): Promise<LynchScreenResult[]> {
-
-  // ─── 후보 가져오기 ──────────────────────────────────────────
-  onProgress?.({ phase: "fetch", done: 0, total: 1 });
-
-  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, CANDIDATE_POOL);
-
-  onProgress?.({ phase: "fetch", done: 1, total: 1 });
-
-  if (candidates.length === 0) {
-    console.warn("[Lynch] Screener returned 0 candidates");
-    return [];
-  }
-
-  // ─── 1차 스코어링 (v7 배치 데이터 기반, API 호출 없음) ──────
-  const preScored: LynchScreenResult[] = candidates.map((c) =>
-    scoreStock(c.stock, c.data),
-  );
-  preScored.sort((a, b) => b.totalScore - a.totalScore);
-
-  // 상위 N개만 선별
-  const top = preScored.slice(0, ENRICH_TOP);
-
-  console.log(
-    `[Lynch] ${candidates.length} candidates → top ${top.length} selected (1st pass scores: ${top.map((r) => r.totalScore).join(", ")})`,
-  );
-
-  // ─── quoteSummary 보강 (상위 종목만) ─────────────────────────
-  onProgress?.({ phase: "enrich", done: 0, total: top.length });
-
-  for (let i = 0; i < top.length; i++) {
-    const r = top[i];
-    const enriched = await enrichFundamentals(r.stock.ticker, r.fundamentals);
-    top[i] = scoreStock(r.stock, enriched);
-
-    onProgress?.({ phase: "enrich", done: i + 1, total: top.length });
-
-    if (i < top.length - 1) {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-    }
-  }
-
-  return top.sort((a, b) => b.totalScore - a.totalScore);
-}
+// ─── 포트폴리오·검색 스크리너 ──────────────────────────────────────────────
 
 /**
  * 주어진 티커 목록에 대해 Lynch 스코어링 실행.
@@ -219,7 +150,7 @@ export async function screenAll(
  */
 export async function screenByTickers(
   tickers: Array<{ ticker: string; name?: string }>,
-  onProgress?: (p: ScreenProgress) => void,
+  onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void,
 ): Promise<LynchScreenResult[]> {
   if (tickers.length === 0) return [];
 

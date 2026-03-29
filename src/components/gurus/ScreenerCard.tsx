@@ -1,7 +1,6 @@
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
 import type { ScreenMode, ScreenerProgress, BaseScreenResult } from "@/hooks/useScreener";
-import type { Market } from "@/types";
 
 // ─── 컬러 테마 ─────────────────────────────────────────────────────────────────
 
@@ -45,20 +44,12 @@ const THEMES: Record<"green" | "violet", ThemeColors> = {
   },
 };
 
-// ─── 시장 옵션 ─────────────────────────────────────────────────────────────────
-
-const MARKET_OPTIONS: Market[] = ["KR", "US", "JP", "EU"];
-
 // ─── 텍스트 인터페이스 ──────────────────────────────────────────────────────────
 
 export interface ScreenerTexts {
   title: string;
   desc: string;
-  capRangeHint: string;
-  progressFetch: string;
   progressEnrich: (done: number, total: number) => string;
-  btnScreen: string;
-  phaseFetch: string;
   phaseEnrich: string;
   noResult: string;
   highScoreBadge: string;
@@ -79,8 +70,6 @@ interface ScreenerCardProps<CKey extends string> {
   // useScreener hook 결과
   mode: ScreenMode;
   setMode: (m: ScreenMode) => void;
-  market: Market;
-  setMarket: (m: Market) => void;
   results: BaseScreenResult[];
   loading: boolean;
   ran: boolean;
@@ -89,7 +78,6 @@ interface ScreenerCardProps<CKey extends string> {
   setSearchQuery: (q: string) => void;
   searchSuggestions: Array<{ ticker: string; name: string }>;
   isSearching: boolean;
-  run: () => void;
   runPortfolio: () => void;
   runSearch: (ticker: string, name?: string) => void;
   handleSearch: () => void;
@@ -162,21 +150,15 @@ function CriterionBadge<CKey extends string>({
 export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>) {
   const {
     theme, texts, criterionHints, criterionLabel, formatValue,
-    mode, setMode, market, setMarket,
+    mode, setMode,
     results, loading, ran, progress,
     searchQuery, setSearchQuery, searchSuggestions, isSearching,
-    run, runPortfolio, runSearch, handleSearch,
+    runPortfolio, runSearch, handleSearch,
     portfolioTickerCount,
   } = props;
 
   const t = useT();
   const colors = THEMES[theme];
-
-  const marketLabel = (m: Market) =>
-    m === "KR" ? `🇰🇷 ${t.market_kr}` :
-    m === "US" ? `🇺🇸 ${t.market_us}` :
-    m === "JP" ? `🇯🇵 ${t.market_jp}` :
-                 `🇪🇺 ${t.market_eu}`;
 
   return (
     <Card title={texts.title}>
@@ -184,9 +166,8 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
 
       {/* 모드 탭 */}
       <div className="flex gap-1.5 mb-3">
-        {(["portfolio", "market", "search"] as const).map((m) => {
+        {(["portfolio", "search"] as const).map((m) => {
           const label =
-            m === "market"    ? `📊 ${t.screener_mode_market}` :
             m === "portfolio" ? `💼 ${t.screener_mode_portfolio}` :
                                 `🔍 ${t.screener_mode_search}`;
           return (
@@ -202,37 +183,6 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
           );
         })}
       </div>
-
-      {/* ─── 시장 모드 ─── */}
-      {mode === "market" && (
-        <>
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            {MARKET_OPTIONS.map((m) => (
-              <button
-                key={m}
-                onClick={() => setMarket(m)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer ${
-                  market === m ? colors.tabActive : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                }`}
-              >
-                {marketLabel(m)}
-              </button>
-            ))}
-          </div>
-          <p className="text-[11px] text-slate-400 mb-2">{texts.capRangeHint}</p>
-          <button
-            onClick={run}
-            disabled={loading}
-            className={`mb-4 rounded-lg ${colors.btn} px-4 py-2 text-sm font-semibold text-white shadow-sm active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer`}
-          >
-            {loading
-              ? progress.phase === "fetch"
-                ? texts.progressFetch
-                : texts.progressEnrich(progress.done, progress.total)
-              : texts.btnScreen}
-          </button>
-        </>
-      )}
 
       {/* ─── 포트폴리오 모드 ─── */}
       {mode === "portfolio" && (
@@ -293,13 +243,11 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
       {loading && (
         <div className="mb-4">
           <p className="text-xs text-slate-400 mb-1 animate-pulse">
-            {progress.phase === "fetch" ? texts.phaseFetch : texts.phaseEnrich}
+            {texts.phaseEnrich}
           </p>
           <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
             <div
-              className={`h-full rounded-full transition-all duration-300 ${
-                progress.phase === "enrich" ? colors.progressEnrich : "bg-blue-500"
-              }`}
+              className={`h-full rounded-full transition-all duration-300 ${colors.progressEnrich}`}
               style={{
                 width: progress.total > 0
                   ? `${Math.round((progress.done / progress.total) * 100)}%`
@@ -307,11 +255,9 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
               }}
             />
           </div>
-          {progress.phase === "enrich" && (
-            <p className="text-[10px] text-slate-300 mt-0.5 text-right">
-              {progress.done} / {progress.total}
-            </p>
-          )}
+          <p className="text-[10px] text-slate-300 mt-0.5 text-right">
+            {progress.done} / {progress.total}
+          </p>
         </div>
       )}
 

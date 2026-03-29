@@ -309,7 +309,7 @@ export const ko: Translations = {
 
   lynch_tenbagger_title: "피터 린치 10루타 후보 스크리너",
   lynch_tenbagger_desc:
-    "각 시장의 주요 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. 100점에 가까울수록 10루타 가능성이 높은 종목입니다.",
+    "보유 종목이나 관심 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. 100점에 가까울수록 10루타 가능성이 높은 종목입니다.",
   lynch_criterion_peg: "PEG 비율",
   lynch_criterion_eps: "EPS 성장률",
   lynch_criterion_rev: "매출 성장률",
@@ -319,18 +319,13 @@ export const ko: Translations = {
   lynch_no_data: "데이터 없음",
   lynch_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  lynch_cap_range_hint: "시가총액 $300M–$30B 범위 50개 후보 → 1차 스코어링 → 상위 10개 상세 분석",
-  lynch_progress_fetch: "⏳ 종목 검색 중…",
   lynch_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
-  lynch_btn_screen: "🔍 스크리닝",
-  lynch_phase_fetch: "📡 Yahoo Screener API에서 소/중형주 검색 중…",
   lynch_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
   lynch_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   lynch_tenbagger_badge: "🚀 10루타 후보",
-  lynch_initial_guide: "위 버튼을 눌러 스크리닝을 시작하세요.",
+  lynch_initial_guide: "포트폴리오 분석 또는 티커 검색으로 스크리닝을 시작하세요.",
 
   // ─── Screener Common (mode tabs) ────────────────────────────────────────────
-  screener_mode_market: "시장 스크리닝",
   screener_mode_portfolio: "내 포트폴리오",
   screener_mode_search: "티커 검색",
   screener_portfolio_desc: (count) => `포트폴리오 내 주식/ETF ${count}종목을 분석합니다.`,
@@ -350,15 +345,11 @@ export const ko: Translations = {
   mf_no_data: "데이터 없음",
   mf_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  mf_cap_range_hint: "시가총액 $300M–$30B 범위 50개 후보 → 1차 스코어링 → 상위 10개 상세 분석",
-  mf_progress_fetch: "⏳ 종목 검색 중…",
   mf_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
-  mf_btn_screen: "🔍 스크리닝",
-  mf_phase_fetch: "📡 Yahoo Screener API에서 소/중형주 검색 중…",
   mf_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
   mf_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   mf_magic_badge: "🪄 마법 공식 적합",
-  mf_initial_guide: "위 버튼을 눌러 스크리닝을 시작하세요.",
+  mf_initial_guide: "포트폴리오 분석 또는 티커 검색으로 스크리닝을 시작하세요.",
 
   settings_title: "설정",
   settings_display_currency_title: "표시 화폐",

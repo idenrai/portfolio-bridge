@@ -5,5 +5,3 @@ export { searchTicker } from "./yahooSearch";
 export { fetchCurrentPrice } from "./yahooQuote";
 export { fetchExchangeRate, fetchAllExchangeRates } from "./yahooFx";
 export { fetchFundamentals, enrichFundamentals, fetchBatchQuote } from "./yahooFundamentals";
-export type { ScreenerResult } from "./yahooScreener";
-export { fetchScreenerStocks } from "./yahooScreener";
