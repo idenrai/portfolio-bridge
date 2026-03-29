@@ -234,6 +234,15 @@ export interface Translations {
   lynch_tenbagger_badge: string;
   lynch_initial_guide: string;
 
+  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  screener_mode_market: string;
+  screener_mode_portfolio: string;
+  screener_mode_search: string;
+  screener_portfolio_desc: (count: number) => string;
+  screener_btn_portfolio: string;
+  screener_btn_search: string;
+  screener_search_placeholder: string;
+
   // ─── Magic Formula Screener ─────────────────────────────────────────────────
   mf_title: string;
   mf_desc: string;

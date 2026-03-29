@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
-import { screenAllMF, type MFScreenResult, type MFCriterionKey, type MFScreenProgress } from "@/utils/magicFormulaScreener";
+import { screenAllMF, screenByTickersMF, type MFScreenResult, type MFCriterionKey, type MFScreenProgress } from "@/utils/magicFormulaScreener";
+import { searchTicker } from "@/utils/yahooFinance";
+import { useAssetStore } from "@/stores";
 import type { Market } from "@/types";
 
 // ─── 상수 ─────────────────────────────────────────────────────────────────────
@@ -91,15 +93,27 @@ function formatValue(key: MFCriterionKey, value: number): string {
   return ` ${(value * 100).toFixed(1)}%`;
 }
 
+// ─── 모드 타입 ─────────────────────────────────────────────────────────────
+
+type ScreenMode = "market" | "portfolio" | "search";
+
 // ─── 메인 컴포넌트 ─────────────────────────────────────────────────────────────
 
 export function MagicFormulaCard() {
   const t = useT();
+  const assets = useAssetStore((s) => s.assets);
+
+  const [mode, setMode] = useState<ScreenMode>("market");
   const [market, setMarket] = useState<Market>("US");
   const [results, setResults] = useState<MFScreenResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [ran, setRan] = useState(false);
   const [progress, setProgress] = useState<MFScreenProgress>({ phase: "fetch", done: 0, total: 0 });
+
+  // 티커 검색
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState<Array<{ ticker: string; name: string }>>([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   const run = useCallback(async () => {
     setLoading(true);
@@ -116,11 +130,60 @@ export function MagicFormulaCard() {
     }
   }, [market]);
 
+  const runPortfolio = useCallback(async () => {
+    const stockAssets = assets.filter((a) => a.ticker && (a.type === "stock" || a.type === "etf"));
+    if (stockAssets.length === 0) return;
+
+    setLoading(true);
+    setRan(false);
+    setProgress({ phase: "enrich", done: 0, total: stockAssets.length });
+    try {
+      const tickers = stockAssets.map((a) => ({ ticker: a.ticker!, name: a.name }));
+      const res = await screenByTickersMF(tickers, (p) => setProgress(p));
+      setResults(res);
+    } finally {
+      setLoading(false);
+      setRan(true);
+    }
+  }, [assets]);
+
+  const runSearch = useCallback(async (ticker: string, name?: string) => {
+    setLoading(true);
+    setRan(false);
+    setProgress({ phase: "enrich", done: 0, total: 1 });
+    setSearchSuggestions([]);
+    try {
+      const res = await screenByTickersMF([{ ticker, name }], (p) => setProgress(p));
+      setResults(res);
+    } finally {
+      setLoading(false);
+      setRan(true);
+    }
+  }, []);
+
+  const handleSearch = useCallback(async () => {
+    const q = searchQuery.trim();
+    if (!q) return;
+    setIsSearching(true);
+    try {
+      const items = await searchTicker(q);
+      if (items.length === 1) {
+        await runSearch(items[0].ticker, items[0].name);
+      } else if (items.length > 1) {
+        setSearchSuggestions(items.map((i) => ({ ticker: i.ticker, name: i.name })));
+      }
+    } finally {
+      setIsSearching(false);
+    }
+  }, [searchQuery, runSearch]);
+
+  // 모드·시장 변경 시 결과 초기화
   useEffect(() => {
     setResults([]);
     setRan(false);
     setProgress({ phase: "fetch", done: 0, total: 0 });
-  }, [market]);
+    setSearchSuggestions([]);
+  }, [mode, market]);
 
   const criterionLabel = (key: MFCriterionKey): string => {
     const map: Record<MFCriterionKey, string> = {
@@ -133,24 +196,25 @@ export function MagicFormulaCard() {
     return map[key];
   };
 
+  const portfolioTickers = assets.filter((a) => a.ticker && (a.type === "stock" || a.type === "etf"));
+
   return (
     <Card title={t.mf_title}>
       <p className="text-xs text-slate-500 mb-3 leading-relaxed">{t.mf_desc}</p>
 
-      {/* 시장 필터 탭 */}
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {MARKET_OPTIONS.map((m) => {
+      {/* 모드 탭 */}
+      <div className="flex gap-1.5 mb-3">
+        {(["market", "portfolio", "search"] as const).map((m) => {
           const label =
-            m.value === "KR"  ? `🇰🇷 ${t.market_kr}` :
-            m.value === "US"  ? `🇺🇸 ${t.market_us}` :
-            m.value === "JP"  ? `🇯🇵 ${t.market_jp}` :
-                                `🇪🇺 ${t.market_eu}`;
+            m === "market"    ? `📊 ${t.screener_mode_market}` :
+            m === "portfolio" ? `💼 ${t.screener_mode_portfolio}` :
+                                `🔍 ${t.screener_mode_search}`;
           return (
             <button
-              key={m.value}
-              onClick={() => setMarket(m.value)}
+              key={m}
+              onClick={() => setMode(m)}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer ${
-                market === m.value
+                mode === m
                   ? "bg-violet-600 text-white"
                   : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
@@ -161,22 +225,100 @@ export function MagicFormulaCard() {
         })}
       </div>
 
-      <p className="text-[11px] text-slate-400 mb-2">
-        {t.mf_cap_range_hint}
-      </p>
+      {/* 시장 모드 */}
+      {mode === "market" && (
+        <>
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {MARKET_OPTIONS.map((m) => {
+              const label =
+                m.value === "KR"  ? `🇰🇷 ${t.market_kr}` :
+                m.value === "US"  ? `🇺🇸 ${t.market_us}` :
+                m.value === "JP"  ? `🇯🇵 ${t.market_jp}` :
+                                    `🇪🇺 ${t.market_eu}`;
+              return (
+                <button
+                  key={m.value}
+                  onClick={() => setMarket(m.value)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+                    market === m.value
+                      ? "bg-violet-600 text-white"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+          <p className="text-[11px] text-slate-400 mb-2">{t.mf_cap_range_hint}</p>
+          <button
+            onClick={run}
+            disabled={loading}
+            className="mb-4 rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-700 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {loading
+              ? progress.phase === "fetch"
+                ? t.mf_progress_fetch
+                : t.mf_progress_enrich(progress.done, progress.total)
+              : t.mf_btn_screen}
+          </button>
+        </>
+      )}
 
-      {/* 스크리닝 실행 버튼 */}
-      <button
-        onClick={run}
-        disabled={loading}
-        className="mb-4 rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-700 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-      >
-        {loading
-          ? progress.phase === "fetch"
-            ? t.mf_progress_fetch
-            : t.mf_progress_enrich(progress.done, progress.total)
-          : t.mf_btn_screen}
-      </button>
+      {/* 포트폴리오 모드 */}
+      {mode === "portfolio" && (
+        <>
+          <p className="text-[11px] text-slate-400 mb-2">
+            {t.screener_portfolio_desc(portfolioTickers.length)}
+          </p>
+          <button
+            onClick={runPortfolio}
+            disabled={loading || portfolioTickers.length === 0}
+            className="mb-4 rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-700 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {loading
+              ? t.mf_progress_enrich(progress.done, progress.total)
+              : t.screener_btn_portfolio}
+          </button>
+        </>
+      )}
+
+      {/* 검색 모드 */}
+      {mode === "search" && (
+        <>
+          <div className="flex gap-2 mb-3">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
+              placeholder={t.screener_search_placeholder}
+              className="flex-1 rounded-lg border border-slate-200 px-3 py-1.5 text-sm outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-200"
+            />
+            <button
+              onClick={handleSearch}
+              disabled={loading || isSearching || !searchQuery.trim()}
+              className="rounded-lg bg-violet-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-700 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            >
+              {isSearching ? "..." : t.screener_btn_search}
+            </button>
+          </div>
+          {searchSuggestions.length > 0 && (
+            <div className="mb-3 rounded-lg border border-slate-200 divide-y divide-slate-100 max-h-48 overflow-y-auto">
+              {searchSuggestions.map((s) => (
+                <button
+                  key={s.ticker}
+                  onClick={() => runSearch(s.ticker, s.name)}
+                  className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-violet-50 transition-colors cursor-pointer"
+                >
+                  <span className="text-xs font-semibold text-slate-700">{s.ticker}</span>
+                  <span className="text-xs text-slate-400 truncate">{s.name}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </>
+      )}
 
       {/* 로딩 — 진행률 바 */}
       {loading && (

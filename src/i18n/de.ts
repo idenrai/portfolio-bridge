@@ -337,6 +337,15 @@ export const de: Translations = {
   lynch_tenbagger_badge: "🚀 Tenbagger-Kandidat",
   lynch_initial_guide: "Drücken Sie die Taste oben, um das Screening zu starten.",
 
+  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  screener_mode_market: "Markt-Screening",
+  screener_mode_portfolio: "Mein Portfolio",
+  screener_mode_search: "Ticker-Suche",
+  screener_portfolio_desc: (count) => `${count} Aktien/ETFs in Ihrem Portfolio analysieren.`,
+  screener_btn_portfolio: "Portfolio analysieren",
+  screener_btn_search: "Analysieren",
+  screener_search_placeholder: "Ticker oder Aktienname eingeben (z.B. AAPL, Siemens)",
+
   // ─── Magic Formula Screener ─────────────────────────────────────────────────
   mf_title: "Joel Greenblatt Magic-Formula-Screener",
   mf_desc:

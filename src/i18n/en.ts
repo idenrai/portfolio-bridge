@@ -333,6 +333,15 @@ export const en: Translations = {
   lynch_tenbagger_badge: "🚀 Tenbagger Candidate",
   lynch_initial_guide: "Press the button above to start screening.",
 
+  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  screener_mode_market: "Market Screening",
+  screener_mode_portfolio: "My Portfolio",
+  screener_mode_search: "Ticker Search",
+  screener_portfolio_desc: (count) => `Analyze ${count} stock/ETF holdings in your portfolio.`,
+  screener_btn_portfolio: "Analyze Portfolio",
+  screener_btn_search: "Analyze",
+  screener_search_placeholder: "Enter ticker or stock name (e.g. AAPL, Tesla)",
+
   // ─── Magic Formula Screener ─────────────────────────────────────────────────
   mf_title: "Joel Greenblatt Magic Formula Screener",
   mf_desc:

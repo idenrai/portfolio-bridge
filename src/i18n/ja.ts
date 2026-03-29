@@ -333,6 +333,15 @@ export const ja: Translations = {
   lynch_tenbagger_badge: "🚀 テンバガー候補",
   lynch_initial_guide: "上のボタンを押してスクリーニングを開始してください。",
 
+  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  screener_mode_market: "市場スクリーニング",
+  screener_mode_portfolio: "マイポートフォリオ",
+  screener_mode_search: "ティッカー検索",
+  screener_portfolio_desc: (count) => `ポートフォリオ内の株式/ETF ${count}銘柄を分析します。`,
+  screener_btn_portfolio: "ポートフォリオ分析",
+  screener_btn_search: "分析",
+  screener_search_placeholder: "ティッカーまたは銘柄名を入力（例：AAPL、トヨタ）",
+
   // ─── Magic Formula Screener ─────────────────────────────────────────────────
   mf_title: "ジョエル・グリーンブラット マジック・フォーミュラ・スクリーナー",
   mf_desc:

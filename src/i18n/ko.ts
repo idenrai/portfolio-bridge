@@ -332,6 +332,15 @@ export const ko: Translations = {
   lynch_tenbagger_badge: "🚀 10루타 후보",
   lynch_initial_guide: "위 버튼을 눌러 스크리닝을 시작하세요.",
 
+  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  screener_mode_market: "시장 스크리닝",
+  screener_mode_portfolio: "내 포트폴리오",
+  screener_mode_search: "티커 검색",
+  screener_portfolio_desc: (count) => `포트폴리오 내 주식/ETF ${count}종목을 분석합니다.`,
+  screener_btn_portfolio: "포트폴리오 분석",
+  screener_btn_search: "분석",
+  screener_search_placeholder: "티커 또는 종목명 입력 (예: AAPL, 삼성전자)",
+
   // ─── Magic Formula Screener ─────────────────────────────────────────────────
   mf_title: "조엘 그린블라트 마법 공식 스크리너",
   mf_desc:

@@ -230,3 +230,45 @@ export async function screenAllMF(
 
   return results.sort((a, b) => b.totalScore - a.totalScore);
 }
+
+/**
+ * 주어진 티커 목록에 대해 Magic Formula 스코어링 실행.
+ * 포트폴리오 스크리닝 / 단일 티커 검색에 사용.
+ */
+export async function screenByTickersMF(
+  tickers: Array<{ ticker: string; name?: string }>,
+  onProgress?: (p: MFScreenProgress) => void,
+): Promise<MFScreenResult[]> {
+  if (tickers.length === 0) return [];
+
+  onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
+
+  const results: MFScreenResult[] = [];
+
+  for (let i = 0; i < tickers.length; i++) {
+    const { ticker, name } = tickers[i];
+    const mfData = await fetchMFData(ticker);
+
+    results.push(
+      scoreStock(
+        { ticker, name: name ?? ticker, market: "OTHER" },
+        mfData ?? {
+          earningsYield: null,
+          returnOnCapital: null,
+          operatingMargin: null,
+          debtToEquity: null,
+          marketCap: null,
+          currency: null,
+        },
+      ),
+    );
+
+    onProgress?.({ phase: "enrich", done: i + 1, total: tickers.length });
+
+    if (i < tickers.length - 1) {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+    }
+  }
+
+  return results.sort((a, b) => b.totalScore - a.totalScore);
+}
