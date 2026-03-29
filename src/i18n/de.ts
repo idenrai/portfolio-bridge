@@ -338,6 +338,29 @@ export const de: Translations = {
   lynch_tenbagger_badge: "🚀 Tenbagger-Kandidat",
   lynch_initial_guide: "Drücken Sie die Taste oben, um das Screening zu starten.",
 
+  // ─── Magic Formula Screener ─────────────────────────────────────────────────
+  mf_title: "Joel Greenblatt Magic-Formula-Screener",
+  mf_desc:
+    "Screent Aktien mit hoher Gewinnrendite und hoher Kapitalrendite — die zwei Säulen von Greenblatts Magic Formula. Je höher der Score, desto besser.",
+  mf_col_score: "Magic-Score",
+  mf_criterion_ey: "Gewinnrendite",
+  mf_criterion_roc: "Kapitalrendite",
+  mf_criterion_margin: "Betriebsmarge",
+  mf_criterion_debt: "Verschuldungsgrad (D/E)",
+  mf_criterion_cap: "Marktkapitalisierung",
+  mf_no_data: "Keine Daten",
+  mf_disclaimer:
+    "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
+  mf_cap_range_hint: "Dynamische Suche im Marktkapitalisierungsbereich $300M–$30B (max. 10)",
+  mf_progress_fetch: "⏳ Aktien werden gesucht…",
+  mf_progress_enrich: (done, total) => `⏳ Top-${total}-Aktien werden analysiert (${done}/${total})`,
+  mf_btn_screen: "🔍 Screening",
+  mf_phase_fetch: "📡 Klein-/Mittelkapitalisierte Aktien über Yahoo Screener API suchen…",
+  mf_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Top-Aktien ergänzen…",
+  mf_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  mf_magic_badge: "🪄 Magic-Formula-Kandidat",
+  mf_initial_guide: "Drücken Sie die Taste oben, um das Screening zu starten.",
+
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",
   settings_display_currency_desc:

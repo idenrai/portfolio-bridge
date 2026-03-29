@@ -334,6 +334,29 @@ export const en: Translations = {
   lynch_tenbagger_badge: "🚀 Tenbagger Candidate",
   lynch_initial_guide: "Press the button above to start screening.",
 
+  // ─── Magic Formula Screener ─────────────────────────────────────────────────
+  mf_title: "Joel Greenblatt Magic Formula Screener",
+  mf_desc:
+    "Screens stocks with high earnings yield and high return on capital — the two pillars of Greenblatt's Magic Formula. The higher the score, the better the fit.",
+  mf_col_score: "Magic Score",
+  mf_criterion_ey: "Earnings Yield",
+  mf_criterion_roc: "Return on Capital",
+  mf_criterion_margin: "Operating Margin",
+  mf_criterion_debt: "Debt/Equity",
+  mf_criterion_cap: "Market Cap",
+  mf_no_data: "No data",
+  mf_disclaimer:
+    "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
+  mf_cap_range_hint: "Dynamic search in $300M–$30B market cap range (up to 10)",
+  mf_progress_fetch: "⏳ Searching stocks…",
+  mf_progress_enrich: (done, total) => `⏳ Analyzing top ${total} stocks (${done}/${total})`,
+  mf_btn_screen: "🔍 Screening",
+  mf_phase_fetch: "📡 Searching small/mid-cap stocks via Yahoo Screener API…",
+  mf_phase_enrich: "🔍 Enriching top stocks with detailed fundamentals…",
+  mf_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  mf_magic_badge: "🪄 Magic Formula Pick",
+  mf_initial_guide: "Press the button above to start screening.",
+
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",
   settings_display_currency_desc:

@@ -333,6 +333,29 @@ export const ja: Translations = {
   lynch_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   lynch_tenbagger_badge: "🚀 テンバガー候補",
   lynch_initial_guide: "上のボタンを押してスクリーニングを開始してください。",
+
+  // ─── Magic Formula Screener ─────────────────────────────────────────────────
+  mf_title: "ジョエル・グリーンブラット マジック・フォーミュラ・スクリーナー",
+  mf_desc:
+    "高い益回りと高い資本収益率を兼ね備えた銘柄をスクリーニングします。100点に近いほどマジック・フォーミュラに適合する銘柄です。",
+  mf_col_score: "Magicスコア",
+  mf_criterion_ey: "益回り",
+  mf_criterion_roc: "資本収益率",
+  mf_criterion_margin: "営業利益率",
+  mf_criterion_debt: "負債比率 (D/E)",
+  mf_criterion_cap: "時価総額",
+  mf_no_data: "データなし",
+  mf_disclaimer:
+    "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
+  mf_cap_range_hint: "時価総額 $300M–$30B の範囲で動的検索（最大10件）",
+  mf_progress_fetch: "⏳ 銘柄検索中…",
+  mf_progress_enrich: (done, total) => `⏳ 上位${total}銘柄を詳細分析中 (${done}/${total})`,
+  mf_btn_screen: "🔍 スクリーニング",
+  mf_phase_fetch: "📡 Yahoo Screener APIで小型・中型株を検索中…",
+  mf_phase_enrich: "🔍 上位銘柄の詳細な財務データを補強中…",
+  mf_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  mf_magic_badge: "🪄 マジック・フォーミュラ適合",
+  mf_initial_guide: "上のボタンを押してスクリーニングを開始してください。",
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",
   settings_display_currency_desc:

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/common";
 import { LynchTenBaggerCard } from "@/components/gurus/LynchTenBaggerCard";
+import { MagicFormulaCard } from "@/components/gurus/MagicFormulaCard";
 import {
   PieChart,
   Pie,
@@ -312,6 +313,11 @@ export function GurusPage() {
           {/* 피터 린치 전용: 10루타 후보 스크리너 */}
           {selectedGuru.id === "lynch" && (
             <LynchTenBaggerCard />
+          )}
+
+          {/* 그린블라트 전용: 마법 공식 스크리너 */}
+          {selectedGuru.id === "greenblatt" && (
+            <MagicFormulaCard />
           )}
         </>
       )}

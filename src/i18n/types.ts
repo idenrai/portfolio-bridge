@@ -235,6 +235,27 @@ export interface Translations {
   lynch_tenbagger_badge: string;
   lynch_initial_guide: string;
 
+  // ─── Magic Formula Screener ─────────────────────────────────────────────────
+  mf_title: string;
+  mf_desc: string;
+  mf_col_score: string;
+  mf_criterion_ey: string;
+  mf_criterion_roc: string;
+  mf_criterion_margin: string;
+  mf_criterion_debt: string;
+  mf_criterion_cap: string;
+  mf_no_data: string;
+  mf_disclaimer: string;
+  mf_cap_range_hint: string;
+  mf_progress_fetch: string;
+  mf_progress_enrich: (done: number, total: number) => string;
+  mf_btn_screen: string;
+  mf_phase_fetch: string;
+  mf_phase_enrich: string;
+  mf_no_result: string;
+  mf_magic_badge: string;
+  mf_initial_guide: string;
+
   // ─── Settings Page ─────────────────────────────────────────────────────────
   settings_title: string;
   settings_display_currency_title: string;
