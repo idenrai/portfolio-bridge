@@ -54,11 +54,22 @@ async function fetchGrahamData(symbol: string): Promise<GrahamRawData | null> {
         ?.quoteSummary?.result?.[0] as Record<string, unknown> | undefined;
       if (!result) continue;
 
+      const ks = (result.defaultKeyStatistics ?? {}) as Record<string, RawVal>;
       const sd = (result.summaryDetail ?? {}) as Record<string, RawVal>;
       const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
 
       const peRatio = sd.trailingPE?.raw ?? null;
-      const pbRatio = sd.priceToBook?.raw ?? null;
+
+      // P/B: summaryDetail.priceToBook 우선, 없으면 currentPrice / bookValue 폴백
+      let pbRatio = sd.priceToBook?.raw ?? null;
+      if (pbRatio === null) {
+        const bookValue = ks.bookValue?.raw ?? null;
+        const price = (fd.currentPrice as RawVal | undefined)?.raw ?? sd.previousClose?.raw ?? null;
+        if (bookValue !== null && bookValue > 0 && price !== null && price > 0) {
+          pbRatio = price / bookValue;
+        }
+      }
+
       const currentRatio = (fd.currentRatio as RawVal | undefined)?.raw ?? null;
       const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
       const dividendYield = sd.dividendYield?.raw ?? null;

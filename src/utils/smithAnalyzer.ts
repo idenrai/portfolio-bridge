@@ -38,9 +38,11 @@ interface SmithRawData {
 
 type RawVal = { raw?: number };
 
+type CfStmt = { freeCashFlow?: RawVal; totalCashFromOperatingActivities?: RawVal };
+
 async function fetchSmithData(symbol: string): Promise<SmithRawData | null> {
   const encoded = encodeURIComponent(symbol);
-  const modules = "defaultKeyStatistics,summaryDetail,financialData";
+  const modules = "defaultKeyStatistics,summaryDetail,financialData,cashflowStatementHistory";
 
   for (const ver of ["v10", "v11"] as const) {
     try {
@@ -58,10 +60,26 @@ async function fetchSmithData(symbol: string): Promise<SmithRawData | null> {
 
       const returnOnEquity = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
       const operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
-      const freeCashflow = (fd.freeCashflow as RawVal | undefined)?.raw ?? null;
-      const operatingCashflow = (fd.operatingCashflow as RawVal | undefined)?.raw ?? null;
+      let freeCashflow = (fd.freeCashflow as RawVal | undefined)?.raw ?? null;
+      let operatingCashflow = (fd.operatingCashflow as RawVal | undefined)?.raw ?? null;
       const revenueGrowth = (fd.revenueGrowth as RawVal | undefined)?.raw ?? null;
       const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
+
+      // FCF/OperatingCashflow 폴백: cashflowStatementHistory 최신 연도
+      if (freeCashflow === null || operatingCashflow === null) {
+        const cfStmts = (result.cashflowStatementHistory as
+          { cashflowStatements?: CfStmt[] } | undefined
+        )?.cashflowStatements;
+        if (cfStmts && cfStmts.length > 0) {
+          const latest = cfStmts[0];
+          if (freeCashflow === null) {
+            freeCashflow = latest.freeCashFlow?.raw ?? null;
+          }
+          if (operatingCashflow === null) {
+            operatingCashflow = latest.totalCashFromOperatingActivities?.raw ?? null;
+          }
+        }
+      }
 
       return { returnOnEquity, operatingMargin, freeCashflow, operatingCashflow, revenueGrowth, debtToEquity };
     } catch {

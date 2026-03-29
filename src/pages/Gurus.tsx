@@ -326,7 +326,7 @@ export function GurusPage() {
             <GrahamDefensiveCard />
           )}
 
-          {/* 테리 스미스 전용: 퀸리티 컴파운더 채점기 */}
+          {/* 테리 스미스 전용: 퀄리티 컴파운더 채점기 */}
           {selectedGuru.id === "smith" && (
             <SmithQualityCard />
           )}        </>

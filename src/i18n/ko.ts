@@ -371,9 +371,9 @@ export const ko: Translations = {
   graham_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   // Smith
-  smith_analyzer_title: "테리 스미스 퀸리티 컴파운더 채점기",
+  smith_analyzer_title: "테리 스미스 퀄리티 컴파운더 채점기",
   smith_analyzer_desc:
-    "보유 주식 또는 임의 티커를 스미스의 퀸리티 컴파운더(ROE, 영업이익률, FCF 전환율, 매출성장, 부채) 기준으로 채점합니다.",
+    "보유 주식 또는 임의 티커를 스미스의 퀄리티 컴파운더(ROE, 영업이익률, FCF 전환율, 매출성장, 부채) 기준으로 채점합니다.",
   smith_criterion_roe: "ROE",
   smith_criterion_margin: "영업이익률",
   smith_criterion_fcf: "FCF 전환율",
@@ -385,7 +385,7 @@ export const ko: Translations = {
   smith_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
   smith_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
   smith_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
-  smith_quality_badge: "✨ 퀸리티 컴파운더",
+  smith_quality_badge: "✨ 퀄리티 컴파운더",
   smith_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   settings_title: "설정",
