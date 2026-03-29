@@ -182,9 +182,17 @@ function scoreStock(stock: UniverseStock, data: MFRawData): MFScreenResult {
 /**
  * Magic Formula 스크리닝
  *
- * 1. Yahoo Finance Screener로 후보 10개 fetch
- * 2. 각 종목 quoteSummary로 EY/ROC 등 보강
- * 3. 점수 내림차순 정렬 후 반환
+/** 후보 풀 크기 / 상세 분석 대상 수 */
+const CANDIDATE_POOL = 50;
+const ENRICH_TOP = 10;
+
+/**
+ * Magic Formula 스크리닝
+ *
+ * 1. Yahoo Finance Screener로 후보 50개 fetch (v7 배치 — 빠름)
+ * 2. v7 데이터 기반 1차 스코어링 (시가총액 등)
+ * 3. 상위 10개만 선별 → quoteSummary로 EY/ROC 보강 (느림)
+ * 4. 최종 점수 내림차순 정렬
  */
 export async function screenAllMF(
   market: Market,
@@ -192,7 +200,7 @@ export async function screenAllMF(
 ): Promise<MFScreenResult[]> {
   onProgress?.({ phase: "fetch", done: 0, total: 1 });
 
-  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, 10);
+  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, CANDIDATE_POOL);
 
   onProgress?.({ phase: "fetch", done: 1, total: 1 });
 
@@ -201,11 +209,33 @@ export async function screenAllMF(
     return [];
   }
 
-  const results: MFScreenResult[] = [];
-  onProgress?.({ phase: "enrich", done: 0, total: candidates.length });
+  // ─── 1차 스코어링 (v7 배치 데이터 기반) ─────────────────────
+  const preScored = candidates.map((c) => ({
+    candidate: c,
+    preScore: scoreStock(c.stock, {
+      earningsYield: null,
+      returnOnCapital: null,
+      operatingMargin: c.data.operatingMargin,
+      debtToEquity: c.data.debtToEquity,
+      marketCap: c.data.marketCap,
+      currency: c.data.currency,
+    }).totalScore,
+  }));
+  preScored.sort((a, b) => b.preScore - a.preScore);
 
-  for (let i = 0; i < candidates.length; i++) {
-    const c = candidates[i];
+  // 상위 N개만 선별
+  const top = preScored.slice(0, ENRICH_TOP);
+
+  console.log(
+    `[MagicFormula] ${candidates.length} candidates → top ${top.length} selected`,
+  );
+
+  // ─── quoteSummary 보강 (상위 종목만) ─────────────────────────
+  const results: MFScreenResult[] = [];
+  onProgress?.({ phase: "enrich", done: 0, total: top.length });
+
+  for (let i = 0; i < top.length; i++) {
+    const c = top[i].candidate;
     const mfData = await fetchMFData(c.stock.ticker);
 
     if (mfData) {
@@ -221,9 +251,9 @@ export async function screenAllMF(
       }));
     }
 
-    onProgress?.({ phase: "enrich", done: i + 1, total: candidates.length });
+    onProgress?.({ phase: "enrich", done: i + 1, total: top.length });
 
-    if (i < candidates.length - 1) {
+    if (i < top.length - 1) {
       await new Promise(resolve => setTimeout(resolve, 1500));
     }
   }

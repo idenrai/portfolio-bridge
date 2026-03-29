@@ -320,7 +320,7 @@ export const ja: Translations = {
   lynch_no_data: "データなし",
   lynch_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
-  lynch_cap_range_hint: "時価総額 $300M–$30B の範囲で動的検索（最大10件）",
+  lynch_cap_range_hint: "時価総額 $300M–$30B 範囲 50候補 → 1次スコアリング → 上位10件詳細分析",
   lynch_progress_fetch: "⏳ 銘柄検索中…",
   lynch_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
   lynch_btn_screen: "🔍 スクリーニング",
@@ -351,7 +351,7 @@ export const ja: Translations = {
   mf_no_data: "データなし",
   mf_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
-  mf_cap_range_hint: "時価総額 $300M–$30B の範囲で動的検索（最大10件）",
+  mf_cap_range_hint: "時価総額 $300M–$30B 範囲 50候補 → 1次スコアリング → 上位10件詳細分析",
   mf_progress_fetch: "⏳ 銘柄検索中…",
   mf_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
   mf_btn_screen: "🔍 スクリーニング",

@@ -158,6 +158,7 @@ async function fetchQuoteBatch(
  */
 async function fetchMarketStocks(
   targetMarket: Market,
+  targetCount: number,
 ): Promise<ScreenerResult[]> {
   const seen = new Set<string>();
   const results: ScreenerResult[] = [];
@@ -203,8 +204,8 @@ async function fetchMarketStocks(
     };
   };
 
-  // 1차: POST Screener API
-  const screenerSymbols = await fetchScreenerByPost(targetMarket, 100);
+  // 1차: POST Screener API — 풀 확보를 위해 넉넉히 요청
+  const screenerSymbols = await fetchScreenerByPost(targetMarket, Math.max(200, targetCount * 4));
   if (screenerSymbols.length > 0) {
     await fetchQuoteBatch(screenerSymbols, mapQuote, results);
     console.log(
@@ -213,7 +214,7 @@ async function fetchMarketStocks(
   }
 
   // 2차: Trending API fallback (결과 부족 시)
-  if (results.length < 10) {
+  if (results.length < targetCount) {
     const regions = TRENDING_REGIONS[targetMarket];
     for (const region of regions) {
       const tickers = await fetchTrendingTickers(region, 50);
@@ -240,9 +241,9 @@ async function fetchMarketStocks(
  */
 export async function fetchScreenerStocks(
   market: Market,
-  count = 30,
+  count = 50,
 ): Promise<ScreenerResult[]> {
-  const results = await fetchMarketStocks(market);
-  console.log(`[Screener] Final: ${results.length} stocks for market=${market}`);
+  const results = await fetchMarketStocks(market, count);
+  console.log(`[Screener] Final: ${results.length} stocks for market=${market} (requested ${count})`);
   return results.slice(0, count);
 }

@@ -320,7 +320,7 @@ export const en: Translations = {
   lynch_no_data: "No data",
   lynch_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  lynch_cap_range_hint: "Dynamic search in $300M–$30B market cap range (up to 10)",
+  lynch_cap_range_hint: "$300M–$30B cap → 50 candidates → 1st-pass scoring → top 10 detailed",
   lynch_progress_fetch: "⏳ Searching stocks…",
   lynch_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
   lynch_btn_screen: "🔍 Screening",
@@ -351,7 +351,7 @@ export const en: Translations = {
   mf_no_data: "No data",
   mf_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  mf_cap_range_hint: "Dynamic search in $300M–$30B market cap range (up to 10)",
+  mf_cap_range_hint: "$300M–$30B cap → 50 candidates → 1st-pass scoring → top 10 detailed",
   mf_progress_fetch: "⏳ Searching stocks…",
   mf_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
   mf_btn_screen: "🔍 Screening",

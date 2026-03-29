@@ -153,12 +153,17 @@ export interface ScreenProgress {
   total: number;
 }
 
+/** 후보 풀 크기 / 상세 분석 대상 수 */
+const CANDIDATE_POOL = 50;
+const ENRICH_TOP = 10;
+
 /**
- * 동적 스크리닝 — 시장별 20종목 반환
+ * 동적 스크리닝
  *
- * 1. Yahoo Finance Screener / quote API로 후보 20개 fetch
- * 2. 각 종목 quoteSummary로 재무 데이터 보강
- * 3. 점수 내림차순 정렬 후 20개 반환
+ * 1. Yahoo Finance Screener로 후보 50개 fetch (v7 배치 — 빠름)
+ * 2. v7 데이터 기반 1차 스코어링 (API 호출 없음)
+ * 3. 상위 10개만 선별 → quoteSummary로 상세 보강 (느림)
+ * 4. 최종 점수 내림차순 정렬
  */
 export async function screenAll(
   market: Market,
@@ -168,7 +173,7 @@ export async function screenAll(
   // ─── 후보 가져오기 ──────────────────────────────────────────
   onProgress?.({ phase: "fetch", done: 0, total: 1 });
 
-  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, 10);
+  const candidates: ScreenerResult[] = await fetchScreenerStocks(market, CANDIDATE_POOL);
 
   onProgress?.({ phase: "fetch", done: 1, total: 1 });
 
@@ -177,28 +182,35 @@ export async function screenAll(
     return [];
   }
 
-  // 1차 스코어링
-  const results: LynchScreenResult[] = candidates.map((c) =>
+  // ─── 1차 스코어링 (v7 배치 데이터 기반, API 호출 없음) ──────
+  const preScored: LynchScreenResult[] = candidates.map((c) =>
     scoreStock(c.stock, c.data),
   );
-  results.sort((a, b) => b.totalScore - a.totalScore);
+  preScored.sort((a, b) => b.totalScore - a.totalScore);
 
-  // ─── quoteSummary 보강 ──────────────────────────────────────
-  onProgress?.({ phase: "enrich", done: 0, total: results.length });
+  // 상위 N개만 선별
+  const top = preScored.slice(0, ENRICH_TOP);
 
-  for (let i = 0; i < results.length; i++) {
-    const r = results[i];
+  console.log(
+    `[Lynch] ${candidates.length} candidates → top ${top.length} selected (1st pass scores: ${top.map((r) => r.totalScore).join(", ")})`,
+  );
+
+  // ─── quoteSummary 보강 (상위 종목만) ─────────────────────────
+  onProgress?.({ phase: "enrich", done: 0, total: top.length });
+
+  for (let i = 0; i < top.length; i++) {
+    const r = top[i];
     const enriched = await enrichFundamentals(r.stock.ticker, r.fundamentals);
-    results[i] = scoreStock(r.stock, enriched);
+    top[i] = scoreStock(r.stock, enriched);
 
-    onProgress?.({ phase: "enrich", done: i + 1, total: results.length });
+    onProgress?.({ phase: "enrich", done: i + 1, total: top.length });
 
-    if (i < results.length - 1) {
+    if (i < top.length - 1) {
       await new Promise(resolve => setTimeout(resolve, 1500));
     }
   }
 
-  return results.sort((a, b) => b.totalScore - a.totalScore);
+  return top.sort((a, b) => b.totalScore - a.totalScore);
 }
 
 /**
