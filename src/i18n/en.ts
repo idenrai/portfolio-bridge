@@ -308,9 +308,9 @@ export const en: Translations = {
     '• Patience Required: "The magic formula works over most periods but can lag the market for 3–4 years"\n' +
     '• Quote: "Figure out what something is worth and pay a lot less, because the stock market is Mr. Market in the short run."',
 
-  lynch_tenbagger_title: "Peter Lynch Tenbagger Screener",
+  lynch_tenbagger_title: "Peter Lynch Tenbagger Analyzer",
   lynch_tenbagger_desc:
-    "Scores your holdings or any ticker against Peter Lynch's PEG, growth, and financial health criteria. The higher the score, the stronger the tenbagger potential.",
+    "Scores your stock holdings or any ticker against Peter Lynch's PEG, growth, and financial health criteria. The higher the score, the stronger the tenbagger potential.",
   lynch_criterion_peg: "PEG Ratio",
   lynch_criterion_eps: "EPS Growth",
   lynch_criterion_rev: "Revenue Growth",
@@ -324,20 +324,20 @@ export const en: Translations = {
   lynch_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
   lynch_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
   lynch_tenbagger_badge: "🚀 Tenbagger Candidate",
-  lynch_initial_guide: "Analyze your portfolio or search a ticker to start screening.",
+  lynch_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
-  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
   screener_mode_portfolio: "My Portfolio",
   screener_mode_search: "Ticker Search",
-  screener_portfolio_desc: (count) => `Analyze ${count} stock/ETF holdings in your portfolio.`,
-  screener_btn_portfolio: "Analyze Portfolio",
+  screener_portfolio_desc: (count) => `Score ${count} stocks in your portfolio.`,
+  screener_btn_portfolio: "Score Portfolio",
   screener_btn_search: "Analyze",
   screener_search_placeholder: "Enter ticker or stock name (e.g. AAPL, Tesla)",
 
-  // ─── Magic Formula Screener ─────────────────────────────────────────────────
-  mf_title: "Joel Greenblatt Magic Formula Screener",
+  // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
+  mf_title: "Joel Greenblatt Magic Formula Analyzer",
   mf_desc:
-    "Screens stocks with high earnings yield and high return on capital — the two pillars of Greenblatt's Magic Formula. The higher the score, the better the fit.",
+    "Scores stocks on earnings yield and return on capital — the two pillars of Greenblatt's Magic Formula. The higher the score, the better the fit.",
   mf_criterion_ey: "Earnings Yield",
   mf_criterion_roc: "Return on Capital",
   mf_criterion_margin: "Operating Margin",
@@ -350,7 +350,7 @@ export const en: Translations = {
   mf_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
   mf_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
   mf_magic_badge: "🪄 Magic Formula Pick",
-  mf_initial_guide: "Analyze your portfolio or search a ticker to start screening.",
+  mf_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",

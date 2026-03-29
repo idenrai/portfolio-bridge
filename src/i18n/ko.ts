@@ -307,9 +307,9 @@ export const ko: Translations = {
     "• 인내가 핵심: 전략이 유효해도 3~4년가량 시장 대비 부진할 수 있음을 전제로 운용\n" +
     "• 명언: '가치를 먼저 계산하고, 그보다 훨씬 싼 가격에 사라. 단기 시장은 미스터 마켓의 감정에 흔들린다.'",
 
-  lynch_tenbagger_title: "피터 린치 10루타 후보 스크리너",
+  lynch_tenbagger_title: "피터 린치 10루타 채점기",
   lynch_tenbagger_desc:
-    "보유 종목이나 관심 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. 100점에 가까울수록 10루타 가능성이 높은 종목입니다.",
+    "보유 주식이나 관심 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. 100점에 가까울수록 10루타 가능성이 높은 종목입니다.",
   lynch_criterion_peg: "PEG 비율",
   lynch_criterion_eps: "EPS 성장률",
   lynch_criterion_rev: "매출 성장률",
@@ -323,20 +323,20 @@ export const ko: Translations = {
   lynch_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
   lynch_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   lynch_tenbagger_badge: "🚀 10루타 후보",
-  lynch_initial_guide: "포트폴리오 분석 또는 티커 검색으로 스크리닝을 시작하세요.",
+  lynch_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
-  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
   screener_mode_portfolio: "내 포트폴리오",
   screener_mode_search: "티커 검색",
-  screener_portfolio_desc: (count) => `포트폴리오 내 주식/ETF ${count}종목을 분석합니다.`,
-  screener_btn_portfolio: "포트폴리오 분석",
+  screener_portfolio_desc: (count) => `포트폴리오 내 주식 ${count}종목을 채점합니다.`,
+  screener_btn_portfolio: "포트폴리오 채점",
   screener_btn_search: "분석",
   screener_search_placeholder: "티커 또는 종목명 입력 (예: AAPL, 삼성전자)",
 
-  // ─── Magic Formula Screener ─────────────────────────────────────────────────
-  mf_title: "조엘 그린블라트 마법 공식 스크리너",
+  // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
+  mf_title: "조엘 그린블라트 마법 공식 채점기",
   mf_desc:
-    "높은 이익수익률(Earnings Yield)과 높은 자본수익률(Return on Capital)을 동시에 갖춘 종목을 스크리닝합니다. 100점에 가까울수록 마법 공식에 부합합니다.",
+    "높은 이익수익률(Earnings Yield)과 높은 자본수익률(Return on Capital)을 동시에 갖춘 종목을 채점합니다. 100점에 가까울수록 마법 공식에 부합합니다.",
   mf_criterion_ey: "이익수익률",
   mf_criterion_roc: "자본수익률",
   mf_criterion_margin: "영업이익률",
@@ -349,7 +349,7 @@ export const ko: Translations = {
   mf_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
   mf_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   mf_magic_badge: "🪄 마법 공식 적합",
-  mf_initial_guide: "포트폴리오 분석 또는 티커 검색으로 스크리닝을 시작하세요.",
+  mf_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   settings_title: "설정",
   settings_display_currency_title: "표시 화폐",

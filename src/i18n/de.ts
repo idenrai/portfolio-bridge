@@ -312,9 +312,9 @@ export const de: Translations = {
     "• Geduld als Voraussetzung: Die Strategie kann über 3–4 Jahre hinter dem Markt liegen, bevor sie aufholt\n" +
     '• Zitat: "Ermitteln Sie den Wert eines Unternehmens und zahlen Sie deutlich weniger — kurzfristig ist der Markt nur Mr. Market."',
 
-  lynch_tenbagger_title: "Peter Lynch Tenbagger-Screener",
+  lynch_tenbagger_title: "Peter Lynch Tenbagger-Bewertung",
   lynch_tenbagger_desc:
-    "Bewertet Ihre Bestände oder beliebige Ticker anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Je höher der Score, desto größer das Tenbagger-Potenzial.",
+    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Je höher der Score, desto größer das Tenbagger-Potenzial.",
   lynch_criterion_peg: "PEG-Verhältnis",
   lynch_criterion_eps: "EPS-Wachstum",
   lynch_criterion_rev: "Umsatzwachstum",
@@ -328,20 +328,20 @@ export const de: Translations = {
   lynch_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
   lynch_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   lynch_tenbagger_badge: "🚀 Tenbagger-Kandidat",
-  lynch_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um das Screening zu starten.",
+  lynch_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
-  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
   screener_mode_portfolio: "Mein Portfolio",
   screener_mode_search: "Ticker-Suche",
-  screener_portfolio_desc: (count) => `${count} Aktien/ETFs in Ihrem Portfolio analysieren.`,
-  screener_btn_portfolio: "Portfolio analysieren",
+  screener_portfolio_desc: (count) => `${count} Aktien in Ihrem Portfolio bewerten.`,
+  screener_btn_portfolio: "Portfolio bewerten",
   screener_btn_search: "Analysieren",
   screener_search_placeholder: "Ticker oder Aktienname eingeben (z.B. AAPL, Siemens)",
 
-  // ─── Magic Formula Screener ─────────────────────────────────────────────────
-  mf_title: "Joel Greenblatt Magic-Formula-Screener",
+  // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
+  mf_title: "Joel Greenblatt Magic-Formula-Bewertung",
   mf_desc:
-    "Screent Aktien mit hoher Gewinnrendite und hoher Kapitalrendite — die zwei Säulen von Greenblatts Magic Formula. Je höher der Score, desto besser.",
+    "Bewertet Aktien nach Gewinnrendite und Kapitalrendite — die zwei Säulen von Greenblatts Magic Formula. Je höher der Score, desto besser.",
   mf_criterion_ey: "Gewinnrendite",
   mf_criterion_roc: "Kapitalrendite",
   mf_criterion_margin: "Betriebsmarge",
@@ -354,7 +354,7 @@ export const de: Translations = {
   mf_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
   mf_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   mf_magic_badge: "🪄 Magic-Formula-Kandidat",
-  mf_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um das Screening zu starten.",
+  mf_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",

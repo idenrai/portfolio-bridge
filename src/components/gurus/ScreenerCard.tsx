@@ -81,7 +81,7 @@ interface ScreenerCardProps<CKey extends string> {
   runPortfolio: () => void;
   runSearch: (ticker: string, name?: string) => void;
   handleSearch: () => void;
-  portfolioTickerCount: number;
+  portfolioStockCount: number;
 }
 
 // ─── 서브 컴포넌트 ──────────────────────────────────────────────────────────────
@@ -154,7 +154,7 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
     results, loading, ran, progress,
     searchQuery, setSearchQuery, searchSuggestions, isSearching,
     runPortfolio, runSearch, handleSearch,
-    portfolioTickerCount,
+    portfolioStockCount,
   } = props;
 
   const t = useT();
@@ -188,11 +188,11 @@ export function ScreenerCard<CKey extends string>(props: ScreenerCardProps<CKey>
       {mode === "portfolio" && (
         <>
           <p className="text-[11px] text-slate-400 mb-2">
-            {t.screener_portfolio_desc(portfolioTickerCount)}
+            {t.screener_portfolio_desc(portfolioStockCount)}
           </p>
           <button
             onClick={runPortfolio}
-            disabled={loading || portfolioTickerCount === 0}
+            disabled={loading || portfolioStockCount === 0}
             className={`mb-4 rounded-lg ${colors.btn} px-4 py-2 text-sm font-semibold text-white shadow-sm active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer`}
           >
             {loading

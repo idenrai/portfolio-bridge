@@ -308,9 +308,9 @@ export const ja: Translations = {
     "• 分散運用：20〜30銘柄で個別リスクを抑えつつ、戦略の再現性を高める\n" +
     "• 忍耐が前提：有効な戦略でも3〜4年程度は市場に劣後し得ることを受け入れる\n" +
     "• 名言：「価値を見積もり、それより十分に安く買え。短期の株式市場は“ミスター・マーケット”に過ぎない」",
-  lynch_tenbagger_title: "ピーター・リンチ テンバガー・スクリーナー",
+  lynch_tenbagger_title: "ピーター・リンチ テンバガー採点",
   lynch_tenbagger_desc:
-    "保有銘柄や気になる銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
+    "保有株や気になる銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
   lynch_criterion_peg: "PEGレシオ",
   lynch_criterion_eps: "EPS成長率",
   lynch_criterion_rev: "売上成長率",
@@ -324,20 +324,20 @@ export const ja: Translations = {
   lynch_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
   lynch_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   lynch_tenbagger_badge: "🚀 テンバガー候補",
-  lynch_initial_guide: "ポートフォリオ分析またはティッカー検索でスクリーニングを開始してください。",
+  lynch_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
-  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
   screener_mode_portfolio: "マイポートフォリオ",
   screener_mode_search: "ティッカー検索",
-  screener_portfolio_desc: (count) => `ポートフォリオ内の株式/ETF ${count}銘柄を分析します。`,
-  screener_btn_portfolio: "ポートフォリオ分析",
+  screener_portfolio_desc: (count) => `ポートフォリオ内の株式 ${count}銘柄を採点します。`,
+  screener_btn_portfolio: "ポートフォリオ採点",
   screener_btn_search: "分析",
   screener_search_placeholder: "ティッカーまたは銘柄名を入力（例：AAPL、トヨタ）",
 
-  // ─── Magic Formula Screener ─────────────────────────────────────────────────
-  mf_title: "ジョエル・グリーンブラット マジック・フォーミュラ・スクリーナー",
+  // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
+  mf_title: "ジョエル・グリーンブラット マジック・フォーミュラ採点",
   mf_desc:
-    "高い益回りと高い資本収益率を兼ね備えた銘柄をスクリーニングします。100点に近いほどマジック・フォーミュラに適合する銘柄です。",
+    "高い益回りと高い資本収益率を兼ね備えた銘柄を採点します。100点に近いほどマジック・フォーミュラに適合する銘柄です。",
   mf_criterion_ey: "益回り",
   mf_criterion_roc: "資本収益率",
   mf_criterion_margin: "営業利益率",
@@ -350,7 +350,7 @@ export const ja: Translations = {
   mf_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
   mf_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   mf_magic_badge: "🪄 マジック・フォーミュラ適合",
-  mf_initial_guide: "ポートフォリオ分析またはティッカー検索でスクリーニングを開始してください。",
+  mf_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",
   settings_display_currency_desc:

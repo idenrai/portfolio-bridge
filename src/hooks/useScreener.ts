@@ -55,10 +55,10 @@ export function useScreener<TResult extends BaseScreenResult>(
   >([]);
   const [isSearching, setIsSearching] = useState(false);
 
-  /** 포트폴리오 모드 — 보유 종목 스크리닝 */
+  /** 포트폴리오 모드 — 보유 주식 채점 */
   const runPortfolio = useCallback(async () => {
     const stockAssets = assets.filter(
-      (a) => a.ticker && (a.type === "stock" || a.type === "etf"),
+      (a) => a.ticker && a.type === "stock",
     );
     if (stockAssets.length === 0) return;
 
@@ -128,8 +128,8 @@ export function useScreener<TResult extends BaseScreenResult>(
     setSearchSuggestions([]);
   }, [mode]);
 
-  const portfolioTickerCount = assets.filter(
-    (a) => a.ticker && (a.type === "stock" || a.type === "etf"),
+  const portfolioStockCount = assets.filter(
+    (a) => a.ticker && a.type === "stock",
   ).length;
 
   return {
@@ -146,6 +146,6 @@ export function useScreener<TResult extends BaseScreenResult>(
     runPortfolio,
     runSearch,
     handleSearch,
-    portfolioTickerCount,
+    portfolioStockCount,
   } as const;
 }

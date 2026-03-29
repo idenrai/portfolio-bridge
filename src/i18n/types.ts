@@ -210,7 +210,7 @@ export interface Translations {
   guru_philosophy_smith: string;
   guru_philosophy_greenblatt: string;
 
-  // ─── Lynch 10-Bagger Screener ──────────────────────────────────────────────
+  // ─── Lynch 10-Bagger Analyzer ───────────────────────────────────────────────
   lynch_tenbagger_title: string;
   lynch_tenbagger_desc: string;
   lynch_criterion_peg: string;
@@ -227,7 +227,7 @@ export interface Translations {
   lynch_tenbagger_badge: string;
   lynch_initial_guide: string;
 
-  // ─── Screener Common (mode tabs) ────────────────────────────────────────────
+  // ─── Analyzer Common (mode tabs) ────────────────────────────────────────────
   screener_mode_portfolio: string;
   screener_mode_search: string;
   screener_portfolio_desc: (count: number) => string;
@@ -235,7 +235,7 @@ export interface Translations {
   screener_btn_search: string;
   screener_search_placeholder: string;
 
-  // ─── Magic Formula Screener ─────────────────────────────────────────────────
+  // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: string;
   mf_desc: string;
   mf_criterion_ey: string;
