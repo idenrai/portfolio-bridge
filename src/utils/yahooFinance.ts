@@ -1,6 +1,6 @@
 // Barrel re-export — 모듈 분리 후 하위 호환용
-export type { TickerSearchItem, QuoteData, FundamentalsData, YahooQuoteResult } from "./yahooCore";
-export { toMarket, toCurrency, toAssetType, yahooFetch } from "./yahooCore";
+export type { TickerSearchItem, QuoteData, FundamentalsData, YahooQuoteResult, RawVal } from "./yahooCore";
+export { toMarket, toCurrency, toAssetType, yahooFetch, fetchQuoteSummary, delay, API_DELAY, analyzeByTickersGeneric } from "./yahooCore";
 export { searchTicker } from "./yahooSearch";
 export { fetchCurrentPrice } from "./yahooQuote";
 export { fetchExchangeRate, fetchAllExchangeRates } from "./yahooFx";

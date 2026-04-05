@@ -175,3 +175,70 @@ export function toCurrency(currency?: string, market?: Market): CurrencyCode {
 export function isISIN(query: string): boolean {
   return /^[A-Z]{2}[A-Z0-9]{10}$/.test(query.trim());
 }
+
+// ─── 공용 Yahoo 유틸 ─────────────────────────────────────────────────────────
+
+/** Yahoo quoteSummary raw 값 타입 */
+export type RawVal = { raw?: number };
+
+/** Rate-limit 방지용 delay */
+export const API_DELAY = 1500;
+export function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * quoteSummary v10/v11 시도 → result[0] 반환하는 공용 래퍼.
+ * modules 예: "defaultKeyStatistics,summaryDetail,financialData"
+ */
+export async function fetchQuoteSummary(
+  symbol: string,
+  modules: string,
+): Promise<Record<string, unknown> | null> {
+  const encoded = encodeURIComponent(symbol);
+
+  for (const ver of ["v10", "v11"] as const) {
+    try {
+      const res = await yahooFetch(
+        `/api/yahoo/${ver}/finance/quoteSummary/${encoded}?modules=${modules}`,
+      );
+      if (!res.ok) continue;
+
+      const data = await res.json();
+      const result = (data as { quoteSummary?: { result?: unknown[] } })
+        ?.quoteSummary?.result?.[0] as Record<string, unknown> | undefined;
+      if (result) return result;
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
+/**
+ * 채점기 공용: ticker 배열에 대해 순차 fetch → score → 정렬.
+ * 개별 채점기는 fetchData + scoreStock 만 구현하면 됨.
+ */
+export async function analyzeByTickersGeneric<TRaw, TResult extends { totalScore: number }>(opts: {
+  tickers: Array<{ ticker: string; name?: string }>;
+  fetchData: (symbol: string) => Promise<TRaw | null>;
+  defaultRaw: TRaw;
+  scoreStock: (stock: import("./stockUniverse").UniverseStock, data: TRaw) => TResult;
+  onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void;
+}): Promise<TResult[]> {
+  const { tickers, fetchData, defaultRaw, scoreStock, onProgress } = opts;
+  if (tickers.length === 0) return [];
+
+  onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
+  const results: TResult[] = [];
+
+  for (let i = 0; i < tickers.length; i++) {
+    const { ticker, name } = tickers[i];
+    const raw = await fetchData(ticker);
+    results.push(scoreStock({ ticker, name: name ?? ticker, market: "OTHER" }, raw ?? defaultRaw));
+    onProgress?.({ phase: "enrich", done: i + 1, total: tickers.length });
+    if (i < tickers.length - 1) await delay(API_DELAY);
+  }
+
+  return results.sort((a, b) => b.totalScore - a.totalScore);
+}

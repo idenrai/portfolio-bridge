@@ -1,4 +1,5 @@
 import { enrichFundamentals, type FundamentalsData } from "./yahooFinance";
+import { analyzeByTickersGeneric } from "./yahooCore";
 import type { UniverseStock } from "./stockUniverse";
 
 import { approxToUSD } from "@/constants";
@@ -146,46 +147,21 @@ export function scoreStock(
 
 // ─── 포트폴리오·검색 스크리너 ──────────────────────────────────────────────
 
-/**
- * 주어진 티커 목록에 대해 Lynch 스코어링 실행.
- * 포트폴리오 스크리닝 / 단일 티커 검색에 사용.
- */
-export async function analyzeByTickers(
+const LYNCH_DEFAULT: FundamentalsData = {
+  pegRatio: null, epsGrowth: null, revenueGrowth: null,
+  debtToEquity: null, operatingMargin: null, marketCap: null, currency: null,
+};
+
+export function analyzeByTickers(
   tickers: Array<{ ticker: string; name?: string }>,
   onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void,
 ): Promise<LynchAnalyzerResult[]> {
-  if (tickers.length === 0) return [];
-
-  onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
-
-  const results: LynchAnalyzerResult[] = [];
-
-  for (let i = 0; i < tickers.length; i++) {
-    const { ticker, name } = tickers[i];
-    const fundamentals = await enrichFundamentals(ticker, {
-      pegRatio: null,
-      epsGrowth: null,
-      revenueGrowth: null,
-      debtToEquity: null,
-      operatingMargin: null,
-      marketCap: null,
-      currency: null,
-    });
-
-    results.push(
-      scoreStock(
-        { ticker, name: name ?? ticker, market: "OTHER" },
-        fundamentals,
-      ),
-    );
-
-    onProgress?.({ phase: "enrich", done: i + 1, total: tickers.length });
-
-    if (i < tickers.length - 1) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-    }
-  }
-
-  return results.sort((a, b) => b.totalScore - a.totalScore);
+  return analyzeByTickersGeneric({
+    tickers,
+    fetchData: (symbol) => enrichFundamentals(symbol, LYNCH_DEFAULT),
+    defaultRaw: LYNCH_DEFAULT,
+    scoreStock,
+    onProgress,
+  });
 }
 

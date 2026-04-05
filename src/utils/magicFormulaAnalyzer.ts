@@ -1,4 +1,4 @@
-import { yahooFetch } from "./yahooCore";
+import { fetchQuoteSummary, analyzeByTickersGeneric, type RawVal } from "./yahooCore";
 import type { UniverseStock } from "./stockUniverse";
 import { approxToUSD } from "@/constants";
 
@@ -37,46 +37,23 @@ interface MFRawData {
   currency: string | null;
 }
 
-type RawVal = { raw?: number };
-
 async function fetchMFData(symbol: string): Promise<MFRawData | null> {
-  const encoded = encodeURIComponent(symbol);
-  const modules = "defaultKeyStatistics,summaryDetail,financialData";
+  const result = await fetchQuoteSummary(symbol, "defaultKeyStatistics,summaryDetail,financialData");
+  if (!result) return null;
 
-  for (const ver of ["v10", "v11"] as const) {
-    try {
-      const res = await yahooFetch(
-        `/api/yahoo/${ver}/finance/quoteSummary/${encoded}?modules=${modules}`,
-      );
-      if (!res.ok) continue;
+  const ks = (result.defaultKeyStatistics ?? {}) as Record<string, RawVal>;
+  const sd = (result.summaryDetail ?? {}) as Record<string, RawVal>;
+  const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
 
-      const data = await res.json();
-      const result = (data as { quoteSummary?: { result?: unknown[] } })
-        ?.quoteSummary?.result?.[0] as Record<string, unknown> | undefined;
-      if (!result) continue;
+  const evToEbitda = ks.enterpriseToEbitda?.raw ?? null;
+  const earningsYield = evToEbitda && evToEbitda > 0 ? 1 / evToEbitda : null;
+  const returnOnCapital = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
+  const operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
+  const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
+  const marketCap = sd.marketCap?.raw ?? ks.marketCap?.raw ?? null;
+  const currency = typeof fd.financialCurrency === "string" ? fd.financialCurrency : null;
 
-      const ks = (result.defaultKeyStatistics ?? {}) as Record<string, RawVal>;
-      const sd = (result.summaryDetail ?? {}) as Record<string, RawVal>;
-      const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
-
-      // Earnings Yield ≈ 1 / (EV / EBITDA)
-      const evToEbitda = ks.enterpriseToEbitda?.raw ?? null;
-      const earningsYield = evToEbitda && evToEbitda > 0 ? 1 / evToEbitda : null;
-
-      // Return on Capital (ROE 프록시)
-      const returnOnCapital = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
-
-      const operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
-      const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
-      const marketCap = sd.marketCap?.raw ?? ks.marketCap?.raw ?? null;
-      const currency = typeof fd.financialCurrency === "string" ? fd.financialCurrency : null;
-
-      return { earningsYield, returnOnCapital, operatingMargin, debtToEquity, marketCap, currency };
-    } catch {
-      continue;
-    }
-  }
-  return null;
+  return { earningsYield, returnOnCapital, operatingMargin, debtToEquity, marketCap, currency };
 }
 
 // ─── 각 기준별 스코어링 ──────────────────────────────────────────────────────
@@ -171,44 +148,20 @@ function scoreStock(stock: UniverseStock, data: MFRawData): MFAnalyzerResult {
 
 // ─── 포트폴리오·검색 스크리너 ──────────────────────────────────────────────
 
-/**
- * 주어진 티커 목록에 대해 Magic Formula 스코어링 실행.
- * 포트폴리오 스크리닝 / 단일 티커 검색에 사용.
- */
-export async function analyzeByTickersMF(
+const MF_DEFAULT: MFRawData = {
+  earningsYield: null, returnOnCapital: null, operatingMargin: null,
+  debtToEquity: null, marketCap: null, currency: null,
+};
+
+export function analyzeByTickersMF(
   tickers: Array<{ ticker: string; name?: string }>,
   onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void,
 ): Promise<MFAnalyzerResult[]> {
-  if (tickers.length === 0) return [];
-
-  onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
-
-  const results: MFAnalyzerResult[] = [];
-
-  for (let i = 0; i < tickers.length; i++) {
-    const { ticker, name } = tickers[i];
-    const mfData = await fetchMFData(ticker);
-
-    results.push(
-      scoreStock(
-        { ticker, name: name ?? ticker, market: "OTHER" },
-        mfData ?? {
-          earningsYield: null,
-          returnOnCapital: null,
-          operatingMargin: null,
-          debtToEquity: null,
-          marketCap: null,
-          currency: null,
-        },
-      ),
-    );
-
-    onProgress?.({ phase: "enrich", done: i + 1, total: tickers.length });
-
-    if (i < tickers.length - 1) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-    }
-  }
-
-  return results.sort((a, b) => b.totalScore - a.totalScore);
+  return analyzeByTickersGeneric({
+    tickers,
+    fetchData: fetchMFData,
+    defaultRaw: MF_DEFAULT,
+    scoreStock,
+    onProgress,
+  });
 }

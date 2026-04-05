@@ -90,13 +90,13 @@ export async function fetchFundamentals(
         const parsed = parseQuoteSummary(json);
         if (parsed) return parsed;
         if (import.meta.env.DEV) {
-          console.warn(`[Lynch] ${symbol} ${ver} 파싱 실패:`, JSON.stringify(json).slice(0, 400));
+          console.warn(`[Yahoo] ${symbol} ${ver} 파싱 실패:`, JSON.stringify(json).slice(0, 400));
         }
       } else if (import.meta.env.DEV) {
-        console.warn(`[Lynch] ${symbol} ${ver} HTTP ${res.status}`);
+        console.warn(`[Yahoo] ${symbol} ${ver} HTTP ${res.status}`);
       }
     } catch (e) {
-      if (import.meta.env.DEV) console.warn(`[Lynch] ${symbol} ${ver} 오류:`, e);
+      if (import.meta.env.DEV) console.warn(`[Yahoo] ${symbol} ${ver} 오류:`, e);
     }
   }
 
@@ -168,13 +168,13 @@ export async function fetchBatchQuote(
         );
 
         if (res.status === 429) {
-          console.warn(`[BatchQuote] 429 rate limit, attempt ${attempt + 1}`);
+          if (import.meta.env.DEV) console.warn(`[BatchQuote] 429 rate limit, attempt ${attempt + 1}`);
           await new Promise(r => setTimeout(r, 2000 * 2 ** attempt));
           continue;
         }
 
         if (!res.ok) {
-          console.warn(`[BatchQuote] HTTP ${res.status} for chunk`, chunk.join(","));
+          if (import.meta.env.DEV) console.warn(`[BatchQuote] HTTP ${res.status} for chunk`, chunk.join(","));
           break;
         }
 
@@ -183,7 +183,7 @@ export async function fetchBatchQuote(
         };
 
         const results = data.quoteResponse?.result ?? [];
-        console.log(`[BatchQuote] chunk got ${results.length} results for ${chunk.length} symbols`);
+        if (import.meta.env.DEV) console.log(`[BatchQuote] chunk got ${results.length} results for ${chunk.length} symbols`);
 
         for (const q of results) {
           const sym = q.symbol as string;
@@ -204,7 +204,7 @@ export async function fetchBatchQuote(
         }
         break;
       } catch (e) {
-        console.warn(`[BatchQuote] error attempt ${attempt + 1}:`, e);
+        if (import.meta.env.DEV) console.warn(`[BatchQuote] error attempt ${attempt + 1}:`, e);
         if (attempt < 2) {
           await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
         }
@@ -221,7 +221,7 @@ export async function fetchBatchQuote(
 
   // v7 배치가 전혀 데이터를 못 가져온 경우 → 개별 quoteSummary 폴백
   if (map.size === 0 && symbols.length > 0) {
-    console.warn(`[BatchQuote] v7 batch returned 0 data, falling back to individual quoteSummary`);
+    if (import.meta.env.DEV) console.warn(`[BatchQuote] v7 batch returned 0 data, falling back to individual quoteSummary`);
     let fallbackDone = 0;
     for (const sym of symbols) {
       try {

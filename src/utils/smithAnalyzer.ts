@@ -1,4 +1,4 @@
-import { yahooFetch } from "./yahooCore";
+import { fetchQuoteSummary, analyzeByTickersGeneric, type RawVal } from "./yahooCore";
 import type { UniverseStock } from "./stockUniverse";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
@@ -36,57 +36,38 @@ interface SmithRawData {
   debtToEquity: number | null;
 }
 
-type RawVal = { raw?: number };
-
 type CfStmt = { freeCashFlow?: RawVal; totalCashFromOperatingActivities?: RawVal };
 
 async function fetchSmithData(symbol: string): Promise<SmithRawData | null> {
-  const encoded = encodeURIComponent(symbol);
-  const modules = "defaultKeyStatistics,summaryDetail,financialData,cashflowStatementHistory";
+  const result = await fetchQuoteSummary(symbol, "defaultKeyStatistics,summaryDetail,financialData,cashflowStatementHistory");
+  if (!result) return null;
 
-  for (const ver of ["v10", "v11"] as const) {
-    try {
-      const res = await yahooFetch(
-        `/api/yahoo/${ver}/finance/quoteSummary/${encoded}?modules=${modules}`,
-      );
-      if (!res.ok) continue;
+  const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
 
-      const data = await res.json();
-      const result = (data as { quoteSummary?: { result?: unknown[] } })
-        ?.quoteSummary?.result?.[0] as Record<string, unknown> | undefined;
-      if (!result) continue;
+  const returnOnEquity = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
+  const operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
+  let freeCashflow = (fd.freeCashflow as RawVal | undefined)?.raw ?? null;
+  let operatingCashflow = (fd.operatingCashflow as RawVal | undefined)?.raw ?? null;
+  const revenueGrowth = (fd.revenueGrowth as RawVal | undefined)?.raw ?? null;
+  const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
 
-      const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
-
-      const returnOnEquity = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
-      const operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
-      let freeCashflow = (fd.freeCashflow as RawVal | undefined)?.raw ?? null;
-      let operatingCashflow = (fd.operatingCashflow as RawVal | undefined)?.raw ?? null;
-      const revenueGrowth = (fd.revenueGrowth as RawVal | undefined)?.raw ?? null;
-      const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
-
-      // FCF/OperatingCashflow 폴백: cashflowStatementHistory 최신 연도
-      if (freeCashflow === null || operatingCashflow === null) {
-        const cfStmts = (result.cashflowStatementHistory as
-          { cashflowStatements?: CfStmt[] } | undefined
-        )?.cashflowStatements;
-        if (cfStmts && cfStmts.length > 0) {
-          const latest = cfStmts[0];
-          if (freeCashflow === null) {
-            freeCashflow = latest.freeCashFlow?.raw ?? null;
-          }
-          if (operatingCashflow === null) {
-            operatingCashflow = latest.totalCashFromOperatingActivities?.raw ?? null;
-          }
-        }
+  // FCF/OperatingCashflow 폴백: cashflowStatementHistory 최신 연도
+  if (freeCashflow === null || operatingCashflow === null) {
+    const cfStmts = (result.cashflowStatementHistory as
+      { cashflowStatements?: CfStmt[] } | undefined
+    )?.cashflowStatements;
+    if (cfStmts && cfStmts.length > 0) {
+      const latest = cfStmts[0];
+      if (freeCashflow === null) {
+        freeCashflow = latest.freeCashFlow?.raw ?? null;
       }
-
-      return { returnOnEquity, operatingMargin, freeCashflow, operatingCashflow, revenueGrowth, debtToEquity };
-    } catch {
-      continue;
+      if (operatingCashflow === null) {
+        operatingCashflow = latest.totalCashFromOperatingActivities?.raw ?? null;
+      }
     }
   }
-  return null;
+
+  return { returnOnEquity, operatingMargin, freeCashflow, operatingCashflow, revenueGrowth, debtToEquity };
 }
 
 // ─── 각 기준별 스코어링 ──────────────────────────────────────────────────────
@@ -186,40 +167,20 @@ function scoreStock(stock: UniverseStock, data: SmithRawData): SmithAnalyzerResu
 
 // ─── 포트폴리오·검색 채점 ──────────────────────────────────────────────────
 
-export async function analyzeByTickersSmith(
+const SMITH_DEFAULT: SmithRawData = {
+  returnOnEquity: null, operatingMargin: null, freeCashflow: null,
+  operatingCashflow: null, revenueGrowth: null, debtToEquity: null,
+};
+
+export function analyzeByTickersSmith(
   tickers: Array<{ ticker: string; name?: string }>,
   onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void,
 ): Promise<SmithAnalyzerResult[]> {
-  if (tickers.length === 0) return [];
-
-  onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
-
-  const results: SmithAnalyzerResult[] = [];
-
-  for (let i = 0; i < tickers.length; i++) {
-    const { ticker, name } = tickers[i];
-    const raw = await fetchSmithData(ticker);
-
-    results.push(
-      scoreStock(
-        { ticker, name: name ?? ticker, market: "OTHER" },
-        raw ?? {
-          returnOnEquity: null,
-          operatingMargin: null,
-          freeCashflow: null,
-          operatingCashflow: null,
-          revenueGrowth: null,
-          debtToEquity: null,
-        },
-      ),
-    );
-
-    onProgress?.({ phase: "enrich", done: i + 1, total: tickers.length });
-
-    if (i < tickers.length - 1) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-    }
-  }
-
-  return results.sort((a, b) => b.totalScore - a.totalScore);
+  return analyzeByTickersGeneric({
+    tickers,
+    fetchData: fetchSmithData,
+    defaultRaw: SMITH_DEFAULT,
+    scoreStock,
+    onProgress,
+  });
 }

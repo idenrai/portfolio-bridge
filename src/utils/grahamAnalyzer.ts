@@ -1,4 +1,4 @@
-import { yahooFetch } from "./yahooCore";
+import { fetchQuoteSummary, analyzeByTickersGeneric, type RawVal } from "./yahooCore";
 import type { UniverseStock } from "./stockUniverse";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
@@ -36,50 +36,31 @@ interface GrahamRawData {
   dividendYield: number | null;
 }
 
-type RawVal = { raw?: number };
-
 async function fetchGrahamData(symbol: string): Promise<GrahamRawData | null> {
-  const encoded = encodeURIComponent(symbol);
-  const modules = "defaultKeyStatistics,summaryDetail,financialData";
+  const result = await fetchQuoteSummary(symbol, "defaultKeyStatistics,summaryDetail,financialData");
+  if (!result) return null;
 
-  for (const ver of ["v10", "v11"] as const) {
-    try {
-      const res = await yahooFetch(
-        `/api/yahoo/${ver}/finance/quoteSummary/${encoded}?modules=${modules}`,
-      );
-      if (!res.ok) continue;
+  const ks = (result.defaultKeyStatistics ?? {}) as Record<string, RawVal>;
+  const sd = (result.summaryDetail ?? {}) as Record<string, RawVal>;
+  const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
 
-      const data = await res.json();
-      const result = (data as { quoteSummary?: { result?: unknown[] } })
-        ?.quoteSummary?.result?.[0] as Record<string, unknown> | undefined;
-      if (!result) continue;
+  const peRatio = sd.trailingPE?.raw ?? null;
 
-      const ks = (result.defaultKeyStatistics ?? {}) as Record<string, RawVal>;
-      const sd = (result.summaryDetail ?? {}) as Record<string, RawVal>;
-      const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
-
-      const peRatio = sd.trailingPE?.raw ?? null;
-
-      // P/B: summaryDetail.priceToBook 우선, 없으면 currentPrice / bookValue 폴백
-      let pbRatio = sd.priceToBook?.raw ?? null;
-      if (pbRatio === null) {
-        const bookValue = ks.bookValue?.raw ?? null;
-        const price = (fd.currentPrice as RawVal | undefined)?.raw ?? sd.previousClose?.raw ?? null;
-        if (bookValue !== null && bookValue > 0 && price !== null && price > 0) {
-          pbRatio = price / bookValue;
-        }
-      }
-
-      const currentRatio = (fd.currentRatio as RawVal | undefined)?.raw ?? null;
-      const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
-      const dividendYield = sd.dividendYield?.raw ?? null;
-
-      return { peRatio, pbRatio, currentRatio, debtToEquity, dividendYield };
-    } catch {
-      continue;
+  // P/B: summaryDetail.priceToBook 우선, 없으면 currentPrice / bookValue 폴백
+  let pbRatio = sd.priceToBook?.raw ?? null;
+  if (pbRatio === null) {
+    const bookValue = ks.bookValue?.raw ?? null;
+    const price = (fd.currentPrice as RawVal | undefined)?.raw ?? sd.previousClose?.raw ?? null;
+    if (bookValue !== null && bookValue > 0 && price !== null && price > 0) {
+      pbRatio = price / bookValue;
     }
   }
-  return null;
+
+  const currentRatio = (fd.currentRatio as RawVal | undefined)?.raw ?? null;
+  const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
+  const dividendYield = sd.dividendYield?.raw ?? null;
+
+  return { peRatio, pbRatio, currentRatio, debtToEquity, dividendYield };
 }
 
 // ─── 각 기준별 스코어링 ──────────────────────────────────────────────────────
@@ -189,39 +170,19 @@ function scoreStock(stock: UniverseStock, data: GrahamRawData): GrahamAnalyzerRe
 
 // ─── 포트폴리오·검색 채점 ──────────────────────────────────────────────────
 
-export async function analyzeByTickersGraham(
+const GRAHAM_DEFAULT: GrahamRawData = {
+  peRatio: null, pbRatio: null, currentRatio: null, debtToEquity: null, dividendYield: null,
+};
+
+export function analyzeByTickersGraham(
   tickers: Array<{ ticker: string; name?: string }>,
   onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void,
 ): Promise<GrahamAnalyzerResult[]> {
-  if (tickers.length === 0) return [];
-
-  onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
-
-  const results: GrahamAnalyzerResult[] = [];
-
-  for (let i = 0; i < tickers.length; i++) {
-    const { ticker, name } = tickers[i];
-    const raw = await fetchGrahamData(ticker);
-
-    results.push(
-      scoreStock(
-        { ticker, name: name ?? ticker, market: "OTHER" },
-        raw ?? {
-          peRatio: null,
-          pbRatio: null,
-          currentRatio: null,
-          debtToEquity: null,
-          dividendYield: null,
-        },
-      ),
-    );
-
-    onProgress?.({ phase: "enrich", done: i + 1, total: tickers.length });
-
-    if (i < tickers.length - 1) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-    }
-  }
-
-  return results.sort((a, b) => b.totalScore - a.totalScore);
+  return analyzeByTickersGeneric({
+    tickers,
+    fetchData: fetchGrahamData,
+    defaultRaw: GRAHAM_DEFAULT,
+    scoreStock,
+    onProgress,
+  });
 }
