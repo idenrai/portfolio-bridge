@@ -22,6 +22,7 @@ import { useLanguageStore, useSettingsStore } from "@/stores";
 import { GURU_PROFILES, formatCurrency, buildGuruPrompt } from "@/utils";
 import { calculateRebalancing } from "@/utils";
 import type { GuruProfile } from "@/types";
+import { CATEGORY_LABELS } from "@/types/asset";
 import { en } from "@/i18n";
 
 const COLORS = [
@@ -68,14 +69,10 @@ export function GurusPage() {
     ? calculateRebalancing(summary, selectedGuru.idealAllocation)
     : [];
 
-  // 레이더 차트용 데이터: 내 포트폴리오 vs 선택 구루 (유니온)
+  // 레이더 차트용 데이터: 전체 카테고리 표시
   const radarData = selectedGuru
-    ? (() => {
-        const allCategories = new Set([
-          ...selectedGuru.idealAllocation.map((a) => a.category),
-          ...summary.categoryAllocation.map((a) => a.category),
-        ]);
-        return [...allCategories].map((cat) => {
+    ? (Object.keys(CATEGORY_LABELS) as (keyof typeof CATEGORY_LABELS)[]).map(
+        (cat) => {
           const guruAlloc = selectedGuru.idealAllocation.find(
             (a) => a.category === cat,
           );
@@ -87,8 +84,8 @@ export function GurusPage() {
             guru: guruAlloc ? guruAlloc.targetPercent : 0,
             mine: myAlloc ? Number(myAlloc.percent.toFixed(1)) : 0,
           };
-        });
-      })()
+        },
+      )
     : [];
 
   const selectedPhilosophyKey = selectedGuru
