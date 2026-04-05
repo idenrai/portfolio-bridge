@@ -68,18 +68,27 @@ export function GurusPage() {
     ? calculateRebalancing(summary, selectedGuru.idealAllocation)
     : [];
 
-  // 레이더 차트용 데이터: 내 포트폴리오 vs 선택 구루
+  // 레이더 차트용 데이터: 내 포트폴리오 vs 선택 구루 (유니온)
   const radarData = selectedGuru
-    ? selectedGuru.idealAllocation.map((ga) => {
-        const myAlloc = summary.categoryAllocation.find(
-          (t_) => t_.category === ga.category,
-        );
-        return {
-          category: t.category_labels[ga.category] ?? ga.category,
-          guru: ga.targetPercent,
-          mine: myAlloc ? Number(myAlloc.percent.toFixed(1)) : 0,
-        };
-      })
+    ? (() => {
+        const allCategories = new Set([
+          ...selectedGuru.idealAllocation.map((a) => a.category),
+          ...summary.categoryAllocation.map((a) => a.category),
+        ]);
+        return [...allCategories].map((cat) => {
+          const guruAlloc = selectedGuru.idealAllocation.find(
+            (a) => a.category === cat,
+          );
+          const myAlloc = summary.categoryAllocation.find(
+            (a) => a.category === cat,
+          );
+          return {
+            category: t.category_labels[cat] ?? cat,
+            guru: guruAlloc ? guruAlloc.targetPercent : 0,
+            mine: myAlloc ? Number(myAlloc.percent.toFixed(1)) : 0,
+          };
+        });
+      })()
     : [];
 
   const selectedPhilosophyKey = selectedGuru
