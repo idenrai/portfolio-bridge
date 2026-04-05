@@ -178,7 +178,7 @@ export function AssetTable({
         </div>
       ) : (
         <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
-          <table className="w-full text-sm min-w-[900px]">
+          <table className="w-full text-sm min-w-225">
             <thead>
               <tr className="text-left text-xs text-slate-500 border-b border-slate-200">
                 <th
@@ -233,8 +233,8 @@ export function AssetTable({
 
                 return (
                   <tr key={a.id} className="hover:bg-slate-50">
-                    <td className="py-2.5 max-w-[260px]">
-                      <p className="font-medium text-slate-800 break-words whitespace-normal leading-snug">
+                    <td className="py-2.5 max-w-65">
+                      <p className="font-medium text-slate-800 wrap-break-word whitespace-normal leading-snug">
                         {a.name}
                       </p>
                       {a.ticker && (

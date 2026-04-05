@@ -24,7 +24,7 @@ export function PortfolioHistoryChart() {
   if (snapshots.length < 2) {
     return (
       <Card title={t.history_title}>
-        <div className="flex items-center justify-center h-[200px] text-sm text-slate-400">
+        <div className="flex items-center justify-center h-50 text-sm text-slate-400">
           {t.history_no_data}
         </div>
       </Card>
