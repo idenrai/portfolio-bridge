@@ -4,6 +4,7 @@ import type { FundamentalsData } from "./yahooCore";
 type RawVal = { raw?: number };
 type RawStr = { raw?: number } | string;
 type Stmt = { totalRevenue?: RawVal; dilutedEPS?: RawVal; operatingIncome?: RawVal };
+type EarningsEntry = { epsActual?: RawVal; epsEstimate?: RawVal; quarter?: RawVal };
 
 /** quoteSummary JSON → FundamentalsData 변환 */
 function parseQuoteSummary(data: unknown): FundamentalsData | null {
@@ -42,6 +43,42 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
     }
   }
 
+  // 폴백 2: earningsQuarterlyGrowth (분기 EPS YoY)
+  if (epsGrowth === null) {
+    epsGrowth = (ks.earningsQuarterlyGrowth as RawVal | undefined)?.raw
+      ?? (fd.earningsQuarterlyGrowth as RawVal | undefined)?.raw
+      ?? null;
+  }
+
+  // 폴백 3: earningsHistory 모듈 – 직전 4분기 epsActual YoY
+  if (epsGrowth === null) {
+    const eh = (result.earningsHistory as
+      { history?: EarningsEntry[] } | undefined
+    )?.history;
+    if (eh && eh.length >= 4) {
+      const recent = eh[eh.length - 1];
+      const yearAgo = eh[0];
+      if (
+        recent?.epsActual?.raw != null && yearAgo?.epsActual?.raw != null &&
+        yearAgo.epsActual.raw !== 0
+      ) {
+        epsGrowth = (recent.epsActual.raw - yearAgo.epsActual.raw) / Math.abs(yearAgo.epsActual.raw);
+      }
+    }
+  }
+
+  // 폴백 4: epsTrailingTwelveMonths vs epsForward 로 예상 성장률 역산
+  if (epsGrowth === null) {
+    const epsTrailing = (sd.epsTrailingTwelveMonths as RawVal | undefined)?.raw
+      ?? (fd.epsTrailingTwelveMonths as RawVal | undefined)?.raw ?? null;
+    const epsForward = (sd.epsForward as RawVal | undefined)?.raw
+      ?? (fd.epsForward as RawVal | undefined)?.raw
+      ?? (ks.forwardEps as RawVal | undefined)?.raw ?? null;
+    if (epsTrailing != null && epsForward != null && epsTrailing !== 0 && epsForward > epsTrailing) {
+      epsGrowth = (epsForward - epsTrailing) / Math.abs(epsTrailing);
+    }
+  }
+
   // 영업이익률 폴백: operatingIncome / totalRevenue (income statement 기준)
   if (stmts && stmts.length >= 1 && operatingMargin === null) {
     const curr = stmts[0];
@@ -77,7 +114,7 @@ export async function fetchFundamentals(
   symbol: string,
 ): Promise<FundamentalsData | null> {
   const encoded = encodeURIComponent(symbol);
-  const modules = "defaultKeyStatistics,summaryDetail,financialData,incomeStatementHistory";
+  const modules = "defaultKeyStatistics,summaryDetail,financialData,incomeStatementHistory,earningsHistory";
 
   // v10, v11 시도
   for (const ver of ["v10", "v11"] as const) {
