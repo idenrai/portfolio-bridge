@@ -111,16 +111,20 @@ function scoreDebtToEquity(de: number | null): Pick<MFCriterion, "pass" | "score
 
 /**
  * 시가총액 (max 10점) — 중형주 선호
- * $1B–$10B: 10, $300M–$1B: 8, $10B–$50B: 5, else: 2
+ * $1B–$10B: 10, $300M–$1B: 8, $10B–$50B: 6,
+ * $100M–$300M: 4, $50B–$200B: 3, else: 1
  */
 function scoreMarketCap(cap: number | null, currency: string | null): Pick<MFCriterion, "pass" | "score"> {
   if (cap === null) return { pass: null, score: 0 };
+  const M = 1_000_000;
   const B = 1_000_000_000;
   const capUSD = approxToUSD(cap, currency ?? "USD");
-  if (capUSD >= 1 * B && capUSD < 10 * B) return { pass: true, score: 10 };
-  if (capUSD >= 300_000_000 && capUSD < 1 * B) return { pass: true, score: 8 };
-  if (capUSD >= 10 * B && capUSD < 50 * B) return { pass: false, score: 5 };
-  return { pass: false, score: 2 };
+  if (capUSD >= 1 * B && capUSD < 10 * B)   return { pass: true,  score: 10 };
+  if (capUSD >= 300 * M && capUSD < 1 * B)   return { pass: true,  score: 8 };
+  if (capUSD >= 10 * B && capUSD < 50 * B)   return { pass: true,  score: 6 };
+  if (capUSD >= 100 * M && capUSD < 300 * M) return { pass: false, score: 4 };
+  if (capUSD >= 50 * B && capUSD < 200 * B)  return { pass: false, score: 3 };
+  return { pass: false, score: 1 };
 }
 
 // ─── 스코어링 함수 ──────────────────────────────────────────────────────────
