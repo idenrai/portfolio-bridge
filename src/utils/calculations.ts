@@ -194,6 +194,7 @@ export function calculateSummary(
 
 /**
  * 리밸런싱 권장 계산
+ * 내 자산 카테고리 + 구루 목표 카테고리의 합집합 기준으로 산출
  */
 export function calculateRebalancing(
   summary: PortfolioSummary,
@@ -202,16 +203,21 @@ export function calculateRebalancing(
   const currentMap = new Map(
     summary.categoryAllocation.map((t) => [t.category, t.percent]),
   );
+  const targetMap = new Map(
+    targets.map((t) => [t.category, t.targetPercent]),
+  );
 
-  return targets.map((t) => {
-    const currentPercent = currentMap.get(t.category) ?? 0;
-    const diffPercent = t.targetPercent - currentPercent;
+  // 합집합: 구루 목표 카테고리 + 내 보유 카테고리
+  const allCategories = new Set<AssetCategory>([
+    ...targetMap.keys(),
+    ...currentMap.keys(),
+  ]);
+
+  return [...allCategories].map((category) => {
+    const currentPercent = currentMap.get(category) ?? 0;
+    const targetPercent = targetMap.get(category) ?? 0;
+    const diffPercent = targetPercent - currentPercent;
     const diffAmountKRW = (diffPercent / 100) * summary.totalValueKRW;
-    return {
-      category: t.category,
-      currentPercent,
-      targetPercent: t.targetPercent,
-      diffAmountKRW,
-    };
+    return { category, currentPercent, targetPercent, diffAmountKRW };
   });
 }
