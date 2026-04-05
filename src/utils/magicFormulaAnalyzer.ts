@@ -37,21 +37,70 @@ interface MFRawData {
   currency: string | null;
 }
 
+type IncStmt = { operatingIncome?: RawVal; totalRevenue?: RawVal; netIncome?: RawVal };
+type BalStmt = { totalStockholderEquity?: RawVal; longTermDebt?: RawVal; shortLongTermDebt?: RawVal };
+
 async function fetchMFData(symbol: string): Promise<MFRawData | null> {
-  const result = await fetchQuoteSummary(symbol, "defaultKeyStatistics,summaryDetail,financialData");
+  const result = await fetchQuoteSummary(
+    symbol,
+    "defaultKeyStatistics,summaryDetail,financialData,incomeStatementHistory,balanceSheetHistory",
+  );
   if (!result) return null;
 
   const ks = (result.defaultKeyStatistics ?? {}) as Record<string, RawVal>;
   const sd = (result.summaryDetail ?? {}) as Record<string, RawVal>;
   const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
 
+  // Earnings Yield: 1/EV÷EBITDA → 폴백: 1/trailingPE 또는 eps/price
   const evToEbitda = ks.enterpriseToEbitda?.raw ?? null;
-  const earningsYield = evToEbitda && evToEbitda > 0 ? 1 / evToEbitda : null;
-  const returnOnCapital = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
-  const operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
-  const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
+  let earningsYield = evToEbitda && evToEbitda > 0 ? 1 / evToEbitda : null;
+  if (earningsYield === null) {
+    const pe = sd.trailingPE?.raw ?? sd.forwardPE?.raw ?? null;
+    if (pe != null && pe > 0) earningsYield = 1 / pe;
+  }
+
+  let returnOnCapital = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
+  let operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
+  let debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
   const marketCap = sd.marketCap?.raw ?? ks.marketCap?.raw ?? null;
   const currency = typeof fd.financialCurrency === "string" ? fd.financialCurrency : null;
+
+  // incomeStatementHistory 폴백: operatingMargin, ROC
+  const incStmts = (result.incomeStatementHistory as
+    { incomeStatementHistory?: IncStmt[] } | undefined
+  )?.incomeStatementHistory;
+
+  if (incStmts && incStmts.length >= 1) {
+    const curr = incStmts[0];
+    if (operatingMargin === null && curr.operatingIncome?.raw != null && curr.totalRevenue?.raw != null && curr.totalRevenue.raw !== 0) {
+      operatingMargin = curr.operatingIncome.raw / curr.totalRevenue.raw;
+    }
+    // ROC 폴백: netIncome / totalStockholderEquity
+    if (returnOnCapital === null && curr.netIncome?.raw != null) {
+      const bsStmts = (result.balanceSheetHistory as
+        { balanceSheetStatements?: BalStmt[] } | undefined
+      )?.balanceSheetStatements;
+      if (bsStmts && bsStmts.length > 0) {
+        const equity = bsStmts[0].totalStockholderEquity?.raw;
+        if (equity != null && equity > 0) {
+          returnOnCapital = curr.netIncome.raw / equity;
+        }
+      }
+    }
+  }
+
+  // D/E 폴백: balanceSheetHistory
+  if (debtToEquity === null) {
+    const bsStmts = (result.balanceSheetHistory as
+      { balanceSheetStatements?: BalStmt[] } | undefined
+    )?.balanceSheetStatements;
+    if (bsStmts && bsStmts.length > 0) {
+      const bs = bsStmts[0];
+      const equity = bs.totalStockholderEquity?.raw;
+      const debt = (bs.longTermDebt?.raw ?? 0) + (bs.shortLongTermDebt?.raw ?? 0);
+      if (equity != null && equity > 0 && debt > 0) debtToEquity = (debt / equity) * 100;
+    }
+  }
 
   return { earningsYield, returnOnCapital, operatingMargin, debtToEquity, marketCap, currency };
 }

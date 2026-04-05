@@ -36,17 +36,35 @@ interface GrahamRawData {
   dividendYield: number | null;
 }
 
+type BalanceStmt = {
+  totalCurrentAssets?: RawVal;
+  totalCurrentLiabilities?: RawVal;
+  totalStockholderEquity?: RawVal;
+  longTermDebt?: RawVal;
+  shortLongTermDebt?: RawVal;
+};
+
 async function fetchGrahamData(symbol: string): Promise<GrahamRawData | null> {
-  const result = await fetchQuoteSummary(symbol, "defaultKeyStatistics,summaryDetail,financialData");
+  const result = await fetchQuoteSummary(
+    symbol,
+    "defaultKeyStatistics,summaryDetail,financialData,balanceSheetHistory",
+  );
   if (!result) return null;
 
   const ks = (result.defaultKeyStatistics ?? {}) as Record<string, RawVal>;
   const sd = (result.summaryDetail ?? {}) as Record<string, RawVal>;
   const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
 
-  const peRatio = sd.trailingPE?.raw ?? null;
+  // P/E: trailingPE → forwardPE → currentPrice / epsTrailingTwelveMonths
+  let peRatio = sd.trailingPE?.raw ?? null;
+  if (peRatio === null) peRatio = sd.forwardPE?.raw ?? null;
+  if (peRatio === null) {
+    const price = (fd.currentPrice as RawVal | undefined)?.raw ?? sd.previousClose?.raw ?? null;
+    const eps = sd.epsTrailingTwelveMonths?.raw ?? (fd.epsTrailingTwelveMonths as RawVal | undefined)?.raw ?? null;
+    if (price != null && eps != null && eps > 0) peRatio = price / eps;
+  }
 
-  // P/B: summaryDetail.priceToBook 우선, 없으면 currentPrice / bookValue 폴백
+  // P/B: priceToBook → currentPrice / bookValue
   let pbRatio = sd.priceToBook?.raw ?? null;
   if (pbRatio === null) {
     const bookValue = ks.bookValue?.raw ?? null;
@@ -56,9 +74,32 @@ async function fetchGrahamData(symbol: string): Promise<GrahamRawData | null> {
     }
   }
 
-  const currentRatio = (fd.currentRatio as RawVal | undefined)?.raw ?? null;
-  const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
-  const dividendYield = sd.dividendYield?.raw ?? null;
+  let currentRatio = (fd.currentRatio as RawVal | undefined)?.raw ?? null;
+  let debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
+
+  // balanceSheetHistory 폴백: currentRatio, debtToEquity
+  const bsStmts = (result.balanceSheetHistory as
+    { balanceSheetStatements?: BalanceStmt[] } | undefined
+  )?.balanceSheetStatements;
+  if (bsStmts && bsStmts.length > 0) {
+    const bs = bsStmts[0];
+    if (currentRatio === null) {
+      const ca = bs.totalCurrentAssets?.raw;
+      const cl = bs.totalCurrentLiabilities?.raw;
+      if (ca != null && cl != null && cl > 0) currentRatio = ca / cl;
+    }
+    if (debtToEquity === null) {
+      const equity = bs.totalStockholderEquity?.raw;
+      const debt = (bs.longTermDebt?.raw ?? 0) + (bs.shortLongTermDebt?.raw ?? 0);
+      if (equity != null && equity > 0 && debt > 0) debtToEquity = (debt / equity) * 100;
+    }
+  }
+
+  // 배당수익률: dividendYield → trailingAnnualDividendYield
+  let dividendYield = sd.dividendYield?.raw ?? null;
+  if (dividendYield === null) {
+    dividendYield = sd.trailingAnnualDividendYield?.raw ?? null;
+  }
 
   return { peRatio, pbRatio, currentRatio, debtToEquity, dividendYield };
 }

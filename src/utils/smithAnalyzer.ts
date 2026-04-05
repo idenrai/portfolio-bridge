@@ -37,19 +37,24 @@ interface SmithRawData {
 }
 
 type CfStmt = { freeCashFlow?: RawVal; totalCashFromOperatingActivities?: RawVal };
+type IncStmt = { operatingIncome?: RawVal; totalRevenue?: RawVal; netIncome?: RawVal };
+type BalStmt = { totalStockholderEquity?: RawVal; longTermDebt?: RawVal; shortLongTermDebt?: RawVal };
 
 async function fetchSmithData(symbol: string): Promise<SmithRawData | null> {
-  const result = await fetchQuoteSummary(symbol, "defaultKeyStatistics,summaryDetail,financialData,cashflowStatementHistory");
+  const result = await fetchQuoteSummary(
+    symbol,
+    "defaultKeyStatistics,summaryDetail,financialData,cashflowStatementHistory,incomeStatementHistory,balanceSheetHistory",
+  );
   if (!result) return null;
 
   const fd = (result.financialData ?? {}) as Record<string, RawVal | string>;
 
-  const returnOnEquity = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
-  const operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
+  let returnOnEquity = (fd.returnOnEquity as RawVal | undefined)?.raw ?? null;
+  let operatingMargin = (fd.operatingMargins as RawVal | undefined)?.raw ?? null;
   let freeCashflow = (fd.freeCashflow as RawVal | undefined)?.raw ?? null;
   let operatingCashflow = (fd.operatingCashflow as RawVal | undefined)?.raw ?? null;
-  const revenueGrowth = (fd.revenueGrowth as RawVal | undefined)?.raw ?? null;
-  const debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
+  let revenueGrowth = (fd.revenueGrowth as RawVal | undefined)?.raw ?? null;
+  let debtToEquity = (fd.debtToEquity as RawVal | undefined)?.raw ?? null;
 
   // FCF/OperatingCashflow 폴백: cashflowStatementHistory 최신 연도
   if (freeCashflow === null || operatingCashflow === null) {
@@ -64,6 +69,51 @@ async function fetchSmithData(symbol: string): Promise<SmithRawData | null> {
       if (operatingCashflow === null) {
         operatingCashflow = latest.totalCashFromOperatingActivities?.raw ?? null;
       }
+    }
+  }
+
+  // incomeStatementHistory 폴백: operatingMargin, revenueGrowth, ROE
+  const incStmts = (result.incomeStatementHistory as
+    { incomeStatementHistory?: IncStmt[] } | undefined
+  )?.incomeStatementHistory;
+
+  if (incStmts && incStmts.length >= 1) {
+    const curr = incStmts[0];
+    // 영업이익률 폴백
+    if (operatingMargin === null && curr.operatingIncome?.raw != null && curr.totalRevenue?.raw != null && curr.totalRevenue.raw !== 0) {
+      operatingMargin = curr.operatingIncome.raw / curr.totalRevenue.raw;
+    }
+    // 매출 성장률 폴백
+    if (revenueGrowth === null && incStmts.length >= 2) {
+      const prev = incStmts[1];
+      if (curr.totalRevenue?.raw != null && prev.totalRevenue?.raw != null && prev.totalRevenue.raw !== 0) {
+        revenueGrowth = (curr.totalRevenue.raw - prev.totalRevenue.raw) / Math.abs(prev.totalRevenue.raw);
+      }
+    }
+    // ROE 폴백: netIncome / totalStockholderEquity
+    if (returnOnEquity === null && curr.netIncome?.raw != null) {
+      const bsStmts = (result.balanceSheetHistory as
+        { balanceSheetStatements?: BalStmt[] } | undefined
+      )?.balanceSheetStatements;
+      if (bsStmts && bsStmts.length > 0) {
+        const equity = bsStmts[0].totalStockholderEquity?.raw;
+        if (equity != null && equity > 0) {
+          returnOnEquity = curr.netIncome.raw / equity;
+        }
+      }
+    }
+  }
+
+  // D/E 폴백: balanceSheetHistory
+  if (debtToEquity === null) {
+    const bsStmts = (result.balanceSheetHistory as
+      { balanceSheetStatements?: BalStmt[] } | undefined
+    )?.balanceSheetStatements;
+    if (bsStmts && bsStmts.length > 0) {
+      const bs = bsStmts[0];
+      const equity = bs.totalStockholderEquity?.raw;
+      const debt = (bs.longTermDebt?.raw ?? 0) + (bs.shortLongTermDebt?.raw ?? 0);
+      if (equity != null && equity > 0 && debt > 0) debtToEquity = (debt / equity) * 100;
     }
   }
 
