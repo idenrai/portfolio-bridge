@@ -108,38 +108,47 @@ async function fetchGrahamData(symbol: string): Promise<GrahamRawData | null> {
 
 /**
  * P/E 비율 (max 25점) — 그레이엄: < 15 선호
- * < 10: 25, 10~15: 20, 15~20: 10, ≥ 20: 0
+ * < 8: 25, 8~10: 22, 10~12: 18, 12~15: 14, 15~18: 8, 18~20: 4, ≥ 20: 0
  */
 function scorePE(pe: number | null): Pick<GrahamCriterion, "pass" | "score"> {
   if (pe === null || pe <= 0) return { pass: null, score: 0 };
-  if (pe < 10) return { pass: true, score: 25 };
-  if (pe < 15) return { pass: true, score: 20 };
-  if (pe < 20) return { pass: false, score: 10 };
+  if (pe < 8)  return { pass: true,  score: 25 };
+  if (pe < 10) return { pass: true,  score: 22 };
+  if (pe < 12) return { pass: true,  score: 18 };
+  if (pe < 15) return { pass: true,  score: 14 };
+  if (pe < 18) return { pass: false, score: 8 };
+  if (pe < 20) return { pass: false, score: 4 };
   return { pass: false, score: 0 };
 }
 
 /**
  * P/B 비율 (max 20점) — 그레이엄: < 1.5 선호
- * < 1.0: 20, 1.0~1.5: 15, 1.5~3.0: 8, ≥ 3.0: 0
+ * < 0.7: 20, 0.7~1.0: 17, 1.0~1.2: 14, 1.2~1.5: 11, 1.5~2.0: 6, 2.0~3.0: 3, ≥ 3: 0
  */
 function scorePB(pb: number | null): Pick<GrahamCriterion, "pass" | "score"> {
   if (pb === null || pb <= 0) return { pass: null, score: 0 };
-  if (pb < 1.0) return { pass: true, score: 20 };
-  if (pb < 1.5) return { pass: true, score: 15 };
-  if (pb < 3.0) return { pass: false, score: 8 };
+  if (pb < 0.7) return { pass: true,  score: 20 };
+  if (pb < 1.0) return { pass: true,  score: 17 };
+  if (pb < 1.2) return { pass: true,  score: 14 };
+  if (pb < 1.5) return { pass: true,  score: 11 };
+  if (pb < 2.0) return { pass: false, score: 6 };
+  if (pb < 3.0) return { pass: false, score: 3 };
   return { pass: false, score: 0 };
 }
 
 /**
  * 그레이엄 넘버: P/E × P/B (max 20점) — < 22.5 선호
- * < 15: 20, 15~22.5: 15, 22.5~40: 8, ≥ 40: 0
+ * < 10: 20, 10~15: 17, 15~18: 14, 18~22.5: 10, 22.5~30: 6, 30~40: 3, ≥ 40: 0
  */
 function scoreGrahamNumber(pe: number | null, pb: number | null): Pick<GrahamCriterion, "pass" | "score"> {
   if (pe === null || pe <= 0 || pb === null || pb <= 0) return { pass: null, score: 0 };
   const product = pe * pb;
-  if (product < 15) return { pass: true, score: 20 };
-  if (product < 22.5) return { pass: true, score: 15 };
-  if (product < 40) return { pass: false, score: 8 };
+  if (product < 10)   return { pass: true,  score: 20 };
+  if (product < 15)   return { pass: true,  score: 17 };
+  if (product < 18)   return { pass: true,  score: 14 };
+  if (product < 22.5) return { pass: true,  score: 10 };
+  if (product < 30)   return { pass: false, score: 6 };
+  if (product < 40)   return { pass: false, score: 3 };
   return { pass: false, score: 0 };
 }
 
@@ -158,13 +167,15 @@ function scoreCurrentRatio(cr: number | null): Pick<GrahamCriterion, "pass" | "s
 
 /**
  * 부채비율 D/E (max 10점) — 그레이엄: 낮은 부채 선호
- * < 30: 10, 30~50: 8, 50~100: 4, ≥ 100: 0
+ * < 20: 10, 20~30: 8, 30~50: 6, 50~80: 4, 80~100: 2, ≥ 100: 0
  */
 function scoreDebtToEquity(de: number | null): Pick<GrahamCriterion, "pass" | "score"> {
   if (de === null) return { pass: null, score: 0 };
-  if (de < 30) return { pass: true, score: 10 };
-  if (de < 50) return { pass: true, score: 8 };
-  if (de < 100) return { pass: false, score: 4 };
+  if (de < 20)  return { pass: true,  score: 10 };
+  if (de < 30)  return { pass: true,  score: 8 };
+  if (de < 50)  return { pass: false, score: 6 };
+  if (de < 80)  return { pass: false, score: 4 };
+  if (de < 100) return { pass: false, score: 2 };
   return { pass: false, score: 0 };
 }
 

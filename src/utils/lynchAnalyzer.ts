@@ -36,61 +36,72 @@ export interface LynchAnalyzerResult {
 
 /**
  * PEG 비율 (max 25점)
- * < 0.5: 25점, 0.5~1.0: 20점, 1.0~2.0: 10점, ≥ 2.0: 0점
+ * < 0.5: 25, 0.5~0.75: 22, 0.75~1.0: 18, 1.0~1.5: 12, 1.5~2.0: 6, ≥ 2.0: 0
  */
 function scorePEG(peg: number | null): Pick<LynchCriterion, "pass" | "score"> {
   if (peg === null || peg <= 0) return { pass: null, score: 0 };
-  if (peg < 0.5) return { pass: true, score: 25 };
-  if (peg < 1.0) return { pass: true, score: 20 };
-  if (peg < 2.0) return { pass: false, score: 10 };
+  if (peg < 0.5)  return { pass: true,  score: 25 };
+  if (peg < 0.75) return { pass: true,  score: 22 };
+  if (peg < 1.0)  return { pass: true,  score: 18 };
+  if (peg < 1.5)  return { pass: false, score: 12 };
+  if (peg < 2.0)  return { pass: false, score: 6 };
   return { pass: false, score: 0 };
 }
 
 /**
  * EPS 성장률 (max 20점)
- * > 30%: 20점, 15~30%: 15점, 5~15%: 8점, < 5%: 0점
+ * > 30%: 20, 20~30: 17, 15~20: 14, 10~15: 10, 5~10: 5, ≤ 5%: 0
  */
 function scoreEpsGrowth(g: number | null): Pick<LynchCriterion, "pass" | "score"> {
   if (g === null) return { pass: null, score: 0 };
-  if (g > 0.3) return { pass: true, score: 20 };
-  if (g > 0.15) return { pass: true, score: 15 };
-  if (g > 0.05) return { pass: false, score: 8 };
+  if (g > 0.30) return { pass: true,  score: 20 };
+  if (g > 0.20) return { pass: true,  score: 17 };
+  if (g > 0.15) return { pass: true,  score: 14 };
+  if (g > 0.10) return { pass: false, score: 10 };
+  if (g > 0.05) return { pass: false, score: 5 };
   return { pass: false, score: 0 };
 }
 
 /**
  * 매출 성장률 (max 20점)
- * > 20%: 20점, 10~20%: 15점, 5~10%: 8점, < 5%: 0점
+ * > 20%: 20, 15~20: 17, 10~15: 13, 5~10: 8, 0~5: 3, ≤ 0%: 0
  */
 function scoreRevenueGrowth(g: number | null): Pick<LynchCriterion, "pass" | "score"> {
   if (g === null) return { pass: null, score: 0 };
-  if (g > 0.2) return { pass: true, score: 20 };
-  if (g > 0.1) return { pass: true, score: 15 };
+  if (g > 0.20) return { pass: true,  score: 20 };
+  if (g > 0.15) return { pass: true,  score: 17 };
+  if (g > 0.10) return { pass: true,  score: 13 };
   if (g > 0.05) return { pass: false, score: 8 };
+  if (g > 0)    return { pass: false, score: 3 };
   return { pass: false, score: 0 };
 }
 
 /**
  * 부채비율 D/E (max 15점) — Yahoo 스케일: 50 = 0.5x
- * < 30: 15점, 30~80: 10점, 80~150: 5점, ≥ 150: 0점
+ * < 20: 15, 20~30: 13, 30~50: 10, 50~80: 7, 80~120: 4, 120~150: 2, ≥ 150: 0
  */
 function scoreDebtToEquity(de: number | null): Pick<LynchCriterion, "pass" | "score"> {
   if (de === null) return { pass: null, score: 0 };
-  if (de < 30) return { pass: true, score: 15 };
-  if (de < 80) return { pass: true, score: 10 };
-  if (de < 150) return { pass: false, score: 5 };
+  if (de < 20)  return { pass: true,  score: 15 };
+  if (de < 30)  return { pass: true,  score: 13 };
+  if (de < 50)  return { pass: true,  score: 10 };
+  if (de < 80)  return { pass: false, score: 7 };
+  if (de < 120) return { pass: false, score: 4 };
+  if (de < 150) return { pass: false, score: 2 };
   return { pass: false, score: 0 };
 }
 
 /**
  * 영업이익률 (max 10점)
- * > 20%: 10점, 10~20%: 7점, 5~10%: 3점, < 5%: 0점
+ * > 25%: 10, 20~25: 8, 15~20: 6, 10~15: 4, 5~10: 2, ≤ 5%: 0
  */
 function scoreOperatingMargin(m: number | null): Pick<LynchCriterion, "pass" | "score"> {
   if (m === null) return { pass: null, score: 0 };
-  if (m > 0.2) return { pass: true, score: 10 };
-  if (m > 0.1) return { pass: true, score: 7 };
-  if (m > 0.05) return { pass: false, score: 3 };
+  if (m > 0.25) return { pass: true,  score: 10 };
+  if (m > 0.20) return { pass: true,  score: 8 };
+  if (m > 0.15) return { pass: true,  score: 6 };
+  if (m > 0.10) return { pass: false, score: 4 };
+  if (m > 0.05) return { pass: false, score: 2 };
   return { pass: false, score: 0 };
 }
 

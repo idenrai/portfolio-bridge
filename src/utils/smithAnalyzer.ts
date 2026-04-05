@@ -150,7 +150,7 @@ function scoreOperatingMargin(m: number | null): Pick<SmithCriterion, "pass" | "
 
 /**
  * FCF 전환율 (max 20점) — FCF / Operating Cashflow
- * > 80%: 20, 60~80%: 15, 40~60%: 8, ≤ 40%: 0
+ * > 90%: 20, 80~90: 17, 70~80: 14, 60~70: 10, 50~60: 6, 40~50: 3, ≤ 40%: 0
  */
 function scoreFCFConversion(
   fcf: number | null,
@@ -158,9 +158,12 @@ function scoreFCFConversion(
 ): Pick<SmithCriterion, "pass" | "score"> {
   if (fcf === null || opCF === null || opCF <= 0) return { pass: null, score: 0 };
   const ratio = fcf / opCF;
-  if (ratio > 0.80) return { pass: true, score: 20 };
-  if (ratio > 0.60) return { pass: true, score: 15 };
-  if (ratio > 0.40) return { pass: false, score: 8 };
+  if (ratio > 0.90) return { pass: true,  score: 20 };
+  if (ratio > 0.80) return { pass: true,  score: 17 };
+  if (ratio > 0.70) return { pass: true,  score: 14 };
+  if (ratio > 0.60) return { pass: false, score: 10 };
+  if (ratio > 0.50) return { pass: false, score: 6 };
+  if (ratio > 0.40) return { pass: false, score: 3 };
   return { pass: false, score: 0 };
 }
 
@@ -179,13 +182,15 @@ function scoreRevenueGrowth(g: number | null): Pick<SmithCriterion, "pass" | "sc
 
 /**
  * 부채비율 D/E (max 10점) — 낮은 부채 선호
- * < 30: 10, 30~60: 8, 60~100: 4, ≥ 100: 0
+ * < 20: 10, 20~30: 8, 30~50: 6, 50~80: 4, 80~100: 2, ≥ 100: 0
  */
 function scoreDebtToEquity(de: number | null): Pick<SmithCriterion, "pass" | "score"> {
   if (de === null) return { pass: null, score: 0 };
-  if (de < 30) return { pass: true, score: 10 };
-  if (de < 60) return { pass: true, score: 8 };
-  if (de < 100) return { pass: false, score: 4 };
+  if (de < 20)  return { pass: true,  score: 10 };
+  if (de < 30)  return { pass: true,  score: 8 };
+  if (de < 50)  return { pass: false, score: 6 };
+  if (de < 80)  return { pass: false, score: 4 };
+  if (de < 100) return { pass: false, score: 2 };
   return { pass: false, score: 0 };
 }
 

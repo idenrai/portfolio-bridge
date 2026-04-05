@@ -148,13 +148,16 @@ function scoreOperatingMargin(m: number | null): Pick<MFCriterion, "pass" | "sco
 
 /**
  * 부채비율 D/E (max 15점)
- * < 30: 15, 30~80: 10, 80~150: 5, ≥ 150: 0
+ * < 20: 15, 20~30: 13, 30~50: 10, 50~80: 7, 80~120: 4, 120~150: 2, ≥ 150: 0
  */
 function scoreDebtToEquity(de: number | null): Pick<MFCriterion, "pass" | "score"> {
   if (de === null) return { pass: null, score: 0 };
-  if (de < 30) return { pass: true, score: 15 };
-  if (de < 80) return { pass: true, score: 10 };
-  if (de < 150) return { pass: false, score: 5 };
+  if (de < 20)  return { pass: true,  score: 15 };
+  if (de < 30)  return { pass: true,  score: 13 };
+  if (de < 50)  return { pass: true,  score: 10 };
+  if (de < 80)  return { pass: false, score: 7 };
+  if (de < 120) return { pass: false, score: 4 };
+  if (de < 150) return { pass: false, score: 2 };
   return { pass: false, score: 0 };
 }
 
