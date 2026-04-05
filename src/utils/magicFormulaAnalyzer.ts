@@ -155,12 +155,14 @@ function scoreStock(stock: UniverseStock, data: MFRawData): MFAnalyzerResult {
   const debt   = scoreDebtToEquity(data.debtToEquity);
   const cap    = scoreMarketCap(data.marketCap, data.currency);
 
+  const capUSD = data.marketCap !== null ? approxToUSD(data.marketCap, data.currency ?? "USD") : null;
+
   const criteria: MFCriterion[] = [
     { key: "earningsYield",   value: data.earningsYield,   maxScore: 30, ...ey     },
     { key: "returnOnCapital", value: data.returnOnCapital, maxScore: 30, ...roc    },
     { key: "operatingMargin", value: data.operatingMargin, maxScore: 15, ...margin },
     { key: "debtToEquity",    value: data.debtToEquity,    maxScore: 15, ...debt   },
-    { key: "marketCap",       value: data.marketCap,       maxScore: 10, ...cap    },
+    { key: "marketCap",       value: capUSD,               maxScore: 10, ...cap    },
   ];
 
   const totalScore = criteria.reduce((sum, c) => sum + c.score, 0);

@@ -128,13 +128,15 @@ export function scoreStock(
   const margin = scoreOperatingMargin(operatingMargin);
   const cap    = scoreMarketCap(marketCap, currency);
 
+  const capUSD = marketCap !== null ? approxToUSD(marketCap, currency ?? "USD") : null;
+
   const criteria: LynchCriterion[] = [
     { key: "peg",             value: pegRatio,        maxScore: 25, ...peg    },
     { key: "epsGrowth",       value: epsGrowth,       maxScore: 20, ...eps    },
     { key: "revenueGrowth",   value: revenueGrowth,   maxScore: 20, ...rev    },
     { key: "debtToEquity",    value: debtToEquity,    maxScore: 15, ...debt   },
     { key: "operatingMargin", value: operatingMargin, maxScore: 10, ...margin },
-    { key: "marketCap",       value: marketCap,       maxScore: 10, ...cap    },
+    { key: "marketCap",       value: capUSD,          maxScore: 10, ...cap    },
   ];
 
   const totalScore = criteria.reduce((sum, c) => sum + c.score, 0);
