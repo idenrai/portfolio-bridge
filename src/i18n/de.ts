@@ -21,7 +21,7 @@ export const de: Translations = {
     "Ticker über Yahoo Finance suchen oder Vermögenswerte manuell hinzufügen. KI-Autoclassifizierung, CSV-Import & -Export unterstützt.",
   about_feat3_title: "Investmentgurus",
   about_feat3_desc:
-    "Referenzieren Sie die Philosophien und Musterportfolios von 15 legendären Investoren — Buffett, Dalio, Lynch und mehr — und vergleichen Sie sie mit Ihrem eigenen Portfolio. Erstellt außerdem KI-Chatprompts in der Persona des gewählten Gurus.",
+    "Referenzieren Sie die Philosophien und Musterportfolios von 18 legendären Investoren — Buffett, Dalio, Lynch und mehr — und vergleichen Sie sie mit Ihrem eigenen Portfolio. Inkl. 4 quantitative Analyzer: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive, Smith Quality Compounder. KI-Chat-Prompts in der Persona des gewählten Gurus.",
   about_feat4_title: "KI-Portfolioanalyse",
   about_feat4_desc:
     "Erstellen Sie einen strukturierten Prompt mit Ihren Bestandsdaten, bereit zum Einfügen in ChatGPT, Claude, Gemini oder Grok für ideale Allokationsratschläge.",

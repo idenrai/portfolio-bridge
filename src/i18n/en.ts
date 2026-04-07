@@ -21,7 +21,7 @@ export const en: Translations = {
     "Search tickers via Yahoo Finance or add assets manually. AI auto-classification, CSV import & export supported.",
   about_feat3_title: "Investment Gurus",
   about_feat3_desc:
-    "Reference the philosophies and model portfolios of 15 legendary investors — Buffett, Dalio, Lynch, and more — and compare them with your own portfolio.",
+    "Reference the philosophies and model portfolios of 18 legendary investors — Buffett, Dalio, Lynch, and more — and compare them with your own portfolio. Includes 4 quantitative analyzers: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive, and Smith Quality Compounder. AI chat prompts in the persona of your chosen guru.",
   about_feat4_title: "AI Portfolio Analysis",
   about_feat4_desc:
     "Generate a structured prompt packed with your holdings data, ready to paste into ChatGPT, Claude, Gemini, or Grok for ideal allocation advice.",
