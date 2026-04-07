@@ -52,7 +52,7 @@ export const ja: Translations = {
     "🖥️ PCブラウザに最適化されています。モバイル画面には現在対応しておりません。",
   dash_sample_btn: "📈 サンプルデータで確認",
   dash_sample_hint:
-    "サンプルデータは「設定 › 全データリセット」で削除できます。",
+    "サンプルデータは「設定 › 全データ初期化」で削除できます。",
   dash_refresh: "為替・時価更新",
   dash_refreshing: "取得中…",
   dash_updated_at: (time) => `${time}`,

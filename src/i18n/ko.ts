@@ -51,7 +51,7 @@ export const ko: Translations = {
   dash_notice_mobile:
     "🖥️ 현재 PC 브라우저에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
   dash_sample_btn: "📈 샘플 데이터로 둘러보기",
-  dash_sample_hint: "샘플 데이터는 '설정 › 전체 초기화'로 제거할 수 있습니다.",
+  dash_sample_hint: "샘플 데이터는 '설정 › 전체 데이터 초기화'로 제거할 수 있습니다.",
   dash_refresh: "환율 · 시세 갱신",
   dash_refreshing: "조회 중…",
   dash_updated_at: (time) => `${time}`,

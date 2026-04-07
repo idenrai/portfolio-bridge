@@ -51,7 +51,7 @@ export const en: Translations = {
   dash_notice_mobile:
     "🖥️ Optimized for desktop browsers. Mobile screens are not currently supported.",
   dash_sample_btn: "📈 Explore with sample data",
-  dash_sample_hint: "Sample data can be removed via Settings › Reset all data.",
+  dash_sample_hint: "Sample data can be removed via Settings › Reset All Data.",
   dash_refresh: "Refresh All",
   dash_refreshing: "Fetching…",
   dash_updated_at: (time) => `${time}`,
