@@ -444,6 +444,7 @@ export const ko: Translations = {
   settings_data_reset: "전체 데이터 초기화",
   settings_data_reset_confirm:
     "모든 데이터(자산, 설정)를 초기화합니다. 이 작업은 되돌릴 수 없습니다.",
+  settings_data_drive_title: "💡 Google Drive 데이터 삭제",
   settings_data_drive_note:
     "Google Drive에 저장된 데이터를 삭제하려면 Google 계정의 앱 연결 관리 페이지(myaccount.google.com/permissions)에서 이 앱의 접근 권한을 해제하세요. 권한 해제 시 Google Drive에 저장된 백업 파일도 함께 삭제됩니다.",
 

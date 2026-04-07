@@ -329,6 +329,7 @@ export interface Translations {
   settings_data_count: (n: number) => string;
   settings_data_reset: string;
   settings_data_reset_confirm: string;
+  settings_data_drive_title: string;
   settings_data_drive_note: string;
 
   // ─── Asset Table ───────────────────────────────────────────────────────────

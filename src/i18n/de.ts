@@ -452,6 +452,7 @@ export const de: Translations = {
   settings_data_reset: "Alle Daten zurücksetzen",
   settings_data_reset_confirm:
     "Dadurch werden alle Daten (Vermögen, Einstellungen) zurückgesetzt. Diese Aktion kann nicht rückgängig gemacht werden.",
+  settings_data_drive_title: "💡 Google Drive Daten löschen",
   settings_data_drive_note:
     "Um die auf Google Drive gespeicherten Daten zu löschen, wechseln Sie zur App-Berechtigungsseite Ihres Google-Kontos (myaccount.google.com/permissions) und widerrufen Sie den Zugriff für diese App. Beim Widerrufen wird auch die in Drive gespeicherte Sicherungsdatei gelöscht.",
 

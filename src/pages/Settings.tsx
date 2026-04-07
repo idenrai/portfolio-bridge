@@ -273,7 +273,7 @@ export function SettingsPage() {
             )}
             <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 space-y-1">
               <p className="text-xs font-medium text-slate-600">
-                💡 Google Drive 데이터 삭제
+                {t.settings_data_drive_title}
               </p>
               <p className="text-xs text-slate-500 leading-relaxed">
                 {t.settings_data_drive_note}

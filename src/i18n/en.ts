@@ -445,6 +445,7 @@ export const en: Translations = {
   settings_data_reset: "Reset All Data",
   settings_data_reset_confirm:
     "This will reset all data (assets, settings). This action cannot be undone.",
+  settings_data_drive_title: "💡 Google Drive Data Deletion",
   settings_data_drive_note:
     "To delete data saved on Google Drive, go to your Google Account's app permissions page (myaccount.google.com/permissions) and revoke access for this app. Revoking access will also delete the backup file stored in Drive.",
 
