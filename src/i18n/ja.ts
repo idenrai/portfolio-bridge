@@ -342,7 +342,7 @@ export const ja: Translations = {
     "• S・L・I・M：需給（浮動株数）、主導株か、機関買い、相場全体の方向性を総合判断\n" +
     "• 名言：「株式投資の秘訣は、間違ったときの損失をいかに最小限に抑えるかだ」",  lynch_tenbagger_title: "ピーター・リンチ テンバガー採点",
   lynch_tenbagger_desc:
-    "保有株や気になる銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
+    "保有株や気になる銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。PEG < 1.0、EPS成長率 > 15%、売上成長率 > 10%、D/E < 80%、営業利益率 > 10%、時価総額$10B未満ほど高スコア。低PEG・高成長の中小型株発掘に最適です。",
   lynch_criterion_peg: "PEGレシオ",
   lynch_criterion_eps: "EPS成長率",
   lynch_criterion_rev: "売上成長率",
@@ -369,7 +369,7 @@ export const ja: Translations = {
   // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: "ジョエル・グリーンブラット マジック・フォーミュラ採点",
   mf_desc:
-    "高い益回りと高い資本収益率を兼ね備えた銘柄を採点します。100点に近いほどマジック・フォーミュラに適合する銘柄です。",
+    "高い益回り(EY)と高い資本収益率(ROC)を兼ね備えた銘柄を採点します。EY > 10%、ROC > 25%、営業利益率 > 15%、D/E < 50%、時価総額$1B–$10B帯ほど高スコア。感情を排したルール基盤のバリュー株発掘に最適です。",
   mf_criterion_ey: "益回り",
   mf_criterion_roc: "資本収益率",
   mf_criterion_margin: "営業利益率",
@@ -387,7 +387,7 @@ export const ja: Translations = {
   // Graham
   graham_analyzer_title: "ベンジャミン・グレアム 防御的投資 採点器",
   graham_analyzer_desc:
-    "保有株式または任意のティッカーをグレアムの安全余裕基準（P/E、P/B、グレアムナンバー、流動比率、負債、配当）で採点します。",
+    "保有株または任意のティッカーをグレアムの安全余裕基準で採点します。P/E < 15、P/B < 1.5、グレアムナンバー(P/E×P/B) < 22.5、流動比率 > 2.0、D/E < 50%、配当利回り > 3%ほど高スコア。財務的に安定した割安ディフェンシブ株の発掘に最適です。",
   graham_criterion_pe: "P/E比率",
   graham_criterion_pb: "P/B比率",
   graham_criterion_gn: "グレアムナンバー",
@@ -406,7 +406,7 @@ export const ja: Translations = {
   // Smith
   smith_analyzer_title: "テリー・スミス クオリティコンパウンダー 採点器",
   smith_analyzer_desc:
-    "保有株式または任意のティッカーをスミスのクオリティ基準（ROE、営業利益率、FCF転換率、売上成長、低負債）で採点します。",
+    "保有株または任意のティッカーをスミスのクオリティコンパウンダー基準で採点します。ROE > 20%、営業利益率 > 15%、FCF転換率 > 80%、売上成長率 > 10%、D/E < 50%ほど高スコア。高い収益性とキャッシュ創出力を持つ複利成長型の優良株発掘に最適です。",
   smith_criterion_roe: "ROE",
   smith_criterion_margin: "営業利益率",
   smith_criterion_fcf: "FCF転換率",
@@ -424,7 +424,7 @@ export const ja: Translations = {
   // Piotroski F-Score
   piotroski_analyzer_title: "ピオトロスキー Fスコア採点",
   piotroski_analyzer_desc:
-    "保有株や任意のティッカーをピオトロスキーの9つの財務健全性基準（収益性・レバレッジ・効率性）で評価します。Fスコア9点（100点）に近いほど財務体質が優良です。",
+    "保有株や任意のティッカーをピオトロスキの9つの二項財務基準で採点します。収益性(ROA > 0、営業CF > 0、ΔROA改善、CF > 純利益)、財務健全性(負債減少、流動比率改善、株式希薄化なし)、運営効率(粗利率・資産回転率改善)の3分野計9点満点。財務体質が堅固なバリュー株の選別に最適です。",
   piotroski_criterion_roa: "ROA（総資産利益率）",
   piotroski_criterion_cfo: "営業キャッシュフロー",
   piotroski_criterion_delta_roa: "ΔROA（前年比）",
@@ -446,7 +446,7 @@ export const ja: Translations = {
   // O'Neil CAN SLIM
   oneil_analyzer_title: "ウィリアム・オニール CAN SLIM採点",
   oneil_analyzer_desc:
-    "保有株や任意のティッカーをオニールのCAN SLIM手法（四半期/年間業績成長、新高値、需給、主導株、機関、時価総額）で評価します。",
+    "保有株や任意のティッカーをオニールのCAN SLIM 7基準で採点します。C(四半EPS成長 ≥ 25%)、A(年間EPS成長 ≥ 25%)、N(52週高値近接 ≥ 90%)、S(浮動株 < 50M株)、L(高い相対強度)、I(機関保有 30–70%)、M(時価総額$2B–$50B)で評価します。爆発的な業績成長と強いモメンタムを持つ成長株の発掘に最適です。",
   oneil_criterion_current: "四半期EPS成長率 (C)",
   oneil_criterion_annual: "年間EPS成長率 (A)",
   oneil_criterion_newhigh: "52週高値近接 (N)",
@@ -586,6 +586,8 @@ export const ja: Translations = {
   af_re_search: "← 再検索",
   af_btn_cancel: "キャンセル",
   af_btn_submit: "登録完了",
+  af_manual_name_placeholder: "例: 楽天・プラス・Ｓ＆Ｐ５００インデックス・ファンド",
+  af_manual_ticker_placeholder: "0P0001D75H.T または JP90C000KRC0",
   af_manual_link: "Yahoo Finance で見つかりませんか？ → 手動入力",
   af_cash_amount_label: "保有額",
   af_crypto_hint: "コインのティッカーを入力して取引ペアを選択してください。",

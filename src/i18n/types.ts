@@ -458,6 +458,8 @@ export interface Translations {
   af_re_search: string;
   af_btn_cancel: string;
   af_btn_submit: string;
+  af_manual_name_placeholder: string;
+  af_manual_ticker_placeholder: string;
   af_manual_link: string;
   af_cash_amount_label: string;
   af_crypto_hint: string;

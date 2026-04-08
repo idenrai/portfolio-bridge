@@ -348,7 +348,7 @@ export const de: Translations = {
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Bewertung",
   lynch_tenbagger_desc:
-    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Je höher der Score, desto größer das Tenbagger-Potenzial.",
+    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Peter Lynchs PEG-, Wachstums- und Finanzkennzahlen. Höhere Punktzahlen bei PEG < 1,0, EPS-Wachstum > 15 %, Umsatzwachstum > 10 %, D/E < 80 %, Betriebsmarge > 10 % und Marktkapitalisierung unter $10 Mrd. Ideal für wachstumsstarke Small-/Mid-Cap-Aktien mit Tenbagger-Potenzial.",
   lynch_criterion_peg: "PEG-Verhältnis",
   lynch_criterion_eps: "EPS-Wachstum",
   lynch_criterion_rev: "Umsatzwachstum",
@@ -375,7 +375,7 @@ export const de: Translations = {
   // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: "Joel Greenblatt Magic-Formula-Bewertung",
   mf_desc:
-    "Bewertet Aktien nach Gewinnrendite und Kapitalrendite — die zwei Säulen von Greenblatts Magic Formula. Je höher der Score, desto besser.",
+    "Bewertet Aktien nach Gewinnrendite und Kapitalrendite — die zwei Säulen von Greenblatts Magic Formula. Höhere Punktzahlen bei EY > 10 %, ROC > 25 %, Betriebsmarge > 15 %, D/E < 50 % und Marktkapitalisierung $1–10 Mrd. Ideal für systematische, regelbasierte Value-Aktienauswahl ohne Emotionen.",
   mf_criterion_ey: "Gewinnrendite",
   mf_criterion_roc: "Kapitalrendite",
   mf_criterion_margin: "Betriebsmarge",
@@ -393,7 +393,7 @@ export const de: Translations = {
   // Graham
   graham_analyzer_title: "Benjamin Graham Defensiver Investor Analyzer",
   graham_analyzer_desc:
-    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Grahams Sicherheitsmarge: P/E, P/B, Graham Number, Liquiditätsquote, Verschuldung und Dividende.",
+    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Grahams Sicherheitsmarge. Höhere Punktzahlen bei P/E < 15, P/B < 1,5, Graham Number (P/E×P/B) < 22,5, Liquiditätsquote > 2,0, D/E < 50 % und Dividendenrendite > 3 %. Ideal für unterbewertete, finanziell stabile defensive Value-Aktien.",
   graham_criterion_pe: "P/E-Verhältnis",
   graham_criterion_pb: "P/B-Verhältnis",
   graham_criterion_gn: "Graham Number",
@@ -412,7 +412,7 @@ export const de: Translations = {
   // Smith
   smith_analyzer_title: "Terry Smith Quality Compounder Analyzer",
   smith_analyzer_desc:
-    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Smiths Qualitätskriterien: ROE, Betriebsmarge, FCF-Konversion, Umsatzwachstum und niedrige Verschuldung.",
+    "Bewertet Ihre Aktienbestände oder beliebige Ticker anhand von Smiths Qualitätskriterien. Höhere Punktzahlen bei ROE > 20 %, Betriebsmarge > 15 %, FCF-Konversion > 80 %, Umsatzwachstum > 10 % und D/E < 50 %. Ideal für hochwertige Compounding-Aktien mit starker Profitabilität und Cashflow-Generierung.",
   smith_criterion_roe: "ROE",
   smith_criterion_margin: "Betriebsmarge",
   smith_criterion_fcf: "FCF-Konversion",
@@ -430,7 +430,7 @@ export const de: Translations = {
   // Piotroski F-Score
   piotroski_analyzer_title: "Piotroski F-Score Bewertung",
   piotroski_analyzer_desc:
-    "Bewertet Ihre Aktien oder beliebige Ticker anhand von Piotroskis 9 binären Finanzkennzahlen (Rentabilität, Verschuldung, Effizienz). Ein perfekter F-Score von 9 (100 Pkt.) signalisiert starke Fundamentaldaten.",
+    "Bewertet Ihre Aktien oder beliebige Ticker anhand von Piotroskis 9 binären Finanzkennzahlen in drei Bereichen: Rentabilität (ROA > 0, positiver Cashflow, verbessertes ROA, Cashflow > Reingewinn), Finanzstärke (sinkende Schulden, verbesserte Liquiditätsquote, keine Verwässerung) und Effizienz (verbesserte Bruttomarge und Kapitalumschlag). Ein perfekter F-Score von 9 (100 Pkt.) signalisiert starke Fundamentaldaten. Ideal für finanziell gesunde Value-Aktien.",
   piotroski_criterion_roa: "ROA (Gesamtkapitalrendite)",
   piotroski_criterion_cfo: "Operativer Cashflow",
   piotroski_criterion_delta_roa: "ΔROA (ggü. Vorjahr)",
@@ -452,7 +452,7 @@ export const de: Translations = {
   // O'Neil CAN SLIM
   oneil_analyzer_title: "William O'Neil CAN SLIM Bewertung",
   oneil_analyzer_desc:
-    "Bewertet Ihre Aktien oder beliebige Ticker anhand von O'Neils CAN-SLIM-Methodik: Quartals-/Jahresgewinnwachstum, neue Hochs, Angebot/Nachfrage, Marktführer, institutionelle Beteiligung und Marktkapitalisierung.",
+    "Bewertet Ihre Aktien oder beliebige Ticker anhand von O'Neils 7 CAN-SLIM-Kriterien: C (Quartals-EPS-Wachstum ≥ 25 %), A (Jahres-EPS-Wachstum ≥ 25 %), N (nahe 52-Wochen-Hoch ≥ 90 %), S (Streubesitz < 50 Mio.), L (hohe relative Stärke), I (institutionelle Beteiligung 30–70 %) und M (Marktkapitalisierung $2–50 Mrd.). Ideal für wachstumsstarke Momentum-Aktien mit explosivem Gewinnwachstum.",
   oneil_criterion_current: "Quartals-EPS-Wachstum (C)",
   oneil_criterion_annual: "Jährliches EPS-Wachstum (A)",
   oneil_criterion_newhigh: "Nahe 52-Wochen-Hoch (N)",
@@ -597,6 +597,8 @@ export const de: Translations = {
   af_re_search: "← Erneut suchen",
   af_btn_cancel: "Abbrechen",
   af_btn_submit: "Speichern",
+  af_manual_name_placeholder: "z.B. iShares MSCI World ETF",
+  af_manual_ticker_placeholder: "0P0001D75H.T oder JP90C000KRC0",
   af_manual_link: "Nicht auf Yahoo Finance gefunden? → Manuell eingeben",
   af_cash_amount_label: "Betrag",
   af_crypto_hint:

@@ -343,7 +343,7 @@ export const ko: Translations = {
 
   lynch_tenbagger_title: "피터 린치 10루타 채점기",
   lynch_tenbagger_desc:
-    "보유 주식이나 관심 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. 100점에 가까울수록 10루타 가능성이 높은 종목입니다.",
+    "보유 주식이나 관심 종목을 피터 린치의 PEG·성장·재무 기준으로 채점합니다. PEG < 1.0, EPS 성장률 > 15%, 매출 성장률 > 10%, 부채비율 < 80%, 영업이익률 > 10%, 시가총액 $10B 미만일수록 높은 점수를 받습니다. 저PEG·고성장 소중형주를 발굴하는 데 적합합니다.",
   lynch_criterion_peg: "PEG 비율",
   lynch_criterion_eps: "EPS 성장률",
   lynch_criterion_rev: "매출 성장률",
@@ -370,7 +370,7 @@ export const ko: Translations = {
   // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: "조엘 그린블라트 마법 공식 채점기",
   mf_desc:
-    "높은 이익수익률(Earnings Yield)과 높은 자본수익률(Return on Capital)을 동시에 갖춘 종목을 채점합니다. 100점에 가까울수록 마법 공식에 부합합니다.",
+    "높은 이익수익률(Earnings Yield)과 높은 자본수익률(Return on Capital)을 동시에 갖춘 종목을 채점합니다. EY > 10%, ROC > 25%, 영업이익률 > 15%, 부채비율 < 50%, 시가총액 $1B–$10B 구간일수록 높은 점수를 받습니다. 감정을 배제한 규칙 기반 가치 투자 종목 발굴에 적합합니다.",
   mf_criterion_ey: "이익수익률",
   mf_criterion_roc: "자본수익률",
   mf_criterion_margin: "영업이익률",
@@ -388,7 +388,7 @@ export const ko: Translations = {
   // Graham
   graham_analyzer_title: "벤저민 그레이엄 방어적 투자 채점기",
   graham_analyzer_desc:
-    "보유 주식 또는 임의 티커를 그레이엄의 안전마진(P/E, P/B, 그레이엄 넘버, 유동비율, 부채, 배당) 기준으로 채점합니다.",
+    "보유 주식 또는 임의 티커를 그레이엄의 안전마진 기준으로 채점합니다. P/E < 15, P/B < 1.5, P/E×P/B < 22.5(그레이엄 넘버), 유동비율 > 2.0, 부채비율 < 50%, 배당수익률 > 3%일수록 높은 점수를 받습니다. 재무적으로 안정적인 저평가 방어적 가치주를 찾는 데 적합합니다.",
   graham_criterion_pe: "P/E 비율",
   graham_criterion_pb: "P/B 비율",
   graham_criterion_gn: "그레이엄 넘버",
@@ -407,7 +407,7 @@ export const ko: Translations = {
   // Smith
   smith_analyzer_title: "테리 스미스 퀄리티 컴파운더 채점기",
   smith_analyzer_desc:
-    "보유 주식 또는 임의 티커를 스미스의 퀄리티 컴파운더(ROE, 영업이익률, FCF 전환율, 매출성장, 부채) 기준으로 채점합니다.",
+    "보유 주식 또는 임의 티커를 스미스의 퀄리티 컴파운더 기준으로 채점합니다. ROE > 20%, 영업이익률 > 15%, FCF 전환율 > 80%, 매출 성장률 > 10%, 부채비율 < 50%일수록 높은 점수를 받습니다. 높은 수익성과 현금 창출력을 갖춘 복리 성장 우량주 발굴에 적합합니다.",
   smith_criterion_roe: "ROE",
   smith_criterion_margin: "영업이익률",
   smith_criterion_fcf: "FCF 전환율",
@@ -425,7 +425,7 @@ export const ko: Translations = {
   // Piotroski F-Score
   piotroski_analyzer_title: "피오트로스키 F-Score 채점기",
   piotroski_analyzer_desc:
-    "보유 주식 또는 임의 티커를 피오트로스키의 9가지 재무 건전성 기준(수익성·재무건전성·운영효율)으로 채점합니다. F-Score 9점(100점)에 가까울수록 재무 체질이 우수합니다.",
+    "보유 주식 또는 임의 티커를 피오트로스키의 9가지 이진 재무 건전성 기준으로 채점합니다. 수익성(ROA > 0, 영업현금흐름 > 0, ΔROA 개선, 현금흐름 > 순이익), 재무건전성(부채 감소, 유동비율 개선, 주식 희석 없음), 운영효율(매출총이익률·자산회전율 개선) 세 영역 총 9점 만점. 재무 체질이 탄탄한 가치주 선별에 적합합니다.",
   piotroski_criterion_roa: "ROA (총자산수익률)",
   piotroski_criterion_cfo: "영업현금흐름",
   piotroski_criterion_delta_roa: "ΔROA (전년 대비)",
@@ -447,7 +447,7 @@ export const ko: Translations = {
   // O'Neil CAN SLIM
   oneil_analyzer_title: "윌리엄 오닐 CAN SLIM 채점기",
   oneil_analyzer_desc:
-    "보유 주식 또는 임의 티커를 오닐의 CAN SLIM 7가지 기준(실적 성장·신고가·수급·선도주·기관·시가총액)으로 채점합니다.",
+    "보유 주식 또는 임의 티커를 오닐의 CAN SLIM 7가지 기준으로 채점합니다. C(분기 EPS 성장 ≥ 25%), A(연간 EPS 성장 ≥ 25%), N(52주 신고가 근접 ≥ 90%), S(유통주식 < 50M), L(높은 상대강도), I(기관 보유 30–70%), M(시가총액 $2B–$50B)으로 평가합니다. 폭발적 실적 성장과 강한 모멘텀을 갖춘 성장주 발굴에 적합합니다.",
   oneil_criterion_current: "분기 EPS 성장률 (C)",
   oneil_criterion_annual: "연간 EPS 성장률 (A)",
   oneil_criterion_newhigh: "52주 신고가 근접 (N)",
@@ -586,6 +586,8 @@ export const ko: Translations = {
   af_re_search: "← 다시 검색",
   af_btn_cancel: "취소",
   af_btn_submit: "등록 완료",
+  af_manual_name_placeholder: "예: 삼성전자, S&P 500 인덱스 펀드",
+  af_manual_ticker_placeholder: "0P0001D75H.T 또는 JP90C000KRC0",
   af_manual_link: "Yahoo Finance에서 검색되지 않나요? → 직접 입력",
   af_cash_amount_label: "보유액",
   af_crypto_hint: "코인 티커를 입력하고 거래쌍을 선택하세요.",

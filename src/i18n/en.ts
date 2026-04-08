@@ -344,7 +344,7 @@ export const en: Translations = {
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger Analyzer",
   lynch_tenbagger_desc:
-    "Scores your stock holdings or any ticker against Peter Lynch's PEG, growth, and financial health criteria. The higher the score, the stronger the tenbagger potential.",
+    "Scores your stock holdings or any ticker against Peter Lynch's PEG, growth, and financial health criteria. Stocks score higher with PEG < 1.0, EPS growth > 15%, revenue growth > 10%, D/E < 80%, operating margin > 10%, and market cap under $10B. Ideal for identifying high-growth small-to-mid cap stocks with tenbagger potential.",
   lynch_criterion_peg: "PEG Ratio",
   lynch_criterion_eps: "EPS Growth",
   lynch_criterion_rev: "Revenue Growth",
@@ -371,7 +371,7 @@ export const en: Translations = {
   // ─── Magic Formula Analyzer ──────────────────────────────────────────────────
   mf_title: "Joel Greenblatt Magic Formula Analyzer",
   mf_desc:
-    "Scores stocks on earnings yield and return on capital — the two pillars of Greenblatt's Magic Formula. The higher the score, the better the fit.",
+    "Scores stocks on earnings yield and return on capital — the two pillars of Greenblatt's Magic Formula. Stocks score higher with EY > 10%, ROC > 25%, operating margin > 15%, D/E < 50%, and market cap between $1B–$10B. Best for systematic, rule-based value stock picking that removes emotion from the process.",
   mf_criterion_ey: "Earnings Yield",
   mf_criterion_roc: "Return on Capital",
   mf_criterion_margin: "Operating Margin",
@@ -389,7 +389,7 @@ export const en: Translations = {
   // Graham
   graham_analyzer_title: "Benjamin Graham Defensive Investor Analyzer",
   graham_analyzer_desc:
-    "Scores your stock holdings or any ticker against Graham's margin of safety criteria: P/E, P/B, Graham Number, current ratio, debt, and dividends.",
+    "Scores your stock holdings or any ticker against Graham's margin of safety criteria. Stocks score higher with P/E < 15, P/B < 1.5, Graham Number (P/E×P/B) < 22.5, current ratio > 2.0, D/E < 50%, and dividend yield > 3%. Ideal for finding undervalued, financially stable defensive value stocks.",
   graham_criterion_pe: "P/E Ratio",
   graham_criterion_pb: "P/B Ratio",
   graham_criterion_gn: "Graham Number",
@@ -408,7 +408,7 @@ export const en: Translations = {
   // Smith
   smith_analyzer_title: "Terry Smith Quality Compounder Analyzer",
   smith_analyzer_desc:
-    "Scores your stock holdings or any ticker against Smith's quality compounder criteria: ROE, operating margin, FCF conversion, revenue growth, and low debt.",
+    "Scores your stock holdings or any ticker against Smith's quality compounder criteria. Stocks score higher with ROE > 20%, operating margin > 15%, FCF conversion > 80%, revenue growth > 10%, and D/E < 50%. Ideal for identifying high-quality compounders with strong profitability and cash generation that compound wealth over time.",
   smith_criterion_roe: "ROE",
   smith_criterion_margin: "Operating Margin",
   smith_criterion_fcf: "FCF Conversion",
@@ -426,7 +426,7 @@ export const en: Translations = {
   // Piotroski F-Score
   piotroski_analyzer_title: "Piotroski F-Score Analyzer",
   piotroski_analyzer_desc:
-    "Scores your holdings or any ticker against Piotroski's 9 binary financial health criteria (profitability, leverage, efficiency). A perfect F-Score of 9 (100 pts) signals strong fundamentals.",
+    "Scores your holdings or any ticker against Piotroski's 9 binary financial health criteria across three areas: Profitability (ROA > 0, positive cash flow, improving ROA, cash flow > net income), Financial Strength (declining debt, improving current ratio, no equity dilution), and Efficiency (improving gross margin and asset turnover). A perfect 9/9 (100 pts) signals strong fundamentals. Ideal for picking financially healthy value stocks.",
   piotroski_criterion_roa: "ROA",
   piotroski_criterion_cfo: "Operating Cash Flow",
   piotroski_criterion_delta_roa: "ΔROA (YoY)",
@@ -448,7 +448,7 @@ export const en: Translations = {
   // O'Neil CAN SLIM
   oneil_analyzer_title: "William O'Neil CAN SLIM Analyzer",
   oneil_analyzer_desc:
-    "Scores your holdings or any ticker against O'Neil's CAN SLIM methodology: current/annual earnings growth, new highs, supply/demand, leadership, institutional sponsorship, and market cap.",
+    "Scores your holdings or any ticker against O'Neil's 7 CAN SLIM criteria: C (quarterly EPS growth ≥ 25%), A (annual EPS growth ≥ 25%), N (near 52-week high ≥ 90%), S (float shares < 50M), L (high relative strength), I (institutional ownership 30–70%), and M (market cap $2B–$50B). Ideal for discovering high-growth momentum stocks with explosive earnings and strong price action.",
   oneil_criterion_current: "Quarterly EPS Growth (C)",
   oneil_criterion_annual: "Annual EPS Growth (A)",
   oneil_criterion_newhigh: "Near 52-Week High (N)",
@@ -587,6 +587,8 @@ export const en: Translations = {
   af_re_search: "← Search again",
   af_btn_cancel: "Cancel",
   af_btn_submit: "Save",
+  af_manual_name_placeholder: "e.g. Vanguard S&P 500 Index Fund",
+  af_manual_ticker_placeholder: "0P0001D75H.T or JP90C000KRC0",
   af_manual_link: "Not found on Yahoo Finance? → Enter manually",
   af_cash_amount_label: "Amount",
   af_crypto_hint: "Enter a coin ticker and select a trading pair.",

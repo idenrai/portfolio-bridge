@@ -89,7 +89,7 @@ export function ManualEntryForm({
           value={name}
           autoFocus
           onChange={(e) => setName(e.target.value)}
-          placeholder="楽天・プラス・Ｓ＆Ｐ５００インデックス・ファンド"
+          placeholder={t.af_manual_name_placeholder}
           className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
       </label>
@@ -103,7 +103,7 @@ export function ManualEntryForm({
             type="text"
             value={ticker}
             onChange={(e) => setTicker(e.target.value)}
-            placeholder="0P0001D75H.T 또는 JP90C000KRC0"
+            placeholder={t.af_manual_ticker_placeholder}
             className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           />
           <Button
