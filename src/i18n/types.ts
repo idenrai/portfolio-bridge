@@ -209,6 +209,8 @@ export interface Translations {
   guru_philosophy_druckenmiller: string;
   guru_philosophy_smith: string;
   guru_philosophy_greenblatt: string;
+  guru_philosophy_piotroski: string;
+  guru_philosophy_oneil: string;
 
   // ─── Lynch 10-Bagger Analyzer ───────────────────────────────────────────────
   lynch_tenbagger_title: string;
