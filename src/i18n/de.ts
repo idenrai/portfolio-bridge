@@ -21,7 +21,7 @@ export const de: Translations = {
     "Ticker über Yahoo Finance suchen oder Vermögenswerte manuell hinzufügen. KI-Autoclassifizierung, CSV-Import & -Export unterstützt.",
   about_feat3_title: "Investmentgurus",
   about_feat3_desc:
-    "Referenzieren Sie die Philosophien und Musterportfolios von 18 legendären Investoren — Buffett, Dalio, Lynch und mehr — und vergleichen Sie sie mit Ihrem eigenen Portfolio. Inkl. 4 quantitative Analyzer: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive, Smith Quality Compounder. KI-Chat-Prompts in der Persona des gewählten Gurus.",
+    "Referenzieren Sie die Philosophien und Musterportfolios von 20 legendären Investoren — Buffett, Dalio, Lynch und mehr — und vergleichen Sie sie mit Ihrem eigenen Portfolio. Inkl. 6 quantitative Analyzer: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive, Smith Quality Compounder, Piotroski F-Score und O'Neil CAN SLIM. KI-Chat-Prompts in der Persona des gewählten Gurus.",
   about_feat4_title: "KI-Portfolioanalyse",
   about_feat4_desc:
     "Erstellen Sie einen strukturierten Prompt mit Ihren Bestandsdaten, bereit zum Einfügen in ChatGPT, Claude, Gemini oder Grok für ideale Allokationsratschläge.",
@@ -311,6 +311,20 @@ export const de: Translations = {
     "• Diversifizierte Umsetzung: 20–30 Positionen, um Einzeltitelrisiken zu reduzieren und die Strategie robust umzusetzen\n" +
     "• Geduld als Voraussetzung: Die Strategie kann über 3–4 Jahre hinter dem Markt liegen, bevor sie aufholt\n" +
     '• Zitat: "Ermitteln Sie den Wert eines Unternehmens und zahlen Sie deutlich weniger — kurzfristig ist der Markt nur Mr. Market."',
+  guru_philosophy_piotroski:
+    "• F-Score: 9-Punkte-System, das die finanzielle Gesundheit eines Unternehmens über Rentabilität, Verschuldung und Effizienz bewertet\n" +
+    "• Value-Aktien-Filter: Filtert unter den günstigen Buchwert-Aktien diejenigen mit soliden Fundamentaldaten heraus\n" +
+    "• Rentabilitätssignale: ROA, operativer Cashflow und Abgrenzungsqualität (Cashflow > Nettogewinn)\n" +
+    "• Finanzielle Stabilität: Sinkende Verschuldung, verbesserte Liquidität und keine Verwässerung\n" +
+    "• Betriebseffizienz: Steigende Bruttomarge und Kapitalumschlag als Zeichen besserer Unternehmensführung\n" +
+    '• Zitat: "Unter High-BM-Firmen erzielen finanziell starke Unternehmen eine jährliche Mehrrendite von 7,5 % gegenüber schwachen."',
+  guru_philosophy_oneil:
+    "• CAN-SLIM-System: Eine 7-Faktoren-Methodik zur Auswahl von Wachstumsaktien mit fundamentaler und technischer Analyse\n" +
+    "• C (Aktuelle Gewinne): Quartals-EPS-Wachstum von mindestens 25 % gegenüber dem Vorjahresquartal\n" +
+    "• A (Jährliche Gewinne): Jährliches EPS-Wachstum von 25 %+ über 3–5 Jahre\n" +
+    "• N (Neues Produkt/Neues Hoch): Unternehmen mit innovativen Produkten nahe am 52-Wochen-Hoch\n" +
+    "• S·L·I·M: Angebot & Nachfrage (Streubesitz), Marktführer, institutionelle Käufer, Marktrichtung\n" +
+    '• Zitat: "Das ganze Geheimnis des Erfolgs an der Börse ist, möglichst wenig zu verlieren, wenn man falsch liegt."',
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Bewertung",
   lynch_tenbagger_desc:
@@ -392,6 +406,48 @@ export const de: Translations = {
   smith_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   smith_quality_badge: "✨ Quality Compounder",
   smith_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
+
+  // Piotroski F-Score
+  piotroski_analyzer_title: "Piotroski F-Score Bewertung",
+  piotroski_analyzer_desc:
+    "Bewertet Ihre Aktien oder beliebige Ticker anhand von Piotroskis 9 binären Finanzkennzahlen (Rentabilität, Verschuldung, Effizienz). Ein perfekter F-Score von 9 (100 Pkt.) signalisiert starke Fundamentaldaten.",
+  piotroski_criterion_roa: "ROA (Gesamtkapitalrendite)",
+  piotroski_criterion_cfo: "Operativer Cashflow",
+  piotroski_criterion_delta_roa: "ΔROA (ggü. Vorjahr)",
+  piotroski_criterion_accruals: "Abgrenzungsqualität",
+  piotroski_criterion_delta_leverage: "ΔLangfristschulden",
+  piotroski_criterion_delta_liquidity: "ΔLiquiditätsquote",
+  piotroski_criterion_equity_dilution: "Aktien-Verwässerung",
+  piotroski_criterion_delta_margin: "ΔBruttomarge",
+  piotroski_criterion_delta_turnover: "ΔKapitalumschlag",
+  piotroski_no_data: "Keine Daten",
+  piotroski_disclaimer:
+    "※ Basierend auf Yahoo Finance-Daten. Nicht als alleinige Grundlage für Anlageentscheidungen verwenden.",
+  piotroski_progress_enrich: (done, total) => `⏳ Analyse läuft… (${done}/${total})`,
+  piotroski_phase_enrich: "🔍 Detaillierte Finanzdaten werden ergänzt…",
+  piotroski_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  piotroski_fscore_badge: "📊 Starker F-Score",
+  piotroski_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
+
+  // O'Neil CAN SLIM
+  oneil_analyzer_title: "William O'Neil CAN SLIM Bewertung",
+  oneil_analyzer_desc:
+    "Bewertet Ihre Aktien oder beliebige Ticker anhand von O'Neils CAN-SLIM-Methodik: Quartals-/Jahresgewinnwachstum, neue Hochs, Angebot/Nachfrage, Marktführer, institutionelle Beteiligung und Marktkapitalisierung.",
+  oneil_criterion_current: "Quartals-EPS-Wachstum (C)",
+  oneil_criterion_annual: "Jährliches EPS-Wachstum (A)",
+  oneil_criterion_newhigh: "Nahe 52-Wochen-Hoch (N)",
+  oneil_criterion_supply: "Streubesitz (S)",
+  oneil_criterion_leader: "Relative Stärke (L)",
+  oneil_criterion_institutional: "Institutionelle Beteiligung (I)",
+  oneil_criterion_cap: "Marktkapitalisierung (M)",
+  oneil_no_data: "Keine Daten",
+  oneil_disclaimer:
+    "※ Basierend auf Yahoo Finance-Daten. Nicht als alleinige Grundlage für Anlageentscheidungen verwenden.",
+  oneil_progress_enrich: (done, total) => `⏳ Analyse läuft… (${done}/${total})`,
+  oneil_phase_enrich: "🔍 Detaillierte Finanzdaten werden ergänzt…",
+  oneil_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  oneil_canslim_badge: "🚀 CAN SLIM geeignet",
+  oneil_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",

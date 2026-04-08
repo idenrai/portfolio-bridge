@@ -4,6 +4,8 @@ import { LynchTenBaggerCard } from "@/components/gurus/LynchTenBaggerCard";
 import { MagicFormulaCard } from "@/components/gurus/MagicFormulaCard";
 import { GrahamDefensiveCard } from "@/components/gurus/GrahamDefensiveCard";
 import { SmithQualityCard } from "@/components/gurus/SmithQualityCard";
+import { PiotroskiFScoreCard } from "@/components/gurus/PiotroskiFScoreCard";
+import { OneilCanSlimCard } from "@/components/gurus/OneilCanSlimCard";
 import {
   PieChart,
   Pie,
@@ -338,6 +340,16 @@ export function GurusPage() {
           {/* 테리 스미스 전용: 퀄리티 컴파운더 채점기 */}
           {selectedGuru.id === "smith" && (
             <SmithQualityCard />
+          )}
+
+          {/* 피오트로스키 전용: F-Score 채점기 */}
+          {selectedGuru.id === "piotroski" && (
+            <PiotroskiFScoreCard />
+          )}
+
+          {/* 윌리엄 오닐 전용: CAN SLIM 채점기 */}
+          {selectedGuru.id === "oneil" && (
+            <OneilCanSlimCard />
           )}        </>
       )}
     </div>

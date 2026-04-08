@@ -282,6 +282,45 @@ export interface Translations {
   smith_no_result: string;
   smith_quality_badge: string;
   smith_initial_guide: string;
+
+  // ─── Piotroski F-Score Analyzer ─────────────────────────────────────────────────────
+  piotroski_analyzer_title: string;
+  piotroski_analyzer_desc: string;
+  piotroski_criterion_roa: string;
+  piotroski_criterion_cfo: string;
+  piotroski_criterion_delta_roa: string;
+  piotroski_criterion_accruals: string;
+  piotroski_criterion_delta_leverage: string;
+  piotroski_criterion_delta_liquidity: string;
+  piotroski_criterion_equity_dilution: string;
+  piotroski_criterion_delta_margin: string;
+  piotroski_criterion_delta_turnover: string;
+  piotroski_no_data: string;
+  piotroski_disclaimer: string;
+  piotroski_progress_enrich: (done: number, total: number) => string;
+  piotroski_phase_enrich: string;
+  piotroski_no_result: string;
+  piotroski_fscore_badge: string;
+  piotroski_initial_guide: string;
+
+  // ─── O'Neil CAN SLIM Analyzer ─────────────────────────────────────────────────────
+  oneil_analyzer_title: string;
+  oneil_analyzer_desc: string;
+  oneil_criterion_current: string;
+  oneil_criterion_annual: string;
+  oneil_criterion_newhigh: string;
+  oneil_criterion_supply: string;
+  oneil_criterion_leader: string;
+  oneil_criterion_institutional: string;
+  oneil_criterion_cap: string;
+  oneil_no_data: string;
+  oneil_disclaimer: string;
+  oneil_progress_enrich: (done: number, total: number) => string;
+  oneil_phase_enrich: string;
+  oneil_no_result: string;
+  oneil_canslim_badge: string;
+  oneil_initial_guide: string;
+
   // ─── Settings Page ─────────────────────────────────────────────────────────
   settings_title: string;
   settings_display_currency_title: string;

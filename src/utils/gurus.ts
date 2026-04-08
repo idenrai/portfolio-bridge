@@ -251,6 +251,31 @@ export const GURU_PROFILES: GuruProfile[] = [
       { category: "bond", targetPercent: 5 },
     ],
   },
+  {
+    id: "piotroski",
+    name: "Joseph Piotroski",
+    nameKo: "조셉 피오트로스키",
+    nameJa: "ジョセフ・ピオトロスキー",
+    firm: "Stanford GSB (Academic)",
+    idealAllocation: [
+      { category: "value", targetPercent: 50 },
+      { category: "dividend", targetPercent: 20 },
+      { category: "bond", targetPercent: 15 },
+      { category: "cash", targetPercent: 15 },
+    ],
+  },
+  {
+    id: "oneil",
+    name: "William O'Neil",
+    nameKo: "윌리엄 오닐",
+    nameJa: "ウィリアム・オニール",
+    firm: "Investor's Business Daily",
+    idealAllocation: [
+      { category: "growth", targetPercent: 60 },
+      { category: "cash", targetPercent: 25 },
+      { category: "index", targetPercent: 15 },
+    ],
+  },
 ];
 /**
  * 구루 ID로 프로필 조회

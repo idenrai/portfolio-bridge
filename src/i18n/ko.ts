@@ -21,7 +21,7 @@ export const ko: Translations = {
     "Yahoo Finance 종목 검색 및 수동 등록으로 다국가 자산을 통합 관리합니다. AI 자동 분류, CSV 가져오기·내보내기 지원.",
   about_feat3_title: "투자 구루",
   about_feat3_desc:
-    "버핏, 달리오, 린치 등 18명의 투자 철학과 대표 포트폴리오를 참고해 내 포트폴리오와 비교할 수 있습니다. 피터 린치 10루타 · 그린블라트 마법공식 · 그레이엄 방어투자 · 테리스미스 퀸리티 4종 채점기로 종목을 분석하고, 구루 페르소나 AI 프롬프트를 제공합니다.",
+    "버핏, 달리오, 린치 등 20명의 투자 철학과 대표 포트폴리오를 참고해 내 포트폴리오와 비교할 수 있습니다. 린치 10루타 · 그린블라트 마법공식 · 그레이엄 방어투자 · 스미스 퀄리티 · 피오트로스키 F-Score · 오닐 CAN SLIM 6종 채점기로 종목을 분석하고, 구루 페르소나 AI 프롬프트를 제공합니다.",
   about_feat4_title: "AI 포트폴리오 분석",
   about_feat4_desc:
     "ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 수 있는 구조화된 프롬프트를 생성합니다. 이상적 배분과 조정 인사이트를 AI에게 물어보세요.",
@@ -306,6 +306,20 @@ export const ko: Translations = {
     "• 분산 운용: 20~30개 종목으로 개별 종목 리스크를 낮추면서 전략의 일관성을 유지\n" +
     "• 인내가 핵심: 전략이 유효해도 3~4년가량 시장 대비 부진할 수 있음을 전제로 운용\n" +
     "• 명언: '가치를 먼저 계산하고, 그보다 훨씬 싼 가격에 사라. 단기 시장은 미스터 마켓의 감정에 흔들린다.'",
+  guru_philosophy_piotroski:
+    "• F-Score(피오트로스키 스코어): 9가지 이진 재무 기준으로 기업의 재무 건전성을 0~9점으로 평가\n" +
+    "• 가치주 필터링: 장부가 대비 저평가된 종목 중 재무 체질이 우수한 기업만 선별\n" +
+    "• 수익성 평가: ROA, 영업현금흐름, 발생주의 품질(현금흐름 > 순이익) 등 수익의 질을 측정\n" +
+    "• 재무 건전성: 부채 감소, 유동비율 개선, 주식 희석 여부로 재무 안정성을 확인\n" +
+    "• 운영 효율성: 매출총이익률 향상, 자산 회전율 개선으로 경영 효율을 판단\n" +
+    "• 명언: '높은 BM(장부가 대비 시가) 기업 중 재무가 탄탄한 종목이 연평균 7.5%p 초과 수익을 낸다.'",
+  guru_philosophy_oneil:
+    "• CAN SLIM 시스템: 7가지 성장주 선별 기준을 체계적으로 적용하는 투자 방법론\n" +
+    "• C(당기 실적): 최근 분기 EPS가 전년 동기 대비 25% 이상 성장한 종목을 선호\n" +
+    "• A(연간 실적): 연간 EPS 성장률이 25% 이상이고 3~5년 지속 성장하는 기업을 추구\n" +
+    "• N(신제품·신고가): 혁신적 제품/서비스를 보유하고 52주 신고가 부근에서 매수\n" +
+    "• S·L·I·M: 수급(유통주식 수), 선도주 여부, 기관 매수, 시장 방향성을 종합적으로 판단\n" +
+    "• 명언: '위대한 주식은 항상 신고가 부근에서 매수 기회를 준다. 하락 종목을 줍는 것은 돈을 잃는 지름길이다.'",
 
   lynch_tenbagger_title: "피터 린치 10루타 채점기",
   lynch_tenbagger_desc:
@@ -387,6 +401,48 @@ export const ko: Translations = {
   smith_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   smith_quality_badge: "✨ 퀄리티 컴파운더",
   smith_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
+
+  // Piotroski F-Score
+  piotroski_analyzer_title: "피오트로스키 F-Score 채점기",
+  piotroski_analyzer_desc:
+    "보유 주식 또는 임의 티커를 피오트로스키의 9가지 재무 건전성 기준(수익성·재무건전성·운영효율)으로 채점합니다. F-Score 9점(100점)에 가까울수록 재무 체질이 우수합니다.",
+  piotroski_criterion_roa: "ROA (총자산수익률)",
+  piotroski_criterion_cfo: "영업현금흐름",
+  piotroski_criterion_delta_roa: "ΔROA (전년 대비)",
+  piotroski_criterion_accruals: "발생주의 품질",
+  piotroski_criterion_delta_leverage: "Δ장기부채",
+  piotroski_criterion_delta_liquidity: "Δ유동비율",
+  piotroski_criterion_equity_dilution: "주식 희석 여부",
+  piotroski_criterion_delta_margin: "Δ매출총이익률",
+  piotroski_criterion_delta_turnover: "Δ자산회전율",
+  piotroski_no_data: "데이터 없음",
+  piotroski_disclaimer:
+    "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
+  piotroski_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
+  piotroski_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  piotroski_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  piotroski_fscore_badge: "📊 F-Score 우수",
+  piotroski_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
+
+  // O'Neil CAN SLIM
+  oneil_analyzer_title: "윌리엄 오닐 CAN SLIM 채점기",
+  oneil_analyzer_desc:
+    "보유 주식 또는 임의 티커를 오닐의 CAN SLIM 7가지 기준(실적 성장·신고가·수급·선도주·기관·시가총액)으로 채점합니다.",
+  oneil_criterion_current: "분기 EPS 성장률 (C)",
+  oneil_criterion_annual: "연간 EPS 성장률 (A)",
+  oneil_criterion_newhigh: "52주 신고가 근접 (N)",
+  oneil_criterion_supply: "유통주식 수 (S)",
+  oneil_criterion_leader: "상대강도 (L)",
+  oneil_criterion_institutional: "기관 보유 비중 (I)",
+  oneil_criterion_cap: "시가총액 (M)",
+  oneil_no_data: "데이터 없음",
+  oneil_disclaimer:
+    "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
+  oneil_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
+  oneil_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  oneil_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  oneil_canslim_badge: "🚀 CAN SLIM 적합",
+  oneil_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   settings_title: "설정",
   settings_display_currency_title: "표시 화폐",

@@ -21,7 +21,7 @@ export const en: Translations = {
     "Search tickers via Yahoo Finance or add assets manually. AI auto-classification, CSV import & export supported.",
   about_feat3_title: "Investment Gurus",
   about_feat3_desc:
-    "Reference the philosophies and model portfolios of 18 legendary investors — Buffett, Dalio, Lynch, and more — and compare them with your own portfolio. Includes 4 quantitative analyzers: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive, and Smith Quality Compounder. AI chat prompts in the persona of your chosen guru.",
+    "Reference the philosophies and model portfolios of 20 legendary investors — Buffett, Dalio, Lynch, and more — and compare them with your own portfolio. Includes 6 quantitative analyzers: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive, Smith Quality Compounder, Piotroski F-Score, and O'Neil CAN SLIM. AI chat prompts in the persona of your chosen guru.",
   about_feat4_title: "AI Portfolio Analysis",
   about_feat4_desc:
     "Generate a structured prompt packed with your holdings data, ready to paste into ChatGPT, Claude, Gemini, or Grok for ideal allocation advice.",
@@ -307,6 +307,20 @@ export const en: Translations = {
     "• Diversified Approach: 20–30 positions to reduce individual stock risk\n" +
     '• Patience Required: "The magic formula works over most periods but can lag the market for 3–4 years"\n' +
     '• Quote: "Figure out what something is worth and pay a lot less, because the stock market is Mr. Market in the short run."',
+  guru_philosophy_piotroski:
+    "• F-Score: A 9-point binary scoring system that evaluates a company's financial health across profitability, leverage, and efficiency\n" +
+    "• Value Stock Filter: Screens high book-to-market stocks to isolate those with genuinely strong fundamentals\n" +
+    "• Profitability Signals: ROA, operating cash flow, and accruals quality (cash flow > net income)\n" +
+    "• Financial Strength: Declining leverage, improving liquidity (current ratio), and no equity dilution\n" +
+    "• Operational Efficiency: Improving gross margin and asset turnover signal better management execution\n" +
+    '• Quote: "Among high BM firms, those with strong fundamentals earn an annual return premium of 7.5% over weak ones."',
+  guru_philosophy_oneil:
+    "• CAN SLIM System: A 7-factor growth stock selection methodology combining fundamental and technical analysis\n" +
+    "• C (Current Earnings): Look for quarterly EPS growth of 25%+ vs. the same quarter a year ago\n" +
+    "• A (Annual Earnings): Seek annual EPS growth of 25%+ sustained over 3–5 years\n" +
+    "• N (New Product/New High): Companies with innovative products/services trading near 52-week highs\n" +
+    "• S·L·I·M: Supply & demand (float), Leader or laggard, Institutional sponsorship, Market direction\n" +
+    '• Quote: "The whole secret to winning in the stock market is to lose the least amount possible when you\'re not right."',
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger Analyzer",
   lynch_tenbagger_desc:
@@ -388,6 +402,48 @@ export const en: Translations = {
   smith_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
   smith_quality_badge: "✨ Quality Compounder",
   smith_initial_guide: "Analyze your portfolio or search a ticker to start.",
+
+  // Piotroski F-Score
+  piotroski_analyzer_title: "Piotroski F-Score Analyzer",
+  piotroski_analyzer_desc:
+    "Scores your holdings or any ticker against Piotroski's 9 binary financial health criteria (profitability, leverage, efficiency). A perfect F-Score of 9 (100 pts) signals strong fundamentals.",
+  piotroski_criterion_roa: "ROA",
+  piotroski_criterion_cfo: "Operating Cash Flow",
+  piotroski_criterion_delta_roa: "ΔROA (YoY)",
+  piotroski_criterion_accruals: "Accruals Quality",
+  piotroski_criterion_delta_leverage: "ΔLong-term Debt",
+  piotroski_criterion_delta_liquidity: "ΔCurrent Ratio",
+  piotroski_criterion_equity_dilution: "Equity Dilution",
+  piotroski_criterion_delta_margin: "ΔGross Margin",
+  piotroski_criterion_delta_turnover: "ΔAsset Turnover",
+  piotroski_no_data: "No data",
+  piotroski_disclaimer:
+    "※ Based on Yahoo Finance data. Do not use as sole basis for investment decisions.",
+  piotroski_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
+  piotroski_phase_enrich: "🔍 Enriching financial data…",
+  piotroski_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  piotroski_fscore_badge: "📊 Strong F-Score",
+  piotroski_initial_guide: "Analyze your portfolio or search a ticker to start.",
+
+  // O'Neil CAN SLIM
+  oneil_analyzer_title: "William O'Neil CAN SLIM Analyzer",
+  oneil_analyzer_desc:
+    "Scores your holdings or any ticker against O'Neil's CAN SLIM methodology: current/annual earnings growth, new highs, supply/demand, leadership, institutional sponsorship, and market cap.",
+  oneil_criterion_current: "Quarterly EPS Growth (C)",
+  oneil_criterion_annual: "Annual EPS Growth (A)",
+  oneil_criterion_newhigh: "Near 52-Week High (N)",
+  oneil_criterion_supply: "Float Shares (S)",
+  oneil_criterion_leader: "Relative Strength (L)",
+  oneil_criterion_institutional: "Institutional Ownership (I)",
+  oneil_criterion_cap: "Market Cap (M)",
+  oneil_no_data: "No data",
+  oneil_disclaimer:
+    "※ Based on Yahoo Finance data. Do not use as sole basis for investment decisions.",
+  oneil_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
+  oneil_phase_enrich: "🔍 Enriching financial data…",
+  oneil_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  oneil_canslim_badge: "🚀 CAN SLIM Fit",
+  oneil_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   settings_title: "Settings",
   settings_display_currency_title: "Display Currency",

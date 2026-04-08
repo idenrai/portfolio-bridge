@@ -21,7 +21,7 @@ export const ja: Translations = {
     "Yahoo Financeで銘柄を検索するか、手動登録で多国籍資産を一元管理。AI自動分類、CSVインポート・エクスポートに対応。",
   about_feat3_title: "投資家",
   about_feat3_desc:
-    "バフェット、ダリオ、リンチなど伝説の投資家１８名の哲学と代表ポートフォリオを参考に、自分のポートフォリオと比較できます。リンチ・10バガー・グリーンブラット魔法公式・グレアム防御的投資・スミスクオリティの4種採点機で銘柄を分析。グルペルソナAIプロンプトも提供します。",
+    "バフェット、ダリオ、リンチなど伝説の投資家20名の哲学と代表ポートフォリオを参考に、自分のポートフォリオと比較できます。リンチ10バガー・グリーンブラット魔法公式・グレアム防御的投資・スミスクオリティ・ピオトロスキーFスコア・オニールCAN SLIMの6種採点機で銘柄を分析。グルペルソナAIプロンプトも提供します。",
   about_feat4_title: "AI ポートフォリオ分析",
   about_feat4_desc:
     "保有銘柄データを盛り込んだ構造化プロンプトを生成。ChatGPT・Claude・Gemini・Grokに貼り付けるだけで、理想配分のアドバイスを得られます。",
@@ -307,8 +307,20 @@ export const ja: Translations = {
     "• 放置された優良株の発掘：市場に見過ごされた割安かつ高品質な企業を体系的に見つける\n" +
     "• 分散運用：20〜30銘柄で個別リスクを抑えつつ、戦略の再現性を高める\n" +
     "• 忍耐が前提：有効な戦略でも3〜4年程度は市場に劣後し得ることを受け入れる\n" +
-    "• 名言：「価値を見積もり、それより十分に安く買え。短期の株式市場は“ミスター・マーケット”に過ぎない」",
-  lynch_tenbagger_title: "ピーター・リンチ テンバガー採点",
+    "• 名言：「価値を見積もり、それより十分に安く買え。短期の株式市場は“ミスター・マーケット”に過ぎない」",  guru_philosophy_piotroski:
+    "• Fスコア：9つの二値基準で企業の財務健全性を0〜9点にスコアリングする定量手法\n" +
+    "• バリュー株フィルター：簿価対市価(BM)が高い銘柄のうち、財務体質が優良なものだけを選別\n" +
+    "• 収益性シグナル：ROA、営業キャッシュフロー、発生主義品質（キャッシュフロー＞純利益）\n" +
+    "• 財務健全性：負債の減少、流動比率の改善、株式希薄化なしで安定性を確認\n" +
+    "• 運営効率性：粗利率と資産回転率の改善が経営効率の向上を示す\n" +
+    "• 名言：「高BM企業のうち財務が健全な銘柄は年平均7.5%の超過リターンを生む」",
+  guru_philosophy_oneil:
+    "• CAN SLIMシステム：ファンダメンタルとテクニカルを融合した7要素の成長株選別手法\n" +
+    "• C（四半期業績）：直近四半期のEPS成長が前年同期比25%以上の銘柄を選好\n" +
+    "• A（年間業績）：年間EPS成長が25%以上で3〜5年持続する企業を追求\n" +
+    "• N（新要素・新高値）：革新的な製品/サービスを持ち、52週高値付近で推移する銘柄に注目\n" +
+    "• S・L・I・M：需給（浮動株数）、主導株か、機関買い、相場全体の方向性を総合判断\n" +
+    "• 名言：「株式投資の秘訣は、間違ったときの損失をいかに最小限に抑えるかだ」",  lynch_tenbagger_title: "ピーター・リンチ テンバガー採点",
   lynch_tenbagger_desc:
     "保有株や気になる銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。100点に近いほどテンバガー候補として有望です。",
   lynch_criterion_peg: "PEGレシオ",
@@ -388,6 +400,48 @@ export const ja: Translations = {
   smith_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   smith_quality_badge: "✨ クオリティコンパウンダー",
   smith_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
+
+  // Piotroski F-Score
+  piotroski_analyzer_title: "ピオトロスキー Fスコア採点",
+  piotroski_analyzer_desc:
+    "保有株や任意のティッカーをピオトロスキーの9つの財務健全性基準（収益性・レバレッジ・効率性）で評価します。Fスコア9点（100点）に近いほど財務体質が優良です。",
+  piotroski_criterion_roa: "ROA（総資産利益率）",
+  piotroski_criterion_cfo: "営業キャッシュフロー",
+  piotroski_criterion_delta_roa: "ΔROA（前年比）",
+  piotroski_criterion_accruals: "発生主義品質",
+  piotroski_criterion_delta_leverage: "Δ長期負債",
+  piotroski_criterion_delta_liquidity: "Δ流動比率",
+  piotroski_criterion_equity_dilution: "株式希薄化",
+  piotroski_criterion_delta_margin: "Δ粗利率",
+  piotroski_criterion_delta_turnover: "Δ資産回転率",
+  piotroski_no_data: "データなし",
+  piotroski_disclaimer:
+    "※ Yahoo Finance の財務データに基づきます。投資判断の唯一の根拠にしないでください。",
+  piotroski_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
+  piotroski_phase_enrich: "🔍 銘柄の詳細財務データを補強中…",
+  piotroski_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  piotroski_fscore_badge: "📊 Fスコア優良",
+  piotroski_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
+
+  // O'Neil CAN SLIM
+  oneil_analyzer_title: "ウィリアム・オニール CAN SLIM採点",
+  oneil_analyzer_desc:
+    "保有株や任意のティッカーをオニールのCAN SLIM手法（四半期/年間業績成長、新高値、需給、主導株、機関、時価総額）で評価します。",
+  oneil_criterion_current: "四半期EPS成長率 (C)",
+  oneil_criterion_annual: "年間EPS成長率 (A)",
+  oneil_criterion_newhigh: "52週高値近接 (N)",
+  oneil_criterion_supply: "浮動株数 (S)",
+  oneil_criterion_leader: "相対強度 (L)",
+  oneil_criterion_institutional: "機関保有比率 (I)",
+  oneil_criterion_cap: "時価総額 (M)",
+  oneil_no_data: "データなし",
+  oneil_disclaimer:
+    "※ Yahoo Finance の財務データに基づきます。投資判断の唯一の根拠にしないでください。",
+  oneil_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
+  oneil_phase_enrich: "🔍 銘柄の詳細財務データを補強中…",
+  oneil_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  oneil_canslim_badge: "🚀 CAN SLIM適合",
+  oneil_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",

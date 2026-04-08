@@ -25,7 +25,7 @@ Market data and exchange rates are fetched client-side via proxy from Yahoo Fina
 | --- | --- |
 | 📊 **Unified Dashboard** | KPI bar, category/market allocation charts, holdings table, rebalance suggestions |
 | 💼 **Asset Management** | Ticker search (Yahoo Finance), manual entry, AI auto-classification, CSV import/export |
-| 💡 **Investment Gurus** | Compare your portfolio with 18 gurus (Buffett, Dalio, Lynch, Druckenmiller, Smith, Greenblatt, etc.); 4 quantitative analyzers: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive Investor, Smith Quality Compounder; AI chat prompts in the persona of your chosen guru |
+| 💡 **Investment Gurus** | Compare your portfolio with 20 gurus (Buffett, Dalio, Lynch, Piotroski, O'Neil, etc.); 6 quantitative analyzers: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive Investor, Smith Quality Compounder, Piotroski F-Score, O'Neil CAN SLIM; AI chat prompts in the persona of your chosen guru |
 | 🤖 **AI Portfolio Analysis** | Structured prompts ready to paste into ChatGPT · Claude · Gemini · Grok |
 | 🔔 **Auto Insights** | Alerts for overweight, large losses, low cash, currency exposure |
 | 🌐 **Multi-language & Currency** | Korean · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
@@ -142,7 +142,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 
 #### Investment Gurus
 
-- 18 gurus: Buffett, Munger, Lynch, Graham, Dalio, Li Lu, Ackman, Burry, Ken Fisher, Steven Cohen, Howard Marks, Seth Klarman, John Templeton, George Soros, Cathie Wood, Stanley Druckenmiller, Terry Smith, Joel Greenblatt
+- 20 gurus: Buffett, Munger, Lynch, Graham, Dalio, Li Lu, Ackman, Burry, Ken Fisher, Steven Cohen, Howard Marks, Seth Klarman, John Templeton, George Soros, Cathie Wood, Stanley Druckenmiller, Terry Smith, Joel Greenblatt, Joseph Piotroski, William O'Neil
 - Philosophy (5 principles + 1 representative quote per guru)
 - Ideal allocation pie chart vs portfolio radar comparison
 - Guru-based rebalancing suggestions
@@ -150,6 +150,8 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 - **Joel Greenblatt Magic Formula analyzer**: Scores stocks on earnings yield, return on capital, operating margin, D/E, and market cap — scored out of 100
 - **Benjamin Graham Defensive Investor analyzer**: Scores stocks on P/E, P/B, Graham Number (P/E×P/B), current ratio, D/E, and dividend yield — scored out of 100
 - **Terry Smith Quality Compounder analyzer**: Scores stocks on ROE, operating margin, FCF conversion, revenue growth, and D/E — scored out of 100
+- **Joseph Piotroski F-Score analyzer**: 9 binary financial health criteria (ROA, CFO, ΔROA, accruals quality, Δleverage, Δliquidity, equity dilution, Δgross margin, Δasset turnover) — F-Score 0–9 scaled to 100
+- **William O'Neil CAN SLIM analyzer**: 7 growth stock criteria (quarterly EPS growth, annual EPS growth, near 52-week high, float, relative strength, institutional ownership, market cap) — scored out of 100
 - All analyzers use multi-tier fallbacks (financialData → incomeStatementHistory → balanceSheetHistory → earningsHistory → implied values) to maximize data coverage for KR/JP stocks
 - AI prompt generation always injects **English** guru philosophy (independent of UI language)
 
@@ -284,7 +286,7 @@ Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 
 | --- | --- |
 | 📊 **통합 대시보드** | KPI 바, 카테고리·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안 |
 | 💼 **자산 관리** | 종목 검색(Yahoo Finance), 수동 등록, AI 자동 카테고리 분류, CSV 가져오기·내보내기 |
-| 💡 **투자 구루** | 버핏·달리오·린치·드러큰밀러·스미스·그린블라트 등 18명의 철학과 내 포트폴리오 비교; 린치 10루타·그린블라트 마법공식·그레이엄 방어투자·스미스 퀸리티 4종 채점기; 구루 페르소나 AI 프롬프트 제공 |
+| 💡 **투자 구루** | 버핏·달리오·린치·피오트로스키·오닐 등 20명의 철학과 내 포트폴리오 비교; 린치 10루타·그린블라트 마법공식·그레이엄 방어투자·스미스 퀄리티·피오트로스키 F-Score·오닐 CAN SLIM 6종 채점기; 구루 페르소나 AI 프롬프트 제공 |
 | 🤖 **AI 포트폴리오 분석** | ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 구조화 프롬프트 생성 |
 | 🔔 **자동 인사이트** | 과대비중, 큰 손실, 현금 부족, 환 노출 초과를 자동 감지·경고 |
 | 🌐 **다국어 · 다통화** | 한국어 · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
@@ -401,14 +403,16 @@ npm run tauri:build
 
 #### 투자 구루
 
-- 18명의 투자 구루: 버핏, 멍거, 린치, 그레이엄, 달리오, 리루, 빌 애크먼, 마이클 버리, 켄 피셔, 스티븐 코헨, 하워드 막스, 세스 클라먼, 존 템플턴, 조지 소로스, 캐시 우드, 스탠리 드러큰밀러, 테리 스미스, 조엘 그린블라트
+- 20명의 투자 구루: 버핏, 멍거, 린치, 그레이엄, 달리오, 리루, 빌 애크먼, 마이클 버리, 켄 피셔, 스티븐 코헨, 하워드 막스, 세스 클라먼, 존 템플턴, 조지 소로스, 캐시 우드, 스탠리 드러큰밀러, 테리 스미스, 조엘 그린블라트, 조셉 피오트로스키, 윌리엄 오닐
 - 구루별 투자 철학 (핵심 원칙 5개 + 대표 명언 1개)
 - 구루 이상적 배분 파이 차트 vs 내 포트폴리오 레이더 비교
 - 구루 기준 리밸런싱 제안
 - **피터 린치 10루타 채점기**: PEG·EPS 성장률·매출 성장률·부채비율·영업이익률·시가총액 기준 100점 만점 채점
 - **조엘 그린블라트 마법공식 채점기**: 이익수익률·자본수익률·영업이익률·부채비율·시가총액 기준 100점 만점 채점
 - **벤저민 그레이엄 방어적 투자 채점기**: P/E·P/B·그레이엄 넘버(P/E×P/B)·유동비율·부채비율·배당수익률 기준 100점 만점 채점
-- **테리 스미스 퀸리티 컴파운더 채점기**: ROE·영업이익률·FCF 전환율·매출 성장률·부채비율 기준 100점 만점 채점
+- **테리 스미스 퀄리티 컴파운더 채점기**: ROE·영업이익률·FCF 전환율·매출 성장률·부채비율 기준 100점 만점 채점
+- **피오트로스키 F-Score 채점기**: ROA·영업현금흐름·ΔROA·발생주의 품질·Δ부채·Δ유동비율·주식희석·Δ마진·Δ회전율 — 9가지 이진 기준 F-Score 0~9 → 100점 환산
+- **윌리엄 오닐 CAN SLIM 채점기**: 분기/연간 EPS 성장·52주 신고가·유통주식 수·상대강도·기관보유·시가총액 7가지 기준 100점 만점 채점
 - 모든 채점기는 다단계 폴백(financialData → incomeStatementHistory → balanceSheetHistory → earningsHistory → 역산값)으로 한국/일본 종목의 데이터 커버리지를 최대화
 - AI 구루 프롬프트는 UI 언어와 무관하게 영어 철학 텍스트를 기준으로 생성
 
