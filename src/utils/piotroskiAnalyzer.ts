@@ -121,7 +121,7 @@ async function fetchPiotroskiData(symbol: string): Promise<PiotroskiRawData | nu
 
   // Accruals: CFO > Net Income → 양이면 PASS
   let accruals: number | null = null;
-  if (cfo !== null && netIncome0 !== null) {
+  if (cfo !== null && netIncome0 != null) {
     accruals = cfo - netIncome0;
   }
 
