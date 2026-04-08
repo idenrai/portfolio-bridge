@@ -7,15 +7,17 @@ import {
   useSnapshotStore,
 } from "@/stores";
 import { LANG_LOCALES } from "@/i18n";
-import { KpiBar } from "@/components/dashboard/KpiBar";
-import { AllocationPieCharts } from "@/components/dashboard/AllocationPieCharts";
-import { TopHoldingsTable } from "@/components/dashboard/TopHoldingsTable";
-import { CategoryAnalysisCard } from "@/components/dashboard/CategoryAnalysisCard";
-import { CurrencyExposureCard } from "@/components/dashboard/CurrencyExposureCard";
-import { RebalanceCard } from "@/components/dashboard/RebalanceCard";
-import { InsightsPanel } from "@/components/dashboard/InsightsPanel";
-import { PortfolioHistoryChart } from "@/components/dashboard/PortfolioHistoryChart";
-import { PnLWaterfallChart } from "@/components/dashboard/PnLWaterfallChart";
+import {
+  KpiBar,
+  AllocationPieCharts,
+  TopHoldingsTable,
+  CategoryAnalysisCard,
+  CurrencyExposureCard,
+  RebalanceCard,
+  InsightsPanel,
+  PortfolioHistoryChart,
+  PnLWaterfallChart,
+} from "@/components/dashboard";
 import { SAMPLE_ASSETS } from "@/utils/sampleData";
 
 export function DashboardPage() {

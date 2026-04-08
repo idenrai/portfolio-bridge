@@ -1,5 +1,5 @@
 import { useT, useAnalyzer } from "@/hooks";
-import { analyzeByTickersPiotroski, type PiotroskiCriterionKey, type PiotroskiAnalyzerResult } from "@/utils/piotroskiAnalyzer";
+import { analyzeByTickersPiotroski, type PiotroskiCriterionKey, type PiotroskiAnalyzerResult } from "@/utils/analyzers/piotroskiAnalyzer";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────

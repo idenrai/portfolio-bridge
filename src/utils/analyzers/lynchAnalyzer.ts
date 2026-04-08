@@ -1,5 +1,5 @@
-import { enrichFundamentals, type FundamentalsData } from "./yahooFinance";
-import { analyzeByTickersGeneric } from "./yahooCore";
+import { enrichFundamentals, type FundamentalsData } from "../yahoo/yahooFinance";
+import { analyzeByTickersGeneric } from "../yahoo/yahooCore";
 import type { UniverseStock } from "./stockUniverse";
 
 import { approxToUSD } from "@/constants";

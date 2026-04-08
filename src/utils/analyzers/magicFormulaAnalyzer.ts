@@ -1,4 +1,4 @@
-import { fetchQuoteSummary, analyzeByTickersGeneric, type RawVal } from "./yahooCore";
+import { fetchQuoteSummary, analyzeByTickersGeneric, type RawVal } from "../yahoo/yahooCore";
 import type { UniverseStock } from "./stockUniverse";
 import { approxToUSD } from "@/constants";
 

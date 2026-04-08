@@ -11,7 +11,7 @@ import {
   driveLoadFromDrive,
   driveResolveWithDrive,
   driveResolveWithLocal,
-} from "@/utils/googleDriveService";
+} from "@/utils/gdrive/googleDriveService";
 
 export function useGoogleDrive() {
   const { isConnected, syncingAction, syncError, syncedAt, pendingConflict } =

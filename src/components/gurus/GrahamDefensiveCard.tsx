@@ -1,5 +1,5 @@
 import { useT, useAnalyzer } from "@/hooks";
-import { analyzeByTickersGraham, type GrahamCriterionKey, type GrahamAnalyzerResult } from "@/utils/grahamAnalyzer";
+import { analyzeByTickersGraham, type GrahamCriterionKey, type GrahamAnalyzerResult } from "@/utils/analyzers/grahamAnalyzer";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────

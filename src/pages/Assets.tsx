@@ -1,13 +1,12 @@
 import { useState, useRef } from "react";
 import { useAssetStore, useLanguageStore } from "@/stores";
 import { Card, Button, Modal } from "@/components/common";
-import { AssetForm } from "@/components/assets/AssetForm";
-import { AssetTable } from "@/components/assets/AssetTable";
+import { AssetForm, AssetTable } from "@/components/assets";
 import { downloadCsv, parseCsv } from "@/utils";
 import {
   buildClassificationPrompt,
   parseAiResponse,
-} from "@/utils/aiClassification";
+} from "@/utils/ai/aiClassification";
 import { useT } from "@/hooks";
 import type {
   Asset,

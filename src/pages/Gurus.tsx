@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Card } from "@/components/common";
-import { LynchTenBaggerCard } from "@/components/gurus/LynchTenBaggerCard";
-import { MagicFormulaCard } from "@/components/gurus/MagicFormulaCard";
-import { GrahamDefensiveCard } from "@/components/gurus/GrahamDefensiveCard";
-import { SmithQualityCard } from "@/components/gurus/SmithQualityCard";
-import { PiotroskiFScoreCard } from "@/components/gurus/PiotroskiFScoreCard";
-import { OneilCanSlimCard } from "@/components/gurus/OneilCanSlimCard";
+import {
+  LynchTenBaggerCard,
+  MagicFormulaCard,
+  GrahamDefensiveCard,
+  SmithQualityCard,
+  PiotroskiFScoreCard,
+  OneilCanSlimCard,
+} from "@/components/gurus";
 import {
   PieChart,
   Pie,

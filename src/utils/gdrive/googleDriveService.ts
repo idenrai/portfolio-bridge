@@ -9,7 +9,7 @@ import {
   uploadDriveBackup,
   createTokenClient,
   type DriveBackup,
-} from "@/utils/googleDrive";
+} from "./googleDrive";
 import type { Asset } from "@/types";
 
 const CLIENT_ID =

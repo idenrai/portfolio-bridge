@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Layout } from "@/components/layout/Layout";
+import { Layout } from "@/components/layout";
 import { DashboardPage } from "@/pages/Dashboard";
 import { AssetsPage } from "@/pages/Assets";
 import { GurusPage } from "@/pages/Gurus";
 import { SettingsPage } from "@/pages/Settings";
 import { AboutPage } from "@/pages/About";
 import { useDataRefresh } from "@/hooks";
-import { initGoogleDriveService } from "@/utils/googleDriveService";
+import { initGoogleDriveService } from "@/utils/gdrive/googleDriveService";
 
 function AppInitializer() {
   const { refreshAll } = useDataRefresh();

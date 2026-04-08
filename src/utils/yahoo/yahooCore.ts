@@ -223,7 +223,7 @@ export async function analyzeByTickersGeneric<TRaw, TResult extends { totalScore
   tickers: Array<{ ticker: string; name?: string }>;
   fetchData: (symbol: string) => Promise<TRaw | null>;
   defaultRaw: TRaw;
-  scoreStock: (stock: import("./stockUniverse").UniverseStock, data: TRaw) => TResult;
+  scoreStock: (stock: import("../analyzers/stockUniverse").UniverseStock, data: TRaw) => TResult;
   onProgress?: (p: { phase: "enrich"; done: number; total: number }) => void;
 }): Promise<TResult[]> {
   const { tickers, fetchData, defaultRaw, scoreStock, onProgress } = opts;
