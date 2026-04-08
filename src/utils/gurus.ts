@@ -7,8 +7,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "buffett",
     name: "Warren Buffett",
-    nameKo: "워렌 버핏",
-    nameJa: "ウォーレン・バフェット",
     firm: "Berkshire Hathaway",
     idealAllocation: [
       { category: "value", targetPercent: 35 },
@@ -21,8 +19,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "munger",
     name: "Charlie Munger",
-    nameKo: "찰리 멍거",
-    nameJa: "チャーリー・マンガー",
     firm: "Daily Journal Corporation",
     idealAllocation: [
       { category: "value", targetPercent: 50 },
@@ -34,8 +30,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "lynch",
     name: "Peter Lynch",
-    nameKo: "피터 린치",
-    nameJa: "ピーター・リンチ",
     firm: "Fidelity (Magellan Fund, ret.)",
     idealAllocation: [
       { category: "growth", targetPercent: 45 },
@@ -48,8 +42,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "graham",
     name: "Benjamin Graham",
-    nameKo: "벤저민 그레이엄",
-    nameJa: "ベンジャミン・グレアム",
     firm: "Graham-Newman Corp. (hist.)",
     idealAllocation: [
       { category: "bond", targetPercent: 35 },
@@ -61,8 +53,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "dalio",
     name: "Ray Dalio",
-    nameKo: "레이 달리오",
-    nameJa: "レイ・ダリオ",
     firm: "Bridgewater Associates",
     idealAllocation: [
       { category: "bond", targetPercent: 55 },
@@ -74,8 +64,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "lilu",
     name: "Li Lu",
-    nameKo: "리루",
-    nameJa: "リー・ルー",
     firm: "Himalaya Capital",
     idealAllocation: [
       { category: "value", targetPercent: 45 },
@@ -87,8 +75,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "ackman",
     name: "Bill Ackman",
-    nameKo: "빌 애크먼",
-    nameJa: "ビル・アックマン",
     firm: "Pershing Square Capital",
     idealAllocation: [
       { category: "value", targetPercent: 35 },
@@ -101,8 +87,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "burry",
     name: "Michael Burry",
-    nameKo: "마이클 버리",
-    nameJa: "マイケル・バーリー",
     firm: "Scion Asset Management",
     idealAllocation: [
       { category: "value", targetPercent: 40 },
@@ -115,8 +99,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "fisher",
     name: "Ken Fisher",
-    nameKo: "켄 피셔",
-    nameJa: "ケン・フィッシャー",
     firm: "Fisher Asset Management",
     idealAllocation: [
       { category: "growth", targetPercent: 45 },
@@ -129,8 +111,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "cohen",
     name: "Steven Cohen",
-    nameKo: "스티븐 코헨",
-    nameJa: "スティーブン・コーエン",
     firm: "Point72 Asset Management",
     idealAllocation: [
       { category: "growth", targetPercent: 30 },
@@ -144,8 +124,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "marks",
     name: "Howard Marks",
-    nameKo: "하워드 막스",
-    nameJa: "ハワード・マークス",
     firm: "Oaktree Capital Management",
     idealAllocation: [
       { category: "bond", targetPercent: 35 },
@@ -158,8 +136,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "klarman",
     name: "Seth Klarman",
-    nameKo: "세스 클라먼",
-    nameJa: "セス・クラーマン",
     firm: "The Baupost Group",
     idealAllocation: [
       { category: "value", targetPercent: 40 },
@@ -172,8 +148,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "templeton",
     name: "John Templeton",
-    nameKo: "존 템플턴",
-    nameJa: "ジョン・テンプルトン",
     firm: "Templeton Growth Fund (hist.)",
     idealAllocation: [
       { category: "value", targetPercent: 40 },
@@ -186,8 +160,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "soros",
     name: "George Soros",
-    nameKo: "조지 소로스",
-    nameJa: "ジョージ・ソロス",
     firm: "Soros Fund Management",
     idealAllocation: [
       { category: "bond", targetPercent: 30 },
@@ -200,8 +172,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "wood",
     name: "Cathie Wood",
-    nameKo: "캐시 우드",
-    nameJa: "キャシー・ウッド",
     firm: "ARK Invest",
     idealAllocation: [
       { category: "growth", targetPercent: 65 },
@@ -213,8 +183,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "druckenmiller",
     name: "Stanley Druckenmiller",
-    nameKo: "스탠리 드러큰밀러",
-    nameJa: "スタンリー・ドラッケンミラー",
     firm: "Duquesne Family Office",
     idealAllocation: [
       { category: "growth", targetPercent: 35 },
@@ -227,8 +195,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "smith",
     name: "Terry Smith",
-    nameKo: "테리 스미스",
-    nameJa: "テリー・スミス",
     firm: "Fundsmith LLP",
     idealAllocation: [
       { category: "growth", targetPercent: 45 },
@@ -240,8 +206,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "greenblatt",
     name: "Joel Greenblatt",
-    nameKo: "조엘 그린블라트",
-    nameJa: "ジョエル・グリーンブラット",
     firm: "Gotham Asset Management",
     idealAllocation: [
       { category: "value", targetPercent: 40 },
@@ -254,8 +218,7 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "piotroski",
     name: "Joseph Piotroski",
-    nameKo: "조셉 피오트로스키",
-    nameJa: "ジョセフ・ピオトロスキー",
+
     firm: "Stanford GSB (Academic)",
     idealAllocation: [
       { category: "value", targetPercent: 50 },
@@ -267,8 +230,6 @@ export const GURU_PROFILES: GuruProfile[] = [
   {
     id: "oneil",
     name: "William O'Neil",
-    nameKo: "윌리엄 오닐",
-    nameJa: "ウィリアム・オニール",
     firm: "Investor's Business Daily",
     idealAllocation: [
       { category: "growth", targetPercent: 60 },

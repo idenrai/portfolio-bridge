@@ -49,12 +49,9 @@ export function GurusPage() {
   const [showPrompt, setShowPrompt] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  /** 언어별 구루 이름 */
-  const guruName = (guru: GuruProfile) => {
-    if (lang === "ko") return guru.nameKo;
-    if (lang === "ja") return guru.nameJa;
-    return guru.name; // en, de → 영문명
-  };
+  /** i18n 구루 이름 */
+  const guruName = (guru: GuruProfile) =>
+    (t as unknown as Record<string, string>)[`guru_name_${guru.id}`] ?? guru.name;
 
   if (assets.length === 0) {
     return (
