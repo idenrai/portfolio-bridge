@@ -180,7 +180,7 @@ export const en: Translations = {
     "Copy the prompt below and paste it into ChatGPT, Claude, or any AI assistant.",
   guru_ai_copy: "Copy to Clipboard",
   guru_ai_copied: "✓ Copied!",
-  guru_ai_followup_btn: "Get Change Assessment",
+  guru_ai_followup_btn: "Continue Previous Chat",
   guru_ai_followup_desc:
     "A prompt containing only the portfolio changes since your last conversation. Paste it into your previous chat to get an evaluation of what's changed.",
   guru_ai_followup_new_session: "Start New Conversation",

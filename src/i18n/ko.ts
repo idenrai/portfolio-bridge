@@ -179,7 +179,7 @@ export const ko: Translations = {
     "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여 넣으세요.",
   guru_ai_copy: "클립보드에 복사",
   guru_ai_copied: "✓ 복사됨!",
-  guru_ai_followup_btn: "변동 사항 평가받기",
+  guru_ai_followup_btn: "이전 대화에서 계속",
   guru_ai_followup_desc:
     "지난 대화 이후의 포트폴리오 변동 사항만을 담은 프롬프트입니다. 이전 채팅에 이어 붙여넣어 바뀐 점을 평가받으세요.",
   guru_ai_followup_new_session: "새 대화 시작",

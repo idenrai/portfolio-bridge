@@ -52,7 +52,6 @@ export function GurusPage() {
   const [showFollowUp, setShowFollowUp] = useState(false);
   const [copied, setCopied] = useState(false);
   const [copiedFollowUp, setCopiedFollowUp] = useState(false);
-  const [sessionSaved, setSessionSaved] = useState(false);
 
   const { sessions, saveSession, clearSession } = useGuruSessionStore();
 
@@ -211,9 +210,7 @@ export function GurusPage() {
                 rates,
               });
               setCopied(true);
-              setSessionSaved(true);
               setTimeout(() => setCopied(false), 2000);
-              setTimeout(() => setSessionSaved(false), 3000);
             };
 
             const copyFollowUp = async () => {
@@ -224,10 +221,9 @@ export function GurusPage() {
             };
 
             const handleNewSession = () => {
-              if (window.confirm(t.guru_ai_followup_new_session_confirm)) {
-                clearSession(selectedGuru.id);
-                setShowFollowUp(false);
-              }
+              clearSession(selectedGuru.id);
+              setShowFollowUp(false);
+              setShowPrompt(true);
             };
 
             return (
@@ -250,23 +246,20 @@ export function GurusPage() {
                         <button
                           type="button"
                           onClick={() => {
-                            setShowFollowUp((v) => !v);
+                            setShowFollowUp(true);
                             setShowPrompt(false);
                           }}
-                          className="rounded-lg bg-emerald-600 hover:bg-emerald-700 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
+                          className="rounded-lg bg-emerald-600 hover:bg-emerald-700 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
                         >
-                          {showFollowUp ? t.guru_ai_close : t.guru_ai_followup_btn}
+                          {t.guru_ai_followup_btn}
                         </button>
                       )}
                       <button
                         type="button"
-                        onClick={() => {
-                          setShowPrompt((v) => !v);
-                          setShowFollowUp(false);
-                        }}
+                        onClick={handleNewSession}
                         className="rounded-lg bg-linear-to-r from-purple-600 to-indigo-500 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
                       >
-                        {showPrompt ? t.guru_ai_close : t.guru_ai_btn}
+                        {t.guru_ai_followup_new_session}
                       </button>
                     </div>
                   </div>
@@ -281,30 +274,14 @@ export function GurusPage() {
                         rows={12}
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
                       />
-                      <div className="flex items-center justify-between gap-2">
-                        {sessionSaved && (
-                          <p className="text-xs text-emerald-600 font-medium">
-                            {t.guru_ai_session_saved}
-                          </p>
-                        )}
-                        <div className="flex gap-2 ml-auto">
-                          {prevSession && (
-                            <button
-                              type="button"
-                              onClick={handleNewSession}
-                              className="rounded-lg border border-slate-300 hover:bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors cursor-pointer"
-                            >
-                              {t.guru_ai_followup_new_session}
-                            </button>
-                          )}
-                          <button
-                            type="button"
-                            onClick={copyPrompt}
-                            className="rounded-lg bg-slate-800 hover:bg-slate-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
-                          >
-                            {copied ? t.guru_ai_copied : t.guru_ai_copy}
-                          </button>
-                        </div>
+                      <div className="flex justify-end">
+                        <button
+                          type="button"
+                          onClick={copyPrompt}
+                          className="rounded-lg bg-slate-800 hover:bg-slate-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                        >
+                          {copied ? t.guru_ai_copied : t.guru_ai_copy}
+                        </button>
                       </div>
                     </div>
                   )}
@@ -324,14 +301,7 @@ export function GurusPage() {
                         rows={14}
                         className="w-full rounded-lg border border-emerald-200 bg-emerald-50/40 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
                       />
-                      <div className="flex items-center justify-between gap-2">
-                        <button
-                          type="button"
-                          onClick={handleNewSession}
-                          className="rounded-lg border border-slate-300 hover:bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors cursor-pointer"
-                        >
-                          {t.guru_ai_followup_new_session}
-                        </button>
+                      <div className="flex justify-end">
                         <button
                           type="button"
                           onClick={copyFollowUp}

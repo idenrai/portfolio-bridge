@@ -181,7 +181,7 @@ export const ja: Translations = {
     "以下のプロンプトをコピーして、ChatGPT・Claudeなど任意のAIに貼り付けてください。",
   guru_ai_copy: "クリップボードにコピー",
   guru_ai_copied: "✓ コピー済み!",
-  guru_ai_followup_btn: "変更点を評価してもらう",
+  guru_ai_followup_btn: "前回の会話から続ける",
   guru_ai_followup_desc:
     "前回の会話以降のポートフォリオ変更のみを含むプロンプトです。前のチャットに貼り付けて、変化した点を評価してもらいましょう。",
   guru_ai_followup_new_session: "新しい会話を始める",
