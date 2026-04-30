@@ -180,6 +180,13 @@ export const en: Translations = {
     "Copy the prompt below and paste it into ChatGPT, Claude, or any AI assistant.",
   guru_ai_copy: "Copy to Clipboard",
   guru_ai_copied: "✓ Copied!",
+  guru_ai_followup_btn: "Get Change Assessment",
+  guru_ai_followup_desc:
+    "A prompt containing only the portfolio changes since your last conversation. Paste it into your previous chat to get an evaluation of what's changed.",
+  guru_ai_followup_new_session: "Start New Conversation",
+  guru_ai_followup_new_session_confirm:
+    "This will clear the saved previous portfolio state and start fresh with the current state. Continue?",
+  guru_ai_session_saved: "✓ Current portfolio state has been saved.",
   guru_name_buffett: "Warren Buffett",
   guru_name_munger: "Charlie Munger",
   guru_name_lynch: "Peter Lynch",

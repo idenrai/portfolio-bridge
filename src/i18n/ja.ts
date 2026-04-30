@@ -181,6 +181,13 @@ export const ja: Translations = {
     "以下のプロンプトをコピーして、ChatGPT・Claudeなど任意のAIに貼り付けてください。",
   guru_ai_copy: "クリップボードにコピー",
   guru_ai_copied: "✓ コピー済み!",
+  guru_ai_followup_btn: "変更点を評価してもらう",
+  guru_ai_followup_desc:
+    "前回の会話以降のポートフォリオ変更のみを含むプロンプトです。前のチャットに貼り付けて、変化した点を評価してもらいましょう。",
+  guru_ai_followup_new_session: "新しい会話を始める",
+  guru_ai_followup_new_session_confirm:
+    "保存された以前のポートフォリオ状態を削除し、現在の状態で新しく始めます。続けますか？",
+  guru_ai_session_saved: "✓ 現在のポートフォリオ状態が保存されました。",
   guru_name_buffett: "ウォーレン・バフェット",
   guru_name_munger: "チャーリー・マンガー",
   guru_name_lynch: "ピーター・リンチ",

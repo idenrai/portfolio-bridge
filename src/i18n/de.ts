@@ -184,6 +184,13 @@ export const de: Translations = {
     "Kopieren Sie den Prompt und fügen Sie ihn in ChatGPT, Claude oder einen anderen KI-Assistenten ein.",
   guru_ai_copy: "In Zwischenablage kopieren",
   guru_ai_copied: "✓ Kopiert!",
+  guru_ai_followup_btn: "Änderungen bewerten lassen",
+  guru_ai_followup_desc:
+    "Ein Prompt, der nur die Portfolio-Änderungen seit Ihrem letzten Gespräch enthält. Fügen Sie ihn in Ihren vorherigen Chat ein, um eine Bewertung der Änderungen zu erhalten.",
+  guru_ai_followup_new_session: "Neues Gespräch starten",
+  guru_ai_followup_new_session_confirm:
+    "Dies löscht den gespeicherten früheren Portfolio-Status und startet neu mit dem aktuellen Status. Fortfahren?",
+  guru_ai_session_saved: "✓ Aktueller Portfolio-Status wurde gespeichert.",
   guru_name_buffett: "Warren Buffett",
   guru_name_munger: "Charlie Munger",
   guru_name_lynch: "Peter Lynch",

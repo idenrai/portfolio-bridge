@@ -179,6 +179,13 @@ export const ko: Translations = {
     "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여 넣으세요.",
   guru_ai_copy: "클립보드에 복사",
   guru_ai_copied: "✓ 복사됨!",
+  guru_ai_followup_btn: "변동 사항 평가받기",
+  guru_ai_followup_desc:
+    "지난 대화 이후의 포트폴리오 변동 사항만을 담은 프롬프트입니다. 이전 채팅에 이어 붙여넣어 바뀐 점을 평가받으세요.",
+  guru_ai_followup_new_session: "새 대화 시작",
+  guru_ai_followup_new_session_confirm:
+    "저장된 이전 포트폴리오 상태를 삭제하고 현재 상태로 새 대화를 시작합니다. 계속하시겠습니까?",
+  guru_ai_session_saved: "✓ 현재 포트폴리오 상태가 저장되었습니다.",
   guru_name_buffett: "워렌 버핏",
   guru_name_munger: "찰리 멍거",
   guru_name_lynch: "피터 린치",

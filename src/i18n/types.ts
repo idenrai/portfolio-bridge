@@ -191,6 +191,11 @@ export interface Translations {
   guru_ai_desc: string;
   guru_ai_copy: string;
   guru_ai_copied: string;
+  guru_ai_followup_btn: string;
+  guru_ai_followup_desc: string;
+  guru_ai_followup_new_session: string;
+  guru_ai_followup_new_session_confirm: string;
+  guru_ai_session_saved: string;
   guru_name_buffett: string;
   guru_name_munger: string;
   guru_name_lynch: string;

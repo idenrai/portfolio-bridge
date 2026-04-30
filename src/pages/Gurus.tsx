@@ -23,7 +23,9 @@ import {
 } from "recharts";
 import { usePortfolio, useT } from "@/hooks";
 import { useLanguageStore, useSettingsStore } from "@/stores";
+import { useGuruSessionStore } from "@/stores/useGuruSessionStore";
 import { GURU_PROFILES, formatCurrency, buildGuruPrompt } from "@/utils";
+import { buildGuruFollowUpPrompt } from "@/utils/ai/buildGuruFollowUpPrompt";
 import { calculateRebalancing } from "@/utils";
 import type { GuruProfile } from "@/types";
 import { en } from "@/i18n";
@@ -47,7 +49,12 @@ export function GurusPage() {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const rates = useSettingsStore((s) => s.exchangeRates);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [showFollowUp, setShowFollowUp] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copiedFollowUp, setCopiedFollowUp] = useState(false);
+  const [sessionSaved, setSessionSaved] = useState(false);
+
+  const { sessions, saveSession, clearSession } = useGuruSessionStore();
 
   /** i18n 구루 이름 */
   const guruName = (guru: GuruProfile) =>
@@ -152,11 +159,77 @@ export function GurusPage() {
               rates,
               englishPhilosophy,
             );
+
+            const prevSession = sessions[selectedGuru.id];
+
+            const followUpText = prevSession
+              ? buildGuruFollowUpPrompt(
+                  selectedGuru,
+                  prevSession,
+                  summary,
+                  lang,
+                  baseCurrency,
+                  rates,
+                )
+              : null;
+
             const copyPrompt = async () => {
               await navigator.clipboard.writeText(promptText);
+              // 첫 번째 프롬프트 복사 시 현재 포트폴리오 스냅샷 저장
+              saveSession({
+                guruId: selectedGuru.id,
+                date: new Date().toISOString().slice(0, 10),
+                totalValueKRW: summary.totalValueKRW,
+                totalCostKRW: summary.totalCostKRW,
+                totalPnLKRW: summary.totalPnLKRW,
+                totalReturnPercent: summary.totalReturnPercent,
+                holdingCount: summary.holdingCount,
+                cashPercent: summary.cashPercent,
+                categoryAllocation: summary.categoryAllocation.map((c) => ({
+                  category: c.category,
+                  percent: c.percent,
+                })),
+                marketAllocation: summary.marketAllocation.map((m) => ({
+                  market: m.market,
+                  percent: m.percent,
+                })),
+                currencyAllocation: summary.currencyAllocation.map((c) => ({
+                  currency: c.currency,
+                  percent: c.percent,
+                })),
+                holdings: summary.holdings
+                  .filter((h) => h.type !== "cash")
+                  .map((h) => ({
+                    id: h.id,
+                    ticker: h.ticker,
+                    name: h.name,
+                    weightPercent: h.weightPercent,
+                    returnPercent: h.returnPercent,
+                    category: h.category,
+                  })),
+                baseCurrency,
+                rates,
+              });
               setCopied(true);
+              setSessionSaved(true);
               setTimeout(() => setCopied(false), 2000);
+              setTimeout(() => setSessionSaved(false), 3000);
             };
+
+            const copyFollowUp = async () => {
+              if (!followUpText) return;
+              await navigator.clipboard.writeText(followUpText);
+              setCopiedFollowUp(true);
+              setTimeout(() => setCopiedFollowUp(false), 2000);
+            };
+
+            const handleNewSession = () => {
+              if (window.confirm(t.guru_ai_followup_new_session_confirm)) {
+                clearSession(selectedGuru.id);
+                setShowFollowUp(false);
+              }
+            };
+
             return (
               <div className="rounded-xl bg-linear-to-r from-purple-600 to-indigo-500 p-px shadow-md">
                 <div className="rounded-[11px] bg-white/95 px-4 py-3">
@@ -172,14 +245,33 @@ export function GurusPage() {
                         </p>
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => setShowPrompt((v) => !v)}
-                      className="shrink-0 rounded-lg bg-linear-to-r from-purple-600 to-indigo-500 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap w-full sm:w-auto text-center"
-                    >
-                      {showPrompt ? t.guru_ai_close : t.guru_ai_btn}
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto shrink-0">
+                      {prevSession && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowFollowUp((v) => !v);
+                            setShowPrompt(false);
+                          }}
+                          className="rounded-lg bg-emerald-600 hover:bg-emerald-700 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
+                        >
+                          {showFollowUp ? t.guru_ai_close : t.guru_ai_followup_btn}
+                        </button>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowPrompt((v) => !v);
+                          setShowFollowUp(false);
+                        }}
+                        className="rounded-lg bg-linear-to-r from-purple-600 to-indigo-500 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
+                      >
+                        {showPrompt ? t.guru_ai_close : t.guru_ai_btn}
+                      </button>
+                    </div>
                   </div>
+
+                  {/* 첫 번째 프롬프트 */}
                   {showPrompt && (
                     <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
                       <p className="text-xs text-slate-500">{t.guru_ai_desc}</p>
@@ -189,13 +281,63 @@ export function GurusPage() {
                         rows={12}
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
                       />
-                      <div className="flex justify-end">
+                      <div className="flex items-center justify-between gap-2">
+                        {sessionSaved && (
+                          <p className="text-xs text-emerald-600 font-medium">
+                            {t.guru_ai_session_saved}
+                          </p>
+                        )}
+                        <div className="flex gap-2 ml-auto">
+                          {prevSession && (
+                            <button
+                              type="button"
+                              onClick={handleNewSession}
+                              className="rounded-lg border border-slate-300 hover:bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors cursor-pointer"
+                            >
+                              {t.guru_ai_followup_new_session}
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={copyPrompt}
+                            className="rounded-lg bg-slate-800 hover:bg-slate-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                          >
+                            {copied ? t.guru_ai_copied : t.guru_ai_copy}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 두 번째 (변동 사항) 프롬프트 */}
+                  {showFollowUp && followUpText && (
+                    <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                          📅 {prevSession?.date}
+                        </span>
+                        <p className="text-xs text-slate-500">{t.guru_ai_followup_desc}</p>
+                      </div>
+                      <textarea
+                        readOnly
+                        value={followUpText}
+                        rows={14}
+                        className="w-full rounded-lg border border-emerald-200 bg-emerald-50/40 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
+                      />
+                      <div className="flex items-center justify-between gap-2">
                         <button
                           type="button"
-                          onClick={copyPrompt}
-                          className="rounded-lg bg-slate-800 hover:bg-slate-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                          onClick={handleNewSession}
+                          className="rounded-lg border border-slate-300 hover:bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors cursor-pointer"
                         >
-                          {copied ? t.guru_ai_copied : t.guru_ai_copy}
+                          {t.guru_ai_followup_new_session}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={copyFollowUp}
+                          className="rounded-lg bg-emerald-700 hover:bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                        >
+                          {copiedFollowUp ? t.guru_ai_copied : t.guru_ai_copy}
                         </button>
                       </div>
                     </div>
