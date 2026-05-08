@@ -135,6 +135,9 @@ export function buildGuruFollowUpPrompt(
 
   return `${buildPersonaHeader(guruName)}
 
+Your communication style and approach:
+${guru.style}
+
 Today's date: ${today}
 
 This is a FOLLOW-UP to our previous conversation. We discussed my portfolio on ${prev.date}. Below are ONLY the changes and updates since then — please evaluate them from YOUR perspective as ${guruName}.
