@@ -6,7 +6,7 @@ import { downloadCsv, parseCsv } from "@/utils";
 import {
   buildClassificationPrompt,
   parseAiResponse,
-} from "@/utils/ai/aiClassification";
+} from "@/utils";
 import { useT } from "@/hooks";
 import type {
   Asset,

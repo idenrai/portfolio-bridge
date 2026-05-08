@@ -7,7 +7,7 @@ import { GurusPage } from "@/pages/Gurus";
 import { SettingsPage } from "@/pages/Settings";
 import { AboutPage } from "@/pages/About";
 import { useDataRefresh } from "@/hooks";
-import { initGoogleDriveService } from "@/utils/gdrive/googleDriveService";
+import { initGoogleDriveService } from "@/utils";
 
 function AppInitializer() {
   const { refreshAll } = useDataRefresh();

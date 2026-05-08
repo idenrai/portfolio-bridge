@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useAssetStore, useSettingsStore } from "@/stores";
 import { calculateSummary, calculateRebalancing } from "@/utils";
-import { useT } from "@/hooks/useT";
+import { useT } from "@/hooks";
 import type { AssetCategory } from "@/types";
 
 /**

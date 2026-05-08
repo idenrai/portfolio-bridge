@@ -9,6 +9,7 @@ export {
 } from "./calc/calculations";
 export { exportToCsv, parseCsv, downloadCsv } from "./csv";
 export { GURU_PROFILES } from "./gurus";
+export { SAMPLE_ASSETS } from "./sampleData";
 export {
   searchTicker,
   fetchCurrentPrice,
@@ -19,3 +20,4 @@ export { buildClassificationPrompt, parseAiResponse } from "./ai/aiClassificatio
 export { buildInsightPrompt } from "./ai/buildInsightPrompt";
 export { buildGuruPrompt } from "./ai/buildGuruPrompt";
 export { buildGuruFollowUpPrompt } from "./ai/buildGuruFollowUpPrompt";
+export { initGoogleDriveService } from "./gdrive/googleDriveService";

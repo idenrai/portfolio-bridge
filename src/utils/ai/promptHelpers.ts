@@ -160,3 +160,44 @@ export function buildPersonaHeader(guruName: string): string {
 export function sign(n: number): string {
   return n >= 0 ? "+" : "";
 }
+
+/**
+ * 포트폴리오 데이터 블록 빌드
+ * PORTFOLIO OVERVIEW ~ CASH POSITIONS 섹션을 생성 (buildGuruPrompt / buildInsightPrompt 공유)
+ */
+export function buildPortfolioDataBlock(
+  summary: PortfolioSummary,
+  assets: Asset[],
+  baseCurrency: string,
+  rates: Record<string, number>,
+  categorySection: string,
+  categoryHeader = "ALLOCATION BY CATEGORY",
+): string {
+  const pnlKRW = summary.totalPnLKRW;
+  const returnPct = summary.totalReturnPercent;
+  const marketSection = buildMarketSection(summary);
+  const fxSection = buildFxSection(summary);
+  const { rows: holdingRows, count: holdingCount } = buildHoldingRows(summary);
+  const cashSection = buildCashSection(assets);
+
+  return `--- PORTFOLIO OVERVIEW ---
+Total value (${baseCurrency}): ${formatInBase(summary.totalValueKRW, baseCurrency, rates)}
+Total P&L (${baseCurrency}):   ${sign(pnlKRW)}${formatInBase(pnlKRW, baseCurrency, rates)} (${sign(returnPct)}${returnPct.toFixed(2)}%)
+Number of positions: ${summary.holdingCount}
+Cash %: ${summary.cashPercent.toFixed(1)}%
+
+--- ${categoryHeader} ---
+${categorySection}
+
+--- ALLOCATION BY MARKET ---
+${marketSection}
+
+--- CURRENCY EXPOSURE ---
+${fxSection}
+
+--- HOLDINGS (sorted by weight, top ${holdingCount}) ---
+${holdingRows}
+
+--- CASH POSITIONS ---
+${cashSection}`;
+}

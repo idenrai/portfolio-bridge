@@ -52,13 +52,12 @@ export function useDataRefresh(): UseDataRefreshResult {
   }, [rates.refreshRates, prices.refreshPrices]);
 
   // 둘 중 더 최근 갱신 시각
-  const lastUpdated = (() => {
-    if (!rates.lastUpdated) return prices.lastUpdated;
-    if (!prices.lastUpdated) return rates.lastUpdated;
-    return rates.lastUpdated > prices.lastUpdated
-      ? rates.lastUpdated
-      : prices.lastUpdated;
-  })();
+  const { lastUpdated: rateTs } = rates;
+  const { lastUpdated: priceTs } = prices;
+  const lastUpdated =
+    rateTs && priceTs
+      ? rateTs > priceTs ? rateTs : priceTs
+      : rateTs ?? priceTs;
 
   const combinedLoading = isLoading || rates.isLoading || prices.isLoading;
 

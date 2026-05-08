@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { searchTicker } from "@/utils/yahoo/yahooFinance";
+import { searchTicker } from "@/utils";
 import { useAssetStore } from "@/stores";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────

@@ -6,13 +6,9 @@ import type {
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 import {
-  formatInBase,
   buildCategorySection,
-  buildMarketSection,
-  buildFxSection,
-  buildHoldingRows,
-  buildCashSection,
   buildPersonaHeader,
+  buildPortfolioDataBlock,
 } from "./promptHelpers";
 
 /**
@@ -27,9 +23,8 @@ export function buildGuruPrompt(
   rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
   philosophyEn: string = "",
 ): string {
-  const totalKRW = summary.totalValueKRW;
-  const pnlKRW = summary.totalPnLKRW;
-  const returnPct = summary.totalReturnPercent;
+  const guruEnName = guru.name;
+  const today = new Date().toISOString().slice(0, 10);
 
   const categorySection = buildCategorySection(
     summary,
@@ -39,12 +34,14 @@ export function buildGuruPrompt(
     })),
     "your ideal target",
   );
-  const marketSection = buildMarketSection(summary);
-  const fxSection = buildFxSection(summary);
-  const { rows: holdingRows, count: holdingCount } = buildHoldingRows(summary);
-  const cashSection = buildCashSection(assets);
-  const guruEnName = guru.name;
-  const today = new Date().toISOString().slice(0, 10);
+  const dataBlock = buildPortfolioDataBlock(
+    summary,
+    assets,
+    baseCurrency,
+    rates,
+    categorySection,
+    "ALLOCATION BY CATEGORY (vs your ideal target)",
+  );
 
   return `${buildPersonaHeader(guruEnName)}
 
@@ -64,26 +61,7 @@ A user has shared their portfolio with you and is asking for your personal revie
 4. What the ideal top holdings in this portfolio SHOULD look like in your view — suggest realistic ideal weight % for up to 10 positions (fewer if the portfolio has fewer stocks) in order of priority
 5. Any key risks or opportunities you observe from your perspective, considering today's macro environment
 
---- PORTFOLIO OVERVIEW ---
-Total value (${baseCurrency}): ${formatInBase(totalKRW, baseCurrency, rates)}
-Total P&L (${baseCurrency}):   ${pnlKRW >= 0 ? "+" : ""}${formatInBase(pnlKRW, baseCurrency, rates)} (${returnPct >= 0 ? "+" : ""}${returnPct.toFixed(2)}%)
-Number of positions: ${summary.holdingCount}
-Cash %: ${summary.cashPercent.toFixed(1)}%
-
---- ALLOCATION BY CATEGORY (vs your ideal target) ---
-${categorySection}
-
---- ALLOCATION BY MARKET ---
-${marketSection}
-
---- CURRENCY EXPOSURE ---
-${fxSection}
-
---- HOLDINGS (sorted by weight, top ${holdingCount}) ---
-${holdingRows}
-
---- CASH POSITIONS ---
-${cashSection}
+${dataBlock}
 
 IMPORTANT: Respond entirely in ${LANG_NAMES[lang]}. Maintain ${guruEnName}'s characteristic voice, vocabulary, and reasoning style throughout. For the top 10 holdings recommendation, format as a table with rank, ticker/name, suggested weight %, and brief reasoning.`;
 }

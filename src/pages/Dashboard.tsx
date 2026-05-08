@@ -18,7 +18,7 @@ import {
   PortfolioHistoryChart,
   PnLWaterfallChart,
 } from "@/components/dashboard";
-import { SAMPLE_ASSETS } from "@/utils/sampleData";
+import { SAMPLE_ASSETS } from "@/utils";
 
 export function DashboardPage() {
   const { assets, summary, rebalancing } = usePortfolio();
