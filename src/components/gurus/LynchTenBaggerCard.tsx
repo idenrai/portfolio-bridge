@@ -1,5 +1,5 @@
 import { useT, useAnalyzer } from "@/hooks";
-import { analyzeByTickers, type LynchCriterionKey, type LynchAnalyzerResult } from "@/utils/analyzers/lynchAnalyzer";
+import { analyzeByTickers, type LynchCriterionKey, type LynchAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────

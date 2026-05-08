@@ -1,6 +1,6 @@
 import { Card } from "@/components/common";
 import { useT } from "@/hooks";
-import type { AnalyzerMode, AnalyzerProgress, BaseAnalyzerResult } from "@/hooks/useAnalyzer";
+import type { AnalyzerMode, AnalyzerProgress, BaseAnalyzerResult } from "@/hooks";
 
 // ─── 컬러 테마 ─────────────────────────────────────────────────────────────────
 

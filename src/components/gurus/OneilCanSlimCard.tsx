@@ -1,5 +1,5 @@
 import { useT, useAnalyzer } from "@/hooks";
-import { analyzeByTickersOneil, type OneilCriterionKey, type OneilAnalyzerResult } from "@/utils/analyzers/oneilAnalyzer";
+import { analyzeByTickersOneil, type OneilCriterionKey, type OneilAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { DriveBackup } from "@/utils/gdrive/googleDrive";
+import type { DriveBackup } from "@/utils";
 import { STORAGE_KEYS } from "@/constants";
 
 export interface DriveStoreState {

@@ -1,5 +1,5 @@
 import { useT, useAnalyzer } from "@/hooks";
-import { analyzeByTickersMF, type MFCriterionKey, type MFAnalyzerResult } from "@/utils/analyzers/magicFormulaAnalyzer";
+import { analyzeByTickersMF, type MFCriterionKey, type MFAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────

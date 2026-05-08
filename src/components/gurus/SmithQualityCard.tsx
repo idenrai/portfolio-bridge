@@ -1,5 +1,5 @@
 import { useT, useAnalyzer } from "@/hooks";
-import { analyzeByTickersSmith, type SmithCriterionKey, type SmithAnalyzerResult } from "@/utils/analyzers/smithAnalyzer";
+import { analyzeByTickersSmith, type SmithCriterionKey, type SmithAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────

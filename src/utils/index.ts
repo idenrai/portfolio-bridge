@@ -20,4 +20,13 @@ export { buildClassificationPrompt, parseAiResponse } from "./ai/aiClassificatio
 export { buildInsightPrompt } from "./ai/buildInsightPrompt";
 export { buildGuruPrompt } from "./ai/buildGuruPrompt";
 export { buildGuruFollowUpPrompt } from "./ai/buildGuruFollowUpPrompt";
-export { initGoogleDriveService } from "./gdrive/googleDriveService";
+export {
+  initGoogleDriveService,
+  driveConnect,
+  driveDisconnect,
+  driveSyncNow,
+  driveLoadFromDrive,
+  driveResolveWithDrive,
+  driveResolveWithLocal,
+} from "./gdrive/googleDriveService";
+export type { DriveBackup } from "./gdrive/googleDrive";
