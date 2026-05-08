@@ -139,4 +139,9 @@ export interface GuruProfile {
   firm: string;
   /** 추천 카테고리 비중 */
   idealAllocation: TargetAllocation[];
+  /**
+   * AI 프롬프트용 커뮤니케이션 스타일 & 투자 시계 지침
+   * (영문, 사용자에게 노출되지 않음)
+   */
+  style: string;
 }
