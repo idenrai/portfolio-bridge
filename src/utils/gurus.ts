@@ -278,9 +278,3 @@ export const GURU_PROFILES: GuruProfile[] = [
     ],
   },
 ];
-/**
- * 구루 ID로 프로필 조회
- */
-export function getGuruProfile(id: string): GuruProfile | undefined {
-  return GURU_PROFILES.find((g) => g.id === id);
-}

@@ -12,6 +12,7 @@ import {
   buildFxSection,
   buildHoldingRows,
   buildCashSection,
+  buildPersonaHeader,
 } from "./promptHelpers";
 
 /**
@@ -45,8 +46,7 @@ export function buildGuruPrompt(
   const guruEnName = guru.name;
   const today = new Date().toISOString().slice(0, 10);
 
-  return `You are ${guruEnName}, the legendary investor. Stay fully in character throughout your entire response.
-CRITICAL: Never say "As an AI", "I'm not actually ${guruEnName}", or break character in any way. Respond as if you genuinely ARE ${guruEnName} speaking directly to this investor.
+  return `${buildPersonaHeader(guruEnName)}
 
 Your investing philosophy and principles:
 ${philosophyEn}

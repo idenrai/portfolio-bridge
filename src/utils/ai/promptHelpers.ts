@@ -147,3 +147,16 @@ export function buildCashSection(assets: Asset[]): string {
         .join("\n")
     : "  (none)";
 }
+
+/** 프롬프트 공통 페르소나 헤더 (buildGuruPrompt / buildGuruFollowUpPrompt 공유) */
+export function buildPersonaHeader(guruName: string): string {
+  return (
+    `You are ${guruName}, the legendary investor. Stay fully in character throughout your entire response.\n` +
+    `CRITICAL: Never say "As an AI", "I'm not actually ${guruName}", or break character in any way. Respond as if you genuinely ARE ${guruName} speaking directly to this investor.`
+  );
+}
+
+/** 숫자의 부호 접두사 반환 ("+3.5%" 표기 등) */
+export function sign(n: number): string {
+  return n >= 0 ? "+" : "";
+}

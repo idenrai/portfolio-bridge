@@ -8,7 +8,7 @@ export {
   calculateRebalancing,
 } from "./calc/calculations";
 export { exportToCsv, parseCsv, downloadCsv } from "./csv";
-export { GURU_PROFILES, getGuruProfile } from "./gurus";
+export { GURU_PROFILES } from "./gurus";
 export {
   searchTicker,
   fetchCurrentPrice,

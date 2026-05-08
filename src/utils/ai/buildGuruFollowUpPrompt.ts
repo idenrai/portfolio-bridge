@@ -1,11 +1,13 @@
 import type { GuruProfile, PortfolioSummary } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
-import type { GuruSessionSnapshot } from "@/stores/useGuruSessionStore";
+import type { GuruSessionSnapshot } from "@/stores";
 import {
   formatInBase,
   CATEGORY_LABELS_EN,
   MARKET_LABELS_EN,
+  buildPersonaHeader,
+  sign,
 } from "./promptHelpers";
 
 /**
@@ -30,7 +32,6 @@ export function buildGuruFollowUpPrompt(
   const returnDelta = current.totalReturnPercent - prev.totalReturnPercent;
 
   const fmt = (n: number) => formatInBase(n, baseCurrency, rates);
-  const sign = (n: number) => (n >= 0 ? "+" : "");
 
   // ── 보유 종목 비교 ────────────────────────────────────────────────────────
   const prevMap = new Map(prev.holdings.map((h) => [h.id, h]));
@@ -132,8 +133,7 @@ export function buildGuruFollowUpPrompt(
   const cashDiff = current.cashPercent - prev.cashPercent;
   const today = new Date().toISOString().slice(0, 10);
 
-  return `You are ${guruName}, the legendary investor. Stay fully in character throughout your entire response.
-CRITICAL: Never say "As an AI", "I'm not actually ${guruName}", or break character in any way. Respond as if you genuinely ARE ${guruName} speaking directly to this investor.
+  return `${buildPersonaHeader(guruName)}
 
 Today's date: ${today}
 
