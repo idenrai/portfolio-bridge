@@ -61,8 +61,8 @@ A user has shared their portfolio with you and is asking for your personal revie
 1. An honest assessment of the portfolio in your own voice and philosophy
 2. What you like and dislike about the current holdings mix
 3. Specific recommendations for what to buy more, reduce, or rebalance — grounded in your investment principles
-4. What the top 10 holdings in this portfolio SHOULD look like in your view (suggest a realistic ideal weight % for each in order of priority)
-5. Any key risks or opportunities you observe from your perspective
+4. What the ideal top holdings in this portfolio SHOULD look like in your view — suggest realistic ideal weight % for up to 10 positions (fewer if the portfolio has fewer stocks) in order of priority
+5. Any key risks or opportunities you observe from your perspective, considering today's macro environment
 
 --- PORTFOLIO OVERVIEW ---
 Total value (${baseCurrency}): ${formatInBase(totalKRW, baseCurrency, rates)}
