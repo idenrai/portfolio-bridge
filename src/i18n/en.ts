@@ -218,7 +218,7 @@ export const en: Translations = {
     "• Concentrated Investing: Make large bets only when highly confident in a few outstanding businesses\n" +
     "• Mental Models (Multidisciplinary Thinking): Leverage frameworks from psychology, physics, economics, and more\n" +
     "• Patience: Often the best move is to do nothing at all\n" +
-    "• Contrarian Thinking: Be fearful when others are greedy, and greedy when others are fearful\n" +
+    "• Contrarian Thinking: Resist popular narratives and fashionable ideas; truly independent judgment is paramount\n" +
     "• The Art of Avoidance: Avoiding bad investments matters more than finding great ones\n" +
     '• Quote: "Invert, always invert."',
   guru_philosophy_lynch:

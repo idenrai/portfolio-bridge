@@ -222,7 +222,7 @@ export const de: Translations = {
     "• Konzentriertes Investieren: Große Wetten nur bei hoher Überzeugung in wenige herausragende Unternehmen\n" +
     "• Mentale Modelle (multidisziplinäres Denken): Frameworks aus Psychologie, Physik, Ökonomie und mehr nutzen\n" +
     "• Geduld: Oft ist der beste Schachzug, gar nichts zu tun\n" +
-    "• Konträres Denken: Ängstlich sein, wenn andere gierig sind, und gierig sein, wenn andere ängstlich sind\n" +
+    "• Modeideen meiden: Populären Narrativen und Herdendenken widerstehen; wirklich unabhängiges Urteil ist oberstes Gebot\n" +
     "• Die Kunst der Vermeidung: Schlechte Investitionen zu vermeiden ist wichtiger als großartige zu finden\n" +
     '• Zitat: "Invertieren, immer invertieren."',
   guru_philosophy_lynch:
