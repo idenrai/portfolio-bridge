@@ -2,6 +2,7 @@ import type { GuruProfile, PortfolioSummary } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 import type { GuruSessionSnapshot } from "@/stores";
+import { GURU_FOLLOWUP_FOCUS } from "./guruFrameworks";
 import {
   formatInBase,
   CATEGORY_LABELS_EN,
@@ -131,6 +132,25 @@ export function buildGuruFollowUpPrompt(
 
   // ── 현금 비중 변화 ────────────────────────────────────────────────────────
   const cashDiff = current.cashPercent - prev.cashPercent;
+
+  // ── 이상 배분 대비 현재 배분 ──────────────────────────────────────────────
+  const idealAllocSection = guru.idealAllocation
+    .map((ia) => {
+      const label =
+        CATEGORY_LABELS_EN[ia.category as keyof typeof CATEGORY_LABELS_EN] ??
+        ia.category;
+      const currAlloc = current.categoryAllocation.find(
+        (c) => c.category === ia.category,
+      );
+      const currPct = currAlloc?.percent ?? 0;
+      const gap = currPct - ia.targetPercent;
+      return (
+        `  ${label}: target ${ia.targetPercent}% | actual ${currPct.toFixed(1)}%` +
+        ` (gap ${sign(gap)}${Math.abs(gap).toFixed(1)}%p)`
+      );
+    })
+    .join("\n");
+
   const today = new Date().toISOString().slice(0, 10);
 
   return `${buildPersonaHeader(guruName)}
@@ -142,12 +162,13 @@ Today's date: ${today}
 
 This is a FOLLOW-UP to our previous conversation. We discussed my portfolio on ${prev.date}. Below are ONLY the changes and updates since then — please evaluate them from YOUR perspective as ${guruName}.
 
-Do NOT repeat your general philosophy or provide a full portfolio review. Focus ONLY on:
-1. Whether the changes I made are moving in the right direction based on your principles
+Do NOT repeat your general philosophy or provide a full portfolio review. Focus on:
+${GURU_FOLLOWUP_FOCUS[guru.id] ??
+`1. Whether the changes I made are moving in the right direction based on your principles
 2. Your reaction to the new positions added and positions removed
 3. Whether the rebalancing moves were wise or misguided
 4. Any specific concerns or approvals about the shifts you observe
-5. A brief updated verdict on the portfolio's direction — is it improving or deteriorating?
+5. A brief updated verdict on the portfolio's direction — is it improving or deteriorating?`}
 
 --- PORTFOLIO PERFORMANCE SINCE LAST REVIEW (${prev.date}) ---
 Portfolio value change (${baseCurrency}): ${sign(valueDelta)}${fmt(valueDelta)} (${sign(valueDeltaPct)}${valueDeltaPct.toFixed(2)}%)
@@ -155,6 +176,9 @@ P&L change (${baseCurrency}): ${sign(pnlDelta)}${fmt(pnlDelta)}
 Return rate: ${sign(prev.totalReturnPercent)}${prev.totalReturnPercent.toFixed(2)}% → ${sign(current.totalReturnPercent)}${current.totalReturnPercent.toFixed(2)}% (${sign(returnDelta)}${returnDelta.toFixed(2)}pp)
 Positions: ${prev.holdingCount} → ${current.holdingCount}
 Cash %: ${prev.cashPercent.toFixed(1)}% → ${current.cashPercent.toFixed(1)}% (${sign(cashDiff)}${cashDiff.toFixed(1)}%p)
+
+--- YOUR IDEAL ALLOCATION vs. CURRENT ---
+${idealAllocSection}
 
 --- NEW POSITIONS ADDED ---
 ${newHoldings.length > 0 ? newHoldings.join("\n") : "  (none)"}
