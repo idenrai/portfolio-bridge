@@ -154,29 +154,6 @@ export function buildGuruFollowUpPrompt(
 
   const today = new Date().toISOString().slice(0, 10);
 
-  // ── 투자자 프로필 섹션 ────────────────────────────────────────────────────
-  const profileLines: string[] = [];
-  if (profile) {
-    if (profile.nickname) profileLines.push(`- Name: ${profile.nickname}`);
-    if (profile.age != null) profileLines.push(`- Age: ${profile.age}`);
-    if (profile.annualIncome != null)
-      profileLines.push(
-        `- Annual Income: ${profile.annualIncome.toLocaleString()} ${baseCurrency}`,
-      );
-    if (profile.monthlyBudget != null)
-      profileLines.push(
-        `- Monthly Investment Budget: ${profile.monthlyBudget.toLocaleString()} ${baseCurrency}`,
-      );
-    if (profile.plan3y) profileLines.push(`- 3-Year Plan: ${profile.plan3y}`);
-    if (profile.plan5y) profileLines.push(`- 5-Year Plan: ${profile.plan5y}`);
-    if (profile.plan10y)
-      profileLines.push(`- 10-Year Plan: ${profile.plan10y}`);
-  }
-  const profileSection =
-    profileLines.length > 0
-      ? `\n--- INVESTOR PROFILE ---\n${profileLines.join("\n")}\n`
-      : "";
-
   const addressLine = profile?.nickname
     ? `Please address the investor as "${profile.nickname}" throughout your response.`
     : `Maintain ${guruName}'s characteristic voice and reasoning style.`;
@@ -187,7 +164,7 @@ Your communication style and approach:
 ${guru.style}
 
 Today's date: ${today}
-${profileSection}
+
 This is a FOLLOW-UP to our previous conversation. We discussed my portfolio on ${prev.date}. Below are ONLY the changes and updates since then — please evaluate them from YOUR perspective as ${guruName}.
 
 Do NOT repeat your general philosophy or provide a full portfolio review. Focus on:

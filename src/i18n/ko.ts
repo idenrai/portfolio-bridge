@@ -547,7 +547,7 @@ export const ko: Translations = {
     "예시: 3년 안에 배당주 수입 월 30만원을 목표로 성장주 중심으로 리밸런싱...",
   profile_plan5y_label: "5년 투자 계획",
   profile_plan5y_placeholder:
-    "예시: 5년 후 결혼 자금으로 1억 목표, 부동산 마련원...",
+    "예시: 5년 후 결혼 자금으로 1억 목표, 부동산 마련 계획...",
   profile_plan10y_label: "10년 투자 계획",
   profile_plan10y_placeholder:
     "예시: 10년 후 경제적 자유 달성을 위해 배당 수입만으로 생활비 충당...",

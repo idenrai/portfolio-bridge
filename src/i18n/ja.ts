@@ -533,8 +533,8 @@ export const ja: Translations = {
 
   profile_title: "プロフィール",
   profile_desc:
-    "グルーとの対話時に使用される個人情報です。ローカルに保存され、外部サーバーには送信されません。",
-  profile_nickname_label: "ニックネーム（グルーに呼んでほしい名前）",
+    "グルとの対話時に使用される個人情報です。ローカルに保存され、外部サーバーには送信されません。",
+  profile_nickname_label: "ニックネーム（グルに呼んでほしい名前）",
   profile_nickname_placeholder: "例: はなこ",
   profile_age_label: "年齢",
   profile_age_placeholder: "例: 35",
@@ -550,7 +550,7 @@ export const ja: Translations = {
     "例: 5年後に結婚資金として 1000万円を目指す...",
   profile_plan10y_label: "10年投資計画",
   profile_plan10y_placeholder:
-    "例: 10年後に配当收入だけで生活費を賎える経済的自由を達成...",
+    "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成...",
   profile_save: "保存",
   profile_saved: "✓ 保存しました",
 
