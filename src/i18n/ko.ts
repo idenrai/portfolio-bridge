@@ -535,8 +535,8 @@ export const ko: Translations = {
   profile_desc:
     "구루와 대화할 때 활용되는 개인 정보입니다. 파일로 저장되며 외부로 전송되지 않습니다.",
   profile_nickname_label: "닉네임 (불리고 싶은 이름)",
-  profile_nickname_placeholder: "예시: 증인�"
-,  profile_age_label: "나이",
+  profile_nickname_placeholder: "예시: 투자가A",
+  profile_age_label: "나이",
   profile_age_placeholder: "예시: 35",
   profile_annual_income_label: "연소득 (연봉)",
   profile_annual_income_placeholder: "예시: 60000000",
