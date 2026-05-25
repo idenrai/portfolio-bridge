@@ -31,16 +31,25 @@ interface AiClassificationItem {
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   dividend:
-    "dividend - income-generating stocks / REITs with regular dividends",
-  growth: "growth - high-growth stocks (tech, biotech, etc.)",
-  value: "value - undervalued, low-multiple stocks",
-  index: "index - index funds / broad market ETFs",
-  bond: "bond - government or corporate bonds / bond ETFs",
-  reit: "reit - real estate investment trusts",
-  cash: "cash - cash equivalents, money market, savings",
-  crypto: "crypto - cryptocurrency assets",
-  commodity: "commodity - gold, oil, silver, commodities ETFs",
-  other: "other - does not fit any category above",
+    "dividend - held primarily for regular income (yield-focused); the investment thesis is cash flow from dividends, not price appreciation",
+  growth:
+    "growth - held primarily for capital appreciation; high expected earnings/revenue growth (tech, biotech, disruptors, etc.)",
+  value:
+    "value - held because the stock trades significantly below intrinsic value (low P/E, P/B, P/FCF relative to peers or history); the investment thesis is mean-reversion to fair value; NOTE: a dividend-paying blue chip can still be 'value' if it appears materially undervalued — prefer 'value' over 'dividend' in that case",
+  index:
+    "index - broad market or sector index funds / passive ETFs",
+  bond:
+    "bond - government or corporate bonds / bond ETFs",
+  reit:
+    "reit - real estate investment trusts (publicly traded property funds)",
+  cash:
+    "cash - cash equivalents, money market funds, savings deposits",
+  crypto:
+    "crypto - cryptocurrency assets (BTC, ETH, altcoins, etc.)",
+  commodity:
+    "commodity - physical commodities or their ETFs (gold, oil, silver, agriculture, etc.)",
+  other:
+    "other - does not clearly fit any category above",
 };
 
 /** 자산 목록을 AI 분류 요청 프롬프트로 변환 */
@@ -80,6 +89,7 @@ Output format — respond with a JSON array only, no extra text:
 Rules:
 - The "category" field must be exactly one of the category keys listed above (e.g. "dividend", "growth").
 - Classify every asset, including already-classified ones.
+- Base your decision on the primary investment thesis, not surface attributes alone (e.g. paying a dividend does not automatically mean "dividend" if the stock is clearly undervalued).
 - Keep reasons concise (one sentence).
 
 IMPORTANT: Please write the "reason" field entirely in ${LANG_NAMES[lang]}.`;
