@@ -531,6 +531,29 @@ export const ko: Translations = {
   settings_data_drive_note:
     "Google Drive에 저장된 데이터를 삭제하려면 Google 계정의 앱 연결 관리 페이지(myaccount.google.com/permissions)에서 이 앱의 접근 권한을 해제하세요. 권한 해제 시 Google Drive에 저장된 백업 파일도 함께 삭제됩니다.",
 
+  profile_title: "내 정보",
+  profile_desc:
+    "구루와 대화할 때 활용되는 개인 정보입니다. 파일로 저장되며 외부로 전송되지 않습니다.",
+  profile_nickname_label: "닉네임 (불리고 싶은 이름)",
+  profile_nickname_placeholder: "예시: 증인�"
+,  profile_age_label: "나이",
+  profile_age_placeholder: "예시: 35",
+  profile_annual_income_label: "연소득 (연봉)",
+  profile_annual_income_placeholder: "예시: 60000000",
+  profile_monthly_budget_label: "매달 투자 가능 금액",
+  profile_monthly_budget_placeholder: "예시: 500000",
+  profile_plan3y_label: "3년 투자 계획",
+  profile_plan3y_placeholder:
+    "예시: 3년 안에 배당주 수입 월 30만원을 목표로 성장주 중심으로 리밸런싱...",
+  profile_plan5y_label: "5년 투자 계획",
+  profile_plan5y_placeholder:
+    "예시: 5년 후 결혼 자금으로 1억 목표, 부동산 마련원...",
+  profile_plan10y_label: "10년 투자 계획",
+  profile_plan10y_placeholder:
+    "예시: 10년 후 경제적 자유 달성을 위해 배당 수입만으로 생활비 충당...",
+  profile_save: "저장",
+  profile_saved: "✓ 저장되었습니다",
+
   at_col_name: "종목",
   at_col_market: "시장",
   at_col_category: "분류",

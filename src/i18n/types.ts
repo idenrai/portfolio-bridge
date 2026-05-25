@@ -398,6 +398,26 @@ export interface Translations {
   settings_data_drive_title: string;
   settings_data_drive_note: string;
 
+  // ─── Profile Section ───────────────────────────────────────────────────────
+  profile_title: string;
+  profile_desc: string;
+  profile_nickname_label: string;
+  profile_nickname_placeholder: string;
+  profile_age_label: string;
+  profile_age_placeholder: string;
+  profile_annual_income_label: string;
+  profile_annual_income_placeholder: string;
+  profile_monthly_budget_label: string;
+  profile_monthly_budget_placeholder: string;
+  profile_plan3y_label: string;
+  profile_plan3y_placeholder: string;
+  profile_plan5y_label: string;
+  profile_plan5y_placeholder: string;
+  profile_plan10y_label: string;
+  profile_plan10y_placeholder: string;
+  profile_save: string;
+  profile_saved: string;
+
   // ─── Asset Table ───────────────────────────────────────────────────────────
   at_col_name: string;
   at_col_market: string;

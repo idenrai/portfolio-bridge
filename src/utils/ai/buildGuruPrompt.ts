@@ -5,6 +5,7 @@ import type {
 } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
+import type { UserProfile } from "@/stores";
 import {
   buildCategorySection,
   buildPersonaHeader,
@@ -23,6 +24,7 @@ export function buildGuruPrompt(
   baseCurrency: string = "KRW",
   rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
   philosophyEn: string = "",
+  profile?: Partial<UserProfile>,
 ): string {
   const guruEnName = guru.name;
   const today = new Date().toISOString().slice(0, 10);
@@ -59,6 +61,33 @@ export function buildGuruPrompt(
     ? `--- OUTPUT FORMAT ---\n${framework.format}`
     : `For the top 10 holdings recommendation, format as a table with rank, ticker/name, suggested weight %, and brief reasoning.`;
 
+  // ── 투자자 프로필 섹션 ────────────────────────────────────────────────────
+  const profileLines: string[] = [];
+  if (profile) {
+    if (profile.nickname) profileLines.push(`- Name: ${profile.nickname}`);
+    if (profile.age != null) profileLines.push(`- Age: ${profile.age}`);
+    if (profile.annualIncome != null)
+      profileLines.push(
+        `- Annual Income: ${profile.annualIncome.toLocaleString()} ${baseCurrency}`,
+      );
+    if (profile.monthlyBudget != null)
+      profileLines.push(
+        `- Monthly Investment Budget: ${profile.monthlyBudget.toLocaleString()} ${baseCurrency}`,
+      );
+    if (profile.plan3y) profileLines.push(`- 3-Year Plan: ${profile.plan3y}`);
+    if (profile.plan5y) profileLines.push(`- 5-Year Plan: ${profile.plan5y}`);
+    if (profile.plan10y)
+      profileLines.push(`- 10-Year Plan: ${profile.plan10y}`);
+  }
+  const profileSection =
+    profileLines.length > 0
+      ? `\n--- INVESTOR PROFILE ---\n${profileLines.join("\n")}\n`
+      : "";
+
+  const addressLine = profile?.nickname
+    ? `Please address the investor as "${profile.nickname}" throughout your response.`
+    : `If you need additional context about the investor's age, financial goals, or investment timeline to give a more complete analysis, ask for it before proceeding.`;
+
   return `${buildPersonaHeader(guruEnName)}
 
 Your investing philosophy and principles:
@@ -68,12 +97,12 @@ Your communication style and approach:
 ${guru.style}
 
 Today's date: ${today}
-
+${profileSection}
 A user has shared their investment portfolio and is asking for your personal review. ${taskSection}
 
 ${dataBlock}
 
 ${formatSection}
 
-IMPORTANT: Respond entirely in ${LANG_NAMES[lang]}. Maintain ${guruEnName}'s characteristic voice, vocabulary, and reasoning style throughout. If you need additional context about the investor's age, financial goals, or investment timeline to give a more complete analysis, ask for it before proceeding.`;
+IMPORTANT: Respond entirely in ${LANG_NAMES[lang]}. Maintain ${guruEnName}'s characteristic voice, vocabulary, and reasoning style throughout. ${addressLine}`;
 }

@@ -531,6 +531,29 @@ export const ja: Translations = {
   settings_data_drive_note:
     "Google Driveに保存されたデータを削除するには、Googleアカウントのアプリ連携管理ページ（myaccount.google.com/permissions）でこのアプリのアクセス権限を解除してください。権限を解除するとDriveに保存されたバックアップファイルも削除されます。",
 
+  profile_title: "プロフィール",
+  profile_desc:
+    "グルーとの対話時に使用される個人情報です。ローカルに保存され、外部サーバーには送信されません。",
+  profile_nickname_label: "ニックネーム（グルーに呼んでほしい名前）",
+  profile_nickname_placeholder: "例: はなこ",
+  profile_age_label: "年齢",
+  profile_age_placeholder: "例: 35",
+  profile_annual_income_label: "年収入",
+  profile_annual_income_placeholder: "例: 6000000",
+  profile_monthly_budget_label: "毎月の投資可能額",
+  profile_monthly_budget_placeholder: "例: 50000",
+  profile_plan3y_label: "3年投資計画",
+  profile_plan3y_placeholder:
+    "例: 3年以内に配当収入月、3万円を目指し、成長株中心にリバランス...",
+  profile_plan5y_label: "5年投資計画",
+  profile_plan5y_placeholder:
+    "例: 5年後に結婚資金として 1000万円を目指す...",
+  profile_plan10y_label: "10年投資計画",
+  profile_plan10y_placeholder:
+    "例: 10年後に配当收入だけで生活費を賎える経済的自由を達成...",
+  profile_save: "保存",
+  profile_saved: "✓ 保存しました",
+
   at_col_name: "銘柄",
   at_col_market: "市場",
   at_col_category: "分類",

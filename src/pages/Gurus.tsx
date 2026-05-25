@@ -22,7 +22,7 @@ import {
   Radar,
 } from "recharts";
 import { usePortfolio, useT } from "@/hooks";
-import { useLanguageStore, useSettingsStore } from "@/stores";
+import { useLanguageStore, useSettingsStore, useProfileStore } from "@/stores";
 import { useGuruSessionStore } from "@/stores";
 import { GURU_PROFILES, formatCurrency, buildGuruPrompt, buildGuruFollowUpPrompt } from "@/utils";
 import { calculateRebalancing } from "@/utils";
@@ -53,6 +53,7 @@ export function GurusPage() {
   const [copiedFollowUp, setCopiedFollowUp] = useState(false);
 
   const { sessions, saveSession, clearSession } = useGuruSessionStore();
+  const profile = useProfileStore();
 
   /** i18n 구루 이름 */
   const guruName = (guru: GuruProfile) =>
@@ -113,12 +114,12 @@ export function GurusPage() {
 
   // ── AI 프롬프트 파생값 ─────────────────────────────────────────────────────
   const promptText = selectedGuru
-    ? buildGuruPrompt(selectedGuru, summary, assets, lang, baseCurrency, rates, englishPhilosophy)
+    ? buildGuruPrompt(selectedGuru, summary, assets, lang, baseCurrency, rates, englishPhilosophy, profile)
     : "";
   const prevSession = selectedGuru ? sessions[selectedGuru.id] : undefined;
   const followUpText =
     selectedGuru && prevSession
-      ? buildGuruFollowUpPrompt(selectedGuru, prevSession, summary, lang, baseCurrency, rates)
+      ? buildGuruFollowUpPrompt(selectedGuru, prevSession, summary, lang, baseCurrency, rates, profile)
       : null;
 
   const copyPrompt = async () => {

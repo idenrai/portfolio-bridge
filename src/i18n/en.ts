@@ -532,6 +532,29 @@ export const en: Translations = {
   settings_data_drive_note:
     "To delete data saved on Google Drive, go to your Google Account's app permissions page (myaccount.google.com/permissions) and revoke access for this app. Revoking access will also delete the backup file stored in Drive.",
 
+  profile_title: "My Profile",
+  profile_desc:
+    "Personal info used when chatting with gurus. Stored locally and never sent to any server.",
+  profile_nickname_label: "Nickname (how gurus will address you)",
+  profile_nickname_placeholder: "e.g. Alex",
+  profile_age_label: "Age",
+  profile_age_placeholder: "e.g. 35",
+  profile_annual_income_label: "Annual Income",
+  profile_annual_income_placeholder: "e.g. 60000",
+  profile_monthly_budget_label: "Monthly Investment Budget",
+  profile_monthly_budget_placeholder: "e.g. 1000",
+  profile_plan3y_label: "3-Year Investment Plan",
+  profile_plan3y_placeholder:
+    "e.g. Within 3 years, target \$500/mo in dividend income and shift toward growth...",
+  profile_plan5y_label: "5-Year Investment Plan",
+  profile_plan5y_placeholder:
+    "e.g. By year 5, accumulate \$100k for a down payment...",
+  profile_plan10y_label: "10-Year Investment Plan",
+  profile_plan10y_placeholder:
+    "e.g. Achieve financial independence through passive income covering all living expenses...",
+  profile_save: "Save",
+  profile_saved: "✓ Saved",
+
   at_col_name: "Name",
   at_col_market: "Market",
   at_col_category: "Category",

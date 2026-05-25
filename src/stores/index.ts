@@ -5,3 +5,5 @@ export { useGoogleDriveStore } from "./useGoogleDriveStore";
 export { useSnapshotStore } from "./useSnapshotStore";
 export { useGuruSessionStore } from "./useGuruSessionStore";
 export type { GuruSessionSnapshot } from "./useGuruSessionStore";
+export { useProfileStore } from "./useProfileStore";
+export type { UserProfile } from "./useProfileStore";

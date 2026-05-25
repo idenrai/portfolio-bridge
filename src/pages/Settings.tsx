@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Card, Button } from "@/components/common";
 import {
   useSettingsStore,
   useAssetStore,
   useLanguageStore,
+  useProfileStore,
 } from "@/stores";
 import { useDataRefresh, useT, useGoogleDrive } from "@/hooks";
 import type { CurrencyCode } from "@/types";
@@ -14,6 +16,13 @@ export function SettingsPage() {
   const assetStore = useAssetStore();
   const lang = useLanguageStore((s) => s.lang);
   const langLocale = LANG_LOCALES[lang];
+  const profile = useProfileStore();
+  const [profileSaved, setProfileSaved] = useState(false);
+
+  const handleProfileSave = () => {
+    setProfileSaved(true);
+    setTimeout(() => setProfileSaved(false), 2000);
+  };
 
   const t = useT();
   const baseCurrency = settings.baseCurrency;
@@ -44,6 +53,116 @@ export function SettingsPage() {
   return (
     <div className="space-y-4 md:space-y-6 max-w-2xl">
       <h2 className="text-lg font-bold text-slate-800">{t.settings_title}</h2>
+
+      {/* 내 정보 */}
+      <Card
+        title={t.profile_title}
+        action={
+          <Button size="sm" variant="secondary" onClick={handleProfileSave}>
+            {profileSaved ? t.profile_saved : t.profile_save}
+          </Button>
+        }
+      >
+        <div className="space-y-4">
+          <p className="text-xs text-slate-500">{t.profile_desc}</p>
+
+          {/* 닉네임 / 나이 */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label className="text-xs font-medium text-slate-600">
+                {t.profile_nickname_label}
+              </label>
+              <input
+                type="text"
+                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder={t.profile_nickname_placeholder}
+                value={profile.nickname}
+                onChange={(e) => profile.setProfile({ nickname: e.target.value })}
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs font-medium text-slate-600">
+                {t.profile_age_label}
+              </label>
+              <input
+                type="number"
+                min={1}
+                max={120}
+                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder={t.profile_age_placeholder}
+                value={profile.age ?? ""}
+                onChange={(e) =>
+                  profile.setProfile({
+                    age: e.target.value ? Number(e.target.value) : null,
+                  })
+                }
+              />
+            </div>
+          </div>
+
+          {/* 연봉 / 월 투자 가능 금액 */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label className="text-xs font-medium text-slate-600">
+                {t.profile_annual_income_label}
+                <span className="ml-1 text-slate-400">({settings.baseCurrency})</span>
+              </label>
+              <input
+                type="number"
+                min={0}
+                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder={t.profile_annual_income_placeholder}
+                value={profile.annualIncome ?? ""}
+                onChange={(e) =>
+                  profile.setProfile({
+                    annualIncome: e.target.value ? Number(e.target.value) : null,
+                  })
+                }
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs font-medium text-slate-600">
+                {t.profile_monthly_budget_label}
+                <span className="ml-1 text-slate-400">({settings.baseCurrency})</span>
+              </label>
+              <input
+                type="number"
+                min={0}
+                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder={t.profile_monthly_budget_placeholder}
+                value={profile.monthlyBudget ?? ""}
+                onChange={(e) =>
+                  profile.setProfile({
+                    monthlyBudget: e.target.value ? Number(e.target.value) : null,
+                  })
+                }
+              />
+            </div>
+          </div>
+
+          {/* 투자 계획 */}
+          {(
+            [
+              { key: "plan3y", labelKey: "profile_plan3y_label", placeholderKey: "profile_plan3y_placeholder" },
+              { key: "plan5y", labelKey: "profile_plan5y_label", placeholderKey: "profile_plan5y_placeholder" },
+              { key: "plan10y", labelKey: "profile_plan10y_label", placeholderKey: "profile_plan10y_placeholder" },
+            ] as const
+          ).map(({ key, labelKey, placeholderKey }) => (
+            <div key={key} className="space-y-1">
+              <label className="text-xs font-medium text-slate-600">
+                {t[labelKey]}
+              </label>
+              <textarea
+                rows={2}
+                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder={t[placeholderKey]}
+                value={profile[key]}
+                onChange={(e) => profile.setProfile({ [key]: e.target.value })}
+              />
+            </div>
+          ))}
+        </div>
+      </Card>
 
       {/* 환율 · 시세 통합 갱신 */}
       <Card

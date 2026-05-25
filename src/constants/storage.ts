@@ -6,4 +6,5 @@ export const STORAGE_KEYS = {
   DRIVE: "portfolio-bridge-drive",
   SNAPSHOTS: "portfolio-bridge-snapshots",
   GURU_SESSIONS: "portfolio-bridge-guru-sessions",
+  PROFILE: "portfolio-bridge-profile",
 } as const;

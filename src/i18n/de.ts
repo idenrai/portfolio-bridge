@@ -539,6 +539,29 @@ export const de: Translations = {
   settings_data_drive_note:
     "Um die auf Google Drive gespeicherten Daten zu löschen, wechseln Sie zur App-Berechtigungsseite Ihres Google-Kontos (myaccount.google.com/permissions) und widerrufen Sie den Zugriff für diese App. Beim Widerrufen wird auch die in Drive gespeicherte Sicherungsdatei gelöscht.",
 
+  profile_title: "Mein Profil",
+  profile_desc:
+    "Persönliche Informationen, die beim Chat mit Gurus verwendet werden. Lokal gespeichert, nie an Server übertragen.",
+  profile_nickname_label: "Spitzname (wie Gurus Sie ansprechen sollen)",
+  profile_nickname_placeholder: "z. B. Max",
+  profile_age_label: "Alter",
+  profile_age_placeholder: "z. B. 35",
+  profile_annual_income_label: "Jahreseinkommen",
+  profile_annual_income_placeholder: "z. B. 60000",
+  profile_monthly_budget_label: "Monatliches Investitionsbudget",
+  profile_monthly_budget_placeholder: "z. B. 500",
+  profile_plan3y_label: "3-Jahres-Investitionsplan",
+  profile_plan3y_placeholder:
+    "z. B. In 3 Jahren Dividendeneinnahmen von 200 €/Monat anstreben...",
+  profile_plan5y_label: "5-Jahres-Investitionsplan",
+  profile_plan5y_placeholder:
+    "z. B. In 5 Jahren 100.000 € als Eigenkapital für eine Immobilie aufbauen...",
+  profile_plan10y_label: "10-Jahres-Investitionsplan",
+  profile_plan10y_placeholder:
+    "z. B. Finanzielle Unabhängigkeit durch passives Einkommen in 10 Jahren erreichen...",
+  profile_save: "Speichern",
+  profile_saved: "✓ Gespeichert",
+
   at_col_name: "Name",
   at_col_market: "Markt",
   at_col_category: "Kategorie",
