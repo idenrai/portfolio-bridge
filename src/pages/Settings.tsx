@@ -19,6 +19,9 @@ export function SettingsPage() {
   const profile = useProfileStore();
   const [profileSaved, setProfileSaved] = useState(false);
 
+  const inputCls =
+    "w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400";
+
   const handleProfileSave = () => {
     setProfileSaved(true);
     setTimeout(() => setProfileSaved(false), 2000);
@@ -74,7 +77,7 @@ export function SettingsPage() {
               </label>
               <input
                 type="text"
-                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={inputCls}
                 placeholder={t.profile_nickname_placeholder}
                 value={profile.nickname}
                 onChange={(e) => profile.setProfile({ nickname: e.target.value })}
@@ -88,7 +91,7 @@ export function SettingsPage() {
                 type="number"
                 min={1}
                 max={120}
-                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={inputCls}
                 placeholder={t.profile_age_placeholder}
                 value={profile.age ?? ""}
                 onChange={(e) =>
@@ -110,7 +113,7 @@ export function SettingsPage() {
               <input
                 type="number"
                 min={0}
-                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={inputCls}
                 placeholder={t.profile_annual_income_placeholder}
                 value={profile.annualIncome ?? ""}
                 onChange={(e) =>
@@ -128,7 +131,7 @@ export function SettingsPage() {
               <input
                 type="number"
                 min={0}
-                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={inputCls}
                 placeholder={t.profile_monthly_budget_placeholder}
                 value={profile.monthlyBudget ?? ""}
                 onChange={(e) =>
@@ -154,7 +157,7 @@ export function SettingsPage() {
               </label>
               <textarea
                 rows={2}
-                className="w-full rounded-md border border-slate-200 px-3 py-1.5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`${inputCls} resize-none`}
                 placeholder={t[placeholderKey]}
                 value={profile[key]}
                 onChange={(e) => profile.setProfile({ [key]: e.target.value })}

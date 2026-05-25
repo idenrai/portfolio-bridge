@@ -34,7 +34,7 @@ export const useProfileStore = create<ProfileState>()(
       plan5y: "",
       plan10y: "",
 
-      setProfile: (patch) => set((s) => ({ ...s, ...patch })),
+      setProfile: (patch) => set(patch),
     }),
     {
       name: STORAGE_KEYS.PROFILE,
