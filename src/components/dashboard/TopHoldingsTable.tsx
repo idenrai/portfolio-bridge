@@ -72,7 +72,7 @@ export function TopHoldingsTable({ summary }: Props) {
       }
     >
       <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
-        <table className="w-full min-w-200">
+        <table className="w-full min-w-160">
           <thead>
             <tr className="border-b border-slate-100">
               <th className="text-[11px] text-slate-500 font-medium px-3 py-2 text-left">
@@ -85,8 +85,6 @@ export function TopHoldingsTable({ summary }: Props) {
               {sortBtn("pnl", t.holdings_col_pnl)}
               {sortBtn("return", t.holdings_col_return)}
               {sortBtn("weight", t.holdings_col_weight)}
-              <th className={`${thCls} w-14`}>{t.holdings_col_per}</th>
-              <th className={`${thCls} w-14`}>{t.holdings_col_pbr}</th>
             </tr>
           </thead>
           <tbody>
@@ -154,12 +152,7 @@ export function TopHoldingsTable({ summary }: Props) {
                     </span>
                   </div>
                 </td>
-                <td className={`${tdCls} text-slate-500`}>
-                  {h.peRatio != null ? h.peRatio.toFixed(1) : <span className="text-slate-300">—</span>}
-                </td>
-                <td className={`${tdCls} text-slate-500`}>
-                  {h.pbRatio != null ? h.pbRatio.toFixed(2) : <span className="text-slate-300">—</span>}
-                </td>
+
               </tr>
             ))}
           </tbody>

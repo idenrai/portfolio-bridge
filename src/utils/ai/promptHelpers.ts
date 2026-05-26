@@ -130,7 +130,9 @@ export function buildHoldingRows(
           ` | ${type} | ${market} | ${h.currency}` +
           ` | weight: ${h.weightPercent.toFixed(1)}%` +
           ` | return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%` +
-          ` | category: ${category}`
+          ` | category: ${category}` +
+          (h.peRatio != null ? ` | PER: ${h.peRatio.toFixed(1)}` : "") +
+          (h.pbRatio != null ? ` | PBR: ${h.pbRatio.toFixed(2)}` : "")
         );
       })
       .join("\n") || "  (no data)";
