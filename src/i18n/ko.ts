@@ -648,7 +648,7 @@ export const ko: Translations = {
   broker_nickname_label: "애칭",
   broker_name_placeholder: "예: 미래에셋증권, KB국민은행, SBI証券, Fidelity",
   broker_type_placeholder: "예: ISA, NISA, 특정, 일반, IRA",
-  broker_nickname_placeholder: "예: 토스 ISA, SBI 특정",
+  broker_nickname_placeholder: "예: 키움 ISA, SBI 특정",
   broker_delete_confirm: "이 계좌를 삭제하시겠습니까?",
   broker_col_nickname: "애칭",
   broker_col_broker: "금융기관",
