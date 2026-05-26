@@ -2,7 +2,14 @@
  * Google Drive 서비스 싱글턴
  * - 모듈 레벨에서 상태를 관리하므로 여러 컴포넌트가 훅을 사용해도 단 1회만 초기화됨
  */
-import { useAssetStore, useSettingsStore, useGoogleDriveStore, useProfileStore } from "@/stores";
+import {
+  useAssetStore,
+  useSettingsStore,
+  useGoogleDriveStore,
+  useProfileStore,
+  useLanguageStore,
+  useSnapshotStore,
+} from "@/stores";
 import {
   findDriveFile,
   downloadDriveBackup,
@@ -33,6 +40,8 @@ function buildBackup(): DriveBackup {
   const { baseCurrency, targetAllocations } = useSettingsStore.getState();
   const { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y } =
     useProfileStore.getState();
+  const { lang } = useLanguageStore.getState();
+  const { snapshots } = useSnapshotStore.getState();
   return {
     version: 1,
     syncedAt: new Date().toISOString(),
@@ -40,6 +49,8 @@ function buildBackup(): DriveBackup {
     // targetAllocations가 undefined이면 빈 배열로 대체 (JSON.stringify 시 키 누락 방지)
     settings: { baseCurrency, targetAllocations: targetAllocations ?? [] },
     profile: { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y },
+    lang,
+    snapshots,
   };
 }
 
@@ -58,6 +69,16 @@ function applyRemote(backup: DriveBackup) {
     // 구버전 백업에 profile이 없으면 기존 로컬 값 유지
     if (backup.profile) {
       useProfileStore.getState().setProfile(backup.profile);
+    }
+    if (backup.lang) {
+      useLanguageStore.getState().setLang(backup.lang as never);
+    }
+    if (Array.isArray(backup.snapshots) && backup.snapshots.length > 0) {
+      // 로컬보다 원격 스냅샷이 더 많을 때만 덮어쓴다
+      const local = useSnapshotStore.getState().snapshots;
+      if (backup.snapshots.length >= local.length) {
+        useSnapshotStore.setState({ snapshots: backup.snapshots });
+      }
     }
   } catch (e) {
     console.error("applyRemote failed", e);

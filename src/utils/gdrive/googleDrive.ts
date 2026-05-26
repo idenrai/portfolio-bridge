@@ -28,6 +28,10 @@ export interface DriveBackup {
     plan5y: string;
     plan10y: string;
   };
+  /** 언어 설정 */
+  lang?: string;
+  /** 포트폴리오 히스토리 스냅샷 (최대 365일) */
+  snapshots?: { date: string; totalValueKRW: number; totalCostKRW: number }[];
 }
 
 // ─── 파일 검색 ────────────────────────────────────────────────────────────────
