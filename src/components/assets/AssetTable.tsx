@@ -73,6 +73,12 @@ export function AssetTable({
     updateAsset(id, { categories: category ? [category] : [] });
   };
 
+  const handleBrokerChange = (id: string, brokerId: string) => {
+    updateAsset(id, { brokerId: brokerId || undefined });
+  };
+
+  const hasBrokers = brokerAccounts.length > 0;
+
   const markets = [...new Set(allAssets.map((a) => a.market))] as Market[];
   const types = [...new Set(allAssets.map((a) => a.type))] as AssetType[];
 
@@ -191,6 +197,9 @@ export function AssetTable({
                 </th>
                 <th className="pb-2 font-medium">{t.at_col_market}</th>
                 <th className="pb-2 font-medium">{t.at_col_category}</th>
+                {hasBrokers && (
+                  <th className="pb-2 font-medium">{t.af_account_label}</th>
+                )}
                 <th className="pb-2 font-medium text-right">
                   {t.at_col_quantity}
                 </th>
@@ -241,14 +250,6 @@ export function AssetTable({
                       {a.ticker && (
                         <p className="text-xs text-slate-400">{a.ticker}</p>
                       )}
-                      {a.brokerId && (() => {
-                        const acct = brokerAccounts.find(b => b.id === a.brokerId);
-                        return acct ? (
-                          <span className="inline-block mt-0.5 text-xs text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
-                            {acct.nickname}
-                          </span>
-                        ) : null;
-                      })()}
                     </td>
                     <td className="py-2.5 whitespace-nowrap">
                       <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
@@ -274,6 +275,24 @@ export function AssetTable({
                         ))}
                       </select>
                     </td>
+                    {hasBrokers && (
+                      <td className="py-2.5 whitespace-nowrap">
+                        <select
+                          value={a.brokerId ?? ""}
+                          onChange={(e) =>
+                            handleBrokerChange(a.id, e.target.value)
+                          }
+                          className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-22.5"
+                        >
+                          <option value="">{t.af_account_none}</option>
+                          {brokerAccounts.map((b) => (
+                            <option key={b.id} value={b.id}>
+                              {b.nickname}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+                    )}
                     <td className="py-2.5 text-right tabular-nums">
                       {isCash ? (
                         <span className="text-slate-400">-</span>

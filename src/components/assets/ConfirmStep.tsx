@@ -4,7 +4,6 @@ import { useT } from "@/hooks";
 import type { AssetFormData } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
 import type { SelectedStock } from "./assetFormTypes";
-import { AccountSelect } from "./AccountSelect";
 
 export function ConfirmStep({
   item,
@@ -17,7 +16,6 @@ export function ConfirmStep({
 }) {
   const [quantity, setQuantity] = useState<number | "">("");
   const [avgBuyPrice, setAvgBuyPrice] = useState<number | "">("");
-  const [brokerId, setBrokerId] = useState<string | undefined>(undefined);
   const sym = CURRENCY_SYMBOLS[item.currency];
   const t = useT();
 
@@ -33,7 +31,6 @@ export function ConfirmStep({
       avgBuyPrice: Number(avgBuyPrice) || 0,
       currentPrice: item.currentPrice,
       categories: [],
-      brokerId,
     });
   };
 
@@ -119,8 +116,6 @@ export function ConfirmStep({
           className="mt-1 block w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500 cursor-not-allowed"
         />
       </label>
-
-      <AccountSelect value={brokerId} onChange={setBrokerId} />
 
       <div className="flex justify-between">
         <Button type="button" variant="ghost" onClick={onBack}>

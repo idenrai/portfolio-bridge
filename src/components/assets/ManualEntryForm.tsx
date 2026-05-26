@@ -9,7 +9,6 @@ import type {
   CurrencyCode,
 } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
-import { AccountSelect } from "./AccountSelect";
 
 export function ManualEntryForm({
   onSubmit,
@@ -27,7 +26,6 @@ export function ManualEntryForm({
   const [avgBuyPrice, setAvgBuyPrice] = useState<number | "">("");
   const [currentPrice, setCurrentPrice] = useState<number | "">("");
   const [isFetchingPrice, setIsFetchingPrice] = useState(false);
-  const [brokerId, setBrokerId] = useState<string | undefined>(undefined);
 
   const t = useT();
   const ASSET_TYPE_OPTIONS: { value: AssetType; label: string }[] = [
@@ -72,7 +70,6 @@ export function ManualEntryForm({
       avgBuyPrice: Number(avgBuyPrice) || 0,
       currentPrice: Number(currentPrice) || 0,
       categories: [],
-      brokerId,
     });
   };
 
@@ -228,8 +225,6 @@ export function ManualEntryForm({
           />
         </label>
       </div>
-
-      <AccountSelect value={brokerId} onChange={setBrokerId} />
 
       <div className="flex justify-between">
         <Button type="button" variant="ghost" onClick={onBack}>
