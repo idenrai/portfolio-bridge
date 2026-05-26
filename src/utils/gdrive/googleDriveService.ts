@@ -2,7 +2,7 @@
  * Google Drive 서비스 싱글턴
  * - 모듈 레벨에서 상태를 관리하므로 여러 컴포넌트가 훅을 사용해도 단 1회만 초기화됨
  */
-import { useAssetStore, useSettingsStore, useGoogleDriveStore } from "@/stores";
+import { useAssetStore, useSettingsStore, useGoogleDriveStore, useProfileStore } from "@/stores";
 import {
   findDriveFile,
   downloadDriveBackup,
@@ -31,12 +31,15 @@ const store = () => useGoogleDriveStore.getState();
 function buildBackup(): DriveBackup {
   const { assets } = useAssetStore.getState();
   const { baseCurrency, targetAllocations } = useSettingsStore.getState();
+  const { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y } =
+    useProfileStore.getState();
   return {
     version: 1,
     syncedAt: new Date().toISOString(),
     assets,
     // targetAllocations가 undefined이면 빈 배열로 대체 (JSON.stringify 시 키 누락 방지)
     settings: { baseCurrency, targetAllocations: targetAllocations ?? [] },
+    profile: { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y },
   };
 }
 
@@ -52,6 +55,10 @@ function applyRemote(backup: DriveBackup) {
         targetAllocations: backup.settings.targetAllocations as never,
       }),
     }));
+    // 구버전 백업에 profile이 없으면 기존 로컬 값 유지
+    if (backup.profile) {
+      useProfileStore.getState().setProfile(backup.profile);
+    }
   } catch (e) {
     console.error("applyRemote failed", e);
   }

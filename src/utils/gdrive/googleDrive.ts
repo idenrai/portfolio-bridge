@@ -19,6 +19,15 @@ export interface DriveBackup {
     baseCurrency: string;
     targetAllocations: unknown[];
   };
+  profile?: {
+    nickname: string;
+    age: number | null;
+    annualIncome: number | null;
+    monthlyBudget: number | null;
+    plan3y: string;
+    plan5y: string;
+    plan10y: string;
+  };
 }
 
 // ─── 파일 검색 ────────────────────────────────────────────────────────────────
