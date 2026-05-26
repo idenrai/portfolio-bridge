@@ -110,6 +110,46 @@ export function calculateSummary(
   }
   holdings.sort((a, b) => b.valueKRW - a.valueKRW);
 
+  // ── 동일 종목 합산 (서로 다른 계좌에 같은 ticker가 있을 경우 하나로 병합) ──
+  // 병합 키: ticker 있으면 "t:<ticker>", 없으면 "n:<name>__<currency>"
+  const holdingMergeMap = new Map<string, HoldingDetail>();
+  for (const h of holdings) {
+    const key = h.ticker
+      ? `t:${h.ticker}`
+      : `n:${h.name}__${h.currency}`;
+    const existing = holdingMergeMap.get(key);
+    if (!existing) {
+      holdingMergeMap.set(key, { ...h, id: key });
+    } else {
+      const newQty = existing.quantity + h.quantity;
+      const totalCostLocal =
+        existing.quantity * existing.avgBuyPrice +
+        h.quantity * h.avgBuyPrice;
+      const newCostKRW = existing.costKRW + h.costKRW;
+      const newValueKRW = existing.valueKRW + h.valueKRW;
+      const newPnL = newValueKRW - newCostKRW;
+      holdingMergeMap.set(key, {
+        ...existing,
+        quantity: newQty,
+        avgBuyPrice: newQty > 0 ? totalCostLocal / newQty : 0,
+        currentPrice: h.currentPrice || existing.currentPrice,
+        category: existing.category ?? h.category,
+        valueKRW: newValueKRW,
+        costKRW: newCostKRW,
+        pnlKRW: newPnL,
+        returnPercent: newCostKRW === 0 ? 0 : (newPnL / newCostKRW) * 100,
+        peRatio: existing.peRatio ?? h.peRatio,
+        pbRatio: existing.pbRatio ?? h.pbRatio,
+        weightPercent: existing.weightPercent + h.weightPercent,
+      });
+    }
+  }
+  const mergedHoldings = [...holdingMergeMap.values()];
+  mergedHoldings.sort((a, b) => b.valueKRW - a.valueKRW);
+
+  // 병합 후 비현금 보유 종목 수 재산출
+  holdingCountNonCash = mergedHoldings.filter((h) => h.type !== "cash").length;
+
   const totalPnLKRW = totalValueKRW - totalCostKRW;
   const totalReturnPercent =
     totalCostKRW === 0 ? 0 : (totalPnLKRW / totalCostKRW) * 100;
@@ -159,7 +199,7 @@ export function calculateSummary(
   const msg = insightMessages ?? DEFAULT_INSIGHT_MESSAGES;
   const insights = generateInsights(
     assets,
-    holdings,
+    mergedHoldings,
     cashPercent,
     categoryAllocation,
     currencyExposure,
@@ -187,7 +227,7 @@ export function calculateSummary(
       percent: x.percent,
       valueKRW: x.valueKRW,
     })),
-    holdings,
+    holdings: mergedHoldings,
     currencyExposure,
     currencyScenarios,
     insights,
