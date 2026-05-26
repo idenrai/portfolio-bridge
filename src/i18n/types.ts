@@ -423,6 +423,7 @@ export interface Translations {
   at_col_market: string;
   at_col_category: string;
   at_col_quantity: string;
+  at_col_avg_buy_price: string;
   at_col_current_price: string;
   at_col_value: string;
   at_col_pnl: string;

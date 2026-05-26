@@ -559,6 +559,7 @@ export const en: Translations = {
   at_col_market: "Market",
   at_col_category: "Category",
   at_col_quantity: "Qty",
+  at_col_avg_buy_price: "Avg. Cost",
   at_col_current_price: "Current Price",
   at_col_value: "Value",
   at_col_pnl: "P&L",

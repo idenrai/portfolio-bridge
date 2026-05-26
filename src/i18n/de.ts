@@ -568,6 +568,7 @@ export const de: Translations = {
   at_col_market: "Markt",
   at_col_category: "Kategorie",
   at_col_quantity: "Menge",
+  at_col_avg_buy_price: "Kaufkurs",
   at_col_current_price: "Aktueller Kurs",
   at_col_value: "Wert",
   at_col_pnl: "G&V",

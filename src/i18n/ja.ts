@@ -558,6 +558,7 @@ export const ja: Translations = {
   at_col_market: "市場",
   at_col_category: "分類",
   at_col_quantity: "数量",
+  at_col_avg_buy_price: "取得単価",
   at_col_current_price: "現在値",
   at_col_value: "評価額",
   at_col_pnl: "損益",

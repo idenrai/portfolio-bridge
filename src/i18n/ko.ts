@@ -560,6 +560,7 @@ export const ko: Translations = {
   at_col_market: "시장",
   at_col_category: "분류",
   at_col_quantity: "수량",
+  at_col_avg_buy_price: "매입가",
   at_col_current_price: "현재가",
   at_col_value: "평가액",
   at_col_pnl: "손익",

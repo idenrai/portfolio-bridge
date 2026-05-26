@@ -204,6 +204,9 @@ export function AssetTable({
                   {t.at_col_quantity}
                 </th>
                 <th className="pb-2 font-medium text-right">
+                  {t.at_col_avg_buy_price}
+                </th>
+                <th className="pb-2 font-medium text-right">
                   {t.at_col_current_price}
                 </th>
                 <th
@@ -298,6 +301,16 @@ export function AssetTable({
                         <span className="text-slate-400">-</span>
                       ) : (
                         a.quantity.toLocaleString()
+                      )}
+                    </td>
+                    <td className="py-2.5 text-right tabular-nums text-slate-500">
+                      {isCash ? (
+                        <span className="text-slate-400">-</span>
+                      ) : (
+                        <>
+                          {sym}
+                          {a.avgBuyPrice.toLocaleString()}
+                        </>
                       )}
                     </td>
                     <td className="py-2.5 text-right tabular-nums">
