@@ -66,18 +66,37 @@ export function buildGuruFollowUpPrompt(
     }
   }
 
-  // 비중 변화 ≥ 1.5%p 인 종목
+  // 비중 변화 ≥ 1.5%p, return ≥ 5pp, 또는 수량/평단가 변화가 있는 종목
   for (const [id, curr] of currMap) {
     const p = prevMap.get(id);
     if (!p) continue;
     const wDiff = curr.weightPercent - p.weightPercent;
     const rDiff = curr.returnPercent - p.returnPercent;
-    if (Math.abs(wDiff) >= 1.5 || Math.abs(rDiff) >= 5) {
-      changedWeights.push(
-        `  ${curr.name}${curr.ticker ? ` [${curr.ticker}]` : ""}` +
-          ` | weight: ${p.weightPercent.toFixed(1)}% → ${curr.weightPercent.toFixed(1)}% (${sign(wDiff)}${wDiff.toFixed(1)}%p)` +
-          ` | return: ${sign(p.returnPercent)}${p.returnPercent.toFixed(1)}% → ${sign(curr.returnPercent)}${curr.returnPercent.toFixed(1)}% (${sign(rDiff)}${rDiff.toFixed(1)}pp)`,
+    const qtyChanged = curr.quantity !== p.quantity;
+    const costChanged = Math.abs(curr.avgBuyPrice - p.avgBuyPrice) > 0.001;
+
+    if (Math.abs(wDiff) >= 1.5 || Math.abs(rDiff) >= 5 || qtyChanged || costChanged) {
+      const parts: string[] = [
+        `  ${curr.name}${curr.ticker ? ` [${curr.ticker}]` : ""}`,
+      ];
+      if (qtyChanged) {
+        const qDiff = curr.quantity - p.quantity;
+        parts.push(
+          `qty: ${p.quantity} → ${curr.quantity} (${sign(qDiff)}${qDiff})`,
+        );
+      }
+      if (costChanged) {
+        parts.push(
+          `avg cost: ${p.avgBuyPrice.toFixed(2)} → ${curr.avgBuyPrice.toFixed(2)} ${curr.currency}`,
+        );
+      }
+      parts.push(
+        `weight: ${p.weightPercent.toFixed(1)}% → ${curr.weightPercent.toFixed(1)}% (${sign(wDiff)}${wDiff.toFixed(1)}%p)`,
       );
+      parts.push(
+        `return: ${sign(p.returnPercent)}${p.returnPercent.toFixed(1)}% → ${sign(curr.returnPercent)}${curr.returnPercent.toFixed(1)}% (${sign(rDiff)}${rDiff.toFixed(1)}pp)`,
+      );
+      changedWeights.push(parts[0] + " | " + parts.slice(1).join(" | "));
     }
   }
 
@@ -191,7 +210,7 @@ ${newHoldings.length > 0 ? newHoldings.join("\n") : "  (none)"}
 --- POSITIONS REMOVED ---
 ${removedHoldings.length > 0 ? removedHoldings.join("\n") : "  (none)"}
 
---- SIGNIFICANT WEIGHT / RETURN CHANGES (≥1.5%p weight or ≥5pp return) ---
+--- POSITION CHANGES (qty/avg cost changes, ≥1.5%p weight, or ≥5pp return) ---
 ${changedWeights.length > 0 ? changedWeights.join("\n") : "  (none)"}
 
 --- CATEGORY ALLOCATION SHIFTS (≥1%p) ---

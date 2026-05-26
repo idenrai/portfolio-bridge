@@ -20,6 +20,9 @@ export interface GuruSessionSnapshot {
     id: string;
     ticker?: string;
     name: string;
+    currency: string;
+    quantity: number;
+    avgBuyPrice: number;
     weightPercent: number;
     returnPercent: number;
     category: string | null;
