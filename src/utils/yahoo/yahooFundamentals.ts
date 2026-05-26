@@ -95,6 +95,7 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
     ?? (peRatio !== null && epsGrowth !== null && epsGrowth > 0
         ? peRatio / (epsGrowth * 100)
         : null);
+  const pbRatio = sd.priceToBook?.raw ?? null;
 
   return {
     pegRatio,
@@ -104,6 +105,9 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
     operatingMargin,
     marketCap,
     currency: typeof fd.financialCurrency === "string" ? fd.financialCurrency : null,
+    peRatio,
+    pbRatio,
+    currentPrice: null,
   };
 }
 
@@ -153,6 +157,7 @@ export async function fetchFundamentals(
           debtToEquity: null, operatingMargin: null,
           marketCap: typeof meta.marketCap === "number" ? meta.marketCap : null,
           currency: typeof meta.currency === "string" ? meta.currency : null,
+          peRatio: null, pbRatio: null, currentPrice: null,
         };
       }
     }
@@ -179,6 +184,9 @@ export async function enrichFundamentals(
     operatingMargin:detail.operatingMargin ?? base.operatingMargin,
     marketCap:      detail.marketCap      ?? base.marketCap,
     currency:       detail.currency       ?? base.currency,
+    peRatio:        detail.peRatio        ?? base.peRatio,
+    pbRatio:        detail.pbRatio        ?? base.pbRatio,
+    currentPrice:   detail.currentPrice   ?? base.currentPrice,
   };
 }
 
@@ -230,13 +238,16 @@ export async function fetchBatchQuote(
           const str = (v: unknown) => typeof v === "string" ? v : null;
 
           map.set(sym, {
-            pegRatio:       num(q.pegRatio),
-            epsGrowth:      num(q.earningsQuarterlyGrowth),
-            revenueGrowth:  num(q.revenueQuarterlyGrowth) ?? null,
-            debtToEquity:   null,
-            operatingMargin:null,
-            marketCap:      num(q.marketCap),
-            currency:       str(q.financialCurrency) ?? str(q.currency),
+            pegRatio:        num(q.pegRatio),
+            epsGrowth:       num(q.earningsQuarterlyGrowth),
+            revenueGrowth:   num(q.revenueQuarterlyGrowth) ?? null,
+            debtToEquity:    null,
+            operatingMargin: null,
+            marketCap:       num(q.marketCap),
+            currency:        str(q.financialCurrency) ?? str(q.currency),
+            peRatio:         num(q.trailingPE),
+            pbRatio:         num(q.priceToBook),
+            currentPrice:    num(q.regularMarketPrice),
           });
         }
         break;

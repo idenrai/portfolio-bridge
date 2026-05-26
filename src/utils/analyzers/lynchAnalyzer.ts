@@ -161,6 +161,7 @@ export function scoreStock(
 const LYNCH_DEFAULT: FundamentalsData = {
   pegRatio: null, epsGrowth: null, revenueGrowth: null,
   debtToEquity: null, operatingMargin: null, marketCap: null, currency: null,
+  peRatio: null, pbRatio: null, currentPrice: null,
 };
 
 export function analyzeByTickers(

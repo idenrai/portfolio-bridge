@@ -74,6 +74,8 @@ export const ko: Translations = {
   holdings_col_pnl: "손익",
   holdings_col_return: "수익률",
   holdings_col_weight: "비중",
+  holdings_col_per: "PER",
+  holdings_col_pbr: "PBR",
   holdings_show_all: (n) => `전체 ${n}개 보기`,
   holdings_show_top10: "상위 10개만",
 

@@ -38,6 +38,10 @@ export interface HoldingDetail {
   returnPercent: number;
   /** 전체 대비 비중 % */
   weightPercent: number;
+  /** PER */
+  peRatio?: number | null;
+  /** PBR */
+  pbRatio?: number | null;
 }
 
 /** 환율 노출 상세 */

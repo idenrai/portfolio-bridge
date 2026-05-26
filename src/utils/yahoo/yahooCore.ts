@@ -87,6 +87,12 @@ export interface FundamentalsData {
   operatingMargin: number | null;
   marketCap: number | null;
   currency: string | null;
+  /** PER (Price-to-Earnings Ratio) */
+  peRatio: number | null;
+  /** PBR (Price-to-Book Ratio) */
+  pbRatio: number | null;
+  /** 현재가 — v7 배치 조회에서만 채워짐 */
+  currentPrice: number | null;
 }
 
 // ─── 내부 매핑 ────────────────────────────────────────────────────────────────

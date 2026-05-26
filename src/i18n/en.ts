@@ -73,8 +73,8 @@ export const en: Translations = {
   holdings_col_value: "Value",
   holdings_col_pnl: "P&L",
   holdings_col_return: "Return",
-  holdings_col_weight: "Weight",
-  holdings_show_all: (n) => `View all ${n}`,
+  holdings_col_weight: "Weight",  holdings_col_per: "P/E",
+  holdings_col_pbr: "P/B",  holdings_show_all: (n) => `View all ${n}`,
   holdings_show_top10: "Top 10 only",
 
   category_title: "Category Target vs Actual",

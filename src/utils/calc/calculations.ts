@@ -99,6 +99,8 @@ export function calculateSummary(
       pnlKRW,
       returnPercent: costKRW === 0 ? 0 : (pnlKRW / costKRW) * 100,
       weightPercent: 0,
+      peRatio: a.peRatio ?? null,
+      pbRatio: a.pbRatio ?? null,
     });
   }
 

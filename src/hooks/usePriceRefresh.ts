@@ -5,12 +5,10 @@ import {
   useLanguageStore,
 } from "@/stores";
 import { TRANSLATIONS } from "@/i18n";
-import { fetchCurrentPrice } from "@/utils";
+import { fetchBatchQuote, fetchCurrentPrice } from "@/utils";
 
 /** 캐시 폴백 한도: 24분 */
 const CACHE_FALLBACK_MS = 24 * 60 * 1000;
-/** 동시 요청 제한 */
-const CONCURRENCY = 5;
 
 interface FailedAsset {
   ticker: string;
@@ -36,12 +34,21 @@ interface UsePriceRefreshResult {
   failedAssets: FailedAsset[];
 }
 
+type PriceUpdate = {
+  id: string;
+  currentPrice: number;
+  peRatio?: number | null;
+  pbRatio?: number | null;
+};
+
 /**
  * Yahoo Finance에서 보유 자산 현재가를 일괄 갱신하는 훅
  *
- * - 마운트 시 캐시가 1시간 이상 됐거나 없으면 자동 조회
- * - 티커가 있는 자산만 조회 (현금·수동자산은 건너뜀)
- * - CONCURRENCY 단위 병렬 처리
+ * 전략:
+ *   1차) v7 배치 조회 (15개/요청) — 현재가 + PER + PBR 동시 취득
+ *   2차) 배치에서 currentPrice 누락된 종목만 v8 chart 개별 폴백
+ *
+ * → 기존 개별 호출(N번) 대비 요청 횟수 대폭 감소
  */
 export function usePriceRefresh(): UsePriceRefreshResult {
   const assets = useAssetStore((s) => s.assets);
@@ -58,11 +65,9 @@ export function usePriceRefresh(): UsePriceRefreshResult {
   const [totalCount, setTotalCount] = useState(0);
   const [failedAssets, setFailedAssets] = useState<FailedAsset[]>([]);
 
-  // 중복 실행 방지
   const runningRef = useRef(false);
 
   const refreshPrices = useCallback(async () => {
-    // 시세를 가져올 대상: ticker가 있고 categories에 cash가 아닌 자산
     const targets = assets.filter(
       (a) => a.ticker && !a.categories.includes("cash"),
     );
@@ -78,16 +83,37 @@ export function usePriceRefresh(): UsePriceRefreshResult {
     setUpdatedCount(0);
     setFailedAssets([]);
 
-    const updates: { id: string; currentPrice: number }[] = [];
+    const updates: PriceUpdate[] = [];
     const failed: FailedAsset[] = [];
-    let completed = 0;
 
-    // 동시성 제한 병렬 처리
-    const queue = [...targets];
-    const workers = Array.from({ length: CONCURRENCY }, async () => {
-      while (queue.length > 0) {
-        const asset = queue.shift();
-        if (!asset) break;
+    try {
+      // ── 1차: v7 배치 조회 (현재가 + PER + PBR) ───────────────────────────
+      const tickers = targets.map((a) => a.ticker!);
+      const batchMap = await fetchBatchQuote(
+        tickers,
+        1500,
+        (done: number, total: number) => setProgress((done / total) * 0.9),
+      );
+
+      // 배치 결과 분류
+      const needsFallback: typeof targets = [];
+      for (const asset of targets) {
+        const data = batchMap.get(asset.ticker!);
+        if (data?.currentPrice != null && data.currentPrice > 0) {
+          updates.push({
+            id: asset.id,
+            currentPrice: data.currentPrice,
+            peRatio: data.peRatio,
+            pbRatio: data.pbRatio,
+          });
+        } else {
+          needsFallback.push(asset);
+        }
+      }
+
+      // ── 2차: 배치 누락 종목 → v8 chart 개별 폴백 ────────────────────────
+      for (let i = 0; i < needsFallback.length; i++) {
+        const asset = needsFallback[i];
         try {
           const quote = await fetchCurrentPrice(asset.ticker!);
           if (quote && quote.price > 0) {
@@ -98,26 +124,20 @@ export function usePriceRefresh(): UsePriceRefreshResult {
         } catch {
           failed.push({ ticker: asset.ticker!, name: asset.name });
         }
-        completed++;
-        setProgress(completed / targets.length);
-        setUpdatedCount(updates.length);
+        setProgress(0.9 + ((i + 1) / Math.max(needsFallback.length, 1)) * 0.1);
       }
-    });
 
-    try {
-      await Promise.all(workers);
+      setUpdatedCount(updates.length);
 
       if (updates.length > 0) {
         updatePrices(updates);
         setLastUpdated(new Date().toISOString());
-        setUpdatedCount(updates.length);
       }
 
-      // 일부/전부 실패한 경우
       if (failed.length > 0) {
         setFailedAssets(failed);
       }
-      // 전부 실패한 경우 캐시 폴백 또는 에러
+
       if (updates.length === 0 && failed.length > 0) {
         const cacheAge = lastUpdated
           ? Date.now() - new Date(lastUpdated).getTime()

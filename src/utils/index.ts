@@ -13,6 +13,7 @@ export { SAMPLE_ASSETS } from "./sampleData";
 export {
   searchTicker,
   fetchCurrentPrice,
+  fetchBatchQuote,
   fetchAllExchangeRates,
 } from "./yahoo/yahooFinance";
 export type { TickerSearchItem, QuoteData } from "./yahoo/yahooFinance";

@@ -74,8 +74,8 @@ export const ja: Translations = {
   holdings_col_value: "評価額",
   holdings_col_pnl: "損益",
   holdings_col_return: "騰落率",
-  holdings_col_weight: "比率",
-  holdings_show_all: (n) => `全${n}件を表示`,
+  holdings_col_weight: "比率",  holdings_col_per: "PER",
+  holdings_col_pbr: "PBR",  holdings_show_all: (n) => `全${n}件を表示`,
   holdings_show_top10: "上位10件のみ",
 
   category_title: "カテゴリー目標 vs 実績",

@@ -49,6 +49,10 @@ export interface Asset {
   currentPrice: number;
   /** 분류 카테고리 (복수 가능) */
   categories: AssetCategory[];
+  /** PER (Price-to-Earnings Ratio) — 시세 갱신 시 자동 취득 */
+  peRatio?: number | null;
+  /** PBR (Price-to-Book Ratio) — 시세 갱신 시 자동 취득 */
+  pbRatio?: number | null;
   /** 메모 */
   memo?: string;
   /** 생성일 */

@@ -75,6 +75,8 @@ export const de: Translations = {
   holdings_col_pnl: "G&V",
   holdings_col_return: "Rendite",
   holdings_col_weight: "Anteil",
+  holdings_col_per: "KGV",
+  holdings_col_pbr: "KBV",
   holdings_show_all: (n) => `Alle ${n} anzeigen`,
   holdings_show_top10: "Nur Top 10",
 
