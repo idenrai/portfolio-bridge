@@ -6,7 +6,7 @@ import {
   type AssetType,
   CURRENCY_SYMBOLS,
 } from "@/types";
-import { useAssetStore, useSettingsStore } from "@/stores";
+import { useAssetStore, useSettingsStore, useBrokerStore } from "@/stores";
 import { useT } from "@/hooks";
 import {
   assetValue,
@@ -62,6 +62,7 @@ export function AssetTable({
 }: Props) {
   const updateAsset = useAssetStore((s) => s.updateAsset);
   const rates = useSettingsStore((s) => s.exchangeRates);
+  const brokerAccounts = useBrokerStore((s) => s.accounts);
   const t = useT();
   const CATEGORY_OPTIONS = Object.entries(t.category_labels) as [
     AssetCategory,
@@ -240,6 +241,14 @@ export function AssetTable({
                       {a.ticker && (
                         <p className="text-xs text-slate-400">{a.ticker}</p>
                       )}
+                      {a.brokerId && (() => {
+                        const acct = brokerAccounts.find(b => b.id === a.brokerId);
+                        return acct ? (
+                          <span className="inline-block mt-0.5 text-xs text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                            {acct.nickname}
+                          </span>
+                        ) : null;
+                      })()}
                     </td>
                     <td className="py-2.5 whitespace-nowrap">
                       <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">

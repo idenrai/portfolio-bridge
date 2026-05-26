@@ -3,6 +3,7 @@ import { Button } from "@/components/common";
 import { useT } from "@/hooks";
 import type { AssetFormData, CurrencyCode, Market } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
+import { AccountSelect } from "./AccountSelect";
 
 export function CashForm({
   onSubmit,
@@ -15,6 +16,7 @@ export function CashForm({
   const [currency, setCurrency] = useState<CurrencyCode | null>(null);
   const [amount, setAmount] = useState<number | "">("");
   const [open, setOpen] = useState(false);
+  const [brokerId, setBrokerId] = useState<string | undefined>(undefined);
   const t = useT();
 
   const CURRENCY_OPTIONS: { code: CurrencyCode; label: string }[] = [
@@ -47,6 +49,7 @@ export function CashForm({
       avgBuyPrice: 1,
       currentPrice: 1,
       categories: [],
+      brokerId,
     });
   };
 
@@ -124,6 +127,8 @@ export function CashForm({
           className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:bg-slate-50 disabled:text-slate-400"
         />
       </label>
+
+      <AccountSelect value={brokerId} onChange={setBrokerId} />
 
       <div className="flex justify-end gap-2">
         <Button type="button" variant="secondary" onClick={onCancel}>

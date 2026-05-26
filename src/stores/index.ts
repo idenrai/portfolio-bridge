@@ -7,3 +7,4 @@ export { useGuruSessionStore } from "./useGuruSessionStore";
 export type { GuruSessionSnapshot } from "./useGuruSessionStore";
 export { useProfileStore } from "./useProfileStore";
 export type { UserProfile } from "./useProfileStore";
+export { useBrokerStore } from "./useBrokerStore";

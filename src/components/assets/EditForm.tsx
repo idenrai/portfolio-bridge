@@ -3,6 +3,7 @@ import { Button } from "@/components/common";
 import { useT } from "@/hooks";
 import type { Asset, AssetFormData } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
+import { AccountSelect } from "./AccountSelect";
 
 export function EditForm({
   initial,
@@ -15,6 +16,7 @@ export function EditForm({
 }) {
   const [quantity, setQuantity] = useState(initial.quantity);
   const [avgBuyPrice, setAvgBuyPrice] = useState(initial.avgBuyPrice);
+  const [brokerId, setBrokerId] = useState<string | undefined>(initial.brokerId);
   const sym = CURRENCY_SYMBOLS[initial.currency];
   const t = useT();
 
@@ -30,6 +32,7 @@ export function EditForm({
       avgBuyPrice,
       currentPrice: initial.currentPrice,
       categories: initial.categories,
+      brokerId,
     });
   };
 
@@ -97,6 +100,8 @@ export function EditForm({
           className="mt-1 block w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500 cursor-not-allowed"
         />
       </label>
+
+      <AccountSelect value={brokerId} onChange={setBrokerId} />
 
       <div className="flex justify-end gap-2">
         <Button type="button" variant="secondary" onClick={onCancel}>

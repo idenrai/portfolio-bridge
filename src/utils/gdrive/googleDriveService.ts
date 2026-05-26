@@ -9,6 +9,7 @@ import {
   useProfileStore,
   useLanguageStore,
   useSnapshotStore,
+  useBrokerStore,
 } from "@/stores";
 import {
   findDriveFile,
@@ -42,6 +43,7 @@ function buildBackup(): DriveBackup {
     useProfileStore.getState();
   const { lang } = useLanguageStore.getState();
   const { snapshots } = useSnapshotStore.getState();
+  const { accounts: brokerAccounts } = useBrokerStore.getState();
   return {
     version: 1,
     syncedAt: new Date().toISOString(),
@@ -51,6 +53,7 @@ function buildBackup(): DriveBackup {
     profile: { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y },
     lang,
     snapshots,
+    brokerAccounts,
   };
 }
 
@@ -79,8 +82,9 @@ function applyRemote(backup: DriveBackup) {
       if (backup.snapshots.length >= local.length) {
         useSnapshotStore.setState({ snapshots: backup.snapshots });
       }
-    }
-  } catch (e) {
+    }    if (Array.isArray(backup.brokerAccounts) && backup.brokerAccounts.length > 0) {
+      useBrokerStore.setState({ accounts: backup.brokerAccounts as never });
+    }  } catch (e) {
     console.error("applyRemote failed", e);
   }
 }

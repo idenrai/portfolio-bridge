@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useAssetStore, useLanguageStore } from "@/stores";
 import { Card, Button, Modal } from "@/components/common";
-import { AssetForm, AssetTable } from "@/components/assets";
+import { AssetForm, AssetTable, BrokerManager } from "@/components/assets";
 import { downloadCsv, parseCsv } from "@/utils";
 import {
   buildClassificationPrompt,
@@ -20,6 +20,7 @@ export function AssetsPage() {
   const { assets, addAsset, updateAsset, deleteAsset } = useAssetStore();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingAsset, setEditingAsset] = useState<Asset | undefined>();
+  const [brokerManagerOpen, setBrokerManagerOpen] = useState(false);
   const [promptOpen, setPromptOpen] = useState(false);
   const [promptTab, setPromptTab] = useState<"generate" | "import">("generate");
   const [copied, setCopied] = useState(false);
@@ -158,6 +159,9 @@ export function AssetsPage() {
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <h2 className="text-lg font-bold text-slate-800">{t.asset_title}</h2>
         <div className="flex items-center gap-2">
+          <Button variant="secondary" size="sm" onClick={() => setBrokerManagerOpen(true)}>
+            {t.broker_manage_btn}
+          </Button>
           <Button variant="secondary" size="sm" onClick={handleImport}>
             {t.asset_btn_import_csv}
           </Button>
@@ -365,6 +369,17 @@ export function AssetsPage() {
       </Modal>
 
       {/* CSV 미리보기 모달 */}
+
+      {/* 계좌 관리 모달 */}
+      <Modal
+        open={brokerManagerOpen}
+        onClose={() => setBrokerManagerOpen(false)}
+        title={t.broker_title}
+        maxWidth="max-w-2xl"
+      >
+        <BrokerManager />
+      </Modal>
+
       <Modal
         open={!!importPreview}
         onClose={() => setImportPreview(null)}

@@ -32,6 +32,8 @@ export interface DriveBackup {
   lang?: string;
   /** 포트폴리오 히스토리 스냅샷 (최대 365일) */
   snapshots?: { date: string; totalValueKRW: number; totalCostKRW: number }[];
+  /** 증권사/계좌 목록 */
+  brokerAccounts?: unknown[];
 }
 
 // ─── 파일 검색 ────────────────────────────────────────────────────────────────

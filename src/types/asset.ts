@@ -53,6 +53,8 @@ export interface Asset {
   peRatio?: number | null;
   /** PBR (Price-to-Book Ratio) — 시세 갱신 시 자동 취득 */
   pbRatio?: number | null;
+  /** 연결된 증권사 계좌 ID */
+  brokerId?: string;
   /** 메모 */
   memo?: string;
   /** 생성일 */
@@ -63,6 +65,19 @@ export interface Asset {
 
 /** 자산 등록/수정 시 사용하는 폼 데이터 */
 export type AssetFormData = Omit<Asset, "id" | "createdAt" | "updatedAt">;
+
+/** 증권사 / 계좌 정보 */
+export interface BrokerAccount {
+  id: string;
+  /** 국가 */
+  country: Market;
+  /** 증권사명 (예: 미래에셋, SBI証券, Fidelity) */
+  broker: string;
+  /** 계좌 종류 (예: ISA, NISA, 특정, 일반, IRA) */
+  accountType: string;
+  /** 사용자 정의 애칭 (예: 토스 ISA, SBI NISA) */
+  nickname: string;
+}
 
 /** 카테고리별 한글 라벨 */
 export const CATEGORY_LABELS: Record<AssetCategory, string> = {

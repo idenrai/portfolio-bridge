@@ -496,6 +496,31 @@ export interface Translations {
   af_crypto_select: string;
   af_buy_price_label: string;
   af_current_price_placeholder: string;
+  /** 계좌 선택 셀렉트박스 */
+  af_account_label: string;
+  af_account_none: string;
+
+  // ─── Broker Account Manager ───────────────────────────────────────────────
+  broker_manage_btn: string;
+  broker_title: string;
+  broker_add_btn: string;
+  broker_edit_btn: string;
+  broker_save_btn: string;
+  broker_delete_btn: string;
+  broker_cancel_btn: string;
+  broker_empty: string;
+  broker_country_label: string;
+  broker_name_label: string;
+  broker_type_label: string;
+  broker_nickname_label: string;
+  broker_name_placeholder: string;
+  broker_type_placeholder: string;
+  broker_nickname_placeholder: string;
+  broker_delete_confirm: string;
+  broker_col_nickname: string;
+  broker_col_broker: string;
+  broker_col_type: string;
+  broker_col_country: string;
 
   // ─── Type / Market / Currency option labels ────────────────────────────────
   atype_stock: string;
