@@ -53,6 +53,8 @@ export interface Asset {
   peRatio?: number | null;
   /** PBR (Price-to-Book Ratio) — 시세 갱신 시 자동 취득 */
   pbRatio?: number | null;
+  /** 배당수익률 (소수점) — 시세 갱신 시 자동 취득 */
+  dividendYield?: number | null;
   /** 연결된 증권사 계좌 ID */
   brokerId?: string;
   /** 메모 */

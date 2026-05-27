@@ -91,6 +91,8 @@ export interface FundamentalsData {
   peRatio: number | null;
   /** PBR (Price-to-Book Ratio) */
   pbRatio: number | null;
+  /** 배당수익률 (소수점, 예: 0.025 = 2.5%) */
+  dividendYield: number | null;
   /** 현재가 — v7 배치 조회에서만 채워짐 */
   currentPrice: number | null;
 }

@@ -11,7 +11,7 @@ interface AssetState {
   deleteAsset: (id: string) => void;
   getAsset: (id: string) => Asset | undefined;
   /** 현재가 일괄 업데이트 (PER/PBR 포함) */
-  updatePrices: (updates: { id: string; currentPrice: number; peRatio?: number | null; pbRatio?: number | null }[]) => void;
+  updatePrices: (updates: { id: string; currentPrice: number; peRatio?: number | null; pbRatio?: number | null; dividendYield?: number | null }[]) => void;
 }
 
 export const useAssetStore = create<AssetState>()(
@@ -59,6 +59,7 @@ export const useAssetStore = create<AssetState>()(
               currentPrice: update.currentPrice,
               ...(update.peRatio !== undefined ? { peRatio: update.peRatio } : {}),
               ...(update.pbRatio !== undefined ? { pbRatio: update.pbRatio } : {}),
+              ...(update.dividendYield !== undefined ? { dividendYield: update.dividendYield } : {}),
               updatedAt: now,
             };
           }),

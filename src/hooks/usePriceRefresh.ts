@@ -39,6 +39,7 @@ type PriceUpdate = {
   currentPrice: number;
   peRatio?: number | null;
   pbRatio?: number | null;
+  dividendYield?: number | null;
 };
 
 /**
@@ -105,6 +106,7 @@ export function usePriceRefresh(): UsePriceRefreshResult {
             currentPrice: data.currentPrice,
             peRatio: data.peRatio,
             pbRatio: data.pbRatio,
+            dividendYield: data.dividendYield,
           });
         } else {
           needsFallback.push(asset);

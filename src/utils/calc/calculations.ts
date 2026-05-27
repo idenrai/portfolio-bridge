@@ -101,6 +101,7 @@ export function calculateSummary(
       weightPercent: 0,
       peRatio: a.peRatio ?? null,
       pbRatio: a.pbRatio ?? null,
+      dividendYield: a.dividendYield ?? null,
     });
   }
 
@@ -140,6 +141,7 @@ export function calculateSummary(
         returnPercent: newCostKRW === 0 ? 0 : (newPnL / newCostKRW) * 100,
         peRatio: existing.peRatio ?? h.peRatio,
         pbRatio: existing.pbRatio ?? h.pbRatio,
+        dividendYield: existing.dividendYield ?? h.dividendYield,
         weightPercent: existing.weightPercent + h.weightPercent,
       });
     }

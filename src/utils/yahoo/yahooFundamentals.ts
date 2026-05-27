@@ -96,6 +96,7 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
         ? peRatio / (epsGrowth * 100)
         : null);
   const pbRatio = sd.priceToBook?.raw ?? null;
+  const dividendYield = sd.dividendYield?.raw ?? null;
 
   return {
     pegRatio,
@@ -107,6 +108,7 @@ function parseQuoteSummary(data: unknown): FundamentalsData | null {
     currency: typeof fd.financialCurrency === "string" ? fd.financialCurrency : null,
     peRatio,
     pbRatio,
+    dividendYield,
     currentPrice: null,
   };
 }
@@ -157,7 +159,7 @@ export async function fetchFundamentals(
           debtToEquity: null, operatingMargin: null,
           marketCap: typeof meta.marketCap === "number" ? meta.marketCap : null,
           currency: typeof meta.currency === "string" ? meta.currency : null,
-          peRatio: null, pbRatio: null, currentPrice: null,
+          peRatio: null, pbRatio: null, dividendYield: null, currentPrice: null,
         };
       }
     }
@@ -186,6 +188,7 @@ export async function enrichFundamentals(
     currency:       detail.currency       ?? base.currency,
     peRatio:        detail.peRatio        ?? base.peRatio,
     pbRatio:        detail.pbRatio        ?? base.pbRatio,
+    dividendYield:  detail.dividendYield  ?? base.dividendYield,
     currentPrice:   detail.currentPrice   ?? base.currentPrice,
   };
 }
@@ -247,6 +250,7 @@ export async function fetchBatchQuote(
             currency:        str(q.financialCurrency) ?? str(q.currency),
             peRatio:         num(q.trailingPE),
             pbRatio:         num(q.priceToBook),
+            dividendYield:   num(q.dividendYield) ?? num(q.trailingAnnualDividendYield),
             currentPrice:    num(q.regularMarketPrice),
           });
         }

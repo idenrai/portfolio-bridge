@@ -42,6 +42,8 @@ export interface HoldingDetail {
   peRatio?: number | null;
   /** PBR */
   pbRatio?: number | null;
+  /** 배당수익률 (소수점, 예: 0.025 = 2.5%) */
+  dividendYield?: number | null;
 }
 
 /** 환율 노출 상세 */

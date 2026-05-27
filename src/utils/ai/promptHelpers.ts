@@ -132,7 +132,8 @@ export function buildHoldingRows(
           ` | return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%` +
           ` | category: ${category}` +
           (h.peRatio != null ? ` | PER: ${h.peRatio.toFixed(1)}` : "") +
-          (h.pbRatio != null ? ` | PBR: ${h.pbRatio.toFixed(2)}` : "")
+          (h.pbRatio != null ? ` | PBR: ${h.pbRatio.toFixed(2)}` : "") +
+          (h.dividendYield != null ? ` | DY: ${(h.dividendYield * 100).toFixed(2)}%` : "")
         );
       })
       .join("\n") || "  (no data)";
