@@ -1,4 +1,5 @@
 export { AnalyzerCard } from "./AnalyzerCard";
+export { BuffettIndicatorCard } from "./BuffettIndicatorCard";
 export { GrahamDefensiveCard } from "./GrahamDefensiveCard";
 export { LynchTenBaggerCard } from "./LynchTenBaggerCard";
 export { MagicFormulaCard } from "./MagicFormulaCard";

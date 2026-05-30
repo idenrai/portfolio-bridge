@@ -348,6 +348,23 @@ export interface Translations {
   oneil_canslim_badge: string;
   oneil_initial_guide: string;
 
+  // ─── Buffett Indicator ────────────────────────────────────────────────────
+  buffett_indicator_title: string;
+  buffett_indicator_subtitle: string;
+  buffett_indicator_ratio_label: string;
+  buffett_indicator_market_cap: string;
+  buffett_indicator_gdp: string;
+  buffett_indicator_year: string;
+  buffett_indicator_loading: string;
+  buffett_indicator_error: string;
+  buffett_indicator_status_deep_under: string;
+  buffett_indicator_status_under: string;
+  buffett_indicator_status_fair: string;
+  buffett_indicator_status_over: string;
+  buffett_indicator_status_deep_over: string;
+  buffett_indicator_source: string;
+  buffett_indicator_desc: string;
+
   // ─── Settings Page ─────────────────────────────────────────────────────────
   settings_title: string;
   settings_display_currency_title: string;

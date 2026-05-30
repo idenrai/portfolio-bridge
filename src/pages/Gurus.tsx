@@ -7,6 +7,7 @@ import {
   SmithQualityCard,
   PiotroskiFScoreCard,
   OneilCanSlimCard,
+  BuffettIndicatorCard,
 } from "@/components/gurus";
 import {
   PieChart,
@@ -433,6 +434,11 @@ export function GurusPage() {
           {/* 피터 린치 전용: 10루타 후보 스크리너 */}
           {selectedGuru.id === "lynch" && (
             <LynchTenBaggerCard />
+          )}
+
+          {/* 워렌 버핏 전용: 버핏 지수 */}
+          {selectedGuru.id === "buffett" && (
+            <BuffettIndicatorCard />
           )}
 
           {/* 그린블라트 전용: 마법 공식 스크리너 */}

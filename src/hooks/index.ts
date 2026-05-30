@@ -7,3 +7,4 @@ export { useT } from "./useT";
 export { useGoogleDrive } from "./useGoogleDrive";
 export { useAnalyzer } from "./useAnalyzer";
 export type { AnalyzerMode, AnalyzerProgress, BaseAnalyzerResult } from "./useAnalyzer";
+export { useBuffettIndicator } from "./useBuffettIndicator";

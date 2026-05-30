@@ -470,6 +470,23 @@ export const ja: Translations = {
   oneil_canslim_badge: "🚀 CAN SLIM適合",
   oneil_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
+  // ─── Buffett Indicator
+  buffett_indicator_title: "バフェット指標 (Buffett Indicator)",
+  buffett_indicator_subtitle: "米国株式市場 時価総額 / GDP",
+  buffett_indicator_ratio_label: "現在のバフェット指標",
+  buffett_indicator_market_cap: "時価総額",
+  buffett_indicator_gdp: "GDP",
+  buffett_indicator_year: "基準年",
+  buffett_indicator_loading: "世界銀行データを読み込み中…",
+  buffett_indicator_error: "データを取得できませんでした。しばらくしてから再試行してください。",
+  buffett_indicator_status_deep_under: "大幅に割安",
+  buffett_indicator_status_under: "割安",
+  buffett_indicator_status_fair: "適正評価",
+  buffett_indicator_status_over: "割高",
+  buffett_indicator_status_deep_over: "大幅に割高",
+  buffett_indicator_source: "出典: 世界銀行 (World Bank) · 年次データ",
+  buffett_indicator_desc: "バフェット指標は、米国株式市場全体の時価総額をGDPで割った値です。バフェットは『おそらく最も良い単一の評価指標』と呼んでおり、75%未満は買い機会、200%超えは『火遇び』と述べました。",
+
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",
   settings_display_currency_desc:

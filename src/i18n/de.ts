@@ -478,6 +478,23 @@ export const de: Translations = {
   oneil_canslim_badge: "🚀 CAN SLIM geeignet",
   oneil_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
+  // ─── Buffett Indicator
+  buffett_indicator_title: "Buffett-Indikator",
+  buffett_indicator_subtitle: "US-Börsenkapitalisierung / BIP",
+  buffett_indicator_ratio_label: "Aktueller Wert",
+  buffett_indicator_market_cap: "Börsenkapitalisierung",
+  buffett_indicator_gdp: "BIP",
+  buffett_indicator_year: "Referenzjahr",
+  buffett_indicator_loading: "Weltbank-Daten werden geladen…",
+  buffett_indicator_error: "Daten konnten nicht geladen werden. Bitte später erneut versuchen.",
+  buffett_indicator_status_deep_under: "Stark unterbewertet",
+  buffett_indicator_status_under: "Leicht unterbewertet",
+  buffett_indicator_status_fair: "Fair bewertet",
+  buffett_indicator_status_over: "Leicht überbewertet",
+  buffett_indicator_status_deep_over: "Stark überbewertet",
+  buffett_indicator_source: "Quelle: Weltbank (World Bank) · Jährliche Daten",
+  buffett_indicator_desc: "Der Buffett-Indikator ist das Verhältnis der gesamten US-Aktienmarktkapitalisierung zum BIP. Buffett nannte ihn 'wahrscheinlich den besten Einzelindikator'. Unter 75% signalisiert eine Kaufgelegenheit; über 200% bedeutet 'Spiel mit dem Feuer'.",
+
   settings_title: "Einstellungen",
   settings_display_currency_title: "Anzeigewährung",
   settings_display_currency_desc:
