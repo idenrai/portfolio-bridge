@@ -94,7 +94,7 @@ const MARKERS = [
 
 export function BuffettIndicatorCard() {
   const t = useT();
-  const { ratio, gdpTrillions, marketCapTrillions, year, loading, error } =
+  const { ratio, gdpTrillions, marketCapTrillions, date, loading, error } =
     useBuffettIndicator();
 
   return (
@@ -186,7 +186,7 @@ export function BuffettIndicatorCard() {
               <p className="text-[11px] text-slate-500 mb-0.5">
                 {t.buffett_indicator_year}
               </p>
-              <p className="text-sm font-semibold text-slate-700">{year}</p>
+              <p className="text-sm font-semibold text-slate-700">{date}</p>
             </div>
           </div>
 
