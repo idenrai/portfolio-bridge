@@ -7,7 +7,7 @@ export interface BuffettIndicatorData {
   gdpTrillions: number;
   /** 미국 주식시장 시가총액 (조 USD) */
   marketCapTrillions: number;
-  /** 기준 날짜 (YYYY-MM-DD) */
+  /** 시가총액 기준 날짜 (YYYY-MM-DD) */
   date: string;
   /** 로딩 중 */
   loading: boolean;
@@ -16,40 +16,58 @@ export interface BuffettIndicatorData {
 }
 
 /**
- * FRED CSV에서 마지막 유효한(non-"." 또는 빈 값) 행을 반환
- * FRED CSV 포맷: DATE,VALUE (헤더 1줄 + 데이터)
- * 결측치는 "." 으로 표시됨
+ * 기존 Yahoo Finance 프록시로 Wilshire 5000 최신 종가를 조회합니다.
+ * ^W5000 index price point ≈ 미국 전체 시가총액 (십억 USD)
+ * — Wilshire 5000은 1980년 기준 1 point = $1B 으로 설계되어 있어
+ *   현재도 index value ≈ 시가총액 (billions)로 근사합니다.
  */
-function parseLastValidRow(csv: string): { date: string; value: number } | null {
-  const lines = csv.trim().split("\n").slice(1); // 헤더 제거
-  for (let i = lines.length - 1; i >= 0; i--) {
-    const [date, value] = lines[i].split(",");
-    if (date && value && value.trim() !== ".") {
-      const num = parseFloat(value.trim());
-      if (!isNaN(num)) return { date: date.trim(), value: num };
+async function fetchMarketCap(): Promise<{ valueTrillions: number; date: string }> {
+  const res = await fetch(
+    "/api/yahoo/v8/finance/chart/%5EW5000?interval=1d&range=5d",
+  );
+  if (!res.ok) throw new Error(`Yahoo Finance error: ${res.status}`);
+  const json = await res.json();
+  const result = json?.chart?.result?.[0];
+  if (!result) throw new Error("No Wilshire 5000 data");
+
+  const timestamps: number[] = result.timestamp ?? [];
+  const closes: (number | null)[] = result.indicators?.quote?.[0]?.close ?? [];
+
+  for (let i = closes.length - 1; i >= 0; i--) {
+    if (closes[i] != null) {
+      const date = new Date(timestamps[i] * 1000).toISOString().slice(0, 10);
+      // index point ≈ billions → trillions
+      return { valueTrillions: (closes[i] as number) / 1_000, date };
     }
   }
-  return null;
-}
-
-/** /api/fred?id=SERIES_ID 를 통해 FRED CSV를 가져옴 */
-async function fetchFred(seriesId: string): Promise<{ date: string; value: number }> {
-  const url = `/api/fred?id=${encodeURIComponent(seriesId)}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`FRED proxy error: ${res.status}`);
-  const csv = await res.text();
-  const row = parseLastValidRow(csv);
-  if (!row) throw new Error(`No valid data in FRED series: ${seriesId}`);
-  return row;
+  throw new Error("No valid close price in Wilshire 5000 data");
 }
 
 /**
- * FRED에서 미국 GDP와 Wilshire 5000 시가총액을 조회해
+ * World Bank API로 미국 GDP를 조회합니다. (CORS 지원, 프록시 불필요)
+ * 연간 데이터로 최대 1년 지연이 있지만 GDP는 분기별로만 바뀌므로 적합합니다.
+ */
+async function fetchGDP(): Promise<{ valueTrillions: number; year: string }> {
+  const res = await fetch(
+    "https://api.worldbank.org/v2/country/US/indicator/NY.GDP.MKTP.CD" +
+      "?format=json&mrv=3&per_page=3",
+  );
+  if (!res.ok) throw new Error(`World Bank API error: ${res.status}`);
+  const json = await res.json();
+  const entries: Array<{ date: string; value: number | null }> = json[1] ?? [];
+  for (const entry of entries) {
+    if (entry.value !== null) {
+      return { valueTrillions: entry.value / 1e12, year: entry.date };
+    }
+  }
+  throw new Error("No valid GDP data from World Bank");
+}
+
+/**
  * 버핏 지수(Buffett Indicator = Market Cap / GDP × 100%)를 계산합니다.
  *
- * - Market Cap: WILL5000INDFC (Wilshire 5000 Full Cap, 단위: 십억 USD, 분기/월별)
- * - GDP: GDP (SAAR, 단위: 십억 USD, 분기별)
- * - 데이터 지연: 최대 1분기 (World Bank 대비 훨씬 최신)
+ * - 시가총액: Yahoo Finance ^W5000 (Wilshire 5000, 일별 갱신)
+ * - GDP:      World Bank NY.GDP.MKTP.CD (연간, 최대 1년 지연)
  */
 export function useBuffettIndicator(): BuffettIndicatorData {
   const [data, setData] = useState<Omit<BuffettIndicatorData, "loading" | "error">>({
@@ -66,22 +84,16 @@ export function useBuffettIndicator(): BuffettIndicatorData {
 
     (async () => {
       try {
-        const [mcRow, gdpRow] = await Promise.all([
-          fetchFred("WILL5000INDFC"),
-          fetchFred("GDP"),
-        ]);
-
+        const [mc, gdp] = await Promise.all([fetchMarketCap(), fetchGDP()]);
         if (cancelled) return;
 
-        // 두 시리즈 모두 단위: 십억(Billions) USD → 조(Trillions)로 변환
-        const marketCapTrillions = mcRow.value / 1_000;
-        const gdpTrillions = gdpRow.value / 1_000;
-        const ratio = (marketCapTrillions / gdpTrillions) * 100;
-
-        // 더 최신 날짜를 기준 날짜로 표시
-        const date = mcRow.date > gdpRow.date ? mcRow.date : gdpRow.date;
-
-        setData({ ratio, gdpTrillions, marketCapTrillions, date });
+        const ratio = (mc.valueTrillions / gdp.valueTrillions) * 100;
+        setData({
+          ratio,
+          gdpTrillions: gdp.valueTrillions,
+          marketCapTrillions: mc.valueTrillions,
+          date: mc.date,
+        });
       } catch (e) {
         if (!cancelled) setError(e instanceof Error ? e.message : "Unknown error");
       } finally {
