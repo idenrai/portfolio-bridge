@@ -29,7 +29,12 @@ export default async function handler(request: Request) {
     );
   }
 
-  const fredUrl = `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${encodeURIComponent(id)}`;
+  // 1년 전 날짜를 cosd(cut-off start date)로 지정해 최소한의 데이터만 수신
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+  const cosd = oneYearAgo.toISOString().slice(0, 10); // YYYY-MM-DD
+
+  const fredUrl = `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${encodeURIComponent(id)}&cosd=${cosd}`;
 
   const res = await fetch(fredUrl, {
     headers: { "User-Agent": "portfolio-bridge/1.0" },
