@@ -298,3 +298,22 @@ After completing the work, always finish with: `npm run build && git add -A && g
 - When multiple agents would apply (e.g. new component + i18n), apply both in sequence: component-creator first, then i18n-sync
 - If the correct agent is ambiguous, pick the one whose trigger keywords match most closely
 
+---
+
+## Prompt Engineering Standards
+
+When writing, editing, or reviewing **any prompt** — including agent `.md` files in `.github/agents/`, workflow `.md` files in `.github/workflows/`, instruction files in `.github/instructions/`, or AI prompt helpers in `src/utils/ai/` — always apply the rules defined in:
+
+`.github/instructions/ai-prompt-engineering-safety-best-practices.instructions.md`
+
+Key principles to follow every time a prompt is authored:
+
+- **Clarity**: State the task, scope, and expected output format explicitly. Avoid vague instructions.
+- **Context**: Provide sufficient background (role, domain, audience). Use Role Prompting when expertise matters.
+- **Constraints**: Specify length, tone, format, and safety boundaries upfront.
+- **Examples**: Include few-shot examples for complex or domain-specific outputs.
+- **Safety**: Run the prompt against the Safety Review Checklist — check for harmful content, bias, injection risk, and privacy leakage before finalising.
+- **No injection**: Never interpolate untrusted user input directly into prompt strings. Sanitise inputs at boundaries.
+- **Transparency**: Document the prompt's purpose, limitations, and expected inputs/outputs alongside the prompt itself.
+- **AI-facing text**: Always write AI-facing prompt text in **English**, regardless of the active UI language.
+
