@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, Button } from "@/components/common";
 import {
   useSettingsStore,
@@ -10,6 +10,37 @@ import { useDataRefresh, useT, useGoogleDrive } from "@/hooks";
 import type { CurrencyCode } from "@/types";
 import { LANG_LOCALES } from "@/i18n";
 import { format } from "date-fns";
+
+function AutoResizeTextarea({
+  className,
+  value,
+  onChange,
+  placeholder,
+}: {
+  className?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder?: string;
+}) {
+  const ref = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  }, [value]);
+  return (
+    <textarea
+      ref={ref}
+      rows={1}
+      className={className}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      style={{ overflow: "hidden" }}
+    />
+  );
+}
 
 export function SettingsPage() {
   const settings = useSettingsStore();
@@ -156,8 +187,7 @@ export function SettingsPage() {
               <label className="text-xs font-medium text-slate-600">
                 {t[labelKey]}
               </label>
-              <textarea
-                rows={2}
+              <AutoResizeTextarea
                 className={`${inputCls} resize-none`}
                 placeholder={t[placeholderKey]}
                 value={profile[key]}
