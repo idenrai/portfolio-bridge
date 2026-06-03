@@ -4,10 +4,14 @@
     "preToolUse": [
       {
         "type": "command",
-        "bash": ".github/hooks/scripts/pre-tool-safety.sh",
+        "bash": ".github/hooks/scripts/block-dangerous-commands.sh",
+        "powershell": ".github/hooks/scripts/block-dangerous-commands.ps1",
         "matcher": "bash",
         "cwd": ".",
-        "timeoutSec": 5
+        "timeoutSec": 5,
+        "env": {
+          "BLOCK_MODE": "deny"
+        }
       }
     ]
   }
