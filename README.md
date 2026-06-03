@@ -135,7 +135,7 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 #### Asset Management
 
 - Ticker search (Yahoo Finance)
-- Manual add / edit / delete
+- Manual add / edit / delete — **simple mode** (name + value only) or **detailed mode** (ticker, type, market, quantity, avg price, current price)
 - **AI auto-classification**: English structured prompt → apply categories in bulk via JSON response (reasons in app language)
 - **CSV import preview**: 5-row preview → confirm to import
 - CSV export
@@ -178,7 +178,24 @@ Browser (local dev)                 Vercel deployment                  Tauri des
 - Display currency toggle (KRW / JPY / USD / EUR)
 - **Exchange rate caching**: auto-fetch on startup, reuse within 1 h, fallback to 24 h cache on failure (amber warning)
 - Target allocation per category
+- **Personal profile**: nickname, age, annual income, monthly budget, 3/5/10-year investment plans, and free-text notes (e.g. mortgage balance, auto-invested amounts)
 - Full data reset
+
+---
+
+### Copilot Agent Customization
+
+This repository ships five custom GitHub Copilot agents in `.github/agents/` for automated, convention-aware development assistance:
+
+| Agent | File | Activates when… |
+| --- | --- | --- |
+| **i18n-sync** | `i18n-sync.agent.md` | Adding/auditing translation keys across ko/en/ja/de |
+| **build-guard** | `build-guard.agent.md` | Vercel build fails, TS errors appear, pre-push verification |
+| **component-creator** | `component-creator.agent.md` | Creating new components, pages, hooks, or Zustand stores |
+| **test-writer** | `test-writer.agent.md` | Writing Vitest unit tests without touching production code |
+| **yahoo-finance-dev** | `yahoo-finance-dev.agent.md` | Adding new Yahoo Finance endpoints or data-fetching hooks |
+
+Routing rules in `.github/copilot-instructions.md` allow Copilot to auto-select the appropriate agent based on request keywords.
 
 ---
 
@@ -396,7 +413,7 @@ npm run tauri:build
 #### 자산 관리
 
 - 종목 검색 (Yahoo Finance)
-- 수동 등록 · 수정 · 삭제
+- 수동 등록 · 수정 · 삭제 — **간이 입력** (종목명 + 평가액만) 또는 **상세 입력** (심볼, 유형, 시장, 수량, 매입단가, 현재가)
 - **AI 자동 카테고리 분류**: 영문 구조화 프롬프트 생성 → JSON 응답으로 카테고리 일괄 적용 (앱 표시 언어로 reason 응답)
 - **CSV 가져오기 미리보기**: 파일 선택 후 5행 미리보기 → 확인 후 임포트 확정
 - CSV 내보내기
@@ -440,7 +457,24 @@ npm run tauri:build
 - 표시 화폐 전환 (KRW / JPY / USD / EUR)
 - **환율 캐시 전략**: 앱 시작 시 자동 조회, 1시간 이내 캐시는 재사용, 조회 실패 시 24시간 이내 캐시로 폴백 (amber 경고 표시)
 - 카테고리별 목표 비중 설정
+- **내 정보**: 닉네임, 나이, 연소득, 월 투자예산, 3/5/10년 투자계획, 특이사항/유의점(주택론 잔액, 자동투자 금액 등 자유 입력)
 - 전체 데이터 초기화
+
+---
+
+### Copilot 에이전트 커스터마이징
+
+이 레포지토리는 `.github/agents/` 에 5개의 GitHub Copilot 커스텀 에이전트를 포함합니다:
+
+| 에이전트 | 파일 | 자동 발동 조건 |
+| --- | --- | --- |
+| **i18n-sync** | `i18n-sync.agent.md` | ko/en/ja/de 번역 키 추가·감사·중복 수정 |
+| **build-guard** | `build-guard.agent.md` | Vercel 빌드 실패, TS 오류, 커밋 전 검증 |
+| **component-creator** | `component-creator.agent.md` | 신규 컴포넌트·페이지·훅·스토어 생성 |
+| **test-writer** | `test-writer.agent.md` | Vitest 단위 테스트 작성 (프로덕션 코드 불변) |
+| **yahoo-finance-dev** | `yahoo-finance-dev.agent.md` | 신규 야후 파이낸스 엔드포인트·훅 추가 |
+
+`.github/copilot-instructions.md` 의 라우팅 규칙에 의해 요청 키워드에 따라 적절한 에이전트가 자동으로 적용됩니다.
 
 ---
 
