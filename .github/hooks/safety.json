@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/scripts/pre-tool-safety.sh",
+        "matcher": "bash",
+        "cwd": ".",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}
