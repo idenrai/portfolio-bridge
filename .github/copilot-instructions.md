@@ -236,3 +236,65 @@ The project uses ESLint 9 flat config (`eslint.config.js`) with:
 - `eslint-plugin-react-refresh` (Vite fast refresh compatibility)
 
 Run `npm run lint` before committing. Fix all reported errors; warnings should be addressed where practical.
+
+---
+
+## Specialist Agent Routing
+
+This repository has five custom agents in `.github/agents/`. When a request matches a pattern below, **automatically apply that agent's full instructions** without waiting to be asked — as if that agent had been explicitly selected.
+
+After completing the work, always finish with: `npm run build && git add -A && git commit -m "..." && git push`.
+
+### i18n-sync — Auto-activate when:
+- Adding, renaming, or removing translation keys
+- Mentioning any of: `ko.ts`, `en.ts`, `ja.ts`, `de.ts`, `types.ts` (i18n), "번역", "i18n", "다국어", "언어"
+- TS error `TS1117` (duplicate object key) or missing key in locale file
+- Asking to audit or check consistency of translation files
+
+**Behavior**: Read `.github/agents/i18n-sync.agent.md` and follow it fully. Always update all 4 locale files + `types.ts` in one pass.
+
+---
+
+### build-guard — Auto-activate when:
+- Vercel build log is pasted into the chat
+- TS errors `TS2323`, `TS2393` (duplicate declaration), `TS1117`, `TS2339`, `TS2345` appear
+- User says "빌드 오류", "배포 실패", "Vercel 에러", "build failed"
+- After any multi-file edit, before committing
+
+**Behavior**: Read `.github/agents/build-guard.agent.md`. Run `npm run build`, fix all errors, re-run to confirm, then commit + push to `main`.
+
+---
+
+### component-creator — Auto-activate when:
+- Creating a new `.tsx` component, page, custom hook (`use*.ts`), or Zustand store
+- User says "만들어줘", "추가해줘", "스캐폴딩", "새 컴포넌트", "새 페이지", "새 훅", "새 스토어"
+- Request involves a new UI feature that doesn't exist yet
+
+**Behavior**: Read `.github/agents/component-creator.agent.md`. Generate the file, update `index.ts` barrel, add i18n keys to all 4 locales.
+
+---
+
+### test-writer — Auto-activate when:
+- User says "테스트", "test", "단위 테스트", "unit test", "Vitest", "커버리지", "coverage"
+- Asked to verify logic correctness of a utility or hook
+- User mentions "하네스", "harness", "TDD"
+
+**Behavior**: Read `.github/agents/test-writer.agent.md`. Never modify production code. Only create/update `*.test.ts` files.
+
+---
+
+### yahoo-finance-dev — Auto-activate when:
+- Adding a new Yahoo Finance endpoint or data field
+- Modifying any file in `src/utils/yahoo/`
+- User mentions "야후 파이낸스", "Yahoo Finance", "주가 조회", "시세", "배당", "펀더멘털", "FX 환율 추가"
+- Creating a new data-fetching hook that calls an external API
+
+**Behavior**: Read `.github/agents/yahoo-finance-dev.agent.md`. Always use `yahooFetch()` from `yahooCore.ts`, never raw `fetch()` against Yahoo URLs.
+
+---
+
+### General rules (always apply)
+- After every implementation task: run `npm run build` to verify, then commit + push
+- When multiple agents would apply (e.g. new component + i18n), apply both in sequence: component-creator first, then i18n-sync
+- If the correct agent is ambiguous, pick the one whose trigger keywords match most closely
+
