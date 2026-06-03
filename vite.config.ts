@@ -25,7 +25,7 @@ function yahooProxy(): Plugin {
     if (!force && crumb && cookie && Date.now() - crumbTs < CRUMB_TTL) return;
 
     // 1) Yahoo 쿠키 획득 (fc.yahoo.com → finance.yahoo.com 순으로 시도)
-    let parts: string[] = [];
+    const parts: string[] = [];
     for (const cookieUrl of [
       "https://fc.yahoo.com/",
       "https://finance.yahoo.com/",

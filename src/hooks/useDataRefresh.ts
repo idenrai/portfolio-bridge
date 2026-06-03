@@ -39,17 +39,21 @@ export function useDataRefresh(): UseDataRefreshResult {
   const [isLoading, setIsLoading] = useState(false);
   const runningRef = useRef(false);
 
+  // Destructure stable function references to satisfy exhaustive-deps
+  const { refreshRates } = rates;
+  const { refreshPrices } = prices;
+
   const refreshAll = useCallback(async () => {
     if (runningRef.current) return;
     runningRef.current = true;
     setIsLoading(true);
     try {
-      await Promise.all([rates.refreshRates(), prices.refreshPrices()]);
+      await Promise.all([refreshRates(), refreshPrices()]);
     } finally {
       setIsLoading(false);
       runningRef.current = false;
     }
-  }, [rates.refreshRates, prices.refreshPrices]);
+  }, [refreshRates, refreshPrices]);
 
   // 둘 중 더 최근 갱신 시각
   const { lastUpdated: rateTs } = rates;

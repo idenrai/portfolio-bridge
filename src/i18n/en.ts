@@ -562,10 +562,10 @@ export const en: Translations = {
   profile_monthly_budget_placeholder: "e.g. 1000",
   profile_plan3y_label: "3-Year Investment Plan",
   profile_plan3y_placeholder:
-    "e.g. Within 3 years, target \$500/mo in dividend income and shift toward growth...",
+    "e.g. Within 3 years, target $500/mo in dividend income and shift toward growth...",
   profile_plan5y_label: "5-Year Investment Plan",
   profile_plan5y_placeholder:
-    "e.g. By year 5, accumulate \$100k for a down payment...",
+    "e.g. By year 5, accumulate $100k for a down payment...",
   profile_plan10y_label: "10-Year Investment Plan",
   profile_plan10y_placeholder:
     "e.g. Achieve financial independence through passive income covering all living expenses...",
