@@ -179,20 +179,23 @@ export function buildGuruFollowUpPrompt(
 
   return `${buildPersonaHeader(guruName)}
 
-Your communication style and approach:
+--- YOUR COMMUNICATION STYLE ---
 ${guru.style}
 
+--- CONTEXT ---
 Today's date: ${today}
+This is a follow-up review. You previously assessed this investor's portfolio on ${prev.date}. The data below covers ONLY the changes since that date.
 
-This is a FOLLOW-UP to our previous conversation. We discussed my portfolio on ${prev.date}. Below are ONLY the changes and updates since then — please evaluate them from YOUR perspective as ${guruName}.
+--- YOUR TASK ---
+Evaluate the changes from YOUR perspective as ${guruName}. This is a focused check-in, not a full portfolio review — begin your response immediately with your assessment of the changes.
 
-Do NOT repeat your general philosophy or provide a full portfolio review. Focus on:
 ${GURU_FOLLOWUP_FOCUS[guru.id] ??
-`1. Whether the changes I made are moving in the right direction based on your principles
+`Address the following, in order:
+1. Whether the changes are moving in the right direction based on your principles
 2. Your reaction to the new positions added and positions removed
 3. Whether the rebalancing moves were wise or misguided
 4. Any specific concerns or approvals about the shifts you observe
-5. A brief updated verdict on the portfolio's direction — is it improving or deteriorating?`}
+5. A brief updated verdict on the portfolio's direction — improving or deteriorating?`}
 
 --- PORTFOLIO PERFORMANCE SINCE LAST REVIEW (${prev.date}) ---
 Portfolio value change (${baseCurrency}): ${sign(valueDelta)}${fmt(valueDelta)} (${sign(valueDeltaPct)}${valueDeltaPct.toFixed(2)}%)
@@ -219,5 +222,8 @@ ${categorySection}
 --- MARKET ALLOCATION SHIFTS (≥1%p) ---
 ${marketSection}
 
-IMPORTANT: Respond entirely in ${LANG_NAMES[lang]}. ${addressLine} Keep your response focused — this is a follow-up check-in, not a full review.`;
+--- RESPONSE CONSTRAINTS ---
+- Language: respond entirely in ${LANG_NAMES[lang]}
+- Scope: focus exclusively on the changes listed above; your general investment philosophy and a full portfolio re-review are out of scope for this check-in
+- ${addressLine}`;
 }

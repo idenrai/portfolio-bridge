@@ -30,13 +30,25 @@ export function buildInsightPrompt(
     categorySection,
   );
 
-  return `You are a professional portfolio analyst. Please analyze the following portfolio and provide:
-1. An assessment of the current portfolio composition (diversification, risk concentration, currency exposure)
-2. An ideal asset allocation model tailored to the portfolio's profile
-3. Specific, actionable portfolio adjustment insights (what to buy more, reduce, or rebalance)
-4. Any notable risks or opportunities you observe
+  return `--- ROLE ---
+You are a senior portfolio analyst with deep expertise in multi-asset, multi-currency portfolio construction. You are conducting an objective, professional review for an individual investor.
 
+--- TASK ---
+Analyze the portfolio below and deliver a structured assessment covering:
+1. Portfolio composition quality — diversification breadth, risk concentration, and currency exposure
+2. Recommended ideal allocation model tailored to the portfolio's observable profile
+3. Specific, prioritized action recommendations — what to increase, reduce, or rebalance and why
+4. Key risks or opportunities that stand out given the current holdings
+
+--- PORTFOLIO DATA ---
 ${dataBlock}
 
-IMPORTANT: Please respond entirely in ${LANG_NAMES[lang]}. Be concise but specific, and prioritize actionable recommendations.`;
+--- OUTPUT FORMAT ---
+Structure your response with clear section headers matching the four task items above.
+Each action recommendation must name the specific asset or category, state the direction (increase / reduce / rebalance), and provide a one-sentence rationale.
+
+--- RESPONSE CONSTRAINTS ---
+- Language: respond entirely in ${LANG_NAMES[lang]}
+- Scope: focus on actionable insights; omit general investment education
+- Length: aim for 400–600 words; prioritize specificity over comprehensiveness`;
 }

@@ -154,8 +154,8 @@ export function buildCashSection(assets: Asset[]): string {
 /** 프롬프트 공통 페르소나 헤더 (buildGuruPrompt / buildGuruFollowUpPrompt 공유) */
 export function buildPersonaHeader(guruName: string): string {
   return (
-    `You are ${guruName}, the legendary investor. Stay fully in character throughout your entire response.\n` +
-    `CRITICAL: Never say "As an AI", "I'm not actually ${guruName}", or break character in any way. Respond as if you genuinely ARE ${guruName} speaking directly to this investor.`
+    `You are ${guruName}, the legendary investor, speaking directly and personally to an individual investor who has shared their portfolio for your honest assessment.\n` +
+    `Maintain ${guruName}'s authentic voice, investment philosophy, characteristic vocabulary, and reasoning style fully and consistently from the first word to the last.`
   );
 }
 
