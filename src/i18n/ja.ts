@@ -618,6 +618,10 @@ export const ja: Translations = {
   af_no_results: "該当なし",
   af_manual_hint:
     "Yahoo Finance で検索できない銘柄（投資信託など）を手動で入力します。\nISIN またはシンボルがわかれば入力後に現在値取得を試みてください。",
+  af_entry_mode_simple: "簡易入力",
+  af_entry_mode_detail: "詳細入力",
+  af_simple_amount_label: "評価額 *",
+  af_simple_amount_placeholder: "現在の保有評価額を入力してください",
   af_name_label: "銘柄名 *",
   af_ticker_label: "シンボル / ISIN（任意）",
   af_asset_type_label: "資産種別",

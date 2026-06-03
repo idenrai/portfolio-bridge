@@ -621,6 +621,10 @@ export const en: Translations = {
   af_no_results: "No results found",
   af_manual_hint:
     "Manually enter assets not found on Yahoo Finance (e.g. mutual funds).\nIf you know the ISIN or symbol, enter it and try fetching the current price.",
+  af_entry_mode_simple: "Simple",
+  af_entry_mode_detail: "Detailed",
+  af_simple_amount_label: "Current Value *",
+  af_simple_amount_placeholder: "Enter current market value",
   af_name_label: "Name *",
   af_ticker_label: "Symbol / ISIN (optional)",
   af_asset_type_label: "Asset Type",

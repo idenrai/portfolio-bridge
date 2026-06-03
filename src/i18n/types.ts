@@ -486,6 +486,10 @@ export interface Translations {
   af_results_count: (n: number) => string;
   af_no_results: string;
   af_manual_hint: string;
+  af_entry_mode_simple: string;
+  af_entry_mode_detail: string;
+  af_simple_amount_label: string;
+  af_simple_amount_placeholder: string;
   af_name_label: string;
   af_ticker_label: string;
   af_asset_type_label: string;

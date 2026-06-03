@@ -622,6 +622,10 @@ export const ko: Translations = {
   af_no_results: "검색 결과 없음",
   af_manual_hint:
     "Yahoo Finance에서 검색되지 않는 종목(투자신탁 등)을 직접 입력합니다.\nISIN 또는 심볼을 알고 있다면 입력 후 현재가 조회를 시도하세요.",
+  af_entry_mode_simple: "간이입력",
+  af_entry_mode_detail: "상세입력",
+  af_simple_amount_label: "평가액 *",
+  af_simple_amount_placeholder: "현재 보유 평가액을 입력하세요",
   af_name_label: "종목명 *",
   af_ticker_label: "심볼 / ISIN (선택)",
   af_asset_type_label: "자산 유형",
