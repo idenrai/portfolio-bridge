@@ -65,6 +65,7 @@ If the build fails after the fix, **revert only the changes that broke it** befo
 ### 4. Open the pull request
 
 Create a draft PR that:
+
 - Targets `main`
 - Has a concise title: `fix: auto-fix ESLint errors`
 - Lists in the body which files were changed and what rule triggered each fix

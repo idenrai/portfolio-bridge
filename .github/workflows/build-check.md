@@ -55,7 +55,8 @@ npm run build
 Post a comment using this format:
 
 **If build passes:**
-```
+
+````markdown
 ## ✅ Build Check Passed
 
 | Step | Result |
@@ -65,10 +66,11 @@ Post a comment using this format:
 | Vite build | ✅ Built successfully |
 
 Bundle size: `dist/assets/index-*.js  X kB (gzip: Y kB)`
-```
+````
 
 **If build fails:**
-```
+
+````markdown
 ## ❌ Build Check Failed
 
 | Step | Result |
@@ -89,7 +91,8 @@ Bundle size: `dist/assets/index-*.js  X kB (gzip: Y kB)`
 </details>
 
 ### Suggested fixes
+
 (brief description of how to fix each error)
-```
+````
 
 Do not make any code changes. Your only output is the comment.

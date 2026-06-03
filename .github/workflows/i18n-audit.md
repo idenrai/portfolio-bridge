@@ -37,7 +37,7 @@ Compare translation keys across all four locale files and report any inconsisten
 
 ### 1. Read all four locale files
 
-```
+```text
 src/i18n/ko.ts
 src/i18n/en.ts
 src/i18n/ja.ts
@@ -67,7 +67,7 @@ grep -E "^\s+[a-zA-Z_][a-zA-Z0-9_]*\s*[:(?]" src/i18n/de.ts | sed "s/[: (].*//" 
 
 Format the comment as:
 
-```
+````markdown
 ## i18n Audit Results
 
 | Status | Keys |
@@ -80,7 +80,8 @@ Format the comment as:
 | ⚠️ Type mismatch | key: string vs (n)=>string |
 
 ### Recommended fix
+
 ...
-```
+````
 
 If everything is in sync, post: `✅ All four locale files are in sync — no issues found.`
