@@ -78,6 +78,8 @@ export function buildGuruPrompt(
     if (profile.plan5y) profileLines.push(`- 5-Year Plan: ${profile.plan5y}`);
     if (profile.plan10y)
       profileLines.push(`- 10-Year Plan: ${profile.plan10y}`);
+    if (profile.notes)
+      profileLines.push(`- Notes / Caveats: ${profile.notes}`);
   }
   const profileSection =
     profileLines.length > 0

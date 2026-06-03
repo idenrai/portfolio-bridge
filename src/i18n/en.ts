@@ -569,6 +569,9 @@ export const en: Translations = {
   profile_plan10y_label: "10-Year Investment Plan",
   profile_plan10y_placeholder:
     "e.g. Achieve financial independence through passive income covering all living expenses...",
+  profile_notes_label: "Notes & Caveats",
+  profile_notes_placeholder:
+    "e.g. Mortgage remaining: $230k (15 yrs left). $500/mo auto-invested in S&P 500 ETF, so only $300/mo is actively managed.",
   profile_save: "Save",
   profile_saved: "✓ Saved",
 

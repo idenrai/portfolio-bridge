@@ -567,8 +567,9 @@ export const ja: Translations = {
     "例: 5年後に結婚資金として 1000万円を目指す...",
   profile_plan10y_label: "10年投資計画",
   profile_plan10y_placeholder:
-    "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成...",
-  profile_save: "保存",
+    "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成...",  profile_notes_label: "特記事項 / 注意点",
+  profile_notes_placeholder:
+    "例: 住宅ローン残高 2,300万円５15年）。投賄予算のうち毎月 5万円は S&P500 ETF自動購入済み、実質的な機定投賄は毎月 3万円分...",  profile_save: "保存",
   profile_saved: "✓ 保存しました",
 
   at_col_name: "銘柄",

@@ -63,6 +63,7 @@ export function GurusPage() {
     plan3y: profile.plan3y,
     plan5y: profile.plan5y,
     plan10y: profile.plan10y,
+    notes: profile.notes,
   };
 
   /** i18n 구루 이름 */

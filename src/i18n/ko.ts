@@ -570,6 +570,9 @@ export const ko: Translations = {
   profile_plan10y_label: "10년 투자 계획",
   profile_plan10y_placeholder:
     "예시: 10년 후 경제적 자유 달성을 위해 배당 수입만으로 생활비 충당...",
+  profile_notes_label: "특이사항 / 유의점",
+  profile_notes_placeholder:
+    "예시: 주택론 잔액 2.3억원(잔여 15년), 월 투자액 중 50만원은 S&P500 ETF 자동매수로 실질적 수동 투자는 30만원 분...",
   profile_save: "저장",
   profile_saved: "✓ 저장되었습니다",
 

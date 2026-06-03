@@ -577,8 +577,9 @@ export const de: Translations = {
     "z. B. In 5 Jahren 100.000 € als Eigenkapital für eine Immobilie aufbauen...",
   profile_plan10y_label: "10-Jahres-Investitionsplan",
   profile_plan10y_placeholder:
-    "z. B. Finanzielle Unabhängigkeit durch passives Einkommen in 10 Jahren erreichen...",
-  profile_save: "Speichern",
+    "z. B. Finanzielle Unabhängigkeit durch passives Einkommen in 10 Jahren erreichen...",  profile_notes_label: "Besonderheiten / Hinweise",
+  profile_notes_placeholder:
+    "z. B. Hypothek: noch 230.000 € (15 Jahre). 500 €/Monat werden automatisch in S&P-500-ETF investiert, aktiv verwaltetes Budget: 300 €.",  profile_save: "Speichern",
   profile_saved: "✓ Gespeichert",
 
   at_col_name: "Name",

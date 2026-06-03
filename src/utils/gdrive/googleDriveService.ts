@@ -39,7 +39,7 @@ const store = () => useGoogleDriveStore.getState();
 function buildBackup(): DriveBackup {
   const { assets } = useAssetStore.getState();
   const { baseCurrency, targetAllocations } = useSettingsStore.getState();
-  const { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y } =
+  const { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y, notes } =
     useProfileStore.getState();
   const { lang } = useLanguageStore.getState();
   const { snapshots } = useSnapshotStore.getState();
@@ -50,7 +50,7 @@ function buildBackup(): DriveBackup {
     assets,
     // targetAllocations가 undefined이면 빈 배열로 대체 (JSON.stringify 시 키 누락 방지)
     settings: { baseCurrency, targetAllocations: targetAllocations ?? [] },
-    profile: { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y },
+    profile: { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y, notes },
     lang,
     snapshots,
     brokerAccounts,

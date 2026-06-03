@@ -27,6 +27,7 @@ export interface DriveBackup {
     plan3y: string;
     plan5y: string;
     plan10y: string;
+    notes?: string;
   };
   /** 언어 설정 */
   lang?: string;

@@ -149,6 +149,7 @@ export function SettingsPage() {
               { key: "plan3y", labelKey: "profile_plan3y_label", placeholderKey: "profile_plan3y_placeholder" },
               { key: "plan5y", labelKey: "profile_plan5y_label", placeholderKey: "profile_plan5y_placeholder" },
               { key: "plan10y", labelKey: "profile_plan10y_label", placeholderKey: "profile_plan10y_placeholder" },
+              { key: "notes", labelKey: "profile_notes_label", placeholderKey: "profile_notes_placeholder" },
             ] as const
           ).map(({ key, labelKey, placeholderKey }) => (
             <div key={key} className="space-y-1">

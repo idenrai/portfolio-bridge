@@ -432,6 +432,8 @@ export interface Translations {
   profile_plan5y_placeholder: string;
   profile_plan10y_label: string;
   profile_plan10y_placeholder: string;
+  profile_notes_label: string;
+  profile_notes_placeholder: string;
   profile_save: string;
   profile_saved: string;
 

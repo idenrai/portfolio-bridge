@@ -17,6 +17,8 @@ export interface UserProfile {
   plan5y: string;
   /** 10년 계획 */
   plan10y: string;
+  /** 특이사항 / 유의점 */
+  notes: string;
 }
 
 interface ProfileState extends UserProfile {
@@ -33,6 +35,7 @@ export const useProfileStore = create<ProfileState>()(
       plan3y: "",
       plan5y: "",
       plan10y: "",
+      notes: "",
 
       setProfile: (patch) => set(patch),
     }),
