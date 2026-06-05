@@ -2,14 +2,14 @@
 
 ## Purpose
 
-Portfolio Bridge is a privacy-first, multi-currency portfolio management web application.  
-Users can track and analyze financial assets across Korea, Japan, the US, and Germany from a single dashboard.  
+Portfolio Bridge is a privacy-first, multi-currency portfolio management web application.
+Users can track and analyze financial assets across Korea, Japan, the US, and Germany from a single dashboard.
 All user data is stored in browser `localStorage` only — no server-side storage, no account required.
 
 ## Key Features
 
 | Feature | Description |
-|---------|-------------|
+| --- | --- |
 | Unified Dashboard | KPI bar, allocation charts, holdings table, rebalance suggestions, auto insights |
 | Asset Management | Yahoo Finance ticker search, manual entry, AI classification, CSV import/export |
 | Investment Gurus | 20 guru personas, ideal allocation comparison, 6 quantitative analyzers, AI prompt generation |
@@ -38,7 +38,7 @@ Local dev (Vite)          Vercel deployment           Tauri desktop
 ## Routing
 
 | Route | Page | Component |
-|-------|------|-----------|
+| --- | --- | --- |
 | `/` | Dashboard | `src/pages/Dashboard.tsx` |
 | `/assets` | Asset Management | `src/pages/Assets.tsx` |
 | `/gurus` | Investment Gurus | `src/pages/Gurus.tsx` |
@@ -50,7 +50,7 @@ Local dev (Vite)          Vercel deployment           Tauri desktop
 All global state uses Zustand with `persist` middleware (localStorage). Store files live in `src/stores/`:
 
 | Store | File | Purpose |
-|-------|------|---------|
+| --- | --- | --- |
 | `useAssetStore` | `useAssetStore.ts` | Asset list |
 | `useBrokerStore` | `useBrokerStore.ts` | Broker accounts |
 | `useSettingsStore` | `useSettingsStore.ts` | Currency, exchange rates, target allocations |
@@ -65,7 +65,7 @@ Storage keys are defined in `src/constants/storage.ts`.
 ## App Layout
 
 | Component | Location | Role |
-|-----------|----------|------|
+| --- | --- | --- |
 | `Layout` | `components/layout/Layout.tsx` | Root shell (sidebar + content area) |
 | `Header` | `components/layout/Header.tsx` | Top bar (language selector, currency, nav on mobile) |
 | `Sidebar` | `components/layout/Sidebar.tsx` | Desktop navigation |
@@ -73,8 +73,22 @@ Storage keys are defined in `src/constants/storage.ts`.
 
 ## Privacy Model
 
-- No backend, no database, no user accounts
-- All data lives in browser `localStorage`
-- Yahoo Finance requests are proxied — the proxy does **not** receive or store portfolio data
-- Google Drive integration is optional; data is stored in the user's own Drive folder
-- AI prompts are generated client-side and placed in clipboard — never transmitted by the app
+- No backend, no database, no user accounts.
+- All data lives in browser `localStorage`.
+- Yahoo Finance requests are proxied — the proxy does **not** receive or store portfolio data.
+- Google Drive integration is optional; data is stored in the user's own Drive folder.
+- AI prompts are generated client-side and placed in clipboard — never transmitted by the app.
+
+## Document Index
+
+| Document | Path | Contents |
+| --- | --- | --- |
+| Overview (this file) | `doc/overview.md` | App concept, routing, state management, privacy model |
+| Dashboard | `doc/pages/dashboard.md` | Dashboard page spec |
+| Asset Management | `doc/pages/assets.md` | Asset management page spec |
+| Gurus | `doc/pages/gurus.md` | Gurus page + quantitative analyzers |
+| Settings | `doc/pages/settings.md` | Settings page + user profile |
+| AI Prompts | `doc/features/ai-prompts.md` | AI prompt system |
+| i18n | `doc/features/i18n.md` | i18n system + translation guide |
+| Yahoo Finance | `doc/system/yahoo-finance.md` | Yahoo Finance integration |
+| Tauri | `doc/system/tauri.md` | Tauri desktop app |

@@ -38,7 +38,7 @@ npm run build  # production build
 
 ### Desktop App (Tauri)
 
-See [doc/tauri.md](doc/tauri.md) for prerequisites and full build instructions.
+See [doc/system/tauri.md](doc/system/tauri.md) for prerequisites and full build instructions.
 
 ```bash
 npm run tauri:dev    # Dev mode (Vite HMR + native window)
@@ -132,7 +132,7 @@ npm run build  # 프로덕션 빌드
 
 ### 데스크톱 앱 (Tauri)
 
-사전 요구 사항 및 빌드 상세는 [doc/tauri.md](doc/tauri.md) 참조.
+사전 요구 사항 및 빌드 상세는 [doc/system/tauri.md](doc/system/tauri.md) 참조.
 
 ```bash
 npm run tauri:dev    # 개발 모드 (Vite HMR + 네이티브 윈도우)

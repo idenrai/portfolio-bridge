@@ -17,123 +17,123 @@
 #   "src/pages/Foo.tsx"  → exact file
 #   "src/dir/**"         → all files under a directory (recursive)
 #
-# DOC FILES
-# ---------
-#   doc/overview.md        App concept, routing, state management, privacy model
-#   doc/dashboard.md       Dashboard page spec
-#   doc/assets.md          Asset management page spec
-#   doc/gurus.md           Gurus page + quantitative analyzers
-#   doc/settings.md        Settings page + user profile
-#   doc/ai-prompts.md      AI prompt system (buildGuruPrompt, etc.)
-#   doc/i18n.md            i18n system + translation guide
-#   doc/yahoo-finance.md   Yahoo Finance integration
-#   doc/tauri.md           Tauri desktop app
+# DOC STRUCTURE
+# -------------
+#   doc/overview.md               App concept, routing, state management, privacy model
+#   doc/pages/dashboard.md        Dashboard page spec
+#   doc/pages/assets.md           Asset management page spec
+#   doc/pages/gurus.md            Gurus page + quantitative analyzers
+#   doc/pages/settings.md         Settings page + user profile
+#   doc/features/ai-prompts.md    AI prompt system (buildGuruPrompt, etc.)
+#   doc/features/i18n.md          i18n system + translation guide
+#   doc/system/yahoo-finance.md   Yahoo Finance integration
+#   doc/system/tauri.md           Tauri desktop app
 
 mappings:
 
   # ── Dashboard ──────────────────────────────────────────────────────────────
   - pattern: "src/pages/Dashboard.tsx"
-    doc: "doc/dashboard.md"
+    doc: "doc/pages/dashboard.md"
 
   - pattern: "src/components/dashboard/**"
-    doc: "doc/dashboard.md"
+    doc: "doc/pages/dashboard.md"
 
   - pattern: "src/hooks/usePortfolio.ts"
-    doc: "doc/dashboard.md"
+    doc: "doc/pages/dashboard.md"
 
   - pattern: "src/utils/sampleData.ts"
-    doc: "doc/dashboard.md"
+    doc: "doc/pages/dashboard.md"
 
   # ── Asset Management ───────────────────────────────────────────────────────
   - pattern: "src/pages/Assets.tsx"
-    doc: "doc/assets.md"
+    doc: "doc/pages/assets.md"
 
   - pattern: "src/components/assets/**"
-    doc: "doc/assets.md"
+    doc: "doc/pages/assets.md"
 
   - pattern: "src/stores/useAssetStore.ts"
-    doc: "doc/assets.md"
+    doc: "doc/pages/assets.md"
 
   - pattern: "src/stores/useBrokerStore.ts"
-    doc: "doc/assets.md"
+    doc: "doc/pages/assets.md"
 
   - pattern: "src/utils/csv.ts"
-    doc: "doc/assets.md"
+    doc: "doc/pages/assets.md"
 
   # ── Investment Gurus ───────────────────────────────────────────────────────
   - pattern: "src/pages/Gurus.tsx"
-    doc: "doc/gurus.md"
+    doc: "doc/pages/gurus.md"
 
   - pattern: "src/components/gurus/**"
-    doc: "doc/gurus.md"
+    doc: "doc/pages/gurus.md"
 
   - pattern: "src/utils/gurus.ts"
-    doc: "doc/gurus.md"
+    doc: "doc/pages/gurus.md"
 
   - pattern: "src/utils/analyzers/**"
-    doc: "doc/gurus.md"
+    doc: "doc/pages/gurus.md"
 
   - pattern: "src/hooks/useAnalyzer.ts"
-    doc: "doc/gurus.md"
+    doc: "doc/pages/gurus.md"
 
   - pattern: "src/stores/useGuruSessionStore.ts"
-    doc: "doc/gurus.md"
+    doc: "doc/pages/gurus.md"
 
   - pattern: "src/hooks/useBuffettIndicator.ts"
-    doc: "doc/gurus.md"
+    doc: "doc/pages/gurus.md"
 
   # ── Settings & Profile ─────────────────────────────────────────────────────
   - pattern: "src/pages/Settings.tsx"
-    doc: "doc/settings.md"
+    doc: "doc/pages/settings.md"
 
   - pattern: "src/stores/useSettingsStore.ts"
-    doc: "doc/settings.md"
+    doc: "doc/pages/settings.md"
 
   - pattern: "src/stores/useProfileStore.ts"
-    doc: "doc/settings.md"
+    doc: "doc/pages/settings.md"
 
   - pattern: "src/stores/useGoogleDriveStore.ts"
-    doc: "doc/settings.md"
+    doc: "doc/pages/settings.md"
 
   - pattern: "src/hooks/useGoogleDrive.ts"
-    doc: "doc/settings.md"
+    doc: "doc/pages/settings.md"
 
   - pattern: "src/hooks/useExchangeRates.ts"
-    doc: "doc/settings.md"
+    doc: "doc/pages/settings.md"
 
   - pattern: "src/hooks/useDataRefresh.ts"
-    doc: "doc/settings.md"
+    doc: "doc/pages/settings.md"
 
   - pattern: "src/utils/gdrive/**"
-    doc: "doc/settings.md"
+    doc: "doc/pages/settings.md"
 
   # ── AI Prompts ─────────────────────────────────────────────────────────────
   - pattern: "src/utils/ai/**"
-    doc: "doc/ai-prompts.md"
+    doc: "doc/features/ai-prompts.md"
 
   # ── i18n ───────────────────────────────────────────────────────────────────
   - pattern: "src/i18n/**"
-    doc: "doc/i18n.md"
+    doc: "doc/features/i18n.md"
 
   - pattern: "src/hooks/useT.ts"
-    doc: "doc/i18n.md"
+    doc: "doc/features/i18n.md"
 
   # ── Yahoo Finance ──────────────────────────────────────────────────────────
   - pattern: "src/utils/yahoo/**"
-    doc: "doc/yahoo-finance.md"
+    doc: "doc/system/yahoo-finance.md"
 
   - pattern: "api/**"
-    doc: "doc/yahoo-finance.md"
+    doc: "doc/system/yahoo-finance.md"
 
   - pattern: "vite.config.ts"
-    doc: "doc/yahoo-finance.md"
+    doc: "doc/system/yahoo-finance.md"
 
   - pattern: "src/hooks/usePriceRefresh.ts"
-    doc: "doc/yahoo-finance.md"
+    doc: "doc/system/yahoo-finance.md"
 
   # ── Tauri Desktop ──────────────────────────────────────────────────────────
   - pattern: "src-tauri/**"
-    doc: "doc/tauri.md"
+    doc: "doc/system/tauri.md"
 
   # ── App-wide / Overview ────────────────────────────────────────────────────
   - pattern: "src/App.tsx"

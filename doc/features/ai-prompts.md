@@ -2,12 +2,10 @@
 
 All prompt generation utilities are in `src/utils/ai/`.
 
----
-
 ## Files
 
 | File | Purpose |
-|------|---------|
+| --- | --- |
 | `buildGuruPrompt.ts` | Initial full portfolio review in a guru's persona |
 | `buildGuruFollowUpPrompt.ts` | Delta-only follow-up review (changes since last session) |
 | `buildInsightPrompt.ts` | Generic portfolio analysis (no guru persona) |
@@ -15,17 +13,15 @@ All prompt generation utilities are in `src/utils/ai/`.
 | `promptHelpers.ts` | Shared utility functions and label maps |
 | `aiClassification.ts` | Asset auto-classification prompt |
 
----
-
 ## buildGuruPrompt
 
 **Entry point**: `buildGuruPrompt(guru, summary, assets, lang, baseCurrency, rates, philosophyEn, profile?)`
 
-**Triggered by**: "Ask [Guru]" button in `src/pages/Gurus.tsx`
+**Triggered by**: "Ask [Guru]" button in `src/pages/Gurus.tsx`.
 
 ### Prompt Structure
 
-```
+```text
 [Persona header]
 
 --- YOUR INVESTMENT PHILOSOPHY ---
@@ -55,9 +51,10 @@ Today's date: [ISO date]
 
 ### Investor Profile Injection
 
-Profile fields are wrapped in `[INVESTOR DATA START]` / `[INVESTOR DATA END]` markers to prevent free-text input from influencing prompt behavior (prompt injection protection).
+Profile fields are wrapped in `[INVESTOR DATA START]` / `[INVESTOR DATA END]` markers
+to prevent free-text input from influencing prompt behavior (prompt injection protection).
 
-```
+```text
 [INVESTOR DATA START]
 - Name: Alice
 - Age: 35
@@ -69,10 +66,8 @@ Profile fields are wrapped in `[INVESTOR DATA START]` / `[INVESTOR DATA END]` ma
 
 ### Language
 
-- The prompt always requests a response in `LANG_NAMES[lang]` (active UI language)
-- Philosophy text (`philosophyEn`) is always English to ensure cross-language consistency
-
----
+- The prompt always requests a response in `LANG_NAMES[lang]` (active UI language).
+- Philosophy text (`philosophyEn`) is always English to ensure cross-language consistency.
 
 ## buildGuruFollowUpPrompt
 
@@ -82,7 +77,7 @@ Profile fields are wrapped in `[INVESTOR DATA START]` / `[INVESTOR DATA END]` ma
 
 ### Prompt Structure
 
-```
+```text
 [Persona header]
 
 --- YOUR COMMUNICATION STYLE ---
@@ -98,22 +93,18 @@ This is a follow-up review. Previous review date: [prev.date]
 [value delta, P&L delta, return delta, position count, cash %]
 
 --- YOUR IDEAL ALLOCATION vs. CURRENT ---
-[ideal vs actual per category with gap]
-
 --- NEW POSITIONS ADDED ---
 --- POSITIONS REMOVED ---
 --- POSITION CHANGES ---
-[threshold: ≥1.5%p weight, ≥5pp return, or any qty/cost change]
+[threshold: ≥1.5 %p weight, ≥5 pp return, or any qty/cost change]
 
---- CATEGORY ALLOCATION SHIFTS (≥1%p) ---
---- MARKET ALLOCATION SHIFTS (≥1%p) ---
+--- CATEGORY ALLOCATION SHIFTS (≥1 %p) ---
+--- MARKET ALLOCATION SHIFTS (≥1 %p) ---
 
 --- RESPONSE CONSTRAINTS ---
 - Language: [LANG_NAMES[lang]]
 - Scope: focus on changes only; full portfolio re-review is out of scope
 ```
-
----
 
 ## buildInsightPrompt
 
@@ -123,14 +114,14 @@ This is a follow-up review. Previous review date: [prev.date]
 
 ### Prompt Structure
 
-```
+```text
 --- ROLE ---
-Senior portfolio analyst conducting an objective review for an individual investor.
+Senior portfolio analyst conducting an objective review.
 
 --- TASK ---
 1. Portfolio composition quality (diversification, risk concentration, FX exposure)
 2. Recommended ideal allocation model
-3. Specific prioritized action recommendations (asset/category + direction + rationale)
+3. Specific prioritized action recommendations
 4. Key risks or opportunities
 
 --- PORTFOLIO DATA ---
@@ -142,35 +133,32 @@ Each action: asset name / direction / one-sentence rationale.
 
 --- RESPONSE CONSTRAINTS ---
 - Language: [LANG_NAMES[lang]]
-- Scope: actionable insights only; omit general investment education
+- Scope: actionable insights only
 - Length: 400–600 words
 ```
 
----
-
 ## guruFrameworks.ts
 
-### `GURU_FRAMEWORKS`
+### GURU_FRAMEWORKS
 
 Each entry has:
-- `lens`: Specific analytical criteria the guru applies (referenced in `--- YOUR TASK ---`)
-- `format`: Output format and style instructions (referenced in `--- OUTPUT FORMAT ---`)
 
-All 20 gurus have entries. Gurus without a `GURU_FRAMEWORKS` entry use a generic 5-point analysis template.
+- `lens`: Specific analytical criteria the guru applies (used in `--- YOUR TASK ---`).
+- `format`: Output format and style instructions (used in `--- OUTPUT FORMAT ---`).
 
-### `GURU_FOLLOWUP_FOCUS`
+All 20 gurus have entries. Gurus without a `GURU_FRAMEWORKS` entry use a generic 5-point template.
 
-Per-guru follow-up evaluation focus, tuned to each guru's philosophy for delta reviews.  
+### GURU_FOLLOWUP_FOCUS
+
+Per-guru follow-up evaluation focus for delta reviews.
 If a guru ID is not in the map, a generic 5-point delta evaluation is used.
-
----
 
 ## promptHelpers.ts
 
 ### Shared Functions
 
 | Function | Description |
-|----------|-------------|
+| --- | --- |
 | `buildPersonaHeader(guruName)` | Persona establishment — authentic voice framing |
 | `buildCategorySection(summary, targets, label?)` | Category allocation vs target text block |
 | `buildMarketSection(summary)` | Market allocation text block |
@@ -184,16 +172,14 @@ If a guru ID is not in the map, a generic 5-point delta evaluation is used.
 ### Label Maps (English, for AI prompts)
 
 | Map | Usage |
-|-----|-------|
+| --- | --- |
 | `CATEGORY_LABELS_EN` | `AssetCategory` → English label |
 | `ASSET_TYPE_LABELS_EN` | `AssetType` → English label |
 | `MARKET_LABELS_EN` | `Market` → English label |
 
----
-
 ## Security Considerations
 
-- Free-text user input is **never interpolated directly** into prompt text — always wrapped in `[INVESTOR DATA START/END]`
-- All prompts are generated client-side and placed only in the clipboard
-- AI-facing text is always English regardless of active UI language
-- The app never transmits prompts or portfolio data to any server
+- Free-text user input is **never interpolated directly** into prompt text — always wrapped in `[INVESTOR DATA START/END]`.
+- All prompts are generated client-side and placed only in the clipboard.
+- AI-facing text is always English regardless of active UI language.
+- The app never transmits prompts or portfolio data to any server.
