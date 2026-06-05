@@ -8,208 +8,56 @@
 
 ## English
 
-> Manage multi-country financial assets (Korea · Japan · US · Germany) in one dashboard,  
-> and gain portfolio insights from AI and legendary investors — a **privacy-first web app**
+> Multi-country financial asset manager (Korea · Japan · US · Germany) — a **privacy-first web app**
 
 🌐 **Live Demo**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)
 
-All data is stored **only in browser localStorage** — never sent to external servers.  
-No account required. Optionally, you can link your personal Google Drive to back up your data.  
-Market data and exchange rates are fetched client-side via proxy from Yahoo Finance.
+All data is stored **only in browser localStorage** — never sent to external servers. No account required.
 
----
-
-### Key Features
-
-| Feature | Description |
-| --- | --- |
-| 📊 **Unified Dashboard** | KPI bar, category/market allocation charts, holdings table, rebalance suggestions |
-| 💼 **Asset Management** | Ticker search (Yahoo Finance), manual entry, AI auto-classification, CSV import/export |
-| 💡 **Investment Gurus** | Compare your portfolio with 20 gurus (Buffett, Dalio, Lynch, Piotroski, O'Neil, etc.); 6 quantitative analyzers: Lynch 10-Bagger, Greenblatt Magic Formula, Graham Defensive Investor, Smith Quality Compounder, Piotroski F-Score, O'Neil CAN SLIM; AI chat prompts in the persona of your chosen guru |
-| 🤖 **AI Portfolio Analysis** | Structured prompts ready to paste into ChatGPT · Claude · Gemini · Grok |
-| 🔔 **Auto Insights** | Alerts for overweight, large losses, low cash, currency exposure |
-| 🌐 **Multi-language & Currency** | Korean · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
+📚 **[Full Design Documentation →](doc/)**
 
 ---
 
 ### Quick Start
 
 ```bash
-# Install dependencies
 npm install
-
-# Development server (localhost:5173)
-npm run dev
-
-# Production build
-npm run build
+npm run dev    # localhost:5173
+npm run build  # production build
 ```
 
 ---
 
 ### Web Deployment (Vercel)
 
-Deploy to Vercel for a static SPA + API proxy with zero server management.
-
-1. Push your repository to GitHub.
-2. Sign in at [vercel.com](https://vercel.com) with your GitHub account.
-3. "Add New Project" → select `portfolio-bridge` → **Deploy**
-4. No environment variables needed.
-
-Auto-redeploys on every `git push`.
-
-#### Proxy Structure
-
-| Path | Target | File |
-| --- | --- | --- |
-| `/api/yahoo/*` | `query1.finance.yahoo.com` | `api/yahoo/[...path].ts` |
-
-SPA routing fallback and API rewrites are configured in `vercel.json`.
+1. Push your repository to GitHub
+2. Sign in at [vercel.com](https://vercel.com) → Add New Project → select `portfolio-bridge` → **Deploy**
+3. No environment variables needed. Auto-redeploys on every `git push`.
 
 ---
 
 ### Desktop App (Tauri)
 
-Build native macOS (.app / .dmg) and Windows (.exe / .msi) desktops using Tauri v2.
-
-#### Prerequisites
-
-| OS | Requirements |
-| --- | --- |
-| **All** | [Node.js](https://nodejs.org/) 18+, [Rust](https://rustup.rs/) 1.77.2+ |
-| **macOS** | Xcode Command Line Tools (`xcode-select --install`) |
-| **Windows** | [VS Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (C++ desktop workload), [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) |
+See [doc/tauri.md](doc/tauri.md) for prerequisites and full build instructions.
 
 ```bash
-# Dev mode (Vite HMR + native window)
-npm run tauri:dev
-
-# Production build (installer for current OS)
-npm run tauri:build
+npm run tauri:dev    # Dev mode (Vite HMR + native window)
+npm run tauri:build  # Production installer for current OS
 ```
-
-| OS | Output Path | Format |
-| --- | --- | --- |
-| macOS | `src-tauri/target/release/bundle/dmg/` | `.app`, `.dmg` |
-| Windows | `src-tauri/target/release/bundle/nsis/` | `.exe` (NSIS installer) |
-| Windows | `src-tauri/target/release/bundle/msi/` | `.msi` |
-
-> **Note**: Tauri does not support cross-compilation. Build on the target OS.
-
-#### Architecture
-
-```text
-Browser (local dev)                 Vercel deployment                  Tauri desktop
-┌──────────────────┐          ┌──────────────────────┐          ┌──────────────────────┐
-│  React SPA       │          │  React SPA (CDN)     │          │  React SPA (WebView) │
-│  fetch("/api/…") │          │  fetch("/api/…")     │          │  yahooFetch()        │
-│       ↓          │          │       ↓              │          │       ↓              │
-│  Vite Proxy      │          │  Serverless Function │          │  tauri-plugin-http   │
-│       ↓          │          │       ↓              │          │       ↓              │
-│  Yahoo Finance   │          │  Yahoo Finance       │          │  Yahoo Finance       │
-└──────────────────┘          └──────────────────────┘          └──────────────────────┘
-```
-
-`yahooFetch()` auto-detects the runtime Environment:
-
-- **Local dev**: Vite proxy (`/api/yahoo/…`)
-- **Vercel**: Serverless Functions proxy
-- **Tauri desktop**: Direct request via `tauri-plugin-http` (bypasses CORS)
-
----
-
-### Feature Details
-
-#### Dashboard
-
-- 5-slot KPI bar (total value, P&L, holdings count, cash ratio, FX exposure)
-- Pie charts by market & category
-- Holdings table (sortable by value / P&L / return / weight, weight bar)
-- Tag target vs actual deviation visualization
-- Currency exposure table + ±5 % scenario analysis
-- Rebalance buy/sell suggestions
-- **Auto insights** (overweight >15 %, loss >20 %, cash <3 % / >20 %, FX exposure >40 %, category deviation >10 %p) — per-item dismiss
-- **AI analysis banner**: structured prompt containing all holdings → paste into ChatGPT · Claude · Gemini · Grok
-- **Onboarding sample data**: "Try with sample data" button on empty dashboard
-
-#### Asset Management
-
-- Ticker search (Yahoo Finance)
-- Manual add / edit / delete — **simple mode** (name + value only) or **detailed mode** (ticker, type, market, quantity, avg price, current price)
-- **AI auto-classification**: English structured prompt → apply categories in bulk via JSON response (reasons in app language)
-- **CSV import preview**: 5-row preview → confirm to import
-- CSV export
-
-#### Investment Gurus
-
-- 20 gurus: Buffett, Munger, Lynch, Graham, Dalio, Li Lu, Ackman, Burry, Ken Fisher, Steven Cohen, Howard Marks, Seth Klarman, John Templeton, George Soros, Cathie Wood, Stanley Druckenmiller, Terry Smith, Joel Greenblatt, Joseph Piotroski, William O'Neil
-- Philosophy (5 principles + 1 representative quote per guru)
-- Ideal allocation pie chart vs portfolio radar comparison
-- Guru-based rebalancing suggestions
-- **Peter Lynch 10-bagger analyzer**: Scores stocks against PEG, EPS growth, revenue growth, D/E, operating margin, and market cap — scored out of 100
-- **Joel Greenblatt Magic Formula analyzer**: Scores stocks on earnings yield, return on capital, operating margin, D/E, and market cap — scored out of 100
-- **Benjamin Graham Defensive Investor analyzer**: Scores stocks on P/E, P/B, Graham Number (P/E×P/B), current ratio, D/E, and dividend yield — scored out of 100
-- **Terry Smith Quality Compounder analyzer**: Scores stocks on ROE, operating margin, FCF conversion, revenue growth, and D/E — scored out of 100
-- **Joseph Piotroski F-Score analyzer**: 9 binary financial health criteria (ROA, CFO, ΔROA, accruals quality, Δleverage, Δliquidity, equity dilution, Δgross margin, Δasset turnover) — F-Score 0–9 scaled to 100
-- **William O'Neil CAN SLIM analyzer**: 7 growth stock criteria (quarterly EPS growth, annual EPS growth, near 52-week high, float, relative strength, institutional ownership, market cap) — scored out of 100
-- All analyzers use multi-tier fallbacks (financialData → incomeStatementHistory → balanceSheetHistory → earningsHistory → implied values) to maximize data coverage for KR/JP stocks
-- AI prompt generation always injects **English** guru philosophy (independent of UI language)
-
-#### Multi-language (i18n)
-
-- Korean 🇰🇷 · English 🇺🇸 · 日本語 🇯🇵 · Deutsch 🇩🇪
-- Instant switch via flag buttons in the header
-- Full UI localization including guru names & philosophies
-- Language setting persisted via Zustand
-- Guru philosophy rendering uses locale text first, then falls back to English if a locale key is missing
-
-#### Translation Style Guide (Guru Philosophy)
-
-- Each `guru_philosophy_*` must keep a strict 6-line structure:
-    1)–5) principle bullets, 6) quote bullet (`Quote:` / `명언:` / `名言：` / `Zitat:`)
-- Keep one bullet per line using `•` and `\n` concatenation style used in i18n files
-- Keep investment terminology consistent by locale (e.g., ROIC, Margin of Safety, Risk Parity)
-- Avoid machine-literal translation; prefer natural, domain-accurate phrasing for investors
-- If localized copy is missing, UI should gracefully fall back to English (already implemented in `GurusPage`)
-- Prompt generation must remain English-philosophy based for cross-language consistency
-
-#### Settings
-
-- Display currency toggle (KRW / JPY / USD / EUR)
-- **Exchange rate caching**: auto-fetch on startup, reuse within 1 h, fallback to 24 h cache on failure (amber warning)
-- Target allocation per category
-- **Personal profile**: nickname, age, annual income, monthly budget, 3/5/10-year investment plans, and free-text notes (e.g. mortgage balance, auto-invested amounts)
-- Full data reset
-
----
-
-### Copilot Agent Customization
-
-This repository ships five custom GitHub Copilot agents in `.github/agents/` for automated, convention-aware development assistance:
-
-| Agent | File | Activates when… |
-| --- | --- | --- |
-| **i18n-sync** | `i18n-sync.agent.md` | Adding/auditing translation keys across ko/en/ja/de |
-| **build-guard** | `build-guard.agent.md` | Vercel build fails, TS errors appear, pre-push verification |
-| **component-creator** | `component-creator.agent.md` | Creating new components, pages, hooks, or Zustand stores |
-| **test-writer** | `test-writer.agent.md` | Writing Vitest unit tests without touching production code |
-| **yahoo-finance-dev** | `yahoo-finance-dev.agent.md` | Adding new Yahoo Finance endpoints or data-fetching hooks |
-
-Routing rules in `.github/copilot-instructions.md` allow Copilot to auto-select the appropriate agent based on request keywords.
 
 ---
 
 ### Tech Stack
 
 | Area | Technology |
-| --- | --- |
+|------|------------|
 | Frontend | React 19 · TypeScript · Vite 7 |
 | Styling | Tailwind CSS v4 |
 | State | Zustand 5 (localStorage persist) |
 | Charts | Recharts |
 | Routing | React Router v7 |
 | i18n | Custom (ko / en / ja / de) |
-| Market Data | Yahoo Finance API (US) |
+| Market Data | Yahoo Finance API |
 | Desktop | Tauri v2 (Rust) + tauri-plugin-http |
 | Deployment | Vercel (Serverless Functions + static CDN) |
 
@@ -219,58 +67,26 @@ Routing rules in `.github/copilot-instructions.md` allow Copilot to auto-select 
 
 ```text
 src/
-├── pages/              # Dashboard, Assets, Gurus, Settings, About
-├── components/
-│   ├── layout/         # Layout, Sidebar, Header
-│   ├── common/         # Card, Button, Modal
-│   ├── dashboard/      # KpiBar, AllocationPieCharts, TopHoldingsTable,
-│   │                   # TagAnalysisCard, CurrencyExposureCard,
-│   │                   # RebalanceCard, InsightsPanel
-│   └── assets/         # AssetForm, AssetTable
-├── hooks/              # usePortfolio, useExchangeRates, useTickerSearch
-├── pages/
-│   └── stores/       # useAssetStore, useSettingsStore, useLanguageStore
-├── i18n/               # types.ts, ko.ts, en.ts, ja.ts, de.ts, index.ts
-├── types/              # Asset, Currency, Portfolio, Guru types
-├── utils/              # Calculations, FX, CSV, Guru, Yahoo Finance, AI
-├── App.tsx
-└── main.tsx
+├── pages/          # Dashboard, Assets, Gurus, Settings, About
+├── components/     # layout/, common/, dashboard/, assets/, gurus/
+├── hooks/          # Custom React hooks
+├── stores/         # Zustand stores (all persisted to localStorage)
+├── i18n/           # Translation files (ko/en/ja/de)
+├── types/          # TypeScript type definitions
+└── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/
 
-api/
-└── yahoo/[...path].ts          # Vercel Serverless — Yahoo Finance proxy
-
-src-tauri/
-├── Cargo.toml                  # Rust deps (tauri, tauri-plugin-http)
-├── tauri.conf.json             # Tauri app config (window, bundle, permissions)
-├── capabilities/               # Allowed HTTP request domains
-├── icons/                      # App icons (.icns, .ico)
-└── src/
-    ├── main.rs                 # Rust entry point
-    └── lib.rs                  # Plugin registration (http, log)
-
-vercel.json                     # Vercel config (SPA rewrite, API routing)
+api/                # Vercel Serverless Functions (Yahoo Finance proxy)
+src-tauri/          # Tauri (Rust) desktop app
 ```
-
----
-
-### Yahoo Finance Data
-
-| Path | Endpoint | Usage |
-| --- | --- | --- |
-| Yahoo Finance | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | US/KR ticker search & quotes, exchange rates |
-
-> **Note**: Uses unofficial Yahoo Finance endpoints; API changes may break data fetching.
->
-> **Manual entry**: Assets not found in Yahoo Finance (e.g. Japanese investment trusts) can be registered manually.
 
 ---
 
 ### Disclaimer
 
-- This project is for **personal learning and portfolio management** only.
-- Market data is fetched via unofficial Yahoo Finance APIs. Commercial use may violate Yahoo's Terms of Service. **Use for personal, non-commercial purposes only.**
-- Quotes, exchange rates, and analysis are for reference only — not investment advice.
-- The developer assumes no liability for any losses resulting from use of this software.
+- For **personal, non-commercial use only**.
+- Uses unofficial Yahoo Finance APIs. Commercial use may violate Yahoo's Terms of Service.
+- Data provided is for reference only — not investment advice.
+- The developer assumes no liability for losses from use of this software.
 
 ---
 
@@ -286,232 +102,85 @@ vercel.json                     # Vercel config (SPA rewrite, API routing)
 
 ## 한국어
 
-> 한국 · 일본 · 미국 · 독일 다국가 금융자산을 하나의 대시보드에서 통합 관리하고,  
-> AI 및 전설적인 투자가들의 관점에서 포트폴리오 인사이트를 얻는 **privacy-first 웹 앱**
+> 한국 · 일본 · 미국 · 독일 다국가 금융자산을 하나의 대시보드에서 통합 관리하는 **privacy-first 웹 앱**
 
 🌐 **라이브 데모**: [portfolio-bridge-sigma.vercel.app](https://portfolio-bridge-sigma.vercel.app/)
 
-모든 데이터는 **브라우저 localStorage**에만 저장되며 외부 서버로 전송되지 않습니다.  
-계정 생성 없이 바로 사용할 수 있습니다. 선택적으로 개인의 Google Drive를 연동해 데이터를 백업할 수도 있습니다.  
-Yahoo Finance 시세/환율 조회는 프록시를 통해 클라이언트에서 직접 수행합니다.
+모든 데이터는 **브라우저 localStorage**에만 저장되며 외부 서버로 전송되지 않습니다. 계정 생성 없이 바로 사용 가능.
 
----
-
-### 핵심 기능 요약
-
-| 기능 | 설명 |
-| --- | --- |
-| 📊 **통합 대시보드** | KPI 바, 카테고리·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안 |
-| 💼 **자산 관리** | 종목 검색(Yahoo Finance), 수동 등록, AI 자동 카테고리 분류, CSV 가져오기·내보내기 |
-| 💡 **투자 구루** | 버핏·달리오·린치·피오트로스키·오닐 등 20명의 철학과 내 포트폴리오 비교; 린치 10루타·그린블라트 마법공식·그레이엄 방어투자·스미스 퀄리티·피오트로스키 F-Score·오닐 CAN SLIM 6종 채점기; 구루 페르소나 AI 프롬프트 제공 |
-| 🤖 **AI 포트폴리오 분석** | ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 구조화 프롬프트 생성 |
-| 🔔 **자동 인사이트** | 과대비중, 큰 손실, 현금 부족, 환 노출 초과를 자동 감지·경고 |
-| 🌐 **다국어 · 다통화** | 한국어 · English · 日本語 · Deutsch / KRW · USD · JPY · EUR |
+📚 **[전체 설계 문서 →](doc/)**
 
 ---
 
 ### 빠른 시작
 
 ```bash
-# 의존성 설치
 npm install
-
-# 개발 서버 (localhost:5173)
-npm run dev
-
-# 프로덕션 빌드
-npm run build
+npm run dev    # localhost:5173
+npm run build  # 프로덕션 빌드
 ```
 
 ---
 
 ### 웹 배포 (Vercel)
 
-Vercel에 배포하면 별도의 서버 없이 정적 SPA + API 프록시가 함께 동작합니다.
-
-1. GitHub에 레포지토리를 푸시합니다.
-2. [vercel.com](https://vercel.com)에서 GitHub 계정으로 로그인합니다.
-3. "Add New Project" → `portfolio-bridge` 레포 선택 → **Deploy** 클릭
-4. 환경변수 설정 없이 바로 배포됩니다.
-
-이후 `git push`할 때마다 자동으로 재배포됩니다.
-
-#### 프록시 구조
-
-| 경로 | 대상 | 파일 |
-| --- | --- | --- |
-| `/api/yahoo/*` | `query1.finance.yahoo.com` | `api/yahoo/[...path].ts` |
-
-`vercel.json`에서 SPA 라우팅 fallback과 API 리라이트를 설정합니다.
+1. GitHub에 레포지토리를 푸시합니다
+2. [vercel.com](https://vercel.com) 로그인 → Add New Project → `portfolio-bridge` 선택 → **Deploy**
+3. 환경변수 설정 불필요. `git push`마다 자동 재배포.
 
 ---
 
 ### 데스크톱 앱 (Tauri)
 
-Tauri v2를 사용하여 macOS (.app / .dmg) 및 Windows (.exe / .msi) 데스크톱 앱으로 빌드할 수 있습니다.
-
-#### 사전 요구 사항
-
-| OS | 필수 설치 |
-| --- | --- |
-| **공통** | [Node.js](https://nodejs.org/) 18+, [Rust](https://rustup.rs/) 1.77.2+ |
-| **macOS** | Xcode Command Line Tools (`xcode-select --install`) |
-| **Windows** | [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (C++ 데스크톱 개발 워크로드), [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) (Win 10+에 기본 포함) |
+사전 요구 사항 및 빌드 상세는 [doc/tauri.md](doc/tauri.md) 참조.
 
 ```bash
-# 개발 모드 (Vite HMR + 네이티브 데스크톱 윈도우)
-npm run tauri:dev
-
-# 프로덕션 빌드 (현재 OS에 맞는 인스톨러 생성)
-npm run tauri:build
+npm run tauri:dev    # 개발 모드 (Vite HMR + 네이티브 윈도우)
+npm run tauri:build  # 프로덕션 인스톨러 생성
 ```
-
-| OS | 출력 경로 | 형식 |
-| --- | --- | --- |
-| macOS | `src-tauri/target/release/bundle/dmg/` | `.app`, `.dmg` |
-| Windows | `src-tauri/target/release/bundle/nsis/` | `.exe` (NSIS 설치 프로그램) |
-| Windows | `src-tauri/target/release/bundle/msi/` | `.msi` |
-
-> **참고**: Tauri는 크로스 컴파일을 지원하지 않습니다. Windows `.exe`는 Windows에서, macOS `.dmg`는 macOS에서 빌드해야 합니다.
-
-#### 아키텍처
-
-```text
-브라우저 (로컬 개발)                   Vercel 웹 배포                     Tauri 데스크톱 앱
-┌──────────────────┐            ┌──────────────────────┐          ┌──────────────────────┐
-│  React SPA       │            │  React SPA (CDN)     │          │  React SPA (WebView) │
-│  fetch("/api/…") │            │  fetch("/api/…")     │          │  yahooFetch()        │
-│       ↓          │            │       ↓              │          │       ↓              │
-│  Vite Proxy      │            │  Serverless Function │          │  tauri-plugin-http   │
-│       ↓          │            │       ↓              │          │       ↓              │
-│  Yahoo Finance   │            │  Yahoo Finance       │          │  Yahoo Finance       │
-└──────────────────┘            └──────────────────────┘          └──────────────────────┘
-```
-
-`yahooFetch()` 래퍼가 실행 환경을 자동 감지하여:
-
-- **브라우저 (로컬 개발)**: Vite 프록시 (`/api/yahoo/…`) 경유
-- **Vercel 웹 배포**: Vercel Serverless Functions 프록시 경유
-- **Tauri 데스크톱**: `tauri-plugin-http`로 Yahoo Finance에 직접 요청 (CORS 우회)
-
----
-
-### 주요 기능
-
-#### 대시보드
-
-- 5칸 KPI 바 (총 평가액, 손익, 보유 종목 수, 현금 비중, 외화 노출)
-- 국가별 · 카테고리별 파이 차트
-- 보유 종목 테이블 (평가액/손익/수익률/비중 정렬, 비중 바)
-- 카테고리 목표 vs 실제 편차 시각화
-- 환율 노출 테이블 + ±5% 시나리오 분석
-- 리밸런스 매수/매도 제안
-- **자동 인사이트** 경고 (과대비중 >15%, 손실 >20%, 현금 <3%/>20%, 환노출 >40%, 카테고리 편차 >10%p) — 항목별 개별 닫기 지원
-- **AI 포트폴리오 분석 배너**: 보유 종목 전체 데이터를 포함한 구조화 프롬프트 생성 → ChatGPT · Claude · Gemini · Grok에 바로 붙여넣기
-- **온보딩 샘플 데이터**: 빈 대시보드에서 "샘플 데이터로 둘러보기" 버튼으로 즉시 데모 체험
-
-#### 자산 관리
-
-- 종목 검색 (Yahoo Finance)
-- 수동 등록 · 수정 · 삭제 — **간이 입력** (종목명 + 평가액만) 또는 **상세 입력** (심볼, 유형, 시장, 수량, 매입단가, 현재가)
-- **AI 자동 카테고리 분류**: 영문 구조화 프롬프트 생성 → JSON 응답으로 카테고리 일괄 적용 (앱 표시 언어로 reason 응답)
-- **CSV 가져오기 미리보기**: 파일 선택 후 5행 미리보기 → 확인 후 임포트 확정
-- CSV 내보내기
-
-#### 투자 구루
-
-- 20명의 투자 구루: 버핏, 멍거, 린치, 그레이엄, 달리오, 리루, 빌 애크먼, 마이클 버리, 켄 피셔, 스티븐 코헨, 하워드 막스, 세스 클라먼, 존 템플턴, 조지 소로스, 캐시 우드, 스탠리 드러큰밀러, 테리 스미스, 조엘 그린블라트, 조셉 피오트로스키, 윌리엄 오닐
-- 구루별 투자 철학 (핵심 원칙 5개 + 대표 명언 1개)
-- 구루 이상적 배분 파이 차트 vs 내 포트폴리오 레이더 비교
-- 구루 기준 리밸런싱 제안
-- **피터 린치 10루타 채점기**: PEG·EPS 성장률·매출 성장률·부채비율·영업이익률·시가총액 기준 100점 만점 채점
-- **조엘 그린블라트 마법공식 채점기**: 이익수익률·자본수익률·영업이익률·부채비율·시가총액 기준 100점 만점 채점
-- **벤저민 그레이엄 방어적 투자 채점기**: P/E·P/B·그레이엄 넘버(P/E×P/B)·유동비율·부채비율·배당수익률 기준 100점 만점 채점
-- **테리 스미스 퀄리티 컴파운더 채점기**: ROE·영업이익률·FCF 전환율·매출 성장률·부채비율 기준 100점 만점 채점
-- **피오트로스키 F-Score 채점기**: ROA·영업현금흐름·ΔROA·발생주의 품질·Δ부채·Δ유동비율·주식희석·Δ마진·Δ회전율 — 9가지 이진 기준 F-Score 0~9 → 100점 환산
-- **윌리엄 오닐 CAN SLIM 채점기**: 분기/연간 EPS 성장·52주 신고가·유통주식 수·상대강도·기관보유·시가총액 7가지 기준 100점 만점 채점
-- 모든 채점기는 다단계 폴백(financialData → incomeStatementHistory → balanceSheetHistory → earningsHistory → 역산값)으로 한국/일본 종목의 데이터 커버리지를 최대화
-- AI 구루 프롬프트는 UI 언어와 무관하게 영어 철학 텍스트를 기준으로 생성
-
-#### 다국어 (i18n)
-
-- 한국어 🇰🇷 · English 🇺🇸 · 日本語 🇯🇵 · Deutsch 🇩🇪 4개국어 지원
-- 헤더의 국기 버튼으로 즉시 전환
-- 투자 구루 이름/철학 포함 전체 UI 다국어 대응
-- Zustand persist로 언어 설정 유지
-- 구루 철학 텍스트는 해당 언어 우선, 누락 시 영어로 자동 폴백
-
-#### 번역 스타일 가이드 (구루 철학)
-
-- 각 `guru_philosophy_*`는 6줄 구조를 유지합니다.
-  - 1~5줄: 투자 원칙 bullet
-  - 6줄: 명언 bullet (`Quote:` / `명언:` / `名言：` / `Zitat:`)
-- 각 줄은 `•`로 시작하고, i18n 파일의 `\n` 연결 스타일을 유지합니다.
-- 투자 도메인 용어(예: ROIC, 안전마진, 리스크 패리티)는 언어별로 일관되게 번역합니다.
-- 직역보다 투자 문맥에서 자연스럽고 정확한 의역을 우선합니다.
-- 특정 언어 키가 누락되더라도 UI는 영어 철학으로 안전하게 폴백합니다 (`GurusPage` 반영).
-- AI 프롬프트는 언어 일관성을 위해 영어 철학 텍스트를 기준으로 유지합니다.
-
-#### 설정
-
-- 표시 화폐 전환 (KRW / JPY / USD / EUR)
-- **환율 캐시 전략**: 앱 시작 시 자동 조회, 1시간 이내 캐시는 재사용, 조회 실패 시 24시간 이내 캐시로 폴백 (amber 경고 표시)
-- 카테고리별 목표 비중 설정
-- **내 정보**: 닉네임, 나이, 연소득, 월 투자예산, 3/5/10년 투자계획, 특이사항/유의점(주택론 잔액, 자동투자 금액 등 자유 입력)
-- 전체 데이터 초기화
-
----
-
-### Copilot 에이전트 커스터마이징
-
-이 레포지토리는 `.github/agents/` 에 5개의 GitHub Copilot 커스텀 에이전트를 포함합니다:
-
-| 에이전트 | 파일 | 자동 발동 조건 |
-| --- | --- | --- |
-| **i18n-sync** | `i18n-sync.agent.md` | ko/en/ja/de 번역 키 추가·감사·중복 수정 |
-| **build-guard** | `build-guard.agent.md` | Vercel 빌드 실패, TS 오류, 커밋 전 검증 |
-| **component-creator** | `component-creator.agent.md` | 신규 컴포넌트·페이지·훅·스토어 생성 |
-| **test-writer** | `test-writer.agent.md` | Vitest 단위 테스트 작성 (프로덕션 코드 불변) |
-| **yahoo-finance-dev** | `yahoo-finance-dev.agent.md` | 신규 야후 파이낸스 엔드포인트·훅 추가 |
-
-`.github/copilot-instructions.md` 의 라우팅 규칙에 의해 요청 키워드에 따라 적절한 에이전트가 자동으로 적용됩니다.
 
 ---
 
 ### 기술 스택
 
 | 영역 | 기술 |
-| --- | --- |
+|------|------|
 | 프런트엔드 | React 19 · TypeScript · Vite 7 |
 | 스타일링 | Tailwind CSS v4 |
 | 상태 관리 | Zustand 5 (localStorage persist) |
 | 차트 | Recharts |
 | 라우팅 | React Router v7 |
 | 다국어 | 커스텀 i18n (ko / en / ja / de) |
-| 시세 조회 | Yahoo Finance API (US) |
+| 시세 조회 | Yahoo Finance API |
 | 데스크톱 | Tauri v2 (Rust) + tauri-plugin-http |
 | 웹 배포 | Vercel (Serverless Functions + 정적 CDN) |
 
 ---
 
-### Yahoo Finance 데이터 조회
+### 프로젝트 구조
 
-| 경로 | 엔드포인트 | 용도 |
-| --- | --- | --- |
-| Yahoo Finance | `query1.finance.yahoo.com` (Vite proxy / Vercel Serverless) | 미국·한국 종목 검색/시세, 환율 |
+```text
+src/
+├── pages/          # Dashboard, Assets, Gurus, Settings, About
+├── components/     # layout/, common/, dashboard/, assets/, gurus/
+├── hooks/          # 커스텀 React 훅
+├── stores/         # Zustand 스토어 (localStorage 영속)
+├── i18n/           # 번역 파일 (ko/en/ja/de)
+├── types/          # TypeScript 타입 정의
+└── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/
 
-> **참고**: Yahoo Finance의 비공식 엔드포인트를 사용하므로 API 구조가 변경되면 조회가 실패할 수 있습니다.
->
-> **수동 입력**: Yahoo Finance에서 검색되지 않는 자산(일본 투자신탁 등)은 수동으로 등록할 수 있습니다.
+api/                # Vercel Serverless Functions (Yahoo Finance 프록시)
+src-tauri/          # Tauri (Rust) 데스크톱 앱
+```
 
 ---
 
 ### 면책 조항
 
-- 이 프로젝트는 **개인 학습 및 포트폴리오 관리 목적**으로 제작되었습니다.
-- Yahoo Finance의 데이터를 비공식 API로 조회합니다. 이는 Yahoo의 이용약관에 따라 상업적 이용이 제한될 수 있습니다. **개인 비상업적 용도**로만 사용하십시오.
-- 제공되는 시세·환율·분석 데이터는 참고용이며, 투자 결정의 근거로 사용해서는 안 됩니다.
-- 이 소프트웨어의 사용으로 인한 어떠한 손실에 대해서도 개발자는 책임을 지지 않습니다.
+- **개인 비상업적 용도**로만 사용하십시오.
+- Yahoo Finance 비공식 API 사용. 상업적 이용은 Yahoo 이용약관에 따라 제한될 수 있습니다.
+- 시세·환율·분석 데이터는 참고용이며, 투자 결정의 근거로 사용해서는 안 됩니다.
+- 이 소프트웨어 사용으로 인한 어떠한 손실에 대해서도 개발자는 책임을 지지 않습니다.
 
 ---
 

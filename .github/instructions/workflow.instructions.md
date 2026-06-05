@@ -1,22 +1,55 @@
 ---
 applyTo: "**"
-description: "Mandatory post-implementation workflow: build verification, commit, and push after every code change."
+description: "Mandatory post-implementation workflow: doc update, build verification, commit, and push after every code change."
 ---
 
 # Mandatory Post-Implementation Workflow
 
-After **every** implementation task — no exceptions, no matter how small — you MUST execute the following steps in order before considering the task complete:
+After **every** implementation task — no exceptions, no matter how small — execute these steps in order before considering the task complete.
+
+---
+
+## Step 1: Update Design Documentation
+
+1. Open `.github/doc-map.yml`
+2. For **each file you modified**, find all matching entries in `mappings`
+3. Open the corresponding `doc` file(s) and update to reflect your changes:
+   - New field / component / behavior → add to the relevant section
+   - Changed behavior → update the existing description
+   - Removed feature → remove or mark deprecated
+4. If no pattern in `doc-map.yml` matches the modified file, update `doc/overview.md`
+
+> Pure bug fixes with no user-visible behavioral change: update the doc only if the fix reveals that a spec was incorrect.
+
+---
+
+## Step 2: Verify Build
+
+```bash
+npm run build
+```
+
+Fix all TypeScript or Vite errors before proceeding. Re-run to confirm zero errors.
+
+---
+
+## Step 3: Commit and Push
+
+```bash
+git add -A && git commit -m "<type>: <short description>" && git push
+```
+
+Conventional commit types: `feat:` · `fix:` · `refactor:` · `style:` · `chore:` · `docs:`
+
+---
+
+## Summary (single command after doc update)
 
 ```bash
 npm run build && git add -A && git commit -m "<type>: <short description>" && git push
 ```
 
-## Step-by-step
-
-1. **`npm run build`** — Verify TypeScript compiles and Vite builds without errors. Fix any errors before proceeding.
-2. **`git add -A`** — Stage all changed files.
-3. **`git commit -m "..."`** — Commit with a conventional commit message (`feat:`, `fix:`, `refactor:`, `style:`, `chore:`).
-4. **`git push`** — Push to the `main` branch on GitHub.
+---
 
 ## When multiple agents apply
 
@@ -25,7 +58,9 @@ Apply agents in this order:
 2. `i18n-sync` second
 3. `build-guard` last (always runs before commit)
 
+---
+
 ## This rule overrides brevity
 
-Even if the change is a single-line fix, you must still run build → commit → push.
-Do NOT skip this workflow to save time or reduce verbosity.
+Even a single-line fix requires: **doc check → build → commit → push**.
+Do NOT skip any step to save time or reduce verbosity.
