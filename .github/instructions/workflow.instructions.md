@@ -21,8 +21,9 @@ After **every** implementation task — no exceptions, no matter how small — e
 
 ## Markdown Style Rules
 
-All documentation files under `doc/` must comply with markdownlint
-(config: `doc/.markdownlint.json`). Apply these rules when writing or updating any doc file:
+All documentation files under `doc/` and `README.md` must comply with markdownlint
+(root config: `.markdownlint.json`, doc-specific: `doc/.markdownlint.json`).
+Apply these rules when writing or updating any doc file:
 
 - Surround every heading with a blank line above and below (MD022).
 - Surround every fenced code block with a blank line above and below (MD031).

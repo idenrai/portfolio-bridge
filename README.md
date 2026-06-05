@@ -50,7 +50,7 @@ npm run tauri:build  # Production installer for current OS
 ### Tech Stack
 
 | Area | Technology |
-|------|------------|
+| --- | --- |
 | Frontend | React 19 · TypeScript · Vite 7 |
 | Styling | Tailwind CSS v4 |
 | State | Zustand 5 (localStorage persist) |
@@ -93,8 +93,6 @@ src-tauri/          # Tauri (Rust) desktop app
 ### License
 
 [MIT License](LICENSE)
-
----
 
 ---
 
@@ -144,7 +142,7 @@ npm run tauri:build  # 프로덕션 인스톨러 생성
 ### 기술 스택
 
 | 영역 | 기술 |
-|------|------|
+| --- | --- |
 | 프런트엔드 | React 19 · TypeScript · Vite 7 |
 | 스타일링 | Tailwind CSS v4 |
 | 상태 관리 | Zustand 5 (localStorage persist) |
