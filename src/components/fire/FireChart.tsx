@@ -25,8 +25,8 @@ export function FireChart({ data }: FireChartProps) {
   if (!data || data.length === 0) return null;
 
   return (
-    <Card className="p-5 flex flex-col gap-4 bg-slate-900 border-slate-800">
-      <h3 className="text-lg font-bold text-slate-200">{t.fire_chart_title}</h3>
+    <Card className="p-5 flex flex-col gap-4">
+      <h3 className="text-lg font-bold text-slate-800">{t.fire_chart_title}</h3>
       <div className="h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
@@ -39,7 +39,7 @@ export function FireChart({ data }: FireChartProps) {
                 <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
             <XAxis
               dataKey="year"
               stroke="#64748b"
@@ -52,23 +52,20 @@ export function FireChart({ data }: FireChartProps) {
             <YAxis
               stroke="#64748b"
               fontSize={12}
-              tickFormatter={(val) => {
-                if (val >= 100000000) return `${Math.floor(val / 100000000)}억`;
-                if (val >= 10000) return `${Math.floor(val / 10000)}만`;
-                return `${val}`;
-              }}
+              tickFormatter={(val) => formatCurrency(val, baseCurrency, true)}
               tickLine={false}
               axisLine={false}
-              width={50}
+              width={65}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#0f172a",
-                borderColor: "#334155",
+                backgroundColor: "#ffffff",
+                borderColor: "#e2e8f0",
                 borderRadius: "8px",
-                color: "#f1f5f9",
+                color: "#1e293b",
+                boxShadow: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
               }}
-              itemStyle={{ color: "#f8fafc" }}
+              itemStyle={{ color: "#334155" }}
               labelFormatter={(label, payload) => {
                 const item = payload[0]?.payload as FireDataPoint;
                 return t.fire_tooltip_year(Number(label), item?.age);
