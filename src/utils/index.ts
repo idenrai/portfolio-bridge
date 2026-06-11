@@ -7,6 +7,8 @@ export {
   calculateSummary,
   calculateRebalancing,
 } from "./calc/calculations";
+export { calculateFire, getTargetAmountFromExpense } from "./calc/fire";
+export type { FireCalculationParams, FireDataPoint, FireResult } from "./calc/fire";
 export { exportToCsv, parseCsv, downloadCsv } from "./csv";
 export { GURU_PROFILES } from "./gurus";
 export { SAMPLE_ASSETS } from "./sampleData";

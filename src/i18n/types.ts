@@ -569,6 +569,28 @@ export interface Translations {
   currency_krw: string;
   currency_eur: string;
 
+  // ─── FIRE Planner ────────────────────────────────────────────────────────
+  nav_fire: string;
+  fire_title: string;
+  fire_desc: string;
+  fire_tab_target: string;
+  fire_tab_expense: string;
+  fire_current_assets: string;
+  fire_monthly_savings: string;
+  fire_expected_return: string;
+  fire_target_amount: string;
+  fire_monthly_expense: string;
+  fire_safe_withdrawal_rate: string;
+  fire_calculate_btn: string;
+  fire_result_success: (years: number, age: number | null) => string;
+  fire_result_already_reached: string;
+  fire_chart_title: string;
+  fire_chart_asset: string;
+  fire_chart_target: string;
+  fire_tooltip_year: (year: number, age: number | null) => string;
+  fire_age_label: string;
+  fire_age_placeholder: string;
+
   // ─── Label maps (charts, dropdowns) ───────────────────────────────────────
   category_labels: Record<string, string>;
   asset_type_labels: Record<string, string>;
