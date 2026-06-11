@@ -460,6 +460,11 @@ export interface Translations {
   at_filter_clear: string;
   at_filter_count: (shown: number, total: number) => string;
   at_filter_no_result: string;
+  at_col_ticker: string;
+
+  // ─── Ticker Search ──────────────────────────────────────────────────────────
+  ticker_search_no_result: string;
+  ticker_search_error: string;
 
   // ─── Portfolio History Chart ───────────────────────────────────────────────
   history_title: string;

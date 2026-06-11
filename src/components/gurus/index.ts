@@ -6,3 +6,7 @@ export { MagicFormulaCard } from "./MagicFormulaCard";
 export { OneilCanSlimCard } from "./OneilCanSlimCard";
 export { PiotroskiFScoreCard } from "./PiotroskiFScoreCard";
 export { SmithQualityCard } from "./SmithQualityCard";
+export { GuruSelector } from "./GuruSelector";
+export { GuruRebalanceTable } from "./GuruRebalanceTable";
+export { GuruCharts } from "./GuruCharts";
+export { GuruAIPromptBanner } from "./GuruAIPromptBanner";

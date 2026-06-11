@@ -594,6 +594,9 @@ export const ja: Translations = {
   at_filter_clear: "フィルター解除",
   at_filter_count: (shown, total) => `${shown} / ${total}銀柄`,
   at_filter_no_result: "該当する資産がありません。",
+  at_col_ticker: "ティッカー",
+  ticker_search_no_result: "検索結果がありません。",
+  ticker_search_error: "検索に失敗しました。ネットワーク状態を確認してください。",
 
   history_title: "資産構成の推移",
   history_value: "評価額",

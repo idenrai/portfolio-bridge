@@ -605,6 +605,9 @@ export const de: Translations = {
   at_filter_clear: "Filter zurücksetzen",
   at_filter_count: (shown, total) => `${shown} / ${total} Werte`,
   at_filter_no_result: "Keine Werte entsprechen den Filterkriterien.",
+  at_col_ticker: "Ticker",
+  ticker_search_no_result: "Keine Ergebnisse gefunden.",
+  ticker_search_error: "Suche fehlgeschlagen. Bitte überprüfen Sie Ihre Netzwerkverbindung.",
 
   history_title: "Portfolioverlauf",
   history_value: "Bewertung",

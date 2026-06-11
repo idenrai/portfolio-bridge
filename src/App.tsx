@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/layout";
 import { DashboardPage } from "@/pages/Dashboard";
@@ -11,11 +11,16 @@ import { initGoogleDriveService } from "@/utils";
 
 function AppInitializer() {
   const { refreshAll } = useDataRefresh();
+  const initRef = useRef(false);
+
   useEffect(() => {
-    refreshAll();
-    initGoogleDriveService(); // Drive 서비스 초기화 (앱 전체에서 1회)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!initRef.current) {
+      initRef.current = true;
+      refreshAll();
+      initGoogleDriveService(); // Drive 서비스 초기화 (앱 전체에서 1회)
+    }
+  }, [refreshAll]);
+
   return null;
 }
 

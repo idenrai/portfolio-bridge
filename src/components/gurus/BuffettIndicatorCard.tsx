@@ -138,11 +138,11 @@ export function BuffettIndicatorCard() {
             <div className="relative h-4 rounded-full bg-slate-100 overflow-hidden">
               {/* 구간 색상 배경 */}
               <div className="absolute inset-0 flex">
-                <div className="h-full bg-sky-200" style={{ width: "40%" }} />
-                <div className="h-full bg-emerald-200" style={{ width: "10%" }} />
-                <div className="h-full bg-amber-200" style={{ width: "15%" }} />
-                <div className="h-full bg-orange-200" style={{ width: "17.5%" }} />
-                <div className="h-full bg-red-200" style={{ width: "17.5%" }} />
+                <div className="h-full bg-sky-200 w-[40%]" />
+                <div className="h-full bg-emerald-200 w-[10%]" />
+                <div className="h-full bg-amber-200 w-[15%]" />
+                <div className="h-full bg-orange-200 w-[17.5%]" />
+                <div className="h-full bg-red-200 w-[17.5%]" />
               </div>
               {/* 현재값 포인터 */}
               <div

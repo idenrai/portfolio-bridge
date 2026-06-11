@@ -8,6 +8,7 @@ import type {
   AssetCategory,
   AssetType,
   Market,
+  CurrencyCode,
 } from "@/types";
 
 interface Props {
@@ -101,7 +102,7 @@ export function TopHoldingsTable({ summary }: Props) {
                           USD: t.currency_usd,
                           JPY: t.currency_jpy,
                           EUR: t.currency_eur,
-                        }[h.currency] ?? h.name)
+                        }[h.currency as CurrencyCode] ?? h.name)
                       : h.name}
                   </div>
                   <div className="text-[10px] text-slate-400">

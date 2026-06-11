@@ -15,6 +15,8 @@ export interface BuffettIndicatorData {
   error: string | null;
 }
 
+import { yahooFetch } from "@/utils/yahoo/yahooCore";
+
 /**
  * 기존 Yahoo Finance 프록시로 Wilshire 5000 최신 종가를 조회합니다.
  * ^W5000 index price point ≈ 미국 전체 시가총액 (십억 USD)
@@ -22,7 +24,7 @@ export interface BuffettIndicatorData {
  *   현재도 index value ≈ 시가총액 (billions)로 근사합니다.
  */
 async function fetchMarketCap(): Promise<{ valueTrillions: number; date: string }> {
-  const res = await fetch(
+  const res = await yahooFetch(
     "/api/yahoo/v8/finance/chart/%5EW5000?interval=1d&range=5d",
   );
   if (!res.ok) throw new Error(`Yahoo Finance error: ${res.status}`);

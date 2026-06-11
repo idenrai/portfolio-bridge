@@ -1,10 +1,8 @@
-import { Button } from "@/components/common";
 import {
   type Asset,
   type AssetCategory,
   type Market,
   type AssetType,
-  CURRENCY_SYMBOLS,
 } from "@/types";
 import { useAssetStore, useSettingsStore, useBrokerStore } from "@/stores";
 import { useT } from "@/hooks";
@@ -12,9 +10,9 @@ import {
   assetValue,
   assetPnL,
   assetReturnPercent,
-  formatPercent,
   toKRW,
 } from "@/utils";
+import { AssetFilterBar, AssetTableRow } from "@/components/assets";
 
 export type SortKey = "name" | "value" | "pnl" | "return";
 export type SortDir = "asc" | "desc";
@@ -103,7 +101,7 @@ export function AssetTable({
     return sortDir === "asc" ? av - bv : bv - av;
   });
 
-  const hasFilter = filterMarket || filterType || filterCategory;
+
 
   if (allAssets.length === 0) {
     return (
@@ -118,66 +116,24 @@ export function AssetTable({
   return (
     <div>
       {/* 필터 바 */}
-      <div className="flex flex-wrap items-center gap-2 mb-3">
-        <select
-          value={filterMarket}
-          onChange={(e) => onFilterMarket(e.target.value as Market | "")}
-          className="text-xs rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-slate-600 focus:border-blue-400 focus:outline-none"
-        >
-          <option value="">{t.at_filter_all_market}</option>
-          {markets.map((m) => (
-            <option key={m} value={m}>
-              {t.market_labels[m]}
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={filterType}
-          onChange={(e) => onFilterType(e.target.value as AssetType | "")}
-          className="text-xs rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-slate-600 focus:border-blue-400 focus:outline-none"
-        >
-          <option value="">{t.at_filter_all_type}</option>
-          {types.map((tp) => (
-            <option key={tp} value={tp}>
-              {t.asset_type_labels[tp] ?? tp}
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={filterCategory}
-          onChange={(e) =>
-            onFilterCategory(e.target.value as AssetCategory | "")
-          }
-          className="text-xs rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-slate-600 focus:border-blue-400 focus:outline-none"
-        >
-          <option value="">{t.at_filter_all_category}</option>
-          {CATEGORY_OPTIONS.map(([val, label]) => (
-            <option key={val} value={val}>
-              {label}
-            </option>
-          ))}
-        </select>
-
-        {hasFilter && (
-          <button
-            type="button"
-            onClick={() => {
-              onFilterMarket("");
-              onFilterType("");
-              onFilterCategory("");
-            }}
-            className="text-xs text-slate-400 hover:text-slate-600 underline cursor-pointer"
-          >
-            {t.at_filter_clear}
-          </button>
-        )}
-
-        <span className="ml-auto text-xs text-slate-400">
-          {t.at_filter_count(sorted.length, allAssets.length)}
-        </span>
-      </div>
+      <AssetFilterBar
+        markets={markets}
+        types={types}
+        categoryOptions={CATEGORY_OPTIONS}
+        filterMarket={filterMarket}
+        filterType={filterType}
+        filterCategory={filterCategory}
+        onFilterMarket={onFilterMarket}
+        onFilterType={onFilterType}
+        onFilterCategory={onFilterCategory}
+        onClearFilter={() => {
+          onFilterMarket("");
+          onFilterType("");
+          onFilterCategory("");
+        }}
+        sortedCount={sorted.length}
+        allCount={allAssets.length}
+      />
 
       {sorted.length === 0 ? (
         <div className="text-center py-10 text-slate-400 text-sm">
@@ -235,138 +191,19 @@ export function AssetTable({
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
-              {sorted.map((a) => {
-                const val = assetValue(a);
-                const pnl = assetPnL(a);
-                const ret = assetReturnPercent(a);
-                const sym = CURRENCY_SYMBOLS[a.currency];
-                const pnlColor = pnl >= 0 ? "text-red-600" : "text-blue-600";
-                const isCash = a.type === "cash";
-
-                return (
-                  <tr key={a.id} className="hover:bg-slate-50">
-                    <td className="py-2.5 max-w-65">
-                      <p className="font-medium text-slate-800 wrap-break-word whitespace-normal leading-snug">
-                        {a.name}
-                      </p>
-                      {a.ticker && (
-                        <p className="text-xs text-slate-400">{a.ticker}</p>
-                      )}
-                    </td>
-                    <td className="py-2.5 whitespace-nowrap">
-                      <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
-                        {t.market_labels[a.market]}
-                      </span>
-                    </td>
-                    <td className="py-2.5 whitespace-nowrap">
-                      <select
-                        value={a.categories[0] ?? ""}
-                        onChange={(e) =>
-                          handleCategoryChange(
-                            a.id,
-                            e.target.value as AssetCategory | "",
-                          )
-                        }
-                        className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-22.5"
-                      >
-                        <option value="">{t.at_unclassified}</option>
-                        {CATEGORY_OPTIONS.map(([val, label]) => (
-                          <option key={val} value={val}>
-                            {label}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                    {hasBrokers && (
-                      <td className="py-2.5 whitespace-nowrap">
-                        <select
-                          value={a.brokerId ?? ""}
-                          onChange={(e) =>
-                            handleBrokerChange(a.id, e.target.value)
-                          }
-                          className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-22.5"
-                        >
-                          <option value="">{t.af_account_none}</option>
-                          {brokerAccounts.map((b) => (
-                            <option key={b.id} value={b.id}>
-                              {b.nickname}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                    )}
-                    <td className="py-2.5 text-right tabular-nums">
-                      {isCash ? (
-                        <span className="text-slate-400">-</span>
-                      ) : (
-                        a.quantity.toLocaleString()
-                      )}
-                    </td>
-                    <td className="py-2.5 text-right tabular-nums text-slate-500">
-                      {isCash ? (
-                        <span className="text-slate-400">-</span>
-                      ) : (
-                        <>
-                          {sym}
-                          {a.avgBuyPrice.toLocaleString()}
-                        </>
-                      )}
-                    </td>
-                    <td className="py-2.5 text-right tabular-nums">
-                      {isCash ? (
-                        <span className="text-slate-400">-</span>
-                      ) : (
-                        <>
-                          {sym}
-                          {a.currentPrice.toLocaleString()}
-                        </>
-                      )}
-                    </td>
-                    <td className="py-2.5 text-right tabular-nums font-medium">
-                      {sym}
-                      {val.toLocaleString()}
-                    </td>
-                    <td
-                      className={`py-2.5 text-right tabular-nums ${isCash ? "text-slate-400" : pnlColor}`}
-                    >
-                      {isCash ? (
-                        "-"
-                      ) : (
-                        <>
-                          {sym}
-                          {pnl.toLocaleString()}
-                        </>
-                      )}
-                    </td>
-                    <td
-                      className={`py-2.5 text-right tabular-nums font-medium ${isCash ? "text-slate-400" : pnlColor}`}
-                    >
-                      {isCash ? "-" : formatPercent(ret)}
-                    </td>
-                    <td className="py-2.5 text-center whitespace-nowrap">
-                      <div className="flex items-center justify-center gap-1">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => onEdit(a)}
-                        >
-                          {t.at_btn_edit}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => onDelete(a.id)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          {t.at_btn_delete}
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
+              {sorted.map((a) => (
+                <AssetTableRow
+                  key={a.id}
+                  asset={a}
+                  categoryOptions={CATEGORY_OPTIONS}
+                  brokerAccounts={brokerAccounts}
+                  hasBrokers={hasBrokers}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                  onCategoryChange={handleCategoryChange}
+                  onBrokerChange={handleBrokerChange}
+                />
+              ))}
           </table>
         </div>
       )}

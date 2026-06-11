@@ -1,4 +1,5 @@
-import type { CurrencyCode } from "./asset";
+/** 통화 코드 */
+export type CurrencyCode = "KRW" | "JPY" | "USD" | "EUR";
 
 /** 기본 환율 (수동 입력 초기값, 2026-02 기준 근사치) */
 export const DEFAULT_RATES: Record<CurrencyCode, number> = {

@@ -1,12 +1,8 @@
 import { useState, useRef } from "react";
-import { useAssetStore, useLanguageStore } from "@/stores";
+import { useAssetStore } from "@/stores";
 import { Card, Button, Modal } from "@/components/common";
-import { AssetForm, AssetTable, BrokerManager } from "@/components/assets";
+import { AssetForm, AssetTable, BrokerManager, AIClassificationModal, CSVPreviewModal } from "@/components/assets";
 import { downloadCsv, parseCsv } from "@/utils";
-import {
-  buildClassificationPrompt,
-  parseAiResponse,
-} from "@/utils";
 import { useT } from "@/hooks";
 import type {
   Asset,
@@ -22,20 +18,10 @@ export function AssetsPage() {
   const [editingAsset, setEditingAsset] = useState<Asset | undefined>();
   const [brokerManagerOpen, setBrokerManagerOpen] = useState(false);
   const [promptOpen, setPromptOpen] = useState(false);
-  const [promptTab, setPromptTab] = useState<"generate" | "import">("generate");
-  const [copied, setCopied] = useState(false);
-  const [aiJsonInput, setAiJsonInput] = useState("");
-  const [importResult, setImportResult] = useState<{
-    applied: number;
-    skipped: number;
-  } | null>(null);
-  const [importError, setImportError] = useState<string | null>(null);
   const [importPreview, setImportPreview] = useState<AssetFormData[] | null>(
     null,
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const lang = useLanguageStore((s) => s.lang);
-  const promptText = buildClassificationPrompt(assets, lang);
   const t = useT();
 
   // ── 필터 / 정렬 상태 ──────────────────────────────────────────────────────
@@ -65,41 +51,6 @@ export function AssetsPage() {
         a.categories.includes(filterCategory as AssetCategory),
     );
 
-  const handleCopyPrompt = async () => {
-    await navigator.clipboard.writeText(promptText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleImportAiJson = () => {
-    setImportResult(null);
-    setImportError(null);
-    try {
-      const { applied, skipped, results } = parseAiResponse(
-        aiJsonInput,
-        assets,
-      );
-      for (const { id, category } of results) {
-        updateAsset(id, { categories: [category] });
-      }
-      setImportResult({ applied, skipped });
-    } catch (err) {
-      setImportError(
-        err instanceof Error
-          ? `${t.asset_ai_parse_error}: ${err.message}`
-          : t.asset_ai_parse_error,
-      );
-    }
-  };
-
-  const handleClosePrompt = () => {
-    setPromptOpen(false);
-    setCopied(false);
-    setAiJsonInput("");
-    setImportResult(null);
-    setImportError(null);
-    setPromptTab("generate");
-  };
 
   const handleAdd = () => {
     setEditingAsset(undefined);
@@ -249,126 +200,18 @@ export function AssetsPage() {
         />
       </Modal>
 
-      {/* AI 분류 프롬프트 모달 */}
-      <Modal
+      <AIClassificationModal
         open={promptOpen}
-        onClose={handleClosePrompt}
-        title={t.asset_ai_modal_title}
-        maxWidth="max-w-2xl"
-      >
-        <div className="space-y-4">
-          {/* 탭 */}
-          <div className="flex rounded-lg border border-slate-200 overflow-hidden">
-            <button
-              type="button"
-              onClick={() => setPromptTab("generate")}
-              className={`flex-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
-                promptTab === "generate"
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-slate-600 hover:bg-slate-50"
-              }`}
-            >
-              {t.asset_ai_tab_generate}
-            </button>
-            <button
-              type="button"
-              onClick={() => setPromptTab("import")}
-              className={`flex-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
-                promptTab === "import"
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-slate-600 hover:bg-slate-50"
-              }`}
-            >
-              {t.asset_ai_tab_import}
-            </button>
-          </div>
-
-          {promptTab === "generate" ? (
-            <>
-              <p className="text-sm text-slate-600">
-                {t.asset_ai_copy_desc}
-                <br />
-                {t.asset_ai_copy_link_pre}{" "}
-                <button
-                  type="button"
-                  onClick={() => setPromptTab("import")}
-                  className="text-blue-600 font-medium underline underline-offset-2 cursor-pointer"
-                >
-                  {t.asset_ai_tab_link}
-                </button>{" "}
-                {t.asset_ai_copy_link_post}
-              </p>
-              <textarea
-                readOnly
-                value={promptText}
-                rows={16}
-                onFocus={(e) => e.target.select()}
-                className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-mono text-slate-700 resize-none focus:outline-none focus:border-blue-300"
-              />
-              <div className="flex justify-end gap-2">
-                <Button variant="secondary" onClick={handleClosePrompt}>
-                  {t.asset_ai_close}
-                </Button>
-                <Button onClick={handleCopyPrompt}>
-                  {copied ? t.asset_ai_copied : t.asset_ai_copy}
-                </Button>
-              </div>
-            </>
-          ) : (
-            <>
-              <p className="text-sm text-slate-600">
-                {t.asset_ai_import_desc} <strong>{t.asset_ai_apply_btn}</strong>{" "}
-                {t.asset_ai_import_btn_suffix}
-                <br />
-                <span className="text-xs text-slate-400">
-                  {t.asset_ai_format_label}{" "}
-                  {`[{ "index": 1, "category": "dividend", ... }, ...]`}
-                </span>
-              </p>
-              <textarea
-                value={aiJsonInput}
-                onChange={(e) => {
-                  setAiJsonInput(e.target.value);
-                  setImportResult(null);
-                  setImportError(null);
-                }}
-                rows={14}
-                placeholder={t.asset_ai_json_placeholder}
-                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-mono text-slate-700 resize-none focus:outline-none focus:border-blue-300"
-              />
-
-              {importError && (
-                <div className="rounded-lg bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700">
-                  {importError}
-                </div>
-              )}
-
-              {importResult && (
-                <div className="rounded-lg bg-green-50 border border-green-200 px-3 py-2 text-sm text-green-700">
-                  {t.asset_ai_apply_result(
-                    importResult.applied,
-                    importResult.skipped,
-                  )}
-                </div>
-              )}
-
-              <div className="flex justify-end gap-2">
-                <Button variant="secondary" onClick={handleClosePrompt}>
-                  {t.asset_ai_close}
-                </Button>
-                <Button
-                  onClick={handleImportAiJson}
-                  disabled={!aiJsonInput.trim()}
-                >
-                  {t.asset_ai_apply_btn}
-                </Button>
-              </div>
-            </>
-          )}
-        </div>
-      </Modal>
+        onClose={() => setPromptOpen(false)}
+      />
 
       {/* CSV 미리보기 모달 */}
+      <CSVPreviewModal
+        open={!!importPreview}
+        previewData={importPreview}
+        onClose={() => setImportPreview(null)}
+        onConfirm={handleConfirmImport}
+      />
 
       {/* 계좌 관리 모달 */}
       <Modal
@@ -378,86 +221,6 @@ export function AssetsPage() {
         maxWidth="max-w-2xl"
       >
         <BrokerManager />
-      </Modal>
-
-      <Modal
-        open={!!importPreview}
-        onClose={() => setImportPreview(null)}
-        title={importPreview ? t.csv_preview_title(importPreview.length) : ""}
-        maxWidth="max-w-3xl"
-      >
-        {importPreview && (
-          <div className="space-y-4">
-            <div className="overflow-x-auto rounded-lg border border-slate-200">
-              <table className="w-full text-xs text-left">
-                <thead className="bg-slate-50 text-slate-500 font-medium">
-                  <tr>
-                    <th className="px-3 py-2">{t.at_col_name}</th>
-                    <th className="px-3 py-2">티커</th>
-                    <th className="px-3 py-2">{t.at_col_market}</th>
-                    <th className="px-3 py-2">{t.af_currency_label}</th>
-                    <th className="px-3 py-2 text-right">
-                      {t.af_quantity_label}
-                    </th>
-                    <th className="px-3 py-2 text-right">
-                      {t.af_avg_price_label}
-                    </th>
-                    <th className="px-3 py-2 text-right">
-                      {t.af_current_price_label}
-                    </th>
-                    <th className="px-3 py-2">{t.at_col_category}</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {importPreview.slice(0, 5).map((row, i) => (
-                    <tr key={i} className="hover:bg-slate-50">
-                      <td className="px-3 py-1.5 text-slate-800 font-medium">
-                        {row.name}
-                      </td>
-                      <td className="px-3 py-1.5 font-mono text-slate-500">
-                        {row.ticker ?? "—"}
-                      </td>
-                      <td className="px-3 py-1.5 text-slate-600">
-                        {row.market}
-                      </td>
-                      <td className="px-3 py-1.5 text-slate-600">
-                        {row.currency}
-                      </td>
-                      <td className="px-3 py-1.5 text-right text-slate-700">
-                        {row.quantity.toLocaleString()}
-                      </td>
-                      <td className="px-3 py-1.5 text-right text-slate-700">
-                        {row.avgBuyPrice.toLocaleString()}
-                      </td>
-                      <td className="px-3 py-1.5 text-right text-slate-700">
-                        {row.currentPrice.toLocaleString()}
-                      </td>
-                      <td className="px-3 py-1.5 text-slate-500">
-                        {row.categories.join(", ")}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            {importPreview.length > 5 && (
-              <p className="text-xs text-slate-400 text-center">
-                {t.csv_preview_more(importPreview.length - 5)}
-              </p>
-            )}
-            <div className="flex justify-end gap-2">
-              <Button
-                variant="secondary"
-                onClick={() => setImportPreview(null)}
-              >
-                {t.af_btn_cancel}
-              </Button>
-              <Button onClick={handleConfirmImport}>
-                {t.csv_preview_confirm}
-              </Button>
-            </div>
-          </div>
-        )}
       </Modal>
     </div>
   );

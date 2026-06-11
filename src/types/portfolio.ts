@@ -1,4 +1,5 @@
-import type { AssetCategory, AssetType, CurrencyCode, Market } from "./asset";
+import type { AssetCategory, AssetType, Market } from "./asset";
+import type { CurrencyCode } from "./currency";
 
 /** 목표 배분 한 건 */
 export interface TargetAllocation {

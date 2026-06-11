@@ -64,7 +64,7 @@ export const useGuruSessionStore = create<GuruSessionState>()(
       clearAllSessions: () => set({ sessions: {} }),
     }),
     {
-      name: STORAGE_KEYS.GURU_SESSIONS ?? "portfolio-bridge-guru-sessions",
+      name: STORAGE_KEYS.GURU_SESSIONS,
     },
   ),
 );

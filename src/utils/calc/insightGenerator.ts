@@ -8,7 +8,7 @@ import type {
   PortfolioInsight,
 } from "@/types";
 import { INSIGHT_THRESHOLDS } from "@/constants";
-import { CATEGORY_LABELS } from "@/types";
+import { CATEGORY_LABELS_EN } from "../ai/promptHelpers";
 
 /** 인사이트 메시지 템플릿 (i18n 주입용) */
 export interface InsightMessages {
@@ -28,17 +28,17 @@ export interface InsightMessages {
 }
 
 export const DEFAULT_INSIGHT_MESSAGES: InsightMessages = {
-  concentration: (name, pct) => `${name} 비중 ${pct}% — 개별 종목 집중도 높음`,
-  bigLoss: (name, pct) => `${name} 수익률 ${pct}% — 큰 손실 발생 중`,
-  cashHigh: (pct) => `현금 비중 ${pct}% — 유동성 과다, 투자 기회 검토`,
-  cashLow: (pct) => `현금 비중 ${pct}% — 비상자금 부족 주의`,
-  fxHigh: (currency, pct) => `${currency} 노출 ${pct}% — 환율 변동 민감`,
+  concentration: (name, pct) => `${name} weight ${pct}% — High concentration`,
+  bigLoss: (name, pct) => `${name} return ${pct}% — Significant loss`,
+  cashHigh: (pct) => `Cash ${pct}% — High liquidity, consider investing`,
+  cashLow: (pct) => `Cash ${pct}% — Low liquidity, keep emergency fund`,
+  fxHigh: (currency, pct) => `${currency} exposure ${pct}% — High FX sensitivity`,
   categoryOver: (label, pct, target, diff) =>
-    `${label} 비중 ${pct}% (목표 ${target}%) → +${diff}%p 과중`,
+    `${label} ${pct}% (Target ${target}%) → +${diff}%p Overweight`,
   categoryUnder: (label, pct, target, diff) =>
-    `${label} 비중 ${pct}% (목표 ${target}%) → ${diff}%p 부족`,
+    `${label} ${pct}% (Target ${target}%) → ${diff}%p Underweight`,
   getCategoryLabel: (category) =>
-    CATEGORY_LABELS[category as AssetCategory] ?? category,
+    CATEGORY_LABELS_EN[category as AssetCategory] ?? category,
 };
 
 /**

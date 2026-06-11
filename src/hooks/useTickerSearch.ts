@@ -1,6 +1,8 @@
 import { useState, useCallback, useRef } from "react";
 import { searchTicker, fetchCurrentPrice } from "@/utils";
 import type { TickerSearchItem, QuoteData } from "@/utils";
+import { useLanguageStore } from "@/stores";
+import { TRANSLATIONS } from "@/i18n";
 
 interface UseTickerSearchResult {
   query: string;
@@ -29,6 +31,7 @@ export function useTickerSearch(): UseTickerSearchResult {
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   const [isFetchingPrice, setIsFetchingPrice] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
+  const lang = useLanguageStore((s) => s.lang);
 
   const search = useCallback(async () => {
     if (!query.trim()) return;
@@ -41,13 +44,13 @@ export function useTickerSearch(): UseTickerSearchResult {
     try {
       const items = await searchTicker(query.trim());
       setResults(items);
-      if (items.length === 0) setSearchError("검색 결과가 없습니다.");
+      if (items.length === 0) setSearchError(TRANSLATIONS[lang].ticker_search_no_result);
     } catch {
-      setSearchError("검색에 실패했습니다. 네트워크 상태를 확인해 주세요.");
+      setSearchError(TRANSLATIONS[lang].ticker_search_error);
     } finally {
       setIsSearching(false);
     }
-  }, [query]);
+  }, [query, lang]);
 
   const selectItem = useCallback(async (item: TickerSearchItem) => {
     setSelected(item);
