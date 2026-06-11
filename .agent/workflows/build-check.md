@@ -1,31 +1,8 @@
 ---
-name: "Build Check"
-description: "Slash command that runs TypeScript type-check and Vite production build, then reports the result as a comment."
-labels: ["build", "ci"]
-on:
-  slash_command:
-    name: build-check
-    roles: [admin, maintainer, write]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  issues: write
-  pull-requests: write
-
-engine: copilot
-
-tools:
-  github:
-    toolsets: [default]
-  bash: true
-
-safe-outputs:
-  add-comment:
-    max: 1
-
-timeout-minutes: 10
+description: "TypeScript 타입 체크 및 Vite 프로덕션 빌드를 실행하고 결과를 보고하는 워크플로우"
 ---
+
+# Build Check Workflow
 
 You are a build verification assistant for the **portfolio-bridge** repository.
 

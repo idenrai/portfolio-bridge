@@ -24,8 +24,30 @@ applyTo: "src/**/*.{ts,tsx}"
 
 - All global state must live in a Zustand store under `src/stores/`.
 - Every store must use the `persist` middleware to sync to `localStorage`.
-- Use a constant from `src/constants/storage.ts` (`STORAGE_KEYS`) as the `name` field in `persist` options — never use raw strings.
+- Use a constant from `src/constants/storage.ts` (`STORAGE_KEYS`) as the `name` field in `persist` options.
 - Store files are named `use<Domain>Store.ts` and export a single `use<Domain>Store` hook.
+
+**Template structure:**
+```typescript
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { STORAGE_KEYS } from "@/constants";
+
+interface MyState {
+  foo: string;
+  setFoo: (value: string) => void;
+}
+
+export const useMyStore = create<MyState>()(
+  persist(
+    (set) => ({
+      foo: "default",
+      setFoo: (value) => set({ foo: value }),
+    }),
+    { name: STORAGE_KEYS.MY_KEY }
+  )
+);
+```
 
 ## Styling
 

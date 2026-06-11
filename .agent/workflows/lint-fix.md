@@ -1,34 +1,8 @@
 ---
-name: "Lint Fix"
-description: "Slash command that runs ESLint --fix on the codebase and opens a draft pull request with the auto-fixed changes."
-labels: ["fix", "lint"]
-on:
-  slash_command:
-    name: lint-fix
-    roles: [admin, maintainer, write]
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pull-requests: write
-
-engine: copilot
-
-tools:
-  github:
-    toolsets: [default]
-  bash: true
-
-safe-outputs:
-  create-pull-request:
-    max: 1
-    title-prefix: "[autofix] "
-    labels: [automation, lint]
-    draft: true
-    if-no-changes: warn
-
-timeout-minutes: 15
+description: "ESLint --fix를 실행하고 결과를 확인하는 린트 수정 워크플로우"
 ---
+
+# Lint Fix Workflow
 
 You are an automated lint-fix assistant for the **portfolio-bridge** repository.
 

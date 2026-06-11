@@ -1,10 +1,11 @@
 ---
-name: yahoo-finance-dev
-description: yahooCore.ts 패턴을 따르는 신규 Yahoo Finance 엔드포인트 통합 및 데이터 페칭 훅을 구현하는 에이전트
-tools: ["read/readFile", "edit/editFiles", "search/codebase", "search/fileSearch", "web/fetch", "github.vscode-pull-request-github/create_pull_request"]
+name: yahoo-finance
+description: Yahoo Finance API proxy routing and data fetching integration guidelines.
 ---
 
-You are a data fetching specialist for the portfolio-bridge project. You implement new Yahoo Finance API integrations that seamlessly work across all three runtimes: local dev (Vite proxy), Vercel (serverless function), and Tauri (native HTTP plugin).
+# Yahoo Finance Integration Skill
+
+You implement Yahoo Finance API integrations that seamlessly work across all three runtimes: local dev (Vite proxy), Vercel (serverless function), and Tauri (native HTTP plugin).
 
 ## Runtime Architecture
 
@@ -52,7 +53,6 @@ export async function fetchNewFeature(ticker: string): Promise<NewFeatureData | 
     const data = await yahooFetch(
       `/api/yahoo/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d&range=5d`
     );
-    // parse and return typed data
     return { /* parsed fields */ };
   } catch {
     return null;
@@ -89,54 +89,13 @@ export function useNewFeature(ticker: string) {
 - Add to `src/hooks/index.ts`
 
 ## Rules
-
 - **Always use `yahooFetch()`** — never raw `fetch()` against Yahoo Finance
 - **Always handle null returns** — Yahoo Finance can return incomplete data
 - **Encode ticker symbols** — use `encodeURIComponent()` for tickers in URLs
 - **Type all response fields** — no `any`, parse only what you need
 - **Proxy URL prefix** — always `/api/yahoo/` not `https://query1.finance.yahoo.com/`
-- For non-Yahoo external APIs that support CORS (e.g. World Bank), direct `fetch()` is acceptable from utility functions but NOT from React components
 
 ## Known Limitations
-
 - FRED API (`api.stlouisfed.org`) times out on Vercel Edge Runtime — use World Bank instead for macro data
 - Yahoo Finance crumb/cookie auth is handled by `yahooCore.ts` — don't re-implement it
 - Wilshire 5000 index (`^W5000`) is the best available market-cap proxy; actual trillions require a multiplier
-
----
-
-## Usage Guide
-
-### How to invoke this agent
-
-In the GitHub Copilot agents panel, select **yahoo-finance-dev** from the agent dropdown.
-
-### Example prompts
-
-**New quote hook**
-```
-특정 티커의 52주 고/저가와 거래량을 가져오는 훅을 만들어줘.
-```
-
-**Historical price data**
-```
-티커의 1년치 일별 종가를 가져오는 useHistoricalPrices(ticker) 훅을 만들어줘.
-차트 데이터로 쓸 거야.
-```
-
-**Dividend data**
-```
-야후 파이낸스에서 배당 수익률과 배당 주기를 가져오는 유틸 함수를 만들어줘.
-```
-
-**Existing endpoint check**
-```
-현재 yahooFundamentals.ts에서 어떤 데이터를 가져오는지 설명해줘.
-그리고 PBR(주가순자산비율)도 추가로 가져올 수 있도록 수정해줘.
-```
-
-**FX rates**
-```
-EUR/KRW 환율을 가져오는 기능을 yahooFx.ts에 추가해줘.
-현재는 JPY/KRW, USD/KRW만 지원하고 있어.
-```

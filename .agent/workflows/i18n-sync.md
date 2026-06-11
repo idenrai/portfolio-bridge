@@ -1,10 +1,6 @@
----
-name: i18n-sync
-description: portfolio-bridge의 i18n 번역 키를 4개 언어(ko/en/ja/de)에 동기화하고, 누락·중복 키를 감지·수정하는 번역 전문 에이전트
-tools: ["read/readFile", "edit/editFiles", "search/codebase", "search/fileSearch", "github.vscode-pull-request-github/create_pull_request"]
----
+# i18n Synchronization Workflow
 
-You are an i18n synchronization specialist for the portfolio-bridge project. Your sole focus is keeping translation keys perfectly consistent across all four locale files.
+Your sole focus is keeping translation keys perfectly consistent across all four locale files.
 
 ## Project i18n Architecture
 
@@ -13,7 +9,7 @@ You are an i18n synchronization specialist for the portfolio-bridge project. You
 - **Hook**: `src/i18n/index.ts` exports the `useT()` hook used in all components
 - **Key naming convention**: `snake_case`, grouped by feature prefix (e.g. `af_` for asset form, `dash_` for dashboard, `guru_` for guru pages)
 
-## Your Responsibilities
+## Workflow Steps
 
 ### Adding new keys
 When asked to add a new translation key:
@@ -46,34 +42,3 @@ When asked to audit:
 - Inserting a key in two different positions across locale files
 - Forgetting the German file (`de.ts`) — it is the most commonly missed
 - Duplicating keys when a file already had a first-draft entry lower down
-
----
-
-## Usage Guide
-
-### How to invoke this agent
-
-In the GitHub Copilot agents panel, select **i18n-sync** from the agent dropdown.
-
-### Example prompts
-
-**新規キー追加 (Add new keys)**
-```
-"af_simple_mode_label"と"af_simple_mode_hint"という2つのキーをi18nに追加して。
-ko: 간이 모드, en: Simple mode, ja: 簡易モード, de: Einfachmodus
-```
-
-**Audit all locale files**
-```
-4개 언어 파일 전체를 감사해서 누락·중복 키를 모두 찾아서 고쳐줘.
-```
-
-**Fix a specific duplicate**
-```
-de.ts의 af_entry_mode_simple 키가 중복돼. 고쳐줘.
-```
-
-**Verify after changes**
-```
-최근에 추가한 buffett_indicator_* 키들이 4개 언어 파일에 모두 올바르게 들어가 있는지 확인해줘.
-```

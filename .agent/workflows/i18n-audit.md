@@ -1,31 +1,8 @@
 ---
-name: "i18n Audit"
-description: "Slash command that audits translation key consistency across all four locale files (ko/en/ja/de) and reports any missing, duplicate, or mismatched keys as a comment."
-labels: ["i18n", "audit"]
-on:
-  slash_command:
-    name: i18n-audit
-    roles: [admin, maintainer, write]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  issues: write
-  pull-requests: write
-
-engine: copilot
-
-tools:
-  github:
-    toolsets: [default]
-  bash: true
-
-safe-outputs:
-  add-comment:
-    max: 1
-
-timeout-minutes: 10
+description: "4개 언어 파일(ko/en/ja/de) 간 번역 키 일관성을 감사(Audit)하는 워크플로우"
 ---
+
+# i18n Audit Workflow
 
 You are an i18n audit assistant for the **portfolio-bridge** repository.
 
