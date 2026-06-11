@@ -73,7 +73,7 @@ export function FireChart({ data }: FireChartProps) {
                 const item = payload[0]?.payload as FireDataPoint;
                 return t.fire_tooltip_year(Number(label), item?.age);
               }}
-              formatter={(value: any, name: any) => [
+              formatter={(value: unknown, name: unknown) => [
                 formatCurrency(Number(value), baseCurrency, false),
                 name === "asset" ? t.fire_chart_asset : t.fire_chart_target,
               ]}
