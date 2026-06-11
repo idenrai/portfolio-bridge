@@ -25,9 +25,11 @@
 - **코드 수정 없이 순수 상담 및 질문 요청 시 (/ask):** `.agent/workflows/ask.md` 읽기
 - **현재 세션을 요약하고 파기할 시 (/discard):** `.agent/workflows/discard.md` 읽기
 - **ESLint 오류를 자동 수정할 시 (/lint-fix):** `.agent/workflows/lint-fix.md` 읽기
+- **심층 오류 분석 및 트러블슈팅 시 (/troubleshoot):** `.agent/workflows/troubleshoot.md` 읽기
 
 ## 🛠 Skills (도구 및 스킬)
 AI가 특정 도구나 기능이 필요할 때 로드하세요.
 - 프로젝트 인덱싱 및 컨텍스트 파악 필요 시: `.agent/skills/indexing-awareness/SKILL.md` 읽기
 - 현재 날짜 및 시간 파악 필요 시 (지식 컷오프 회피): `.agent/skills/knowledge-cutoff-awareness/SKILL.md` 읽기
 - Vercel/Next.js 성능 최적화 가이드 필요 시: `.agent/skills/vercel-react-best-practices/SKILL.md` 읽기
+- AI 프롬프트 작성, 개선 및 프롬프트 엔지니어링 필요 시 (예: 구루 프롬프트 작성): `.agent/skills/prompt-engineering/SKILL.md` 읽기
