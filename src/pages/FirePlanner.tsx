@@ -14,18 +14,19 @@ export function FirePlannerPage() {
   const result = useMemo(() => {
     // Convert current assets to base currency for the calculation
     const currentAssets = fromKRW(summary.totalValueKRW, baseCurrency, exchangeRates);
-    const target =
+    const savingsInBase = fromKRW(store.monthlySavings, baseCurrency, exchangeRates);
+    const targetInBase =
       store.mode === "target"
-        ? store.targetAmount
-        : getTargetAmountFromExpense(store.monthlyExpense, store.safeWithdrawalRate);
+        ? fromKRW(store.targetAmount, baseCurrency, exchangeRates)
+        : getTargetAmountFromExpense(fromKRW(store.monthlyExpense, baseCurrency, exchangeRates), store.safeWithdrawalRate);
 
-    if (target <= 0) return null;
+    if (targetInBase <= 0) return null;
 
     return calculateFire({
       currentAssets,
-      monthlySavings: store.monthlySavings,
+      monthlySavings: savingsInBase,
       expectedReturnRate: store.expectedReturnRate,
-      targetAmount: target,
+      targetAmount: targetInBase,
       currentAge: store.currentAge,
     });
   }, [summary.totalValueKRW, baseCurrency, exchangeRates, store]);
@@ -33,10 +34,10 @@ export function FirePlannerPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-20 pt-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-100">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">
           {t.fire_title}
         </h1>
-        <p className="text-sm text-slate-400 leading-relaxed">
+        <p className="text-sm text-slate-500 leading-relaxed">
           {t.fire_desc}
         </p>
       </div>
