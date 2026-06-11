@@ -8,4 +8,5 @@ export const STORAGE_KEYS = {
   GURU_SESSIONS: "portfolio-bridge-guru-sessions",
   PROFILE: "portfolio-bridge-profile",
   BROKERS: "portfolio-bridge-brokers",
+  FIRE: "portfolio-bridge-fire",
 } as const;

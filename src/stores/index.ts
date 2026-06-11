@@ -8,3 +8,5 @@ export type { GuruSessionSnapshot } from "./useGuruSessionStore";
 export { useProfileStore } from "./useProfileStore";
 export type { UserProfile } from "./useProfileStore";
 export { useBrokerStore } from "./useBrokerStore";
+export { useFireStore } from "./useFireStore";
+export type { FireCalculationMode } from "./useFireStore";

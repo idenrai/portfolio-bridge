@@ -6,6 +6,7 @@ import { AssetsPage } from "@/pages/Assets";
 import { GurusPage } from "@/pages/Gurus";
 import { SettingsPage } from "@/pages/Settings";
 import { AboutPage } from "@/pages/About";
+import { FirePlannerPage } from "@/pages/FirePlanner";
 import { useDataRefresh } from "@/hooks";
 import { initGoogleDriveService } from "@/utils";
 
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="assets" element={<AssetsPage />} />
           <Route path="gurus" element={<GurusPage />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="fire" element={<FirePlannerPage />} />
           <Route path="about" element={<AboutPage />} />
         </Route>
       </Routes>

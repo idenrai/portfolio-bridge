@@ -8,6 +8,7 @@ export function BottomNav() {
     { to: "/", label: t.nav_dashboard, icon: "📊" },
     { to: "/assets", label: t.nav_assets, icon: "💼" },
     { to: "/gurus", label: t.nav_gurus, icon: "💡" },
+    { to: "/fire", label: t.nav_fire, icon: "🌴" },
     { to: "/settings", label: t.nav_settings, icon: "⚙️" },
     { to: "/about", label: t.nav_about, icon: "ℹ️" },
   ];

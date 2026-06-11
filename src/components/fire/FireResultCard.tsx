@@ -1,0 +1,32 @@
+import { Card } from "@/components/common";
+import { useT } from "@/hooks";
+import type { FireResult } from "@/utils/calc/fire";
+
+interface FireResultCardProps {
+  result: FireResult | null;
+}
+
+export function FireResultCard({ result }: FireResultCardProps) {
+  const t = useT();
+
+  if (!result) return null;
+
+  return (
+    <Card className="p-8 flex flex-col items-center justify-center text-center gap-4 bg-gradient-to-br from-blue-900/40 to-slate-900 border-blue-800/50">
+      <div className="text-4xl mb-2">🏝️</div>
+      {result.alreadyReached ? (
+        <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
+          {t.fire_result_already_reached}
+        </h2>
+      ) : result.successYear !== null ? (
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-100">
+          {t.fire_result_success(result.successYear, result.successAge)}
+        </h2>
+      ) : (
+        <h2 className="text-xl md:text-2xl font-semibold text-slate-300">
+          계산 범위를 초과했습니다. 저축액이나 수익률을 높여보세요!
+        </h2>
+      )}
+    </Card>
+  );
+}
