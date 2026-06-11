@@ -23,6 +23,7 @@
 - **기존 코드 파악 및 종속성 분석 시:** `.agent/workflows/grasp.md` 읽기
 - **코드 및 개념 설명 요청 시:** `.agent/workflows/explain.md` 읽기
 - **코드 수정 없이 순수 상담 및 질문 요청 시 (/ask):** `.agent/workflows/ask.md` 읽기
+- **GitHub 이슈 기반 버그 수정 및 자동 PR 시 (/solve-issue):** `.agent/workflows/solve-issue.md` 읽기
 - **작업 완료 후 PR 자동 생성 시 (/pr):** `.agent/workflows/pr.md` 읽기
 - **현재 세션을 요약하고 파기할 시 (/discard):** `.agent/workflows/discard.md` 읽기
 - **ESLint 오류를 자동 수정할 시 (/lint-fix):** `.agent/workflows/lint-fix.md` 읽기
