@@ -1,3 +1,7 @@
+---
+description: GitHub 이슈 기반 버그 수정 및 자동 PR 생성
+---
+
 # GitHub Issue Solver Workflow
 
 **Activation:** User typed `/solve-issue` or `/solve-issue <number>`, or requested to resolve an open GitHub issue.

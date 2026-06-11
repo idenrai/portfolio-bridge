@@ -1,3 +1,7 @@
+---
+description: 심층 오류 원인 분석 및 트러블슈팅
+---
+
 # 오류 해결 워크플로우 (Troubleshoot)
 
 **Activation:** 이 워크플로우는 사용자가 `/troubleshoot` 명령어를 사용하거나 깊이 있는 오류 원인 분석 및 해결을 요청했을 때 활성화됩니다.
