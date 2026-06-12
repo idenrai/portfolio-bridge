@@ -46,35 +46,35 @@ export function FireInputForm() {
 
       <div className="grid grid-cols-1 gap-4">
         {/* Monthly Savings */}
-        <div className="flex items-center gap-3">
-          <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_monthly_savings} ({baseCurrency})</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-slate-700">{t.fire_monthly_savings} ({baseCurrency})</label>
           <input
             type="text"
             inputMode="numeric"
-            className={`${inputClass} flex-1 min-w-0`}
+            className={inputClass}
             value={store.monthlySavings ? formatWithComma(Number(fromKRW(store.monthlySavings, baseCurrency, exchangeRates).toFixed(0))) : ""}
             onChange={(e) => store.setMonthlySavings(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
           />
         </div>
 
         {/* Expected Return */}
-        <div className="flex items-center gap-3">
-          <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_expected_return}</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-slate-700">{t.fire_expected_return}</label>
           <input
             type="number"
             step="0.1"
-            className={`${inputClass} flex-1 min-w-0`}
+            className={inputClass}
             value={store.expectedReturnRate || ""}
             onChange={(e) => store.setExpectedReturnRate(Number(e.target.value))}
           />
         </div>
 
         {/* Current Age */}
-        <div className="flex items-center gap-3">
-          <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_age_label}</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-slate-700">{t.fire_age_label}</label>
           <input
             type="number"
-            className={`${inputClass} flex-1 min-w-0`}
+            className={inputClass}
             placeholder={t.fire_age_placeholder}
             value={store.currentAge || ""}
             onChange={(e) => store.setCurrentAge(e.target.value ? Number(e.target.value) : null)}
@@ -83,34 +83,34 @@ export function FireInputForm() {
 
         {/* Conditional Fields based on mode */}
         {store.mode === "target" ? (
-          <div className="flex items-center gap-3">
-            <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_target_amount} ({baseCurrency})</label>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-sm font-medium text-slate-700">{t.fire_target_amount} ({baseCurrency})</label>
             <input
               type="text"
               inputMode="numeric"
-              className={`${inputClass} flex-1 min-w-0`}
+              className={inputClass}
               value={store.targetAmount ? formatWithComma(Number(fromKRW(store.targetAmount, baseCurrency, exchangeRates).toFixed(0))) : ""}
               onChange={(e) => store.setTargetAmount(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
             />
           </div>
         ) : (
           <>
-            <div className="flex items-center gap-3">
-              <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_monthly_expense} ({baseCurrency})</label>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium text-slate-700">{t.fire_monthly_expense} ({baseCurrency})</label>
               <input
                 type="text"
                 inputMode="numeric"
-                className={`${inputClass} flex-1 min-w-0`}
+                className={inputClass}
                 value={store.monthlyExpense ? formatWithComma(Number(fromKRW(store.monthlyExpense, baseCurrency, exchangeRates).toFixed(0))) : ""}
                 onChange={(e) => store.setMonthlyExpense(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
               />
             </div>
-            <div className="flex items-center gap-3">
-              <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_safe_withdrawal_rate}</label>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium text-slate-700">{t.fire_safe_withdrawal_rate}</label>
               <input
                 type="number"
                 step="0.1"
-                className={`${inputClass} flex-1 min-w-0`}
+                className={inputClass}
                 value={store.safeWithdrawalRate || ""}
                 onChange={(e) => store.setSafeWithdrawalRate(Number(e.target.value))}
               />
