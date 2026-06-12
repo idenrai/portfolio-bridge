@@ -590,6 +590,7 @@ export interface Translations {
   fire_tooltip_year: (year: number, age: number | null) => string;
   fire_age_label: string;
   fire_age_placeholder: string;
+  fire_error_savings_exceed_target: string;
 
   // ─── Label maps (charts, dropdowns) ───────────────────────────────────────
   category_labels: Record<string, string>;

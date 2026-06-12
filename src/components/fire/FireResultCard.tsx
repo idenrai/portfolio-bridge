@@ -11,6 +11,19 @@ export function FireResultCard({ result }: FireResultCardProps) {
 
   if (!result) return null;
 
+  if (result.isInvalidInput) {
+    return (
+      <Card className="p-8 flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-blue-50 to-white border-blue-100">
+        <div className="flex items-start gap-2 px-4 py-3 rounded-lg border text-sm bg-amber-50 border-amber-200 text-amber-800 text-left w-full max-w-md">
+          <span className="text-base shrink-0 mt-0.5">⚠️</span>
+          <span className="leading-relaxed flex-1 font-medium">
+            {t.fire_error_savings_exceed_target}
+          </span>
+        </div>
+      </Card>
+    );
+  }
+
   return (
     <Card className="p-8 flex flex-col items-center justify-center text-center gap-4 bg-gradient-to-br from-blue-50 to-white border-blue-100">
       <div className="text-4xl mb-2">🏝️</div>

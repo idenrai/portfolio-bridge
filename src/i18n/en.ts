@@ -719,6 +719,7 @@ export const en: Translations = {
   fire_tooltip_year: (year, age) => `Year ${year}${age ? ` (Age ${age})` : ''}`,
   fire_age_label: "Current Age (Optional)",
   fire_age_placeholder: "e.g., 30",
+  fire_error_savings_exceed_target: "Monthly savings exceed the target asset amount. Please check your target amount or monthly savings.",
 
   category_labels: {
     dividend: "Dividend",

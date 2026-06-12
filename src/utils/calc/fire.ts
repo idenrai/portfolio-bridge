@@ -18,10 +18,21 @@ export interface FireResult {
   successYear: number | null;
   successAge: number | null;
   alreadyReached: boolean;
+  isInvalidInput?: boolean;
 }
 
 export function calculateFire(params: FireCalculationParams, maxYears: number = 60): FireResult {
   const { currentAssets, monthlySavings, expectedReturnRate, targetAmount, currentAge } = params;
+
+  if (monthlySavings > targetAmount) {
+    return {
+      data: [],
+      successYear: null,
+      successAge: null,
+      alreadyReached: false,
+      isInvalidInput: true,
+    };
+  }
   
   if (currentAssets >= targetAmount) {
     return {

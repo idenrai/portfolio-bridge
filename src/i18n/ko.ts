@@ -720,6 +720,7 @@ export const ko: Translations = {
   fire_tooltip_year: (year, age) => `${year}년 후${age ? ` (${age}세)` : ''}`,
   fire_age_label: "현재 나이 (선택)",
   fire_age_placeholder: "예: 30",
+  fire_error_savings_exceed_target: "월 저축액이 목표 자산 총액을 초과합니다. 목표 금액이나 월 저축액을 다시 확인해 주세요.",
 
   category_labels: {
     dividend: "배당",

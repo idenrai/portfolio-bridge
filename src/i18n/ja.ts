@@ -717,6 +717,7 @@ export const ja: Translations = {
   fire_tooltip_year: (year, age) => `${year}年後${age ? `（${age}歳）` : ''}`,
   fire_age_label: "現在の年齢（任意）",
   fire_age_placeholder: "例：30",
+  fire_error_savings_exceed_target: "毎月の貯蓄額が目標資産総額を超えています。目標金額または貯蓄額を再確認してください。",
 
   category_labels: {
     dividend: "配当",
