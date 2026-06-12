@@ -699,8 +699,8 @@ export const en: Translations = {
   currency_krw: "Won (KRW)",
   currency_eur: "Euro (EUR)",
 
-  nav_fire: "FIRE Planner",
-  fire_title: "FIRE & Retirement Planner",
+  nav_fire: "Freedom Planner",
+  fire_title: "Financial Freedom Planner",
   fire_desc: "Predict when you can achieve Financial Independence (FIRE) based on your current assets, savings, and expected returns.",
   fire_tab_target: "By Target Amount",
   fire_tab_expense: "By Monthly Expense (4% Rule)",
