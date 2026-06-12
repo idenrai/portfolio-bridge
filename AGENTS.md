@@ -27,7 +27,7 @@
 - **작업 완료 후 PR 자동 생성 시 (/pr):** `.agent/workflows/pr.md` 읽기
 - **현재 세션을 요약하고 파기할 시 (/discard):** `.agent/workflows/discard.md` 읽기
 - **ESLint 오류를 자동 수정할 시 (/lint-fix):** `.agent/workflows/lint-fix.md` 읽기
-- **심층 오류 분석 및 트러블슈팅 시 (/troubleshoot):** `.agent/workflows/troubleshoot.md` 읽기
+- **복잡한 문제의 심층 분석 및 해결 시 (/deep-dive):** `.agent/workflows/deep-dive.md` 읽기
 
 ## 🛠 Skills (도구 및 스킬)
 AI가 특정 도구나 기능이 필요할 때 로드하세요.
