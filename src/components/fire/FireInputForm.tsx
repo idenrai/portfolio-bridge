@@ -3,13 +3,27 @@ import { useT } from "@/hooks";
 import { useFireStore, useSettingsStore } from "@/stores";
 import { fromKRW, toKRW } from "@/utils";
 
+/** Format a number with thousand-separator commas for display */
+function formatWithComma(value: number): string {
+  return value.toLocaleString("en-US", { maximumFractionDigits: 0 });
+}
+
+/** Parse a comma-formatted string back to a plain number */
+function parseCommaNumber(str: string): number {
+  return Number(str.replace(/,/g, ""));
+}
+
 export function FireInputForm() {
   const t = useT();
   const { baseCurrency, exchangeRates } = useSettingsStore();
   const store = useFireStore();
 
+  /** Shared input style */
+  const inputClass =
+    "bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800";
+
   return (
-    <Card className="p-5 flex flex-col gap-5">
+    <Card className="p-5 flex flex-col gap-5 h-full">
       {/* Tabs */}
       <div className="flex gap-2 p-1 bg-slate-100 rounded-lg">
         <button
@@ -30,36 +44,37 @@ export function FireInputForm() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         {/* Monthly Savings */}
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm text-slate-600">{t.fire_monthly_savings} ({baseCurrency})</label>
+        <div className="flex items-center gap-3">
+          <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_monthly_savings} ({baseCurrency})</label>
           <input
-            type="number"
-            className="bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800"
-            value={store.monthlySavings ? Number(fromKRW(store.monthlySavings, baseCurrency, exchangeRates).toFixed(0)) : ""}
-            onChange={(e) => store.setMonthlySavings(toKRW(Number(e.target.value), baseCurrency, exchangeRates))}
+            type="text"
+            inputMode="numeric"
+            className={`${inputClass} flex-1 min-w-0`}
+            value={store.monthlySavings ? formatWithComma(Number(fromKRW(store.monthlySavings, baseCurrency, exchangeRates).toFixed(0))) : ""}
+            onChange={(e) => store.setMonthlySavings(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
           />
         </div>
 
         {/* Expected Return */}
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm text-slate-600">{t.fire_expected_return}</label>
+        <div className="flex items-center gap-3">
+          <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_expected_return}</label>
           <input
             type="number"
             step="0.1"
-            className="bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800"
+            className={`${inputClass} flex-1 min-w-0`}
             value={store.expectedReturnRate || ""}
             onChange={(e) => store.setExpectedReturnRate(Number(e.target.value))}
           />
         </div>
 
         {/* Current Age */}
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm text-slate-600">{t.fire_age_label}</label>
+        <div className="flex items-center gap-3">
+          <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_age_label}</label>
           <input
             type="number"
-            className="bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800"
+            className={`${inputClass} flex-1 min-w-0`}
             placeholder={t.fire_age_placeholder}
             value={store.currentAge || ""}
             onChange={(e) => store.setCurrentAge(e.target.value ? Number(e.target.value) : null)}
@@ -68,32 +83,34 @@ export function FireInputForm() {
 
         {/* Conditional Fields based on mode */}
         {store.mode === "target" ? (
-          <div className="flex flex-col gap-1.5">
-            <label className="text-sm text-slate-600">{t.fire_target_amount} ({baseCurrency})</label>
+          <div className="flex items-center gap-3">
+            <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_target_amount} ({baseCurrency})</label>
             <input
-              type="number"
-              className="bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800"
-              value={store.targetAmount ? Number(fromKRW(store.targetAmount, baseCurrency, exchangeRates).toFixed(0)) : ""}
-              onChange={(e) => store.setTargetAmount(toKRW(Number(e.target.value), baseCurrency, exchangeRates))}
+              type="text"
+              inputMode="numeric"
+              className={`${inputClass} flex-1 min-w-0`}
+              value={store.targetAmount ? formatWithComma(Number(fromKRW(store.targetAmount, baseCurrency, exchangeRates).toFixed(0))) : ""}
+              onChange={(e) => store.setTargetAmount(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
             />
           </div>
         ) : (
           <>
-            <div className="flex flex-col gap-1.5">
-              <label className="text-sm text-slate-600">{t.fire_monthly_expense} ({baseCurrency})</label>
+            <div className="flex items-center gap-3">
+              <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_monthly_expense} ({baseCurrency})</label>
               <input
-                type="number"
-                className="bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800"
-                value={store.monthlyExpense ? Number(fromKRW(store.monthlyExpense, baseCurrency, exchangeRates).toFixed(0)) : ""}
-                onChange={(e) => store.setMonthlyExpense(toKRW(Number(e.target.value), baseCurrency, exchangeRates))}
+                type="text"
+                inputMode="numeric"
+                className={`${inputClass} flex-1 min-w-0`}
+                value={store.monthlyExpense ? formatWithComma(Number(fromKRW(store.monthlyExpense, baseCurrency, exchangeRates).toFixed(0))) : ""}
+                onChange={(e) => store.setMonthlyExpense(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
               />
             </div>
-            <div className="flex flex-col gap-1.5">
-              <label className="text-sm text-slate-600">{t.fire_safe_withdrawal_rate}</label>
+            <div className="flex items-center gap-3">
+              <label className="text-sm text-slate-600 w-36 shrink-0">{t.fire_safe_withdrawal_rate}</label>
               <input
                 type="number"
                 step="0.1"
-                className="bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800"
+                className={`${inputClass} flex-1 min-w-0`}
                 value={store.safeWithdrawalRate || ""}
                 onChange={(e) => store.setSafeWithdrawalRate(Number(e.target.value))}
               />

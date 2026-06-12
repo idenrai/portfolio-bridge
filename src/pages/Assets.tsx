@@ -108,7 +108,7 @@ export function AssetsPage() {
   return (
     <div className="space-y-4 md:space-y-6">
       <div className="flex items-center justify-between gap-2 flex-wrap">
-        <h2 className="text-lg font-bold text-slate-800">{t.asset_title}</h2>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">{t.asset_title}</h1>
         <div className="flex items-center gap-2">
           <Button variant="secondary" size="sm" onClick={() => setBrokerManagerOpen(true)}>
             {t.broker_manage_btn}

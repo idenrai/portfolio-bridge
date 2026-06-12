@@ -93,7 +93,7 @@ export function DashboardPage() {
     <div className="space-y-4 md:space-y-6">
       {/* 타이틀 + 갱신 바 */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-lg font-bold text-slate-800">{t.dash_title}</h2>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">{t.dash_title}</h1>
 
         <button
           type="button"

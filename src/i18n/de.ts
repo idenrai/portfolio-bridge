@@ -710,8 +710,8 @@ export const de: Translations = {
   currency_krw: "Won (KRW)",
   currency_eur: "Euro (EUR)",
 
-  nav_fire: "FIRE Planer",
-  fire_title: "FIRE & Ruhestandsplaner",
+  nav_fire: "Freiheitsplaner",
+  fire_title: "Finanzielle Freiheit Planer",
   fire_desc: "Prognostizieren Sie, wann Sie finanzielle Unabhängigkeit (FIRE) erreichen können, basierend auf Ihrem aktuellen Vermögen, Ihren Ersparnissen und der erwarteten Rendite.",
   fire_tab_target: "Nach Zielbetrag",
   fire_tab_expense: "Nach monatlichen Ausgaben (4%-Regel)",

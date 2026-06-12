@@ -697,8 +697,8 @@ export const ja: Translations = {
   currency_krw: "ウォン (KRW)",
   currency_eur: "ユーロ (EUR)",
 
-  nav_fire: "FIREプランナー",
-  fire_title: "FIRE・リタイアメントプランナー",
+  nav_fire: "経済的自由プランナー",
+  fire_title: "経済的自由プランナー",
   fire_desc: "現在の資産、貯蓄額、期待利回りに基づいて、いつ経済的自立（FIRE）を達成できるかを予測します。",
   fire_tab_target: "目標金額で計算",
   fire_tab_expense: "月間生活費で計算（4%ルール）",

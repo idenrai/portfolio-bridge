@@ -25,7 +25,7 @@ export function FireChart({ data }: FireChartProps) {
   if (!data || data.length === 0) return null;
 
   return (
-    <Card className="p-5 flex flex-col gap-4">
+    <Card className="p-5 flex flex-col gap-4 h-full flex-1">
       <h3 className="text-lg font-bold text-slate-800">{t.fire_chart_title}</h3>
       <div className="h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
