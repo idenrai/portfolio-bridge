@@ -13,7 +13,8 @@ export function FirePlannerPage() {
   // Calculate FIRE projection
   const result = useMemo(() => {
     // Convert current assets to base currency for the calculation
-    const currentAssets = fromKRW(summary.totalValueKRW, baseCurrency, exchangeRates);
+    const currentAssetsKRW = store.usePortfolioAssets ? summary.totalValueKRW : store.manualCurrentAssets;
+    const currentAssets = fromKRW(currentAssetsKRW, baseCurrency, exchangeRates);
     const savingsInBase = fromKRW(store.monthlySavings, baseCurrency, exchangeRates);
     const targetInBase =
       store.mode === "target"
