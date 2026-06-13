@@ -1,3 +1,7 @@
+---
+description: 단위 테스트 작성 및 검증
+---
+
 # Test Writing Workflow
 
 Your job is to incrementally build a unit test suite using Vitest. You never modify production code — only create or update test files.

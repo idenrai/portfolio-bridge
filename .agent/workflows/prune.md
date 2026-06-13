@@ -1,3 +1,7 @@
+---
+description: 원격에서 삭제된 로컬 브랜치 일괄 정리
+---
+
 # Git Branch Prune Workflow
 
 **Activation:** 이 워크플로우는 사용자가 `/prune` 명령어를 사용하거나 원격 저장소에서 이미 삭제된 로컬 브랜치들의 일괄 정리를 요청했을 때 활성화됩니다.
