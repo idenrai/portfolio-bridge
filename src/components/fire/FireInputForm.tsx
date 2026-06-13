@@ -1,5 +1,5 @@
 import { Card } from "@/components/common";
-import { useT } from "@/hooks";
+import { useT, usePortfolio } from "@/hooks";
 import { useFireStore, useSettingsStore } from "@/stores";
 import { fromKRW, toKRW } from "@/utils";
 
@@ -17,6 +17,7 @@ export function FireInputForm() {
   const t = useT();
   const { baseCurrency, exchangeRates } = useSettingsStore();
   const store = useFireStore();
+  const { summary } = usePortfolio();
 
   /** Shared input style */
   const inputClass =
@@ -45,6 +46,39 @@ export function FireInputForm() {
       </div>
 
       <div className="grid grid-cols-1 gap-4">
+        {/* Current Assets */}
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-medium text-slate-700">{t.fire_current_assets} ({baseCurrency})</label>
+          <div className="flex items-center gap-2 mb-0.5">
+            <input
+              type="checkbox"
+              id="usePortfolioAssets"
+              checked={store.usePortfolioAssets}
+              onChange={(e) => store.setUsePortfolioAssets(e.target.checked)}
+              className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500 cursor-pointer"
+            />
+            <label htmlFor="usePortfolioAssets" className="text-sm text-slate-600 cursor-pointer select-none">
+              {t.fire_use_portfolio_assets}
+            </label>
+          </div>
+          <input
+            type="text"
+            inputMode="numeric"
+            className={`${inputClass} ${store.usePortfolioAssets ? 'bg-slate-50 text-slate-500 cursor-not-allowed' : ''}`}
+            disabled={store.usePortfolioAssets}
+            value={
+              store.usePortfolioAssets
+                ? formatWithComma(Number(fromKRW(summary.totalValueKRW, baseCurrency, exchangeRates).toFixed(0)))
+                : (store.manualCurrentAssets ? formatWithComma(Number(fromKRW(store.manualCurrentAssets, baseCurrency, exchangeRates).toFixed(0))) : "")
+            }
+            onChange={(e) => {
+              if (!store.usePortfolioAssets) {
+                store.setManualCurrentAssets(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates));
+              }
+            }}
+          />
+        </div>
+
         {/* Monthly Savings */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-slate-700">{t.fire_monthly_savings} ({baseCurrency})</label>
@@ -67,6 +101,7 @@ export function FireInputForm() {
             value={store.expectedReturnRate || ""}
             onChange={(e) => store.setExpectedReturnRate(Number(e.target.value))}
           />
+          <p className="text-xs text-slate-500 leading-relaxed mt-0.5">{t.fire_helper_expected_return}</p>
         </div>
 
         {/* Current Age */}
@@ -114,6 +149,7 @@ export function FireInputForm() {
                 value={store.safeWithdrawalRate || ""}
                 onChange={(e) => store.setSafeWithdrawalRate(Number(e.target.value))}
               />
+              <p className="text-xs text-slate-500 leading-relaxed mt-0.5">{t.fire_helper_safe_withdrawal}</p>
             </div>
           </>
         )}

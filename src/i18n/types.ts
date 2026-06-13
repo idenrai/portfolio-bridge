@@ -575,11 +575,14 @@ export interface Translations {
   fire_desc: string;
   fire_tab_target: string;
   fire_tab_expense: string;
+  fire_use_portfolio_assets: string;
   fire_current_assets: string;
   fire_monthly_savings: string;
+  fire_helper_expected_return: string;
   fire_expected_return: string;
   fire_target_amount: string;
   fire_monthly_expense: string;
+  fire_helper_safe_withdrawal: string;
   fire_safe_withdrawal_rate: string;
   fire_calculate_btn: string;
   fire_result_success: (years: number, age: number | null) => string;
