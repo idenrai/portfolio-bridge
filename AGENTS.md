@@ -28,6 +28,7 @@
 - **현재 세션을 요약하고 파기할 시 (/discard):** `.agent/workflows/discard.md` 읽기
 - **ESLint 오류를 자동 수정할 시 (/lint-fix):** `.agent/workflows/lint-fix.md` 읽기
 - **복잡한 문제의 심층 분석 및 해결 시 (/deep-dive):** `.agent/workflows/deep-dive.md` 읽기
+- **원격에서 삭제된 로컬 브랜치 일괄 정리 시 (/prune):** `.agent/workflows/prune.md` 읽기
 
 ## 🛠 Skills (도구 및 스킬)
 AI가 특정 도구나 기능이 필요할 때 로드하세요.
