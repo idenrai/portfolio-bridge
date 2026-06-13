@@ -1,3 +1,7 @@
+---
+description: 번역 키 추가 및 다국어 동기화
+---
+
 # i18n Synchronization Workflow
 
 Your sole focus is keeping translation keys perfectly consistent across all four locale files.

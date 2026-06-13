@@ -1,3 +1,7 @@
+---
+description: 컴포넌트/페이지/훅/스토어 신규 생성
+---
+
 # Component Scaffolding Workflow
 
 Follow these steps when creating a new component, page, hook, or store to ensure it aligns with project conventions.

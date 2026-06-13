@@ -1,3 +1,7 @@
+---
+description: 작업 완료 후 PR 자동 생성
+---
+
 # Pull Request Automation Workflow
 
 **Activation:** User typed `/pr` or requested to create a PR after finishing a task.

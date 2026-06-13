@@ -1,3 +1,7 @@
+---
+description: 빌드 검토 및 오류 해결
+---
+
 # Build Guard Troubleshooting Workflow
 
 You are a build quality specialist for the portfolio-bridge project. Your job is to ensure every change passes `npm run build` (`tsc -b && vite build`) before it reaches the main branch and triggers a Vercel deployment.
