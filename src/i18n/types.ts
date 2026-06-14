@@ -585,7 +585,10 @@ export interface Translations {
   fire_helper_safe_withdrawal: string;
   fire_safe_withdrawal_rate: string;
   fire_calculate_btn: string;
-  fire_result_success: (years: number, age: number | null) => string;
+  fire_res_years_label: string;
+  fire_res_age_label: string;
+  fire_res_yrs: string;
+  fire_res_out_of_bounds: string;
   fire_result_already_reached: string;
   fire_chart_title: string;
   fire_chart_asset: string;
