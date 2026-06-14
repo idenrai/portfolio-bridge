@@ -14,16 +14,15 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 bg-slate-900/90 backdrop-blur border-t border-slate-800/50 md:hidden safe-bottom">
+    <nav className="fixed bottom-0 inset-x-0 z-50 bg-black border-t border-zinc-800 md:hidden safe-bottom">
       <div className="flex justify-around items-center h-14 px-1">
         {NAV_ITEMS.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             end={item.to === "/"}
-            className={({ isActive }) =>
-              `flex flex-col items-center justify-center gap-0.5 flex-1 py-1 text-[10px] transition-colors ${
-                isActive ? "text-emerald-400 font-semibold drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "text-slate-500"
+              `flex flex-col items-center justify-center gap-0.5 flex-1 py-1 text-[10px] transition-colors border-r last:border-r-0 border-zinc-800 ${
+                isActive ? "bg-zinc-200 text-black font-bold" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900"
               }`
             }
           >

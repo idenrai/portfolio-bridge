@@ -5,7 +5,7 @@ import { BottomNav } from "./BottomNav";
 
 export function Layout() {
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-300">
+    <div className="flex min-h-screen bg-black text-zinc-300 font-mono selection:bg-zinc-800">
       {/* 데스크톱 사이드바 (md 이상) */}
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
