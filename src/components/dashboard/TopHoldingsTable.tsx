@@ -41,14 +41,14 @@ export function TopHoldingsTable({ summary }: Props) {
 
   const display = showAll ? sorted : sorted.slice(0, 10);
 
-  const thCls = "text-[11px] text-slate-500 font-medium px-3 py-2 text-right";
+  const thCls = "text-[11px] text-zinc-400 font-bold px-3 py-2 text-right";
   const tdCls = "px-3 py-2 text-right text-sm";
 
   const sortBtn = (key: SortKey, label: string) => (
     <th className="p-0">
       <button
         onClick={() => setSortKey(key)}
-        className={`${thCls} w-full cursor-pointer hover:text-slate-800 ${sortKey === key ? "text-blue-600 font-semibold" : ""}`}
+        className={`${thCls} w-full cursor-pointer hover:text-white ${sortKey === key ? "text-white font-bold" : ""}`}
       >
         {label}
         {sortKey === key ? " ↓" : ""}
@@ -75,11 +75,11 @@ export function TopHoldingsTable({ summary }: Props) {
       <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
         <table className="w-full min-w-160">
           <thead>
-            <tr className="border-b border-slate-100">
-              <th className="text-[11px] text-slate-500 font-medium px-3 py-2 text-left">
+            <tr className="border-b border-zinc-800">
+              <th className="text-[11px] text-zinc-400 font-bold px-3 py-2 text-left">
                 {t.holdings_col_name}
               </th>
-              <th className="text-[11px] text-slate-500 font-medium px-3 py-2 text-left">
+              <th className="text-[11px] text-zinc-400 font-bold px-3 py-2 text-left">
                 {t.holdings_col_type}
               </th>
               {sortBtn("value", t.holdings_col_value)}
@@ -92,10 +92,10 @@ export function TopHoldingsTable({ summary }: Props) {
             {display.map((h) => (
               <tr
                 key={h.id}
-                className="border-b border-slate-50 hover:bg-slate-50/50"
+                className="border-b border-zinc-900 hover:bg-zinc-900"
               >
                 <td className="px-3 py-2 text-left">
-                  <div className="text-sm font-medium text-slate-800 max-w-72 wrap-break-word">
+                  <div className="text-sm font-bold text-white max-w-72 wrap-break-word">
                     {h.type === "cash"
                       ? ({
                           KRW: t.currency_krw,
@@ -105,21 +105,21 @@ export function TopHoldingsTable({ summary }: Props) {
                         }[h.currency as CurrencyCode] ?? h.name)
                       : h.name}
                   </div>
-                  <div className="text-[10px] text-slate-400">
+                  <div className="text-[10px] text-zinc-500">
                     {h.ticker && <span>{h.ticker}</span>}
                     {h.category && (
-                      <span className="ml-1 px-1 py-0.5 bg-slate-100 rounded text-[9px]">
+                      <span className="ml-1 px-1 py-0.5 bg-zinc-800 text-zinc-300 rounded text-[9px]">
                         {t.category_labels[h.category as AssetCategory] ??
                           h.category}
                       </span>
                     )}
                   </div>
                 </td>
-                <td className="px-3 py-2 text-left text-[11px] text-slate-500 whitespace-nowrap">
+                <td className="px-3 py-2 text-left text-[11px] text-zinc-500 whitespace-nowrap">
                   <div>
                     {t.asset_type_labels[h.type as AssetType] ?? h.type}
                   </div>
-                  <div className="text-[10px] text-slate-400">
+                  <div className="text-[10px] text-zinc-600">
                     {t.market_labels[h.market as Market] ?? h.market}
                   </div>
                 </td>
@@ -127,28 +127,28 @@ export function TopHoldingsTable({ summary }: Props) {
                   {formatCurrency(convert(h.valueKRW), baseCurrency)}
                 </td>
                 <td
-                  className={`${tdCls} ${h.type === "cash" ? "text-slate-400" : h.pnlKRW >= 0 ? "text-red-600" : "text-blue-600"}`}
+                  className={`${tdCls} ${h.type === "cash" ? "text-zinc-600" : h.pnlKRW >= 0 ? "text-red-500" : "text-blue-500"}`}
                 >
                   {h.type === "cash"
                     ? "-"
                     : formatCurrency(convert(h.pnlKRW), baseCurrency)}
                 </td>
                 <td
-                  className={`${tdCls} font-medium ${h.type === "cash" ? "text-slate-400" : h.returnPercent >= 0 ? "text-red-600" : "text-blue-600"}`}
+                  className={`${tdCls} font-bold ${h.type === "cash" ? "text-zinc-600" : h.returnPercent >= 0 ? "text-red-500" : "text-blue-500"}`}
                 >
                   {h.type === "cash" ? "-" : formatPercent(h.returnPercent)}
                 </td>
                 <td className={tdCls}>
                   <div className="flex items-center justify-end gap-1.5">
-                    <div className="w-12 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="w-12 h-1.5 bg-zinc-800 rounded-none overflow-hidden border border-zinc-700">
                       <div
-                        className="h-full bg-blue-500 rounded-full"
+                        className="h-full bg-zinc-300 rounded-none"
                         style={{
                           width: `${Math.min(h.weightPercent, 100)}%`,
                         }}
                       />
                     </div>
-                    <span className="text-[11px] text-slate-600 w-10 text-right">
+                    <span className="text-[11px] text-zinc-500 w-10 text-right">
                       {h.weightPercent.toFixed(1)}%
                     </span>
                   </div>

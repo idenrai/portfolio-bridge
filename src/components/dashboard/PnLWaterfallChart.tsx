@@ -30,7 +30,7 @@ export function PnLWaterfallChart({ assets }: Props) {
   const data = assets
     .filter((a) => a.type !== "cash")
     .map((a) => ({
-      name: a.ticker ?? a.name,
+      name: a.name,
       fullName: a.name,
       pnlKRW: toKRW(assetPnL(a), a.currency, rates),
     }))
@@ -72,10 +72,10 @@ export function PnLWaterfallChart({ assets }: Props) {
           <YAxis
             type="category"
             dataKey="name"
-            tick={{ fontSize: 10, fill: "#475569" }}
+            tick={{ fontSize: 10, fill: "#71717a" }}
             tickLine={false}
             axisLine={false}
-            width={80}
+            width={130}
           />
           <Tooltip
             formatter={(value: number | undefined) => [
@@ -87,9 +87,12 @@ export function PnLWaterfallChart({ assets }: Props) {
             }
             contentStyle={{
               fontSize: 12,
-              borderRadius: 8,
-              border: "1px solid #e2e8f0",
+              borderRadius: 0,
+              border: "1px solid #27272a",
+              backgroundColor: "#000",
+              color: "#fff",
             }}
+            itemStyle={{ color: "#fff" }}
           />
           <ReferenceLine x={0} stroke="#cbd5e1" strokeWidth={1} />
           <Bar dataKey="pnl" radius={[0, 3, 3, 0]}>
@@ -97,7 +100,7 @@ export function PnLWaterfallChart({ assets }: Props) {
               <Cell
                 key={i}
                 fill={d.pnl >= 0 ? "#ef4444" : "#3b82f6"}
-                fillOpacity={0.8}
+                fillOpacity={0.9}
               />
             ))}
           </Bar>

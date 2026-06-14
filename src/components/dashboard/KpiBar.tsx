@@ -35,7 +35,7 @@ export function KpiBar({ summary }: Props) {
       label: t.kpi_pnl,
       value: formatCurrency(convert(summary.totalPnLKRW), baseCurrency),
       sub: formatPercent(summary.totalReturnPercent),
-      color: summary.totalPnLKRW >= 0 ? "text-white" : "text-zinc-500 line-through",
+      color: summary.totalPnLKRW >= 0 ? "text-red-500" : "text-blue-500",
     },
     {
       label: t.holdings_title,

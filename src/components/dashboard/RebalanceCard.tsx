@@ -22,7 +22,7 @@ export function RebalanceCard({ rebalancing }: Props) {
   if (significant.length === 0) {
     return (
       <Card title={t.rebalance_title}>
-        <div className="text-sm text-slate-400 py-4 text-center">
+        <div className="text-sm text-zinc-500 py-4 text-center">
           {t.rebalance_ok}
         </div>
       </Card>
@@ -41,19 +41,19 @@ export function RebalanceCard({ rebalancing }: Props) {
             return (
               <div
                 key={r.category}
-                className="flex items-center justify-between py-1.5 border-b border-slate-50 last:border-0"
+                className="flex items-center justify-between py-1.5 border-b border-zinc-800 last:border-0"
               >
                 <div>
-                  <span className="text-sm font-medium text-slate-700">
+                  <span className="text-sm font-bold text-zinc-200">
                     {label}
                   </span>
-                  <span className="ml-2 text-[11px] text-slate-400">
+                  <span className="ml-2 text-[11px] text-zinc-500">
                     {r.currentPercent.toFixed(1)}% → {r.targetPercent}%
                   </span>
                 </div>
                 <span
                   className={`text-sm font-medium ${
-                    isBuy ? "text-red-600" : "text-blue-600"
+                    isBuy ? "text-red-500" : "text-blue-500"
                   }`}
                 >
                   {isBuy ? t.rebalance_buy + " " : t.rebalance_sell + " "}

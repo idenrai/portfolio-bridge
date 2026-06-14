@@ -8,6 +8,10 @@
 @layer base {
   body {
     @apply bg-black text-zinc-300 font-mono antialiased selection:bg-zinc-800;
+    color-scheme: dark;
+  }
+  select, input, textarea {
+    @apply bg-black text-zinc-200 border-zinc-800 outline-none focus:border-zinc-500 rounded-none;
   }
 }
 
