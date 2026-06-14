@@ -29,20 +29,20 @@ export function Modal({
     <dialog
       ref={dialogRef}
       onClose={onClose}
-      className={`${maxWidth} w-[calc(100%-1rem)] sm:w-full rounded-xl border-none shadow-2xl backdrop:bg-black/60 p-0 max-h-[85vh] sm:max-h-[90vh] flex flex-col`}
+      className={`${maxWidth} w-[calc(100%-1rem)] sm:w-full rounded-none border-none shadow-none backdrop:bg-black/80 p-0 max-h-[85vh] sm:max-h-[90vh] flex flex-col`}
     >
       {open && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl flex flex-col min-h-0 max-h-[85vh] sm:max-h-[90vh]">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-none flex flex-col min-h-0 max-h-[85vh] sm:max-h-[90vh]">
           {title && (
-            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-800/50 shrink-0">
-              <h2 className="text-base font-semibold text-slate-200">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-zinc-800 shrink-0">
+              <h2 className="text-base font-bold text-white">
                 {title}
               </h2>
               <button
                 onClick={onClose}
-                className="text-slate-500 hover:text-slate-300 text-lg leading-none cursor-pointer"
+                className="text-zinc-500 hover:text-zinc-300 text-sm leading-none cursor-pointer font-bold"
               >
-                ✕
+                [ X ]
               </button>
             </div>
           )}

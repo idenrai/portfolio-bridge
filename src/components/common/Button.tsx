@@ -9,11 +9,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary: "bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]",
-  secondary:
-    "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700",
-  danger: "bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500/30",
-  ghost: "text-slate-400 hover:bg-slate-800",
+  primary: "bg-zinc-200 text-black hover:bg-white border border-zinc-200 hover:border-white",
+  secondary: "bg-black text-zinc-300 hover:bg-zinc-900 border border-zinc-800",
+  danger: "bg-black text-zinc-500 hover:bg-white hover:text-black border border-zinc-800 hover:border-white",
+  ghost: "text-zinc-500 hover:bg-zinc-900 hover:text-zinc-300",
 };
 
 export function Button({
@@ -26,10 +25,12 @@ export function Button({
   const sizeClass = size === "sm" ? "px-3 py-1.5 text-xs" : "px-4 py-2 text-sm";
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${VARIANT_CLASSES[variant]} ${sizeClass} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 font-bold transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${VARIANT_CLASSES[variant]} ${sizeClass} ${className}`}
       {...rest}
     >
+      <span className="text-inherit opacity-40">{"["}</span>
       {children}
+      <span className="text-inherit opacity-40">{"]"}</span>
     </button>
   );
 }

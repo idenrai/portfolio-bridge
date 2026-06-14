@@ -35,7 +35,7 @@ export function KpiBar({ summary }: Props) {
       label: t.kpi_pnl,
       value: formatCurrency(convert(summary.totalPnLKRW), baseCurrency),
       sub: formatPercent(summary.totalReturnPercent),
-      color: summary.totalPnLKRW >= 0 ? "text-red-600" : "text-blue-600",
+      color: summary.totalPnLKRW >= 0 ? "text-white" : "text-zinc-500 line-through",
     },
     {
       label: t.holdings_title,
@@ -47,10 +47,10 @@ export function KpiBar({ summary }: Props) {
       value: `${summary.cashPercent.toFixed(1)}%`,
       color:
         summary.cashPercent > 20
-          ? "text-amber-500"
+          ? "text-white bg-zinc-800 px-1"
           : summary.cashPercent < 3
-            ? "text-red-500"
-            : "text-slate-200",
+            ? "text-zinc-500 underline"
+            : "text-zinc-300",
     },
     {
       label: t.kpi_fx_exposure,
@@ -59,7 +59,7 @@ export function KpiBar({ summary }: Props) {
         .filter((e) => e.currency !== baseCurrency)
         .map((e) => `${e.currency} ${e.percent.toFixed(0)}%`)
         .join(" · "),
-      color: fxExposure > 40 ? "text-amber-500" : "text-slate-200",
+      color: fxExposure > 40 ? "text-white bg-zinc-800 px-1" : "text-zinc-300",
     },
   ];
 
@@ -68,18 +68,18 @@ export function KpiBar({ summary }: Props) {
       {items.map((item, i) => (
         <div
           key={i}
-          className="bg-slate-900/50 rounded-xl border border-slate-800 shadow-sm px-4 py-3"
+          className="bg-black border border-zinc-800 px-4 py-3"
         >
-          <p className="text-[11px] text-slate-500 font-medium mb-0.5">
+          <p className="text-xs text-zinc-500 font-bold mb-0.5">
             {item.label}
           </p>
           <p
-            className={`text-lg font-bold leading-tight ${item.color ?? "text-slate-200"}`}
+            className={`text-lg font-bold leading-tight inline-block ${item.color ?? "text-zinc-300"}`}
           >
             {item.value}
           </p>
           {item.sub && (
-            <p className="text-[11px] text-slate-400 mt-0.5 truncate">
+            <p className="text-xs text-zinc-600 mt-0.5 truncate">
               {item.sub}
             </p>
           )}

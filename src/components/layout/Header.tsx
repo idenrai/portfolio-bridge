@@ -34,12 +34,13 @@ export function Header() {
   };
 
   return (
-    <header className="h-14 bg-slate-900/80 backdrop-blur border-b border-slate-800/50 flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
+    <header className="h-14 bg-black border-b border-zinc-800 flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
       {/* 모바일: 로고 표시 / 데스크톱: 빈 공간 */}
       <div className="md:hidden">
         <span className="text-sm font-bold tracking-tight">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Portfolio</span>
-          <span className="text-slate-400">Bridge</span>
+          <span className="text-zinc-500">{'> '}</span>
+          <span className="text-white">PORTFOLIO_BRIDGE</span>
+          <span className="text-zinc-500 animate-pulse">_</span>
         </span>
       </div>
       <div className="hidden md:block" />
@@ -50,10 +51,10 @@ export function Header() {
             <button
               key={l}
               onClick={() => handleLangChange(l)}
-              className={`text-xs px-2 py-1 rounded transition-colors cursor-pointer border ${
+              className={`text-xs px-2 py-1 transition-colors cursor-pointer border ${
                 lang === l
-                  ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50"
-                  : "text-slate-400 border-transparent hover:bg-slate-800"
+                  ? "bg-zinc-200 text-black border-zinc-200 font-bold"
+                  : "text-zinc-500 border-transparent hover:bg-zinc-900 hover:text-zinc-300"
               }`}
             >
               {LANG_LABELS[l]}
