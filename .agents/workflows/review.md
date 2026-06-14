@@ -37,7 +37,7 @@ description: 코드 리뷰 및 피드백
 ---
 
 **출력 포맷:**
-(`./.agent/rules/language-strategies.md`에 정의된 전략에 따르십시오)
+(`./.agents/rules/language-strategies.md`에 정의된 전략에 따르십시오)
 1. **리뷰 관점 (Review Perspective)**: 예: "관점: 보안" 또는 "관점: 논문 심사"
 2. 🔴 **치명적 문제 (Critical Issues)**: 버그, 리스크, 논리적 결함.
 3. 🟡 **제안 사항 (Suggestions)**: 리팩토링, 최적화.

@@ -5,6 +5,7 @@
 ## 📌 Core Rules (항상 준수)
 코딩 전반에 적용되는 필수 규칙입니다. 코드 작성 전 반드시 다음 파일들을 확인하세요.
 - 프로젝트 전체 아키텍처 및 스택: `.agents/rules/project-context.md` 읽기
+- 프로젝트 보안 및 데이터 취급 원칙: `.agents/rules/security.md` 읽기
 - React/TypeScript/스타일링/Zustand 코딩 표준: `.agents/rules/react-typescript.md` 읽기
 - GitHub 커밋 규칙: `.agents/rules/git-commit-rules.md` 읽기
 - **오픈소스 스킬 탐색 (필수):** 새로운 지시를 받으면, 코딩이나 계획 수립에 앞서 `npx skills find [키워드]` 명령어로 필요한 도구나 가이드라인(Skill)이 있는지 검색하세요. 적합한 스킬이 발견되면 `npx skills add <package> -y`를 통해 프로젝트에 설치 및 적용한 후 작업을 진행하세요.

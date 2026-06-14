@@ -34,7 +34,7 @@ description: 컨텍스트 파악 및 종속성 분석
 ---
 
 **출력 포맷:**
-(`./.agent/rules/language-strategies.md`에 정의된 전략에 따르십시오)
+(`./.agents/rules/language-strategies.md`에 정의된 전략에 따르십시오)
 1.  **역할 정의 (Role Definition)**
 2.  **종속성 맵 (Dependency Map)**:
     - ⬅️ **피참조 (Used By)**: ...

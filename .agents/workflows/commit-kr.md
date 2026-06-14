@@ -10,7 +10,7 @@ description: 커밋 메시지 생성 (한국어)
 스테이징된 변경사항으로부터 Conventional Commits 형식의 커밋 메시지를 **한국어**로 생성합니다.
 
 > **주의:** 이 워크플로우는 git의 상태를 읽지만 파일 변경은 하지 않습니다.
-> 커밋 규칙은 `.agent/rules/git-commit-rules.md`에 정의되어 있습니다.
+> 커밋 규칙은 `.agents/rules/git-commit-rules.md`에 정의되어 있습니다.
 
 ---
 
@@ -30,7 +30,7 @@ description: 커밋 메시지 생성 (한국어)
 ## 3. 커밋 메시지 생성
 - **목적:** 그대로 복사해서 사용할 수 있는 커밋 메시지를 출력합니다.
 - **액션:**
-  - `.agent/rules/git-commit-rules.md`의 모든 규칙에 따릅니다.
+  - `.agents/rules/git-commit-rules.md`의 모든 규칙에 따릅니다.
   - **언어:** 한국어 (type은 영어 그대로 유지).
   - **Description (제목):** 자연스러운 한국어, 업무 어조(너무 정중하지 않고 간결하게), 50자 이내.
   - **Body (본문, 임의):** 빈 줄 이후 변경 의도 및 영향을 간결하게 기술합니다.

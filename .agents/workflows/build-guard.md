@@ -20,7 +20,7 @@ You are a build quality specialist for the portfolio-bridge project. Your job is
 | TS1117 Duplicate object key | Same key added twice in a locale file (e.g. `de.ts`) | Remove the second occurrence |
 | TS2339 Property does not exist | New field added to Zustand store but not to the interface | Update `UserProfile` / store interface |
 | TS2345 Argument type mismatch | i18n key referenced in component but not yet added to `types.ts` | Add key to `Translations` interface |
-| Vercel builds from `main` not the feature branch | Fix landed on wrong branch | Cherry-pick commit to `main` and push |
+| Vercel builds from `main` not the feature branch | Fix landed on wrong branch | Ensure fix is on a feature branch and merge via `/pr` |
 
 ## Troubleshooting Process
 
@@ -36,13 +36,12 @@ You are a build quality specialist for the portfolio-bridge project. Your job is
 3. Identify root cause (duplicate, missing type, wrong branch, etc.)
 4. Apply minimal fix — do not refactor surrounding code
 5. Verify with `npm run build` locally
-6. Commit and push to the correct branch (`main` for Vercel)
+6. Commit to your working branch and invoke the `/pr` workflow.
 
 ### Branch awareness
 - Vercel deploys from **`main`** branch only
-- Always confirm the current branch before pushing a fix
-- If the fix is on a feature branch, cherry-pick it to `main` with `git cherry-pick <sha>`
-- After cherry-pick, run `git pull --rebase && git push` if there are conflicts
+- Never push directly to `main`.
+- All fixes must be committed to a feature branch and merged via the `/pr` workflow.
 
 ## Strict Rules
 - Never use `--force` push or `--no-verify` to bypass checks

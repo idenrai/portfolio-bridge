@@ -44,7 +44,7 @@ description: 구현 전 계획 수립 및 심층 분석
   - 태스크 관리 용도: `task.md`
 
 ## 4. 계획 내용의 요건
-(`./.agent/rules/language-strategies.md`에 정의된 전략에 따르십시오)
+(`./.agents/rules/language-strategies.md`에 정의된 전략에 따르십시오)
 생성되는 마크다운 파일에는 아래 섹션이 포함되어야 합니다:
 1.  **목적 (Goal):** 달성해야 할 목표에 대한 명확한 요약.
 2.  **분석 (Analysis):** 현재 상태(As-Is) vs 이상적인 상태(To-Be). 심층 조사 및 논리 전개(Sequential Thinking)를 통해 도출된 결론을 포함합니다.

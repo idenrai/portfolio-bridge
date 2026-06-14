@@ -28,16 +28,16 @@ Antigravity는 리포지토리의 사전 인덱싱을 수행하지 않으므로,
 
 ```bash
 # 실행 권한 부여 (최초 1회)
-chmod +x .agent/skills/indexing-awareness/scripts/index-structure.sh
+chmod +x .agents/skills/indexing-awareness/scripts/index-structure.sh
 
 # 프로젝트 전체 인덱싱
-./.agent/skills/indexing-awareness/scripts/index-structure.sh
+./.agents/skills/indexing-awareness/scripts/index-structure.sh
 
 # 탐색 깊이 지정 (기본값: 4)
-./.agent/skills/indexing-awareness/scripts/index-structure.sh --depth 6
+./.agents/skills/indexing-awareness/scripts/index-structure.sh --depth 6
 
 # 특정 디렉토리만 인덱싱
-./.agent/skills/indexing-awareness/scripts/index-structure.sh --dir src/
+./.agents/skills/indexing-awareness/scripts/index-structure.sh --dir src/
 ```
 
 ### 2. trace-dependencies.sh (종속성 추적)
@@ -45,16 +45,16 @@ chmod +x .agent/skills/indexing-awareness/scripts/index-structure.sh
 파일 또는 심볼의 종속성을 **양방향**으로 검색합니다.
 
 ```bash
-chmod +x .agent/skills/indexing-awareness/scripts/trace-dependencies.sh
+chmod +x .agents/skills/indexing-awareness/scripts/trace-dependencies.sh
 
 # 파일 모드: 종속성의 양방향 추적
-./.agent/skills/indexing-awareness/scripts/trace-dependencies.sh src/utils/auth.ts
+./.agents/skills/indexing-awareness/scripts/trace-dependencies.sh src/utils/auth.ts
 
 # 심볼 모드: 정의된 위치와 사용된 위치 검색
-./.agent/skills/indexing-awareness/scripts/trace-dependencies.sh handleLogin
+./.agents/skills/indexing-awareness/scripts/trace-dependencies.sh handleLogin
 
 # 검색 범위 제한
-./.agent/skills/indexing-awareness/scripts/trace-dependencies.sh UserService src/
+./.agents/skills/indexing-awareness/scripts/trace-dependencies.sh UserService src/
 ```
 
 **파일 모드 출력 (File Mode Output):**
@@ -69,11 +69,11 @@ chmod +x .agent/skills/indexing-awareness/scripts/trace-dependencies.sh
 
 ### 3. verify-structure.sh (문서 무결성 체크)
 
-`.agent/` 내의 규칙, 워크플로우, 스킬과 `README.md`의 기재 내용이 일치하는지 무결성을 검증합니다.
+`.agents/` 내의 규칙, 워크플로우, 스킬과 `README.md`의 기재 내용이 일치하는지 무결성을 검증합니다.
 
 ```bash
-chmod +x .agent/skills/indexing-awareness/scripts/verify-structure.sh
-./.agent/skills/indexing-awareness/scripts/verify-structure.sh
+chmod +x .agents/skills/indexing-awareness/scripts/verify-structure.sh
+./.agents/skills/indexing-awareness/scripts/verify-structure.sh
 ```
 
 ## Troubleshooting
