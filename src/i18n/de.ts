@@ -149,7 +149,7 @@ export const de: Translations = {
     "Fügen Sie das von der KI zurückgegebene JSON unten ein und",
   asset_ai_format_label: "Format:",
   asset_ai_json_placeholder:
-    'KI-Antwort-JSON hier einfügen...\n\nBeispiel:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "..." }\n]',
+    'KI-Antwort-JSON hier einfügen…\n\nBeispiel:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "…" },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "…" }\n]',
   asset_ai_apply_btn: "Kategorien anwenden",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ Kategorien auf ${applied} Vermögenswerte angewendet.${skipped > 0 ? ` (${skipped} übersprungen)` : ""}`,
@@ -161,7 +161,7 @@ export const de: Translations = {
   asset_ai_import_btn_suffix: "und anwenden.",
   csv_preview_title: (n) => `CSV-Vorschau — ${n} Zeilen`,
   csv_preview_confirm: "Import bestätigen",
-  csv_preview_more: (n) => `... und ${n} weitere Zeilen`,
+  csv_preview_more: (n) => `… und ${n} weitere Zeilen`,
 
   guru_title: "Investmentgurus",
   guru_empty_title: "Guru-Analyse",
@@ -571,13 +571,13 @@ export const de: Translations = {
   profile_monthly_budget_placeholder: "z. B. 500",
   profile_plan3y_label: "3-Jahres-Investitionsplan",
   profile_plan3y_placeholder:
-    "z. B. In 3 Jahren Dividendeneinnahmen von 200 €/Monat anstreben...",
+    "z. B. In 3 Jahren Dividendeneinnahmen von 200 €/Monat anstreben…",
   profile_plan5y_label: "5-Jahres-Investitionsplan",
   profile_plan5y_placeholder:
-    "z. B. In 5 Jahren 100.000 € als Eigenkapital für eine Immobilie aufbauen...",
+    "z. B. In 5 Jahren 100.000 € als Eigenkapital für eine Immobilie aufbauen…",
   profile_plan10y_label: "10-Jahres-Investitionsplan",
   profile_plan10y_placeholder:
-    "z. B. Finanzielle Unabhängigkeit durch passives Einkommen in 10 Jahren erreichen...",  profile_notes_label: "Besonderheiten / Hinweise",
+    "z. B. Finanzielle Unabhängigkeit durch passives Einkommen in 10 Jahren erreichen…",  profile_notes_label: "Besonderheiten / Hinweise",
   profile_notes_placeholder:
     "z. B. Hypothek: noch 230.000 € (15 Jahre). 500 €/Monat werden automatisch in S&P-500-ETF investiert, aktiv verwaltetes Budget: 300 €.",  profile_save: "Speichern",
   profile_saved: "✓ Gespeichert",
@@ -627,7 +627,7 @@ export const de: Translations = {
   af_mode_manual: "Manuelle Eingabe",
   af_search_hint:
     "Geben Sie einen Ticker oder Unternehmensnamen ein und suchen.",
-  af_search_placeholder: "Ticker oder Name...",
+  af_search_placeholder: "Ticker oder Name…",
   af_search_btn: "Suchen",
   af_searching: "Suche läuft…",
   af_results_count: (n) => `${n} Ergebnis${n !== 1 ? "se" : ""}`,

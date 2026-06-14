@@ -74,7 +74,7 @@ export function KpiBar({ summary }: Props) {
             {item.label}
           </p>
           <p
-            className={`text-lg font-bold leading-tight inline-block ${item.color ?? "text-zinc-300"}`}
+            className={`text-lg font-bold leading-tight inline-block tabular-nums ${item.color ?? "text-zinc-300"}`}
           >
             {item.value}
           </p>
