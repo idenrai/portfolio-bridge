@@ -13,7 +13,8 @@
 ## 🔄 Workflows (상황별 참조 트리거)
 특정 작업이나 상황이 발생했을 때, 해당하는 워크플로우나 에이전트 지침을 로드하세요.
 
-- **컴포넌트/페이지/훅/스토어 신규 생성 시:** `.agents/workflows/component-creator.md` 읽기
+- **프론트엔드(UI/UX) 컴포넌트 신규 생성, 수정 및 리팩토링 시 (/frontend):** `.agents/workflows/frontend.md` 읽기
+- **백엔드(Node.js/API) 아키텍처 설계, API 개발 및 리팩토링 시 (/backend):** `.agents/workflows/backend.md` 읽기
 - **번역 키 추가 및 다국어(i18n) 작업 시:** `.agents/workflows/i18n-sync.md` 및 `.agents/workflows/i18n-audit.md` 읽기
 - **빌드 검토 및 오류 해결 시:** `.agents/workflows/build-guard.md` 및 `.agents/workflows/build-check.md` 읽기
 - **단위 테스트 작성 및 검증 시:** `.agents/workflows/test-writer.md` 읽기
