@@ -90,7 +90,7 @@ export function CryptoForm({
           onKeyDown={handleKeyDown}
           placeholder="BTC, ETH, SOL..."
           autoFocus
-          className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="flex-1 rounded-lg border border-slate-800 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
         />
         <Button
           type="button"
@@ -102,13 +102,13 @@ export function CryptoForm({
       </div>
 
       {pairs.length > 0 && (
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
-          <div className="bg-slate-50 px-3 py-2 border-b border-slate-200">
-            <p className="text-xs text-slate-500 font-medium">
+        <div className="border border-slate-800 rounded-lg overflow-hidden">
+          <div className="bg-slate-900/50 px-3 py-2 border-b border-slate-800">
+            <p className="text-xs text-zinc-400 font-medium">
               {t.af_crypto_pair_title}
             </p>
           </div>
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-zinc-800">
             {pairs.map((p) => (
               <button
                 key={p.symbol}
@@ -116,11 +116,11 @@ export function CryptoForm({
                 onClick={() => setSelectedPair(p)}
                 className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors ${
                   selectedPair?.symbol === p.symbol
-                    ? "bg-blue-50 border-l-2 border-blue-500"
-                    : "hover:bg-slate-50"
+                    ? "bg-emerald-950/30 border-l-2 border-emerald-500"
+                    : "hover:bg-slate-900/50"
                 }`}
               >
-                <span className="text-sm font-semibold text-slate-800">
+                <span className="text-sm font-bold text-white">
                   {p.symbol}
                 </span>
                 <div className="flex items-center gap-3">
@@ -133,8 +133,8 @@ export function CryptoForm({
                   <span
                     className={`text-xs px-2 py-0.5 rounded ${
                       selectedPair?.symbol === p.symbol
-                        ? "bg-blue-600 text-white"
-                        : "bg-slate-100 text-slate-600"
+                        ? "bg-emerald-600 text-white"
+                        : "bg-zinc-800 text-zinc-300"
                     }`}
                   >
                     {selectedPair?.symbol === p.symbol
@@ -149,16 +149,16 @@ export function CryptoForm({
       )}
 
       {searchedOnce && pairs.length === 0 && !isSearching && (
-        <p className="text-sm text-slate-500 bg-slate-50 rounded-lg px-3 py-2">
+        <p className="text-sm text-zinc-400 bg-slate-900/50 rounded-lg px-3 py-2">
           {t.af_crypto_no_pairs}
         </p>
       )}
 
       {selectedPair && (
         <>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
+          <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-lg px-4 py-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-slate-800">
+              <span className="text-sm font-bold text-white">
                 {selectedPair.symbol}
               </span>
               {selectedPair.price !== null && (
@@ -187,7 +187,7 @@ export function CryptoForm({
                   )
                 }
                 placeholder="0"
-                className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               />
             </label>
             <label className="block">
@@ -206,7 +206,7 @@ export function CryptoForm({
                   )
                 }
                 placeholder="0"
-                className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               />
             </label>
           </div>

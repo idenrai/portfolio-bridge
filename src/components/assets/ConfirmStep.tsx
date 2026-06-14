@@ -36,25 +36,25 @@ export function ConfirmStep({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
+      <div className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-3">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-          <span className="text-sm font-semibold text-slate-800">
+          <span className="text-sm font-bold text-white">
             {item.name}
           </span>
           {item.ticker && (
-            <span className="text-sm text-slate-500 font-mono">
+            <span className="text-sm text-slate-400 font-mono">
               {item.ticker}
             </span>
           )}
         </div>
         <div className="flex flex-wrap gap-1.5 mt-2">
-          <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
+          <span className="text-xs bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded border border-zinc-700">
             {t.asset_type_labels[item.type]}
           </span>
-          <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
+          <span className="text-xs bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded border border-zinc-700">
             {t.market_labels[item.market]}
           </span>
-          <span className="text-xs bg-white text-slate-600 px-2 py-0.5 rounded border">
+          <span className="text-xs bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded border border-zinc-700">
             {item.currency}
           </span>
         </div>

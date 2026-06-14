@@ -45,7 +45,7 @@ export function AssetTableRow({
   return (
     <tr className="hover:bg-slate-50">
       <td className="py-2.5 max-w-65">
-        <p className="font-medium text-slate-800 wrap-break-word whitespace-normal leading-snug">
+        <p className="font-medium text-white wrap-break-word whitespace-normal leading-snug">
           {asset.name}
         </p>
         {asset.ticker && (
@@ -53,7 +53,7 @@ export function AssetTableRow({
         )}
       </td>
       <td className="py-2.5 whitespace-nowrap">
-        <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+        <span className="text-xs bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded">
           {t.market_labels[asset.market]}
         </span>
       </td>
@@ -63,7 +63,7 @@ export function AssetTableRow({
           onChange={(e) =>
             onCategoryChange(asset.id, e.target.value as AssetCategory | "")
           }
-          className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-22.5"
+          className="text-xs rounded border border-slate-800 px-1.5 py-1 bg-slate-900/50 text-slate-200 focus:border-emerald-500 focus:outline-none min-w-22.5"
         >
           <option value="">{t.at_unclassified}</option>
           {categoryOptions.map(([val, label]) => (
@@ -78,7 +78,7 @@ export function AssetTableRow({
           <select
             value={asset.brokerId ?? ""}
             onChange={(e) => onBrokerChange(asset.id, e.target.value)}
-            className="text-xs rounded border border-slate-200 px-1.5 py-1 bg-white text-slate-700 focus:border-blue-400 focus:outline-none min-w-22.5"
+            className="text-xs rounded border border-slate-800 px-1.5 py-1 bg-slate-900/50 text-slate-200 focus:border-emerald-500 focus:outline-none min-w-22.5"
           >
             <option value="">{t.af_account_none}</option>
             {brokerAccounts.map((b) => (

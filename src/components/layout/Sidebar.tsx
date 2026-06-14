@@ -5,24 +5,23 @@ export function Sidebar() {
   const t = useT();
 
   const NAV_ITEMS = [
-    { to: "/", label: t.nav_dashboard, icon: "📊" },
-    { to: "/assets", label: t.nav_assets, icon: "💼" },
-    { to: "/gurus", label: t.nav_gurus, icon: "💡" },
-    { to: "/fire", label: t.nav_fire, icon: "🌴" },
-    { to: "/settings", label: t.nav_settings, icon: "⚙️" },
-    { to: "/about", label: t.nav_about, icon: "ℹ️" },
+    { to: "/", label: t.nav_dashboard },
+    { to: "/assets", label: t.nav_assets },
+    { to: "/gurus", label: t.nav_gurus },
+    { to: "/fire", label: t.nav_fire },
+    { to: "/settings", label: t.nav_settings },
+    { to: "/about", label: t.nav_about },
   ];
 
   return (
     <aside className="hidden md:flex w-72 min-h-screen bg-zinc-950 text-zinc-300 flex-col border-r border-zinc-800">
       {/* 로고 */}
-      <div className="px-6 py-5 border-b border-zinc-800">
+      <div className="h-14 px-6 flex flex-col justify-center border-b border-zinc-800">
         <h1 className="text-lg font-bold tracking-tight">
           <span className="text-zinc-500">{'> '}</span>
           <span className="text-white">PORTFOLIO BRIDGE</span>
           <span className="text-zinc-500 animate-pulse">_</span>
         </h1>
-        <p className="text-xs text-slate-500 mt-1">{t.app_tagline}</p>
       </div>
 
       {/* 네비게이션 */}
@@ -40,7 +39,6 @@ export function Sidebar() {
               }`
             }
           >
-            <span className="text-base">{item.icon}</span>
             {item.label}
           </NavLink>
         ))}

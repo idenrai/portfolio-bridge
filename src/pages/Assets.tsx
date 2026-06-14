@@ -108,7 +108,7 @@ export function AssetsPage() {
   return (
     <div className="space-y-4 md:space-y-6">
       <div className="flex items-center justify-between gap-2 flex-wrap">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">{t.asset_title}</h1>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">{t.asset_title}</h1>
         <div className="flex items-center gap-2">
           <Button variant="secondary" size="sm" onClick={() => setBrokerManagerOpen(true)}>
             {t.broker_manage_btn}
@@ -130,15 +130,15 @@ export function AssetsPage() {
         </div>
       </div>
       <div className="rounded-xl bg-linear-to-r from-violet-600 to-purple-500 p-px shadow-md">
-        <div className="rounded-[11px] bg-white/95 px-4 py-3">
+        <div className="rounded-[11px] bg-zinc-950/95 px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-start gap-3 min-w-0">
               <span className="text-2xl shrink-0 mt-0.5">🤖</span>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-800 leading-tight">
+                <p className="text-sm font-bold text-white leading-tight">
                   {t.asset_ai_banner_title}
                 </p>
-                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                <p className="text-xs text-zinc-400 mt-0.5 leading-relaxed">
                   {t.asset_ai_banner_desc}
                 </p>
               </div>

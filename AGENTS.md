@@ -20,7 +20,7 @@
 - **코드 리뷰 요청 시:** `.agents/workflows/review.md` 읽기
 - **한국어 커밋 메시지 작성 시:** `.agents/workflows/commit-kr.md` 읽기
 - **영어 커밋 메시지 작성 시:** `.agents/workflows/commit.md` 읽기
-- **기능 구현 전 계획 수립 시:** `.agents/workflows/plan.md` 읽기
+- **기능 구현 전 계획 수립 및 복잡한 문제의 심층 분석 시 (/plan):** `.agents/workflows/plan.md` 읽기
 - **기존 코드 파악 및 종속성 분석 시:** `.agents/workflows/grasp.md` 읽기
 - **코드 및 개념 설명 요청 시:** `.agents/workflows/explain.md` 읽기
 - **코드 수정 없이 순수 상담 및 질문 요청 시 (/ask):** `.agents/workflows/ask.md` 읽기
@@ -28,7 +28,6 @@
 - **작업 완료 후 PR 자동 생성 시 (/pr):** `.agents/workflows/pr.md` 읽기
 - **현재 세션을 요약하고 파기할 시 (/discard):** `.agents/workflows/discard.md` 읽기
 - **ESLint 오류를 자동 수정할 시 (/lint-fix):** `.agents/workflows/lint-fix.md` 읽기
-- **복잡한 문제의 심층 분석 및 해결 시 (/deep-dive):** `.agents/workflows/deep-dive.md` 읽기
 - **원격에서 삭제된 로컬 브랜치 일괄 정리 시 (/prune):** `.agents/workflows/prune.md` 읽기
 
 ## 🛠 Skills (도구 및 스킬)

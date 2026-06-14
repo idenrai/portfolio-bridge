@@ -21,10 +21,10 @@ export function ModeSelector({
           key={t.key}
           type="button"
           onClick={() => onChange(t.key)}
-          className={`flex-1 py-2 text-sm font-medium transition-colors ${
+          className={`flex-1 py-2 text-sm font-medium transition-colors rounded-md ${
             mode === t.key
-              ? "bg-blue-600 text-white"
-              : "bg-white text-slate-600 hover:bg-slate-50"
+              ? "bg-zinc-800 text-white shadow-sm"
+              : "bg-transparent text-zinc-500 hover:text-zinc-300"
           }`}
         >
           {t.label}

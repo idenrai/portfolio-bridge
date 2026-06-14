@@ -11,7 +11,7 @@ export function SettingsPage() {
 
   return (
     <div className="space-y-4 md:space-y-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">{t.settings_title}</h1>
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">{t.settings_title}</h1>
 
       <ProfileSection />
       <DataRefreshSection />

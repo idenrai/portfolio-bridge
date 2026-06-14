@@ -149,7 +149,7 @@ export function AIClassificationModal({
               }}
               rows={14}
               placeholder={t.asset_ai_json_placeholder}
-              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-mono text-slate-700 resize-none focus:outline-none focus:border-blue-300"
+              className="w-full rounded-lg border border-slate-800 bg-slate-900/50 px-3 py-2.5 text-xs font-mono text-slate-300 resize-none focus:outline-none focus:border-emerald-500"
             />
 
             {importError && (

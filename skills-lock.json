@@ -1,6 +1,18 @@
 {
   "version": 1,
   "skills": {
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "computedHash": "228f87d57035100d9dc6efcfc05aafd4b6e3962adacaa04b8217ab2fadb15dc8"
+    },
+    "before-and-after": {
+      "source": "vercel-labs/before-and-after",
+      "sourceType": "github",
+      "skillPath": "skill/SKILL.md",
+      "computedHash": "2ddadc58c8b916f8b253542c4c3ae0057e35530914c0d7627a0e10b89accaef5"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",

@@ -78,7 +78,7 @@ export function GurusPage() {
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">{t.guru_title}</h1>
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">{t.guru_title}</h1>
       <GuruSelector
         selectedGuru={selectedGuru}
         onSelect={setSelectedGuru}

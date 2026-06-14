@@ -38,7 +38,7 @@ export function AssetFilterBar({
       <select
         value={filterMarket}
         onChange={(e) => onFilterMarket(e.target.value as Market | "")}
-        className="text-xs rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-slate-600 focus:border-blue-400 focus:outline-none"
+        className="text-xs rounded-lg border border-slate-800 px-2.5 py-1.5 bg-slate-900/50 text-slate-200 focus:border-emerald-500 focus:outline-none"
       >
         <option value="">{t.at_filter_all_market}</option>
         {markets.map((m) => (
@@ -51,7 +51,7 @@ export function AssetFilterBar({
       <select
         value={filterType}
         onChange={(e) => onFilterType(e.target.value as AssetType | "")}
-        className="text-xs rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-slate-600 focus:border-blue-400 focus:outline-none"
+        className="text-xs rounded-lg border border-slate-800 px-2.5 py-1.5 bg-slate-900/50 text-slate-200 focus:border-emerald-500 focus:outline-none"
       >
         <option value="">{t.at_filter_all_type}</option>
         {types.map((tp) => (
@@ -64,7 +64,7 @@ export function AssetFilterBar({
       <select
         value={filterCategory}
         onChange={(e) => onFilterCategory(e.target.value as AssetCategory | "")}
-        className="text-xs rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-slate-600 focus:border-blue-400 focus:outline-none"
+        className="text-xs rounded-lg border border-slate-800 px-2.5 py-1.5 bg-slate-900/50 text-slate-200 focus:border-emerald-500 focus:outline-none"
       >
         <option value="">{t.at_filter_all_category}</option>
         {categoryOptions.map(([val, label]) => (

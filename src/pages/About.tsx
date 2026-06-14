@@ -85,21 +85,21 @@ export function AboutPage() {
 
       {/* Features */}
       <div>
-        <h2 className="text-base font-bold text-slate-700 mb-3">
+        <h2 className="text-base font-bold text-slate-200 mb-3">
           {t.about_features_title}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {FEATURES.map((f) => (
+          {FEATURES.map((f, idx) => (
             <div
-              key={f.titleKey}
-              className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm"
+              key={idx}
+              className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3.5 shadow-sm"
             >
               <span className="text-xl shrink-0 mt-0.5">{f.icon}</span>
               <div>
-                <p className="text-sm font-semibold text-slate-800">
+                <p className="text-sm font-semibold text-white">
                   {t[f.titleKey]}
                 </p>
-                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
                   {t[f.descKey]}
                 </p>
               </div>
@@ -109,13 +109,13 @@ export function AboutPage() {
       </div>
 
       {/* Privacy */}
-      <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 md:px-5 md:py-4 flex items-start gap-3">
+      <div className="rounded-xl border border-emerald-900/50 bg-emerald-950/30 px-4 py-3 md:px-5 md:py-4 flex items-start gap-3">
         <span className="text-xl shrink-0 mt-0.5">🔒</span>
         <div>
-          <p className="text-sm font-semibold text-emerald-800">
+          <p className="text-sm font-semibold text-emerald-400">
             {t.about_privacy_title}
           </p>
-          <p className="text-xs text-emerald-700 mt-0.5 leading-relaxed">
+          <p className="text-xs text-emerald-300/70 mt-0.5 leading-relaxed">
             {t.about_privacy_desc}
           </p>
         </div>
@@ -123,14 +123,14 @@ export function AboutPage() {
 
       {/* Tech Stack */}
       <div>
-        <h2 className="text-base font-bold text-slate-700 mb-3">
+        <h2 className="text-base font-bold text-slate-200 mb-3">
           {t.about_tech_title}
         </h2>
         <div className="flex flex-wrap gap-2">
           {STACK.map((s) => (
             <span
               key={s}
-              className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-sm"
+              className="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs font-medium text-zinc-300 shadow-sm"
             >
               {s}
             </span>

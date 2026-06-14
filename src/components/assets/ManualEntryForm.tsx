@@ -105,8 +105,8 @@ export function ManualEntryForm({
             onClick={() => setIsSimple(false)}
             className={`px-4 py-1.5 rounded-md text-xs font-medium transition-colors ${
               !isSimple
-                ? "bg-white text-slate-800 shadow-sm"
-                : "text-slate-500 hover:text-slate-700"
+                ? "bg-zinc-800 text-white shadow-sm"
+                : "text-zinc-500 hover:text-zinc-300"
             }`}
           >
             {t.af_entry_mode_detail}
@@ -116,8 +116,8 @@ export function ManualEntryForm({
             onClick={() => setIsSimple(true)}
             className={`px-4 py-1.5 rounded-md text-xs font-medium transition-colors ${
               isSimple
-                ? "bg-white text-slate-800 shadow-sm"
-                : "text-slate-500 hover:text-slate-700"
+                ? "bg-zinc-800 text-white shadow-sm"
+                : "text-zinc-500 hover:text-zinc-300"
             }`}
           >
             {t.af_entry_mode_simple}
@@ -125,8 +125,8 @@ export function ManualEntryForm({
         </div>
       </div>
 
-      <div className="bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
-        <p className="text-xs text-amber-700">{t.af_manual_hint}</p>
+      <div className="bg-amber-950/30 border border-amber-900/50 rounded-lg px-4 py-3">
+        <p className="text-xs text-amber-400">{t.af_manual_hint}</p>
       </div>
 
       {/* 종목명 (공통) */}
@@ -141,7 +141,7 @@ export function ManualEntryForm({
           autoFocus
           onChange={(e) => setName(e.target.value)}
           placeholder={t.af_manual_name_placeholder}
-          className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
         />
       </label>
 
@@ -153,7 +153,7 @@ export function ManualEntryForm({
         <select
           value={currency}
           onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-          className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
         >
           {CURRENCY_INPUT_OPTIONS.map((o) => (
             <option key={o.value} value={o.value}>
@@ -179,7 +179,7 @@ export function ManualEntryForm({
               setSimpleAmount(e.target.value === "" ? "" : Number(e.target.value))
             }
             placeholder={t.af_simple_amount_placeholder}
-            className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
           />
         </label>
       ) : (
@@ -195,7 +195,7 @@ export function ManualEntryForm({
                 value={ticker}
                 onChange={(e) => setTicker(e.target.value)}
                 placeholder={t.af_manual_ticker_placeholder}
-                className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="flex-1 rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               />
               <Button
                 type="button"
@@ -217,7 +217,7 @@ export function ManualEntryForm({
               <select
                 value={assetType}
                 onChange={(e) => setAssetType(e.target.value as AssetType)}
-                className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               >
                 {ASSET_TYPE_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>
@@ -233,7 +233,7 @@ export function ManualEntryForm({
               <select
                 value={market}
                 onChange={(e) => setMarket(e.target.value as Market)}
-                className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               >
                 {MARKET_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>
@@ -259,7 +259,7 @@ export function ManualEntryForm({
                   setQuantity(e.target.value === "" ? "" : Number(e.target.value))
                 }
                 placeholder="0"
-                className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               />
             </label>
             <label className="block">
@@ -277,7 +277,7 @@ export function ManualEntryForm({
                   )
                 }
                 placeholder="0"
-                className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               />
             </label>
             <label className="block">
@@ -295,7 +295,7 @@ export function ManualEntryForm({
                   )
                 }
                 placeholder={t.af_current_price_placeholder}
-                className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               />
             </label>
           </div>
