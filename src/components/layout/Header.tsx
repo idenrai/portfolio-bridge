@@ -1,4 +1,6 @@
 import { useLanguageStore, useSettingsStore } from "@/stores";
+import { NavLink } from "react-router-dom";
+import { useT } from "@/hooks";
 import type { Lang } from "@/i18n";
 import type { CurrencyCode } from "@/types";
 
@@ -24,14 +26,19 @@ const LANG_CURRENCY: Record<Lang, CurrencyCode> = {
   de: "EUR", // EUR 통화권 첫 번째 언어 — 프랑스어·스페인어 등 추가 시도 EUR 매핑
 };
 
-interface Props {
-  isSidebarOpen: boolean;
-  onToggleSidebar: () => void;
-}
-
-export function Header({ isSidebarOpen, onToggleSidebar }: Props) {
+export function Header() {
   const { lang, setLang } = useLanguageStore();
   const setBaseCurrency = useSettingsStore((s) => s.setBaseCurrency);
+  const t = useT();
+
+  const NAV_ITEMS = [
+    { to: "/", label: t.nav_dashboard },
+    { to: "/assets", label: t.nav_assets },
+    { to: "/gurus", label: t.nav_gurus },
+    { to: "/fire", label: t.nav_fire },
+    { to: "/settings", label: t.nav_settings },
+    { to: "/about", label: t.nav_about },
+  ];
 
   const handleLangChange = (l: Lang) => {
     setLang(l);
@@ -49,22 +56,28 @@ export function Header({ isSidebarOpen, onToggleSidebar }: Props) {
         </span>
       </div>
       <div className="hidden md:flex items-center gap-3">
-        <button
-          onClick={onToggleSidebar}
-          className="p-1.5 -ml-1.5 hover:bg-zinc-800 rounded-md transition-colors text-zinc-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
-          aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
-        >
-          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
-          </svg>
-        </button>
-        {!isSidebarOpen && (
-          <span className="text-sm font-bold tracking-tight fade-in duration-300">
-            <span className="text-zinc-500">{'> '}</span>
-            <span className="text-white">PORTFOLIO_BRIDGE</span>
-            <span className="text-zinc-500 animate-pulse">_</span>
-          </span>
-        )}
+        <span className="text-sm font-bold tracking-tight mr-4">
+          <span className="text-zinc-500">{'> '}</span>
+          <span className="text-white">PORTFOLIO_BRIDGE</span>
+          <span className="text-zinc-500 animate-pulse">_</span>
+        </span>
+        <nav className="flex items-center gap-1">
+          {NAV_ITEMS.map(({ to, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) =>
+                `px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  isActive
+                    ? "bg-zinc-800 text-white"
+                    : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50"
+                }`
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
       </div>
       <div className="flex items-center gap-4">
         {/* 언어 전환 버튼 (화폐 동시 전환) */}
