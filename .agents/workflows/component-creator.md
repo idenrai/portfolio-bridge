@@ -27,3 +27,9 @@ If the component contains user-visible strings:
 
 ## 4. Barrel Exports
 - After creating a new file, update the `index.ts` in the same directory (e.g., `export { MyComponent } from "./MyComponent";`).
+
+## 5. Visual Design (UI Components)
+- When styling new UI, read and apply `.agents/skills/frontend-design/SKILL.md`.
+- Avoid generic AI-generated defaults (e.g., near-black with acid/neon accents, or cream with serifs).
+- Make deliberate choices about structure, spacing, and typography that fit the specific brief.
+- Ensure any UI text follows the 'writing in design' guidelines (active voice, specific verbs, cohesive signposting).
