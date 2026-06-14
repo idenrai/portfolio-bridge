@@ -37,3 +37,5 @@ AI가 특정 도구나 기능이 필요할 때 로드하세요.
 - 현재 날짜 및 시간 파악 필요 시 (지식 컷오프 회피): `.agents/skills/knowledge-cutoff-awareness/SKILL.md` 읽기
 - Vercel/Next.js 성능 최적화 가이드 필요 시: `.agents/skills/vercel-react-best-practices/SKILL.md` 읽기
 - AI 프롬프트 작성, 개선 및 프롬프트 엔지니어링 필요 시 (예: 구루 프롬프트 작성): `.agents/skills/prompt-engineering/SKILL.md` 읽기
+- **UI/UX 설계 및 프론트엔드 디자인 기획 시:** `.agents/skills/ui-ux-pro-max/SKILL.md` 및 `.agents/skills/frontend-design/SKILL.md` 읽기
+- **디자인 가이드라인 준수 여부 및 시각적 버그 감사 시:** `.agents/skills/web-design-guidelines/SKILL.md`, `.agents/skills/agent-browser/SKILL.md`, `.agents/skills/before-and-after/SKILL.md` 적극 활용
