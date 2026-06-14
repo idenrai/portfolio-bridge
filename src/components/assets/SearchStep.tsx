@@ -1,13 +1,12 @@
 import { useEffect } from "react";
-import { Button } from "@/components/common";
+import { Button, Input } from "@/components/common";
 import { useTickerSearch, useT } from "@/hooks";
 import type { SelectedStock } from "./assetFormTypes";
 
 export function SearchStep({
   onSelect,
   onManual,
-  onCancel,
-}: {
+  onCancel }: {
   onSelect: (item: SelectedStock) => void;
   onManual: () => void;
   onCancel: () => void;
@@ -22,8 +21,7 @@ export function SearchStep({
     selected,
     selectedPrice,
     isFetchingPrice,
-    selectItem,
-  } = useTickerSearch();
+    selectItem } = useTickerSearch();
   const t = useT();
 
   useEffect(() => {
@@ -34,8 +32,7 @@ export function SearchStep({
       type: selected.type,
       market: selected.market,
       currency: selected.currency,
-      currentPrice: selectedPrice ?? 0,
-    });
+      currentPrice: selectedPrice ?? 0 });
   }, [selected, selectedPrice, isFetchingPrice, onSelect]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -50,14 +47,14 @@ export function SearchStep({
       <p className="text-sm text-slate-500">{t.af_search_hint}</p>
 
       <div className="flex gap-2">
-        <input
+        <Input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={t.af_search_placeholder}
           autoFocus
-          className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          
         />
         <Button
           type="button"

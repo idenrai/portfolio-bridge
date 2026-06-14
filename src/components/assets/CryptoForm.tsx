@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/common";
+import { Button, Input, Label } from "@/components/common";
 import { useT } from "@/hooks";
 import { fetchCurrentPrice } from "@/utils";
 import type { AssetFormData, CurrencyCode, Market } from "@/types";
@@ -15,8 +15,7 @@ interface CryptoPair {
 
 export function CryptoForm({
   onSubmit,
-  onCancel,
-}: {
+  onCancel }: {
   onSubmit: (data: AssetFormData) => void;
   onCancel: () => void;
 }) {
@@ -72,8 +71,7 @@ export function CryptoForm({
       quantity: Number(quantity) || 0,
       avgBuyPrice: Number(avgBuyPrice) || 0,
       currentPrice: selectedPair.price ?? 0,
-      categories: [],
-    });
+      categories: [] });
   };
 
   const sym = selectedPair ? CURRENCY_SYMBOLS[selectedPair.currency] : "";
@@ -83,14 +81,14 @@ export function CryptoForm({
       <p className="text-sm text-slate-500">{t.af_crypto_hint}</p>
 
       <div className="flex gap-2">
-        <input
+        <Input
           type="text"
           value={coinQuery}
           onChange={(e) => setCoinQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="BTC, ETH, SOL..."
           autoFocus
-          className="flex-1 rounded-lg border border-slate-800 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+          
         />
         <Button
           type="button"
@@ -102,7 +100,7 @@ export function CryptoForm({
       </div>
 
       {pairs.length > 0 && (
-        <div className="border border-slate-800 rounded-lg overflow-hidden">
+        <div >
           <div className="bg-slate-900/50 px-3 py-2 border-b border-slate-800">
             <p className="text-xs text-zinc-400 font-medium">
               {t.af_crypto_pair_title}
@@ -171,11 +169,11 @@ export function CryptoForm({
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            <div className="block">
+              <Label>
                 {t.af_quantity_label} *
-              </span>
-              <input
+              </Label>
+              <Input
                 type="number"
                 required
                 min={0}
@@ -187,14 +185,14 @@ export function CryptoForm({
                   )
                 }
                 placeholder="0"
-                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+                
               />
-            </label>
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            </div>
+            <div className="block">
+              <Label>
                 {t.af_avg_price_label} ({sym}) *
-              </span>
-              <input
+              </Label>
+              <Input
                 type="number"
                 required
                 min={0}
@@ -206,9 +204,9 @@ export function CryptoForm({
                   )
                 }
                 placeholder="0"
-                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+                
               />
-            </label>
+            </div>
           </div>
 
           <div className="flex justify-end gap-2">

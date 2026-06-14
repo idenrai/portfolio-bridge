@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useBrokerStore } from "@/stores";
-import { Button } from "@/components/common";
+import { Button, Input, Select, Label } from "@/components/common";
 import { useT } from "@/hooks";
 import type { BrokerAccount, Market } from "@/types";
 
@@ -62,9 +62,7 @@ export function BrokerManager() {
     deleteAccount(id);
   };
 
-  const inputCls =
-    "mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500";
-
+  
   return (
     <div className="space-y-4">
       {/* 계좌 목록 */}
@@ -142,57 +140,57 @@ export function BrokerManager() {
             {editing.id ? t.broker_edit_btn : t.broker_add_btn}
           </p>
           <div className="grid grid-cols-2 gap-3">
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            <div className="block">
+              <Label>
                 {t.broker_country_label}
-              </span>
-              <select
+              </Label>
+              <Select
                 value={editing.country}
                 onChange={(e) =>
                   setEditing({ ...editing, country: e.target.value as Market })
                 }
-                className={inputCls}
+                
               >
                 {COUNTRY_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}
                   </option>
                 ))}
-              </select>
-            </label>
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+              </Select>
+            </div>
+            <div className="block">
+              <Label>
                 {t.broker_name_label}
-              </span>
-              <input
+              </Label>
+              <Input
                 type="text"
                 value={editing.broker}
                 onChange={(e) =>
                   setEditing({ ...editing, broker: e.target.value })
                 }
                 placeholder={t.broker_name_placeholder}
-                className={inputCls}
+                
               />
-            </label>
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            </div>
+            <div className="block">
+              <Label>
                 {t.broker_type_label}
-              </span>
-              <input
+              </Label>
+              <Input
                 type="text"
                 value={editing.accountType}
                 onChange={(e) =>
                   setEditing({ ...editing, accountType: e.target.value })
                 }
                 placeholder={t.broker_type_placeholder}
-                className={inputCls}
+                
               />
-            </label>
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            </div>
+            <div className="block">
+              <Label>
                 {t.broker_nickname_label} *
-              </span>
-              <input
+              </Label>
+              <Input
                 type="text"
                 value={editing.nickname}
                 autoFocus
@@ -200,9 +198,9 @@ export function BrokerManager() {
                   setEditing({ ...editing, nickname: e.target.value })
                 }
                 placeholder={t.broker_nickname_placeholder}
-                className={inputCls}
+                
               />
-            </label>
+            </div>
           </div>
           <div className="flex justify-end gap-2">
             <Button

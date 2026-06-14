@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { Button } from "@/components/common";
+import { Button, Input, Label } from "@/components/common";
 import { useT } from "@/hooks";
 import type { AssetFormData, CurrencyCode, Market } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
 
 export function CashForm({
   onSubmit,
-  onCancel,
-}: {
+  onCancel }: {
   onSubmit: (data: AssetFormData) => void;
   onCancel: () => void;
 }) {
@@ -46,21 +45,20 @@ export function CashForm({
       quantity: Number(amount) || 0,
       avgBuyPrice: 1,
       currentPrice: 1,
-      categories: [],
-    });
+      categories: [] });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <span className="text-xs font-medium text-slate-600">
+        <Label>
           {t.af_currency_label}
-        </span>
+        </Label>
         <div className="relative mt-1">
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="w-full rounded-lg border border-slate-800 px-3 py-2 text-sm text-left flex justify-between items-center bg-slate-900/50 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+            
           >
             <span className={currency ? "text-white" : "text-slate-500"}>
               {selected ? selected.label : t.af_currency_placeholder}
@@ -68,15 +66,15 @@ export function CashForm({
             <span className="text-slate-400 text-xs">▼</span>
           </button>
           {open && (
-            <div className="mt-1 w-full bg-slate-950 border border-slate-800 rounded-lg shadow-lg">
+            <div >
               <div className="p-2 border-b border-slate-800">
-                <input
+                <Input
                   type="text"
                   autoFocus
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="KRW, JPY, USD, EUR..."
-                  className="w-full rounded border border-slate-800 px-2 py-1.5 text-sm bg-slate-900/50 text-white focus:outline-none focus:border-emerald-400"
+                  
                 />
               </div>
               <div>
@@ -105,12 +103,12 @@ export function CashForm({
         </div>
       </div>
 
-      <label className="block">
-        <span className="text-xs font-medium text-slate-600">
+      <div className="block">
+        <Label>
           {t.af_cash_amount_label}
           {currency ? ` (${CURRENCY_SYMBOLS[currency]})` : ""} *
-        </span>
-        <input
+        </Label>
+        <Input
           type="number"
           required
           min={0}
@@ -121,9 +119,9 @@ export function CashForm({
           }
           placeholder="0"
           disabled={!currency}
-          className="mt-1 block w-full rounded-lg border border-slate-800 px-3 py-2 text-sm bg-slate-900/50 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 disabled:bg-slate-900 disabled:text-slate-600"
+          
         />
-      </label>
+      </div>
 
       <div className="flex justify-end gap-2">
         <Button type="button" variant="secondary" onClick={onCancel}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/common";
+import { Button, Input, Label } from "@/components/common";
 import { useT } from "@/hooks";
 import type { AssetFormData } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
@@ -8,8 +8,7 @@ import type { SelectedStock } from "./assetFormTypes";
 export function ConfirmStep({
   item,
   onSubmit,
-  onBack,
-}: {
+  onBack }: {
   item: SelectedStock;
   onSubmit: (data: AssetFormData) => void;
   onBack: () => void;
@@ -30,8 +29,7 @@ export function ConfirmStep({
       quantity: Number(quantity) || 0,
       avgBuyPrice: Number(avgBuyPrice) || 0,
       currentPrice: item.currentPrice,
-      categories: [],
-    });
+      categories: [] });
   };
 
   return (
@@ -61,11 +59,11 @@ export function ConfirmStep({
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <label className="block">
-          <span className="text-xs font-medium text-slate-600">
+        <div className="block">
+          <Label>
             {t.af_quantity_label} *
-          </span>
-          <input
+          </Label>
+          <Input
             type="number"
             required
             min={0}
@@ -76,14 +74,14 @@ export function ConfirmStep({
             }
             placeholder="0"
             autoFocus
-            className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            
           />
-        </label>
-        <label className="block">
-          <span className="text-xs font-medium text-slate-600">
+        </div>
+        <div className="block">
+          <Label>
             {t.af_avg_price_label} ({sym}) *
-          </span>
-          <input
+          </Label>
+          <Input
             type="number"
             required
             min={0}
@@ -95,12 +93,12 @@ export function ConfirmStep({
               )
             }
             placeholder="0"
-            className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            
           />
-        </label>
+        </div>
       </div>
 
-      <label className="block">
+      <div className="block">
         <span className="text-xs font-medium text-slate-600">
           {t.af_current_price_label} ({sym})
           {item.currentPrice > 0 && (
@@ -109,13 +107,13 @@ export function ConfirmStep({
             </span>
           )}
         </span>
-        <input
+        <Input
           type="number"
           value={item.currentPrice}
           readOnly
           className="mt-1 block w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500 cursor-not-allowed"
         />
-      </label>
+      </div>
 
       <div className="flex justify-between">
         <Button type="button" variant="ghost" onClick={onBack}>

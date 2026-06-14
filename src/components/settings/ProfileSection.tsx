@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useProfileStore, useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
-import { Card, AutoResizeTextarea, Button } from "@/components/common";
+import { Card, AutoResizeTextarea, Button, Input } from "@/components/common";
 
 export function ProfileSection() {
   const profile = useProfileStore();
@@ -35,12 +35,12 @@ export function ProfileSection() {
         {/* 닉네임 / 나이 */}
         <div className="grid grid-cols-[1fr_100px] gap-3">
           <div className="space-y-1">
-            <label className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-slate-600">
               {t.profile_nickname_label}
-            </label>
-            <input
+            </div>
+            <Input
               type="text"
-              className={inputCls}
+              
               placeholder={t.profile_nickname_placeholder}
               value={profile.nickname ?? ""}
               onChange={(e) =>
@@ -49,19 +49,18 @@ export function ProfileSection() {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-slate-600">
               {t.profile_age_label}
-            </label>
-            <input
+            </div>
+            <Input
               type="number"
               min={0}
-              className={inputCls}
+              
               placeholder={t.profile_age_placeholder}
               value={profile.age ?? ""}
               onChange={(e) =>
                 profile.setProfile({
-                  age: e.target.value ? Number(e.target.value) : null,
-                })
+                  age: e.target.value ? Number(e.target.value) : null })
               }
             />
           </div>
@@ -70,38 +69,36 @@ export function ProfileSection() {
         {/* 연봉 / 월 투자 가능 금액 */}
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1">
-            <label className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-slate-600">
               {t.profile_annual_income_label}
               <span className="ml-1 text-slate-400">({settings.baseCurrency})</span>
-            </label>
-            <input
+            </div>
+            <Input
               type="number"
               min={0}
-              className={inputCls}
+              
               placeholder={t.profile_annual_income_placeholder}
               value={profile.annualIncome ?? ""}
               onChange={(e) =>
                 profile.setProfile({
-                  annualIncome: e.target.value ? Number(e.target.value) : null,
-                })
+                  annualIncome: e.target.value ? Number(e.target.value) : null })
               }
             />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-slate-600">
               {t.profile_monthly_budget_label}
               <span className="ml-1 text-slate-400">({settings.baseCurrency})</span>
-            </label>
-            <input
+            </div>
+            <Input
               type="number"
               min={0}
-              className={inputCls}
+              
               placeholder={t.profile_monthly_budget_placeholder}
               value={profile.monthlyBudget ?? ""}
               onChange={(e) =>
                 profile.setProfile({
-                  monthlyBudget: e.target.value ? Number(e.target.value) : null,
-                })
+                  monthlyBudget: e.target.value ? Number(e.target.value) : null })
               }
             />
           </div>
@@ -117,9 +114,9 @@ export function ProfileSection() {
           ] as const
         ).map(({ key, labelKey, placeholderKey }) => (
           <div key={key} className="space-y-1">
-            <label className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-slate-600">
               {t[labelKey as keyof typeof t] as string}
-            </label>
+            </div>
             <AutoResizeTextarea
               className={`${inputCls} resize-none`}
               placeholder={t[placeholderKey as keyof typeof t] as string}

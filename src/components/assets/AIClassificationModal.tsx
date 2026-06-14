@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAssetStore, useLanguageStore } from "@/stores";
 import { useT } from "@/hooks";
-import { Modal, Button } from "@/components/common";
+import { Button, Modal } from "@/components/common";
 import { buildClassificationPrompt, parseAiResponse } from "@/utils";
 
 interface AIClassificationModalProps {
@@ -11,8 +11,7 @@ interface AIClassificationModalProps {
 
 export function AIClassificationModal({
   open,
-  onClose,
-}: AIClassificationModalProps) {
+  onClose }: AIClassificationModalProps) {
   const { assets, updateAsset } = useAssetStore();
   const lang = useLanguageStore((s) => s.lang);
   const t = useT();
@@ -118,7 +117,7 @@ export function AIClassificationModal({
               value={promptText}
               rows={16}
               onFocus={(e) => e.target.select()}
-              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-mono text-slate-700 resize-none focus:outline-none focus:border-blue-300"
+              
             />
             <div className="flex justify-end gap-2">
               <Button variant="secondary" onClick={handleClose}>
@@ -149,7 +148,7 @@ export function AIClassificationModal({
               }}
               rows={14}
               placeholder={t.asset_ai_json_placeholder}
-              className="w-full rounded-lg border border-slate-800 bg-slate-900/50 px-3 py-2.5 text-xs font-mono text-slate-300 resize-none focus:outline-none focus:border-emerald-500"
+              
             />
 
             {importError && (
