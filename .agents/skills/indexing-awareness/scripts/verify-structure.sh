@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Indexing Awareness verification script
-# Checks the consistency between the document (README.md) and actual files (.agent/**/*).
+# Checks the consistency between the document (README.md) and actual files (.agents/**/*).
 
 # Move to project root so the script works from anywhere
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -13,9 +13,9 @@ echo "   Project root: $PROJECT_ROOT"
 echo "============================================================"
 
 README_FILE="README.md"
-RULES_DIR=".agent/rules"
-WORKFLOWS_DIR=".agent/workflows"
-SKILLS_DIR=".agent/skills"
+RULES_DIR=".agents/rules"
+WORKFLOWS_DIR=".agents/workflows"
+SKILLS_DIR=".agents/skills"
 
 EXIT_CODE=0
 

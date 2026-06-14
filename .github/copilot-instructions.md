@@ -30,4 +30,4 @@ You MUST follow these rules when generating or editing code:
    - AI-facing prompt text must be in English.
 
 6. **Agent Workflows:**
-   - For detailed workflows, read the corresponding agent files in the workspace (e.g., `.agent/rules/agent-component-creator.md`).
+   - For detailed workflows, read the corresponding agent files in the workspace (e.g., `.agents/rules/agent-component-creator.md`).

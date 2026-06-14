@@ -10,7 +10,7 @@ description: 커밋 메시지 생성 (영어)
 스테이징된 변경사항으로부터 Conventional Commits 형식의 커밋 메시지를 **영어**로 생성합니다.
 
 > **참고:** 이 워크플로우는 git 상태를 읽지만 파일을 수정하지는 않습니다.
-> 모든 커밋 규칙은 `.agent/rules/git-commit-rules.md`에 정의되어 있습니다.
+> 모든 커밋 규칙은 `.agents/rules/git-commit-rules.md`에 정의되어 있습니다.
 
 ---
 
@@ -30,7 +30,7 @@ description: 커밋 메시지 생성 (영어)
 ## 3. 커밋 메시지 생성 (Generate Commit Message)
 - **목적:** 바로 사용할 수 있는 커밋 메시지를 생성합니다.
 - **액션:**
-  - `.agent/rules/git-commit-rules.md`의 모든 규칙을 따릅니다.
+  - `.agents/rules/git-commit-rules.md`의 모든 규칙을 따릅니다.
   - **언어:** 영어.
   - **Description (제목):** 명령문(Imperative mood), 현재 시제 사용, 첫 글자 대문자, 최대 50자, 끝에 마침표 없음.
   - **Body (본문, 선택 사항):** 빈 줄 이후에 이유와 영향을 설명합니다. 72자에서 줄 바꿈합니다.
