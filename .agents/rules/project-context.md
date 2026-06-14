@@ -45,8 +45,9 @@ portfolio-bridge/
 │   ├── index.css               # Global styles (Tailwind directives)
 │   ├── components/             # Reusable UI components
 │   │   ├── assets/             # Asset-related components
-│   │   ├── common/             # Shared primitives (Button, Card, Modal)
+│   │   ├── common/             # Shared primitives (Button, Card, Modal, Input, Select, Label)
 │   │   ├── dashboard/          # Dashboard-specific components
+│   │   ├── fire/               # FIRE planner-related components
 │   │   ├── gurus/              # Guru-specific components
 │   │   └── layout/             # Layout shell (Header, Sidebar, BottomNav, Layout)
 │   ├── constants/              # App-wide constants (storage keys, thresholds, etc.)
@@ -94,6 +95,7 @@ portfolio-bridge/
 │       │   ├── yahooFx.ts
 │       │   ├── yahooQuote.ts
 │       │   └── yahooSearch.ts
+│       ├── cn.ts               # Tailwind class merging utility (clsx + tailwind-merge)
 │       ├── csv.ts              # CSV import/export
 │       ├── fx.ts               # FX rate helpers
 │       ├── gurus.ts            # Guru data definitions

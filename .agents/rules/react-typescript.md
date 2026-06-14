@@ -54,6 +54,7 @@ export const useMyStore = create<MyState>()(
 - Use **Tailwind CSS v4** utility classes exclusively.
 - No CSS Modules, no inline `style` props, no `styled-components`.
 - Global base styles go in `src/index.css` using Tailwind directives (`@import "tailwindcss"`).
+- When conditionally joining Tailwind classes, use the `cn()` utility (`import { cn } from "@/utils/cn"`) which leverages `clsx` and `tailwind-merge` to prevent class conflicts.
 
 ## Internationalisation (i18n)
 
