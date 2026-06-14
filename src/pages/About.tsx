@@ -93,7 +93,7 @@ export function AboutPage() {
               key={idx}
               className="flex items-start gap-3 md:gap-3.5 rounded-xl border border-zinc-800 bg-black hover:border-zinc-700 transition-colors px-3 py-3 md:px-4 md:py-4 shadow-sm"
             >
-              <div className="w-12 h-10 shrink-0 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-sm font-mono text-zinc-400">
+              <div className="w-auto min-w-12 px-2 h-10 shrink-0 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-sm font-mono text-zinc-400 whitespace-nowrap">
                 {f.icon}
               </div>
               <div className="pt-0.5">

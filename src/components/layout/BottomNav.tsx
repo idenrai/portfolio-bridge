@@ -5,12 +5,12 @@ export function BottomNav() {
   const t = useT();
 
   const NAV_ITEMS = [
-    { to: "/", label: t.nav_dashboard, icon: "[ ~ ]" },
-    { to: "/assets", label: t.nav_assets, icon: "[ $ ]" },
-    { to: "/gurus", label: t.nav_gurus, icon: "[ ? ]" },
-    { to: "/fire", label: t.nav_fire, icon: "[ % ]" },
-    { to: "/settings", label: t.nav_settings, icon: "[ * ]" },
-    { to: "/about", label: t.nav_about, icon: "[ i ]" },
+    { to: "/", label: t.nav_dashboard },
+    { to: "/assets", label: t.nav_assets },
+    { to: "/gurus", label: t.nav_gurus },
+    { to: "/fire", label: t.nav_fire },
+    { to: "/settings", label: t.nav_settings },
+    { to: "/about", label: t.nav_about },
   ];
 
   return (
@@ -22,13 +22,12 @@ export function BottomNav() {
             to={item.to}
             end={item.to === "/"}
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center gap-0.5 flex-1 py-1 text-[10px] transition-colors border-r last:border-r-0 border-zinc-800 ${
-                isActive ? "bg-zinc-200 text-black font-bold" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900"
+              `flex items-center justify-center flex-1 py-0 h-full text-[11px] transition-colors border-r last:border-r-0 border-zinc-800 ${
+                isActive ? "bg-zinc-200 text-black font-bold" : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
               }`
             }
           >
-            <span className="font-mono text-sm leading-none">{item.icon}</span>
-            <span className="truncate max-w-[60px]">{item.label}</span>
+            <span className="truncate px-1 text-center w-full">{item.label}</span>
           </NavLink>
         ))}
       </div>
