@@ -704,7 +704,7 @@ export const ko: Translations = {
   fire_title: "경제적 자유 플래너",
   fire_desc: "현재 자산과 저축액, 수익률을 바탕으로 언제 경제적 자유(FIRE)에 도달할 수 있는지 예측해 보세요.",
   fire_tab_target: "목표 금액으로 계산",
-  fire_tab_expense: "월 생활비로 계산 (4% 룰)",
+  fire_tab_expense: "월 생활비로 계산",
   fire_use_portfolio_assets: "포트폴리오 자산 연동",
   fire_current_assets: "현재 자산 총액",
   fire_monthly_savings: "월 저축액",

@@ -577,9 +577,9 @@ export const de: Translations = {
     "z. B. In 5 Jahren 100.000 € als Eigenkapital für eine Immobilie aufbauen…",
   profile_plan10y_label: "10-Jahres-Investitionsplan",
   profile_plan10y_placeholder:
-    "z. B. Finanzielle Unabhängigkeit durch passives Einkommen in 10 Jahren erreichen…",  profile_notes_label: "Besonderheiten / Hinweise",
+    "z. B. Finanzielle Unabhängigkeit durch passives Einkommen in 10 Jahren erreichen…", profile_notes_label: "Besonderheiten / Hinweise",
   profile_notes_placeholder:
-    "z. B. Hypothek: noch 230.000 € (15 Jahre). 500 €/Monat werden automatisch in S&P-500-ETF investiert, aktiv verwaltetes Budget: 300 €.",  profile_save: "Speichern",
+    "z. B. Hypothek: noch 230.000 € (15 Jahre). 500 €/Monat werden automatisch in S&P-500-ETF investiert, aktiv verwaltetes Budget: 300 €.", profile_save: "Speichern",
   profile_saved: "✓ Gespeichert",
 
   at_col_name: "Name",
@@ -714,7 +714,7 @@ export const de: Translations = {
   fire_title: "Finanzielle Freiheit Planer",
   fire_desc: "Prognostizieren Sie, wann Sie finanzielle Unabhängigkeit (FIRE) erreichen können, basierend auf Ihrem aktuellen Vermögen, Ihren Ersparnissen und der erwarteten Rendite.",
   fire_tab_target: "Nach Zielbetrag",
-  fire_tab_expense: "Nach monatlichen Ausgaben (4%-Regel)",
+  fire_tab_expense: "Nach monatlichen Ausgaben",
   fire_use_portfolio_assets: "Portfoliovermögen verwenden",
   fire_current_assets: "Aktuelles Gesamtvermögen",
   fire_monthly_savings: "Monatliche Ersparnisse",

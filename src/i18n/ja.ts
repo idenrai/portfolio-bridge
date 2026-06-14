@@ -74,8 +74,8 @@ export const ja: Translations = {
   holdings_col_value: "評価額",
   holdings_col_pnl: "損益",
   holdings_col_return: "騰落率",
-  holdings_col_weight: "比率",  holdings_col_per: "PER",
-  holdings_col_pbr: "PBR",  holdings_show_all: (n) => `全${n}件を表示`,
+  holdings_col_weight: "比率", holdings_col_per: "PER",
+  holdings_col_pbr: "PBR", holdings_show_all: (n) => `全${n}件を表示`,
   holdings_show_top10: "上位10件のみ",
 
   category_title: "カテゴリー目標 vs 実績",
@@ -334,7 +334,7 @@ export const ja: Translations = {
     "• 放置された優良株の発掘：市場に見過ごされた割安かつ高品質な企業を体系的に見つける\n" +
     "• 分散運用：20〜30銘柄で個別リスクを抑えつつ、戦略の再現性を高める\n" +
     "• 忍耐が前提：有効な戦略でも3〜4年程度は市場に劣後し得ることを受け入れる\n" +
-    "• 名言：「価値を見積もり、それより十分に安く買え。短期の株式市場は“ミスター・マーケット”に過ぎない」",  guru_philosophy_piotroski:
+    "• 名言：「価値を見積もり、それより十分に安く買え。短期の株式市場は“ミスター・マーケット”に過ぎない」", guru_philosophy_piotroski:
     "• Fスコア：9つの二値基準で企業の財務健全性を0〜9点にスコアリングする定量手法\n" +
     "• バリュー株フィルター：簿価対市価(BM)が高い銘柄のうち、財務体質が優良なものだけを選別\n" +
     "• 収益性シグナル：ROA、営業キャッシュフロー、発生主義品質（キャッシュフロー＞純利益）\n" +
@@ -347,7 +347,7 @@ export const ja: Translations = {
     "• A（年間業績）：年間EPS成長が25%以上で3〜5年持続する企業を追求\n" +
     "• N（新要素・新高値）：革新的な製品/サービスを持ち、52週高値付近で推移する銘柄に注目\n" +
     "• S・L・I・M：需給（浮動株数）、主導株か、機関買い、相場全体の方向性を総合判断\n" +
-    "• 名言：「株式投資の秘訣は、間違ったときの損失をいかに最小限に抑えるかだ」",  lynch_tenbagger_title: "ピーター・リンチ テンバガー採点",
+    "• 名言：「株式投資の秘訣は、間違ったときの損失をいかに最小限に抑えるかだ」", lynch_tenbagger_title: "ピーター・リンチ テンバガー採点",
   lynch_tenbagger_desc:
     "保有株や気になる銘柄をピーター・リンチのPEG・成長・財務基準でスコアリングします。PEG < 1.0、EPS成長率 > 15%、売上成長率 > 10%、D/E < 80%、営業利益率 > 10%、時価総額$10B未満ほど高スコア。低PEG・高成長の中小型株発掘に最適です。",
   lynch_criterion_peg: "PEGレシオ",
@@ -567,9 +567,9 @@ export const ja: Translations = {
     "例: 5年後に結婚資金として 1000万円を目指す…",
   profile_plan10y_label: "10年投資計画",
   profile_plan10y_placeholder:
-    "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成…",  profile_notes_label: "特記事項 / 注意点",
+    "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成…", profile_notes_label: "特記事項 / 注意点",
   profile_notes_placeholder:
-    "例: 住宅ローン残高 2,300万円５15年）。投賄予算のうち毎月 5万円は S&P500 ETF自動購入済み、実質的な機定投賄は毎月 3万円分…",  profile_save: "保存",
+    "例: 住宅ローン残高 2,300万円５15年）。投賄予算のうち毎月 5万円は S&P500 ETF自動購入済み、実質的な機定投賄は毎月 3万円分…", profile_save: "保存",
   profile_saved: "✓ 保存しました",
 
   at_col_name: "銘柄",
@@ -701,7 +701,7 @@ export const ja: Translations = {
   fire_title: "経済的自由プランナー",
   fire_desc: "現在の資産、貯蓄額、期待利回りに基づいて、いつ経済的自立（FIRE）を達成できるかを予測します。",
   fire_tab_target: "目標金額で計算",
-  fire_tab_expense: "月間生活費で計算（4%ルール）",
+  fire_tab_expense: "月間生活費で計算",
   fire_use_portfolio_assets: "ポートフォリオ資産を連動",
   fire_current_assets: "現在の総資産",
   fire_monthly_savings: "月間貯蓄額",
