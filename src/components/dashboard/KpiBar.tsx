@@ -45,12 +45,6 @@ export function KpiBar({ summary }: Props) {
     {
       label: t.kpi_cash_weight,
       value: `${summary.cashPercent.toFixed(1)}%`,
-      color:
-        summary.cashPercent > 20
-          ? "text-white bg-zinc-800 px-1"
-          : summary.cashPercent < 3
-            ? "text-zinc-500 underline"
-            : "text-zinc-300",
     },
     {
       label: t.kpi_fx_exposure,
@@ -59,7 +53,6 @@ export function KpiBar({ summary }: Props) {
         .filter((e) => e.currency !== baseCurrency)
         .map((e) => `${e.currency} ${e.percent.toFixed(0)}%`)
         .join(" · "),
-      color: fxExposure > 40 ? "text-white bg-zinc-800 px-1" : "text-zinc-300",
     },
   ];
 

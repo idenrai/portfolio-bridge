@@ -24,7 +24,11 @@ const LANG_CURRENCY: Record<Lang, CurrencyCode> = {
   de: "EUR", // EUR 통화권 첫 번째 언어 — 프랑스어·스페인어 등 추가 시도 EUR 매핑
 };
 
-export function Header() {
+interface Props {
+  onOpenSidebar: () => void;
+}
+
+export function Header({ onOpenSidebar }: Props) {
   const { lang, setLang } = useLanguageStore();
   const setBaseCurrency = useSettingsStore((s) => s.setBaseCurrency);
 
@@ -43,7 +47,22 @@ export function Header() {
           <span className="text-zinc-500 animate-pulse">_</span>
         </span>
       </div>
-      <div className="hidden md:block" />
+      <div className="hidden md:flex items-center gap-3">
+        <button
+          onClick={onOpenSidebar}
+          className="p-1.5 -ml-1.5 hover:bg-zinc-800 rounded-md transition-colors text-zinc-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+          aria-label="Open menu"
+        >
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+          </svg>
+        </button>
+        <span className="text-sm font-bold tracking-tight">
+          <span className="text-zinc-500">{'> '}</span>
+          <span className="text-white">PORTFOLIO_BRIDGE</span>
+          <span className="text-zinc-500 animate-pulse">_</span>
+        </span>
+      </div>
       <div className="flex items-center gap-4">
         {/* 언어 전환 버튼 (화폐 동시 전환) */}
         <div className="flex gap-1">
