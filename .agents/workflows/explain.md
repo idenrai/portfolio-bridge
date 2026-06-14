@@ -32,7 +32,7 @@ description: 코드 및 개념 설명
 ---
 
 **출력 가이드라인:**
-(`./.agent/rules/language-strategies.md`에 정의된 전략에 따르십시오)
+(`./.agents/rules/language-strategies.md`에 정의된 전략에 따르십시오)
 - **어조:** 기술적이고 명확하게. 거만한 말투나 지나치게 가르치려는 태도를 피하세요.
 - **포맷:**
   1.  **개요 (Overview):** 이것이 *무엇*을 하는지에 대해 1~2문장으로 설명.

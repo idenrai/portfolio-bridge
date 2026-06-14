@@ -9,7 +9,43 @@ description: 작업 완료 후 PR 자동 생성
 ## Objective
 자동으로 현재 작업 내역을 브랜치에 커밋하고 GitHub에 푸시한 뒤, Pull Request를 생성합니다.
 
-## Workflow Steps
+## Pre-PR Checklist
+
+Before creating a PR, strictly follow these verification steps:
+
+### 1. Update Design Documentation
+1. Open `.github/doc-map.yml`
+2. For **each file you modified**, find all matching entries in `mappings`
+3. Open the corresponding `doc` file(s) and update to reflect your changes:
+   - New field / component / behavior → add to the relevant section
+   - Changed behavior → update the existing description
+   - Removed feature → remove or mark deprecated
+4. If no pattern in `doc-map.yml` matches the modified file, update `doc/overview.md`
+
+> Pure bug fixes with no user-visible behavioral change: update the doc only if the fix reveals that a spec was incorrect.
+
+#### Bilingual Requirement / 이중 언어 필수
+Every doc file must be written in **both English and Korean**.
+Use the following inline bilingual convention throughout:
+
+```markdown
+Section body in English.
+
+한국어 설명을 바로 이어서 작성합니다.
+```
+
+- Section headings: English only (for anchor consistency with code references).
+- Each descriptive paragraph: English first, Korean immediately after (same section, no extra heading).
+- Tables: header row in English; add a brief Korean caption line above the table if the purpose is not obvious.
+- Code blocks and file/symbol names: always English only.
+
+### 2. Verify Build
+- `run_command` 도구를 사용하여 `npm run build`를 실행합니다.
+- **에러가 발생할 경우:** 즉시 `.agents/workflows/build-guard.md`를 참고하여 에러의 원인을 파악하고 코드를 수정한 뒤 다시 확인하여 0 에러 상태를 만듭니다.
+
+---
+
+## PR Creation Steps
 
 ### 1. Check Git Status
 - `git status`를 실행하여 커밋되지 않은 변경사항이 있는지 확인합니다.
@@ -36,7 +72,7 @@ description: 작업 완료 후 PR 자동 생성
     - `owner`: (저장소 소유자)
     - `repo`: (저장소 이름)
     - `title`: PR 제목 (커밋 제목과 유사하게 작성)
-    - `body`: 변경사항 요약, 구현한 기능, 남은 작업(TODO) 등을 마크다운으로 상세히 작성.
+    - `body`: 변경사항 요약, 구현한 기능 등을 작성합니다. 이때, 반드시 **`.agents/workflows/build-check.md`** 의 템플릿(마크다운 표 형식)을 참고하여 빌드/린트 검증 통과 내역을 본문에 포함하십시오.
     - `head`: 작업한 브랜치 이름
     - `base`: 병합할 타겟 브랜치 (기본값: `main`)
 

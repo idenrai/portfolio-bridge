@@ -32,7 +32,7 @@ description: 세션 파기 및 요약
 ---
 
 **출력 포맷:**
-(`./.agent/rules/language-strategies.md`에 정의된 전략에 따르십시오)
+(`./.agents/rules/language-strategies.md`에 정의된 전략에 따르십시오)
 ```text
 **재개 프롬프트 (Resume Prompt)**
 **목적:** ...
