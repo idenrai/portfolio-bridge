@@ -68,12 +68,12 @@ npm run tauri:build  # Production installer for current OS
 ```text
 src/
 ├── pages/          # Dashboard, Assets, Gurus, Settings, About
-├── components/     # layout/, common/, dashboard/, assets/, gurus/
+├── components/     # layout/, common/, dashboard/, assets/, gurus/, fire/
 ├── hooks/          # Custom React hooks
 ├── stores/         # Zustand stores (all persisted to localStorage)
 ├── i18n/           # Translation files (ko/en/ja/de)
 ├── types/          # TypeScript type definitions
-└── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/
+└── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/, cn.ts
 
 api/                # Vercel Serverless Functions (Yahoo Finance proxy)
 src-tauri/          # Tauri (Rust) desktop app
@@ -160,12 +160,12 @@ npm run tauri:build  # 프로덕션 인스톨러 생성
 ```text
 src/
 ├── pages/          # Dashboard, Assets, Gurus, Settings, About
-├── components/     # layout/, common/, dashboard/, assets/, gurus/
+├── components/     # layout/, common/, dashboard/, assets/, gurus/, fire/
 ├── hooks/          # 커스텀 React 훅
 ├── stores/         # Zustand 스토어 (localStorage 영속)
 ├── i18n/           # 번역 파일 (ko/en/ja/de)
 ├── types/          # TypeScript 타입 정의
-└── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/
+└── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/, cn.ts
 
 api/                # Vercel Serverless Functions (Yahoo Finance 프록시)
 src-tauri/          # Tauri (Rust) 데스크톱 앱
