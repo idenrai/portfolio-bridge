@@ -25,10 +25,11 @@ const LANG_CURRENCY: Record<Lang, CurrencyCode> = {
 };
 
 interface Props {
-  onOpenSidebar: () => void;
+  isSidebarOpen: boolean;
+  onToggleSidebar: () => void;
 }
 
-export function Header({ onOpenSidebar }: Props) {
+export function Header({ isSidebarOpen, onToggleSidebar }: Props) {
   const { lang, setLang } = useLanguageStore();
   const setBaseCurrency = useSettingsStore((s) => s.setBaseCurrency);
 
@@ -49,19 +50,21 @@ export function Header({ onOpenSidebar }: Props) {
       </div>
       <div className="hidden md:flex items-center gap-3">
         <button
-          onClick={onOpenSidebar}
+          onClick={onToggleSidebar}
           className="p-1.5 -ml-1.5 hover:bg-zinc-800 rounded-md transition-colors text-zinc-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
-          aria-label="Open menu"
+          aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
         >
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
           </svg>
         </button>
-        <span className="text-sm font-bold tracking-tight">
-          <span className="text-zinc-500">{'> '}</span>
-          <span className="text-white">PORTFOLIO_BRIDGE</span>
-          <span className="text-zinc-500 animate-pulse">_</span>
-        </span>
+        {!isSidebarOpen && (
+          <span className="text-sm font-bold tracking-tight fade-in duration-300">
+            <span className="text-zinc-500">{'> '}</span>
+            <span className="text-white">PORTFOLIO_BRIDGE</span>
+            <span className="text-zinc-500 animate-pulse">_</span>
+          </span>
+        )}
       </div>
       <div className="flex items-center gap-4">
         {/* 언어 전환 버튼 (화폐 동시 전환) */}
