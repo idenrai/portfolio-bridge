@@ -28,7 +28,7 @@ export function FireInputForm() {
       {/* Tabs */}
       <div className="flex gap-2 p-1 bg-slate-900/50 rounded-lg border border-slate-800/50">
         <button
-          className={`flex-1 py-1.5 px-2 text-sm font-medium rounded-md transition-all border whitespace-nowrap ${
+          className={`flex-1 py-1.5 px-2 text-xs md:text-sm font-medium rounded-md transition-all border break-keep leading-tight ${
             store.mode === "expense" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "text-slate-500 border-transparent hover:text-slate-300 hover:bg-slate-800"
           }`}
           onClick={() => store.setMode("expense")}
@@ -36,7 +36,7 @@ export function FireInputForm() {
           {t.fire_tab_expense}
         </button>
         <button
-          className={`flex-1 py-1.5 px-2 text-sm font-medium rounded-md transition-all border whitespace-nowrap ${
+          className={`flex-1 py-1.5 px-2 text-xs md:text-sm font-medium rounded-md transition-all border break-keep leading-tight ${
             store.mode === "target" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "text-slate-500 border-transparent hover:text-slate-300 hover:bg-slate-800"
           }`}
           onClick={() => store.setMode("target")}

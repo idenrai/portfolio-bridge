@@ -51,9 +51,9 @@ export function Header() {
             <button
               key={l}
               onClick={() => handleLangChange(l)}
-              className={`text-xs px-2 py-1 transition-colors cursor-pointer border ${
+              className={`text-xs px-2 py-1 transition-colors cursor-pointer border rounded-sm ${
                 lang === l
-                  ? "bg-zinc-200 text-black border-zinc-200 font-bold"
+                  ? "bg-zinc-800 text-white border-zinc-500 font-bold shadow-sm"
                   : "text-zinc-500 border-transparent hover:bg-zinc-900 hover:text-zinc-300"
               }`}
             >

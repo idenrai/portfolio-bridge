@@ -43,7 +43,7 @@ export function AssetTableRow({
   const isCash = asset.type === "cash";
 
   return (
-    <tr className="hover:bg-slate-50">
+    <tr className="hover:bg-slate-800/50 transition-colors">
       <td className="py-2.5 max-w-65">
         <p className="font-medium text-white wrap-break-word whitespace-normal leading-snug">
           {asset.name}
