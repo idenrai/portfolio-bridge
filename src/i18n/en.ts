@@ -144,7 +144,7 @@ export const en: Translations = {
   asset_ai_import_desc: "Paste the JSON returned by the AI below and",
   asset_ai_format_label: "Format:",
   asset_ai_json_placeholder:
-    'Paste AI response JSON here...\n\nExample:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "..." }\n]',
+    'Paste AI response JSON here…\n\nExample:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "…" },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "…" }\n]',
   asset_ai_apply_btn: "Apply Categories",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ Categories applied to ${applied} assets.${skipped > 0 ? ` (${skipped} skipped)` : ""}`,
@@ -155,7 +155,7 @@ export const en: Translations = {
   asset_ai_import_btn_suffix: "and apply.",
   csv_preview_title: (n) => `CSV Preview — ${n} rows`,
   csv_preview_confirm: "Confirm import",
-  csv_preview_more: (n) => `... and ${n} more rows`,
+  csv_preview_more: (n) => `… and ${n} more rows`,
 
   guru_title: "Investment Gurus",
   guru_empty_title: "Guru Analysis",
@@ -562,13 +562,13 @@ export const en: Translations = {
   profile_monthly_budget_placeholder: "e.g. 1000",
   profile_plan3y_label: "3-Year Investment Plan",
   profile_plan3y_placeholder:
-    "e.g. Within 3 years, target $500/mo in dividend income and shift toward growth...",
+    "e.g. Within 3 years, target $500/mo in dividend income and shift toward growth…",
   profile_plan5y_label: "5-Year Investment Plan",
   profile_plan5y_placeholder:
-    "e.g. By year 5, accumulate $100k for a down payment...",
+    "e.g. By year 5, accumulate $100k for a down payment…",
   profile_plan10y_label: "10-Year Investment Plan",
   profile_plan10y_placeholder:
-    "e.g. Achieve financial independence through passive income covering all living expenses...",
+    "e.g. Achieve financial independence through passive income covering all living expenses…",
   profile_notes_label: "Notes & Caveats",
   profile_notes_placeholder:
     "e.g. Mortgage remaining: $230k (15 yrs left). $500/mo auto-invested in S&P 500 ETF, so only $300/mo is actively managed.",
@@ -617,7 +617,7 @@ export const en: Translations = {
   af_mode_crypto: "Crypto",
   af_mode_manual: "Manual Entry",
   af_search_hint: "Enter a ticker or company name and search.",
-  af_search_placeholder: "Ticker or name...",
+  af_search_placeholder: "Ticker or name…",
   af_search_btn: "Search",
   af_searching: "Searching…",
   af_results_count: (n) => `${n} result${n !== 1 ? "s" : ""}`,

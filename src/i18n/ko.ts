@@ -145,7 +145,7 @@ export const ko: Translations = {
   asset_ai_import_desc: "AI가 응답한 JSON을 아래에 붙여 넣고",
   asset_ai_format_label: "형식:",
   asset_ai_json_placeholder:
-    'AI 응답 JSON을 여기에 붙여 넣으세요...\n\n예시:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "..." }\n]',
+    'AI 응답 JSON을 여기에 붙여 넣으세요…\n\n예시:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "…" },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "…" }\n]',
   asset_ai_apply_btn: "분류 적용",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ ${applied}건 분류가 적용되었습니다.${skipped > 0 ? ` (${skipped}건 건너뜀)` : ""}`,
@@ -157,7 +157,7 @@ export const ko: Translations = {
   asset_ai_import_btn_suffix: "버튼을 눌러 주세요.",
   csv_preview_title: (n) => `CSV 미리보기 — ${n}행`,
   csv_preview_confirm: "가져오기 확정",
-  csv_preview_more: (n) => `... 외 ${n}행`,
+  csv_preview_more: (n) => `… 외 ${n}행`,
 
   guru_title: "투자 구루",
   guru_empty_title: "투자 구루 분석",
@@ -563,16 +563,16 @@ export const ko: Translations = {
   profile_monthly_budget_placeholder: "예시: 500000",
   profile_plan3y_label: "3년 투자 계획",
   profile_plan3y_placeholder:
-    "예시: 3년 안에 배당주 수입 월 30만원을 목표로 성장주 중심으로 리밸런싱...",
+    "예시: 3년 안에 배당주 수입 월 30만원을 목표로 성장주 중심으로 리밸런싱…",
   profile_plan5y_label: "5년 투자 계획",
   profile_plan5y_placeholder:
-    "예시: 5년 후 결혼 자금으로 1억 목표, 부동산 마련 계획...",
+    "예시: 5년 후 결혼 자금으로 1억 목표, 부동산 마련 계획…",
   profile_plan10y_label: "10년 투자 계획",
   profile_plan10y_placeholder:
-    "예시: 10년 후 경제적 자유 달성을 위해 배당 수입만으로 생활비 충당...",
+    "예시: 10년 후 경제적 자유 달성을 위해 배당 수입만으로 생활비 충당…",
   profile_notes_label: "특이사항 / 유의점",
   profile_notes_placeholder:
-    "예시: 주택론 잔액 2.3억원(잔여 15년), 월 투자액 중 50만원은 S&P500 ETF 자동매수로 실질적 수동 투자는 30만원 분...",
+    "예시: 주택론 잔액 2.3억원(잔여 15년), 월 투자액 중 50만원은 S&P500 ETF 자동매수로 실질적 수동 투자는 30만원 분…",
   profile_save: "저장",
   profile_saved: "✓ 저장되었습니다",
 
@@ -618,7 +618,7 @@ export const ko: Translations = {
   af_mode_crypto: "코인",
   af_mode_manual: "직접 입력",
   af_search_hint: "티커 또는 종목명을 입력하고 검색하세요.",
-  af_search_placeholder: "티커 또는 종목명...",
+  af_search_placeholder: "티커 또는 종목명…",
   af_search_btn: "검색",
   af_searching: "검색 중…",
   af_results_count: (n) => `검색 결과 ${n}건`,

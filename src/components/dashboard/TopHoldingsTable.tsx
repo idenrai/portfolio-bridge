@@ -42,7 +42,7 @@ export function TopHoldingsTable({ summary }: Props) {
   const display = showAll ? sorted : sorted.slice(0, 10);
 
   const thCls = "text-[11px] text-zinc-400 font-bold px-3 py-2 text-right";
-  const tdCls = "px-3 py-2 text-right text-sm";
+  const tdCls = "px-3 py-2 text-right text-sm tabular-nums";
 
   const sortBtn = (key: SortKey, label: string) => (
     <th className="p-0">

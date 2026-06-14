@@ -145,7 +145,7 @@ export const ja: Translations = {
   asset_ai_import_desc: "AIが返答したJSONを下に貼り付けて",
   asset_ai_format_label: "形式:",
   asset_ai_json_placeholder:
-    'AIの応答JSONをここに貼り付けてください...\n\n例:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "..." },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "..." }\n]',
+    'AIの応答JSONをここに貼り付けてください…\n\n例:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "…" },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "…" }\n]',
   asset_ai_apply_btn: "カテゴリーを適用",
   asset_ai_apply_result: (applied, skipped) =>
     `✓ ${applied}件にカテゴリーを適用しました。${skipped > 0 ? `（${skipped}件スキップ）` : ""}`,
@@ -157,7 +157,7 @@ export const ja: Translations = {
   asset_ai_import_btn_suffix: "ボタンを押してください。",
   csv_preview_title: (n) => `CSVプレビュー — ${n}行`,
   csv_preview_confirm: "インポートを確定",
-  csv_preview_more: (n) => `... 他${n}行`,
+  csv_preview_more: (n) => `… 他${n}行`,
 
   guru_title: "投資家",
   guru_empty_title: "投資家分析",
@@ -561,15 +561,15 @@ export const ja: Translations = {
   profile_monthly_budget_placeholder: "例: 50000",
   profile_plan3y_label: "3年投資計画",
   profile_plan3y_placeholder:
-    "例: 3年以内に配当収入月、3万円を目指し、成長株中心にリバランス...",
+    "例: 3年以内に配当収入月、3万円を目指し、成長株中心にリバランス…",
   profile_plan5y_label: "5年投資計画",
   profile_plan5y_placeholder:
-    "例: 5年後に結婚資金として 1000万円を目指す...",
+    "例: 5年後に結婚資金として 1000万円を目指す…",
   profile_plan10y_label: "10年投資計画",
   profile_plan10y_placeholder:
-    "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成...",  profile_notes_label: "特記事項 / 注意点",
+    "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成…",  profile_notes_label: "特記事項 / 注意点",
   profile_notes_placeholder:
-    "例: 住宅ローン残高 2,300万円５15年）。投賄予算のうち毎月 5万円は S&P500 ETF自動購入済み、実質的な機定投賄は毎月 3万円分...",  profile_save: "保存",
+    "例: 住宅ローン残高 2,300万円５15年）。投賄予算のうち毎月 5万円は S&P500 ETF自動購入済み、実質的な機定投賄は毎月 3万円分…",  profile_save: "保存",
   profile_saved: "✓ 保存しました",
 
   at_col_name: "銘柄",
@@ -614,7 +614,7 @@ export const ja: Translations = {
   af_mode_crypto: "仮想通貨",
   af_mode_manual: "手動入力",
   af_search_hint: "ティッカーまたは銘柄名を入力して検索してください。",
-  af_search_placeholder: "ティッカーまたは銘柄名...",
+  af_search_placeholder: "ティッカーまたは銘柄名…",
   af_search_btn: "検索",
   af_searching: "検索中…",
   af_results_count: (n) => `検索結果: ${n}件`,

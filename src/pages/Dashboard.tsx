@@ -79,7 +79,7 @@ export function DashboardPage() {
           <button
             type="button"
             onClick={handleLoadSample}
-            className="px-5 py-2 bg-black border border-zinc-500 text-zinc-300 text-sm font-bold hover:bg-white hover:text-black transition-colors cursor-pointer"
+            className="px-5 py-2 min-h-[44px] bg-black border border-zinc-500 text-zinc-300 text-sm font-bold hover:bg-white hover:text-black transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             <span className="opacity-40">{"["}</span> {t.dash_sample_btn} <span className="opacity-40">{"]"}</span>
           </button>
@@ -99,7 +99,8 @@ export function DashboardPage() {
           type="button"
           onClick={() => refreshAll()}
           disabled={isLoading}
-          className="inline-flex items-center gap-2 border border-zinc-800 bg-black px-3 py-1.5 text-xs font-bold text-zinc-300 hover:bg-white hover:text-black hover:border-white disabled:opacity-50 transition-colors cursor-pointer"
+          aria-live="polite"
+          className="inline-flex min-h-[44px] items-center gap-2 border border-zinc-800 bg-black px-3 py-1.5 text-xs font-bold text-zinc-300 hover:bg-white hover:text-black hover:border-white disabled:opacity-50 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
         >
           <span className="opacity-40">{"["}</span>
           <span>{t.dash_refresh}</span>
