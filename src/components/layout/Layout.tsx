@@ -6,14 +6,14 @@ import { BottomNav } from "./BottomNav";
 import { ScrollToTop } from "./ScrollToTop";
 
 export function Layout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
     <div className="flex min-h-screen bg-black text-zinc-300 font-mono selection:bg-zinc-800">
       {/* 데스크톱 사이드바 (md 이상) */}
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      <Sidebar isOpen={isSidebarOpen} />
       <div className="flex-1 flex flex-col min-w-0">
-        <Header onOpenSidebar={() => setIsSidebarOpen(true)} />
+        <Header isSidebarOpen={isSidebarOpen} onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
         <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto pb-20 md:pb-6">
           <Outlet />
         </main>
