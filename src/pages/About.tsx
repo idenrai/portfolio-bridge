@@ -2,32 +2,32 @@ import { useT } from "@/hooks";
 
 const FEATURES = [
   {
-    icon: "📊",
+    icon: "[ 01 ]",
     titleKey: "about_feat1_title" as const,
     descKey: "about_feat1_desc" as const,
   },
   {
-    icon: "💼",
+    icon: "[ 02 ]",
     titleKey: "about_feat2_title" as const,
     descKey: "about_feat2_desc" as const,
   },
   {
-    icon: "💡",
+    icon: "[ 03 ]",
     titleKey: "about_feat3_title" as const,
     descKey: "about_feat3_desc" as const,
   },
   {
-    icon: "🤖",
+    icon: "[ 04 ]",
     titleKey: "about_feat4_title" as const,
     descKey: "about_feat4_desc" as const,
   },
   {
-    icon: "🔔",
+    icon: "[ 05 ]",
     titleKey: "about_feat5_title" as const,
     descKey: "about_feat5_desc" as const,
   },
   {
-    icon: "🌐",
+    icon: "[ 06 ]",
     titleKey: "about_feat6_title" as const,
     descKey: "about_feat6_desc" as const,
   },
@@ -93,7 +93,7 @@ export function AboutPage() {
               key={idx}
               className="flex items-start gap-3 md:gap-3.5 rounded-xl border border-zinc-800 bg-black hover:border-zinc-700 transition-colors px-3 py-3 md:px-4 md:py-4 shadow-sm"
             >
-              <div className="w-10 h-10 shrink-0 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-lg">
+              <div className="w-12 h-10 shrink-0 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-sm font-mono text-zinc-400">
                 {f.icon}
               </div>
               <div className="pt-0.5">
@@ -111,8 +111,8 @@ export function AboutPage() {
 
       {/* Privacy */}
       <div className="rounded-xl border border-zinc-800 border-l-4 border-l-emerald-500 bg-zinc-900 px-4 py-3 md:px-5 md:py-4 flex items-start gap-3.5 shadow-sm">
-        <div className="w-8 h-8 shrink-0 rounded-md bg-zinc-950 border border-zinc-800 flex items-center justify-center text-sm">
-          🔒
+        <div className="w-auto px-2 h-8 shrink-0 rounded-md bg-zinc-950 border border-zinc-800 flex items-center justify-center text-sm font-mono text-zinc-400">
+          [ SECURE ]
         </div>
         <div className="pt-0.5">
           <p className="text-sm font-bold text-zinc-200">

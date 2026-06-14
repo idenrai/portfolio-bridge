@@ -5,12 +5,12 @@ export function BottomNav() {
   const t = useT();
 
   const NAV_ITEMS = [
-    { to: "/", label: t.nav_dashboard, icon: "📊" },
-    { to: "/assets", label: t.nav_assets, icon: "💼" },
-    { to: "/gurus", label: t.nav_gurus, icon: "💡" },
-    { to: "/fire", label: t.nav_fire, icon: "🌴" },
-    { to: "/settings", label: t.nav_settings, icon: "⚙️" },
-    { to: "/about", label: t.nav_about, icon: "ℹ️" },
+    { to: "/", label: t.nav_dashboard, icon: "[ ~ ]" },
+    { to: "/assets", label: t.nav_assets, icon: "[ $ ]" },
+    { to: "/gurus", label: t.nav_gurus, icon: "[ ? ]" },
+    { to: "/fire", label: t.nav_fire, icon: "[ % ]" },
+    { to: "/settings", label: t.nav_settings, icon: "[ * ]" },
+    { to: "/about", label: t.nav_about, icon: "[ i ]" },
   ];
 
   return (
@@ -27,7 +27,7 @@ export function BottomNav() {
               }`
             }
           >
-            <span className="text-lg leading-none">{item.icon}</span>
+            <span className="font-mono text-sm leading-none">{item.icon}</span>
             <span className="truncate max-w-[60px]">{item.label}</span>
           </NavLink>
         ))}
