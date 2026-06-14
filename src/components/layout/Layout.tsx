@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 import { BottomNav } from "./BottomNav";
+import { ScrollToTop } from "./ScrollToTop";
 
 export function Layout() {
   return (
@@ -16,6 +17,8 @@ export function Layout() {
       </div>
       {/* 모바일 하단 탭바 (md 미만) */}
       <BottomNav />
+      {/* 화면 우측 하단 플로팅 스크롤 맨위로 버튼 */}
+      <ScrollToTop />
     </div>
   );
 }

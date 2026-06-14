@@ -14,7 +14,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="hidden md:flex w-72 min-h-screen bg-zinc-950 text-zinc-300 flex-col border-r border-zinc-800">
+    <aside className="hidden md:flex w-72 h-screen sticky top-0 overflow-y-auto bg-zinc-950 text-zinc-300 flex-col border-r border-zinc-800">
       {/* 로고 */}
       <div className="h-14 px-6 flex flex-col justify-center border-b border-zinc-800">
         <h1 className="text-lg font-bold tracking-tight">

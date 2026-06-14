@@ -72,6 +72,7 @@ export function PnLWaterfallChart({ assets }: Props) {
           <YAxis
             type="category"
             dataKey="name"
+            tickFormatter={(name: string) => name.length > 15 ? name.substring(0, 15) + "..." : name}
             tick={{ fontSize: 10, fill: "#71717a" }}
             tickLine={false}
             axisLine={false}
