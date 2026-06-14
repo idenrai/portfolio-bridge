@@ -75,6 +75,9 @@ Section body in English.
     - `body`: 변경사항 요약, 구현한 기능 등을 작성합니다. 이때, 반드시 **`.agents/workflows/build-check.md`** 의 템플릿(마크다운 표 형식)을 참고하여 빌드/린트 검증 통과 내역을 본문에 포함하십시오.
     - `head`: 작업한 브랜치 이름
     - `base`: 병합할 타겟 브랜치 (기본값: `main`)
+  - PR이 생성된 직후, 터미널에서 GitHub CLI(`gh`)를 사용하여 해당 PR에 작업자 본인을 Assignee로 할당합니다.
+    - 실행 명령어: `gh pr edit <생성된_PR_번호> --add-assignee "@me"`
+    - *(참고: GitHub 정책상 PR 작성자 본인을 Reviewer로 지정할 수는 없으므로 Reviewer 할당은 생략합니다.)*
 
 ### 6. Report Success
 - 성공적으로 PR이 생성되면, 생성된 PR 링크와 함께 사용자에게 완료를 보고합니다.
