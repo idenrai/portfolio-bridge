@@ -1,5 +1,6 @@
 import { useBrokerStore } from "@/stores";
 import { useT } from "@/hooks";
+import { Select, Label } from "@/components/common";
 
 interface Props {
   value: string | undefined;
@@ -17,14 +18,14 @@ export function AccountSelect({ value, onChange }: Props) {
   if (accounts.length === 0) return null;
 
   return (
-    <label className="block">
-      <span className="text-xs font-medium text-slate-600">
+    <div className="block">
+      <Label>
         {t.af_account_label}
-      </span>
-      <select
+      </Label>
+      <Select
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value || undefined)}
-        className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        
       >
         <option value="">{t.af_account_none}</option>
         {accounts.map((a) => (
@@ -34,7 +35,7 @@ export function AccountSelect({ value, onChange }: Props) {
             {a.accountType ? ` / ${a.accountType})` : a.broker ? ")" : ""}
           </option>
         ))}
-      </select>
-    </label>
+      </Select>
+    </div>
   );
 }

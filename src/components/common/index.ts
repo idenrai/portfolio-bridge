@@ -2,3 +2,6 @@ export { Card } from "./Card";
 export { Button } from "./Button";
 export { Modal } from "./Modal";
 export { AutoResizeTextarea } from "./AutoResizeTextarea";
+export { Input } from "./Input";
+export { Select } from "./Select";
+export { Label } from "./Label";

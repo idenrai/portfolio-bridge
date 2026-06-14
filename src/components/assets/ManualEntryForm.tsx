@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/common";
+import { Button, Input, Select, Label } from "@/components/common";
 import { useT } from "@/hooks";
 import { fetchCurrentPrice } from "@/utils";
 import type {
@@ -130,46 +130,46 @@ export function ManualEntryForm({
       </div>
 
       {/* 종목명 (공통) */}
-      <label className="block">
-        <span className="text-xs font-medium text-slate-600">
+      <div className="block">
+        <Label>
           {t.af_name_label} *
-        </span>
-        <input
+        </Label>
+        <Input
           type="text"
           required
           value={name}
           autoFocus
           onChange={(e) => setName(e.target.value)}
           placeholder={t.af_manual_name_placeholder}
-          className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+          
         />
-      </label>
+      </div>
 
       {/* 통화 (공통) */}
-      <label className="block">
-        <span className="text-xs font-medium text-slate-600">
+      <div className="block">
+        <Label>
           {t.af_currency_label}
-        </span>
-        <select
+        </Label>
+        <Select
           value={currency}
           onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-          className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+          
         >
           {CURRENCY_INPUT_OPTIONS.map((o) => (
             <option key={o.value} value={o.value}>
               {o.label}
             </option>
           ))}
-        </select>
-      </label>
+        </Select>
+      </div>
 
       {isSimple ? (
         /* 간이입력 */
-        <label className="block">
-          <span className="text-xs font-medium text-slate-600">
+        <div className="block">
+          <Label>
             {t.af_simple_amount_label} ({sym})
-          </span>
-          <input
+          </Label>
+          <Input
             type="number"
             required
             min={0}
@@ -179,23 +179,23 @@ export function ManualEntryForm({
               setSimpleAmount(e.target.value === "" ? "" : Number(e.target.value))
             }
             placeholder={t.af_simple_amount_placeholder}
-            className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+            
           />
-        </label>
+        </div>
       ) : (
         /* 상세입력 */
         <>
-          <label className="block">
-            <span className="text-xs font-medium text-slate-600">
+          <div className="block">
+            <Label>
               {t.af_ticker_label}
-            </span>
+            </Label>
             <div className="flex gap-2 mt-1">
-              <input
+              <Input
                 type="text"
                 value={ticker}
                 onChange={(e) => setTicker(e.target.value)}
                 placeholder={t.af_manual_ticker_placeholder}
-                className="flex-1 rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+                
               />
               <Button
                 type="button"
@@ -207,49 +207,49 @@ export function ManualEntryForm({
                 {isFetchingPrice ? t.af_fetching : t.af_fetch_price_btn}
               </Button>
             </div>
-          </label>
+          </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            <div className="block">
+              <Label>
                 {t.af_asset_type_label}
-              </span>
-              <select
+              </Label>
+              <Select
                 value={assetType}
                 onChange={(e) => setAssetType(e.target.value as AssetType)}
-                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+                
               >
                 {ASSET_TYPE_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}
                   </option>
                 ))}
-              </select>
-            </label>
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+              </Select>
+            </div>
+            <div className="block">
+              <Label>
                 {t.af_market_label}
-              </span>
-              <select
+              </Label>
+              <Select
                 value={market}
                 onChange={(e) => setMarket(e.target.value as Market)}
-                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+                
               >
                 {MARKET_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}
                   </option>
                 ))}
-              </select>
-            </label>
+              </Select>
+            </div>
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            <div className="block">
+              <Label>
                 {t.af_quantity_label} *
-              </span>
-              <input
+              </Label>
+              <Input
                 type="number"
                 required
                 min={0}
@@ -259,14 +259,14 @@ export function ManualEntryForm({
                   setQuantity(e.target.value === "" ? "" : Number(e.target.value))
                 }
                 placeholder="0"
-                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+                
               />
-            </label>
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            </div>
+            <div className="block">
+              <Label>
                 {t.af_avg_price_label} ({sym})
-              </span>
-              <input
+              </Label>
+              <Input
                 type="number"
                 min={0}
                 step="any"
@@ -277,14 +277,14 @@ export function ManualEntryForm({
                   )
                 }
                 placeholder="0"
-                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+                
               />
-            </label>
-            <label className="block">
-              <span className="text-xs font-medium text-slate-600">
+            </div>
+            <div className="block">
+              <Label>
                 {t.af_current_price_label} ({sym})
-              </span>
-              <input
+              </Label>
+              <Input
                 type="number"
                 min={0}
                 step="any"
@@ -295,9 +295,9 @@ export function ManualEntryForm({
                   )
                 }
                 placeholder={t.af_current_price_placeholder}
-                className="mt-1 block w-full rounded-lg border border-slate-800 bg-slate-900/50 text-white px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
+                
               />
-            </label>
+            </div>
           </div>
         </>
       )}
