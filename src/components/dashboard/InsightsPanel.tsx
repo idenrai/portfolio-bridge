@@ -12,15 +12,15 @@ interface Props {
 }
 
 const TYPE_STYLES = {
-  danger: "bg-red-50 border-red-200 text-red-800",
-  warning: "bg-amber-50 border-amber-200 text-amber-800",
-  info: "bg-blue-50 border-blue-200 text-blue-700",
+  danger: "bg-red-500/10 border-red-500/20 text-red-400",
+  warning: "bg-amber-500/10 border-amber-500/20 text-amber-400",
+  info: "bg-blue-500/10 border-blue-500/20 text-blue-400",
 } as const;
 
 const CLOSE_BTN = {
-  danger: "text-red-400 hover:text-red-700",
-  warning: "text-amber-400 hover:text-amber-700",
-  info: "text-blue-300 hover:text-blue-600",
+  danger: "text-red-500 hover:text-red-300",
+  warning: "text-amber-500 hover:text-amber-300",
+  info: "text-blue-500 hover:text-blue-300",
 } as const;
 
 export function InsightsPanel({ summary, assets, targets }: Props) {
@@ -58,13 +58,13 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
     <Card title={t.insights_title}>
       {/* ── AI 분석 배너 (항상 표시) ── */}
       <div className="mb-4 rounded-xl bg-linear-to-r from-indigo-600 to-blue-500 p-px shadow-md">
-        <div className="rounded-[11px] bg-white/95 px-4 py-3">
+        <div className="rounded-[11px] bg-slate-900/95 px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             {/* 좌측: 아이콘 + 텍스트 */}
             <div className="flex items-start gap-3 min-w-0">
               <span className="text-2xl shrink-0 mt-0.5">🤖</span>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-800 leading-tight">
+                <p className="text-sm font-semibold text-slate-200 leading-tight">
                   {t.insights_ai_banner_title}
                 </p>
                 <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
@@ -84,13 +84,13 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
 
           {/* 프롬프트 확장 영역 */}
           {showPrompt && (
-            <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
+            <div className="mt-3 pt-3 border-t border-slate-800/50 space-y-2">
               <p className="text-xs text-slate-500">{t.insights_ai_desc}</p>
               <textarea
                 readOnly
                 value={promptText}
                 rows={10}
-                className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
+                className="w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs font-mono text-slate-300 resize-none focus:outline-none"
               />
               <div className="flex justify-end">
                 <button

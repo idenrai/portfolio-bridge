@@ -14,7 +14,7 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 bg-white border-t border-slate-200 md:hidden safe-bottom">
+    <nav className="fixed bottom-0 inset-x-0 z-50 bg-slate-900/90 backdrop-blur border-t border-slate-800/50 md:hidden safe-bottom">
       <div className="flex justify-around items-center h-14 px-1">
         {NAV_ITEMS.map((item) => (
           <NavLink
@@ -23,7 +23,7 @@ export function BottomNav() {
             end={item.to === "/"}
             className={({ isActive }) =>
               `flex flex-col items-center justify-center gap-0.5 flex-1 py-1 text-[10px] transition-colors ${
-                isActive ? "text-blue-600 font-semibold" : "text-slate-400"
+                isActive ? "text-emerald-400 font-semibold drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "text-slate-500"
               }`
             }
           >

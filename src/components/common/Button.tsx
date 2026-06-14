@@ -9,11 +9,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary: "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800",
+  primary: "bg-gradient-to-r from-emerald-500 to-cyan-500 text-white hover:from-emerald-400 hover:to-cyan-400 border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]",
   secondary:
-    "bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300",
-  danger: "bg-red-600 text-white hover:bg-red-700",
-  ghost: "text-slate-600 hover:bg-slate-100",
+    "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700",
+  danger: "bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500/30",
+  ghost: "text-slate-400 hover:bg-slate-800",
 };
 
 export function Button({

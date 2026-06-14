@@ -47,10 +47,10 @@ export function KpiBar({ summary }: Props) {
       value: `${summary.cashPercent.toFixed(1)}%`,
       color:
         summary.cashPercent > 20
-          ? "text-amber-600"
+          ? "text-amber-500"
           : summary.cashPercent < 3
-            ? "text-red-600"
-            : "text-slate-900",
+            ? "text-red-500"
+            : "text-slate-200",
     },
     {
       label: t.kpi_fx_exposure,
@@ -59,7 +59,7 @@ export function KpiBar({ summary }: Props) {
         .filter((e) => e.currency !== baseCurrency)
         .map((e) => `${e.currency} ${e.percent.toFixed(0)}%`)
         .join(" · "),
-      color: fxExposure > 40 ? "text-amber-600" : "text-slate-900",
+      color: fxExposure > 40 ? "text-amber-500" : "text-slate-200",
     },
   ];
 
@@ -68,13 +68,13 @@ export function KpiBar({ summary }: Props) {
       {items.map((item, i) => (
         <div
           key={i}
-          className="bg-white rounded-xl border border-slate-200 shadow-sm px-4 py-3"
+          className="bg-slate-900/50 rounded-xl border border-slate-800 shadow-sm px-4 py-3"
         >
           <p className="text-[11px] text-slate-500 font-medium mb-0.5">
             {item.label}
           </p>
           <p
-            className={`text-lg font-bold leading-tight ${item.color ?? "text-slate-900"}`}
+            className={`text-lg font-bold leading-tight ${item.color ?? "text-slate-200"}`}
           >
             {item.value}
           </p>

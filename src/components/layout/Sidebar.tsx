@@ -16,9 +16,9 @@ export function Sidebar() {
   return (
     <aside className="hidden md:flex w-60 min-h-screen bg-slate-900 text-slate-200 flex-col">
       {/* 로고 */}
-      <div className="px-6 py-5 border-b border-slate-700">
+      <div className="px-6 py-5 border-b border-slate-800/50">
         <h1 className="text-lg font-bold tracking-tight">
-          <span className="text-blue-400">Portfolio</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Portfolio</span>
           <span className="text-slate-400">Bridge</span>
         </h1>
         <p className="text-xs text-slate-500 mt-1">{t.app_tagline}</p>
@@ -32,10 +32,10 @@ export function Sidebar() {
             to={item.to}
             end={item.to === "/"}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all border ${
                 isActive
-                  ? "bg-blue-600/20 text-blue-400 font-medium"
-                  : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                  : "text-slate-400 border-transparent hover:bg-slate-800/50 hover:text-slate-200"
               }`
             }
           >
@@ -46,7 +46,7 @@ export function Sidebar() {
       </nav>
 
       {/* 하단 */}
-      <div className="px-6 py-4 border-t border-slate-700">
+      <div className="px-6 py-4 border-t border-slate-800/50">
         <p className="text-xs text-slate-600">v0.2.0 · {t.app_version_info}</p>
       </div>
     </aside>

@@ -113,12 +113,12 @@ export function GuruAIPromptBanner({
 
   return (
     <div className="rounded-xl bg-linear-to-r from-purple-600 to-indigo-500 p-px shadow-md">
-      <div className="rounded-[11px] bg-white/95 px-4 py-3">
+      <div className="rounded-[11px] bg-slate-900/95 px-4 py-3">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
           <div className="flex items-start gap-3 min-w-0">
             <span className="text-2xl shrink-0 mt-0.5">🧘</span>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-800 leading-tight">
+              <p className="text-sm font-semibold text-slate-200 leading-tight">
                 {t.guru_ai_banner_title}
               </p>
               <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
@@ -151,13 +151,13 @@ export function GuruAIPromptBanner({
 
         {/* 첫 번째 프롬프트 */}
         {showPrompt && (
-          <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
+          <div className="mt-3 pt-3 border-t border-slate-800/50 space-y-2">
             <p className="text-xs text-slate-500">{t.guru_ai_desc}</p>
             <textarea
               readOnly
               value={promptText}
               rows={12}
-              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
+              className="w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs font-mono text-slate-300 resize-none focus:outline-none"
             />
             <div className="flex justify-end">
               <button
@@ -173,9 +173,9 @@ export function GuruAIPromptBanner({
 
         {/* 두 번째 (변동 사항) 프롬프트 */}
         {showFollowUp && followUpText && (
-          <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
+          <div className="mt-3 pt-3 border-t border-slate-800/50 space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+              <span className="text-xs font-medium text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded-full">
                 📅 {prevSession?.date}
               </span>
               <p className="text-xs text-slate-500">{t.guru_ai_followup_desc}</p>
@@ -184,7 +184,7 @@ export function GuruAIPromptBanner({
               readOnly
               value={followUpText}
               rows={14}
-              className="w-full rounded-lg border border-emerald-200 bg-emerald-50/40 px-3 py-2 text-xs font-mono text-slate-700 resize-none focus:outline-none"
+              className="w-full rounded-lg border border-emerald-800 bg-emerald-900/20 px-3 py-2 text-xs font-mono text-slate-300 resize-none focus:outline-none"
             />
             <div className="flex justify-end">
               <button

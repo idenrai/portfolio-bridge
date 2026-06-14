@@ -26,7 +26,7 @@ export function FireChart({ data }: FireChartProps) {
 
   return (
     <Card className="p-5 flex flex-col gap-4 h-full flex-1">
-      <h3 className="text-lg font-bold text-slate-800">{t.fire_chart_title}</h3>
+      <h3 className="text-lg font-bold text-slate-200">{t.fire_chart_title}</h3>
       <div className="h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
@@ -35,11 +35,11 @@ export function FireChart({ data }: FireChartProps) {
           >
             <defs>
               <linearGradient id="colorAsset" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
             <XAxis
               dataKey="year"
               stroke="#64748b"
@@ -59,13 +59,13 @@ export function FireChart({ data }: FireChartProps) {
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#ffffff",
-                borderColor: "#e2e8f0",
+                backgroundColor: "#0f172a",
+                borderColor: "#1e293b",
                 borderRadius: "8px",
-                color: "#1e293b",
-                boxShadow: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+                color: "#f8fafc",
+                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5)",
               }}
-              itemStyle={{ color: "#334155" }}
+              itemStyle={{ color: "#cbd5e1" }}
               labelFormatter={(label, payload) => {
                 const item = payload[0]?.payload as FireDataPoint;
                 return t.fire_tooltip_year(Number(label), item?.age);
@@ -78,7 +78,7 @@ export function FireChart({ data }: FireChartProps) {
             <Area
               type="monotone"
               dataKey="asset"
-              stroke="#3b82f6"
+              stroke="#10b981"
               strokeWidth={3}
               fillOpacity={1}
               fill="url(#colorAsset)"
@@ -87,7 +87,7 @@ export function FireChart({ data }: FireChartProps) {
             <Line
               type="stepAfter"
               dataKey="target"
-              stroke="#ef4444"
+              stroke="#06b6d4"
               strokeWidth={2}
               strokeDasharray="5 5"
               dot={false}

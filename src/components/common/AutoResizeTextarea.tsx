@@ -22,7 +22,7 @@ export function AutoResizeTextarea({
     <textarea
       ref={ref}
       rows={1}
-      className={`${className || ""} overflow-hidden`}
+      className={`${className || ""} overflow-hidden bg-transparent outline-none`}
       placeholder={placeholder}
       value={value}
       onChange={onChange}

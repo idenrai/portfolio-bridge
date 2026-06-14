@@ -21,11 +21,11 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
           onClick={() => onSelect(guru)}
           className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
             selectedGuru?.id === guru.id
-              ? "border-blue-500 bg-blue-50 shadow-md"
-              : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"
+              ? "border-emerald-500 bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+              : "border-slate-800 bg-slate-900/50 hover:border-emerald-500/50 hover:shadow-sm"
           }`}
         >
-          <p className="font-semibold text-slate-800 text-sm leading-tight">
+          <p className="font-semibold text-slate-200 text-sm leading-tight">
             {guruName(guru)}
           </p>
           <p className="text-xs text-slate-500 mt-0.5 leading-tight">

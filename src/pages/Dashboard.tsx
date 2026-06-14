@@ -55,7 +55,7 @@ export function DashboardPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-slate-400">
         <p className="text-6xl mb-4">📊</p>
-        <h2 className="text-xl font-semibold text-slate-600 mb-2">
+        <h2 className="text-xl font-semibold text-slate-300 mb-2">
           {t.dash_empty_title}
         </h2>
         <p className="text-sm">{t.dash_empty_desc}</p>
@@ -66,7 +66,7 @@ export function DashboardPage() {
             (notice, i) => (
               <p
                 key={i}
-                className="text-xs text-slate-500 bg-slate-100 rounded-lg px-4 py-2.5 text-left leading-relaxed"
+                className="text-xs text-slate-400 bg-slate-900 rounded-lg px-4 py-2.5 text-left leading-relaxed"
               >
                 {notice}
               </p>
@@ -79,7 +79,7 @@ export function DashboardPage() {
           <button
             type="button"
             onClick={handleLoadSample}
-            className="px-5 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer"
+            className="px-5 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 text-sm font-medium hover:bg-emerald-500/30 transition-colors cursor-pointer"
           >
             {t.dash_sample_btn}
           </button>
@@ -93,18 +93,18 @@ export function DashboardPage() {
     <div className="space-y-4 md:space-y-6">
       {/* 타이틀 + 갱신 바 */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">{t.dash_title}</h1>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-200">{t.dash_title}</h1>
 
         <button
           type="button"
           onClick={() => refreshAll()}
           disabled={isLoading}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50 transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700 disabled:opacity-50 transition-colors cursor-pointer shadow-sm"
         >
           <span>🔄</span>
           <span>{t.dash_refresh}</span>
           {isLoading ? (
-            <span className="text-blue-500">{t.dash_refreshing}</span>
+            <span className="text-emerald-400">{t.dash_refreshing}</span>
           ) : (
             lastUpdated && (
               <span className="text-slate-400">
