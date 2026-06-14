@@ -36,25 +36,33 @@ export default async function handler(request: Request) {
 
   const fredUrl = `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${encodeURIComponent(id)}&cosd=${cosd}`;
 
-  const res = await fetch(fredUrl, {
-    headers: { "User-Agent": "portfolio-bridge/1.0" },
-  });
+  try {
+    const res = await fetch(fredUrl, {
+      headers: { "User-Agent": "portfolio-bridge/1.0" },
+    });
 
-  if (!res.ok) {
+    if (!res.ok) {
+      return new Response(
+        JSON.stringify({ error: `FRED responded with ${res.status}` }),
+        { status: res.status, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
+      );
+    }
+
+    const text = await res.text();
+    return new Response(text, {
+      status: 200,
+      headers: {
+        ...CORS_HEADERS,
+        "Content-Type": "text/csv",
+        // 1시간 캐시
+        "Cache-Control": "public, max-age=3600",
+      },
+    });
+  } catch (err) {
+    console.error(`[FRED Error] Failed to fetch series ${id}:`, err);
     return new Response(
-      JSON.stringify({ error: `FRED responded with ${res.status}` }),
-      { status: res.status, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
+      JSON.stringify({ error: "FRED API proxy failed" }),
+      { status: 502, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
     );
   }
-
-  const text = await res.text();
-  return new Response(text, {
-    status: 200,
-    headers: {
-      ...CORS_HEADERS,
-      "Content-Type": "text/csv",
-      // 1시간 캐시
-      "Cache-Control": "public, max-age=3600",
-    },
-  });
 }
