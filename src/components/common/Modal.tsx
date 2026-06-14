@@ -29,7 +29,7 @@ export function Modal({
     <dialog
       ref={dialogRef}
       onClose={onClose}
-      className={`${maxWidth} w-[calc(100%-1rem)] sm:w-full rounded-none border-none shadow-none backdrop:bg-black/80 p-0 max-h-[85vh] sm:max-h-[90vh] flex flex-col`}
+      className={`${maxWidth} w-[calc(100%-1rem)] sm:w-full rounded-none border-none shadow-none backdrop:bg-black/80 p-0 m-auto max-h-[85vh] sm:max-h-[90vh] flex flex-col`}
     >
       {open && (
         <div className="bg-zinc-950 border border-zinc-800 rounded-none flex flex-col min-h-0 max-h-[85vh] sm:max-h-[90vh]">
