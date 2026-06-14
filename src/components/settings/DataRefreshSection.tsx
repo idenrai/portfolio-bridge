@@ -35,7 +35,7 @@ export function DataRefreshSection() {
       action={
         <div className="flex items-center gap-2">
           {lastUpdated && (
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-zinc-400">
               {t.settings_data_refresh_time(
                 format(new Date(lastUpdated), "HH:mm"),
               )}
@@ -56,7 +56,7 @@ export function DataRefreshSection() {
     >
       <div className="space-y-3">
         {error && (
-          <p className="text-xs text-red-600 bg-red-50 rounded px-3 py-2">
+          <p className="text-xs text-red-600 bg-red-500/10 rounded px-3 py-2">
             {error}
           </p>
         )}
@@ -80,7 +80,7 @@ export function DataRefreshSection() {
 
         {/* 환율 표시 */}
         <div>
-          <p className="text-xs font-medium text-slate-500 mb-2">
+          <p className="text-xs font-medium text-zinc-500 mb-2">
             {t.settings_fx_title}
           </p>
           <div className="space-y-1">
@@ -101,18 +101,18 @@ export function DataRefreshSection() {
                     key={code}
                     className="grid py-0.5 items-center gap-x-1 sm:gap-x-2 grid-cols-[1fr_auto_auto_auto]"
                   >
-                    <span className="text-xs sm:text-sm text-slate-600 truncate">
+                    <span className="text-xs sm:text-sm text-zinc-400 truncate">
                       {currencyName} ({code})
                     </span>
-                    <span className="text-[10px] sm:text-xs text-slate-400 text-right tabular-nums">
+                    <span className="text-[10px] sm:text-xs text-zinc-400 text-right tabular-nums">
                       {unit} {code} =
                     </span>
-                    <span className="text-xs sm:text-sm font-mono text-slate-800 text-right tabular-nums">
+                    <span className="text-xs sm:text-sm font-mono text-zinc-100 text-right tabular-nums">
                       {rateInBase.toLocaleString(langLocale, {
                         maximumSignificantDigits: 4,
                       })}
                     </span>
-                    <span className="text-xs text-slate-400">
+                    <span className="text-xs text-zinc-400">
                       {baseCurrency}
                     </span>
                   </div>
@@ -124,15 +124,15 @@ export function DataRefreshSection() {
         {/* 시세 진행률 */}
         {isLoading && totalCount > 0 && (
           <div className="space-y-1">
-            <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+            <div className="h-1.5 w-full bg-zinc-800/50 rounded-full overflow-hidden">
               <div
-                className="h-full bg-blue-500 transition-all duration-300 rounded-full"
+                className="h-full bg-zinc-300 transition-all duration-300 rounded-full"
                 style={{
                   width: `${Math.round((updatedCount / totalCount) * 100)}%`,
                 }}
               />
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-zinc-400">
               {t.settings_data_refresh_result(updatedCount, totalCount)}
             </p>
           </div>
@@ -143,7 +143,7 @@ export function DataRefreshSection() {
           </p>
         )}
         {!isLoading && !lastUpdated && !error && !isCached && (
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-zinc-400">
             {assetStore.assets.some(
               (a) => a.ticker && !a.categories.includes("cash"),
             )

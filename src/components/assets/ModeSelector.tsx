@@ -15,7 +15,7 @@ export function ModeSelector({
     { key: "crypto", label: t.af_mode_crypto },
   ];
   return (
-    <div className="flex rounded-lg border border-slate-200 overflow-hidden">
+    <div className="flex rounded-lg border border-zinc-800 overflow-hidden">
       {tabs.map((t) => (
         <button
           key={t.key}

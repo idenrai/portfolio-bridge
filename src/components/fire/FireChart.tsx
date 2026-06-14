@@ -26,7 +26,7 @@ export function FireChart({ data }: FireChartProps) {
 
   return (
     <Card className="p-5 flex flex-col gap-4 h-full flex-1">
-      <h3 className="text-lg font-bold text-slate-200">{t.fire_chart_title}</h3>
+      <h3 className="text-lg font-bold text-zinc-200">{t.fire_chart_title}</h3>
       <div className="h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart

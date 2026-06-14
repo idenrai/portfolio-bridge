@@ -107,7 +107,7 @@ export function PnLWaterfallChart({ assets }: Props) {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <div className="flex items-center gap-4 mt-1 text-[10px] text-slate-400">
+      <div className="flex items-center gap-4 mt-1 text-[10px] text-zinc-400">
         <span className="flex items-center gap-1">
           <span className="w-2.5 h-2.5 rounded-sm bg-red-400 inline-block" />
           {t.pnl_chart_profit}

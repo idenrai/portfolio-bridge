@@ -22,13 +22,13 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
           className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
             selectedGuru?.id === guru.id
               ? "border-emerald-500 bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
-              : "border-slate-800 bg-slate-900/50 hover:border-emerald-500/50 hover:shadow-sm"
+              : "border-zinc-800 bg-zinc-900/50 hover:border-emerald-500/50 hover:shadow-sm"
           }`}
         >
-          <p className="font-semibold text-slate-200 text-sm leading-tight">
+          <p className="font-semibold text-zinc-200 text-sm leading-tight">
             {guruName(guru)}
           </p>
-          <p className="text-xs text-slate-500 mt-0.5 leading-tight">
+          <p className="text-xs text-zinc-500 mt-0.5 leading-tight">
             {guru.firm}
           </p>
         </button>

@@ -15,7 +15,7 @@ export function ProfileSection() {
   };
 
   const inputCls =
-    "w-full rounded-md border border-slate-800 bg-slate-900/50 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 transition-colors";
+    "w-full rounded-md border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-sm text-zinc-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 transition-colors";
 
   return (
     <Card
@@ -28,14 +28,14 @@ export function ProfileSection() {
     >
       <div className="space-y-4">
         {/* 설명 */}
-        <p className="text-sm text-slate-500 leading-relaxed">
+        <p className="text-sm text-zinc-500 leading-relaxed">
           {t.profile_desc}
         </p>
 
         {/* 닉네임 / 나이 */}
         <div className="grid grid-cols-[1fr_100px] gap-3">
           <div className="space-y-1">
-            <div className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-zinc-400">
               {t.profile_nickname_label}
             </div>
             <Input
@@ -49,7 +49,7 @@ export function ProfileSection() {
             />
           </div>
           <div className="space-y-1">
-            <div className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-zinc-400">
               {t.profile_age_label}
             </div>
             <Input
@@ -69,9 +69,9 @@ export function ProfileSection() {
         {/* 연봉 / 월 투자 가능 금액 */}
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1">
-            <div className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-zinc-400">
               {t.profile_annual_income_label}
-              <span className="ml-1 text-slate-400">({settings.baseCurrency})</span>
+              <span className="ml-1 text-zinc-400">({settings.baseCurrency})</span>
             </div>
             <Input
               type="number"
@@ -86,9 +86,9 @@ export function ProfileSection() {
             />
           </div>
           <div className="space-y-1">
-            <div className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-zinc-400">
               {t.profile_monthly_budget_label}
-              <span className="ml-1 text-slate-400">({settings.baseCurrency})</span>
+              <span className="ml-1 text-zinc-400">({settings.baseCurrency})</span>
             </div>
             <Input
               type="number"
@@ -114,7 +114,7 @@ export function ProfileSection() {
           ] as const
         ).map(({ key, labelKey, placeholderKey }) => (
           <div key={key} className="space-y-1">
-            <div className="text-xs font-medium text-slate-600">
+            <div className="text-xs font-medium text-zinc-400">
               {t[labelKey as keyof typeof t] as string}
             </div>
             <AutoResizeTextarea

@@ -78,7 +78,7 @@ export function CryptoForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <p className="text-sm text-slate-500">{t.af_crypto_hint}</p>
+      <p className="text-sm text-zinc-500">{t.af_crypto_hint}</p>
 
       <div className="flex gap-2">
         <Input
@@ -101,7 +101,7 @@ export function CryptoForm({
 
       {pairs.length > 0 && (
         <div >
-          <div className="bg-slate-900/50 px-3 py-2 border-b border-slate-800">
+          <div className="bg-zinc-900/50 px-3 py-2 border-b border-zinc-800">
             <p className="text-xs text-zinc-400 font-medium">
               {t.af_crypto_pair_title}
             </p>
@@ -115,7 +115,7 @@ export function CryptoForm({
                 className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors ${
                   selectedPair?.symbol === p.symbol
                     ? "bg-emerald-950/30 border-l-2 border-emerald-500"
-                    : "hover:bg-slate-900/50"
+                    : "hover:bg-zinc-900/50"
                 }`}
               >
                 <span className="text-sm font-bold text-white">
@@ -123,7 +123,7 @@ export function CryptoForm({
                 </span>
                 <div className="flex items-center gap-3">
                   {p.price !== null && (
-                    <span className="text-sm text-slate-600">
+                    <span className="text-sm text-zinc-400">
                       {CURRENCY_SYMBOLS[p.currency]}
                       {p.price.toLocaleString()}
                     </span>
@@ -147,7 +147,7 @@ export function CryptoForm({
       )}
 
       {searchedOnce && pairs.length === 0 && !isSearching && (
-        <p className="text-sm text-zinc-400 bg-slate-900/50 rounded-lg px-3 py-2">
+        <p className="text-sm text-zinc-400 bg-zinc-900/50 rounded-lg px-3 py-2">
           {t.af_crypto_no_pairs}
         </p>
       )}

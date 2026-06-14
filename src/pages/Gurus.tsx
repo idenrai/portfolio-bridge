@@ -29,9 +29,9 @@ export function GurusPage() {
 
   if (assets.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[40vh] md:min-h-[60vh] text-slate-400 px-4">
+      <div className="flex flex-col items-center justify-center min-h-[40vh] md:min-h-[60vh] text-zinc-400 px-4">
         <p className="text-5xl md:text-6xl mb-4">💡</p>
-        <h2 className="text-lg md:text-xl font-semibold text-slate-600 mb-2 text-center">
+        <h2 className="text-lg md:text-xl font-semibold text-zinc-400 mb-2 text-center">
           {t.guru_empty_title}
         </h2>
         <p className="text-xs md:text-sm text-center">{t.guru_empty_desc}</p>
@@ -88,7 +88,7 @@ export function GurusPage() {
         <>
           {/* 철학 */}
           <Card title={t.guru_philosophy_title(guruName(selectedGuru))}>
-            <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
+            <p className="text-sm text-zinc-400 leading-relaxed whitespace-pre-line">
               {localizedPhilosophy}
             </p>
           </Card>

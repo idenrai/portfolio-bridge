@@ -36,7 +36,7 @@ interface Props {
 function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
   return (
     <span
-      className={`ml-0.5 inline-block text-[10px] ${active ? "text-blue-500" : "text-slate-300"}`}
+      className={`ml-0.5 inline-block text-[10px] ${active ? "text-blue-500" : "text-zinc-300"}`}
     >
       {active ? (dir === "asc" ? "▲" : "▼") : "↕"}
     </span>
@@ -105,7 +105,7 @@ export function AssetTable({
 
   if (allAssets.length === 0) {
     return (
-      <div className="text-center py-16 text-slate-400">
+      <div className="text-center py-16 text-zinc-400">
         <p className="text-4xl mb-3">💼</p>
         <p className="font-medium">{t.at_empty_title}</p>
         <p className="text-sm mt-1">{t.at_empty_desc}</p>
@@ -136,14 +136,14 @@ export function AssetTable({
       />
 
       {sorted.length === 0 ? (
-        <div className="text-center py-10 text-slate-400 text-sm">
+        <div className="text-center py-10 text-zinc-400 text-sm">
           {t.at_filter_no_result}
         </div>
       ) : (
         <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
           <table className="w-full text-sm min-w-225">
             <thead>
-              <tr className="text-left text-xs text-slate-500 border-b border-slate-200">
+              <tr className="text-left text-xs text-zinc-500 border-b border-zinc-800 whitespace-nowrap">
                 <th
                   className="pb-2 font-medium cursor-pointer select-none"
                   onClick={() => onSort("name")}

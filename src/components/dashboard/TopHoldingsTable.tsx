@@ -63,7 +63,7 @@ export function TopHoldingsTable({ summary }: Props) {
         sorted.length > 10 && (
           <button
             onClick={() => setShowAll(!showAll)}
-            className="text-xs text-blue-600 hover:underline cursor-pointer"
+            className="text-xs text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer"
           >
             {showAll
               ? t.holdings_show_top10

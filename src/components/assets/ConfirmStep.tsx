@@ -34,13 +34,13 @@ export function ConfirmStep({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-3">
+      <div className="bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
           <span className="text-sm font-bold text-white">
             {item.name}
           </span>
           {item.ticker && (
-            <span className="text-sm text-slate-400 font-mono">
+            <span className="text-sm text-zinc-400 font-mono">
               {item.ticker}
             </span>
           )}
@@ -99,7 +99,7 @@ export function ConfirmStep({
       </div>
 
       <div className="block">
-        <span className="text-xs font-medium text-slate-600">
+        <span className="text-xs font-medium text-zinc-400">
           {t.af_current_price_label} ({sym})
           {item.currentPrice > 0 && (
             <span className="ml-2 text-green-600 font-normal text-xs">
@@ -111,7 +111,7 @@ export function ConfirmStep({
           type="number"
           value={item.currentPrice}
           readOnly
-          className="mt-1 block w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500 cursor-not-allowed"
+          className="mt-1 block w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-sm text-zinc-500 cursor-not-allowed"
         />
       </div>
 

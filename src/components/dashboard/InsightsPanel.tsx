@@ -12,9 +12,9 @@ interface Props {
 }
 
 const TYPE_STYLES = {
-  danger: "bg-red-500/10 border-red-500/20 text-red-400",
+  danger: "bg-red-500/100/10 border-red-500/20 text-red-400",
   warning: "bg-amber-500/10 border-amber-500/20 text-amber-400",
-  info: "bg-blue-500/10 border-blue-500/20 text-blue-400",
+  info: "bg-zinc-800/500/10 border-blue-500/20 text-blue-400",
 } as const;
 
 const CLOSE_BTN = {
@@ -58,16 +58,16 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
     <Card title={t.insights_title}>
       {/* ── AI 분석 배너 (항상 표시) ── */}
       <div className="mb-4 rounded-xl bg-linear-to-r from-indigo-600 to-blue-500 p-px shadow-md">
-        <div className="rounded-[11px] bg-slate-900/95 px-4 py-3">
+        <div className="rounded-[11px] bg-zinc-900/95 px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             {/* 좌측: 아이콘 + 텍스트 */}
             <div className="flex items-start gap-3 min-w-0">
               <span className="text-2xl shrink-0 mt-0.5">🤖</span>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-200 leading-tight">
+                <p className="text-sm font-semibold text-zinc-200 leading-tight">
                   {t.insights_ai_banner_title}
                 </p>
-                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
                   {t.insights_ai_banner_desc}
                 </p>
               </div>
@@ -84,19 +84,19 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
 
           {/* 프롬프트 확장 영역 */}
           {showPrompt && (
-            <div className="mt-3 pt-3 border-t border-slate-800/50 space-y-2">
-              <p className="text-xs text-slate-500">{t.insights_ai_desc}</p>
+            <div className="mt-3 pt-3 border-t border-zinc-800/50 space-y-2">
+              <p className="text-xs text-zinc-500">{t.insights_ai_desc}</p>
               <textarea
                 readOnly
                 value={promptText}
                 rows={10}
-                className="w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs font-mono text-slate-300 resize-none focus:outline-none"
+                className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs font-mono text-zinc-300 resize-none focus:outline-none"
               />
               <div className="flex justify-end">
                 <button
                   type="button"
                   onClick={copyPrompt}
-                  className="rounded-lg bg-slate-800 hover:bg-slate-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                  className="rounded-lg bg-zinc-800 hover:bg-zinc-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
                 >
                   {copied ? t.insights_ai_copied : t.insights_ai_copy}
                 </button>
@@ -108,7 +108,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
 
       {/* ── 인사이트 목록 ── */}
       {visible.length === 0 ? (
-        <div className="text-sm text-slate-400 py-4 text-center">
+        <div className="text-sm text-zinc-400 py-4 text-center">
           {t.insights_ok}
         </div>
       ) : (
