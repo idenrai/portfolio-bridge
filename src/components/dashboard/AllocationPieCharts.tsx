@@ -46,7 +46,7 @@ function MiniPie({
 }) {
   if (data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-55 text-slate-400 text-sm">
+      <div className="flex items-center justify-center h-55 text-zinc-400 text-sm">
         {noDataText}
       </div>
     );

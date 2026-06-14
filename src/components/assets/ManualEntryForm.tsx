@@ -99,7 +99,7 @@ export function ManualEntryForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* 모드 토글 */}
       <div className="flex items-center justify-center">
-        <div className="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
+        <div className="inline-flex rounded-lg border border-zinc-800 bg-zinc-800/50 p-0.5">
           <button
             type="button"
             onClick={() => setIsSimple(false)}

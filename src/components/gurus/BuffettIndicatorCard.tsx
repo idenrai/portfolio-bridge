@@ -54,10 +54,10 @@ const ZONES: Zone[] = [
   },
   {
     labelKey: "buffett_indicator_status_deep_over",
-    color: "text-red-700",
-    bgColor: "bg-red-50",
+    color: "text-red-400",
+    bgColor: "bg-red-500/10",
     borderColor: "border-red-300",
-    gaugeColor: "bg-red-500",
+    gaugeColor: "bg-red-500/100",
     max: Infinity,
   },
 ];
@@ -100,7 +100,7 @@ export function BuffettIndicatorCard() {
   return (
     <Card title={t.buffett_indicator_title}>
       {loading ? (
-        <p className="text-sm text-slate-500 py-4 text-center animate-pulse">
+        <p className="text-sm text-zinc-500 py-4 text-center animate-pulse">
           {t.buffett_indicator_loading}
         </p>
       ) : error ? (
@@ -117,7 +117,7 @@ export function BuffettIndicatorCard() {
                 className={`flex items-center justify-between rounded-xl border px-4 py-3 ${zone.bgColor} ${zone.borderColor}`}
               >
                 <div>
-                  <p className="text-xs text-slate-500 mb-0.5">
+                  <p className="text-xs text-zinc-500 mb-0.5">
                     {t.buffett_indicator_ratio_label}
                   </p>
                   <p className={`text-3xl font-bold tabular-nums ${zone.color}`}>
@@ -135,7 +135,7 @@ export function BuffettIndicatorCard() {
 
           {/* 게이지 바 */}
           <div className="space-y-1">
-            <div className="relative h-4 rounded-full bg-slate-100 overflow-hidden">
+            <div className="relative h-4 rounded-full bg-zinc-800/50 overflow-hidden">
               {/* 구간 색상 배경 */}
               <div className="absolute inset-0 flex">
                 <div className="h-full bg-sky-200 w-[40%]" />
@@ -146,7 +146,7 @@ export function BuffettIndicatorCard() {
               </div>
               {/* 현재값 포인터 */}
               <div
-                className="absolute top-0 h-full w-1 -translate-x-0.5 bg-slate-700 rounded-full shadow"
+                className="absolute top-0 h-full w-1 -tranzinc-x-0.5 bg-zinc-700 rounded-full shadow"
                 style={{ left: `${gaugeWidth(ratio)}%` }}
               />
             </div>
@@ -155,7 +155,7 @@ export function BuffettIndicatorCard() {
               {MARKERS.map((m) => (
                 <span
                   key={m.value}
-                  className="absolute text-[10px] text-slate-400 -translate-x-1/2"
+                  className="absolute text-[10px] text-zinc-400 -tranzinc-x-1/2"
                   style={{ left: `${(m.value / 200) * 100}%` }}
                 >
                   {m.label}
@@ -166,37 +166,37 @@ export function BuffettIndicatorCard() {
 
           {/* 세부 수치 */}
           <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="rounded-lg bg-slate-50 px-3 py-2">
-              <p className="text-[11px] text-slate-500 mb-0.5">
+            <div className="rounded-lg bg-zinc-900/50 px-3 py-2">
+              <p className="text-[11px] text-zinc-500 mb-0.5">
                 {t.buffett_indicator_market_cap} (USD)
               </p>
-              <p className="text-sm font-semibold text-slate-700 tabular-nums">
+              <p className="text-sm font-semibold text-zinc-700 tabular-nums">
                 ${formatTrillions(marketCapTrillions, "en")}
               </p>
             </div>
-            <div className="rounded-lg bg-slate-50 px-3 py-2">
-              <p className="text-[11px] text-slate-500 mb-0.5">
+            <div className="rounded-lg bg-zinc-900/50 px-3 py-2">
+              <p className="text-[11px] text-zinc-500 mb-0.5">
                 {t.buffett_indicator_gdp} (USD)
               </p>
-              <p className="text-sm font-semibold text-slate-700 tabular-nums">
+              <p className="text-sm font-semibold text-zinc-700 tabular-nums">
                 ${formatTrillions(gdpTrillions, "en")}
               </p>
             </div>
-            <div className="rounded-lg bg-slate-50 px-3 py-2">
-              <p className="text-[11px] text-slate-500 mb-0.5">
+            <div className="rounded-lg bg-zinc-900/50 px-3 py-2">
+              <p className="text-[11px] text-zinc-500 mb-0.5">
                 {t.buffett_indicator_year}
               </p>
-              <p className="text-sm font-semibold text-slate-700">{date}</p>
+              <p className="text-sm font-semibold text-zinc-700">{date}</p>
             </div>
           </div>
 
           {/* 설명 */}
-          <p className="text-xs text-slate-500 leading-relaxed">
+          <p className="text-xs text-zinc-500 leading-relaxed">
             {t.buffett_indicator_desc}
           </p>
 
           {/* 출처 */}
-          <p className="text-[11px] text-slate-400 text-right">
+          <p className="text-[11px] text-zinc-400 text-right">
             {t.buffett_indicator_source}
           </p>
         </div>

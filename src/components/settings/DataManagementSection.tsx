@@ -21,7 +21,7 @@ export function DataManagementSection() {
       <div className="space-y-5">
         {/* Google Drive 연동 */}
         <div className="space-y-2">
-          <p className="text-xs font-semibold text-slate-500 tracking-wide">
+          <p className="text-xs font-semibold text-zinc-500 tracking-wide">
             Google Drive
           </p>
           {drive.isConnected ? (
@@ -52,7 +52,7 @@ export function DataManagementSection() {
                   )}
                 </Button>
                 {drive.syncedAt && (
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-zinc-400">
                     {t.drive_synced_at(
                       format(new Date(drive.syncedAt), "HH:mm"),
                     )}
@@ -68,7 +68,7 @@ export function DataManagementSection() {
                 </Button>
               </div>
               {drive.syncError && (
-                <p className="text-xs text-red-600 bg-red-50 rounded px-3 py-1.5">
+                <p className="text-xs text-red-600 bg-red-500/10 rounded px-3 py-1.5">
                   {t.drive_error_prefix}{" "}
                   {drive.syncError === "no_client_id"
                     ? t.drive_error_no_client_id
@@ -110,38 +110,38 @@ export function DataManagementSection() {
             </div>
           ) : (
             <div className="space-y-2">
-              <p className="text-sm text-slate-500">{t.drive_desc}</p>
+              <p className="text-sm text-zinc-500">{t.drive_desc}</p>
               <Button size="sm" variant="secondary" onClick={drive.connect}>
                 {t.drive_connect}
               </Button>
             </div>
           )}
-          <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 space-y-1">
-            <p className="text-xs font-medium text-slate-600">
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2.5 space-y-1">
+            <p className="text-xs font-medium text-zinc-400">
               {t.settings_data_drive_title}
             </p>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-zinc-500 leading-relaxed">
               {t.settings_data_drive_note}
             </p>
             <a
               href="https://myaccount.google.com/permissions"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block text-xs text-blue-600 hover:underline mt-0.5"
+              className="inline-block text-xs text-zinc-400 hover:text-zinc-100 transition-colors mt-0.5"
             >
               myaccount.google.com/permissions →
             </a>
           </div>
         </div>
 
-        <hr className="border-slate-100" />
+        <hr className="border-zinc-800" />
 
         {/* 로컬 스토리지 초기화 */}
         <div className="space-y-2">
-          <p className="text-xs font-semibold text-slate-500 tracking-wide">
+          <p className="text-xs font-semibold text-zinc-500 tracking-wide">
             {t.settings_data_local_title}
           </p>
-          <p className="text-sm text-slate-500">{t.settings_data_desc}</p>
+          <p className="text-sm text-zinc-500">{t.settings_data_desc}</p>
           <Button variant="danger" size="sm" onClick={handleResetAll}>
             {t.settings_data_reset}
           </Button>

@@ -34,22 +34,22 @@ export function EditForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="bg-slate-50 rounded-lg px-4 py-3 flex flex-wrap gap-x-6 gap-y-1">
-        <span className="text-sm font-semibold text-slate-800">
+      <div className="bg-zinc-900/50 rounded-lg px-4 py-3 flex flex-wrap gap-x-6 gap-y-1">
+        <span className="text-sm font-semibold text-zinc-100">
           {initial.name}
         </span>
         {initial.ticker && (
-          <span className="text-sm text-slate-500 font-mono">
+          <span className="text-sm text-zinc-500 font-mono">
             {initial.ticker}
           </span>
         )}
-        <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded self-center">
+        <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded self-center">
           {t.asset_type_labels[initial.type]}
         </span>
-        <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded self-center">
+        <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded self-center">
           {t.market_labels[initial.market]}
         </span>
-        <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded self-center">
+        <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded self-center">
           {initial.currency}
         </span>
       </div>
@@ -93,7 +93,7 @@ export function EditForm({
           type="number"
           value={initial.currentPrice}
           readOnly
-          className="mt-1 block w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500 cursor-not-allowed"
+          className="mt-1 block w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-sm text-zinc-500 cursor-not-allowed"
         />
       </div>
 

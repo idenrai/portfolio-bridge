@@ -39,17 +39,17 @@ export function AssetTableRow({
   const pnl = assetPnL(asset);
   const ret = assetReturnPercent(asset);
   const sym = CURRENCY_SYMBOLS[asset.currency];
-  const pnlColor = pnl >= 0 ? "text-red-600" : "text-blue-600";
+  const pnlColor = pnl >= 0 ? "text-red-600" : "text-zinc-300";
   const isCash = asset.type === "cash";
 
   return (
-    <tr className="hover:bg-slate-800/50 transition-colors">
+    <tr className="hover:bg-zinc-800/50 transition-colors whitespace-nowrap">
       <td className="py-2.5 max-w-65">
         <p className="font-medium text-white wrap-break-word whitespace-normal leading-snug">
           {asset.name}
         </p>
         {asset.ticker && (
-          <p className="text-xs text-slate-400">{asset.ticker}</p>
+          <p className="text-xs text-zinc-400">{asset.ticker}</p>
         )}
       </td>
       <td className="py-2.5 whitespace-nowrap">
@@ -63,7 +63,7 @@ export function AssetTableRow({
           onChange={(e) =>
             onCategoryChange(asset.id, e.target.value as AssetCategory | "")
           }
-          className="text-xs rounded border border-slate-800 px-1.5 py-1 bg-slate-900/50 text-slate-200 focus:border-emerald-500 focus:outline-none min-w-22.5"
+          className="text-xs rounded border border-zinc-800 px-1.5 py-1 bg-zinc-900/50 text-zinc-200 focus:border-emerald-500 focus:outline-none min-w-22.5"
         >
           <option value="">{t.at_unclassified}</option>
           {categoryOptions.map(([val, label]) => (
@@ -78,7 +78,7 @@ export function AssetTableRow({
           <select
             value={asset.brokerId ?? ""}
             onChange={(e) => onBrokerChange(asset.id, e.target.value)}
-            className="text-xs rounded border border-slate-800 px-1.5 py-1 bg-slate-900/50 text-slate-200 focus:border-emerald-500 focus:outline-none min-w-22.5"
+            className="text-xs rounded border border-zinc-800 px-1.5 py-1 bg-zinc-900/50 text-zinc-200 focus:border-emerald-500 focus:outline-none min-w-22.5"
           >
             <option value="">{t.af_account_none}</option>
             {brokerAccounts.map((b) => (
@@ -91,14 +91,14 @@ export function AssetTableRow({
       )}
       <td className="py-2.5 text-right tabular-nums">
         {isCash ? (
-          <span className="text-slate-400">-</span>
+          <span className="text-zinc-400">-</span>
         ) : (
           asset.quantity.toLocaleString()
         )}
       </td>
-      <td className="py-2.5 text-right tabular-nums text-slate-500">
+      <td className="py-2.5 text-right tabular-nums text-zinc-500">
         {isCash ? (
-          <span className="text-slate-400">-</span>
+          <span className="text-zinc-400">-</span>
         ) : (
           <>
             {sym}
@@ -108,7 +108,7 @@ export function AssetTableRow({
       </td>
       <td className="py-2.5 text-right tabular-nums">
         {isCash ? (
-          <span className="text-slate-400">-</span>
+          <span className="text-zinc-400">-</span>
         ) : (
           <>
             {sym}
@@ -121,7 +121,7 @@ export function AssetTableRow({
         {val.toLocaleString()}
       </td>
       <td
-        className={`py-2.5 text-right tabular-nums ${isCash ? "text-slate-400" : pnlColor}`}
+        className={`py-2.5 text-right tabular-nums ${isCash ? "text-zinc-400" : pnlColor}`}
       >
         {isCash ? (
           "-"
@@ -133,7 +133,7 @@ export function AssetTableRow({
         )}
       </td>
       <td
-        className={`py-2.5 text-right tabular-nums font-medium ${isCash ? "text-slate-400" : pnlColor}`}
+        className={`py-2.5 text-right tabular-nums font-medium ${isCash ? "text-zinc-400" : pnlColor}`}
       >
         {isCash ? "-" : formatPercent(ret)}
       </td>
@@ -146,7 +146,7 @@ export function AssetTableRow({
             variant="ghost"
             size="sm"
             onClick={() => onDelete(asset.id)}
-            className="text-red-500 hover:text-red-700"
+            className="text-red-500 hover:text-red-400"
           >
             {t.at_btn_delete}
           </Button>

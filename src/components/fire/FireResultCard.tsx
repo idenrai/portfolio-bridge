@@ -23,7 +23,7 @@ export function FireResultCard({ result }: FireResultCardProps) {
   }
 
   return (
-    <Card className="p-8 flex flex-col items-center justify-center text-center gap-4 bg-slate-950/50 border border-slate-800 shadow-sm">
+    <Card className="p-8 flex flex-col items-center justify-center text-center gap-4 bg-zinc-950/50 border border-zinc-800 shadow-sm">
       {result.alreadyReached ? (
         <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.2)] py-4">
           {t.fire_result_already_reached}
@@ -31,22 +31,22 @@ export function FireResultCard({ result }: FireResultCardProps) {
       ) : result.successYear !== null ? (
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 py-4">
           <div className="flex flex-col items-center">
-            <span className="text-xs font-semibold tracking-widest text-slate-500 uppercase mb-2">
+            <span className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">
               {t.fire_res_years_label}
             </span>
             <div className="flex items-baseline gap-1">
               <span className="text-6xl md:text-7xl font-mono font-light text-emerald-400 tracking-tighter">
                 {result.successYear}
               </span>
-              <span className="text-xl font-medium text-slate-500">{t.fire_res_yrs}</span>
+              <span className="text-xl font-medium text-zinc-500">{t.fire_res_yrs}</span>
             </div>
           </div>
           
           {result.successAge && (
             <>
-              <div className="w-px h-16 bg-slate-800 hidden md:block" />
+              <div className="w-px h-16 bg-zinc-800 hidden md:block" />
               <div className="flex flex-col items-center">
-                <span className="text-xs font-semibold tracking-widest text-slate-500 uppercase mb-2">
+                <span className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-2">
                   {t.fire_res_age_label}
                 </span>
                 <span className="text-6xl md:text-7xl font-mono font-light text-white tracking-tighter">
@@ -57,7 +57,7 @@ export function FireResultCard({ result }: FireResultCardProps) {
           )}
         </div>
       ) : (
-        <h2 className="text-lg md:text-xl font-medium text-slate-400 py-4">
+        <h2 className="text-lg md:text-xl font-medium text-zinc-400 py-4">
           {t.fire_res_out_of_bounds}
         </h2>
       )}

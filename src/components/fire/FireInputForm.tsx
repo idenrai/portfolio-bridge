@@ -21,15 +21,15 @@ export function FireInputForm() {
 
   /** Shared input style */
   const inputClass =
-    "bg-slate-900/50 border border-slate-800 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition-all text-slate-200 placeholder-slate-600";
+    "bg-zinc-900/50 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition-all text-zinc-200 placeholder-zinc-600";
 
   return (
     <Card className="p-5 flex flex-col gap-5 h-full">
       {/* Tabs */}
-      <div className="flex gap-2 p-1 bg-slate-900/50 rounded-lg border border-slate-800/50">
+      <div className="flex gap-2 p-1 bg-zinc-900/50 rounded-lg border border-zinc-800/50">
         <button
           className={`flex-1 py-1.5 px-2 text-xs md:text-sm font-medium rounded-md transition-all border break-keep leading-tight ${
-            store.mode === "expense" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "text-slate-500 border-transparent hover:text-slate-300 hover:bg-slate-800"
+            store.mode === "expense" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "text-zinc-500 border-transparent hover:text-zinc-300 hover:bg-zinc-800"
           }`}
           onClick={() => store.setMode("expense")}
         >
@@ -37,7 +37,7 @@ export function FireInputForm() {
         </button>
         <button
           className={`flex-1 py-1.5 px-2 text-xs md:text-sm font-medium rounded-md transition-all border break-keep leading-tight ${
-            store.mode === "target" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "text-slate-500 border-transparent hover:text-slate-300 hover:bg-slate-800"
+            store.mode === "target" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "text-zinc-500 border-transparent hover:text-zinc-300 hover:bg-zinc-800"
           }`}
           onClick={() => store.setMode("target")}
         >
@@ -48,23 +48,23 @@ export function FireInputForm() {
       <div className="grid grid-cols-1 gap-4">
         {/* Current Assets */}
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-medium text-slate-300">{t.fire_current_assets} ({baseCurrency})</label>
+          <label className="text-sm font-medium text-zinc-300">{t.fire_current_assets} ({baseCurrency})</label>
           <div className="flex items-center gap-2 mb-0.5">
             <input
               type="checkbox"
               id="usePortfolioAssets"
               checked={store.usePortfolioAssets}
               onChange={(e) => store.setUsePortfolioAssets(e.target.checked)}
-              className="w-4 h-4 text-emerald-500 bg-slate-900/50 border-slate-700 rounded focus:ring-emerald-500 cursor-pointer"
+              className="w-4 h-4 text-emerald-500 bg-zinc-900/50 border-zinc-700 rounded focus:ring-emerald-500 cursor-pointer"
             />
-            <label htmlFor="usePortfolioAssets" className="text-sm text-slate-400 cursor-pointer select-none">
+            <label htmlFor="usePortfolioAssets" className="text-sm text-zinc-400 cursor-pointer select-none">
               {t.fire_use_portfolio_assets}
             </label>
           </div>
           <input
             type="text"
             inputMode="numeric"
-            className={`${inputClass} ${store.usePortfolioAssets ? 'bg-slate-900 text-slate-600 cursor-not-allowed border-slate-800' : ''}`}
+            className={`${inputClass} ${store.usePortfolioAssets ? 'bg-zinc-900 text-zinc-400 cursor-not-allowed border-zinc-800' : ''}`}
             disabled={store.usePortfolioAssets}
             value={
               store.usePortfolioAssets
@@ -81,7 +81,7 @@ export function FireInputForm() {
 
         {/* Monthly Savings */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-slate-300">{t.fire_monthly_savings} ({baseCurrency})</label>
+          <label className="text-sm font-medium text-zinc-300">{t.fire_monthly_savings} ({baseCurrency})</label>
           <input
             type="text"
             inputMode="numeric"
@@ -93,7 +93,7 @@ export function FireInputForm() {
 
         {/* Expected Return */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-slate-300">{t.fire_expected_return}</label>
+          <label className="text-sm font-medium text-zinc-300">{t.fire_expected_return}</label>
           <input
             type="number"
             step="0.1"
@@ -101,12 +101,12 @@ export function FireInputForm() {
             value={store.expectedReturnRate || ""}
             onChange={(e) => store.setExpectedReturnRate(Number(e.target.value))}
           />
-          <p className="text-xs text-slate-500 leading-relaxed mt-0.5">{t.fire_helper_expected_return}</p>
+          <p className="text-xs text-zinc-500 leading-relaxed mt-0.5">{t.fire_helper_expected_return}</p>
         </div>
 
         {/* Current Age */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-slate-300">{t.fire_age_label}</label>
+          <label className="text-sm font-medium text-zinc-300">{t.fire_age_label}</label>
           <input
             type="number"
             className={inputClass}
@@ -119,7 +119,7 @@ export function FireInputForm() {
         {/* Conditional Fields based on mode */}
         {store.mode === "target" ? (
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-slate-300">{t.fire_target_amount} ({baseCurrency})</label>
+            <label className="text-sm font-medium text-zinc-300">{t.fire_target_amount} ({baseCurrency})</label>
             <input
               type="text"
               inputMode="numeric"
@@ -131,7 +131,7 @@ export function FireInputForm() {
         ) : (
           <>
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-medium text-slate-300">{t.fire_monthly_expense} ({baseCurrency})</label>
+              <label className="text-sm font-medium text-zinc-300">{t.fire_monthly_expense} ({baseCurrency})</label>
               <input
                 type="text"
                 inputMode="numeric"
@@ -141,7 +141,7 @@ export function FireInputForm() {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-medium text-slate-300">{t.fire_safe_withdrawal_rate}</label>
+              <label className="text-sm font-medium text-zinc-300">{t.fire_safe_withdrawal_rate}</label>
               <input
                 type="number"
                 step="0.1"
@@ -149,7 +149,7 @@ export function FireInputForm() {
                 value={store.safeWithdrawalRate || ""}
                 onChange={(e) => store.setSafeWithdrawalRate(Number(e.target.value))}
               />
-              <p className="text-xs text-slate-500 leading-relaxed mt-0.5">{t.fire_helper_safe_withdrawal}</p>
+              <p className="text-xs text-zinc-500 leading-relaxed mt-0.5">{t.fire_helper_safe_withdrawal}</p>
             </div>
           </>
         )}

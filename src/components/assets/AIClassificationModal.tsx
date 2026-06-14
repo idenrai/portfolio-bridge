@@ -72,14 +72,14 @@ export function AIClassificationModal({
     >
       <div className="space-y-4">
         {/* 탭 */}
-        <div className="flex rounded-lg border border-slate-200 overflow-hidden">
+        <div className="flex rounded-lg border border-zinc-800 overflow-hidden">
           <button
             type="button"
             onClick={() => setPromptTab("generate")}
             className={`flex-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
               promptTab === "generate"
-                ? "bg-blue-600 text-white"
-                : "bg-white text-slate-600 hover:bg-slate-50"
+                ? "bg-zinc-100 text-black shadow-sm"
+                : "bg-white text-zinc-400 hover:bg-zinc-900/50"
             }`}
           >
             {t.asset_ai_tab_generate}
@@ -89,8 +89,8 @@ export function AIClassificationModal({
             onClick={() => setPromptTab("import")}
             className={`flex-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
               promptTab === "import"
-                ? "bg-blue-600 text-white"
-                : "bg-white text-slate-600 hover:bg-slate-50"
+                ? "bg-zinc-100 text-black shadow-sm"
+                : "bg-white text-zinc-400 hover:bg-zinc-900/50"
             }`}
           >
             {t.asset_ai_tab_import}
@@ -99,14 +99,14 @@ export function AIClassificationModal({
 
         {promptTab === "generate" ? (
           <>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-zinc-400">
               {t.asset_ai_copy_desc}
               <br />
               {t.asset_ai_copy_link_pre}{" "}
               <button
                 type="button"
                 onClick={() => setPromptTab("import")}
-                className="text-blue-600 font-medium underline underline-offset-2 cursor-pointer"
+                className="text-zinc-300 font-medium underline underline-offset-2 cursor-pointer"
               >
                 {t.asset_ai_tab_link}
               </button>{" "}
@@ -130,11 +130,11 @@ export function AIClassificationModal({
           </>
         ) : (
           <>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-zinc-400">
               {t.asset_ai_import_desc} <strong>{t.asset_ai_apply_btn}</strong>{" "}
               {t.asset_ai_import_btn_suffix}
               <br />
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-zinc-400">
                 {t.asset_ai_format_label}{" "}
                 {`[{ "index": 1, "category": "dividend", ... }, ...]`}
               </span>
@@ -152,13 +152,13 @@ export function AIClassificationModal({
             />
 
             {importError && (
-              <div className="rounded-lg bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700">
+              <div className="rounded-lg bg-red-500/10 border border-red-500/20 px-3 py-2 text-sm text-red-400">
                 {importError}
               </div>
             )}
 
             {importResult && (
-              <div className="rounded-lg bg-green-50 border border-green-200 px-3 py-2 text-sm text-green-700">
+              <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 text-sm text-emerald-400">
                 {t.asset_ai_apply_result(
                   importResult.applied,
                   importResult.skipped,

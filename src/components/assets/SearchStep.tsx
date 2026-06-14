@@ -44,7 +44,7 @@ export function SearchStep({
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">{t.af_search_hint}</p>
+      <p className="text-sm text-zinc-500">{t.af_search_hint}</p>
 
       <div className="flex gap-2">
         <Input
@@ -66,40 +66,40 @@ export function SearchStep({
       </div>
 
       {results.length > 0 && (
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
-          <div className="bg-slate-50 px-3 py-2 border-b border-slate-200">
-            <p className="text-xs text-slate-500 font-medium">
+        <div className="border border-zinc-800 rounded-lg overflow-hidden">
+          <div className="bg-zinc-900/50 px-3 py-2 border-b border-zinc-800">
+            <p className="text-xs text-zinc-500 font-medium">
               {t.af_results_count(results.length)}
             </p>
           </div>
-          <div className="max-h-64 overflow-y-auto divide-y divide-slate-100">
+          <div className="max-h-64 overflow-y-auto divide-y divide-zinc-800/50">
             {results.map((item) => (
               <button
                 key={item.ticker}
                 type="button"
                 onClick={() => selectItem(item)}
                 disabled={isFetchingPrice}
-                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-blue-50 transition-colors disabled:opacity-50"
+                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-zinc-800/50 transition-colors disabled:opacity-50"
               >
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-slate-800 truncate">
+                  <p className="text-sm font-medium text-zinc-100 truncate">
                     {item.name}
                   </p>
-                  <p className="text-xs text-slate-400 font-mono mt-0.5">
+                  <p className="text-xs text-zinc-400 font-mono mt-0.5">
                     {item.ticker}
                   </p>
                 </div>
                 <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                  <span className="text-xs bg-zinc-800/50 text-zinc-400 px-2 py-0.5 rounded">
                     {t.asset_type_labels[item.type]}
                   </span>
-                  <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                  <span className="text-xs bg-zinc-800/50 text-zinc-400 px-2 py-0.5 rounded">
                     {t.market_labels[item.market]}
                   </span>
-                  <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                  <span className="text-xs bg-zinc-800/50 text-zinc-400 px-2 py-0.5 rounded">
                     {item.currency}
                   </span>
-                  <span className="text-xs text-blue-600 font-semibold ml-1">
+                  <span className="text-xs text-zinc-300 font-semibold ml-1">
                     {t.af_search_btn} →
                   </span>
                 </div>
@@ -110,12 +110,12 @@ export function SearchStep({
       )}
 
       {searchError && (
-        <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">
+        <p className="text-sm text-red-600 bg-red-500/10 rounded-lg px-3 py-2">
           {searchError}
         </p>
       )}
       {isFetchingPrice && (
-        <p className="text-sm text-slate-500 text-center animate-pulse py-2">
+        <p className="text-sm text-zinc-500 text-center animate-pulse py-2">
           {t.af_current_price_label} {t.af_fetching}
         </p>
       )}
@@ -124,7 +124,7 @@ export function SearchStep({
         <button
           type="button"
           onClick={onManual}
-          className="text-xs text-slate-400 hover:text-blue-600 underline text-center py-1 transition-colors"
+          className="text-xs text-zinc-400 hover:text-zinc-300 underline text-center py-1 transition-colors"
         >
           {t.af_manual_link}
         </button>

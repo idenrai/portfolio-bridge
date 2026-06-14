@@ -22,7 +22,7 @@ export function GuruRebalanceTable({
       <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
         <table className="w-full text-sm min-w-125">
           <thead>
-            <tr className="text-left text-xs text-slate-500 border-b">
+            <tr className="text-left text-xs text-zinc-500 border-b">
               <th className="pb-2 font-medium">{t.guru_col_category}</th>
               <th className="pb-2 font-medium text-right">
                 {t.guru_col_current}
@@ -38,7 +38,7 @@ export function GuruRebalanceTable({
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-zinc-800/50">
             {guruRebalancing.map((s) => {
               const diff = s.targetPercent - s.currentPercent;
               return (
@@ -54,7 +54,7 @@ export function GuruRebalanceTable({
                   </td>
                   <td
                     className={`py-2 text-right tabular-nums font-medium ${
-                      diff >= 0 ? "text-blue-600" : "text-red-600"
+                      diff >= 0 ? "text-zinc-300" : "text-red-600"
                     }`}
                   >
                     {diff >= 0 ? "+" : ""}
@@ -63,7 +63,7 @@ export function GuruRebalanceTable({
                   <td
                     className={`py-2 text-right tabular-nums ${
                       s.diffAmountKRW >= 0
-                        ? "text-blue-600"
+                        ? "text-zinc-300"
                         : "text-red-600"
                     }`}
                   >

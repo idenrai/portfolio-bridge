@@ -60,14 +60,14 @@ export function CashForm({
             onClick={() => setOpen((v) => !v)}
             
           >
-            <span className={currency ? "text-white" : "text-slate-500"}>
+            <span className={currency ? "text-white" : "text-zinc-500"}>
               {selected ? selected.label : t.af_currency_placeholder}
             </span>
-            <span className="text-slate-400 text-xs">▼</span>
+            <span className="text-zinc-400 text-xs">▼</span>
           </button>
           {open && (
             <div >
-              <div className="p-2 border-b border-slate-800">
+              <div className="p-2 border-b border-zinc-800">
                 <Input
                   type="text"
                   autoFocus
@@ -87,13 +87,13 @@ export function CashForm({
                       setOpen(false);
                       setSearch("");
                     }}
-                    className="w-full text-left px-3 py-2 text-sm hover:bg-blue-50 text-slate-700"
+                    className="w-full text-left px-3 py-2 text-sm hover:bg-zinc-800/50 text-zinc-700"
                   >
                     {c.label}
                   </button>
                 ))}
                 {filtered.length === 0 && (
-                  <p className="text-center text-sm text-slate-400 py-3">
+                  <p className="text-center text-sm text-zinc-400 py-3">
                     {t.af_currency_no_result}
                   </p>
                 )}

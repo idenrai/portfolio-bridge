@@ -24,7 +24,7 @@ export function PortfolioHistoryChart() {
   if (snapshots.length < 2) {
     return (
       <Card title={t.history_title}>
-        <div className="flex items-center justify-center h-50 text-sm text-slate-400">
+        <div className="flex items-center justify-center h-50 text-sm text-zinc-400">
           {t.history_no_data}
         </div>
       </Card>
@@ -115,13 +115,13 @@ export function PortfolioHistoryChart() {
           />
         </AreaChart>
       </ResponsiveContainer>
-      <div className="flex items-center gap-4 mt-2 text-[10px] text-slate-400">
+      <div className="flex items-center gap-4 mt-2 text-[10px] text-zinc-400">
         <span className="flex items-center gap-1">
           <span className="w-3 h-0.5 bg-indigo-500 inline-block rounded" />
           {t.history_value}
         </span>
         <span className="flex items-center gap-1">
-          <span className="w-3 h-0.5 bg-slate-400 inline-block rounded" />
+          <span className="w-3 h-0.5 bg-zinc-400 inline-block rounded" />
           {t.history_cost}
         </span>
       </div>

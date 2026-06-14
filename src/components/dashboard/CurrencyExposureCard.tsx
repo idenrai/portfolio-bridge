@@ -32,35 +32,35 @@ export function CurrencyExposureCard({ summary }: Props) {
       <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5 mb-4">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-100">
-              <th className="text-[11px] text-slate-500 font-medium px-2 py-1.5 text-left">
+            <tr className="border-b border-zinc-800">
+              <th className="text-[11px] text-zinc-500 font-medium px-2 py-1.5 text-left">
                 {t.fx_col_currency}
               </th>
-              <th className="text-[11px] text-slate-500 font-medium px-2 py-1.5 text-right">
+              <th className="text-[11px] text-zinc-500 font-medium px-2 py-1.5 text-right">
                 {t.fx_col_value}
               </th>
-              <th className="text-[11px] text-slate-500 font-medium px-2 py-1.5 text-right">
+              <th className="text-[11px] text-zinc-500 font-medium px-2 py-1.5 text-right">
                 {t.fx_col_weight}
               </th>
-              <th className="text-[11px] text-slate-500 font-medium px-2 py-1.5 text-right">
+              <th className="text-[11px] text-zinc-500 font-medium px-2 py-1.5 text-right">
                 {t.fx_col_rate}
               </th>
             </tr>
           </thead>
           <tbody>
             {summary.currencyExposure.map((exp) => (
-              <tr key={exp.currency} className="border-b border-slate-50">
+              <tr key={exp.currency} className="border-b border-zinc-50">
                 <td className="px-2 py-1.5 text-left">
-                  <span className="font-medium text-slate-700">
+                  <span className="font-medium text-zinc-700">
                     {exp.currency}
                   </span>
                 </td>
-                <td className="px-2 py-1.5 text-right text-slate-700">
+                <td className="px-2 py-1.5 text-right text-zinc-700">
                   {formatCurrency(convert(exp.totalKRW), baseCurrency, true)}
                 </td>
                 <td className="px-2 py-1.5 text-right">
                   <div className="flex items-center justify-end gap-1">
-                    <div className="w-10 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="w-10 h-1.5 bg-zinc-800/50 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-indigo-400 rounded-full"
                         style={{
@@ -68,12 +68,12 @@ export function CurrencyExposureCard({ summary }: Props) {
                         }}
                       />
                     </div>
-                    <span className="text-[11px] text-slate-600 w-10 text-right">
+                    <span className="text-[11px] text-zinc-400 w-10 text-right">
                       {exp.percent.toFixed(1)}%
                     </span>
                   </div>
                 </td>
-                <td className="px-2 py-1.5 text-right text-[11px] text-slate-500">
+                <td className="px-2 py-1.5 text-right text-[11px] text-zinc-500">
                   {exp.currency === baseCurrency
                     ? "-"
                     : `${CURRENCY_SYMBOLS[baseCurrency]}${fromKRW(exp.rate, baseCurrency, rates).toLocaleString(undefined, { maximumFractionDigits: baseCurrency === "USD" ? 4 : 0 })}`}
@@ -87,19 +87,19 @@ export function CurrencyExposureCard({ summary }: Props) {
       {/* ±5% 환율 시나리오 */}
       {scenarioMap.size > 0 && (
         <div>
-          <h4 className="text-[11px] text-slate-500 font-medium mb-2">
+          <h4 className="text-[11px] text-zinc-500 font-medium mb-2">
             {t.fx_scenario_title}
           </h4>
           <div className="grid grid-cols-1 gap-2">
             {[...scenarioMap.entries()].map(([currency, { up, down }]) => (
               <div key={currency} className="flex items-center gap-3 text-xs">
-                <span className="font-medium text-slate-700 w-8">
+                <span className="font-medium text-zinc-700 w-8">
                   {currency}
                 </span>
                 <span className="text-red-600 flex-1 text-right">
                   +5% → {formatCurrency(convert(up), baseCurrency, true)}
                 </span>
-                <span className="text-blue-600 flex-1 text-right">
+                <span className="text-zinc-300 flex-1 text-right">
                   −5% → {formatCurrency(convert(down), baseCurrency, true)}
                 </span>
               </div>

@@ -48,7 +48,7 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
     <button
       type="button"
       onClick={openModal}
-      className="text-xs text-slate-500 hover:text-slate-700 border border-slate-200 rounded-md px-2 py-1 hover:bg-slate-50 transition-colors cursor-pointer"
+      className="text-xs text-zinc-500 hover:text-zinc-700 border border-zinc-800 rounded-md px-2 py-1 hover:bg-zinc-900/50 transition-colors cursor-pointer"
     >
       {t.category_set_target}
     </button>
@@ -63,7 +63,7 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
       <div className="space-y-2">
         {allocations.map((a, i) => (
           <label key={a.category} className="flex items-center gap-3">
-            <span className="text-sm text-slate-600 w-32">
+            <span className="text-sm text-zinc-400 w-32">
               {t.category_labels[a.category as AssetCategory] ?? a.category}
             </span>
             <input
@@ -72,12 +72,12 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
               max={100}
               value={a.targetPercent}
               onChange={(e) => handleChange(i, e.target.value)}
-              className="w-24 rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
+              className="w-24 rounded-lg border border-zinc-300 px-3 py-1.5 text-sm"
             />
-            <span className="text-xs text-slate-400">%</span>
+            <span className="text-xs text-zinc-400">%</span>
           </label>
         ))}
-        <div className="flex items-center justify-between pt-3 mt-1 border-t border-slate-100">
+        <div className="flex items-center justify-between pt-3 mt-1 border-t border-zinc-800">
           <span
             className={`text-sm font-medium ${isExact ? "text-green-600" : "text-red-600"}`}
           >
@@ -102,7 +102,7 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
     return (
       <>
         <Card title={t.category_title} action={setTargetBtn}>
-          <p className="text-sm text-slate-400 py-4 text-center">
+          <p className="text-sm text-zinc-400 py-4 text-center">
             {t.category_empty}
           </p>
         </Card>
@@ -129,7 +129,7 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
             return (
               <div key={r.category}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-medium text-slate-700">
+                  <span className="text-xs font-medium text-zinc-700">
                     {label}
                   </span>
                   <span
@@ -137,8 +137,8 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
                       absDiff > 5
                         ? isOver
                           ? "text-amber-600"
-                          : "text-blue-600"
-                        : "text-slate-400"
+                          : "text-zinc-300"
+                        : "text-zinc-400"
                     }`}
                   >
                     {r.currentPercent.toFixed(1)}% / {r.targetPercent}%
@@ -151,7 +151,7 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
                   </span>
                 </div>
                 <div className="relative h-2">
-                  <div className="absolute inset-0 bg-slate-100 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-zinc-800/50 rounded-full overflow-hidden">
                     <div
                       className={`absolute inset-y-0 left-0 rounded-full ${
                         absDiff > 5
@@ -166,7 +166,7 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
                     />
                   </div>
                   <div
-                    className="absolute top-0 h-full w-0.5 bg-slate-500/70 rounded-full"
+                    className="absolute top-0 h-full w-0.5 bg-zinc-900/500/70 rounded-full"
                     style={{ left: `${(r.targetPercent / maxPercent) * 100}%` }}
                   />
                 </div>
@@ -174,9 +174,9 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
             );
           })}
         </div>
-        <div className="flex items-center gap-4 mt-4 text-[10px] text-slate-400">
+        <div className="flex items-center gap-4 mt-4 text-[10px] text-zinc-400">
           <span className="flex items-center gap-1">
-            <span className="w-0.5 h-3 bg-slate-500/70 inline-block" />
+            <span className="w-0.5 h-3 bg-zinc-900/500/70 inline-block" />
             {t.category_legend_target}
           </span>
           <span className="flex items-center gap-1">
