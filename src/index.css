@@ -11,7 +11,7 @@
     color-scheme: dark;
   }
   select, input, textarea {
-    @apply bg-black text-zinc-200 border-zinc-800 outline-none focus:border-zinc-500 rounded-none;
+    @apply bg-slate-900/50 border border-slate-800 rounded-lg text-slate-200 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder-slate-600;
   }
 }
 
