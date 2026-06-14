@@ -64,7 +64,11 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
                 <Cell key={i} fill={COLORS[i % COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip formatter={(v) => `${Number(v)}%`} />
+            <Tooltip 
+              formatter={(v) => `${Number(v)}%`} 
+              contentStyle={{ backgroundColor: "#0f172a", borderColor: "#1e293b", color: "#f8fafc" }} 
+              itemStyle={{ color: "#f8fafc" }}
+            />
             <Legend wrapperStyle={{ fontSize: "12px" }} />
           </PieChart>
         </ResponsiveContainer>
@@ -74,9 +78,9 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
       <Card title={t.guru_radar_title}>
         <ResponsiveContainer width="100%" height={220}>
           <RadarChart data={radarData}>
-            <PolarGrid />
-            <PolarAngleAxis dataKey="category" tick={{ fontSize: 11 }} />
-            <PolarRadiusAxis angle={90} domain={[0, 60]} />
+            <PolarGrid stroke="rgba(255,255,255,0.1)" />
+            <PolarAngleAxis dataKey="category" tick={{ fontSize: 11, fill: "#94a3b8" }} />
+            <PolarRadiusAxis angle={90} domain={[0, 60]} tick={false} axisLine={false} />
             <Radar
               name={guruName(selectedGuru)}
               dataKey="guru"
@@ -92,7 +96,11 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
               fillOpacity={0.15}
             />
             <Legend wrapperStyle={{ fontSize: "12px" }} />
-            <Tooltip formatter={(v) => `${Number(v)}%`} />
+            <Tooltip 
+              formatter={(v) => `${Number(v)}%`} 
+              contentStyle={{ backgroundColor: "#0f172a", borderColor: "#1e293b", color: "#f8fafc" }} 
+              itemStyle={{ color: "#f8fafc" }}
+            />
           </RadarChart>
         </ResponsiveContainer>
       </Card>
