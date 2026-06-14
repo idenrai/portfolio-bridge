@@ -87,7 +87,7 @@ export function CashForm({
                       setOpen(false);
                       setSearch("");
                     }}
-                    className="w-full text-left px-3 py-2 text-sm hover:bg-zinc-800/50 text-zinc-700"
+                    className="w-full text-left px-3 py-2 text-sm hover:bg-zinc-800/50 text-zinc-300 transition-colors"
                   >
                     {c.label}
                   </button>
