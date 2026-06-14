@@ -50,26 +50,25 @@ export function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6 md:space-y-8 pb-10">
       {/* Hero */}
-      <div className="rounded-2xl bg-linear-to-br from-slate-900 to-slate-800 text-white px-5 py-7 md:px-8 md:py-10 shadow-lg">
-        <div className="flex items-center gap-3 mb-4">
-          <img src="/favicon.svg" className="w-10 h-10 md:w-12 md:h-12 rounded-xl" alt="" aria-hidden="true" />
+      <div className="rounded-2xl bg-zinc-950 border border-zinc-800 text-white px-5 py-7 md:px-8 md:py-10 shadow-lg">
+        <div className="flex items-center gap-4 mb-4">
+          <img src="/favicon.svg" className="w-10 h-10 md:w-12 md:h-12 rounded-xl border border-zinc-800" alt="" aria-hidden="true" />
           <div>
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight">
-              <span className="text-blue-400">Portfolio</span>
-              <span className="text-slate-300">Bridge</span>
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white">
+              Portfolio Bridge
             </h1>
-            <p className="text-sm text-slate-400 mt-0.5">{t.about_tagline}</p>
+            <p className="text-sm text-zinc-400 mt-1">{t.about_tagline}</p>
           </div>
         </div>
-        <p className="text-slate-300 text-sm leading-relaxed">
+        <p className="text-zinc-300 text-sm leading-relaxed">
           {t.about_intro}
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-2">
           <a
             href="https://github.com/idenrai/portfolio-bridge"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-slate-700 hover:bg-slate-600 px-4 py-2 text-sm font-semibold text-slate-200 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-700 bg-transparent hover:bg-zinc-800 px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition-colors"
           >
             <svg
               viewBox="0 0 16 16"
@@ -85,21 +84,23 @@ export function AboutPage() {
 
       {/* Features */}
       <div>
-        <h2 className="text-base font-bold text-slate-200 mb-3">
+        <h2 className="text-base font-bold text-zinc-200 mb-3">
           {t.about_features_title}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {FEATURES.map((f, idx) => (
             <div
               key={idx}
-              className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3.5 shadow-sm"
+              className="flex items-start gap-3 md:gap-3.5 rounded-xl border border-zinc-800 bg-black hover:border-zinc-700 transition-colors px-3 py-3 md:px-4 md:py-4 shadow-sm"
             >
-              <span className="text-xl shrink-0 mt-0.5">{f.icon}</span>
-              <div>
-                <p className="text-sm font-semibold text-white">
+              <div className="w-10 h-10 shrink-0 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-lg">
+                {f.icon}
+              </div>
+              <div className="pt-0.5">
+                <p className="text-sm font-bold text-zinc-100">
                   {t[f.titleKey]}
                 </p>
-                <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
+                <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
                   {t[f.descKey]}
                 </p>
               </div>
@@ -109,13 +110,15 @@ export function AboutPage() {
       </div>
 
       {/* Privacy */}
-      <div className="rounded-xl border border-emerald-900/50 bg-emerald-950/30 px-4 py-3 md:px-5 md:py-4 flex items-start gap-3">
-        <span className="text-xl shrink-0 mt-0.5">🔒</span>
-        <div>
-          <p className="text-sm font-semibold text-emerald-400">
+      <div className="rounded-xl border border-zinc-800 border-l-4 border-l-emerald-500 bg-zinc-900 px-4 py-3 md:px-5 md:py-4 flex items-start gap-3.5 shadow-sm">
+        <div className="w-8 h-8 shrink-0 rounded-md bg-zinc-950 border border-zinc-800 flex items-center justify-center text-sm">
+          🔒
+        </div>
+        <div className="pt-0.5">
+          <p className="text-sm font-bold text-zinc-200">
             {t.about_privacy_title}
           </p>
-          <p className="text-xs text-emerald-300/70 mt-0.5 leading-relaxed">
+          <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
             {t.about_privacy_desc}
           </p>
         </div>
@@ -123,14 +126,14 @@ export function AboutPage() {
 
       {/* Tech Stack */}
       <div>
-        <h2 className="text-base font-bold text-slate-200 mb-3">
+        <h2 className="text-base font-bold text-zinc-200 mb-3">
           {t.about_tech_title}
         </h2>
         <div className="flex flex-wrap gap-2">
           {STACK.map((s) => (
             <span
               key={s}
-              className="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs font-medium text-zinc-300 shadow-sm"
+              className="rounded-md border border-zinc-800 bg-zinc-950 px-2.5 py-1.5 text-[11px] font-mono uppercase tracking-wider text-zinc-400 shadow-sm hover:text-zinc-200 hover:border-zinc-700 transition-colors"
             >
               {s}
             </span>
@@ -139,7 +142,7 @@ export function AboutPage() {
       </div>
 
       {/* Disclaimer */}
-      <p className="text-xs text-slate-400 leading-relaxed border-t border-slate-100 pt-4">
+      <p className="text-xs text-zinc-500 leading-relaxed border-t border-zinc-800 pt-5">
         {t.about_disclaimer}
       </p>
     </div>

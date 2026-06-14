@@ -1,5 +1,5 @@
 import { useLanguageStore, useSettingsStore } from "@/stores";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useT } from "@/hooks";
 import type { Lang } from "@/i18n";
 import type { CurrencyCode } from "@/types";
@@ -49,18 +49,20 @@ export function Header() {
     <header className="h-14 bg-black border-b border-zinc-800 flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
       {/* 모바일: 로고 표시 / 데스크톱: 빈 공간 */}
       <div className="md:hidden">
-        <span className="text-sm font-bold tracking-tight">
-          <span className="text-zinc-500">{'> '}</span>
-          <span className="text-white">PORTFOLIO_BRIDGE</span>
-          <span className="text-zinc-500 animate-pulse">_</span>
-        </span>
+        <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+          <img src="/favicon.svg" alt="" className="w-6 h-6 rounded-md border border-zinc-800" aria-hidden="true" />
+          <span className="font-bold tracking-tight text-lg text-white">
+            Portfolio Bridge
+          </span>
+        </Link>
       </div>
       <div className="hidden md:flex items-center gap-3">
-        <span className="text-sm font-bold tracking-tight mr-4">
-          <span className="text-zinc-500">{'> '}</span>
-          <span className="text-white">PORTFOLIO_BRIDGE</span>
-          <span className="text-zinc-500 animate-pulse">_</span>
-        </span>
+        <Link to="/" className="flex items-center gap-2.5 mr-6 shrink-0 group">
+          <img src="/favicon.svg" alt="" className="w-7 h-7 rounded-md border border-zinc-800" aria-hidden="true" />
+          <span className="font-bold tracking-tight text-xl text-white">
+            Portfolio Bridge
+          </span>
+        </Link>
         <nav className="flex items-center gap-1">
           {NAV_ITEMS.map(({ to, label }) => (
             <NavLink
