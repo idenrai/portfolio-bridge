@@ -85,6 +85,15 @@ export default async function handler(request: Request) {
     );
   }
 
+  // 보안: Path Traversal 및 비정상 URL 조작 방어
+  if (yahooPath.includes("..") || yahooPath.includes("//")) {
+    console.error(`[Proxy Error] Suspicious path detected: ${yahooPath}`);
+    return new Response(
+      JSON.stringify({ error: "Invalid path parameter" }),
+      { status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
+    );
+  }
+
   // ⚠️ URLSearchParams.toString()은 쉼표(,)를 %2C로 재인코딩합니다.
   // 원본 URL에서 __path= 부분만 제거하여 쉼표를 보존합니다.
   const originalSearch = url.search
@@ -126,10 +135,10 @@ export default async function handler(request: Request) {
       headers,
     });
   } catch (err) {
+    console.error("[Yahoo Proxy Error]", err);
     return new Response(
       JSON.stringify({
         error: "Yahoo Finance proxy failed",
-        detail: String(err),
       }),
       {
         status: 502,
