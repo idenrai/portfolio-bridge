@@ -187,15 +187,17 @@ Today's date: ${today}
 This is a follow-up review. You previously assessed this investor's portfolio on ${prev.date}. The data below covers ONLY the changes since that date.
 
 --- YOUR TASK ---
-Evaluate the changes from YOUR perspective as ${guruName}. This is a focused check-in, not a full portfolio review — begin your response immediately with your assessment of the changes.
+Evaluate the changes from YOUR perspective as ${guruName}. This is a focused check-in, not a full portfolio review.
 
-${GURU_FOLLOWUP_FOCUS[guru.id] ??
-`Address the following, in order:
-1. Whether the changes are moving in the right direction based on your principles
-2. Your reaction to the new positions added and positions removed
-3. Whether the rebalancing moves were wise or misguided
-4. Any specific concerns or approvals about the shifts you observe
-5. A brief updated verdict on the portfolio's direction — improving or deteriorating?`}
+${GURU_FOLLOWUP_FOCUS[guru.id] 
+  ? `Before concluding, briefly think step-by-step about the weight shifts and macro context.\n${GURU_FOLLOWUP_FOCUS[guru.id]}`
+  : `Address the following, in order:
+1. [Step-by-Step Reasoning] Briefly think step-by-step about the most significant weight shifts and current macro context
+2. Whether the changes are moving in the right direction based on your principles
+3. Your reaction to the new positions added and positions removed
+4. Whether the rebalancing moves were wise or misguided
+5. Any specific concerns or approvals about the shifts you observe
+6. A brief updated verdict on the portfolio's direction — improving or deteriorating?`}
 
 --- PORTFOLIO PERFORMANCE SINCE LAST REVIEW (${prev.date}) ---
 Portfolio value change (${baseCurrency}): ${sign(valueDelta)}${fmt(valueDelta)} (${sign(valueDeltaPct)}${valueDeltaPct.toFixed(2)}%)
@@ -225,5 +227,7 @@ ${marketSection}
 --- RESPONSE CONSTRAINTS ---
 - Language: respond entirely in ${LANG_NAMES[lang]}
 - Scope: focus exclusively on the changes listed above; your general investment philosophy and a full portfolio re-review are out of scope for this check-in
+- Voice: Do not hedge with disclaimers (e.g., never say "this is not financial advice"). Speak with direct confidence.
+- Edge Cases: If the user sold everything to cash, or moved >80% into a single asset, strongly address this extreme move first.
 - ${addressLine}`;
 }
