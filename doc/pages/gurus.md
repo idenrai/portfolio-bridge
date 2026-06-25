@@ -78,9 +78,11 @@ See [../features/ai-prompts.md](../features/ai-prompts.md#buildguruprompt).
 
 After saving a session, the "Follow-up" button becomes available.
 Builds a delta-only prompt via `buildGuruFollowUpPrompt()` showing only changes since the saved session date.
+When the "Follow-up" prompt is copied, the session snapshot is updated to the current state, allowing for sequential comparisons.
 
 세션 저장 후 "팔로우업" 버튼이 활성화됩니다.
 저장된 세션 날짜 이후 변경 사항만 담은 델타 프롬프트를 `buildGuruFollowUpPrompt()`로 생성합니다.
+"팔로우업" 프롬프트를 복사할 때 세션 스냅샷이 현재 상태로 갱신되어, 매번 직전 질문 시점과의 꼬리물기 식 비교가 가능해집니다.
 
 See [../features/ai-prompts.md](../features/ai-prompts.md#buildgurufollowupprompt).
 
