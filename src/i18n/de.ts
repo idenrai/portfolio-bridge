@@ -180,11 +180,12 @@ export const de: Translations = {
   guru_ai_banner_title: "Guru befragen",
   guru_ai_banner_desc:
     "Analysieren Sie Ihr Portfolio aus der Perspektive des gewählten Gurus.",
-  guru_ai_btn: "Prompt generieren",
+  guru_ai_btn: "Prompt erstellen",
   guru_ai_close: "Schließen",
   guru_ai_desc:
-    "Kopieren Sie den Prompt und fügen Sie ihn in ChatGPT, Claude oder einen anderen KI-Assistenten ein.",
-  guru_ai_copy: "In Zwischenablage kopieren",
+    "Kopieren Sie den Prompt unten und fügen Sie ihn in ChatGPT, Claude, Gemini oder Grok ein.",
+  guru_ai_search_warn: "⚠️ Die KI sucht nach den neuesten Nachrichten, was einige zusätzliche Sekunden dauern kann.",
+  guru_ai_copy: "In die Zwischenablage kopieren",
   guru_ai_copied: "✓ Kopiert!",
   guru_ai_followup_btn: "Vorheriges Gespräch fortsetzen",
   guru_ai_followup_desc:

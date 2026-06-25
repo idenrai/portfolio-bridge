@@ -164,11 +164,14 @@ export function GuruAIPromptBanner({
               rows={12}
               className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs font-mono text-zinc-300 resize-none focus:outline-none"
             />
-            <div className="flex justify-end">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[10px] text-zinc-500 leading-tight flex-1">
+                {t.guru_ai_search_warn}
+              </span>
               <button
                 type="button"
                 onClick={copyPrompt}
-                className="rounded-lg bg-zinc-800 hover:bg-zinc-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                className="shrink-0 whitespace-nowrap rounded-lg bg-zinc-800 hover:bg-zinc-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
               >
                 {copied ? t.guru_ai_copied : t.guru_ai_copy}
               </button>
@@ -191,11 +194,14 @@ export function GuruAIPromptBanner({
               rows={14}
               className="w-full rounded-lg border border-emerald-800 bg-emerald-900/20 px-3 py-2 text-xs font-mono text-zinc-300 resize-none focus:outline-none"
             />
-            <div className="flex justify-end">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[10px] text-emerald-600/70 leading-tight flex-1">
+                {t.guru_ai_search_warn}
+              </span>
               <button
                 type="button"
                 onClick={copyFollowUp}
-                className="rounded-lg bg-emerald-700 hover:bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                className="shrink-0 whitespace-nowrap rounded-lg bg-emerald-700 hover:bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
               >
                 {copiedFollowUp ? t.guru_ai_copied : t.guru_ai_copy}
               </button>

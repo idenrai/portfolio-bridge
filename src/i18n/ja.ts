@@ -178,7 +178,8 @@ export const ja: Translations = {
   guru_ai_btn: "プロンプト生成",
   guru_ai_close: "閉じる",
   guru_ai_desc:
-    "以下のプロンプトをコピーして、ChatGPT・Claudeなど任意のAIに貼り付けてください。",
+    "以下のプロンプトをコピーし、ChatGPT、Claude、Gemini、GrokなどのAIに貼り付けてください。",
+  guru_ai_search_warn: "⚠️ AIが最新ニュースを検索するため、回答に数秒余分にかかる場合があります。",
   guru_ai_copy: "クリップボードにコピー",
   guru_ai_copied: "✓ コピー済み!",
   guru_ai_followup_btn: "前回の会話から続ける",

@@ -189,6 +189,7 @@ export interface Translations {
   guru_ai_btn: string;
   guru_ai_close: string;
   guru_ai_desc: string;
+  guru_ai_search_warn: string;
   guru_ai_copy: string;
   guru_ai_copied: string;
   guru_ai_followup_btn: string;
