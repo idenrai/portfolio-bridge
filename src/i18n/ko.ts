@@ -179,6 +179,7 @@ export const ko: Translations = {
   guru_ai_close: "닫기",
   guru_ai_desc:
     "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여 넣으세요.",
+  guru_ai_search_warn: "⚠️ AI가 최신 뉴스를 검색하므로 답변에 수 초가 더 소요될 수 있습니다.",
   guru_ai_copy: "클립보드에 복사",
   guru_ai_copied: "✓ 복사됨!",
   guru_ai_followup_btn: "이전 대화에서 계속",

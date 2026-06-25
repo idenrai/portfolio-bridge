@@ -177,7 +177,8 @@ export const en: Translations = {
   guru_ai_btn: "Generate Prompt",
   guru_ai_close: "Close",
   guru_ai_desc:
-    "Copy the prompt below and paste it into ChatGPT, Claude, or any AI assistant.",
+    "Copy the prompt below and paste it into AI tools like ChatGPT, Claude, Gemini, or Grok.",
+  guru_ai_search_warn: "⚠️ AI will search the web for the latest news, which may take a few extra seconds.",
   guru_ai_copy: "Copy to Clipboard",
   guru_ai_copied: "✓ Copied!",
   guru_ai_followup_btn: "Continue Previous Chat",

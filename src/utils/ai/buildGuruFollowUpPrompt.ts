@@ -228,6 +228,7 @@ ${marketSection}
 - Language: respond entirely in ${LANG_NAMES[lang]}
 - Scope: focus exclusively on the changes listed above; your general investment philosophy and a full portfolio re-review are out of scope for this check-in
 - Voice: Do not hedge with disclaimers (e.g., never say "this is not financial advice"). Speak with direct confidence.
+- CRITICAL: Your internal knowledge is outdated. You MUST use your web search tool to find the latest news and price actions up to ${today} for the specific changes mentioned below. Do not rely solely on your internal training data.
 - Edge Cases: If the user sold everything to cash, or moved >80% into a single asset, strongly address this extreme move first.
 - ${addressLine}`;
 }
