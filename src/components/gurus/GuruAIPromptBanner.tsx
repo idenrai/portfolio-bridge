@@ -55,11 +55,10 @@ export function GuruAIPromptBanner({
       )
     : null;
 
-  const copyPrompt = async () => {
-    await navigator.clipboard.writeText(promptText);
+  const updateCurrentSession = () => {
     saveSession({
       guruId: selectedGuru.id,
-      date: new Date().toISOString().slice(0, 10),
+      date: new Date().toLocaleDateString('en-CA'),
       totalValueKRW: summary.totalValueKRW,
       totalCostKRW: summary.totalCostKRW,
       totalPnLKRW: summary.totalPnLKRW,
@@ -94,6 +93,11 @@ export function GuruAIPromptBanner({
       baseCurrency,
       rates,
     });
+  };
+
+  const copyPrompt = async () => {
+    await navigator.clipboard.writeText(promptText);
+    updateCurrentSession();
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -101,6 +105,7 @@ export function GuruAIPromptBanner({
   const copyFollowUp = async () => {
     if (!followUpText) return;
     await navigator.clipboard.writeText(followUpText);
+    updateCurrentSession();
     setCopiedFollowUp(true);
     setTimeout(() => setCopiedFollowUp(false), 2000);
   };
