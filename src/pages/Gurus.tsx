@@ -62,11 +62,24 @@ export function GurusPage() {
     ? (`guru_philosophy_${selectedGuru.id}` as keyof typeof en)
     : null;
 
+  const selectedQuotesKey = selectedGuru
+    ? (`guru_quotes_${selectedGuru.id}` as keyof typeof en)
+    : null;
+
   const localizedPhilosophy = selectedPhilosophyKey
     ? ((t[selectedPhilosophyKey as keyof typeof t] as string | undefined) ??
       (en[selectedPhilosophyKey] as string | undefined) ??
       "")
     : "";
+
+  const localizedQuotes = selectedQuotesKey
+    ? ((t[selectedQuotesKey as keyof typeof t] as string | undefined) ??
+      (en[selectedQuotesKey] as string | undefined) ??
+      "")
+    : "";
+
+  const principles = localizedPhilosophy.split('\n').map(l => l.trim()).filter(Boolean);
+  const quotes = localizedQuotes.split('\n').map(l => l.trim()).filter(Boolean);
 
   if (assets.length === 0) {
     return (
@@ -94,27 +107,42 @@ export function GurusPage() {
             {/* 좌측 고정 패널 (철학 및 프로필) */}
             <div className="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-20">
               <div className="bg-black/40 border border-zinc-800/60 p-6 rounded-xl shadow-sm">
-                <div className="flex items-start gap-4 mb-6">
+                <div className="mb-6 flex flex-col gap-4">
                   <img 
                     src={selectedGuru.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedGuru.name)}&background=27272a&color=fff&size=256&font-size=0.33`} 
                     alt={selectedGuru.name} 
-                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover shrink-0 border border-zinc-800 bg-zinc-900" 
+                    width={320}
+                    height={320}
+                    className="w-full aspect-square max-w-[320px] rounded-2xl object-cover shrink-0 border border-zinc-800 bg-zinc-900 mx-auto lg:mx-0 shadow-lg" 
                   />
-                  <div className="min-w-0 flex-1 pt-1">
-                    <h2 className="text-xl font-bold text-white mb-1 truncate">{guruName(selectedGuru)}</h2>
-                    <p className="text-xs text-zinc-500 uppercase tracking-widest truncate">{selectedGuru.firm}</p>
+                  <div className="pt-2 text-center lg:text-left">
+                    <h2 className="text-2xl font-bold text-white mb-1 tracking-tight">{guruName(selectedGuru)}</h2>
+                    <p className="text-xs text-zinc-500 uppercase tracking-widest">{selectedGuru.firm}</p>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center lg:justify-start gap-2">
                     <div className="w-1 h-4 bg-indigo-500 rounded-full" />
                     <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{t.guru_philosophy_label}</h3>
                   </div>
-                  <p className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line text-pretty break-words">
-                    {localizedPhilosophy}
-                  </p>
+                  <div className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line text-pretty break-words">
+                    {principles.join('\n')}
+                  </div>
                 </div>
+
+                {quotes.length > 0 && (
+                  <div className="mt-8 pt-6 border-t border-zinc-800/60 flex flex-col gap-5">
+                    {quotes.map((quote, idx) => (
+                      <blockquote key={idx} className="relative">
+                        <span aria-hidden="true" className="absolute -left-2 -top-2 text-3xl text-zinc-800 font-serif leading-none select-none">"</span>
+                        <p className="relative z-10 text-sm font-medium text-zinc-300/90 italic leading-relaxed pl-3 border-l-2 border-indigo-500/30">
+                          {quote}
+                        </p>
+                      </blockquote>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 

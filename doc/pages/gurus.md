@@ -55,7 +55,8 @@ For each selected guru:
 
 | Element | Source |
 | --- | --- |
-| Philosophy (5 principles + 1 quote) / 철학 | `t.guru_philosophy_<id>` (localized) |
+| Philosophy (Principles) / 철학 원칙 | `t.guru_philosophy_<id>` (localized) |
+| Quotes / 명언 | `t.guru_quotes_<id>` (localized) |
 | Ideal allocation pie chart / 이상적 배분 파이 차트 | `guru.idealAllocation` |
 | Radar comparison / 레이더 비교 | User's allocation vs guru's ideal |
 | Rebalancing suggestions / 리밸런싱 제안 | Computed from `idealAllocation` vs current |
@@ -233,9 +234,9 @@ Full width (below grid): GuruAIPromptBanner
 | Context | Size | Rationale |
 |---------|------|-----------|
 | GuruSelector grid | `w-11 h-11 sm:w-12 sm:h-12` (44–48px) | Meets Apple HIG touch-target-size minimum (44px); portrait detail recognizable |
-| Profile panel | `w-20 h-20 sm:w-24 sm:h-24` (80–96px) | Prominent display for generated portraits; aligned top with `items-start` |
+| Profile panel | `w-full max-w-[320px] aspect-square` (up to 320px) | Editorial, magazine-cover style prominent display; aligned top-center or top-left |
 
-구루 선택 그리드의 아바타는 44–48px로 터치 타겟 최소 기준을 충족하며, 프로필 패널의 아바타는 80–96px로 초상화 디테일이 충분히 보이도록 합니다.
+구루 선택 그리드의 아바타는 44–48px로 터치 타겟 최소 기준을 충족하며, 프로필 패널의 아바타는 최대 320px 뷰로 에디토리얼 디자인 요소를 강조해 초상화 디테일이 크게 보이도록 구성합니다.
 
 ## Design & Accessibility
 
