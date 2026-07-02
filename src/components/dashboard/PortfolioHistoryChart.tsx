@@ -9,15 +9,15 @@ import {
 } from "recharts";
 import { Card } from "@/components/common";
 import { useSettingsStore, useSnapshotStore, useLanguageStore } from "@/stores";
+import { useT, useExchangeRates } from "@/hooks";
 import { formatCurrency, fromKRW } from "@/utils";
-import { useT } from "@/hooks";
 import { LANG_LOCALES } from "@/i18n";
 
 export function PortfolioHistoryChart() {
   const t = useT();
   const snapshots = useSnapshotStore((s) => s.snapshots);
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
-  const rates = useSettingsStore((s) => s.exchangeRates);
+  const { data: rates } = useExchangeRates();
   const lang = useLanguageStore((s) => s.lang);
   const locale = LANG_LOCALES[lang];
 

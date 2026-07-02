@@ -12,7 +12,7 @@ import {
 import { Card } from "@/components/common";
 import { useSettingsStore } from "@/stores";
 import { formatCurrency, fromKRW, assetPnL, toKRW } from "@/utils";
-import { useT } from "@/hooks";
+import { useT, useExchangeRates } from "@/hooks";
 import type { Asset } from "@/types";
 
 interface Props {
@@ -22,7 +22,7 @@ interface Props {
 export function PnLWaterfallChart({ assets }: Props) {
   const t = useT();
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
-  const rates = useSettingsStore((s) => s.exchangeRates);
+  const { data: rates } = useExchangeRates();
 
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
 

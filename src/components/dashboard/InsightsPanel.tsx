@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { Card } from "@/components/common";
-import { useT } from "@/hooks";
+import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore } from "@/stores";
 import { buildInsightPrompt } from "@/utils";
 import type { PortfolioSummary, Asset, TargetAllocation } from "@/types";
@@ -27,7 +27,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
   const t = useT();
   const lang = useLanguageStore((s) => s.lang);
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
-  const rates = useSettingsStore((s) => s.exchangeRates);
+  const { data: rates } = useExchangeRates();
   const [dismissed, setDismissed] = useState<Set<number>>(new Set());
   const [showPrompt, setShowPrompt] = useState(false);
   const [copied, setCopied] = useState(false);

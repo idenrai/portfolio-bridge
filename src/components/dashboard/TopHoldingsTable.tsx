@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/common";
 import { formatCurrency, formatPercent, fromKRW } from "@/utils";
 import { useSettingsStore } from "@/stores";
-import { useT } from "@/hooks";
+import { useT, useExchangeRates } from "@/hooks";
 import type {
   PortfolioSummary,
   AssetCategory,
@@ -19,7 +19,7 @@ type SortKey = "value" | "pnl" | "return" | "weight";
 
 export function TopHoldingsTable({ summary }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
-  const rates = useSettingsStore((s) => s.exchangeRates);
+  const { data: rates } = useExchangeRates();
   const [sortKey, setSortKey] = useState<SortKey>("value");
   const [showAll, setShowAll] = useState(false);
   const t = useT();

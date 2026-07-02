@@ -1,11 +1,11 @@
 import type {
-  Asset,
   AssetCategory,
   CurrencyCode,
   TargetAllocation,
   HoldingDetail,
   CurrencyExposure,
   PortfolioInsight,
+  PortfolioAsset,
 } from "@/types";
 import { INSIGHT_THRESHOLDS } from "@/constants";
 import { CATEGORY_LABELS_EN } from "../ai/promptHelpers";
@@ -45,7 +45,7 @@ export const DEFAULT_INSIGHT_MESSAGES: InsightMessages = {
  * 인사이트/경고 자동 생성
  */
 export function generateInsights(
-  assets: Asset[],
+  assets: PortfolioAsset[],
   holdings: HoldingDetail[],
   cashPercent: number,
   categoryAllocation: { category: AssetCategory; percent: number }[],

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { usePortfolio, useDataRefresh, useT } from "@/hooks";
 import {
   useAssetStore,
@@ -15,10 +15,15 @@ import {
   CurrencyExposureCard,
   RebalanceCard,
   InsightsPanel,
-  PortfolioHistoryChart,
-  PnLWaterfallChart,
 } from "@/components/dashboard";
 import { SAMPLE_ASSETS } from "@/utils";
+
+const PortfolioHistoryChart = lazy(() =>
+  import("@/components/dashboard/PortfolioHistoryChart").then((mod) => ({ default: mod.PortfolioHistoryChart }))
+);
+const PnLWaterfallChart = lazy(() =>
+  import("@/components/dashboard/PnLWaterfallChart").then((mod) => ({ default: mod.PnLWaterfallChart }))
+);
 
 export function DashboardPage() {
   const { assets, summary, rebalancing } = usePortfolio();
@@ -132,7 +137,9 @@ export function DashboardPage() {
       <AllocationPieCharts summary={summary} />
 
       {/* ④ 자산 구성 추이 차트 */}
-      <PortfolioHistoryChart />
+      <Suspense fallback={<div className="h-64 flex items-center justify-center border border-zinc-800 bg-black/50 text-zinc-600 font-mono text-sm">Loading Chart...</div>}>
+        <PortfolioHistoryChart />
+      </Suspense>
 
       {/* ⑤ 보유종목 테이블 */}
       <TopHoldingsTable summary={summary} />
@@ -145,7 +152,9 @@ export function DashboardPage() {
       </div>
 
       {/* ⑦ 종목별 손익 차트 */}
-      <PnLWaterfallChart assets={assets} />
+      <Suspense fallback={<div className="h-64 flex items-center justify-center border border-zinc-800 bg-black/50 text-zinc-600 font-mono text-sm">Loading Chart...</div>}>
+        <PnLWaterfallChart assets={assets} />
+      </Suspense>
     </div>
   );
 }

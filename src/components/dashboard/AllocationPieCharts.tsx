@@ -9,7 +9,7 @@ import {
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
 import { useSettingsStore } from "@/stores";
-import { useT } from "@/hooks";
+import { useT, useExchangeRates } from "@/hooks";
 import type { PortfolioSummary, Market, AssetCategory } from "@/types";
 
 const COLORS = [
@@ -84,7 +84,7 @@ function MiniPie({
 
 export function AllocationPieCharts({ summary }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
-  const rates = useSettingsStore((s) => s.exchangeRates);
+  const { data: rates } = useExchangeRates();
   const t = useT();
 
   if (summary.totalValueKRW === 0) return null;

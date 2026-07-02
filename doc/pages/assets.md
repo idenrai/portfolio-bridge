@@ -115,3 +115,9 @@ Implemented in `src/utils/csv.ts`.
 | --- | --- | --- |
 | `useAssetStore` | `STORAGE_KEYS.ASSETS` | Full asset list / 전체 자산 목록 |
 | `useBrokerStore` | `STORAGE_KEYS.BROKERS` | Broker account definitions / 브로커 계좌 정의 |
+
+## Design & Accessibility
+
+Asset tables utilize `tabular-nums` for consistent numeric alignments and `focus-visible` for keyboard navigation. Action headers and sortable columns use `<button>` elements to maintain keyboard accessibility, adhering to Vercel Web Interface Guidelines.
+
+자산 테이블은 일관된 숫자 정렬을 위해 `tabular-nums`를, 키보드 탐색을 위해 `focus-visible`을 활용합니다. 액션 헤더와 정렬 가능한 컬럼은 `<button>` 요소를 사용하여 Vercel 접근성 가이드라인을 준수합니다.

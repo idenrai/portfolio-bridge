@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useT, usePortfolio } from "@/hooks";
+import { useT, usePortfolio, useExchangeRates } from "@/hooks";
 import { useFireStore, useSettingsStore } from "@/stores";
 import { FireInputForm, FireChart, FireResultCard } from "@/components/fire";
 import { calculateFire, getTargetAmountFromExpense, fromKRW } from "@/utils";
@@ -8,7 +8,8 @@ export function FirePlannerPage() {
   const t = useT();
   const { summary } = usePortfolio();
   const store = useFireStore();
-  const { baseCurrency, exchangeRates } = useSettingsStore();
+  const { baseCurrency } = useSettingsStore();
+  const { data: exchangeRates } = useExchangeRates();
 
   // Calculate FIRE projection
   const result = useMemo(() => {

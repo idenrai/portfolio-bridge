@@ -1,5 +1,5 @@
 import { Card } from "@/components/common";
-import { useT, usePortfolio } from "@/hooks";
+import { useT, usePortfolio, useExchangeRates } from "@/hooks";
 import { useFireStore, useSettingsStore } from "@/stores";
 import { fromKRW, toKRW } from "@/utils";
 
@@ -15,7 +15,8 @@ function parseCommaNumber(str: string): number {
 
 export function FireInputForm() {
   const t = useT();
-  const { baseCurrency, exchangeRates } = useSettingsStore();
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
+  const { data: exchangeRates } = useExchangeRates();
   const store = useFireStore();
   const { summary } = usePortfolio();
 

@@ -1,5 +1,5 @@
 import { useSettingsStore, useAssetStore, useLanguageStore } from "@/stores";
-import { useT, useDataRefresh } from "@/hooks";
+import { useT, useDataRefresh, useExchangeRates } from "@/hooks";
 import { Card, Button } from "@/components/common";
 import type { CurrencyCode } from "@/types";
 import { LANG_LOCALES } from "@/i18n";
@@ -13,7 +13,8 @@ export function DataRefreshSection() {
   const t = useT();
 
   const baseCurrency = settings.baseCurrency;
-  const baseCurrencyRate = settings.exchangeRates[baseCurrency] ?? 1;
+  const { data: exchangeRates } = useExchangeRates();
+  const baseCurrencyRate = exchangeRates[baseCurrency] ?? 1;
   const currencyDisplayNames = new Intl.DisplayNames([langLocale], {
     type: "currency",
   });
@@ -84,7 +85,7 @@ export function DataRefreshSection() {
             {t.settings_fx_title}
           </p>
           <div className="space-y-1">
-            {(Object.keys(settings.exchangeRates) as CurrencyCode[])
+            {(Object.keys(exchangeRates) as CurrencyCode[])
               .filter((code) => code !== baseCurrency)
               .map((code) => {
                 const UNIT: Partial<Record<CurrencyCode, number>> = {
@@ -93,7 +94,7 @@ export function DataRefreshSection() {
                 };
                 const unit = UNIT[code] ?? 1;
                 const rateInBase =
-                  ((settings.exchangeRates[code] ?? 1) / baseCurrencyRate) *
+                  ((exchangeRates[code] ?? 1) / baseCurrencyRate) *
                   unit;
                 const currencyName = currencyDisplayNames.of(code) ?? code;
                 return (

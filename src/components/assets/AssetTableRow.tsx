@@ -5,6 +5,7 @@ import {
   type AssetCategory,
   CURRENCY_SYMBOLS,
   type BrokerAccount,
+  type PortfolioAsset,
 } from "@/types";
 import {
   assetValue,
@@ -14,7 +15,7 @@ import {
 } from "@/utils";
 
 interface AssetTableRowProps {
-  asset: Asset;
+  asset: PortfolioAsset;
   categoryOptions: [AssetCategory, string][];
   brokerAccounts: BrokerAccount[];
   hasBrokers: boolean;
@@ -39,7 +40,9 @@ export function AssetTableRow({
   const pnl = assetPnL(asset);
   const ret = assetReturnPercent(asset);
   const sym = CURRENCY_SYMBOLS[asset.currency];
-  const pnlColor = pnl >= 0 ? "text-red-600" : "text-zinc-300";
+  const isPositive = pnl >= 0;
+  const pnlColor = isPositive ? "text-emerald-400" : "text-rose-400";
+  const pnlIcon = isPositive ? "▲" : "▼";
   const isCash = asset.type === "cash";
 
   return (
@@ -59,11 +62,12 @@ export function AssetTableRow({
       </td>
       <td className="py-2.5 whitespace-nowrap">
         <select
+          aria-label={t.at_col_category}
           value={asset.categories[0] ?? ""}
           onChange={(e) =>
             onCategoryChange(asset.id, e.target.value as AssetCategory | "")
           }
-          className="text-xs rounded border border-zinc-800 px-1.5 py-1 bg-zinc-900/50 text-zinc-200 focus:border-emerald-500 focus:outline-none min-w-22.5"
+          className="text-[11px] uppercase tracking-wider rounded-sm border border-transparent hover:border-zinc-700 px-1 py-1 bg-transparent hover:bg-zinc-900 text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:border-zinc-500 min-w-22 cursor-pointer transition-colors"
         >
           <option value="">{t.at_unclassified}</option>
           {categoryOptions.map(([val, label]) => (
@@ -76,9 +80,10 @@ export function AssetTableRow({
       {hasBrokers && (
         <td className="py-2.5 whitespace-nowrap">
           <select
+            aria-label={t.af_account_label}
             value={asset.brokerId ?? ""}
             onChange={(e) => onBrokerChange(asset.id, e.target.value)}
-            className="text-xs rounded border border-zinc-800 px-1.5 py-1 bg-zinc-900/50 text-zinc-200 focus:border-emerald-500 focus:outline-none min-w-22.5"
+            className="text-[11px] uppercase tracking-wider rounded-sm border border-transparent hover:border-zinc-700 px-1 py-1 bg-transparent hover:bg-zinc-900 text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:border-zinc-500 min-w-22 cursor-pointer transition-colors"
           >
             <option value="">{t.af_account_none}</option>
             {brokerAccounts.map((b) => (
@@ -121,21 +126,29 @@ export function AssetTableRow({
         {val.toLocaleString()}
       </td>
       <td
-        className={`py-2.5 text-right tabular-nums ${isCash ? "text-zinc-400" : pnlColor}`}
+        className={`py-2.5 text-right tabular-nums ${isCash ? "text-zinc-500" : pnlColor}`}
       >
         {isCash ? (
           "-"
         ) : (
-          <>
-            {sym}
-            {pnl.toLocaleString()}
-          </>
+          <div className="flex items-center justify-end gap-1">
+            <span aria-hidden="true" className="text-[10px]">{pnlIcon}</span>
+            <span>
+              {sym}
+              {Math.abs(pnl).toLocaleString()}
+            </span>
+          </div>
         )}
       </td>
       <td
-        className={`py-2.5 text-right tabular-nums font-medium ${isCash ? "text-zinc-400" : pnlColor}`}
+        className={`py-2.5 text-right tabular-nums font-medium ${isCash ? "text-zinc-500" : pnlColor}`}
       >
-        {isCash ? "-" : formatPercent(ret)}
+        {isCash ? "-" : (
+          <div className="flex items-center justify-end gap-1">
+            <span aria-hidden="true" className="text-[10px]">{pnlIcon}</span>
+            <span>{formatPercent(Math.abs(ret))}</span>
+          </div>
+        )}
       </td>
       <td className="py-2.5 text-center whitespace-nowrap">
         <div className="flex items-center justify-center gap-1">

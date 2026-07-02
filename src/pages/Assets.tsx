@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useAssetStore } from "@/stores";
+import { usePortfolio } from "@/hooks";
 import { Card, Button, Modal } from "@/components/common";
 import { AssetForm, AssetTable, BrokerManager, AIClassificationModal, CSVPreviewModal } from "@/components/assets";
 import { downloadCsv, parseCsv } from "@/utils";
@@ -13,7 +14,8 @@ import type {
 } from "@/types";
 
 export function AssetsPage() {
-  const { assets, addAsset, updateAsset, deleteAsset } = useAssetStore();
+  const { assets } = usePortfolio();
+  const { addAsset, updateAsset, deleteAsset } = useAssetStore();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingAsset, setEditingAsset] = useState<Asset | undefined>();
   const [brokerManagerOpen, setBrokerManagerOpen] = useState(false);
