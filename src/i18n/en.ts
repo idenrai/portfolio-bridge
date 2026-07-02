@@ -215,10 +215,11 @@ export const en: Translations = {
     "• Circle of Competence: Only invest in industries and business models you truly understand\n" +
     "• Wonderful Business: It's far better to buy a wonderful company at a fair price than a fair company at a wonderful price\n" +
     "• Reject Stupidity: Strictly avoid complex derivatives and businesses that are too hard to understand\n" +
-    "• Cash Optionality: Always maintain substantial cash to provide liquidity during crises and seize great opportunities\n" +
-    '• "Rule No.1: Never lose money. Rule No.2: Never forget Rule No.1."\n' +
-    '• "Be fearful when others are greedy, and greedy when others are fearful."\n' +
-    '• "Only when the tide goes out do you discover who\'s been swimming naked."',
+    "• Cash Optionality: Always maintain substantial cash to provide liquidity during crises and seize great opportunities\n",
+  guru_quotes_buffett:
+    "Rule No.1: Never lose money. Rule No.2: Never forget Rule No.1.\n" +
+    "Be fearful when others are greedy, and greedy when others are fearful.\n" +
+    "Only when the tide goes out do you discover who's been swimming naked.",
   guru_philosophy_munger:
     "• Concentrated Investing: Make massive bets only when highly confident in a few outstanding businesses\n" +
     "• Mental Models (Multidisciplinary Thinking): Leverage core frameworks from psychology, physics, biology, math, and history\n" +
@@ -226,162 +227,181 @@ export const en: Translations = {
     "• Contrarian Thinking: Resist popular narratives and herd mentality; truly independent judgment is paramount\n" +
     "• The Art of Avoidance (Inversion): Ask how you might fail first, and systematically avoid stupidity to achieve success\n" +
     "• Continuous Learning: Try to go to bed a little wiser than when you woke up through relentless reading and reflection\n" +
-    "• Power of Incentives: Absolutely emphasize the massive impact incentive structures have on human behavior and business outcomes\n" +
-    '• "Invert, always invert."\n' +
-    '• "Show me the incentive and I will show you the outcome."\n' +
-    '• "It is remarkable how much long-term advantage people like us have gotten by trying to be consistently not stupid, instead of trying to be very intelligent."',
+    "• Power of Incentives: Absolutely emphasize the massive impact incentive structures have on human behavior and business outcomes\n",
+  guru_quotes_munger:
+    "Invert, always invert.\n" +
+    "Show me the incentive and I will show you the outcome.\n" +
+    "It is remarkable how much long-term advantage people like us have gotten by trying to be consistently not stupid, instead of trying to be very intelligent.",
   guru_philosophy_lynch:
     "• Everyday Investment Ideas: Be the first to discover growing products and services in your daily life and verify them with fundamental analysis\n" +
     "• PEG Ratio: Divide the P/E ratio by the earnings growth rate to accurately assess whether growth is fairly priced\n" +
     "• Tenbagger Hunting: Target highly promising small-to-mid cap companies with the potential to multiply your investment tenfold\n" +
     "• Broad Diversification: Hold hundreds of stocks to spread risk, but rigorously track the unique thesis for each one\n" +
     "• Thorough Research: Emphasize persistent, hands-on investigation including company visits and direct management interviews\n" +
-    "• Cocktail Party Theory: A contrarian indicator—when everyone at a party is bragging about stocks, it's a market top; when they ignore stocks, it's a bottom\n" +
-    '• "Know what you own, and know why you own it."\n' +
-    '• "The most important organ in the stock market is the brain, not the stomach."\n' +
-    '• "Time is on your side when you own shares of superior companies."',
+    "• Cocktail Party Theory: A contrarian indicator—when everyone at a party is bragging about stocks, it's a market top; when they ignore stocks, it's a bottom\n",
+  guru_quotes_lynch:
+    "Know what you own, and know why you own it.\n" +
+    "The most important organ in the stock market is the brain, not the stomach.\n" +
+    "Time is on your side when you own shares of superior companies.",
   guru_philosophy_graham:
     "• Margin of Safety: Only buy at a significant discount to intrinsic value to provide a buffer against errors in judgment\n" +
     "• Mr. Market: View the market as a manic-depressive business partner; never let his wild emotional swings dictate your actions, but rather profit from them\n" +
     "• Defensive Investing: Prioritize strict capital preservation and downside protection above maximizing returns\n" +
     "• Stock-Bond Balance: Mechanically allocate 25–75% to stocks and the rest to bonds, adjusting purely based on market conditions\n" +
-    "• Quantitative Analysis: Entirely remove emotion and evaluate companies solely on cold financial data such as Net Current Asset Value (NCAV)\n" +
-    '• "An investment operation is one which, upon thorough analysis, promises safety of principal and an adequate return."\n' +
-    '• "The investor’s chief problem—and even his worst enemy—is likely to be himself."\n' +
-    '• "In the short run, the market is a voting machine but in the long run, it is a weighing machine."',
+    "• Quantitative Analysis: Entirely remove emotion and evaluate companies solely on cold financial data such as Net Current Asset Value (NCAV)\n",
+  guru_quotes_graham:
+    "An investment operation is one which, upon thorough analysis, promises safety of principal and an adequate return.\n" +
+    "The investor’s chief problem—and even his worst enemy—is likely to be himself.\n" +
+    "In the short run, the market is a voting machine but in the long run, it is a weighing machine.",
   guru_philosophy_dalio:
     "• All Weather Strategy: Perfectly prepare for all economic regimes mapping to four quadrants (growth/slowdown × inflation/deflation)\n" +
     "• Risk Parity: Equalize 'risk contributions' across asset classes rather than capital amounts to avoid volatility dominance\n" +
     "• Broad Diversification: Structurally diversify across mutually uncorrelated assets like nominal bonds, inflation-linked bonds, gold, and commodities\n" +
     "• Radical Transparency: Pursue truth regardless of hierarchy and enforce an Idea Meritocracy within the organization\n" +
     "• Principles: Understand markets and life as a machine of cause-and-effect; systemize lessons from failures into algorithms\n" +
-    "• Understanding Debt Cycles: Analyze short-term business cycles and long-term debt cycles to navigate macroeconomic turning points\n" +
-    '• "He who lives by the crystal ball will eat shattered glass."\n' +
-    '• "Pain + Reflection = Progress."',
+    "• Understanding Debt Cycles: Analyze short-term business cycles and long-term debt cycles to navigate macroeconomic turning points\n",
+  guru_quotes_dalio:
+    "He who lives by the crystal ball will eat shattered glass.\n" +
+    "Pain + Reflection = Progress.",
   guru_philosophy_lilu:
     "• Buffett-Munger Approach in Asia: Systematically apply the purest form of value investing principles to the rapidly growing Chinese and Asian markets\n" +
     "• Deep Business Analysis: Thoroughly grasp the essence of business models, management integrity, and impenetrable long-term competitive advantages\n" +
     "• Ultra-Concentrated Portfolio: Commit massive amounts of capital to only a handful of life-changing, high-conviction ideas\n" +
     "• Long-Term Holding: Ignore short-term volatility entirely, maintaining a 5–10+ year horizon until intrinsic value is fully recognized\n" +
-    "• Intellectual Honesty: Accurately acknowledge the limits of your own knowledge and rigorously stay within your Circle of Competence\n" +
-    '• "The biggest risk in investing is not volatility, but permanent loss of capital."\n' +
-    '• "A true value investor never tries to beat the market. They only control their own ignorance."',
+    "• Intellectual Honesty: Accurately acknowledge the limits of your own knowledge and rigorously stay within your Circle of Competence\n",
+  guru_quotes_lilu:
+    "The biggest risk in investing is not volatility, but permanent loss of capital.\n" +
+    "A true value investor never tries to beat the market. They only control their own ignorance.",
   guru_philosophy_ackman:
     "• Activist Investing: Acquire massive stakes to actively engage with and force management to unlock hidden shareholder value\n" +
     "• Concentrated Portfolio: Make huge, high-conviction investments in a heavily concentrated portfolio of 5–10 world-class companies\n" +
     "• Business Model Analysis: Demand simple, highly predictable businesses with exceptional free cash flow and dominant brand moats\n" +
     "• Asymmetric Risk-Reward: Relentlessly hunt for asymmetric opportunities where the downside is strictly capped but the upside is potentially infinite\n" +
-    "• Macro Hedging: Utilize massive derivative positions (like CDS) as ultimate defensive hedges against extreme macroeconomic shocks or pandemics\n" +
-    '• "Concentration builds wealth; diversification preserves it."\n' +
-    '• "The best investments are often the ones that people laugh at as terrible ideas at the time."',
+    "• Macro Hedging: Utilize massive derivative positions (like CDS) as ultimate defensive hedges against extreme macroeconomic shocks or pandemics\n",
+  guru_quotes_ackman:
+    "Concentration builds wealth; diversification preserves it.\n" +
+    "The best investments are often the ones that people laugh at as terrible ideas at the time.",
   guru_philosophy_burry:
     "• Contrarian Investing: Willingly and decisively take positions diametrically opposed to the market consensus or mania\n" +
     "• Value-Based Analysis: Meticulously calculate intrinsic and asset values, completely ignoring herd mentality\n" +
     "• Macro Bets: Analyze deep macroeconomic trends, systemic risks, and asset bubbles to place massive directional wagers when conviction is absolute\n" +
     "• Independent Thinking: Isolate yourself from Wall Street narratives and rely solely on your own exhaustive, solitary research\n" +
-    "• High Cash Reserves: Exhibit infinite patience, holding cash until a wildly asymmetric, undeniable opportunity presents itself\n" +
-    '• "I may be early, but I\'m not wrong."\n' +
-    '• "If everyone believes something, it’s a good bet that nobody has really tested it."',
+    "• High Cash Reserves: Exhibit infinite patience, holding cash until a wildly asymmetric, undeniable opportunity presents itself\n",
+  guru_quotes_burry:
+    "I may be early, but I'm not wrong.\n" +
+    "If everyone believes something, it’s a good bet that nobody has really tested it.",
   guru_philosophy_fisher:
     "• Global Macro: Analyze massive shifts in the world economy and historical market cycles to dictate top-down asset allocation\n" +
     "• Exploiting Sentiment: Capitalize on the irrational extremes of market crowds—buying max pessimism and selling max optimism\n" +
     "• Long-Term Equity Bias: Hold the firm conviction that equities will vastly outperform all other asset classes over the long haul in a capitalist system\n" +
     "• Broad Global Diversification: Completely eliminate home country bias by spreading investments extensively across the globe\n" +
-    "• The Three Questions: Always ask what the market knows, what it doesn't know, and what it believes that is actually completely false\n" +
-    '• "Markets climb a wall of worry."\n' +
-    '• "What everyone knows is usually wrong, and therein lies the biggest opportunity."',
+    "• The Three Questions: Always ask what the market knows, what it doesn't know, and what it believes that is actually completely false\n",
+  guru_quotes_fisher:
+    "Markets climb a wall of worry.\n" +
+    "What everyone knows is usually wrong, and therein lies the biggest opportunity.",
   guru_philosophy_cohen:
     "• Multi-Manager Model: Run a massive platform combining numerous independent trading strategies executed by brilliant, specialized portfolio managers\n" +
     "• Supreme Risk Management: Enforce ruthless stop-loss limits on every position and strictly manage total portfolio risk limits without exception\n" +
     "• Short-to-Medium Term Trading: Exploit short-term market inefficiencies through rapid decision-making and extraordinarily high portfolio turnover\n" +
     "• Information Edge: Base every decision on the most relentless, legally permissible research and alternative data analysis on Wall Street\n" +
-    "• Flexible Strategy: Deploy whatever works best in the current environment—long/short equity, event-driven, or pure quantitative strategies\n" +
-    '• "What matters is not how accurately you predict the future, but how ruthlessly you manage risk and cut losses."\n' +
-    '• "The market is not perfectly efficient. Money is made where information is asymmetric."',
+    "• Flexible Strategy: Deploy whatever works best in the current environment—long/short equity, event-driven, or pure quantitative strategies\n",
+  guru_quotes_cohen:
+    "What matters is not how accurately you predict the future, but how ruthlessly you manage risk and cut losses.\n" +
+    "The market is not perfectly efficient. Money is made where information is asymmetric.",
   guru_philosophy_marks:
     "• Market Cycle Theory: Understand that markets swing like a pendulum, and figuring out where we are in the cycle is paramount\n" +
     "• Second-Level Thinking: You can't do the same things as others and expect to outperform; you must think deeper and differently than the consensus\n" +
     "• Distressed Investing: Pioneer in distressed debt, finding true value and high-return opportunities where the crowd is panicking\n" +
     "• Risk = Permanent Loss: Define true risk exclusively as the probability of permanent capital loss, not temporary price volatility\n" +
     "• Defensive Investing: Focus far more heavily on limiting losses in bad times than maximizing gains in good times\n" +
-    "• Price vs. Value: A great asset bought too expensively is a bad investment, while a bad asset bought cheaply enough is a great investment\n" +
-    '• "You can’t predict. You can prepare."\n' +
-    '• "Experience is what you got when you didn\'t get what you wanted."\n' +
-    '• "The most dangerous thing is to buy something at the peak of its popularity."',
+    "• Price vs. Value: A great asset bought too expensively is a bad investment, while a bad asset bought cheaply enough is a great investment\n",
+  guru_quotes_marks:
+    "You can’t predict. You can prepare.\n" +
+    "Experience is what you got when you didn't get what you wanted.\n" +
+    "The most dangerous thing is to buy something at the peak of its popularity.",
   guru_philosophy_klarman:
     "• Margin of Safety Legacy: Brilliantly adapt Benjamin Graham's conservative margin of safety principles to complex, modern financial markets\n" +
     "• Absolute Returns: Entirely reject the trap of relative benchmark chasing, focusing exclusively on achieving positive absolute returns without losing money\n" +
     "• High Cash Reserves: Display extreme patience by holding 50% or more in cash if no investments meet your stringent criteria\n" +
     "• Utilizing Market Fear: Act as the ultimate buyer of last resort when others are panic-selling, scooping up assets far below intrinsic value\n" +
-    "• Downside Protection First: Constantly prioritize capital preservation and downside protection over the temptation to maximize upside in a raging bull market\n" +
-    '• "Value investing is at its core the marriage of a contrarian streak and a calculator."\n' +
-    '• "Our goal is not to make money; our goal is to not lose money. If we do that, the returns will take care of themselves."\n' +
-    '• "The market can always be wrong, and price volatility does not equal risk."',
+    "• Downside Protection First: Constantly prioritize capital preservation and downside protection over the temptation to maximize upside in a raging bull market\n",
+  guru_quotes_klarman:
+    "Value investing is at its core the marriage of a contrarian streak and a calculator.\n" +
+    "Our goal is not to make money; our goal is to not lose money. If we do that, the returns will take care of themselves.\n" +
+    "The market can always be wrong, and price volatility does not equal risk.",
   guru_philosophy_templeton:
     "• Global Contrarian: Buy at the 'Point of Maximum Pessimism'\n" +
     "• Borderless Investing: Search for undervalued opportunities across all global markets\n" +
     "• Long-Term Value Investing: Hold for 5–10+ years, waiting for intrinsic value realization\n" +
     "• Quantitative Screening: Use low P/E, P/B and other metrics to screen candidates\n" +
-    "• Humble Investing: Exploit market mistakes rather than trying to beat the market\n" +
-    '• "The time of maximum pessimism is the best time to buy."',
+    "• Humble Investing: Exploit market mistakes rather than trying to beat the market\n",
+  guru_quotes_templeton:
+    "The time of maximum pessimism is the best time to buy.",
   guru_philosophy_soros:
     "• Reflexivity Theory: Markets are not efficient; biased perceptions of participants affect prices, which in turn alter the underlying fundamentals in a feedback loop\n" +
     "• Massive Directional Bets: When you have strong conviction on macroeconomic imbalances, use leverage to make massive bets across currencies, bonds, and equities\n" +
     "• Global Macro: Analyze political, economic, and social changes alongside central bank policies to uncover massive macro opportunities\n" +
     "• Fast Stop-Loss & Survival: Survival is the absolute priority; if your hypothesis is proven wrong, liquidate the position immediately and run\n" +
     "• Exploiting Chaos: Actively utilize the early stages of market instability and forming bubbles as highly profitable opportunities\n" +
-    "• Fallibility: Human beings are inherently fallible; always remain skeptical and open to the possibility that your thesis is fundamentally flawed\n" +
-    '• "It\'s not whether you\'re right or wrong that\'s important, but how much money you make when you\'re right and how much you lose when you\'re wrong."\n' +
-    '• "Markets are constantly in a state of uncertainty and flux, and money is made by discounting the obvious and betting on the unexpected."\n' +
-    '• "I\'m only rich because I know when I\'m wrong."',
+    "• Fallibility: Human beings are inherently fallible; always remain skeptical and open to the possibility that your thesis is fundamentally flawed\n",
+  guru_quotes_soros:
+    "It's not whether you're right or wrong that's important, but how much money you make when you're right and how much you lose when you're wrong.\n" +
+    "Markets are constantly in a state of uncertainty and flux, and money is made by discounting the obvious and betting on the unexpected.\n" +
+    "I'm only rich because I know when I'm wrong.",
   guru_philosophy_wood:
     "• Disruptive Innovation: Concentrate on technologies that will transform the world in 5–10 years\n" +
     "• Five Key Themes: AI, robotics, energy storage, genomics, and blockchain innovation platforms\n" +
     "• Long-Term Growth Investing: Accept short-term volatility; bet on long-term growth potential\n" +
     "• Proactive Research: Proprietary future forecasts and price modeling by in-house research teams\n" +
-    "• Transparent Management: Publicly disclose daily trades for full fund transparency\n" +
-    '• "Innovation solves problems and creates entirely new market opportunities."',
+    "• Transparent Management: Publicly disclose daily trades for full fund transparency\n",
+  guru_quotes_wood:
+    "Innovation solves problems and creates entirely new market opportunities.",
 
   guru_philosophy_druckenmiller:
     "• Macro Trading Mastery: Directional bets via analysis of correlations between currencies, rates, and equities\n" +
     "• Soros Protégé: Inherited and evolved strategies proven at the Quantum Fund — averaged ~30% annual returns over 30 years\n" +
-    '• Concentrated Bets: "When you have tremendous conviction on a trade, you have to go for the jugular."\n' +
+    "• Concentrated Bets: \"When you have tremendous conviction on a trade, you have to go for the jugular.\"\n" +
     "• Momentum-Aware: Ride trends with conviction; pivot immediately when signals reverse — ego is the enemy\n" +
-    "• Asymmetric Risk Management: Limit losses while maximizing upside through asymmetric position sizing\n" +
-    '• "The way to build long-term returns is through preservation of capital and home runs."',
+    "• Asymmetric Risk Management: Limit losses while maximizing upside through asymmetric position sizing\n",
+  guru_quotes_druckenmiller:
+    "The way to build long-term returns is through preservation of capital and home runs.",
   guru_philosophy_smith:
-    '• Quality Compounders: "Buy good companies, don\'t overpay, do nothing"—a remarkably simple, yet brutally effective philosophy\n' +
+    "• Quality Compounders: \"Buy good companies, don't overpay, do nothing\"—a remarkably simple, yet brutally effective philosophy\n" +
     "• High ROIC Focus: Only invest in companies with wide moats that can sustainably reinvest capital at exceptionally high rates of return\n" +
-    '• Concentrated Portfolio: Reject "diworsification"; concentrate in 25–30 core holdings and rely on the sheer quality of the ideas\n' +
+    "• Concentrated Portfolio: Reject \"diworsification\"; concentrate in 25–30 core holdings and rely on the sheer quality of the ideas\n" +
     "• Quality Over Cheapness: Avoid low-quality \"cigar butts\" completely; willingly pay a fair price for outstanding business economics and cash flow\n" +
-    "• Compounding Machine & Patience: True value investing is not trading; it is holding a compounding machine forever to maximize exponential returns\n" +
-    '• "I have a problem with the idea you should diversify to reduce risk. If you own a business, own the best."\n' +
-    '• "The greatest mistake investors make is the urge to do something, when doing nothing is the right answer."',
+    "• Compounding Machine & Patience: True value investing is not trading; it is holding a compounding machine forever to maximize exponential returns\n",
+  guru_quotes_smith:
+    "I have a problem with the idea you should diversify to reduce risk. If you own a business, own the best.\n" +
+    "The greatest mistake investors make is the urge to do something, when doing nothing is the right answer.",
   guru_philosophy_greenblatt:
     "• Magic Formula: Mechanically combine high Earnings Yield (value) with high Return on Invested Capital (quality) to select optimal stocks\n" +
-    '• Systematic Value Investing: Remove human greed and fear entirely; deploy capital coldly based on strict mathematical rules\n' +
+    "• Systematic Value Investing: Remove human greed and fear entirely; deploy capital coldly based on strict mathematical rules\n" +
     "• Unloved Stocks: Systematically filter the market to find phenomenal, high-quality businesses that Wall Street has temporarily discarded\n" +
     "• Diversified Approach & Rebalancing: Hold 20–30 positions to mitigate individual company risk, and rebalance strictly every 12 months\n" +
-    '• Patience Required: Even a statistically proven strategy can underperform for 3–4 years; enduring this pain is the price of long-term outperformance\n' +
-    '• "Figure out what something is worth and pay a lot less, because the stock market is Mr. Market in the short run."\n' +
-    '• "The fact that the magic formula doesn\'t work all the time is the exact reason why it continues to work over the long term."',
+    "• Patience Required: Even a statistically proven strategy can underperform for 3–4 years; enduring this pain is the price of long-term outperformance\n",
+  guru_quotes_greenblatt:
+    "Figure out what something is worth and pay a lot less, because the stock market is Mr. Market in the short run.\n" +
+    "The fact that the magic formula doesn't work all the time is the exact reason why it continues to work over the long term.",
   guru_philosophy_piotroski:
     "• F-Score: A rigorous 9-point binary scoring system evaluating a company's absolute fundamental health across profitability, leverage, and efficiency\n" +
     "• Value Stock Filter: Avoid \"value traps\" by screening high book-to-market stocks to isolate only those undergoing a genuine fundamental turnaround\n" +
     "• Profitability & Cash Flow: Prioritize earnings quality above all—operating cash flow must exceed net income (accruals quality)\n" +
     "• Financial Strength Tracking: Demand proof of financial stability, such as declining leverage, improving liquidity, and zero equity dilution\n" +
-    "• Operational Efficiency: Require concrete data showing management execution, such as improving gross margins and asset turnover\n" +
-    '• "Buying cheap stocks is dangerous. You must verify through hard data that the financial statements are genuinely improving."\n' +
-    '• "Among high BM firms, those with strong fundamentals earn an annual return premium of 7.5% over weak ones."',
+    "• Operational Efficiency: Require concrete data showing management execution, such as improving gross margins and asset turnover\n",
+  guru_quotes_piotroski:
+    "Buying cheap stocks is dangerous. You must verify through hard data that the financial statements are genuinely improving.\n" +
+    "Among high BM firms, those with strong fundamentals earn an annual return premium of 7.5% over weak ones.",
   guru_philosophy_oneil:
     "• CAN SLIM System: A highly systematic growth methodology flawlessly blending strict fundamental analysis with technical chart reading\n" +
     "• C & A (Earnings Growth): Demand massive current quarterly EPS growth (25%+) and a multi-year history of explosive annual compounding\n" +
     "• N (New Product/New High): Buy into sheer momentum when a company with a world-changing product breaks out to new 52-week highs\n" +
     "• S·L·I·M Requirements: Analyze supply/demand, insist on buying the #1 market leader, require institutional backing, and respect market direction\n" +
-    "• Ruthless Stop-Loss Rule: Mechanically cut all losses at 7-8% without a single exception or excuse to prevent catastrophic capital destruction\n" +
-    '• "The whole secret to winning in the stock market is to lose the least amount possible when you\'re not right."\n' +
-    '• "Never buy cheap stocks. Buy expensive stocks and sell them higher."\n' +
-    '• "The best stocks always look too high to the majority, and the worst ones always look too low."',
+    "• Ruthless Stop-Loss Rule: Mechanically cut all losses at 7-8% without a single exception or excuse to prevent catastrophic capital destruction\n",
+  guru_quotes_oneil:
+    "The whole secret to winning in the stock market is to lose the least amount possible when you're not right.\n" +
+    "Never buy cheap stocks. Buy expensive stocks and sell them higher.\n" +
+    "The best stocks always look too high to the majority, and the worst ones always look too low.",
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger Analyzer",
   lynch_tenbagger_desc:
