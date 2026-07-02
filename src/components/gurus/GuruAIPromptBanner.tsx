@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Brain } from "lucide-react";
 import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore, useProfileStore, useGuruSessionStore } from "@/stores";
 import { buildGuruPrompt, buildGuruFollowUpPrompt } from "@/utils";
@@ -122,7 +123,7 @@ export function GuruAIPromptBanner({
         <div className="flex flex-col gap-4">
           {/* Header */}
           <div className="flex items-start gap-3 min-w-0">
-            <span className="text-2xl shrink-0 mt-0.5">🧘</span>
+            <Brain className="w-6 h-6 text-indigo-400 shrink-0 mt-0.5" />
             <div className="min-w-0">
               <p className="text-sm font-semibold text-zinc-100 leading-tight">
                 {t.guru_ai_banner_title}

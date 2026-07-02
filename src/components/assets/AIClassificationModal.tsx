@@ -3,6 +3,7 @@ import { useAssetStore, useLanguageStore } from "@/stores";
 import { useT } from "@/hooks";
 import { Button, Modal } from "@/components/common";
 import { buildClassificationPrompt, parseAiResponse } from "@/utils";
+import { Sparkles } from "lucide-react";
 
 interface AIClassificationModalProps {
   open: boolean;
@@ -67,7 +68,12 @@ export function AIClassificationModal({
     <Modal
       open={open}
       onClose={handleClose}
-      title={t.asset_ai_modal_title}
+      title={
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-indigo-400" />
+          <span>{t.asset_ai_modal_title}</span>
+        </div>
+      }
       maxWidth="max-w-2xl"
     >
       <div className="space-y-4">
@@ -116,8 +122,9 @@ export function AIClassificationModal({
               readOnly
               value={promptText}
               rows={16}
+              aria-label={t.asset_ai_copy_desc}
               onFocus={(e) => e.target.select()}
-              
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-3 text-sm font-mono text-zinc-300 resize-none focus:outline-none focus:ring-1 focus:ring-zinc-700"
             />
             <div className="flex justify-end gap-2">
               <Button variant="secondary" onClick={handleClose}>
@@ -147,8 +154,10 @@ export function AIClassificationModal({
                 setImportError(null);
               }}
               rows={14}
+              aria-label={t.asset_ai_json_placeholder}
+              spellCheck={false}
               placeholder={t.asset_ai_json_placeholder}
-              
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-3 text-sm font-mono text-zinc-300 resize-none focus:outline-none focus:ring-1 focus:ring-zinc-700"
             />
 
             {importError && (

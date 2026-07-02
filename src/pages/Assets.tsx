@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Sparkles } from "lucide-react";
 import { useAssetStore } from "@/stores";
 import { usePortfolio } from "@/hooks";
 import { Card, Button, Modal } from "@/components/common";
@@ -135,9 +136,9 @@ export function AssetsPage() {
         <div className="rounded-[11px] bg-zinc-950/95 px-4 py-4 sm:px-5">
           <div className="flex flex-col gap-4">
             {/* Header */}
-            <div className="flex items-start gap-3 min-w-0">
-              <span className="text-2xl shrink-0 mt-0.5">🤖</span>
-              <div className="min-w-0">
+            <div className="flex gap-4">
+              <Sparkles className="w-6 h-6 text-indigo-400 shrink-0 mt-0.5" />
+              <div className="flex-1 space-y-3">
                 <p className="text-sm font-semibold text-zinc-100 leading-tight">
                   {t.asset_ai_banner_title}
                 </p>

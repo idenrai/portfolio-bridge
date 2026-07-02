@@ -3,7 +3,7 @@ import { type ReactNode, useEffect, useRef } from "react";
 interface ModalProps {
   open: boolean;
   onClose: () => void;
-  title?: string;
+  title?: ReactNode;
   children: ReactNode;
   /** 최대 너비 (Tailwind class) */
   maxWidth?: string;
@@ -40,7 +40,8 @@ export function Modal({
               </h2>
               <button
                 onClick={onClose}
-                className="text-zinc-500 hover:text-zinc-300 text-sm leading-none cursor-pointer font-bold"
+                aria-label="Close"
+                className="text-zinc-500 hover:text-zinc-300 text-sm leading-none cursor-pointer font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 rounded"
               >
                 [ X ]
               </button>
