@@ -5,7 +5,7 @@ import { TRANSLATIONS } from "@/i18n";
 import { fetchBatchQuote, fetchCurrentPrice } from "@/utils";
 
 const CACHE_FALLBACK_MS = 24 * 60 * 1000;
-const EMPTY_ARRAY: any[] = [];
+const EMPTY_ARRAY: never[] = [];
 
 export interface FailedAsset {
   ticker: string;

@@ -3,9 +3,9 @@ import { createRoot } from "react-dom/client";
 import { QueryProvider } from "./providers/QueryProvider";
 import App from "./App";
 import "./index.css";
-// @ts-ignore
+// @ts-expect-error - no types for fontsource
 import "@fontsource/inter";
-// @ts-ignore
+// @ts-expect-error - no types for fontsource
 import "@fontsource/fira-code";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

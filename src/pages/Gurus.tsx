@@ -27,17 +27,7 @@ export function GurusPage() {
   const guruName = (guru: GuruProfile) =>
     (t[`guru_name_${guru.id}` as keyof typeof t] as string) ?? guru.name;
 
-  if (assets.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[40vh] md:min-h-[60vh] text-zinc-400 px-4">
-        <p className="text-5xl md:text-6xl mb-4">💡</p>
-        <h2 className="text-lg md:text-xl font-semibold text-zinc-400 mb-2 text-center">
-          {t.guru_empty_title}
-        </h2>
-        <p className="text-xs md:text-sm text-center">{t.guru_empty_desc}</p>
-      </div>
-    );
-  }
+
 
   const guruRebalancing = useMemo(() => {
     return selectedGuru
@@ -77,6 +67,18 @@ export function GurusPage() {
       (en[selectedPhilosophyKey] as string | undefined) ??
       "")
     : "";
+
+  if (assets.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[40vh] md:min-h-[60vh] text-zinc-400 px-4">
+        <p className="text-5xl md:text-6xl mb-4">💡</p>
+        <h2 className="text-lg md:text-xl font-semibold text-zinc-400 mb-2 text-center">
+          {t.guru_empty_title}
+        </h2>
+        <p className="text-xs md:text-sm text-center">{t.guru_empty_desc}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4 md:space-y-6">
