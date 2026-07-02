@@ -174,11 +174,11 @@ export interface Translations {
   guru_title: string;
   guru_empty_title: string;
   guru_empty_desc: string;
-  guru_philosophy_title: (name: string) => string;
-  guru_ideal_alloc: (name: string) => string;
+  guru_philosophy_label: string;
+  guru_ideal_alloc: string;
   guru_radar_title: string;
   guru_my_portfolio: string;
-  guru_rebalance_title: (name: string) => string;
+  guru_rebalance_title: string;
   guru_col_category: string;
   guru_col_current: string;
   guru_col_guru_target: string;

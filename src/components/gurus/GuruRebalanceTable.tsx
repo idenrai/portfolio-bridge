@@ -1,24 +1,19 @@
 import { useT } from "@/hooks";
 import { Card } from "@/components/common";
 import { formatCurrency } from "@/utils";
-import type { GuruProfile, RebalanceSuggestion } from "@/types";
+import type { RebalanceSuggestion } from "@/types";
 
 interface GuruRebalanceTableProps {
-  selectedGuru: GuruProfile;
   guruRebalancing: RebalanceSuggestion[];
 }
 
 export function GuruRebalanceTable({
-  selectedGuru,
   guruRebalancing,
 }: GuruRebalanceTableProps) {
   const t = useT();
 
-  const guruName = (guru: GuruProfile) =>
-    (t[`guru_name_${guru.id}` as keyof typeof t] as string) ?? guru.name;
-
   return (
-    <Card title={t.guru_rebalance_title(guruName(selectedGuru))}>
+    <Card title={t.guru_rebalance_title}>
       <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
         <table className="w-full text-sm min-w-125">
           <thead>

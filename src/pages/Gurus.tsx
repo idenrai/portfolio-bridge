@@ -82,7 +82,7 @@ export function GurusPage() {
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">{t.guru_title}</h1>
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white text-balance">{t.guru_title}</h1>
       <GuruSelector
         selectedGuru={selectedGuru}
         onSelect={setSelectedGuru}
@@ -92,14 +92,25 @@ export function GurusPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mt-8">
           {/* 좌측 고정 패널 (철학 및 프로필) */}
           <div className="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-20">
-            <div className="bg-zinc-950 border border-zinc-800 p-6 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-zinc-900 rounded-full blur-3xl opacity-50 -mr-16 -mt-16 transition-opacity group-hover:opacity-70 pointer-events-none" />
-              <h2 className="text-xl font-bold text-white mb-1">{guruName(selectedGuru)}</h2>
-              <p className="text-sm text-zinc-500 font-mono mb-6 uppercase tracking-wider">{selectedGuru.firm}</p>
+            <div className="bg-black/40 border border-zinc-800/60 p-6 rounded-xl shadow-sm">
+              <div className="flex items-center gap-4 mb-6">
+                <img 
+                  src={selectedGuru.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedGuru.name)}&background=27272a&color=fff&size=256&font-size=0.33`} 
+                  alt={selectedGuru.name} 
+                  className="w-16 h-16 rounded-2xl object-cover shrink-0 border border-zinc-800 bg-zinc-900" 
+                />
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-xl font-bold text-white mb-1 truncate">{guruName(selectedGuru)}</h2>
+                  <p className="text-xs text-zinc-500 uppercase tracking-widest truncate">{selectedGuru.firm}</p>
+                </div>
+              </div>
               
               <div className="space-y-4">
-                <h3 className="text-xs font-bold text-zinc-600 uppercase tracking-widest">{t.guru_philosophy_title("")}</h3>
-                <p className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line font-sans text-pretty break-words">
+                <div className="flex items-center gap-2">
+                  <div className="w-1 h-4 bg-indigo-500 rounded-full" />
+                  <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{t.guru_philosophy_label}</h3>
+                </div>
+                <p className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line text-pretty break-words">
                   {localizedPhilosophy}
                 </p>
               </div>
@@ -120,7 +131,6 @@ export function GurusPage() {
             />
 
             <GuruRebalanceTable
-              selectedGuru={selectedGuru}
               guruRebalancing={guruRebalancing}
             />
 

@@ -54,7 +54,7 @@ export function AboutPage() {
         <div className="flex items-center gap-4 mb-4">
           <img src="/favicon.svg" className="w-10 h-10 md:w-12 md:h-12 rounded-xl border border-zinc-800" alt="" aria-hidden="true" />
           <div>
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white">
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white text-balance">
               Portfolio Bridge
             </h1>
             <p className="text-sm text-zinc-400 mt-1">{t.about_tagline}</p>

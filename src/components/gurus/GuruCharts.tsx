@@ -44,7 +44,7 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
       {/* 이상적 배분 파이 차트 */}
-      <Card title={t.guru_ideal_alloc(guruName(selectedGuru))}>
+      <Card title={t.guru_ideal_alloc}>
         <ResponsiveContainer width="100%" height={220}>
           <PieChart>
             <Pie
@@ -67,7 +67,7 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
             <Tooltip 
               formatter={(v) => `${Number(v)}%`} 
               contentStyle={{ backgroundColor: "#0f172a", borderColor: "#1e293b", color: "#f8fafc" }} 
-              itemStyle={{ color: "#f8fafc" }}
+              itemStyle={{ color: "#f8fafc", fontVariantNumeric: "tabular-nums" }}
             />
             <Legend wrapperStyle={{ fontSize: "12px" }} />
           </PieChart>
@@ -99,7 +99,7 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
             <Tooltip 
               formatter={(v) => `${Number(v)}%`} 
               contentStyle={{ backgroundColor: "#0f172a", borderColor: "#1e293b", color: "#f8fafc" }} 
-              itemStyle={{ color: "#f8fafc" }}
+              itemStyle={{ color: "#f8fafc", fontVariantNumeric: "tabular-nums" }}
             />
           </RadarChart>
         </ResponsiveContainer>

@@ -86,6 +86,9 @@ mappings:
   - pattern: "src/pages/Settings.tsx"
     doc: "doc/pages/settings.md"
 
+  - pattern: "src/components/settings/**"
+    doc: "doc/pages/settings.md"
+
   - pattern: "src/stores/useSettingsStore.ts"
     doc: "doc/pages/settings.md"
 
@@ -135,8 +138,18 @@ mappings:
   - pattern: "src-tauri/**"
     doc: "doc/system/tauri.md"
 
+  # ── FIRE Planner ───────────────────────────────────────────────────────────
+  - pattern: "src/pages/FirePlanner.tsx"
+    doc: "doc/pages/fire.md"
+
+  - pattern: "src/components/fire/**"
+    doc: "doc/pages/fire.md"
+
   # ── App-wide / Overview ────────────────────────────────────────────────────
   - pattern: "src/App.tsx"
+    doc: "doc/overview.md"
+
+  - pattern: "src/pages/About.tsx"
     doc: "doc/overview.md"
 
   - pattern: "src/components/layout/**"
