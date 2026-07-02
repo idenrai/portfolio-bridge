@@ -89,73 +89,78 @@ export function GurusPage() {
       />
 
       {selectedGuru && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mt-8">
-          {/* 좌측 고정 패널 (철학 및 프로필) */}
-          <div className="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-20">
-            <div className="bg-black/40 border border-zinc-800/60 p-6 rounded-xl shadow-sm">
-              <div className="flex items-center gap-4 mb-6">
-                <img 
-                  src={selectedGuru.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedGuru.name)}&background=27272a&color=fff&size=256&font-size=0.33`} 
-                  alt={selectedGuru.name} 
-                  className="w-16 h-16 rounded-2xl object-cover shrink-0 border border-zinc-800 bg-zinc-900" 
-                />
-                <div className="min-w-0 flex-1">
-                  <h2 className="text-xl font-bold text-white mb-1 truncate">{guruName(selectedGuru)}</h2>
-                  <p className="text-xs text-zinc-500 uppercase tracking-widest truncate">{selectedGuru.firm}</p>
+        <>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mt-8">
+            {/* 좌측 고정 패널 (철학 및 프로필) */}
+            <div className="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-20">
+              <div className="bg-black/40 border border-zinc-800/60 p-6 rounded-xl shadow-sm">
+                <div className="flex items-start gap-4 mb-6">
+                  <img 
+                    src={selectedGuru.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedGuru.name)}&background=27272a&color=fff&size=256&font-size=0.33`} 
+                    alt={selectedGuru.name} 
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover shrink-0 border border-zinc-800 bg-zinc-900" 
+                  />
+                  <div className="min-w-0 flex-1 pt-1">
+                    <h2 className="text-xl font-bold text-white mb-1 truncate">{guruName(selectedGuru)}</h2>
+                    <p className="text-xs text-zinc-500 uppercase tracking-widest truncate">{selectedGuru.firm}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-1 h-4 bg-indigo-500 rounded-full" />
-                  <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{t.guru_philosophy_label}</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1 h-4 bg-indigo-500 rounded-full" />
+                    <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{t.guru_philosophy_label}</h3>
+                  </div>
+                  <p className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line text-pretty break-words">
+                    {localizedPhilosophy}
+                  </p>
                 </div>
-                <p className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line text-pretty break-words">
-                  {localizedPhilosophy}
-                </p>
               </div>
             </div>
 
+            {/* 우측 스크롤 패널 (지표, 차트, 스크리너) */}
+            <div className="lg:col-span-8 flex flex-col gap-6">
+              <GuruCharts
+                selectedGuru={selectedGuru}
+                radarData={radarData}
+              />
+
+              <GuruRebalanceTable
+                guruRebalancing={guruRebalancing}
+              />
+
+              {/* 피터 린치 전용: 10루타 후보 스크리너 */}
+              {selectedGuru.id === "lynch" && <LynchTenBaggerCard />}
+
+              {/* 워렌 버핏 전용: 버핏 지수 */}
+              {selectedGuru.id === "buffett" && <BuffettIndicatorCard />}
+
+              {/* 그린블라트 전용: 마법 공식 스크리너 */}
+              {selectedGuru.id === "greenblatt" && <MagicFormulaCard />}
+
+              {/* 그레이엄 전용: 방어적 투자 채점기 */}
+              {selectedGuru.id === "graham" && <GrahamDefensiveCard />}
+
+              {/* 테리 스미스 전용: 퀄리티 컴파운더 채점기 */}
+              {selectedGuru.id === "smith" && <SmithQualityCard />}
+
+              {/* 피오트로스키 전용: F-Score 채점기 */}
+              {selectedGuru.id === "piotroski" && <PiotroskiFScoreCard />}
+
+              {/* 윌리엄 오닐 전용: CAN SLIM 채점기 */}
+              {selectedGuru.id === "oneil" && <OneilCanSlimCard />}
+            </div>
+          </div>
+
+          {/* 전체 폭: 구루에게 묻기 */}
+          <div className="mt-6">
             <GuruAIPromptBanner
               selectedGuru={selectedGuru}
               summary={summary}
               assets={assets}
             />
           </div>
-
-          {/* 우측 스크롤 패널 (지표, 차트, 스크리너) */}
-          <div className="lg:col-span-8 flex flex-col gap-6">
-            <GuruCharts
-              selectedGuru={selectedGuru}
-              radarData={radarData}
-            />
-
-            <GuruRebalanceTable
-              guruRebalancing={guruRebalancing}
-            />
-
-            {/* 피터 린치 전용: 10루타 후보 스크리너 */}
-            {selectedGuru.id === "lynch" && <LynchTenBaggerCard />}
-
-            {/* 워렌 버핏 전용: 버핏 지수 */}
-            {selectedGuru.id === "buffett" && <BuffettIndicatorCard />}
-
-            {/* 그린블라트 전용: 마법 공식 스크리너 */}
-            {selectedGuru.id === "greenblatt" && <MagicFormulaCard />}
-
-            {/* 그레이엄 전용: 방어적 투자 채점기 */}
-            {selectedGuru.id === "graham" && <GrahamDefensiveCard />}
-
-            {/* 테리 스미스 전용: 퀄리티 컴파운더 채점기 */}
-            {selectedGuru.id === "smith" && <SmithQualityCard />}
-
-            {/* 피오트로스키 전용: F-Score 채점기 */}
-            {selectedGuru.id === "piotroski" && <PiotroskiFScoreCard />}
-
-            {/* 윌리엄 오닐 전용: CAN SLIM 채점기 */}
-            {selectedGuru.id === "oneil" && <OneilCanSlimCard />}
-          </div>
-        </div>
+        </>
       )}
     </div>
   );

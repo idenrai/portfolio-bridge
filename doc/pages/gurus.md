@@ -214,6 +214,29 @@ When no assets are registered, the page shows a message directing the user to th
 
 등록된 자산이 없으면 자산 관리 페이지로 안내하는 메시지가 표시됩니다.
 
+## Layout Structure
+
+The guru detail view uses a 12-column grid layout with a sticky left panel and a scrollable right panel. The AI prompt banner is placed outside and below the grid at full width.
+
+구루 상세 뷰는 12열 그리드 레이아웃을 사용하며, 좌측 패널은 고정(sticky), 우측 패널은 스크롤됩니다. AI 프롬프트 배너는 그리드 바깥 하단에 전체 폭으로 배치됩니다.
+
+```
+12-col grid
+├── Left (col-span-4, sticky): Profile avatar + philosophy
+└── Right (col-span-8): Charts + rebalancing + screeners
+
+Full width (below grid): GuruAIPromptBanner
+```
+
+### Avatar Sizing
+
+| Context | Size | Rationale |
+|---------|------|-----------|
+| GuruSelector grid | `w-11 h-11 sm:w-12 sm:h-12` (44–48px) | Meets Apple HIG touch-target-size minimum (44px); portrait detail recognizable |
+| Profile panel | `w-20 h-20 sm:w-24 sm:h-24` (80–96px) | Prominent display for generated portraits; aligned top with `items-start` |
+
+구루 선택 그리드의 아바타는 44–48px로 터치 타겟 최소 기준을 충족하며, 프로필 패널의 아바타는 80–96px로 초상화 디테일이 충분히 보이도록 합니다.
+
 ## Design & Accessibility
 
 The UI enforces an "anti-slop" aesthetic, avoiding unconditional center-alignment (center bias) in favor of editorial, left-aligned data presentations. Interactive elements support keyboard navigation (`focus-visible` rings).
