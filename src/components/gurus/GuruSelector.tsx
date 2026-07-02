@@ -27,7 +27,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
                 : "border-zinc-800 bg-black hover:border-zinc-700 hover:bg-zinc-900/50"
             }`}
           >
-            <img src={avatarUrl} alt={guru.name} className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover shrink-0 bg-zinc-900 transition-colors ${selectedGuru?.id === guru.id ? "border border-zinc-500" : "border border-zinc-800"}`} />
+            <img src={avatarUrl} alt={guru.name} className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover shrink-0 bg-zinc-900 transition-colors ${selectedGuru?.id === guru.id ? "border border-zinc-500" : "border border-zinc-800"}`} />
             <div className="min-w-0">
               <p className="font-semibold text-zinc-200 text-sm leading-tight truncate">
                 {guruName(guru)}
