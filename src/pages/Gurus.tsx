@@ -109,7 +109,7 @@ export function GurusPage() {
               <div className="bg-black/40 border border-zinc-800/60 p-6 rounded-xl shadow-sm">
                 <div className="mb-6 flex flex-col gap-4">
                   <img 
-                    src={selectedGuru.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedGuru.name)}&background=27272a&color=fff&size=256&font-size=0.33`} 
+                    src={selectedGuru.avatar || "/fallback-avatar.svg"} 
                     alt={selectedGuru.name} 
                     width={320}
                     height={320}
@@ -148,6 +148,13 @@ export function GurusPage() {
 
             {/* 우측 스크롤 패널 (지표, 차트, 스크리너) */}
             <div className="lg:col-span-8 flex flex-col gap-6">
+              {/* 구루에게 묻기 (메인 기능 상단 배치) */}
+              <GuruAIPromptBanner
+                selectedGuru={selectedGuru}
+                summary={summary}
+                assets={assets}
+              />
+
               <GuruCharts
                 selectedGuru={selectedGuru}
                 radarData={radarData}
@@ -180,14 +187,6 @@ export function GurusPage() {
             </div>
           </div>
 
-          {/* 전체 폭: 구루에게 묻기 */}
-          <div className="mt-6">
-            <GuruAIPromptBanner
-              selectedGuru={selectedGuru}
-              summary={summary}
-              assets={assets}
-            />
-          </div>
         </>
       )}
     </div>

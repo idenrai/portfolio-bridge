@@ -16,12 +16,12 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3">
       {GURU_PROFILES.map((guru) => {
-        const avatarUrl = guru.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(guru.name)}&background=27272a&color=fff&size=128&font-size=0.33`;
+        const avatarUrl = guru.avatar || "/fallback-avatar.svg";
         return (
           <button
             key={guru.id}
             onClick={() => onSelect(guru)}
-            className={`text-left p-3 rounded-xl border transition-all cursor-pointer flex items-center gap-3 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:border-zinc-500 ${
+            className={`text-left p-3 rounded-xl border transition-all cursor-pointer flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:border-transparent ${
               selectedGuru?.id === guru.id
                 ? "border-zinc-400 bg-zinc-900 text-white shadow-sm"
                 : "border-zinc-800 bg-black hover:border-zinc-700 hover:bg-zinc-900/50"
