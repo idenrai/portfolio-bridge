@@ -13,6 +13,7 @@ import {
   assetPnL,
   assetReturnPercent,
   toKRW,
+  cn,
 } from "@/utils";
 import { AssetFilterBar, AssetTableRow } from "@/components/assets";
 
@@ -38,7 +39,10 @@ interface Props {
 function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
   return (
     <span
-      className={`ml-0.5 inline-block text-[10px] ${active ? "text-blue-500" : "text-zinc-300"}`}
+      className={cn(
+        "ml-0.5 inline-block text-[10px]",
+        active ? "text-blue-500" : "text-zinc-300"
+      )}
     >
       {active ? (dir === "asc" ? "▲" : "▼") : "↕"}
     </span>
@@ -111,10 +115,10 @@ export function AssetTable({
 
   if (allAssets.length === 0) {
     return (
-      <div className="text-center py-16 text-zinc-400">
-        <p className="text-4xl mb-3">💼</p>
+      <div className="py-16 text-center text-zinc-400">
+        <p className="mb-3 text-4xl">💼</p>
         <p className="font-medium">{t.at_empty_title}</p>
-        <p className="text-sm mt-1">{t.at_empty_desc}</p>
+        <p className="mt-1 text-sm">{t.at_empty_desc}</p>
       </div>
     );
   }
@@ -142,19 +146,19 @@ export function AssetTable({
       />
 
       {sorted.length === 0 ? (
-        <div className="text-center py-10 text-zinc-400 text-sm">
+        <div className="py-10 text-center text-sm text-zinc-400">
           {t.at_filter_no_result}
         </div>
       ) : (
-        <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
-          <table className="w-full text-sm min-w-225">
+        <div className="-mx-4 overflow-x-auto px-4 md:-mx-5 md:px-5">
+          <table className="w-full min-w-225 text-sm">
             <thead>
-              <tr className="text-left text-xs text-zinc-500 border-b border-zinc-800 whitespace-nowrap">
+              <tr className="border-b border-zinc-800 text-left text-xs whitespace-nowrap text-zinc-500">
                 <th className="pb-2 font-medium select-none">
                   <button
                     type="button"
                     onClick={() => onSort("name")}
-                    className="flex items-center gap-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 rounded px-1 -ml-1"
+                    className="-ml-1 flex items-center gap-1 rounded px-1 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
                   >
                     {t.at_col_name}
                     <SortIcon active={sortKey === "name"} dir={sortDir} />
@@ -165,46 +169,46 @@ export function AssetTable({
                 {hasBrokers && (
                   <th className="pb-2 font-medium">{t.af_account_label}</th>
                 )}
-                <th className="pb-2 font-medium text-right">
+                <th className="pb-2 text-right font-medium">
                   {t.at_col_quantity}
                 </th>
-                <th className="pb-2 font-medium text-right">
+                <th className="pb-2 text-right font-medium">
                   {t.at_col_avg_buy_price}
                 </th>
-                <th className="pb-2 font-medium text-right">
+                <th className="pb-2 text-right font-medium">
                   {t.at_col_current_price}
                 </th>
-                <th className="pb-2 font-medium text-right select-none">
+                <th className="pb-2 text-right font-medium select-none">
                   <button
                     type="button"
                     onClick={() => onSort("value")}
-                    className="inline-flex items-center justify-end gap-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 rounded px-1 -mr-1"
+                    className="-mr-1 inline-flex items-center justify-end gap-1 rounded px-1 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
                   >
                     {t.at_col_value}
                     <SortIcon active={sortKey === "value"} dir={sortDir} />
                   </button>
                 </th>
-                <th className="pb-2 font-medium text-right select-none">
+                <th className="pb-2 text-right font-medium select-none">
                   <button
                     type="button"
                     onClick={() => onSort("pnl")}
-                    className="inline-flex items-center justify-end gap-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 rounded px-1 -mr-1"
+                    className="-mr-1 inline-flex items-center justify-end gap-1 rounded px-1 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
                   >
                     {t.at_col_pnl}
                     <SortIcon active={sortKey === "pnl"} dir={sortDir} />
                   </button>
                 </th>
-                <th className="pb-2 font-medium text-right select-none">
+                <th className="pb-2 text-right font-medium select-none">
                   <button
                     type="button"
                     onClick={() => onSort("return")}
-                    className="inline-flex items-center justify-end gap-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 rounded px-1 -mr-1"
+                    className="-mr-1 inline-flex items-center justify-end gap-1 rounded px-1 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
                   >
                     {t.at_col_return}
                     <SortIcon active={sortKey === "return"} dir={sortDir} />
                   </button>
                 </th>
-                <th className="pb-2 font-medium text-center">
+                <th className="pb-2 text-center font-medium">
                   {t.at_col_actions}
                 </th>
               </tr>

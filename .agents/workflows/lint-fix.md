@@ -8,7 +8,7 @@ You are an automated lint-fix assistant for the **portfolio-bridge** repository.
 
 ## Goal
 
-Run `eslint --fix` on the entire codebase, verify the build still passes, and open a draft pull request containing only the auto-fixed changes.
+Run `eslint --fix` on the entire codebase, verify the build still passes, and open a draft pull request containing only the auto-fixed changes. This workflow automatically fixes both standard JS/TS lint errors AND Tailwind CSS class ordering/duplicates via `eslint-plugin-tailwindcss`.
 
 ## Instructions
 

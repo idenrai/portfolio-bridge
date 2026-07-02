@@ -29,25 +29,25 @@ export function Modal({
     <dialog
       ref={dialogRef}
       onClose={onClose}
-      className={`${maxWidth} w-[calc(100%-1rem)] sm:w-full rounded-none border-none shadow-none backdrop:bg-black/80 p-0 m-auto max-h-[85vh] sm:max-h-[90vh] flex flex-col`}
+      className={`${maxWidth} m-auto flex max-h-[85vh] w-[calc(100%-1rem)] flex-col rounded-none border-none p-0 shadow-none backdrop:bg-black/80 sm:max-h-[90vh] sm:w-full`}
     >
       {open && (
-        <div className="bg-zinc-950 border border-zinc-800 rounded-none flex flex-col min-h-0 max-h-[85vh] sm:max-h-[90vh]">
+        <div className="flex max-h-[85vh] min-h-0 flex-col rounded-none border border-zinc-800 bg-zinc-950 sm:max-h-[90vh]">
           {title && (
-            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-zinc-800 shrink-0">
+            <div className="flex shrink-0 items-center justify-between border-b border-zinc-800 px-4 py-3 sm:px-6 sm:py-4">
               <h2 className="text-base font-bold text-white">
                 {title}
               </h2>
               <button
                 onClick={onClose}
                 aria-label="Close"
-                className="text-zinc-500 hover:text-zinc-300 text-sm leading-none cursor-pointer font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 rounded"
+                className="cursor-pointer rounded text-sm leading-none font-bold text-zinc-500 hover:text-zinc-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
               >
                 [ X ]
               </button>
             </div>
           )}
-          <div className="px-4 sm:px-6 py-4 sm:py-5 overflow-y-auto">
+          <div className="overflow-y-auto p-4 sm:px-6 sm:py-5">
             {children}
           </div>
         </div>

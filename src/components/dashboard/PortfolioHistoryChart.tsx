@@ -24,7 +24,7 @@ export function PortfolioHistoryChart() {
   if (snapshots.length < 2) {
     return (
       <Card title={t.history_title}>
-        <div className="flex items-center justify-center h-50 text-sm text-zinc-400">
+        <div className="flex h-50 items-center justify-center text-sm text-zinc-400">
           {t.history_no_data}
         </div>
       </Card>
@@ -61,7 +61,7 @@ export function PortfolioHistoryChart() {
               <stop offset="95%" stopColor="#94a3b8" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
           <XAxis
             dataKey="date"
             tickFormatter={formatDate}
@@ -115,13 +115,13 @@ export function PortfolioHistoryChart() {
           />
         </AreaChart>
       </ResponsiveContainer>
-      <div className="flex items-center gap-4 mt-2 text-[10px] text-zinc-400">
+      <div className="mt-2 flex items-center gap-4 text-[10px] text-zinc-400">
         <span className="flex items-center gap-1">
-          <span className="w-3 h-0.5 bg-indigo-500 inline-block rounded" />
+          <span className="inline-block h-0.5 w-3 rounded bg-indigo-500" />
           {t.history_value}
         </span>
         <span className="flex items-center gap-1">
-          <span className="w-3 h-0.5 bg-zinc-400 inline-block rounded" />
+          <span className="inline-block h-0.5 w-3 rounded bg-zinc-400" />
           {t.history_cost}
         </span>
       </div>

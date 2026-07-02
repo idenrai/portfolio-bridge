@@ -16,14 +16,16 @@ import {
 import type { GuruProfile } from "@/types";
 
 const COLORS = [
-  "#3b82f6",
-  "#10b981",
-  "#f59e0b",
-  "#ef4444",
-  "#8b5cf6",
-  "#ec4899",
-  "#14b8a6",
-  "#f97316",
+  "#60a5fa",
+  "#34d399",
+  "#fbbf24",
+  "#f87171",
+  "#c084fc",
+  "#2dd4bf",
+  "#fb923c",
+  "#a78bfa",
+  "#f472b6",
+  "#a3e635",
 ];
 
 interface GuruChartsProps {
@@ -42,7 +44,7 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
     (t[`guru_name_${guru.id}` as keyof typeof t] as string) ?? guru.name;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
+    <div className="grid grid-cols-1 gap-3 md:gap-4 lg:grid-cols-2">
       {/* 이상적 배분 파이 차트 */}
       <Card title={t.guru_ideal_alloc}>
         <ResponsiveContainer width="100%" height={220}>
@@ -84,15 +86,15 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
             <Radar
               name={guruName(selectedGuru)}
               dataKey="guru"
-              stroke="#3b82f6"
-              fill="#3b82f6"
+              stroke="#60a5fa"
+              fill="#60a5fa"
               fillOpacity={0.15}
             />
             <Radar
               name={t.guru_my_portfolio}
               dataKey="mine"
-              stroke="#10b981"
-              fill="#10b981"
+              stroke="#34d399"
+              fill="#34d399"
               fillOpacity={0.15}
             />
             <Legend wrapperStyle={{ fontSize: "12px" }} />

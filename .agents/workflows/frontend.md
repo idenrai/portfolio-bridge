@@ -19,6 +19,7 @@ description: 프론트엔드 UI/UX 컴포넌트 신규 생성, 수정 및 리팩
 - 모든 컴포넌트는 Functional Component 구조의 훅(Hooks) 패턴으로만 작성합니다.
 - Tailwind CSS v4 유틸리티 클래스만 사용하여 스타일링하며, 인라인 스타일(`style={{}}`)은 특별히 동적인 렌더링을 제외하고는 사용하지 않습니다.
 - 내부 임포트 경로는 상대 경로 대신 항상 `@/` 별칭(Alias)을 사용합니다.
+- 변경 후에는 반드시 `npm run lint -- --fix`를 실행하여 Tailwind 클래스 순서를 정렬하고 중복을 자동 제거합니다.
 
 ## 3. Component Scaffolding (신규 생성 시)
 새로운 파일을 생성할 때는 다음 구조 규칙을 따릅니다:

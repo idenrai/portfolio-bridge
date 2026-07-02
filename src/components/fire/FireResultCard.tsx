@@ -13,9 +13,9 @@ export function FireResultCard({ result }: FireResultCardProps) {
 
   if (result.isInvalidInput) {
     return (
-      <div className="flex items-start gap-2 px-4 py-3 rounded-lg border bg-amber-500/10 border-amber-500/50 text-amber-400 w-full shadow-sm">
-        <span className="text-base shrink-0 mt-0.5">⚠️</span>
-        <span className="leading-relaxed flex-1 font-medium text-sm">
+      <div className="flex w-full items-start gap-2 rounded-lg border border-amber-500/50 bg-amber-500/10 px-4 py-3 text-amber-400 shadow-sm">
+        <span className="mt-0.5 shrink-0 text-base">⚠️</span>
+        <span className="flex-1 text-sm leading-relaxed font-medium">
           {t.fire_error_savings_exceed_target}
         </span>
       </div>
@@ -23,41 +23,41 @@ export function FireResultCard({ result }: FireResultCardProps) {
   }
 
   return (
-    <div className="relative overflow-hidden bg-black border border-zinc-800 p-8 md:p-12 flex flex-col justify-end text-left gap-4 min-h-[320px]">
+    <div className="relative flex min-h-[320px] flex-col justify-end gap-4 overflow-hidden border border-zinc-800 bg-black p-8 text-left md:p-12">
       {/* 배경 장식 (우측 하단으로 이동) */}
-      <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="pointer-events-none absolute -right-20 -bottom-20 size-80 rounded-full bg-emerald-500/5 blur-[100px]" />
       
       {result.alreadyReached ? (
-        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight py-4 z-10">
+        <h2 className="z-10 py-4 text-3xl font-bold tracking-tight text-white md:text-5xl">
           {t.fire_result_already_reached}
         </h2>
       ) : result.successYear !== null ? (
-        <div className="flex flex-col gap-12 mt-auto z-10">
+        <div className="z-10 mt-auto flex flex-col gap-12">
           <div>
-            <span className="text-xs font-bold tracking-widest text-zinc-500 uppercase mb-2 block">
+            <span className="mb-2 block text-xs font-bold tracking-widest text-zinc-500 uppercase">
               {t.fire_res_years_label}
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-8xl md:text-9xl font-mono font-light text-white tracking-tighter">
+              <span className="font-mono text-8xl font-light tracking-tighter text-white md:text-9xl">
                 {result.successYear}
               </span>
-              <span className="text-2xl font-medium text-zinc-600">{t.fire_res_yrs}</span>
+              <span className="text-2xl font-medium text-zinc-400">{t.fire_res_yrs}</span>
             </div>
           </div>
           
           {result.successAge && (
             <div>
-              <span className="text-xs font-bold tracking-widest text-zinc-500 uppercase mb-2 block">
+              <span className="mb-2 block text-xs font-bold tracking-widest text-zinc-500 uppercase">
                 {t.fire_res_age_label}
               </span>
-              <span className="text-6xl md:text-7xl font-mono font-light text-zinc-400 tracking-tighter">
+              <span className="font-mono text-6xl font-light tracking-tighter text-zinc-400 md:text-7xl">
                 {result.successAge}
               </span>
             </div>
           )}
         </div>
       ) : (
-        <h2 className="text-lg md:text-xl font-medium text-zinc-500 py-4 z-10 mt-auto">
+        <h2 className="z-10 mt-auto py-4 text-lg font-medium text-zinc-500 md:text-xl">
           {t.fire_res_out_of_bounds}
         </h2>
       )}

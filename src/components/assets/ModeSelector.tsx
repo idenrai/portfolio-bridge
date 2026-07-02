@@ -1,4 +1,5 @@
 import { useT } from "@/hooks";
+import { cn } from "@/utils";
 import type { FormMode } from "./assetFormTypes";
 
 export function ModeSelector({
@@ -15,17 +16,18 @@ export function ModeSelector({
     { key: "crypto", label: t.af_mode_crypto },
   ];
   return (
-    <div className="flex rounded-lg border border-zinc-800 overflow-hidden">
+    <div className="flex overflow-hidden rounded-lg border border-zinc-800">
       {tabs.map((t) => (
         <button
           key={t.key}
           type="button"
           onClick={() => onChange(t.key)}
-          className={`flex-1 py-2 text-sm font-medium transition-colors rounded-md ${
+          className={cn(
+            "flex-1 rounded-md py-2 text-sm font-medium transition-colors",
             mode === t.key
               ? "bg-zinc-800 text-white shadow-sm"
               : "bg-transparent text-zinc-500 hover:text-zinc-300"
-          }`}
+          )}
         >
           {t.label}
         </button>

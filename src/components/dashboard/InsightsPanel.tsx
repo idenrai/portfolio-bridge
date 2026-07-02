@@ -70,16 +70,16 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
     <Card title={t.insights_title}>
       {/* ── AI 분석 배너 (항상 표시) ── */}
       <div className="mb-4 rounded-xl bg-linear-to-r from-indigo-500/20 to-blue-500/20 p-px shadow-sm">
-        <div className="rounded-[11px] bg-zinc-900/95 px-4 py-4 sm:px-5">
+        <div className="rounded-[11px] bg-zinc-900/95 p-4 sm:px-5">
           <div className="flex flex-col gap-4">
             {/* Header */}
-            <div className="flex items-start gap-3 min-w-0">
-              <Sparkles className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
+            <div className="flex min-w-0 items-start gap-3">
+              <Sparkles className="mt-0.5 size-5 shrink-0 text-indigo-400" />
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-zinc-100 leading-tight">
+                <p className="text-sm leading-tight font-semibold text-zinc-100">
                   {t.insights_ai_banner_title}
                 </p>
-                <p className="text-[11px] sm:text-xs text-zinc-500 mt-1 leading-relaxed">
+                <p className="mt-1 text-[11px] leading-relaxed text-zinc-500 sm:text-xs">
                   {t.insights_ai_banner_desc}
                 </p>
               </div>
@@ -89,7 +89,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
               <button
                 type="button"
                 onClick={() => setShowPrompt((v) => !v)}
-                className="flex-1 sm:flex-none rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-3 py-2 text-xs font-medium shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
+                className="flex-1 cursor-pointer rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-indigo-400 shadow-sm transition-all hover:bg-indigo-500/20 hover:opacity-90 active:scale-95 sm:flex-none"
               >
                 {showPrompt ? t.insights_ai_close : t.insights_ai_btn}
               </button>
@@ -98,19 +98,19 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
 
           {/* 프롬프트 확장 영역 */}
           {showPrompt && (
-            <div className="mt-4 pt-4 border-t border-zinc-800/50 space-y-3">
+            <div className="mt-4 space-y-3 border-t border-zinc-800/50 pt-4">
               <p className="text-[11px] text-zinc-500">{t.insights_ai_desc}</p>
-              <div className="relative group">
+              <div className="group relative">
                 <textarea
                   readOnly
                   value={promptText}
                   rows={10}
-                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950 p-3 pb-12 text-[11px] sm:text-xs font-mono text-zinc-300 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500/50 transition-shadow"
+                  className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950 p-3 pb-12 font-mono text-[11px] text-zinc-300 transition-shadow focus:ring-1 focus:ring-indigo-500/50 focus:outline-none sm:text-xs"
                 />
                 <button
                   type="button"
                   onClick={copyPrompt}
-                  className="absolute bottom-3 right-3 shrink-0 rounded-md bg-zinc-800/80 backdrop-blur hover:bg-zinc-700 px-3 py-1.5 text-xs font-medium text-white transition-colors cursor-pointer shadow-sm border border-zinc-700/50"
+                  className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700"
                 >
                   {copied ? "✓ " + t.insights_ai_copied : t.insights_ai_copy}
                 </button>
@@ -122,25 +122,25 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
 
       {/* ── 인사이트 목록 ── */}
       {visible.length === 0 ? (
-        <div className="text-sm text-zinc-400 py-4 text-center">
+        <div className="py-4 text-center text-sm text-zinc-400">
           {t.insights_ok}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {summary.insights.map((insight, i) =>
             dismissed.has(i) ? null : (
               <div
                 key={i}
-                className={`flex items-start gap-2 px-3 py-2 rounded-lg border text-xs ${TYPE_STYLES[insight.type]}`}
+                className={`flex items-start gap-2 rounded-lg border px-3 py-2 text-xs ${TYPE_STYLES[insight.type]}`}
               >
-                <span className="shrink-0 mt-px">{getInsightIcon(insight.icon, "w-3.5 h-3.5")}</span>
-                <span className="leading-relaxed flex-1">
+                <span className="mt-px shrink-0">{getInsightIcon(insight.icon, "w-3.5 h-3.5")}</span>
+                <span className="flex-1 leading-relaxed">
                   {insight.message}
                 </span>
                 <button
                   type="button"
                   onClick={() => dismiss(i)}
-                  className={`shrink-0 text-base leading-none cursor-pointer transition-colors ${CLOSE_BTN[insight.type]}`}
+                  className={`shrink-0 cursor-pointer text-base leading-none transition-colors ${CLOSE_BTN[insight.type]}`}
                   aria-label="dismiss"
                 >
                   ×

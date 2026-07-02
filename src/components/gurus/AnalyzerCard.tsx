@@ -1,4 +1,5 @@
 import { Card } from "@/components/common";
+import { cn } from "@/utils";
 import { useT } from "@/hooks";
 import type { AnalyzerMode, AnalyzerProgress, BaseAnalyzerResult } from "@/hooks";
 
@@ -120,14 +121,14 @@ function ScoreBar({ score, colors }: { score: number; colors: ThemeColors }) {
     score >= 45 ? "text-amber-600" :
                   "text-zinc-400";
   return (
-    <div className="flex items-center gap-2 min-w-30">
-      <div className="flex-1 h-2 rounded-full bg-zinc-800/50 overflow-hidden">
+    <div className="flex min-w-30 items-center gap-2">
+      <div className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-800/50">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${barColor}`}
+          className={cn("h-full rounded-full transition-all duration-500", barColor)}
           style={{ width: `${score}%` }}
         />
       </div>
-      <span className={`text-xs font-bold tabular-nums w-7 text-right ${textColor}`}>
+      <span className={cn("w-7 text-right text-xs font-bold tabular-nums", textColor)}>
         {score}
       </span>
     </div>
@@ -154,13 +155,13 @@ function CriterionBadge<CKey extends string>({
   const base = "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium leading-none";
   if (pass === null) {
     return (
-      <span className={`${base} bg-zinc-800/50 text-zinc-400`}>
+      <span className={cn(base, "bg-zinc-800/50 text-zinc-400")}>
         {label}: {noDataLabel}
       </span>
     );
   }
   return (
-    <span className={`${base} ${pass ? colors.badgePass : "bg-red-500/10 text-red-600"}`}>
+    <span className={cn(base, pass ? colors.badgePass : "bg-red-500/10 text-red-600")}>
       {pass ? "✓" : "✗"} {label}
       {value !== null && (
         <span className="opacity-70">{formatValue(criterionKey, value)}</span>
@@ -186,10 +187,10 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
 
   return (
     <Card title={texts.title}>
-      <p className="text-xs text-zinc-500 mb-3 leading-relaxed">{texts.desc}</p>
+      <p className="mb-3 text-xs leading-relaxed text-zinc-500">{texts.desc}</p>
 
       {/* 모드 탭 */}
-      <div className="flex gap-1.5 mb-3">
+      <div className="mb-3 flex gap-1.5">
         {(["portfolio", "search"] as const).map((m) => {
           const label =
             m === "portfolio" ? `💼 ${t.analyzer_mode_portfolio}` :
@@ -198,9 +199,9 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+              className={cn("cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors", 
                 mode === m ? colors.tabActive : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800"
-              }`}
+              )}
             >
               {label}
             </button>
@@ -211,13 +212,13 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
       {/* ─── 포트폴리오 모드 ─── */}
       {mode === "portfolio" && (
         <>
-          <p className="text-[11px] text-zinc-400 mb-2">
+          <p className="mb-2 text-[11px] text-zinc-400">
             {t.analyzer_portfolio_desc(portfolioStockCount)}
           </p>
           <button
             onClick={runPortfolio}
             disabled={loading || portfolioStockCount === 0}
-            className={`mb-4 rounded-lg ${colors.btn} px-4 py-2 text-sm font-semibold text-white shadow-sm active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer`}
+            className={cn("mb-4 rounded-lg", colors.btn, "cursor-pointer px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40")}
           >
             {loading
               ? texts.progressEnrich(progress.done, progress.total)
@@ -229,36 +230,39 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
       {/* ─── 검색 모드 ─── */}
       {mode === "search" && (
         <>
-          <div className="flex gap-2 mb-3">
+          <div className="mb-3 flex gap-2">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
               placeholder={t.analyzer_search_placeholder}
-              className={`flex-1 rounded-lg border border-zinc-800 px-3 py-1.5 text-sm outline-none ${colors.inputFocus}`}
+              className={cn("flex-1 rounded-lg border border-zinc-800 px-3 py-1.5 text-sm outline-none", colors.inputFocus)}
             />
             <button
               onClick={handleSearch}
               disabled={loading || isSearching || !searchQuery.trim()}
-              className={`rounded-lg ${colors.btn} px-4 py-1.5 text-sm font-semibold text-white shadow-sm active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer`}
+              className={cn("rounded-lg", colors.btn, "cursor-pointer px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40")}
             >
               {isSearching ? "..." : t.analyzer_btn_search}
             </button>
           </div>
           {searchSuggestions.length > 0 && (
-            <div className="mb-3 rounded-lg border border-zinc-800 divide-y divide-zinc-800/50 max-h-48 overflow-y-auto">
+            <>
+              {/* eslint-disable-next-line tailwindcss/no-contradicting-classname */}
+              <div className="mb-3 max-h-48 divide-y divide-zinc-800 overflow-y-auto rounded-lg border border-zinc-800">
               {searchSuggestions.map((s) => (
                 <button
                   key={s.ticker}
                   onClick={() => runSearch(s.ticker, s.name)}
-                  className={`w-full flex items-center gap-2 px-3 py-2 text-left ${colors.suggestHover} transition-colors cursor-pointer`}
+                  className={cn("flex w-full items-center gap-2 px-3 py-2 text-left", colors.suggestHover, "cursor-pointer transition-colors")}
                 >
-                  <span className="text-xs font-semibold text-zinc-700">{s.ticker}</span>
-                  <span className="text-xs text-zinc-400 truncate">{s.name}</span>
+                  <span className="text-xs font-semibold text-zinc-300">{s.ticker}</span>
+                  <span className="truncate text-xs text-zinc-400">{s.name}</span>
                 </button>
               ))}
-            </div>
+              </div>
+            </>
           )}
         </>
       )}
@@ -266,12 +270,12 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
       {/* ─── 로딩 진행률 바 ─── */}
       {loading && (
         <div className="mb-4">
-          <p className="text-xs text-zinc-400 mb-1 animate-pulse">
+          <p className="mb-1 animate-pulse text-xs text-zinc-400">
             {texts.phaseEnrich}
           </p>
-          <div className="h-1.5 w-full rounded-full bg-zinc-800/50 overflow-hidden">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800/50">
             <div
-              className={`h-full rounded-full transition-all duration-300 ${colors.progressEnrich}`}
+              className={cn("h-full rounded-full transition-all duration-300", colors.progressEnrich)}
               style={{
                 width: progress.total > 0
                   ? `${Math.round((progress.done / progress.total) * 100)}%`
@@ -279,7 +283,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
               }}
             />
           </div>
-          <p className="text-[10px] text-zinc-300 mt-0.5 text-right">
+          <p className="mt-0.5 text-right text-[10px] text-zinc-300">
             {progress.done} / {progress.total}
           </p>
         </div>
@@ -287,7 +291,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
 
       {/* 결과 없음 */}
       {!loading && ran && results.length === 0 && (
-        <p className="text-sm text-zinc-400 text-center py-6">{texts.noResult}</p>
+        <p className="py-6 text-center text-sm text-zinc-400">{texts.noResult}</p>
       )}
 
       {/* ─── 결과 테이블 ─── */}
@@ -296,26 +300,26 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
           {results.map((r, idx) => (
             <div
               key={r.stock.ticker}
-              className={`rounded-xl border border-zinc-800 bg-zinc-900/50 p-3 ${colors.resultHover} transition-colors`}
+              className={cn("rounded-xl border border-zinc-800 bg-zinc-900/50 p-3", colors.resultHover, "transition-colors")}
             >
               {/* 헤더 행 */}
-              <div className="flex items-center gap-2 mb-2">
-                <span className={`text-xs font-bold w-5 shrink-0 ${
+              <div className="mb-2 flex items-center gap-2">
+                <span className={cn("w-5 shrink-0 text-xs font-bold", 
                   idx === 0 ? "text-yellow-500" :
-                  idx === 1 ? "text-zinc-400" :
+                  idx === 1 ? "text-zinc-300" :
                   idx === 2 ? "text-amber-600" :
-                              "text-zinc-300"
-                }`}>
-                  {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `${idx + 1}.`}
+                              "text-zinc-500"
+                )}>
+                  {idx + 1}.
                 </span>
 
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-zinc-100 truncate">{r.stock.name}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-zinc-100">{r.stock.name}</p>
                   <p className="text-xs text-zinc-400">{r.stock.ticker}</p>
                 </div>
 
                 {r.totalScore >= 70 && (
-                  <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${colors.highScoreBadge}`}>
+                  <span className={cn("shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold", colors.highScoreBadge)}>
                     {texts.highScoreBadge}
                   </span>
                 )}
@@ -352,13 +356,13 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
             </div>
           ))}
 
-          <p className="text-[10px] text-zinc-300 pt-1">{texts.disclaimer}</p>
+          <p className="pt-1 text-[10px] text-zinc-300">{texts.disclaimer}</p>
         </div>
       )}
 
       {/* 초기 상태 */}
       {!loading && !ran && (
-        <p className="text-xs text-zinc-400 text-center py-4">{texts.initialGuide}</p>
+        <p className="py-4 text-center text-xs text-zinc-400">{texts.initialGuide}</p>
       )}
     </Card>
   );

@@ -21,7 +21,7 @@ export function DataManagementSection() {
       <div className="space-y-5">
         {/* Google Drive 연동 */}
         <div className="space-y-2">
-          <p className="text-xs font-semibold text-zinc-500 tracking-wide">
+          <p className="text-xs font-semibold tracking-wide text-zinc-500">
             Google Drive
           </p>
           {drive.isConnected ? (
@@ -68,7 +68,7 @@ export function DataManagementSection() {
                 </Button>
               </div>
               {drive.syncError && (
-                <p className="text-xs text-red-600 bg-red-500/10 rounded px-3 py-1.5">
+                <p className="rounded bg-red-500/10 px-3 py-1.5 text-xs text-red-600">
                   {t.drive_error_prefix}{" "}
                   {drive.syncError === "no_client_id"
                     ? t.drive_error_no_client_id
@@ -78,7 +78,7 @@ export function DataManagementSection() {
                 </p>
               )}
               {drive.pendingConflict && (
-                <div className="rounded-lg border border-amber-300 bg-amber-50 p-3 space-y-2">
+                <div className="space-y-2 rounded-lg border border-amber-300 bg-amber-50 p-3">
                   <p className="text-xs font-semibold text-amber-800">
                     {t.drive_conflict_title}
                   </p>
@@ -116,18 +116,18 @@ export function DataManagementSection() {
               </Button>
             </div>
           )}
-          <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2.5 space-y-1">
+          <div className="space-y-1 rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2.5">
             <p className="text-xs font-medium text-zinc-400">
               {t.settings_data_drive_title}
             </p>
-            <p className="text-xs text-zinc-500 leading-relaxed">
+            <p className="text-xs leading-relaxed text-zinc-500">
               {t.settings_data_drive_note}
             </p>
             <a
               href="https://myaccount.google.com/permissions"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block text-xs text-zinc-400 hover:text-zinc-100 transition-colors mt-0.5"
+              className="mt-0.5 inline-block text-xs text-zinc-400 transition-colors hover:text-zinc-100"
             >
               myaccount.google.com/permissions →
             </a>
@@ -138,7 +138,7 @@ export function DataManagementSection() {
 
         {/* 로컬 스토리지 초기화 */}
         <div className="space-y-2">
-          <p className="text-xs font-semibold text-zinc-500 tracking-wide">
+          <p className="text-xs font-semibold tracking-wide text-zinc-500">
             {t.settings_data_local_title}
           </p>
           <p className="text-sm text-zinc-500">{t.settings_data_desc}</p>

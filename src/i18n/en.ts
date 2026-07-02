@@ -690,6 +690,7 @@ export const en: Translations = {
   af_quantity_label: "Quantity *",
   af_avg_price_label: "Average Cost",
   af_current_price_label: "Current Price",
+  af_current_price_help: "※ The entered price may be overwritten upon auto-refresh. However, for assets where auto-refresh fails (e.g. mutual funds), the manually entered price will be maintained, allowing manual PnL tracking.",
   af_current_price_auto: "✓ Auto-fetched from Yahoo Finance",
   af_fetch_price_btn: "Fetch Price",
   af_fetching: "Fetching…",

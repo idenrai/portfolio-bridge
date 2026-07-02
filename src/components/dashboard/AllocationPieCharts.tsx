@@ -13,16 +13,16 @@ import { useT, useExchangeRates } from "@/hooks";
 import type { PortfolioSummary, Market, AssetCategory } from "@/types";
 
 const COLORS = [
-  "#3b82f6",
-  "#10b981",
-  "#f59e0b",
-  "#ef4444",
-  "#8b5cf6",
-  "#ec4899",
-  "#14b8a6",
-  "#f97316",
-  "#6366f1",
-  "#84cc16",
+  "#60a5fa",
+  "#34d399",
+  "#fbbf24",
+  "#f87171",
+  "#c084fc",
+  "#2dd4bf",
+  "#fb923c",
+  "#a78bfa",
+  "#f472b6",
+  "#a3e635",
 ];
 
 interface ChartEntry {
@@ -46,7 +46,7 @@ function MiniPie({
 }) {
   if (data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-55 text-zinc-400 text-sm">
+      <div className="flex h-55 items-center justify-center text-sm text-zinc-400">
         {noDataText}
       </div>
     );
@@ -110,7 +110,7 @@ export function AllocationPieCharts({ summary }: Props) {
   }));
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       <Card title={t.chart_market}>
         <MiniPie
           data={marketData}

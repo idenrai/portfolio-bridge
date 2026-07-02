@@ -695,6 +695,7 @@ export const ko: Translations = {
   af_quantity_label: "보유 수량 *",
   af_avg_price_label: "매입 단가",
   af_current_price_label: "현재가",
+  af_current_price_help: "※ 입력된 현재가는 자동 갱신 시 최신 가격으로 덮어씌워질 수 있습니다. 단, 자동 갱신이 지원되지 않는 자산(투자신탁 등)은 직접 입력한 가격이 유지되므로 수동으로 수익률을 추적할 수 있습니다.",
   af_current_price_auto: "✓ Yahoo Finance 자동 조회",
   af_fetch_price_btn: "현재가 조회",
   af_fetching: "조회 중…",

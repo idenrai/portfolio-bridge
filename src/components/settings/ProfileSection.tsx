@@ -28,7 +28,7 @@ export function ProfileSection() {
     >
       <div className="space-y-4">
         {/* 설명 */}
-        <p className="text-sm text-zinc-500 leading-relaxed">
+        <p className="text-sm leading-relaxed text-zinc-500">
           {t.profile_desc}
         </p>
 

@@ -27,8 +27,8 @@ export function CSVPreviewModal({
       {previewData && (
         <div className="space-y-4">
           <div className="overflow-x-auto rounded-lg border border-zinc-800">
-            <table className="w-full text-xs text-left">
-              <thead className="bg-zinc-900/50 text-zinc-500 font-medium">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-zinc-900/50 font-medium text-zinc-500">
                 <tr>
                   <th className="px-3 py-2">{t.at_col_name}</th>
                   <th className="px-3 py-2">{t.at_col_ticker}</th>
@@ -49,7 +49,7 @@ export function CSVPreviewModal({
               <tbody className="divide-y divide-zinc-800/50">
                 {previewData.slice(0, 5).map((row, i) => (
                   <tr key={i} className="hover:bg-zinc-900/50">
-                    <td className="px-3 py-1.5 text-zinc-100 font-medium">
+                    <td className="px-3 py-1.5 font-medium text-zinc-100">
                       {row.name}
                     </td>
                     <td className="px-3 py-1.5 font-mono text-zinc-500">
@@ -61,13 +61,13 @@ export function CSVPreviewModal({
                     <td className="px-3 py-1.5 text-zinc-400">
                       {row.currency}
                     </td>
-                    <td className="px-3 py-1.5 text-right text-zinc-700">
+                    <td className="px-3 py-1.5 text-right text-zinc-300">
                       {row.quantity.toLocaleString()}
                     </td>
-                    <td className="px-3 py-1.5 text-right text-zinc-700">
+                    <td className="px-3 py-1.5 text-right text-zinc-300">
                       {row.avgBuyPrice.toLocaleString()}
                     </td>
-                    <td className="px-3 py-1.5 text-right text-zinc-700">
+                    <td className="px-3 py-1.5 text-right text-zinc-300">
                       {row.currentPrice.toLocaleString()}
                     </td>
                     <td className="px-3 py-1.5 text-zinc-500">
@@ -79,7 +79,7 @@ export function CSVPreviewModal({
             </table>
           </div>
           {previewData.length > 5 && (
-            <p className="text-xs text-zinc-400 text-center">
+            <p className="text-center text-xs text-zinc-400">
               {t.csv_preview_more(previewData.length - 5)}
             </p>
           )}

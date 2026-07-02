@@ -63,11 +63,11 @@ export function CashForm({
             <span className={currency ? "text-white" : "text-zinc-500"}>
               {selected ? selected.label : t.af_currency_placeholder}
             </span>
-            <span className="text-zinc-400 text-xs">▼</span>
+            <span className="text-xs text-zinc-400">▼</span>
           </button>
           {open && (
             <div >
-              <div className="p-2 border-b border-zinc-800">
+              <div className="border-b border-zinc-800 p-2">
                 <Input
                   type="text"
                   autoFocus
@@ -87,13 +87,13 @@ export function CashForm({
                       setOpen(false);
                       setSearch("");
                     }}
-                    className="w-full text-left px-3 py-2 text-sm hover:bg-zinc-800/50 text-zinc-300 transition-colors"
+                    className="w-full px-3 py-2 text-left text-sm text-zinc-300 transition-colors hover:bg-zinc-800/50"
                   >
                     {c.label}
                   </button>
                 ))}
                 {filtered.length === 0 && (
-                  <p className="text-center text-sm text-zinc-400 py-3">
+                  <p className="py-3 text-center text-sm text-zinc-400">
                     {t.af_currency_no_result}
                   </p>
                 )}

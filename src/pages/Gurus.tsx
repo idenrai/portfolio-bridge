@@ -83,19 +83,19 @@ export function GurusPage() {
 
   if (assets.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[40vh] md:min-h-[60vh] text-zinc-400 px-4">
-        <p className="text-5xl md:text-6xl mb-4">💡</p>
-        <h2 className="text-lg md:text-xl font-semibold text-zinc-400 mb-2 text-center">
+      <div className="flex min-h-[40vh] flex-col items-center justify-center px-4 text-zinc-400 md:min-h-[60vh]">
+        <p className="mb-4 text-5xl md:text-6xl">💡</p>
+        <h2 className="mb-2 text-center text-lg font-semibold text-zinc-400 md:text-xl">
           {t.guru_empty_title}
         </h2>
-        <p className="text-xs md:text-sm text-center">{t.guru_empty_desc}</p>
+        <p className="text-center text-xs md:text-sm">{t.guru_empty_desc}</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white text-balance">{t.guru_title}</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.guru_title}</h1>
       <GuruSelector
         selectedGuru={selectedGuru}
         onSelect={setSelectedGuru}
@@ -103,39 +103,39 @@ export function GurusPage() {
 
       {selectedGuru && (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mt-8">
+          <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-12 lg:gap-8">
             {/* 좌측 고정 패널 (철학 및 프로필) */}
-            <div className="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-20">
-              <div className="bg-black/40 border border-zinc-800/60 p-6 rounded-xl shadow-sm">
+            <div className="flex flex-col gap-4 lg:sticky lg:top-20 lg:col-span-4">
+              <div className="rounded-xl border border-zinc-800/60 bg-black/40 p-6 shadow-sm">
                 <div className="mb-6 flex flex-col gap-4">
                   <img 
                     src={selectedGuru.avatar || "/fallback-avatar.svg"} 
                     alt={selectedGuru.name} 
                     width={320}
                     height={320}
-                    className="w-full aspect-square max-w-[320px] rounded-2xl object-cover shrink-0 border border-zinc-800 bg-zinc-900 mx-auto lg:mx-0 shadow-lg" 
+                    className="mx-auto aspect-square w-full max-w-[320px] shrink-0 rounded-2xl border border-zinc-800 bg-zinc-900 object-cover shadow-lg lg:mx-0" 
                   />
                   <div className="pt-2 text-center lg:text-left">
-                    <h2 className="text-2xl font-bold text-white mb-1 tracking-tight">{guruName(selectedGuru)}</h2>
-                    <p className="text-xs text-zinc-500 uppercase tracking-widest">{selectedGuru.firm}</p>
+                    <h2 className="mb-1 text-2xl font-bold tracking-tight text-white">{guruName(selectedGuru)}</h2>
+                    <p className="text-xs tracking-widest text-zinc-500 uppercase">{selectedGuru.firm}</p>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-center lg:justify-start gap-2">
-                    <div className="w-1 h-4 bg-indigo-500 rounded-full" />
-                    <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{t.guru_philosophy_label}</h3>
+                  <div className="flex items-center justify-center gap-2 lg:justify-start">
+                    <div className="h-4 w-1 rounded-full bg-indigo-500" />
+                    <h3 className="text-xs font-bold tracking-widest text-zinc-400 uppercase">{t.guru_philosophy_label}</h3>
                   </div>
-                  <div className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line text-pretty break-words">
+                  <div className="text-sm leading-relaxed text-pretty break-words whitespace-pre-line text-zinc-300">
                     {principles.join('\n')}
                   </div>
                 </div>
 
                 {quotes.length > 0 && (
-                  <div className="mt-8 pt-6 border-t border-zinc-800/60 flex flex-col gap-5">
+                  <div className="mt-8 flex flex-col gap-5 border-t border-zinc-800/60 pt-6">
                     {quotes.map((quote, idx) => (
                       <blockquote key={idx} className="relative">
-                        <p className="relative z-10 text-sm font-medium text-zinc-300/90 italic leading-relaxed pl-3 border-l-2 border-indigo-500/30">
+                        <p className="relative z-10 border-l-2 border-indigo-500/30 pl-3 text-sm leading-relaxed font-medium text-zinc-300/90 italic">
                           {quote}
                         </p>
                       </blockquote>
@@ -146,7 +146,7 @@ export function GurusPage() {
             </div>
 
             {/* 우측 스크롤 패널 (지표, 차트, 스크리너) */}
-            <div className="lg:col-span-8 flex flex-col gap-6">
+            <div className="flex flex-col gap-6 lg:col-span-8">
               {/* 구루에게 묻기 (메인 기능 상단 배치) */}
               <GuruAIPromptBanner
                 selectedGuru={selectedGuru}

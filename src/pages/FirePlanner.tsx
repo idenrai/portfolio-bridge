@@ -34,24 +34,24 @@ export function FirePlannerPage() {
   }, [summary.totalValueKRW, baseCurrency, exchangeRates, store]);
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 pb-20 pt-4">
+    <div className="mx-auto max-w-5xl space-y-6 pt-4 pb-20">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white text-balance">
+        <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">
           {t.fire_title}
         </h1>
-        <p className="text-sm text-zinc-400 leading-relaxed">
+        <p className="text-sm leading-relaxed text-zinc-400">
           {t.fire_desc}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <FireInputForm />
         </div>
-        <div className="lg:col-span-7 flex flex-col gap-6">
+        <div className="flex flex-col gap-6 lg:col-span-7">
           <FireResultCard result={result} />
           {result && result.data.length > 0 && (
-            <div className="flex-1 flex flex-col">
+            <div className="flex flex-1 flex-col">
               <FireChart data={result.data} />
             </div>
           )}
