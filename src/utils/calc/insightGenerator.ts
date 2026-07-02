@@ -61,7 +61,7 @@ export function generateInsights(
     if (h.type !== "cash" && h.weightPercent > INSIGHT_THRESHOLDS.CONCENTRATION) {
       insights.push({
         type: "warning",
-        icon: "⚠️",
+        icon: "warning",
         message: msg.concentration(h.name, h.weightPercent.toFixed(1)),
       });
     }
@@ -72,7 +72,7 @@ export function generateInsights(
     if (h.type !== "cash" && h.returnPercent < INSIGHT_THRESHOLDS.BIG_LOSS) {
       insights.push({
         type: "danger",
-        icon: "🔻",
+        icon: "danger",
         message: msg.bigLoss(h.name, h.returnPercent.toFixed(1)),
       });
     }
@@ -82,13 +82,13 @@ export function generateInsights(
   if (cashPercent > INSIGHT_THRESHOLDS.CASH_HIGH) {
     insights.push({
       type: "info",
-      icon: "💰",
+      icon: "money",
       message: msg.cashHigh(cashPercent.toFixed(1)),
     });
   } else if (cashPercent < INSIGHT_THRESHOLDS.CASH_LOW && assets.length > INSIGHT_THRESHOLDS.CASH_LOW_MIN_ASSETS) {
     insights.push({
       type: "warning",
-      icon: "💰",
+      icon: "money",
       message: msg.cashLow(cashPercent.toFixed(1)),
     });
   }
@@ -98,7 +98,7 @@ export function generateInsights(
     if (exp.currency !== baseCurrency && exp.percent > INSIGHT_THRESHOLDS.FX_HIGH) {
       insights.push({
         type: "warning",
-        icon: "💱",
+        icon: "fx",
         message: msg.fxHigh(exp.currency, exp.percent.toFixed(1)),
       });
     }
@@ -114,7 +114,7 @@ export function generateInsights(
       if (diff > 0) {
         insights.push({
           type: "warning",
-          icon: "📊",
+          icon: "chart",
           message: msg.categoryOver(
             label,
             currentPercent.toFixed(1),
@@ -125,7 +125,7 @@ export function generateInsights(
       } else {
         insights.push({
           type: "info",
-          icon: "📊",
+          icon: "chart",
           message: msg.categoryUnder(
             label,
             currentPercent.toFixed(1),

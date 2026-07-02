@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Brain } from "lucide-react";
+import { MessageSquareQuote, AlertTriangle } from "lucide-react";
 import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore, useProfileStore, useGuruSessionStore } from "@/stores";
 import { buildGuruPrompt, buildGuruFollowUpPrompt } from "@/utils";
@@ -122,8 +122,8 @@ export function GuruAIPromptBanner({
       <div className="rounded-[11px] bg-zinc-900/95 px-4 py-4 sm:px-5">
         <div className="flex flex-col gap-4">
           {/* Header */}
-          <div className="flex items-start gap-3 min-w-0">
-            <Brain className="w-6 h-6 text-indigo-400 shrink-0 mt-0.5" />
+          <div className="flex items-center gap-2">
+            <MessageSquareQuote aria-hidden="true" className="w-5 h-5 text-indigo-400" />
             <div className="min-w-0">
               <p className="text-sm font-semibold text-zinc-100 leading-tight">
                 {t.guru_ai_banner_title}
@@ -178,7 +178,7 @@ export function GuruAIPromptBanner({
               </button>
             </div>
             <div className="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-2.5 mt-1">
-              <span className="text-yellow-500 text-xs shrink-0 mt-px">⚠️</span>
+              <AlertTriangle aria-hidden="true" className="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" />
               <span className="text-[10px] sm:text-[11px] text-yellow-500/90 leading-relaxed">
                 {t.guru_ai_search_warn}
               </span>
@@ -211,7 +211,7 @@ export function GuruAIPromptBanner({
               </button>
             </div>
             <div className="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-2.5 mt-1">
-              <span className="text-yellow-500 text-xs shrink-0 mt-px">⚠️</span>
+              <AlertTriangle aria-hidden="true" className="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" />
               <span className="text-[10px] sm:text-[11px] text-yellow-500/90 leading-relaxed">
                 {t.guru_ai_search_warn}
               </span>

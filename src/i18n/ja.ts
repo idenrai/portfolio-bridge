@@ -179,7 +179,7 @@ export const ja: Translations = {
   guru_ai_close: "閉じる",
   guru_ai_desc:
     "以下のプロンプトをコピーし、ChatGPT、Claude、Gemini、GrokなどのAIに貼り付けてください。",
-  guru_ai_search_warn: "⚠️ AIが最新ニュースを検索するため、回答に数秒余分にかかる場合があります。",
+  guru_ai_search_warn: "AIが最新ニュースを検索するため、回答に数秒余分にかかる場合があります。",
   guru_ai_copy: "クリップボードにコピー",
   guru_ai_copied: "✓ コピー済み!",
   guru_ai_followup_btn: "前回の会話から続ける",
@@ -419,7 +419,7 @@ export const ja: Translations = {
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
   lynch_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
   lynch_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
-  lynch_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  lynch_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   lynch_tenbagger_badge: "🚀 テンバガー候補",
   lynch_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
@@ -445,7 +445,7 @@ export const ja: Translations = {
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
   mf_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
   mf_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
-  mf_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  mf_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   mf_magic_badge: "🪄 マジック・フォーミュラ適合",
   mf_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
@@ -464,7 +464,7 @@ export const ja: Translations = {
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
   graham_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
   graham_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
-  graham_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  graham_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   graham_defensive_badge: "🛡️ 防御的投資適合",
   graham_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
@@ -482,7 +482,7 @@ export const ja: Translations = {
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
   smith_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
   smith_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
-  smith_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  smith_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   smith_quality_badge: "✨ クオリティコンパウンダー",
   smith_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
@@ -504,7 +504,7 @@ export const ja: Translations = {
     "※ Yahoo Finance の財務データに基づきます。投資判断の唯一の根拠にしないでください。",
   piotroski_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
   piotroski_phase_enrich: "🔍 銘柄の詳細財務データを補強中…",
-  piotroski_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  piotroski_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   piotroski_fscore_badge: "📊 Fスコア優良",
   piotroski_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
@@ -524,7 +524,7 @@ export const ja: Translations = {
     "※ Yahoo Finance の財務データに基づきます。投資判断の唯一の根拠にしないでください。",
   oneil_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
   oneil_phase_enrich: "🔍 銘柄の詳細財務データを補強中…",
-  oneil_no_result: "⚠️ Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
+  oneil_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
   oneil_canslim_badge: "🚀 CAN SLIM適合",
   oneil_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
@@ -551,14 +551,14 @@ export const ja: Translations = {
     "ダッシュボードの金額表示に使用する基準通貨を選択します。",
   settings_fx_title: "為替レート",
   settings_fx_cache_warn: (time) =>
-    `⚠️ 為替レート取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
+    `為替レート取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
   settings_data_refresh_title: "為替・時価更新",
   settings_data_refresh_refreshing: "取得中…",
   settings_data_refresh_refresh: "🔄 今すぐ更新",
   settings_data_refresh_auto: "アプリ起動時に自動取得されます。",
   settings_data_refresh_time: (time) => `${time} 時点`,
   settings_data_refresh_cache_warn: (time) =>
-    `⚠️ 取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
+    `取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
   settings_data_refresh_result: (updated, total) =>
     `${total}件中${updated}件時価更新`,
   settings_data_refresh_no_ticker: "ティッカーが登録された資産がありません。",

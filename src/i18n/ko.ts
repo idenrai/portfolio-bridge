@@ -179,7 +179,7 @@ export const ko: Translations = {
   guru_ai_close: "닫기",
   guru_ai_desc:
     "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여 넣으세요.",
-  guru_ai_search_warn: "⚠️ AI가 최신 뉴스를 검색하므로 답변에 수 초가 더 소요될 수 있습니다.",
+  guru_ai_search_warn: "AI가 최신 뉴스를 검색하므로 답변에 수 초가 더 소요될 수 있습니다.",
   guru_ai_copy: "클립보드에 복사",
   guru_ai_copied: "✓ 복사됨!",
   guru_ai_followup_btn: "이전 대화에서 계속",
@@ -422,7 +422,7 @@ export const ko: Translations = {
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
   lynch_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
   lynch_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
-  lynch_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  lynch_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   lynch_tenbagger_badge: "🚀 10루타 후보",
   lynch_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
@@ -448,7 +448,7 @@ export const ko: Translations = {
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
   mf_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
   mf_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
-  mf_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  mf_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   mf_magic_badge: "🪄 마법 공식 적합",
   mf_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
@@ -467,7 +467,7 @@ export const ko: Translations = {
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
   graham_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
   graham_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
-  graham_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  graham_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   graham_defensive_badge: "🛡️ 방어적 투자 적합",
   graham_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
@@ -485,7 +485,7 @@ export const ko: Translations = {
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
   smith_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
   smith_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
-  smith_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  smith_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   smith_quality_badge: "✨ 퀄리티 컴파운더",
   smith_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
@@ -507,7 +507,7 @@ export const ko: Translations = {
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
   piotroski_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
   piotroski_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
-  piotroski_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  piotroski_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   piotroski_fscore_badge: "📊 F-Score 우수",
   piotroski_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
@@ -527,7 +527,7 @@ export const ko: Translations = {
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
   oneil_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
   oneil_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
-  oneil_no_result: "⚠️ Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
+  oneil_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
   oneil_canslim_badge: "🚀 CAN SLIM 적합",
   oneil_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
@@ -554,14 +554,14 @@ export const ko: Translations = {
     "대시보드 금액을 표시할 기준 통화를 선택합니다.",
   settings_fx_title: "환율",
   settings_fx_cache_warn: (time) =>
-    `⚠️ 환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
+    `환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
   settings_data_refresh_title: "환율 · 시세 갱신",
   settings_data_refresh_refreshing: "조회 중…",
   settings_data_refresh_refresh: "🔄 지금 갱신",
   settings_data_refresh_auto: "앱 시작 시 자동 조회됩니다.",
   settings_data_refresh_time: (time) => `${time} 기준`,
   settings_data_refresh_cache_warn: (time) =>
-    `⚠️ 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
+    `조회 실패 — 캐시값 사용 중 (${time} 기준)`,
   settings_data_refresh_result: (updated, total) =>
     `${total}건 중 ${updated}건 시세 갱신`,
   settings_data_refresh_no_ticker: "티커가 등록된 자산이 없습니다.",
