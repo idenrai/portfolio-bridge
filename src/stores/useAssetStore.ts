@@ -10,8 +10,6 @@ interface AssetState {
   updateAsset: (id: string, data: Partial<AssetFormData>) => void;
   deleteAsset: (id: string) => void;
   getAsset: (id: string) => Asset | undefined;
-  /** 현재가 일괄 업데이트 (PER/PBR 포함) */
-  updatePrices: (updates: { id: string; currentPrice: number; peRatio?: number | null; pbRatio?: number | null; dividendYield?: number | null }[]) => void;
 }
 
 export const useAssetStore = create<AssetState>()(
@@ -47,24 +45,6 @@ export const useAssetStore = create<AssetState>()(
       },
 
       getAsset: (id) => get().assets.find((a) => a.id === id),
-
-      updatePrices: (updates) => {
-        const now = new Date().toISOString();
-        set((state) => ({
-          assets: state.assets.map((a) => {
-            const update = updates.find((u) => u.id === a.id);
-            if (!update) return a;
-            return {
-              ...a,
-              currentPrice: update.currentPrice,
-              ...(update.peRatio !== undefined ? { peRatio: update.peRatio } : {}),
-              ...(update.pbRatio !== undefined ? { pbRatio: update.pbRatio } : {}),
-              ...(update.dividendYield !== undefined ? { dividendYield: update.dividendYield } : {}),
-              updatedAt: now,
-            };
-          }),
-        }));
-      },
     }),
     {
       name: STORAGE_KEYS.ASSETS,

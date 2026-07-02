@@ -165,28 +165,28 @@ export function BuffettIndicatorCard() {
           </div>
 
           {/* 세부 수치 */}
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="rounded-lg bg-zinc-900/50 px-3 py-2">
-              <p className="text-[11px] text-zinc-500 mb-0.5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
+              <p className="text-[11px] text-zinc-500 mb-0.5 uppercase tracking-wider">
                 {t.buffett_indicator_market_cap} (USD)
               </p>
-              <p className="text-sm font-semibold text-zinc-700 tabular-nums">
+              <p className="text-sm font-semibold text-zinc-200 tabular-nums tracking-tight">
                 ${formatTrillions(marketCapTrillions, "en")}
               </p>
             </div>
-            <div className="rounded-lg bg-zinc-900/50 px-3 py-2">
-              <p className="text-[11px] text-zinc-500 mb-0.5">
+            <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
+              <p className="text-[11px] text-zinc-500 mb-0.5 uppercase tracking-wider">
                 {t.buffett_indicator_gdp} (USD)
               </p>
-              <p className="text-sm font-semibold text-zinc-700 tabular-nums">
+              <p className="text-sm font-semibold text-zinc-200 tabular-nums tracking-tight">
                 ${formatTrillions(gdpTrillions, "en")}
               </p>
             </div>
-            <div className="rounded-lg bg-zinc-900/50 px-3 py-2">
-              <p className="text-[11px] text-zinc-500 mb-0.5">
+            <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
+              <p className="text-[11px] text-zinc-500 mb-0.5 uppercase tracking-wider">
                 {t.buffett_indicator_year}
               </p>
-              <p className="text-sm font-semibold text-zinc-700">{date}</p>
+              <p className="text-sm font-semibold text-zinc-200 tabular-nums tracking-tight">{date}</p>
             </div>
           </div>
 

@@ -1,7 +1,7 @@
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
 import { useSettingsStore } from "@/stores";
-import { useT } from "@/hooks";
+import { useT, useExchangeRates } from "@/hooks";
 import type { RebalanceSuggestion, AssetCategory } from "@/types";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 export function RebalanceCard({ rebalancing }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
-  const rates = useSettingsStore((s) => s.exchangeRates);
+  const { data: rates } = useExchangeRates();
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
   const t = useT();
 

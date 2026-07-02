@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useT } from "@/hooks";
+import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore, useProfileStore, useGuruSessionStore } from "@/stores";
 import { buildGuruPrompt, buildGuruFollowUpPrompt } from "@/utils";
 import type { GuruProfile, PortfolioSummary, Asset } from "@/types";
@@ -19,7 +19,7 @@ export function GuruAIPromptBanner({
   const t = useT();
   const lang = useLanguageStore((s) => s.lang);
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
-  const rates = useSettingsStore((s) => s.exchangeRates);
+  const { data: rates } = useExchangeRates();
   const profile = useProfileStore();
   const { sessions, saveSession, clearSession } = useGuruSessionStore();
 

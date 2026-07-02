@@ -46,16 +46,10 @@ export interface Asset {
   quantity: number;
   /** 매입 단가 (현지 통화) */
   avgBuyPrice: number;
-  /** 현재가 (현지 통화) — 수동 입력 또는 시세 갱신 */
+  /** 사용자가 수동으로 입력한 현재가 (API 실패 시 Fallback) */
   currentPrice: number;
   /** 분류 카테고리 (복수 가능) */
   categories: AssetCategory[];
-  /** PER (Price-to-Earnings Ratio) — 시세 갱신 시 자동 취득 */
-  peRatio?: number | null;
-  /** PBR (Price-to-Book Ratio) — 시세 갱신 시 자동 취득 */
-  pbRatio?: number | null;
-  /** 배당수익률 (소수점) — 시세 갱신 시 자동 취득 */
-  dividendYield?: number | null;
   /** 연결된 증권사 계좌 ID */
   brokerId?: string;
   /** 메모 */
@@ -64,6 +58,15 @@ export interface Asset {
   createdAt: string; // ISO 8601
   /** 수정일 */
   updatedAt: string; // ISO 8601
+}
+
+/** 실시간 시세가 병합된 형태의 자산 데이터 (계산 및 UI 렌더링용) */
+export interface PortfolioAsset extends Asset {
+  /** API에서 조회된 실시간 가격 (없을 경우 Asset의 currentPrice로 대체됨) */
+  livePrice?: number;
+  peRatio?: number | null;
+  pbRatio?: number | null;
+  dividendYield?: number | null;
 }
 
 /** 자산 등록/수정 시 사용하는 폼 데이터 */

@@ -1,5 +1,4 @@
 import type {
-  Asset,
   AssetCategory,
   AssetType,
   CurrencyCode,
@@ -9,6 +8,7 @@ import type {
   HoldingDetail,
   CurrencyExposure,
   CurrencyScenario,
+  PortfolioAsset,
 } from "@/types";
 import { toKRW } from "./currency";
 import { assetValue, assetCost } from "./assetCalcs";
@@ -23,7 +23,7 @@ export type { InsightMessages } from "./insightGenerator";
  * 전체 포트폴리오 요약 계산
  */
 export function calculateSummary(
-  assets: Asset[],
+  assets: PortfolioAsset[],
   rates: Record<CurrencyCode, number>,
   targets: TargetAllocation[] = [],
   baseCurrency: CurrencyCode = "KRW",

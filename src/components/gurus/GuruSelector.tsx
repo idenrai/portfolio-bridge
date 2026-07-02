@@ -19,10 +19,10 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
         <button
           key={guru.id}
           onClick={() => onSelect(guru)}
-          className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
+          className={`text-left p-4 rounded-none border transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:border-zinc-500 ${
             selectedGuru?.id === guru.id
-              ? "border-emerald-500 bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
-              : "border-zinc-800 bg-zinc-900/50 hover:border-emerald-500/50 hover:shadow-sm"
+              ? "border-zinc-300 bg-zinc-900 text-white shadow-sm"
+              : "border-zinc-800 bg-black hover:border-zinc-600"
           }`}
         >
           <p className="font-semibold text-zinc-200 text-sm leading-tight">

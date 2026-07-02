@@ -11,6 +11,13 @@ const LANG_LABELS: Record<Lang, string> = {
   de: "🇩🇪",
 };
 
+const LANG_ARIA: Record<Lang, string> = {
+  ko: "Korean",
+  en: "English",
+  ja: "Japanese",
+  de: "German",
+};
+
 /**
  * 언어 전환 시 기본으로 설정되는 표시 화폐
  *
@@ -88,13 +95,14 @@ export function Header() {
             <button
               key={l}
               onClick={() => handleLangChange(l)}
-              className={`text-xs px-2 py-1 transition-colors cursor-pointer border rounded-sm ${
+              aria-label={LANG_ARIA[l]}
+              className={`text-sm min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors cursor-pointer border rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-black ${
                 lang === l
-                  ? "bg-zinc-800 text-white border-zinc-500 font-bold shadow-sm"
-                  : "text-zinc-500 border-transparent hover:bg-zinc-900 hover:text-zinc-300"
+                  ? "bg-zinc-800 text-white border-zinc-500 shadow-sm"
+                  : "text-zinc-500 border-transparent hover:bg-zinc-900"
               }`}
             >
-              {LANG_LABELS[l]}
+              <span aria-hidden="true">{LANG_LABELS[l]}</span>
             </button>
           ))}
         </div>

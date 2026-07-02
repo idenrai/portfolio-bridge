@@ -213,3 +213,9 @@ Score interpretation: **8–9 = Strong / 강함** · **4–7 = Neutral / 중립*
 When no assets are registered, the page shows a message directing the user to the Asset Management page.
 
 등록된 자산이 없으면 자산 관리 페이지로 안내하는 메시지가 표시됩니다.
+
+## Design & Accessibility
+
+The UI enforces an "anti-slop" aesthetic, avoiding unconditional center-alignment (center bias) in favor of editorial, left-aligned data presentations. Interactive elements support keyboard navigation (`focus-visible` rings).
+
+UI는 무조건적인 중앙 정렬(Center Bias)을 지양하고 편집물 스타일의 좌측 정렬 데이터 표출을 선호하는 "anti-slop" 미학을 적용합니다. 인터랙티브 요소는 키보드 탐색을 지원합니다(`focus-visible` 링).

@@ -8,7 +8,7 @@ export function Layout() {
   const t = useT();
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-zinc-300 font-mono selection:bg-zinc-800">
+    <div className="flex flex-col min-h-screen bg-black text-zinc-300 selection:bg-zinc-800">
       <Header />
       <main className="flex-1 p-3 sm:p-4 md:p-6 pb-20 md:pb-6 flex flex-col">
         <div className="flex-1">

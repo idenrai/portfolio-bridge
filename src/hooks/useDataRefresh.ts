@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useExchangeRates } from "./useExchangeRates";
 import { usePriceRefresh } from "./usePriceRefresh";
 
@@ -30,30 +31,31 @@ interface UseDataRefreshResult {
 /**
  * 환율 + 시세를 한 번에 갱신하는 통합 훅
  *
- * - 내부적으로 useExchangeRates · usePriceRefresh를 병렬 호출
+ * - 내부적으로 React Query의 캐시를 무효화(invalidate)하여 백그라운드 갱신 트리거
  * - 대시보드 / 설정 페이지에서 하나의 새로고침 버튼으로 사용
  */
 export function useDataRefresh(): UseDataRefreshResult {
+  const queryClient = useQueryClient();
   const rates = useExchangeRates();
   const prices = usePriceRefresh();
+  
   const [isLoading, setIsLoading] = useState(false);
   const runningRef = useRef(false);
-
-  // Destructure stable function references to satisfy exhaustive-deps
-  const { refreshRates } = rates;
-  const { refreshPrices } = prices;
 
   const refreshAll = useCallback(async () => {
     if (runningRef.current) return;
     runningRef.current = true;
     setIsLoading(true);
     try {
-      await Promise.all([refreshRates(), refreshPrices()]);
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["exchangeRates"] }),
+        queryClient.invalidateQueries({ queryKey: ["prices"] })
+      ]);
     } finally {
       setIsLoading(false);
       runningRef.current = false;
     }
-  }, [refreshRates, refreshPrices]);
+  }, [queryClient]);
 
   // 둘 중 더 최근 갱신 시각
   const { lastUpdated: rateTs } = rates;
