@@ -58,9 +58,9 @@ export function DashboardPage() {
 
   if (assets.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-zinc-500 font-mono">
-        <p className="text-4xl mb-4 font-bold">{"[ EMPTY ]"}</p>
-        <h2 className="text-xl font-bold text-zinc-300 mb-2">
+      <div className="flex min-h-[60vh] flex-col items-center justify-center font-mono text-zinc-500">
+        <p className="mb-4 text-4xl font-bold">{"[ EMPTY ]"}</p>
+        <h2 className="mb-2 text-xl font-bold text-zinc-300">
           {t.dash_empty_title}
         </h2>
         <p className="text-sm">{t.dash_empty_desc}</p>
@@ -71,7 +71,7 @@ export function DashboardPage() {
             (notice, i) => (
               <p
                 key={i}
-                className="text-xs text-zinc-500 bg-black border border-zinc-800 px-4 py-2.5 text-left leading-relaxed"
+                className="border border-zinc-800 bg-black px-4 py-2.5 text-left text-xs leading-relaxed text-zinc-500"
               >
                 {notice}
               </p>
@@ -84,7 +84,7 @@ export function DashboardPage() {
           <button
             type="button"
             onClick={handleLoadSample}
-            className="px-5 py-2 min-h-[44px] bg-black border border-zinc-500 text-zinc-300 text-sm font-bold hover:bg-white hover:text-black transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="min-h-[44px] cursor-pointer border border-zinc-500 bg-black px-5 py-2 text-sm font-bold text-zinc-300 transition-colors hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
           >
             <span className="opacity-40">{"["}</span> {t.dash_sample_btn} <span className="opacity-40">{"]"}</span>
           </button>
@@ -98,14 +98,14 @@ export function DashboardPage() {
     <div className="space-y-4 md:space-y-6">
       {/* 타이틀 + 갱신 바 */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white text-balance">{t.dash_title}</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.dash_title}</h1>
 
         <button
           type="button"
           onClick={() => refreshAll()}
           disabled={isLoading}
           aria-live="polite"
-          className="inline-flex min-h-[44px] items-center gap-2 border border-zinc-800 bg-black px-3 py-1.5 text-xs font-bold text-zinc-300 hover:bg-white hover:text-black hover:border-white disabled:opacity-50 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 border border-zinc-800 bg-black px-3 py-1.5 text-xs font-bold text-zinc-300 transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none disabled:opacity-50"
         >
           <span className="opacity-40">{"["}</span>
           <span>{t.dash_refresh}</span>
@@ -137,7 +137,7 @@ export function DashboardPage() {
       <AllocationPieCharts summary={summary} />
 
       {/* ④ 자산 구성 추이 차트 */}
-      <Suspense fallback={<div className="h-64 flex items-center justify-center border border-zinc-800 bg-black/50 text-zinc-600 font-mono text-sm">Loading Chart...</div>}>
+      <Suspense fallback={<div className="flex h-64 items-center justify-center border border-zinc-800 bg-black/50 font-mono text-sm text-zinc-500">Loading Chart...</div>}>
         <PortfolioHistoryChart />
       </Suspense>
 
@@ -145,14 +145,14 @@ export function DashboardPage() {
       <TopHoldingsTable summary={summary} />
 
       {/* ⑥ 하단 그리드 */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <CategoryAnalysisCard rebalancing={rebalancing} />
         <CurrencyExposureCard summary={summary} />
         <RebalanceCard rebalancing={rebalancing} />
       </div>
 
       {/* ⑦ 종목별 손익 차트 */}
-      <Suspense fallback={<div className="h-64 flex items-center justify-center border border-zinc-800 bg-black/50 text-zinc-600 font-mono text-sm">Loading Chart...</div>}>
+      <Suspense fallback={<div className="flex h-64 items-center justify-center border border-zinc-800 bg-black/50 font-mono text-sm text-zinc-500">Loading Chart...</div>}>
         <PnLWaterfallChart assets={assets} />
       </Suspense>
     </div>

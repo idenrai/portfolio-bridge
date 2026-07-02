@@ -14,21 +14,21 @@ export function GuruRebalanceTable({
 
   return (
     <Card title={t.guru_rebalance_title}>
-      <div className="overflow-x-auto -mx-4 md:-mx-5 px-4 md:px-5">
-        <table className="w-full text-sm min-w-125">
+      <div className="-mx-4 overflow-x-auto px-4 md:-mx-5 md:px-5">
+        <table className="w-full min-w-125 text-sm">
           <thead>
-            <tr className="text-left text-xs text-zinc-500 border-b">
+            <tr className="border-b text-left text-xs text-zinc-500">
               <th className="pb-2 font-medium">{t.guru_col_category}</th>
-              <th className="pb-2 font-medium text-right">
+              <th className="pb-2 text-right font-medium">
                 {t.guru_col_current}
               </th>
-              <th className="pb-2 font-medium text-right">
+              <th className="pb-2 text-right font-medium">
                 {t.guru_col_guru_target}
               </th>
-              <th className="pb-2 font-medium text-right">
+              <th className="pb-2 text-right font-medium">
                 {t.guru_col_diff}
               </th>
-              <th className="pb-2 font-medium text-right">
+              <th className="pb-2 text-right font-medium">
                 {t.guru_col_amount}
               </th>
             </tr>
@@ -48,7 +48,7 @@ export function GuruRebalanceTable({
                     {s.targetPercent.toFixed(1)}%
                   </td>
                   <td
-                    className={`py-2 text-right tabular-nums font-medium ${
+                    className={`py-2 text-right font-medium tabular-nums ${
                       diff >= 0 ? "text-zinc-300" : "text-red-600"
                     }`}
                   >

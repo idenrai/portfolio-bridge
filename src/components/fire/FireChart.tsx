@@ -25,7 +25,7 @@ export function FireChart({ data }: FireChartProps) {
   if (!data || data.length === 0) return null;
 
   return (
-    <Card className="p-5 flex flex-col gap-4 h-full flex-1">
+    <Card className="flex h-full flex-1 flex-col gap-4 p-5">
       <h3 className="text-lg font-bold text-zinc-200">{t.fire_chart_title}</h3>
       <div className="h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
@@ -35,8 +35,8 @@ export function FireChart({ data }: FireChartProps) {
           >
             <defs>
               <linearGradient id="colorAsset" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />
-                <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                <stop offset="5%" stopColor="#34d399" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
@@ -78,7 +78,7 @@ export function FireChart({ data }: FireChartProps) {
             <Area
               type="monotone"
               dataKey="asset"
-              stroke="#10b981"
+              stroke="#34d399"
               strokeWidth={3}
               fillOpacity={1}
               fill="url(#colorAsset)"
@@ -87,7 +87,7 @@ export function FireChart({ data }: FireChartProps) {
             <Line
               type="stepAfter"
               dataKey="target"
-              stroke="#06b6d4"
+              stroke="#22d3ee"
               strokeWidth={2}
               strokeDasharray="5 5"
               dot={false}

@@ -22,7 +22,7 @@ export function RebalanceCard({ rebalancing }: Props) {
   if (significant.length === 0) {
     return (
       <Card title={t.rebalance_title}>
-        <div className="text-sm text-zinc-500 py-4 text-center">
+        <div className="py-4 text-center text-sm text-zinc-500">
           {t.rebalance_ok}
         </div>
       </Card>
@@ -41,7 +41,7 @@ export function RebalanceCard({ rebalancing }: Props) {
             return (
               <div
                 key={r.category}
-                className="flex items-center justify-between py-1.5 border-b border-zinc-800 last:border-0"
+                className="flex items-center justify-between border-b border-zinc-800 py-1.5 last:border-0"
               >
                 <div>
                   <span className="text-sm font-bold text-zinc-200">

@@ -103,7 +103,7 @@ export function ManualEntryForm({
           <button
             type="button"
             onClick={() => setIsSimple(false)}
-            className={`px-4 py-1.5 rounded-md text-xs font-medium transition-colors ${
+            className={`rounded-md px-4 py-1.5 text-xs font-medium transition-colors ${
               !isSimple
                 ? "bg-zinc-800 text-white shadow-sm"
                 : "text-zinc-500 hover:text-zinc-300"
@@ -114,7 +114,7 @@ export function ManualEntryForm({
           <button
             type="button"
             onClick={() => setIsSimple(true)}
-            className={`px-4 py-1.5 rounded-md text-xs font-medium transition-colors ${
+            className={`rounded-md px-4 py-1.5 text-xs font-medium transition-colors ${
               isSimple
                 ? "bg-zinc-800 text-white shadow-sm"
                 : "text-zinc-500 hover:text-zinc-300"
@@ -125,7 +125,7 @@ export function ManualEntryForm({
         </div>
       </div>
 
-      <div className="bg-amber-950/30 border border-amber-900/50 rounded-lg px-4 py-3">
+      <div className="rounded-lg border border-amber-900/50 bg-amber-950/30 px-4 py-3">
         <p className="text-xs text-amber-400">{t.af_manual_hint}</p>
       </div>
 
@@ -189,7 +189,7 @@ export function ManualEntryForm({
             <Label>
               {t.af_ticker_label}
             </Label>
-            <div className="flex gap-2 mt-1">
+            <div className="mt-1 flex gap-2">
               <Input
                 type="text"
                 value={ticker}

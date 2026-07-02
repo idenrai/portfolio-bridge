@@ -14,6 +14,7 @@ export function EditForm({
 }) {
   const [quantity, setQuantity] = useState(initial.quantity);
   const [avgBuyPrice, setAvgBuyPrice] = useState(initial.avgBuyPrice);
+  const [currentPrice, setCurrentPrice] = useState(initial.currentPrice);
   const sym = CURRENCY_SYMBOLS[initial.currency];
   const t = useT();
 
@@ -27,29 +28,29 @@ export function EditForm({
       currency: initial.currency,
       quantity,
       avgBuyPrice,
-      currentPrice: initial.currentPrice,
+      currentPrice,
       categories: initial.categories,
       brokerId: initial.brokerId });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="bg-zinc-900/50 rounded-lg px-4 py-3 flex flex-wrap gap-x-6 gap-y-1">
+      <div className="flex flex-wrap gap-x-6 gap-y-1 rounded-lg bg-zinc-900/50 px-4 py-3">
         <span className="text-sm font-semibold text-zinc-100">
           {initial.name}
         </span>
         {initial.ticker && (
-          <span className="text-sm text-zinc-500 font-mono">
+          <span className="font-mono text-sm text-zinc-500">
             {initial.ticker}
           </span>
         )}
-        <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded self-center">
+        <span className="self-center rounded bg-zinc-800 px-2 py-0.5 text-xs text-zinc-400">
           {t.asset_type_labels[initial.type]}
         </span>
-        <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded self-center">
+        <span className="self-center rounded bg-zinc-800 px-2 py-0.5 text-xs text-zinc-400">
           {t.market_labels[initial.market]}
         </span>
-        <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded self-center">
+        <span className="self-center rounded bg-zinc-800 px-2 py-0.5 text-xs text-zinc-400">
           {initial.currency}
         </span>
       </div>
@@ -91,10 +92,15 @@ export function EditForm({
         </Label>
         <Input
           type="number"
-          value={initial.currentPrice}
-          readOnly
-          className="mt-1 block w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-sm text-zinc-500 cursor-not-allowed"
+          required
+          min={0}
+          step="any"
+          value={currentPrice || ""}
+          onChange={(e) => setCurrentPrice(Number(e.target.value))}
         />
+        <p className="mt-1.5 text-[10px] leading-relaxed text-zinc-500">
+          {t.af_current_price_help}
+        </p>
       </div>
 
       <div className="flex justify-end gap-2">

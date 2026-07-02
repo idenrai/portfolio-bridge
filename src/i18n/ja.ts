@@ -691,6 +691,7 @@ export const ja: Translations = {
   af_quantity_label: "保有数量 *",
   af_avg_price_label: "取得単価",
   af_current_price_label: "現在値",
+  af_current_price_help: "※ 入力された現在値は自動更新時に上書きされる場合があります。ただし、自動更新が失敗する資産（投資信託など）は手動入力した価格が維持されるため、手動で損益を追跡できます。",
   af_current_price_auto: "✓ Yahoo Finance 自動取得",
   af_fetch_price_btn: "現在値取得",
   af_fetching: "取得中…",

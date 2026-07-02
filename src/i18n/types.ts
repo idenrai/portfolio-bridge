@@ -524,6 +524,7 @@ export interface Translations {
   af_quantity_label: string;
   af_avg_price_label: string;
   af_current_price_label: string;
+  af_current_price_help: string;
   af_current_price_auto: string;
   af_fetch_price_btn: string;
   af_fetching: string;

@@ -53,20 +53,20 @@ export function Header() {
   };
 
   return (
-    <header className="h-14 bg-black border-b border-zinc-800 flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
+    <header className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-zinc-800 bg-black px-4 md:px-6">
       {/* 모바일: 로고 표시 / 데스크톱: 빈 공간 */}
       <div className="md:hidden">
-        <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-          <img src="/favicon.svg" alt="" className="w-6 h-6 rounded-md border border-zinc-800" aria-hidden="true" />
-          <span className="font-bold tracking-tight text-lg text-white">
+        <Link to="/" className="group flex shrink-0 items-center gap-2.5">
+          <img src="/favicon.svg" alt="" className="size-6 rounded-md border border-zinc-800" aria-hidden="true" />
+          <span className="text-lg font-bold tracking-tight text-white">
             Portfolio Bridge
           </span>
         </Link>
       </div>
-      <div className="hidden md:flex items-center gap-3">
-        <Link to="/" className="flex items-center gap-2.5 mr-6 shrink-0 group">
-          <img src="/favicon.svg" alt="" className="w-7 h-7 rounded-md border border-zinc-800" aria-hidden="true" />
-          <span className="font-bold tracking-tight text-xl text-white">
+      <div className="hidden items-center gap-3 md:flex">
+        <Link to="/" className="group mr-6 flex shrink-0 items-center gap-2.5">
+          <img src="/favicon.svg" alt="" className="size-7 rounded-md border border-zinc-800" aria-hidden="true" />
+          <span className="text-xl font-bold tracking-tight text-white">
             Portfolio Bridge
           </span>
         </Link>
@@ -96,10 +96,10 @@ export function Header() {
               key={l}
               onClick={() => handleLangChange(l)}
               aria-label={LANG_ARIA[l]}
-              className={`text-sm min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors cursor-pointer border rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-black ${
+              className={`flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-md border text-sm transition-colors focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-black focus-visible:outline-none ${
                 lang === l
-                  ? "bg-zinc-800 text-white border-zinc-500 shadow-sm"
-                  : "text-zinc-500 border-transparent hover:bg-zinc-900"
+                  ? "border-zinc-500 bg-zinc-800 text-white shadow-sm"
+                  : "border-transparent text-zinc-500 hover:bg-zinc-900"
               }`}
             >
               <span aria-hidden="true">{LANG_LABELS[l]}</span>

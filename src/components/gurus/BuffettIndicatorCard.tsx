@@ -100,11 +100,11 @@ export function BuffettIndicatorCard() {
   return (
     <Card title={t.buffett_indicator_title}>
       {loading ? (
-        <p className="text-sm text-zinc-500 py-4 text-center animate-pulse">
+        <p className="animate-pulse py-4 text-center text-sm text-zinc-500">
           {t.buffett_indicator_loading}
         </p>
       ) : error ? (
-        <p className="text-sm text-red-500 py-4 text-center">
+        <p className="py-4 text-center text-sm text-red-500">
           {t.buffett_indicator_error}
         </p>
       ) : (
@@ -117,7 +117,7 @@ export function BuffettIndicatorCard() {
                 className={`flex items-center justify-between rounded-xl border px-4 py-3 ${zone.bgColor} ${zone.borderColor}`}
               >
                 <div>
-                  <p className="text-xs text-zinc-500 mb-0.5">
+                  <p className="mb-0.5 text-xs text-zinc-500">
                     {t.buffett_indicator_ratio_label}
                   </p>
                   <p className={`text-3xl font-bold tabular-nums ${zone.color}`}>
@@ -135,18 +135,18 @@ export function BuffettIndicatorCard() {
 
           {/* 게이지 바 */}
           <div className="space-y-1">
-            <div className="relative h-4 rounded-full bg-zinc-800/50 overflow-hidden">
+            <div className="relative h-4 overflow-hidden rounded-full bg-zinc-800/50">
               {/* 구간 색상 배경 */}
               <div className="absolute inset-0 flex">
-                <div className="h-full bg-sky-200 w-[40%]" />
-                <div className="h-full bg-emerald-200 w-[10%]" />
-                <div className="h-full bg-amber-200 w-[15%]" />
-                <div className="h-full bg-orange-200 w-[17.5%]" />
-                <div className="h-full bg-red-200 w-[17.5%]" />
+                <div className="h-full w-[40%] bg-sky-200" />
+                <div className="h-full w-[10%] bg-emerald-200" />
+                <div className="h-full w-[15%] bg-amber-200" />
+                <div className="h-full w-[17.5%] bg-orange-200" />
+                <div className="h-full w-[17.5%] bg-red-200" />
               </div>
               {/* 현재값 포인터 */}
               <div
-                className="absolute top-0 h-full w-1 -tranzinc-x-0.5 bg-zinc-700 rounded-full shadow"
+                className="absolute top-0 h-full w-1 -translate-x-0.5 rounded-full bg-zinc-700 shadow"
                 style={{ left: `${gaugeWidth(ratio)}%` }}
               />
             </div>
@@ -155,7 +155,7 @@ export function BuffettIndicatorCard() {
               {MARKERS.map((m) => (
                 <span
                   key={m.value}
-                  className="absolute text-[10px] text-zinc-400 -tranzinc-x-1/2"
+                  className="absolute -translate-x-1/2 text-[10px] text-zinc-400"
                   style={{ left: `${(m.value / 200) * 100}%` }}
                 >
                   {m.label}
@@ -165,38 +165,38 @@ export function BuffettIndicatorCard() {
           </div>
 
           {/* 세부 수치 */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
-              <p className="text-[11px] text-zinc-500 mb-0.5 uppercase tracking-wider">
+              <p className="mb-0.5 text-[11px] tracking-wider text-zinc-500 uppercase">
                 {t.buffett_indicator_market_cap} (USD)
               </p>
-              <p className="text-sm font-semibold text-zinc-200 tabular-nums tracking-tight">
+              <p className="text-sm font-semibold tracking-tight text-zinc-200 tabular-nums">
                 ${formatTrillions(marketCapTrillions, "en")}
               </p>
             </div>
             <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
-              <p className="text-[11px] text-zinc-500 mb-0.5 uppercase tracking-wider">
+              <p className="mb-0.5 text-[11px] tracking-wider text-zinc-500 uppercase">
                 {t.buffett_indicator_gdp} (USD)
               </p>
-              <p className="text-sm font-semibold text-zinc-200 tabular-nums tracking-tight">
+              <p className="text-sm font-semibold tracking-tight text-zinc-200 tabular-nums">
                 ${formatTrillions(gdpTrillions, "en")}
               </p>
             </div>
             <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
-              <p className="text-[11px] text-zinc-500 mb-0.5 uppercase tracking-wider">
+              <p className="mb-0.5 text-[11px] tracking-wider text-zinc-500 uppercase">
                 {t.buffett_indicator_year}
               </p>
-              <p className="text-sm font-semibold text-zinc-200 tabular-nums tracking-tight">{date}</p>
+              <p className="text-sm font-semibold tracking-tight text-zinc-200 tabular-nums">{date}</p>
             </div>
           </div>
 
           {/* 설명 */}
-          <p className="text-xs text-zinc-500 leading-relaxed">
+          <p className="text-xs leading-relaxed text-zinc-500">
             {t.buffett_indicator_desc}
           </p>
 
           {/* 출처 */}
-          <p className="text-[11px] text-zinc-400 text-right">
+          <p className="text-right text-[11px] text-zinc-400">
             {t.buffett_indicator_source}
           </p>
         </div>

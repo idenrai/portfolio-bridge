@@ -25,20 +25,20 @@ export function FireInputForm() {
     "bg-zinc-900/50 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition-all text-zinc-200 placeholder-zinc-600";
 
   return (
-    <Card className="p-5 flex flex-col gap-5 h-full">
+    <Card className="flex h-full flex-col gap-5 p-5">
       {/* Tabs */}
-      <div className="flex gap-2 p-1 bg-zinc-900/50 rounded-lg border border-zinc-800/50">
+      <div className="flex gap-2 rounded-lg border border-zinc-800/50 bg-zinc-900/50 p-1">
         <button
-          className={`flex-1 py-1.5 px-2 text-xs md:text-sm font-medium rounded-md transition-all border break-keep leading-tight ${
-            store.mode === "expense" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "text-zinc-500 border-transparent hover:text-zinc-300 hover:bg-zinc-800"
+          className={`flex-1 rounded-md border px-2 py-1.5 text-xs leading-tight font-medium break-keep transition-all md:text-sm ${
+            store.mode === "expense" ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "border-transparent text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"
           }`}
           onClick={() => store.setMode("expense")}
         >
           {t.fire_tab_expense}
         </button>
         <button
-          className={`flex-1 py-1.5 px-2 text-xs md:text-sm font-medium rounded-md transition-all border break-keep leading-tight ${
-            store.mode === "target" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "text-zinc-500 border-transparent hover:text-zinc-300 hover:bg-zinc-800"
+          className={`flex-1 rounded-md border px-2 py-1.5 text-xs leading-tight font-medium break-keep transition-all md:text-sm ${
+            store.mode === "target" ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.1)]" : "border-transparent text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"
           }`}
           onClick={() => store.setMode("target")}
         >
@@ -50,22 +50,22 @@ export function FireInputForm() {
         {/* Current Assets */}
         <div className="flex flex-col gap-2">
           <label className="text-sm font-medium text-zinc-300">{t.fire_current_assets} ({baseCurrency})</label>
-          <div className="flex items-center gap-2 mb-0.5">
+          <div className="mb-0.5 flex items-center gap-2">
             <input
               type="checkbox"
               id="usePortfolioAssets"
               checked={store.usePortfolioAssets}
               onChange={(e) => store.setUsePortfolioAssets(e.target.checked)}
-              className="w-4 h-4 text-emerald-500 bg-zinc-900/50 border-zinc-700 rounded focus:ring-emerald-500 cursor-pointer"
+              className="size-4 cursor-pointer rounded border-zinc-700 bg-zinc-900/50 text-emerald-500 focus:ring-emerald-500"
             />
-            <label htmlFor="usePortfolioAssets" className="text-sm text-zinc-400 cursor-pointer select-none">
+            <label htmlFor="usePortfolioAssets" className="cursor-pointer text-sm text-zinc-400 select-none">
               {t.fire_use_portfolio_assets}
             </label>
           </div>
           <input
             type="text"
             inputMode="numeric"
-            className={`${inputClass} ${store.usePortfolioAssets ? 'bg-zinc-900 text-zinc-400 cursor-not-allowed border-zinc-800' : ''}`}
+            className={`${inputClass} ${store.usePortfolioAssets ? 'cursor-not-allowed border-zinc-800 bg-zinc-900 text-zinc-400' : ''}`}
             disabled={store.usePortfolioAssets}
             value={
               store.usePortfolioAssets
@@ -102,7 +102,7 @@ export function FireInputForm() {
             value={store.expectedReturnRate || ""}
             onChange={(e) => store.setExpectedReturnRate(Number(e.target.value))}
           />
-          <p className="text-xs text-zinc-500 leading-relaxed mt-0.5">{t.fire_helper_expected_return}</p>
+          <p className="mt-0.5 text-xs leading-relaxed text-zinc-500">{t.fire_helper_expected_return}</p>
         </div>
 
         {/* Current Age */}
@@ -150,7 +150,7 @@ export function FireInputForm() {
                 value={store.safeWithdrawalRate || ""}
                 onChange={(e) => store.setSafeWithdrawalRate(Number(e.target.value))}
               />
-              <p className="text-xs text-zinc-500 leading-relaxed mt-0.5">{t.fire_helper_safe_withdrawal}</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-zinc-500">{t.fire_helper_safe_withdrawal}</p>
             </div>
           </>
         )}

@@ -101,8 +101,8 @@ export function CryptoForm({
 
       {pairs.length > 0 && (
         <div >
-          <div className="bg-zinc-900/50 px-3 py-2 border-b border-zinc-800">
-            <p className="text-xs text-zinc-400 font-medium">
+          <div className="border-b border-zinc-800 bg-zinc-900/50 px-3 py-2">
+            <p className="text-xs font-medium text-zinc-400">
               {t.af_crypto_pair_title}
             </p>
           </div>
@@ -112,9 +112,9 @@ export function CryptoForm({
                 key={p.symbol}
                 type="button"
                 onClick={() => setSelectedPair(p)}
-                className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors ${
+                className={`flex w-full items-center justify-between px-4 py-3 text-left transition-colors ${
                   selectedPair?.symbol === p.symbol
-                    ? "bg-emerald-950/30 border-l-2 border-emerald-500"
+                    ? "border-l-2 border-emerald-500 bg-emerald-950/30"
                     : "hover:bg-zinc-900/50"
                 }`}
               >
@@ -129,7 +129,7 @@ export function CryptoForm({
                     </span>
                   )}
                   <span
-                    className={`text-xs px-2 py-0.5 rounded ${
+                    className={`rounded px-2 py-0.5 text-xs ${
                       selectedPair?.symbol === p.symbol
                         ? "bg-emerald-600 text-white"
                         : "bg-zinc-800 text-zinc-300"
@@ -147,20 +147,20 @@ export function CryptoForm({
       )}
 
       {searchedOnce && pairs.length === 0 && !isSearching && (
-        <p className="text-sm text-zinc-400 bg-zinc-900/50 rounded-lg px-3 py-2">
+        <p className="rounded-lg bg-zinc-900/50 px-3 py-2 text-sm text-zinc-400">
           {t.af_crypto_no_pairs}
         </p>
       )}
 
       {selectedPair && (
         <>
-          <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-lg px-4 py-3">
+          <div className="rounded-lg border border-emerald-900/50 bg-emerald-950/30 px-4 py-3">
             <div className="flex items-center justify-between">
               <span className="text-sm font-bold text-white">
                 {selectedPair.symbol}
               </span>
               {selectedPair.price !== null && (
-                <span className="text-sm text-green-600 font-medium">
+                <span className="text-sm font-medium text-green-600">
                   {t.af_current_price_label} {sym}
                   {selectedPair.price.toLocaleString()}
                 </span>

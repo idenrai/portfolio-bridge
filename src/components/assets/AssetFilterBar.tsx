@@ -34,11 +34,11 @@ export function AssetFilterBar({
   const hasFilter = filterMarket || filterType || filterCategory;
 
   return (
-    <div className="flex flex-wrap items-center gap-2 mb-3">
+    <div className="mb-3 flex flex-wrap items-center gap-2">
       <select
         value={filterMarket}
         onChange={(e) => onFilterMarket(e.target.value as Market | "")}
-        className="text-xs rounded-lg border border-zinc-800 px-2.5 py-1.5 bg-zinc-900/50 text-zinc-200 focus:border-emerald-500 focus:outline-none"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
       >
         <option value="">{t.at_filter_all_market}</option>
         {markets.map((m) => (
@@ -51,7 +51,7 @@ export function AssetFilterBar({
       <select
         value={filterType}
         onChange={(e) => onFilterType(e.target.value as AssetType | "")}
-        className="text-xs rounded-lg border border-zinc-800 px-2.5 py-1.5 bg-zinc-900/50 text-zinc-200 focus:border-emerald-500 focus:outline-none"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
       >
         <option value="">{t.at_filter_all_type}</option>
         {types.map((tp) => (
@@ -64,7 +64,7 @@ export function AssetFilterBar({
       <select
         value={filterCategory}
         onChange={(e) => onFilterCategory(e.target.value as AssetCategory | "")}
-        className="text-xs rounded-lg border border-zinc-800 px-2.5 py-1.5 bg-zinc-900/50 text-zinc-200 focus:border-emerald-500 focus:outline-none"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
       >
         <option value="">{t.at_filter_all_category}</option>
         {categoryOptions.map(([val, label]) => (
@@ -78,7 +78,7 @@ export function AssetFilterBar({
         <button
           type="button"
           onClick={onClearFilter}
-          className="text-xs text-zinc-400 hover:text-zinc-400 underline cursor-pointer"
+          className="cursor-pointer text-xs text-zinc-400 underline hover:text-zinc-400"
         >
           {t.at_filter_clear}
         </button>

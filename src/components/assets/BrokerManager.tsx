@@ -67,24 +67,24 @@ export function BrokerManager() {
     <div className="space-y-4">
       {/* 계좌 목록 */}
       {accounts.length === 0 ? (
-        <p className="text-sm text-zinc-400 py-4 text-center">
+        <p className="py-4 text-center text-sm text-zinc-400">
           {t.broker_empty}
         </p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-xs text-zinc-500 border-b border-zinc-800 whitespace-nowrap">
-                <th className="text-left font-medium py-2 pr-3">
+              <tr className="border-b border-zinc-800 text-xs whitespace-nowrap text-zinc-500">
+                <th className="py-2 pr-3 text-left font-medium">
                   {t.broker_col_nickname}
                 </th>
-                <th className="text-left font-medium py-2 pr-3">
+                <th className="py-2 pr-3 text-left font-medium">
                   {t.broker_col_broker}
                 </th>
-                <th className="text-left font-medium py-2 pr-3">
+                <th className="py-2 pr-3 text-left font-medium">
                   {t.broker_col_type}
                 </th>
-                <th className="text-left font-medium py-2 pr-3">
+                <th className="py-2 pr-3 text-left font-medium">
                   {t.broker_col_country}
                 </th>
                 <th className="py-2" />
@@ -94,41 +94,41 @@ export function BrokerManager() {
               {accounts.map((a) => (
                 <tr
                   key={a.id}
-                  className="border-b border-zinc-800 hover:bg-zinc-900/50 whitespace-nowrap"
+                  className="border-b border-zinc-800 whitespace-nowrap hover:bg-zinc-900/50"
                 >
                   <td
-                    className="py-2 pr-3 font-medium text-zinc-100 max-w-[120px] truncate"
+                    className="max-w-[120px] truncate py-2 pr-3 font-medium text-zinc-100"
                     title={a.nickname}
                   >
                     {a.nickname}
                   </td>
                   <td
-                    className="py-2 pr-3 text-zinc-400 max-w-[100px] truncate"
+                    className="max-w-[100px] truncate py-2 pr-3 text-zinc-400"
                     title={a.broker}
                   >
                     {a.broker}
                   </td>
                   <td className="py-2 pr-3">
                     {a.accountType && (
-                      <span className="text-xs bg-zinc-800/50 text-zinc-300 px-2 py-0.5 rounded-full border border-zinc-700">
+                      <span className="rounded-full border border-zinc-700 bg-zinc-800/50 px-2 py-0.5 text-xs text-zinc-300">
                         {a.accountType}
                       </span>
                     )}
                   </td>
                   <td className="py-2 pr-3 text-zinc-500">{a.country}</td>
                   <td className="py-2 text-right">
-                    <div className="flex gap-1 justify-end">
+                    <div className="flex justify-end gap-1">
                       <button
                         type="button"
                         onClick={() => openEdit(a)}
-                        className="text-xs text-zinc-400 hover:text-zinc-100 transition-colors px-1"
+                        className="px-1 text-xs text-zinc-400 transition-colors hover:text-zinc-100"
                       >
                         {t.broker_edit_btn}
                       </button>
                       <button
                         type="button"
                         onClick={() => handleDelete(a.id)}
-                        className="text-xs text-red-500 hover:underline px-1"
+                        className="px-1 text-xs text-red-500 hover:underline"
                       >
                         {t.broker_delete_btn}
                       </button>
@@ -143,8 +143,8 @@ export function BrokerManager() {
 
       {/* 추가/수정 폼 */}
       {editing ? (
-        <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/50 space-y-3">
-          <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wide">
+        <div className="space-y-3 rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
+          <p className="text-xs font-semibold tracking-wide text-zinc-400 uppercase">
             {editing.id ? t.broker_edit_btn : t.broker_add_btn}
           </p>
           <div className="grid grid-cols-2 gap-3">

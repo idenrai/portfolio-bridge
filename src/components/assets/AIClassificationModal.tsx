@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAssetStore, useLanguageStore } from "@/stores";
 import { useT } from "@/hooks";
 import { Button, Modal } from "@/components/common";
-import { buildClassificationPrompt, parseAiResponse } from "@/utils";
+import { buildClassificationPrompt, parseAiResponse, cn } from "@/utils";
 import { Sparkles } from "lucide-react";
 
 interface AIClassificationModalProps {
@@ -70,7 +70,7 @@ export function AIClassificationModal({
       onClose={handleClose}
       title={
         <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-indigo-400" />
+          <Sparkles className="size-5 text-indigo-400" />
           <span>{t.asset_ai_modal_title}</span>
         </div>
       }
@@ -78,26 +78,28 @@ export function AIClassificationModal({
     >
       <div className="space-y-4">
         {/* 탭 */}
-        <div className="flex rounded-lg border border-zinc-800 overflow-hidden">
+        <div className="flex overflow-hidden rounded-lg border border-zinc-800">
           <button
             type="button"
             onClick={() => setPromptTab("generate")}
-            className={`flex-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
+            className={cn(
+              "flex-1 cursor-pointer py-2 text-sm font-medium transition-colors",
               promptTab === "generate"
                 ? "bg-zinc-100 text-black shadow-sm"
                 : "bg-white text-zinc-400 hover:bg-zinc-900/50"
-            }`}
+            )}
           >
             {t.asset_ai_tab_generate}
           </button>
           <button
             type="button"
             onClick={() => setPromptTab("import")}
-            className={`flex-1 py-2 text-sm font-medium transition-colors cursor-pointer ${
+            className={cn(
+              "flex-1 cursor-pointer py-2 text-sm font-medium transition-colors",
               promptTab === "import"
                 ? "bg-zinc-100 text-black shadow-sm"
                 : "bg-white text-zinc-400 hover:bg-zinc-900/50"
-            }`}
+            )}
           >
             {t.asset_ai_tab_import}
           </button>
@@ -112,7 +114,7 @@ export function AIClassificationModal({
               <button
                 type="button"
                 onClick={() => setPromptTab("import")}
-                className="text-zinc-300 font-medium underline underline-offset-2 cursor-pointer"
+                className="cursor-pointer font-medium text-zinc-300 underline underline-offset-2"
               >
                 {t.asset_ai_tab_link}
               </button>{" "}
@@ -124,7 +126,7 @@ export function AIClassificationModal({
               rows={16}
               aria-label={t.asset_ai_copy_desc}
               onFocus={(e) => e.target.select()}
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-3 text-sm font-mono text-zinc-300 resize-none focus:outline-none focus:ring-1 focus:ring-zinc-700"
+              className="w-full resize-none rounded-lg border border-zinc-800 bg-zinc-900 p-3 font-mono text-sm text-zinc-300 focus:ring-1 focus:ring-zinc-700 focus:outline-none"
             />
             <div className="flex justify-end gap-2">
               <Button variant="secondary" onClick={handleClose}>
@@ -157,17 +159,17 @@ export function AIClassificationModal({
               aria-label={t.asset_ai_json_placeholder}
               spellCheck={false}
               placeholder={t.asset_ai_json_placeholder}
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-3 text-sm font-mono text-zinc-300 resize-none focus:outline-none focus:ring-1 focus:ring-zinc-700"
+              className="w-full resize-none rounded-lg border border-zinc-800 bg-zinc-900 p-3 font-mono text-sm text-zinc-300 focus:ring-1 focus:ring-zinc-700 focus:outline-none"
             />
 
             {importError && (
-              <div className="rounded-lg bg-red-500/10 border border-red-500/20 px-3 py-2 text-sm text-red-400">
+              <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
                 {importError}
               </div>
             )}
 
             {importResult && (
-              <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 text-sm text-emerald-400">
+              <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-400">
                 {t.asset_ai_apply_result(
                   importResult.applied,
                   importResult.skipped,

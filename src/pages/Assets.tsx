@@ -110,8 +110,8 @@ export function AssetsPage() {
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <div className="flex items-center justify-between gap-2 flex-wrap">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white text-balance">{t.asset_title}</h1>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.asset_title}</h1>
         <div className="flex items-center gap-2">
           <Button variant="secondary" size="sm" onClick={() => setBrokerManagerOpen(true)}>
             {t.broker_manage_btn}
@@ -133,16 +133,16 @@ export function AssetsPage() {
         </div>
       </div>
       <div className="rounded-xl bg-linear-to-r from-violet-500/20 to-purple-500/20 p-px shadow-sm">
-        <div className="rounded-[11px] bg-zinc-950/95 px-4 py-4 sm:px-5">
+        <div className="rounded-[11px] bg-zinc-950/95 p-4 sm:px-5">
           <div className="flex flex-col gap-4">
             {/* Header */}
             <div className="flex gap-4">
-              <Sparkles className="w-6 h-6 text-indigo-400 shrink-0 mt-0.5" />
+              <Sparkles className="mt-0.5 size-6 shrink-0 text-indigo-400" />
               <div className="flex-1 space-y-3">
-                <p className="text-sm font-semibold text-zinc-100 leading-tight">
+                <p className="text-sm leading-tight font-semibold text-zinc-100">
                   {t.asset_ai_banner_title}
                 </p>
-                <p className="text-[11px] sm:text-xs text-zinc-500 mt-1 leading-relaxed">
+                <p className="mt-1 text-[11px] leading-relaxed text-zinc-500 sm:text-xs">
                   {t.asset_ai_banner_desc}
                 </p>
               </div>
@@ -153,7 +153,7 @@ export function AssetsPage() {
                 type="button"
                 onClick={() => setPromptOpen(true)}
                 disabled={assets.length === 0}
-                className="flex-1 sm:flex-none rounded-lg bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 border border-violet-500/30 px-3 py-2 text-xs font-medium shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex-1 cursor-pointer rounded-lg border border-violet-500/30 bg-violet-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-violet-400 shadow-sm transition-all hover:bg-violet-500/20 hover:opacity-90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
               >
                 {t.asset_btn_ai}
               </button>

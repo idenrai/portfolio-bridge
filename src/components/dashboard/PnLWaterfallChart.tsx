@@ -58,7 +58,7 @@ export function PnLWaterfallChart({ assets }: Props) {
         >
           <CartesianGrid
             strokeDasharray="3 3"
-            stroke="#f1f5f9"
+            stroke="#27272a"
             horizontal={false}
           />
           <XAxis
@@ -95,7 +95,7 @@ export function PnLWaterfallChart({ assets }: Props) {
             }}
             itemStyle={{ color: "#fff", fontVariantNumeric: "tabular-nums" }}
           />
-          <ReferenceLine x={0} stroke="#cbd5e1" strokeWidth={1} />
+          <ReferenceLine x={0} stroke="#52525b" strokeWidth={1} />
           <Bar dataKey="pnl" radius={[0, 3, 3, 0]}>
             {data.map((d, i) => (
               <Cell
@@ -107,13 +107,13 @@ export function PnLWaterfallChart({ assets }: Props) {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <div className="flex items-center gap-4 mt-1 text-[10px] text-zinc-400">
+      <div className="mt-1 flex items-center gap-4 text-[10px] text-zinc-400">
         <span className="flex items-center gap-1">
-          <span className="w-2.5 h-2.5 rounded-sm bg-red-400 inline-block" />
+          <span className="inline-block size-2.5 rounded-sm bg-red-400" />
           {t.pnl_chart_profit}
         </span>
         <span className="flex items-center gap-1">
-          <span className="w-2.5 h-2.5 rounded-sm bg-blue-400 inline-block" />
+          <span className="inline-block size-2.5 rounded-sm bg-blue-400" />
           {t.pnl_chart_loss}
         </span>
         <span className="ml-auto">{t.pnl_chart_top12}</span>

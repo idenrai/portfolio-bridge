@@ -57,19 +57,19 @@ export function DataRefreshSection() {
     >
       <div className="space-y-3">
         {error && (
-          <p className="text-xs text-red-600 bg-red-500/10 rounded px-3 py-2">
+          <p className="rounded bg-red-500/10 px-3 py-2 text-xs text-red-600">
             {error}
           </p>
         )}
         {!isLoading && failedAssets.length > 0 && (
-          <p className="text-xs text-amber-700 bg-amber-50 rounded px-3 py-2">
+          <p className="rounded bg-amber-50 px-3 py-2 text-xs text-amber-700">
             {t.data_refresh_partial_fail(
               failedAssets.map((a) => `${a.name} (${a.ticker})`),
             )}
           </p>
         )}
         {isCached && lastUpdated && (
-          <p className="text-xs text-amber-700 bg-amber-50 rounded px-3 py-2">
+          <p className="rounded bg-amber-50 px-3 py-2 text-xs text-amber-700">
             {t.settings_data_refresh_cache_warn(
               new Date(lastUpdated).toLocaleTimeString(langLocale, {
                 hour: "2-digit",
@@ -81,7 +81,7 @@ export function DataRefreshSection() {
 
         {/* 환율 표시 */}
         <div>
-          <p className="text-xs font-medium text-zinc-500 mb-2">
+          <p className="mb-2 text-xs font-medium text-zinc-500">
             {t.settings_fx_title}
           </p>
           <div className="space-y-1">
@@ -100,15 +100,15 @@ export function DataRefreshSection() {
                 return (
                   <div
                     key={code}
-                    className="grid py-0.5 items-center gap-x-1 sm:gap-x-2 grid-cols-[1fr_auto_auto_auto]"
+                    className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-1 py-0.5 sm:gap-x-2"
                   >
-                    <span className="text-xs sm:text-sm text-zinc-400 truncate">
+                    <span className="truncate text-xs text-zinc-400 sm:text-sm">
                       {currencyName} ({code})
                     </span>
-                    <span className="text-[10px] sm:text-xs text-zinc-400 text-right tabular-nums">
+                    <span className="text-right text-[10px] text-zinc-400 tabular-nums sm:text-xs">
                       {unit} {code} =
                     </span>
-                    <span className="text-xs sm:text-sm font-mono text-zinc-100 text-right tabular-nums">
+                    <span className="text-right font-mono text-xs text-zinc-100 tabular-nums sm:text-sm">
                       {rateInBase.toLocaleString(langLocale, {
                         maximumSignificantDigits: 4,
                       })}
@@ -125,9 +125,9 @@ export function DataRefreshSection() {
         {/* 시세 진행률 */}
         {isLoading && totalCount > 0 && (
           <div className="space-y-1">
-            <div className="h-1.5 w-full bg-zinc-800/50 rounded-full overflow-hidden">
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800/50">
               <div
-                className="h-full bg-zinc-300 transition-all duration-300 rounded-full"
+                className="h-full rounded-full bg-zinc-300 transition-all duration-300"
                 style={{
                   width: `${Math.round((updatedCount / totalCount) * 100)}%`,
                 }}

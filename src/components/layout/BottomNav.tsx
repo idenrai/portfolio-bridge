@@ -14,8 +14,8 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 bg-black border-t border-zinc-800 md:hidden safe-bottom">
-      <div className="flex justify-around items-center h-14 px-1">
+    <nav className="safe-bottom fixed inset-x-0 bottom-0 z-50 border-t border-zinc-800 bg-black md:hidden">
+      <div className="flex h-14 items-center justify-around px-1">
         {NAV_ITEMS.map((item) => (
           <NavLink
             key={item.to}
@@ -27,7 +27,7 @@ export function BottomNav() {
               }`
             }
           >
-            <span className="truncate px-1 text-center w-full">{item.label}</span>
+            <span className="w-full truncate px-1 text-center">{item.label}</span>
           </NavLink>
         ))}
       </div>

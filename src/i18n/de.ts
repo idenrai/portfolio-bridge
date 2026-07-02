@@ -704,6 +704,7 @@ export const de: Translations = {
   af_quantity_label: "Menge *",
   af_avg_price_label: "Durchschnittlicher Einstandspreis",
   af_current_price_label: "Aktueller Kurs",
+  af_current_price_help: "※ Der eingegebene Kurs kann bei automatischer Aktualisierung überschrieben werden. Bei Vermögenswerten, bei denen die automatische Aktualisierung fehlschlägt (z. B. Investmentfonds), bleibt der manuell eingegebene Kurs erhalten.",
   af_current_price_auto: "✓ Automatisch von Yahoo Finance abgerufen",
   af_fetch_price_btn: "Kurs abrufen",
   af_fetching: "Wird abgerufen…",

@@ -46,9 +46,9 @@ export function AssetTableRow({
   const isCash = asset.type === "cash";
 
   return (
-    <tr className="hover:bg-zinc-800/50 transition-colors whitespace-nowrap">
-      <td className="py-2.5 max-w-65">
-        <p className="font-medium text-white wrap-break-word whitespace-normal leading-snug">
+    <tr className="whitespace-nowrap transition-colors hover:bg-zinc-800/50">
+      <td className="max-w-65 py-2.5">
+        <p className="leading-snug font-medium wrap-break-word whitespace-normal text-white">
           {asset.name}
         </p>
         {asset.ticker && (
@@ -56,7 +56,7 @@ export function AssetTableRow({
         )}
       </td>
       <td className="py-2.5 whitespace-nowrap">
-        <span className="text-xs bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded">
+        <span className="rounded bg-zinc-800 px-2 py-0.5 text-xs text-zinc-300">
           {t.market_labels[asset.market]}
         </span>
       </td>
@@ -67,7 +67,7 @@ export function AssetTableRow({
           onChange={(e) =>
             onCategoryChange(asset.id, e.target.value as AssetCategory | "")
           }
-          className="text-[11px] uppercase tracking-wider rounded-sm border border-transparent hover:border-zinc-700 px-1 py-1 bg-transparent hover:bg-zinc-900 text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:border-zinc-500 min-w-22 cursor-pointer transition-colors"
+          className="min-w-22 cursor-pointer rounded-sm border border-transparent bg-transparent p-1 text-[11px] tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
         >
           <option value="">{t.at_unclassified}</option>
           {categoryOptions.map(([val, label]) => (
@@ -83,7 +83,7 @@ export function AssetTableRow({
             aria-label={t.af_account_label}
             value={asset.brokerId ?? ""}
             onChange={(e) => onBrokerChange(asset.id, e.target.value)}
-            className="text-[11px] uppercase tracking-wider rounded-sm border border-transparent hover:border-zinc-700 px-1 py-1 bg-transparent hover:bg-zinc-900 text-zinc-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:border-zinc-500 min-w-22 cursor-pointer transition-colors"
+            className="min-w-22 cursor-pointer rounded-sm border border-transparent bg-transparent p-1 text-[11px] tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
           >
             <option value="">{t.af_account_none}</option>
             {brokerAccounts.map((b) => (
@@ -101,7 +101,7 @@ export function AssetTableRow({
           asset.quantity.toLocaleString()
         )}
       </td>
-      <td className="py-2.5 text-right tabular-nums text-zinc-500">
+      <td className="py-2.5 text-right text-zinc-500 tabular-nums">
         {isCash ? (
           <span className="text-zinc-400">-</span>
         ) : (
@@ -121,7 +121,7 @@ export function AssetTableRow({
           </>
         )}
       </td>
-      <td className="py-2.5 text-right tabular-nums font-medium">
+      <td className="py-2.5 text-right font-medium tabular-nums">
         {sym}
         {val.toLocaleString()}
       </td>
@@ -141,7 +141,7 @@ export function AssetTableRow({
         )}
       </td>
       <td
-        className={`py-2.5 text-right tabular-nums font-medium ${isCash ? "text-zinc-500" : pnlColor}`}
+        className={`py-2.5 text-right font-medium tabular-nums ${isCash ? "text-zinc-500" : pnlColor}`}
       >
         {isCash ? "-" : (
           <div className="flex items-center justify-end gap-1">
