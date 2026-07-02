@@ -184,7 +184,7 @@ export const de: Translations = {
   guru_ai_close: "Schließen",
   guru_ai_desc:
     "Kopieren Sie den Prompt unten und fügen Sie ihn in ChatGPT, Claude, Gemini oder Grok ein.",
-  guru_ai_search_warn: "⚠️ Die KI sucht nach den neuesten Nachrichten, was einige zusätzliche Sekunden dauern kann.",
+  guru_ai_search_warn: "Die KI sucht nach den neuesten Nachrichten, was einige zusätzliche Sekunden dauern kann.",
   guru_ai_copy: "In die Zwischenablage kopieren",
   guru_ai_copied: "✓ Kopiert!",
   guru_ai_followup_btn: "Vorheriges Gespräch fortsetzen",
@@ -427,7 +427,7 @@ export const de: Translations = {
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
   lynch_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
   lynch_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
-  lynch_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  lynch_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   lynch_tenbagger_badge: "🚀 Tenbagger-Kandidat",
   lynch_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
@@ -453,7 +453,7 @@ export const de: Translations = {
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
   mf_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
   mf_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
-  mf_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  mf_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   mf_magic_badge: "🪄 Magic-Formula-Kandidat",
   mf_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
@@ -472,7 +472,7 @@ export const de: Translations = {
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
   graham_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
   graham_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
-  graham_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  graham_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   graham_defensive_badge: "🛡️ Defensiver Kandidat",
   graham_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
@@ -490,7 +490,7 @@ export const de: Translations = {
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
   smith_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
   smith_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
-  smith_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  smith_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   smith_quality_badge: "✨ Quality Compounder",
   smith_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
@@ -512,7 +512,7 @@ export const de: Translations = {
     "※ Basierend auf Yahoo Finance-Daten. Nicht als alleinige Grundlage für Anlageentscheidungen verwenden.",
   piotroski_progress_enrich: (done, total) => `⏳ Analyse läuft… (${done}/${total})`,
   piotroski_phase_enrich: "🔍 Detaillierte Finanzdaten werden ergänzt…",
-  piotroski_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  piotroski_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   piotroski_fscore_badge: "📊 Starker F-Score",
   piotroski_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
@@ -532,7 +532,7 @@ export const de: Translations = {
     "※ Basierend auf Yahoo Finance-Daten. Nicht als alleinige Grundlage für Anlageentscheidungen verwenden.",
   oneil_progress_enrich: (done, total) => `⏳ Analyse läuft… (${done}/${total})`,
   oneil_phase_enrich: "🔍 Detaillierte Finanzdaten werden ergänzt…",
-  oneil_no_result: "⚠️ Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
+  oneil_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
   oneil_canslim_badge: "🚀 CAN SLIM geeignet",
   oneil_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
@@ -559,7 +559,7 @@ export const de: Translations = {
     "Wählen Sie die Basiswährung für die Anzeige von Portfoliowerten.",
   settings_fx_title: "Wechselkurse",
   settings_fx_cache_warn: (time) =>
-    `⚠️ Kursabruf fehlgeschlagen — gecachten Wert verwenden (Stand: ${time})`,
+    `Kursabruf fehlgeschlagen — gecachten Wert verwenden (Stand: ${time})`,
   settings_data_refresh_title: "Kurse & Preise",
   settings_data_refresh_refreshing: "Wird abgerufen…",
   settings_data_refresh_refresh: "🔄 Jetzt aktualisieren",
@@ -567,7 +567,7 @@ export const de: Translations = {
     "Kurse und Preise werden beim App-Start automatisch abgerufen.",
   settings_data_refresh_time: (time) => `Stand: ${time}`,
   settings_data_refresh_cache_warn: (time) =>
-    `⚠️ Abruf fehlgeschlagen — gecachte Werte verwenden (Stand: ${time})`,
+    `Abruf fehlgeschlagen — gecachte Werte verwenden (Stand: ${time})`,
   settings_data_refresh_result: (updated, total) =>
     `${updated} von ${total} Preise aktualisiert`,
   settings_data_refresh_no_ticker:

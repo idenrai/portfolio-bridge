@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, AlertTriangle, TrendingDown, CircleDollarSign, Coins, PieChart } from "lucide-react";
 import { Card } from "@/components/common";
 import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore } from "@/stores";
@@ -23,6 +23,17 @@ const CLOSE_BTN = {
   warning: "text-amber-500 hover:text-amber-300",
   info: "text-blue-500 hover:text-blue-300",
 } as const;
+
+function getInsightIcon(id: string, className: string) {
+  switch (id) {
+    case "warning": return <AlertTriangle aria-hidden="true" className={className} />;
+    case "danger": return <TrendingDown aria-hidden="true" className={className} />;
+    case "money": return <CircleDollarSign aria-hidden="true" className={className} />;
+    case "fx": return <Coins aria-hidden="true" className={className} />;
+    case "chart": return <PieChart aria-hidden="true" className={className} />;
+    default: return <AlertTriangle aria-hidden="true" className={className} />;
+  }
+}
 
 export function InsightsPanel({ summary, assets, targets }: Props) {
   const t = useT();
@@ -122,7 +133,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                 key={i}
                 className={`flex items-start gap-2 px-3 py-2 rounded-lg border text-xs ${TYPE_STYLES[insight.type]}`}
               >
-                <span className="text-sm shrink-0">{insight.icon}</span>
+                <span className="shrink-0 mt-px">{getInsightIcon(insight.icon, "w-3.5 h-3.5")}</span>
                 <span className="leading-relaxed flex-1">
                   {insight.message}
                 </span>

@@ -135,7 +135,6 @@ export function GurusPage() {
                   <div className="mt-8 pt-6 border-t border-zinc-800/60 flex flex-col gap-5">
                     {quotes.map((quote, idx) => (
                       <blockquote key={idx} className="relative">
-                        <span aria-hidden="true" className="absolute -left-2 -top-2 text-3xl text-zinc-800 font-serif leading-none select-none">"</span>
                         <p className="relative z-10 text-sm font-medium text-zinc-300/90 italic leading-relaxed pl-3 border-l-2 border-indigo-500/30">
                           {quote}
                         </p>

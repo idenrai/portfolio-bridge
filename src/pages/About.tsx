@@ -38,6 +38,7 @@ const STACK = [
   "Vite 7",
   "Tailwind CSS v4",
   "Zustand 5",
+  "Lucide React",
   "Recharts",
   "Yahoo Finance API",
   "Tauri v2",

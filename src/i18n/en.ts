@@ -178,7 +178,7 @@ export const en: Translations = {
   guru_ai_close: "Close",
   guru_ai_desc:
     "Copy the prompt below and paste it into AI tools like ChatGPT, Claude, Gemini, or Grok.",
-  guru_ai_search_warn: "⚠️ AI will search the web for the latest news, which may take a few extra seconds.",
+  guru_ai_search_warn: "AI will search the web for the latest news, which may take a few extra seconds.",
   guru_ai_copy: "Copy to Clipboard",
   guru_ai_copied: "✓ Copied!",
   guru_ai_followup_btn: "Continue Previous Chat",
@@ -417,7 +417,7 @@ export const en: Translations = {
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
   lynch_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
   lynch_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
-  lynch_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  lynch_no_result: "No stock data received from Yahoo Finance. Please try again later.",
   lynch_tenbagger_badge: "🚀 Tenbagger Candidate",
   lynch_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
@@ -443,7 +443,7 @@ export const en: Translations = {
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
   mf_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
   mf_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
-  mf_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  mf_no_result: "No stock data received from Yahoo Finance. Please try again later.",
   mf_magic_badge: "🪄 Magic Formula Pick",
   mf_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
@@ -462,7 +462,7 @@ export const en: Translations = {
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
   graham_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
   graham_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
-  graham_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  graham_no_result: "No stock data received from Yahoo Finance. Please try again later.",
   graham_defensive_badge: "🛡️ Defensive Pick",
   graham_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
@@ -480,7 +480,7 @@ export const en: Translations = {
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
   smith_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
   smith_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
-  smith_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  smith_no_result: "No stock data received from Yahoo Finance. Please try again later.",
   smith_quality_badge: "✨ Quality Compounder",
   smith_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
@@ -502,7 +502,7 @@ export const en: Translations = {
     "※ Based on Yahoo Finance data. Do not use as sole basis for investment decisions.",
   piotroski_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
   piotroski_phase_enrich: "🔍 Enriching financial data…",
-  piotroski_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  piotroski_no_result: "No stock data received from Yahoo Finance. Please try again later.",
   piotroski_fscore_badge: "📊 Strong F-Score",
   piotroski_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
@@ -522,7 +522,7 @@ export const en: Translations = {
     "※ Based on Yahoo Finance data. Do not use as sole basis for investment decisions.",
   oneil_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
   oneil_phase_enrich: "🔍 Enriching financial data…",
-  oneil_no_result: "⚠️ No stock data received from Yahoo Finance. Please try again later.",
+  oneil_no_result: "No stock data received from Yahoo Finance. Please try again later.",
   oneil_canslim_badge: "🚀 CAN SLIM Fit",
   oneil_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
@@ -549,7 +549,7 @@ export const en: Translations = {
     "Select the base currency for displaying portfolio values.",
   settings_fx_title: "Exchange Rates",
   settings_fx_cache_warn: (time) =>
-    `⚠️ Rate fetch failed — using cached value (as of ${time})`,
+    `Rate fetch failed — using cached value (as of ${time})`,
   settings_data_refresh_title: "Rates & Prices",
   settings_data_refresh_refreshing: "Fetching…",
   settings_data_refresh_refresh: "🔄 Refresh Now",
@@ -557,7 +557,7 @@ export const en: Translations = {
     "Rates and prices are fetched automatically on app start.",
   settings_data_refresh_time: (time) => `As of ${time}`,
   settings_data_refresh_cache_warn: (time) =>
-    `⚠️ Fetch failed — using cached values (as of ${time})`,
+    `Fetch failed — using cached values (as of ${time})`,
   settings_data_refresh_result: (updated, total) =>
     `${updated} of ${total} prices updated`,
   settings_data_refresh_no_ticker: "No assets with tickers registered.",
