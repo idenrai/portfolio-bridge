@@ -36,7 +36,7 @@ export function FirePlannerPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-20 pt-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white text-balance">
           {t.fire_title}
         </h1>
         <p className="text-sm text-zinc-400 leading-relaxed">

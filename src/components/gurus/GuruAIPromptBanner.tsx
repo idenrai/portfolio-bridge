@@ -117,21 +117,24 @@ export function GuruAIPromptBanner({
   };
 
   return (
-    <div className="rounded-xl bg-linear-to-r from-purple-600 to-indigo-500 p-px shadow-md">
-      <div className="rounded-[11px] bg-zinc-900/95 px-4 py-3">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+    <div className="rounded-xl bg-linear-to-r from-indigo-500/20 to-purple-500/20 p-px shadow-sm">
+      <div className="rounded-[11px] bg-zinc-900/95 px-4 py-4 sm:px-5">
+        <div className="flex flex-col gap-4">
+          {/* Header */}
           <div className="flex items-start gap-3 min-w-0">
             <span className="text-2xl shrink-0 mt-0.5">🧘</span>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-zinc-200 leading-tight">
+              <p className="text-sm font-semibold text-zinc-100 leading-tight">
                 {t.guru_ai_banner_title}
               </p>
-              <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
+              <p className="text-[11px] sm:text-xs text-zinc-500 mt-1 leading-relaxed">
                 {t.guru_ai_banner_desc}
               </p>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto shrink-0">
+          
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center gap-2">
             {prevSession && (
               <button
                 type="button"
@@ -139,7 +142,7 @@ export function GuruAIPromptBanner({
                   setShowFollowUp(true);
                   setShowPrompt(false);
                 }}
-                className="rounded-lg bg-emerald-600 hover:bg-emerald-700 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
+                className="flex-1 sm:flex-none rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-2 text-xs font-medium shadow-sm active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
               >
                 {t.guru_ai_followup_btn}
               </button>
@@ -147,7 +150,7 @@ export function GuruAIPromptBanner({
             <button
               type="button"
               onClick={handleNewSession}
-              className="rounded-lg bg-linear-to-r from-purple-600 to-indigo-500 px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
+              className="flex-1 sm:flex-none rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-3 py-2 text-xs font-medium shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center"
             >
               {t.guru_ai_followup_new_session}
             </button>
@@ -156,55 +159,61 @@ export function GuruAIPromptBanner({
 
         {/* 첫 번째 프롬프트 */}
         {showPrompt && (
-          <div className="mt-3 pt-3 border-t border-zinc-800/50 space-y-2">
-            <p className="text-xs text-zinc-500">{t.guru_ai_desc}</p>
-            <textarea
-              readOnly
-              value={promptText}
-              rows={12}
-              className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs font-mono text-zinc-300 resize-none focus:outline-none"
-            />
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[10px] text-zinc-500 leading-tight flex-1">
-                {t.guru_ai_search_warn}
-              </span>
+          <div className="mt-4 pt-4 border-t border-zinc-800/50 space-y-3">
+            <p className="text-[11px] text-zinc-500">{t.guru_ai_desc}</p>
+            <div className="relative group">
+              <textarea
+                readOnly
+                value={promptText}
+                rows={12}
+                className="w-full rounded-xl border border-zinc-800 bg-zinc-950 p-3 pb-12 text-[11px] sm:text-xs font-mono text-zinc-300 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500/50 transition-shadow"
+              />
               <button
                 type="button"
                 onClick={copyPrompt}
-                className="shrink-0 whitespace-nowrap rounded-lg bg-zinc-800 hover:bg-zinc-700 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                className="absolute bottom-3 right-3 shrink-0 rounded-md bg-zinc-800/80 backdrop-blur hover:bg-zinc-700 px-3 py-1.5 text-xs font-medium text-white transition-colors cursor-pointer shadow-sm border border-zinc-700/50"
               >
-                {copied ? t.guru_ai_copied : t.guru_ai_copy}
+                {copied ? "✓ " + t.guru_ai_copied : t.guru_ai_copy}
               </button>
+            </div>
+            <div className="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-2.5 mt-1">
+              <span className="text-yellow-500 text-xs shrink-0 mt-px">⚠️</span>
+              <span className="text-[10px] sm:text-[11px] text-yellow-500/90 leading-relaxed">
+                {t.guru_ai_search_warn}
+              </span>
             </div>
           </div>
         )}
 
         {/* 두 번째 (변동 사항) 프롬프트 */}
         {showFollowUp && followUpText && (
-          <div className="mt-3 pt-3 border-t border-zinc-800/50 space-y-2">
+          <div className="mt-4 pt-4 border-t border-zinc-800/50 space-y-3">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-medium text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-medium text-emerald-400 bg-emerald-900/30 border border-emerald-800/50 px-2 py-0.5 rounded-full">
                 📅 {prevSession?.date}
               </span>
-              <p className="text-xs text-zinc-500">{t.guru_ai_followup_desc}</p>
+              <p className="text-[11px] text-zinc-500">{t.guru_ai_followup_desc}</p>
             </div>
-            <textarea
-              readOnly
-              value={followUpText}
-              rows={14}
-              className="w-full rounded-lg border border-emerald-800 bg-emerald-900/20 px-3 py-2 text-xs font-mono text-zinc-300 resize-none focus:outline-none"
-            />
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[10px] text-emerald-600/70 leading-tight flex-1">
-                {t.guru_ai_search_warn}
-              </span>
+            <div className="relative group">
+              <textarea
+                readOnly
+                value={followUpText}
+                rows={14}
+                className="w-full rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-3 pb-12 text-[11px] sm:text-xs font-mono text-zinc-300 resize-none focus:outline-none focus:ring-1 focus:ring-emerald-500/50 transition-shadow"
+              />
               <button
                 type="button"
                 onClick={copyFollowUp}
-                className="shrink-0 whitespace-nowrap rounded-lg bg-emerald-700 hover:bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white transition-colors cursor-pointer"
+                className="absolute bottom-3 right-3 shrink-0 rounded-md bg-emerald-800/80 backdrop-blur hover:bg-emerald-700 px-3 py-1.5 text-xs font-medium text-emerald-50 transition-colors cursor-pointer shadow-sm border border-emerald-700/50"
               >
-                {copiedFollowUp ? t.guru_ai_copied : t.guru_ai_copy}
+                {copiedFollowUp ? "✓ " + t.guru_ai_copied : t.guru_ai_copy}
               </button>
+            </div>
+            <div className="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-2.5 mt-1">
+              <span className="text-yellow-500 text-xs shrink-0 mt-px">⚠️</span>
+              <span className="text-[10px] sm:text-[11px] text-yellow-500/90 leading-relaxed">
+                {t.guru_ai_search_warn}
+              </span>
             </div>
           </div>
         )}

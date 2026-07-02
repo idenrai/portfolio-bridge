@@ -167,11 +167,11 @@ export const de: Translations = {
   guru_empty_title: "Guru-Analyse",
   guru_empty_desc:
     "Registrieren Sie Ihre Vermögenswerte, um Ihr Portfolio mit einem Guru zu vergleichen.",
-  guru_philosophy_title: (name) => `${name}s Investmentphilosophie`,
-  guru_ideal_alloc: (name) => `${name}s Idealallokation`,
+  guru_philosophy_label: "Investmentphilosophie",
+  guru_ideal_alloc: "Ideale Allokation",
   guru_radar_title: "Mein Portfolio vs. Guru",
   guru_my_portfolio: "Mein Portfolio",
-  guru_rebalance_title: (name) => `Neuausrichtungsvorschläge (${name})`,
+  guru_rebalance_title: "Rebalancing-Vorschlag",
   guru_col_category: "Kategorie",
   guru_col_current: "Aktuell",
   guru_col_guru_target: "Guru-Ziel",
@@ -216,145 +216,182 @@ export const de: Translations = {
   guru_name_oneil: "William O'Neil",
   guru_philosophy_buffett:
     "• Wirtschaftlicher Burggraben: Konzentration auf Unternehmen mit dauerhaften Wettbewerbsvorteilen und hohen Markteintrittsbarrieren\n" +
-    "• Langfristiges Halten: Verständliche Unternehmen zu fairen Preisen kaufen und 10+ Jahre halten\n" +
-    "• Dividendenwachstum & Aktienrückkäufe: Bevorzugung von Unternehmen mit konsistenter Aktionärsvergütungspolitik\n" +
-    "• Kompetenzkreis: Nur in Branchen investieren, die man wirklich versteht\n" +
-    "• Barreserven: Stets erhebliche Barmittel halten, um großartige Gelegenheiten zu ergreifen\n" +
-    '• Zitat: "Regel Nr. 1: Verliere niemals Geld. Regel Nr. 2: Vergiss niemals Regel Nr. 1."',
+    "• Langfristiges Halten: Verständliche Unternehmen zu fairen Preisen kaufen und bevorzugt für immer halten\n" +
+    "• Dividendenwachstum & Aktienrückkäufe: Bevorzugung von Unternehmen mit konsistenter Aktionärsvergütungspolitik und exzellenter Kapitalallokation\n" +
+    "• Kompetenzkreis: Nur in Branchen und Geschäftsmodelle investieren, die man wirklich versteht\n" +
+    "• Wunderbares Geschäft: Es ist weitaus besser, ein wunderbares Unternehmen zu einem fairen Preis zu kaufen als ein faires Unternehmen zu einem wunderbaren Preis\n" +
+    "• Dummheit meiden: Komplexe Derivate und schwer verständliche Geschäftsmodelle strikt ablehnen\n" +
+    "• Barreserven: Stets erhebliche Barmittel halten, um in Krisen Liquidität zu sichern und großartige Gelegenheiten zu ergreifen\n" +
+    '• "Regel Nr. 1: Verliere niemals Geld. Regel Nr. 2: Vergiss niemals Regel Nr. 1."\n' +
+    '• "Sei ängstlich, wenn andere gierig sind, und gierig, wenn andere ängstlich sind."\n' +
+    '• "Erst wenn die Ebbe kommt, sieht man, wer nackt geschwommen ist."',
   guru_philosophy_munger:
-    "• Konzentriertes Investieren: Große Wetten nur bei hoher Überzeugung in wenige herausragende Unternehmen\n" +
-    "• Mentale Modelle (multidisziplinäres Denken): Frameworks aus Psychologie, Physik, Ökonomie und mehr nutzen\n" +
-    "• Geduld: Oft ist der beste Schachzug, gar nichts zu tun\n" +
-    "• Modeideen meiden: Populären Narrativen und Herdendenken widerstehen; wirklich unabhängiges Urteil ist oberstes Gebot\n" +
-    "• Die Kunst der Vermeidung: Schlechte Investitionen zu vermeiden ist wichtiger als großartige zu finden\n" +
-    '• Zitat: "Invertieren, immer invertieren."',
+    "• Konzentriertes Investieren: Massive Wetten nur bei hoher Überzeugung in wenige herausragende Unternehmen abschließen\n" +
+    "• Mentale Modelle (multidisziplinäres Denken): Kernkonzepte aus Psychologie, Physik, Biologie, Mathematik und Geschichte zusammenführen\n" +
+    "• Geduld: Häufiges Handeln vermeiden; oft ist es am besten, nichts zu tun und den Zinseszins eines großartigen Geschäfts wirken zu lassen\n" +
+    "• Konträres Denken: Populären Narrativen und Herdendenken widerstehen; ein wirklich unabhängiges Urteil ist unerlässlich\n" +
+    "• Die Kunst der Vermeidung (Inversion): Zuerst fragen, wie man scheitern könnte, und Dummheit systematisch meiden, um Erfolg zu haben\n" +
+    "• Kontinuierliches Lernen: Jeden Tag ein wenig klüger ins Bett gehen als man aufgewacht ist, durch unermüdliches Lesen und Nachdenken\n" +
+    "• Macht der Anreize: Die enorme Bedeutung von Anreizstrukturen auf menschliches Verhalten und Unternehmensergebnisse absolut betonen\n" +
+    '• "Invertieren, immer invertieren."\n' +
+    '• "Zeig mir den Anreiz, und ich zeige dir das Ergebnis."\n' +
+    '• "Es ist bemerkenswert, wie viel langfristigen Vorteil wir erzielt haben, indem wir beständig versuchten, nicht dumm zu sein, anstatt zu versuchen, sehr intelligent zu sein."',
   guru_philosophy_lynch:
-    "• Alltägliche Investmentideen: Wachsende Produkte und Dienstleistungen im täglichen Leben entdecken\n" +
-    "• PEG-Ratio: KGV durch Gewinnwachstumsrate teilen, um faire Bewertung einzuschätzen\n" +
-    "• Tenbagger-Suche: Aktien mit dem Potenzial für 10-fache Renditen suchen\n" +
-    "• Breite Diversifikation: Risiko über Dutzende bis Hunderte von Aktien streuen\n" +
-    "• Gründliche Recherche: Unternehmensbesuche und praxisnahe Finanzanalyse betonen\n" +
-    '• Zitat: "Wisse, was du besitzt – und warum du es besitzt."',
+    "• Alltägliche Investmentideen: Entdecken Sie schnell wachsende Produkte und Dienstleistungen im täglichen Leben vor der Wall Street und überprüfen Sie diese fundamental\n" +
+    "• PEG-Ratio: Teilen Sie das KGV durch die Gewinnwachstumsrate, um das Wachstum objektiv und präzise zu bewerten\n" +
+    "• Tenbagger-Suche: Zielen Sie auf vielversprechende Small- und Mid-Cap-Unternehmen ab, die das Potenzial haben, Ihren Einsatz zu verzehnfachen\n" +
+    "• Breite Diversifikation: Streuen Sie das Risiko über Hunderte von Aktien, aber verfolgen Sie für jede einzelne einen klaren, individuellen Investment-Case\n" +
+    "• Gründliche Recherche: Betonen Sie beharrliche Unternehmensbesuche und direkte Interviews mit dem Management anstelle von reinen Zahlen\n" +
+    "• Cocktailparty-Theorie: Ein Kontraindikator – wenn jeder auf einer Party mit Aktien prahlt, ist der Markt am Höhepunkt; wenn sie Aktien ignorieren, am Tiefpunkt\n" +
+    '• "Wisse, was du besitzt – und warum du es besitzt."\n' +
+    '• "Das wichtigste Organ an der Börse ist das Gehirn, nicht der Magen."\n' +
+    '• "Die Zeit ist auf Ihrer Seite, wenn Sie Aktien von überlegenen Unternehmen besitzen."',
   guru_philosophy_graham:
-    "• Sicherheitsmarge: Nur mit erheblichem Abschlag zum inneren Wert kaufen\n" +
-    "• Defensives Investieren: Kapitalerhalt mit konservativem Ansatz priorisieren\n" +
-    "• Aktien-Anleihen-Balance: 25–75% in Aktien, Rest in Anleihen, je nach Marktlage anpassen\n" +
-    "• Quantitative Analyse: Emotionen ausschalten; Unternehmen anhand von Finanzdaten bewerten\n" +
-    '• Der Markt ist eine "Wiegemaschine": Langfristig spiegeln Aktienkurse den wahren Unternehmenswert wider\n' +
-    '• Zitat: "Das größte Problem des Investors – und oft sein schlimmster Feind – ist er selbst."',
+    "• Sicherheitsmarge: Kaufen Sie ausschließlich mit einem massiven Abschlag zum inneren Wert, um einen Puffer gegen Fehler und Pech zu schaffen\n" +
+    "• Mr. Market: Betrachten Sie den Markt als einen manisch-depressiven Geschäftspartner; lassen Sie sich niemals von seinen Emotionen leiten, sondern profitieren Sie davon\n" +
+    "• Defensives Investieren: Priorisieren Sie den absoluten Kapitalerhalt und die Absicherung nach unten über die Maximierung der Rendite\n" +
+    "• Aktien-Anleihen-Balance: Allokieren Sie mechanisch 25–75% in Aktien und den Rest in Anleihen, angepasst rein an die aktuelle Marktlage\n" +
+    "• Quantitative Analyse: Schalten Sie Emotionen völlig aus; bewerten Sie Unternehmen ausschließlich anhand kalter Finanzdaten wie dem Netto-Umlaufvermögen (NCAV)\n" +
+    '• "Eine Investitionsoperation ist eine, die nach gründlicher Analyse die Sicherheit des Kapitals und eine angemessene Rendite verspricht."\n' +
+    '• "Das größte Problem des Investors – und oft sein schlimmster Feind – ist er selbst."\n' +
+    '• "Kurzfristig ist der Markt eine Wahlmaschine, aber langfristig ist er eine Wiegemaschine."',
   guru_philosophy_dalio:
-    "• Allwetter-Strategie: Auf alle Wirtschaftsregimes vorbereiten (Wachstum/Abschwung × Inflation/Deflation)\n" +
-    "• Risikoparität: Risikobeiträge über Anlageklassen hinweg angleichen\n" +
-    "• Breite Diversifikation: In Aktien, Anleihen, Gold und Rohstoffe mit geringen Korrelationen investieren\n" +
-    "• Prinzipien: Systematische Entscheidungsfindung und Organisationsprinzipien etablieren\n" +
-    "• Zyklen verstehen: Kurz- und langfristige Schuldenzyklen analysieren, um Entscheidungen zu leiten\n" +
-    '• Zitat: "Wer von der Kristallkugel lebt, wird zersplittertes Glas essen."',
+    "• Allwetter-Strategie: Sich perfekt auf alle Wirtschaftsregimes in vier Quadranten vorbereiten (Wachstum/Abschwung × Inflation/Deflation)\n" +
+    "• Risikoparität: Risikobeiträge statt Kapitalmengen angleichen, um die Dominanz einzelner Anlageklassen zu vermeiden\n" +
+    "• Breite Diversifikation: Strukturell in unkorrelierte Vermögenswerte wie Aktien, nominale Anleihen, inflationsgeschützte Anleihen, Gold und Rohstoffe investieren\n" +
+    "• Radikale Transparenz: Unabhängig von der Hierarchie nach Wahrheit streben und eine Ideen-Meritokratie (Idea Meritocracy) im Unternehmen durchsetzen\n" +
+    "• Prinzipien: Märkte und das Leben als Maschine von Ursache und Wirkung verstehen; Lehren aus Fehlern in Algorithmen systematisieren\n" +
+    "• Zyklen verstehen: Kurzfristige Geschäftszyklen und langfristige Schuldenzyklen analysieren, um makroökonomische Wendepunkte zu navigieren\n" +
+    '• "Wer von der Kristallkugel lebt, wird zersplittertes Glas essen."\n' +
+    '• "Schmerz + Reflexion = Fortschritt."',
   guru_philosophy_lilu:
-    "• Buffett-Munger-Ansatz in Asien: Wertinvestitionsprinzipien auf chinesische und asiatische Märkte anwenden\n" +
-    "• Tiefgehende Unternehmensanalyse: Geschäftsmodelle und langfristige Wettbewerbsfähigkeit gründlich verstehen\n" +
-    "• Ultra-konzentriertes Portfolio: Stark in wenige hochkonviktierte Ideen investieren\n" +
-    "• Langfristiges Halten: 5–10+ Jahre Investitionshorizonte aufrechterhalten\n" +
-    "• Intellektuelle Ehrlichkeit: Die Grenzen des eigenen Wissens anerkennen und im Kompetenzkreis bleiben\n" +
-    '• Zitat: "Das größte Risiko beim Investieren ist nicht Volatilität, sondern permanenter Kapitalverlust."',
+    "• Buffett-Munger-Ansatz in Asien: Wenden Sie die reinsten Prinzipien des Value-Investings systematisch auf die schnell wachsenden asiatischen Märkte an\n" +
+    "• Tiefgehende Unternehmensanalyse: Verstehen Sie das absolute Wesen von Geschäftsmodellen, die Integrität des Managements und unüberwindbare Burggräben\n" +
+    "• Ultra-konzentriertes Portfolio: Investieren Sie massives Kapital in nur eine Handvoll lebensverändernder, extrem überzeugender Ideen\n" +
+    "• Langfristiges Halten: Ignorieren Sie kurzfristige Volatilität komplett und halten Sie Positionen 5–10+ Jahre, bis der innere Wert voll erkannt wird\n" +
+    "• Intellektuelle Ehrlichkeit: Erkennen Sie die Grenzen Ihres eigenen Wissens präzise an und agieren Sie streng innerhalb Ihres Kompetenzkreises\n" +
+    '• "Das größte Risiko beim Investieren ist nicht Volatilität, sondern permanenter Kapitalverlust."\n' +
+    '• "Ein wahrer Value-Investor versucht niemals, den Markt zu schlagen. Er kontrolliert nur seine eigene Unwissenheit."',
   guru_philosophy_ackman:
-    "• Aktivistisches Investieren: Aktiv mit dem Unternehmensmanagement zusammenarbeiten, um Wert freizusetzen\n" +
-    "• Konzentriertes Portfolio: Großangelegte Investitionen in 5–10 Qualitätsunternehmen\n" +
-    "• Geschäftsmodellanalyse: Einfache, vorhersehbare Cashflow-Unternehmen bevorzugen\n" +
-    "• Asymmetrisches Chance-Risiko-Verhältnis: Chancen mit begrenztem Abwärtspotenzial und großem Aufwärtspotenzial suchen\n" +
-    "• Makro-Absicherung: Defensive Positionen zum Schutz vor extremen Szenarien nutzen\n" +
-    '• Zitat: "Konzentration baut Vermögen auf; Diversifikation bewahrt es."',
+    "• Aktivistisches Investieren: Erwerben Sie massive Beteiligungen, um aktiv mit dem Management zu streiten und verborgenen Aktionärswert freizusetzen\n" +
+    "• Konzentriertes Portfolio: Tätigen Sie riesige Investitionen mit höchster Überzeugung in ein konzentriertes Portfolio von 5–10 Weltklasse-Unternehmen\n" +
+    "• Geschäftsmodellanalyse: Fordern Sie einfache, hochgradig vorhersehbare Geschäftsmodelle mit starkem freien Cashflow und dominanten Marken-Burggräben\n" +
+    "• Asymmetrisches Chance-Risiko-Verhältnis: Suchen Sie unerbittlich nach Chancen, bei denen das Abwärtsrisiko strikt begrenzt, das Aufwärtspotenzial jedoch grenzenlos ist\n" +
+    "• Makro-Absicherung: Nutzen Sie massive Derivatpositionen (wie CDS) als ultimative defensive Absicherung gegen extreme makroökonomische Schocks\n" +
+    '• "Konzentration baut Vermögen auf; Diversifikation bewahrt es."\n' +
+    '• "Die besten Investitionen sind oft diejenigen, über die die Leute damals als furchtbare Ideen gelacht haben."',
   guru_philosophy_burry:
-    "• Konträres Investieren: Bereitwillig Positionen entgegen dem Marktkonsens eingehen\n" +
-    "• Wertbasierte Analyse: Innere und Vermögenswerte sorgfältig berechnen\n" +
-    "• Makro-Wetten: Makroökonomische Trends und Marktblasen für gerichtete Wetten analysieren\n" +
-    "• Unabhängiges Denken: Auf eigene Analyse setzen, ohne dem Herdenverhalten nachzugeben\n" +
-    "• Hohe Bargeldposition: Geduldig Barmittel halten, bis wirklich überzeugende Chancen entstehen\n" +
-    '• Zitat: "Ich bin vielleicht früh dran, aber ich liege nicht falsch."',
+    "• Konträres Investieren: Bereitwillig und entschlossen Positionen einnehmen, die dem Konsens oder dem Wahn des Marktes diametral entgegenstehen\n" +
+    "• Wertbasierte Analyse: Innere und Vermögenswerte akribisch berechnen, wobei das Herdenverhalten vollständig ignoriert wird\n" +
+    "• Makro-Wetten: Tiefe makroökonomische Trends, systemische Risiken und Vermögensblasen analysieren, um massive direktionale Wetten bei absoluter Überzeugung zu platzieren\n" +
+    "• Unabhängiges Denken: Sich von den Narrativen der Wall Street isolieren und sich ausschließlich auf eigene, erschöpfende und einsame Recherchen verlassen\n" +
+    "• Hohe Bargeldreserven: Unendliche Geduld zeigen und Bargeld halten, bis sich eine wild asymmetrische, unbestreitbare Gelegenheit bietet\n" +
+    '• "Ich bin vielleicht früh dran, aber ich liege nicht falsch."\n' +
+    '• "Wenn jeder etwas glaubt, ist es eine gute Wette, dass es niemand wirklich überprüft hat."',
   guru_philosophy_fisher:
-    "• Globales Makro: Globale Wirtschaftstrends und Marktzyklen zur Steuerung der Vermögensallokation analysieren\n" +
-    "• Investorenstimmung nutzen: Übermäßigen Optimismus und Pessimismus als Gewinnchancen nutzen\n" +
-    "• Langfristige Übergewichtung von Aktien: Aktien liefern langfristig überlegene Renditen gegenüber anderen Anlagen\n" +
-    "• Breite globale Diversifikation: Länderspezifische Konzentration vermeiden; weltweit investieren\n" +
-    "• Drei Fragen: Unterscheiden, was der Markt weiß, nicht weiß und fälschlicherweise glaubt\n" +
-    '• Zitat: "Märkte klettern eine Mauer der Sorgen hinauf."',
+    "• Globales Makro: Massive Verschiebungen in der Weltwirtschaft und historische Marktzyklen analysieren, um die Top-Down-Vermögensallokation zu diktieren\n" +
+    "• Stimmung ausnutzen: Aus den irrationalen Extremen der Marktmassen Kapital schlagen – maximalen Pessimismus kaufen und maximalen Optimismus verkaufen\n" +
+    "• Langfristige Aktienpräferenz: Die feste Überzeugung vertreten, dass Aktien alle anderen Anlageklassen in einem kapitalistischen System langfristig weit übertreffen werden\n" +
+    "• Breite globale Diversifikation: Den Home-Country-Bias durch weitreichende weltweite Streuung von Investitionen vollständig eliminieren\n" +
+    "• Die drei Fragen: Immer fragen, was der Markt weiß, was er nicht weiß und was er glaubt, das in Wirklichkeit völlig falsch ist\n" +
+    '• "Märkte klettern an einer Mauer der Sorge hinauf."\n' +
+    '• "Was jeder weiß, ist meistens falsch, und genau darin liegt die größte Chance."',
   guru_philosophy_cohen:
-    "• Multi-Manager-Modell: Mehrere Anlagestrategien und Manager parallel betreiben\n" +
-    "• Risikomanagement zuerst: Stop-Losses pro Position und Gesamtportfoliorisiko streng managen\n" +
-    "• Kurz- bis mittelfristiger Handel: Renditen durch schnelle Entscheidungsfindung und Positionsrotation erzielen\n" +
-    "• Informationsvorteil: Anlageentscheidungen auf Basis gründlicher Recherche und Datenanalyse\n" +
-    "• Flexible Strategien: Long/Short, ereignisgesteuerte, quantitative und andere Ansätze einsetzen\n" +
-    '• Zitat: "Entscheidend ist nicht perfekte Prognose, sondern konsequentes Risikomanagement."',
+    "• Multi-Manager-Modell: Eine massive Plattform betreiben, die zahlreiche unabhängige Handelsstrategien kombiniert, die von brillanten, spezialisierten Portfoliomanagern ausgeführt werden\n" +
+    "• Höchstes Risikomanagement: Gnadenlose Stop-Loss-Limits für jede Position durchsetzen und die Gesamtrisikolimits des Portfolios ausnahmslos streng verwalten\n" +
+    "• Kurz- bis mittelfristiger Handel: Kurzfristige Marktineffizienzen durch schnelle Entscheidungsfindung und außerordentlich hohen Portfolioumschlag ausnutzen\n" +
+    "• Informationsvorsprung: Jede Entscheidung auf der unerbittlichsten, rechtlich zulässigen Recherche und alternativen Datenanalyse der Wall Street basieren\n" +
+    "• Flexible Strategie: Alles einsetzen, was im aktuellen Umfeld am besten funktioniert – Long/Short-Equity, Event-Driven oder rein quantitative Strategien\n" +
+    '• "Entscheidend ist nicht, wie genau man die Zukunft vorhersagt, sondern wie gnadenlos man Risiken managt und Verluste begrenzt."\n' +
+    '• "Der Markt ist nicht perfekt effizient. Geld wird da verdient, wo Informationen asymmetrisch sind."',
   guru_philosophy_marks:
-    "• Marktzyklustheorie: Die pendelartige Schwingung der Märkte verstehen und die eigene Position bestimmen\n" +
-    "• Zweistufiges Denken: Anders und besser als der Konsens denken\n" +
-    "• Distressed Investing: Pionier im Bereich notleidender Schulden und Krisenanlageninvestments\n" +
-    "• Risiko = Permanenter Verlust: Wahres Risiko als permanenten Kapitalverlust definieren, nicht als Volatilität\n" +
-    "• Defensives Investieren: In schlechten Zeiten Verluste begrenzen über Gewinne in guten Zeiten maximieren\n" +
-    '• Zitat: "Du kannst nicht vorhersagen, aber du kannst dich vorbereiten."',
+    "• Marktzyklus-Theorie: Verstehen, dass Märkte wie ein Pendel schwingen, und herauszufinden, wo wir uns im Zyklus befinden, ist von größter Bedeutung\n" +
+    "• Denken auf zweiter Ebene (Second-Level Thinking): Man kann nicht das Gleiche tun wie andere und Überrenditen erwarten; man muss tiefer und anders denken als der Konsens\n" +
+    "• Distressed Investing: Pionier bei notleidenden Krediten; wahren Wert und hochrentable Chancen dort finden, wo die Masse in Panik gerät\n" +
+    "• Risiko = Permanenter Verlust: Wahres Risiko ausschließlich als Wahrscheinlichkeit eines dauerhaften Kapitalverlusts definieren, nicht als kurzfristige Volatilität\n" +
+    "• Defensives Investieren: Sich viel stärker darauf konzentrieren, Verluste in schlechten Zeiten zu begrenzen, als Gewinne in guten Zeiten zu maximieren\n" +
+    "• Preis vs. Wert: Ein großartiges Asset, das zu teuer gekauft wird, ist ein schlechtes Investment; ein schlechtes Asset, das billig genug gekauft wird, ist ein großartiges Investment\n" +
+    '• "Man kann nicht vorhersagen, aber man kann sich vorbereiten."\n' +
+    '• "Erfahrung ist das, was man bekommt, wenn man nicht das bekommt, was man wollte."\n' +
+    '• "Das Gefährlichste ist es, etwas auf dem Höhepunkt seiner Beliebtheit zu kaufen."',
   guru_philosophy_klarman:
-    "• Sicherheitsmarge-Erbe: Grahams Sicherheitsmarge-Philosophie für heutige Märkte modernisieren\n" +
-    "• Absolute Renditen: Auf absolute Renditen statt relative Benchmark-Performance fokussieren\n" +
-    "• Hohe Barreserven: Bereitwillig bis zu 50% Barmittel halten, wenn keine überzeugenden Chancen existieren\n" +
-    "• Angst ausnutzen: Bei Marktpanik aggressiv unterbewertete Anlagen kaufen\n" +
-    "• Kapitalschutz zuerst: Kapitalerhalt über Renditemaximierung priorisieren\n" +
-    '• Zitat: "Value Investing ist im Kern die Verbindung aus konträrem Denken und einem Taschenrechner."',
+    "• Vermächtnis der Sicherheitsmarge: Benjamin Grahams konservatives Prinzip der Sicherheitsmarge brillant an komplexe, moderne Finanzmärkte anpassen\n" +
+    "• Absolute Renditen: Die Falle der relativen Benchmark-Jagd vollständig ablehnen und sich ausschließlich darauf konzentrieren, positive absolute Renditen zu erzielen, ohne Geld zu verlieren\n" +
+    "• Hohe Bargeldreserven: Extreme Geduld beweisen, indem man 50 % oder mehr in bar hält, wenn keine Investitionen die strengen Kriterien erfüllen\n" +
+    "• Marktängste nutzen: Als ultimativer Käufer der letzten Instanz agieren, wenn andere in Panik verkaufen, und Vermögenswerte weit unter ihrem inneren Wert aufsammeln\n" +
+    "• Abwärtsschutz zuerst: Kapitalerhalt und Schutz vor Verlusten haben stets Vorrang vor der Versuchung, die Gewinne in einem wütenden Bullenmarkt zu maximieren\n" +
+    '• "Value Investing ist im Kern die Verbindung einer konträren Ader mit einem Taschenrechner."\n' +
+    '• "Unser Ziel ist es nicht, Geld zu verdienen; unser Ziel ist es, kein Geld zu verlieren. Wenn wir das tun, kümmern sich die Renditen um sich selbst."\n' +
+    '• "Der Markt kann immer falsch liegen, und Preisvolatilität ist nicht gleich Risiko."',
   guru_philosophy_templeton:
-    "• Globaler Konträrer: Am 'Punkt des maximalen Pessimismus' kaufen\n" +
-    "• Grenzenlos investieren: Unterbewertete Chancen auf allen globalen Märkten suchen\n" +
-    "• Langfristiges Wertinvestieren: 5–10+ Jahre halten und auf die Realisierung des inneren Werts warten\n" +
-    "• Quantitatives Screening: Niedriges KGV, KBV und andere Kennzahlen zur Kandidatenselektion nutzen\n" +
-    "• Bescheidenes Investieren: Marktfehler ausnutzen statt zu versuchen, den Markt zu schlagen\n" +
-    '• Zitat: "Die Zeit maximaler Pessimismus ist die beste Zeit zum Kaufen."',
+    "• Globaler Konträrer: Aggressiv am 'Punkt des maximalen Pessimismus' kaufen, wenn die Masse in Panik gerät und Vermögenswerte abstößt\n" +
+    "• Grenzenloses Investieren: Unerbittlich nach tief unterbewerteten Gelegenheiten in allen Nationen und Anlageklassen suchen und den Home-Bias ignorieren\n" +
+    "• Langfristiger Wert: Sich vollständig auf die Realisierung des inneren Wertes über eine Haltedauer von 5–10+ Jahren konzentrieren und kurzfristiges Rauschen ausblenden\n" +
+    "• Quantitatives Screening: Rauschen durch strenge fundamentale Kennzahlen wie niedriges KGV, niedriges KBV und hohe Gewinnmargen herausfiltern\n" +
+    "• Flexibilität und Offenheit: Den eigenen Anlagestil dynamisch an den Markt oder die Anlageklasse anpassen, die den aktuell besten Wert bietet\n" +
+    '• "Die Zeit des maximalen Pessimismus ist die beste Zeit zum Kaufen, und die Zeit des maximalen Optimismus ist die beste Zeit zum Verkaufen."\n' +
+    '• "Wenn man eine bessere Performance als die Masse erzielen will, muss man Dinge anders machen als die Masse."\n' +
+    '• "Die vier gefährlichsten Worte beim Investieren sind: \'Dieses Mal ist alles anders.\'"',
   guru_philosophy_soros:
-    "• Reflexivitätstheorie: Marktwahrnehmungen der Teilnehmer verändern die Realität in Rückkopplungsschleifen\n" +
-    "• Massive gerichtete Wetten: Enorme Positionen in Währungen, Anleihen und Aktien eingehen, wenn die Überzeugung hoch ist\n" +
-    "• Globales Makro: Politische, wirtschaftliche und soziale Verschiebungen für Makro-Investitionschancen lesen\n" +
-    "• Schnelle Stop-Losses: Positionen sofort verlassen, wenn die These sich als falsch erweist\n" +
-    "• Marktinstabilität ausnutzen: Gewinnchancen in Marktungleichgewichten und Ineffizienzen finden\n" +
-    '• Zitat: "Entscheidend ist nicht, ob man recht hat, sondern wie viel man gewinnt, wenn man recht hat, und wie viel man verliert, wenn man falsch liegt."',
+    "• Reflexivitätstheorie: Märkte sind nicht effizient; voreingenommene Wahrnehmungen der Teilnehmer beeinflussen die Preise, was wiederum die Fundamentaldaten in einer Rückkopplungsschleife verändert\n" +
+    "• Massive direktionale Wetten: Bei starker Überzeugung von makroökonomischen Ungleichgewichten massiv und mit Hebel über Währungen, Anleihen und Aktien hinweg wetten\n" +
+    "• Global Macro: Politische, wirtschaftliche und soziale Veränderungen sowie Zentralbankpolitik analysieren, um massive Makro-Chancen aufzudecken\n" +
+    "• Schneller Stop-Loss & Überleben: Überleben hat absolute Priorität; wenn sich die eigene Hypothese als falsch erweist, die Position sofort liquidieren und fliehen\n" +
+    "• Chaos ausnutzen: Die Frühphasen von Marktinstabilitäten und Blasenbildungen aktiv als hochprofitable Chancen nutzen\n" +
+    "• Fehlbarkeit (Fallibility): Menschen sind von Natur aus fehlbar; stets skeptisch bleiben und offen für die Möglichkeit sein, dass die eigene These grundlegend falsch ist\n" +
+    '• "Es ist nicht wichtig, ob du recht oder unrecht hast, sondern wie viel Geld du verdienst, wenn du recht hast, und wie viel du verlierst, wenn du unrecht hast."\n' +
+    '• "Märkte irren sich immer."\n' +
+    '• "Ich bin nur reich, weil ich weiß, wann ich falsch liege."',
   guru_philosophy_wood:
-    "• Disruptive Innovation: Konzentration auf Technologien, die in 5–10 Jahren die Welt transformieren werden\n" +
-    "• Fünf Schlüsselthemen: KI, Robotik, Energiespeicherung, Genomik und Blockchain-Innovationsplattformen\n" +
-    "• Langfristiges Wachstumsinvestieren: Kurzfristige Volatilität akzeptieren; auf langfristiges Wachstumspotenzial setzen\n" +
-    "• Proaktive Forschung: Eigenentwickelte Zukunftsprognosen und Preismodellierungen durch interne Forschungsteams\n" +
-    "• Transparentes Management: Tägliche Trades öffentlich offenlegen für vollständige Fondstransparenz\n" +
-    '• Zitat: "Innovation löst Probleme und schafft völlig neue Marktchancen."',
+    "• Disruptive Innovation: Ausschließlich in transformative Technologien investieren, die die alte Weltordnung in den nächsten 5–10 Jahren vollständig zerstören werden\n" +
+    "• Kernthemen: Aggressiv auf die exponentiellen Wachstumskurven von KI, Robotik, Energiespeicherung, DNA-Sequenzierung und Blockchain-Technologie setzen\n" +
+    "• Langfristiger Wachstumsfokus: Schwere, qualvolle kurzfristige Volatilität bereitwillig ertragen, um massive langfristige exponentielle Gewinne zu erzielen\n" +
+    "• Anwendung des Wrightschen Gesetzes: Futuristische Unternehmen wie Tesla nach dem Wrightschen Gesetz bewerten, wonach die Kosten mit zunehmender kumulativer Produktion stetig sinken\n" +
+    "• Radikale Transparenz: Alle proprietären Forschungsmodelle als Open-Source zur Verfügung stellen und tägliche Handelsaktivitäten für die gesamte Öffentlichkeit zur Prüfung veröffentlichen\n" +
+    '• "Innovation löst Probleme und schafft völlig neue Marktchancen."\n' +
+    '• "Wir stehen auf der richtigen Seite des Wandels, der richtigen Seite der Geschichte."',
 
   guru_philosophy_druckenmiller:
-    "• Meister des Makro-Tradings: Richtungswetten auf Basis von Zusammenhängen zwischen Währungen, Zinsen und Aktien\n" +
-    "• Geprägt von Soros: Im Quantum Fund entwickelte Strategien übernommen und konsequent weiterentwickelt\n" +
-    '• Konzentrierte Einsätze: "Wenn die Überzeugung sehr hoch ist, muss man entschlossen agieren."\n' +
-    "• Momentum-orientiert: Trends offensiv reiten, bei Signalwechsel aber sofort umschalten\n" +
-    "• Asymmetrisches Risikomanagement: Verluste konsequent begrenzen und Gewinner laufen lassen\n" +
-    '• Zitat: "Langfristige Renditen entstehen durch Kapitalerhalt und gelegentliche Home Runs."',
+    "• Makro-Mastermind: Das komplexe Netz aus Makroökonomie, Zentralbankpolitik und Aktienmärkten entschlüsseln, um massive direktionale Positionen aufzubauen\n" +
+    "• Kapitalerhalt steht an erster Stelle: Das von Soros geerbte Prinzip, das Abwärtsrisiko strikt zu begrenzen, führte zu einem legendären 30-jährigen Track-Record ohne ein einziges Verlustjahr\n" +
+    "• Wetten mit hoher Überzeugung: Bei durchschnittlichen Ideen mit Diversifikation verteidigen, aber bei absoluter Überzeugung massiven Hebel einsetzen, um Home Runs zu erzielen\n" +
+    "• Gnadenlose Flexibilität: Sofort umschwenken; eine massive Position augenblicklich auflösen, wenn die These bricht oder der Haupttrend des Marktes dreht\n" +
+    "• Asymmetrisches Risikomanagement: Verluste mit erschreckender Geschwindigkeit begrenzen, Gewinner aber so lange laufen lassen, wie der makroökonomische Rückenwind anhält\n" +
+    '• "Der Weg zum Aufbau langfristiger Renditen führt über den Erhalt des Kapitals und das Schlagen von Home Runs."\n' +
+    '• "Lege alle deine Eier in einen Korb und behalte diesen Korb dann sehr genau im Auge."',
   guru_philosophy_smith:
-    '• Qualitäts-Compounder: "Gute Unternehmen kaufen, nicht überbezahlen, dann nichts tun" als Kernprinzip\n' +
-    "• Hoher ROIC-Fokus: Bevorzugt Unternehmen mit dauerhaft hoher Kapitalrendite und starkem Reinvestitionspotenzial\n" +
-    "• Konzentriertes Portfolio: Rund 25–30 Positionen; Qualität der Ideen vor bloßer Streuung\n" +
-    "• Qualität vor Schnäppchenjagd: Lieber faire Preise für exzellente Geschäftsmodelle als billige, schwache Unternehmen\n" +
-    "• Zinseszins-Effekt: Langfristiges Halten von Unternehmen, die interne Cashflows zu hohen Renditen reinvestieren\n" +
-    '• Zitat: "Zur Risikoreduktion blind zu diversifizieren überzeugt mich nicht. Wenn man investiert, dann in die besten Unternehmen."',
+    '• Qualitäts-Compounder: Das radikal einfache Kernprinzip ausführen: "Kaufe gute Unternehmen, überbezahle nicht, tu dann absolut gar nichts"\n' +
+    "• Hoher ROIC-Fokus: Rücksichtslos Unternehmen mit wirtschaftlichen Burggräben aussortieren, die außergewöhnlich hohe Renditen auf ihr investiertes Kapital erzielen und diese Gewinne dauerhaft reinvestieren können\n" +
+    "• Konzentriertes Portfolio: Die verwässernden Auswirkungen einer breiten Diversifikation ablehnen und stattdessen eine konzentrierte Liste von 25–30 Eliteunternehmen mit extrem hoher Überzeugung halten\n" +
+    "• Qualität vor Schnäppchenjagd: Bereitwillig faire – oder sogar scheinbar hohe – Preise für außergewöhnliche, erstklassige Geschäftsmodelle zahlen, anstatt Zigarrenstummel von geringer Qualität zu jagen\n" +
+    "• Zinseszins-Effekt: Den wahren Wert des Investierens erkennen, der in der ungestörten, magischen Aufzinsung großartiger Unternehmen über Jahrzehnte hinweg liegt\n" +
+    '• "Zur Risikoreduktion blind zu diversifizieren, überzeugt mich nicht. Wenn man investiert, dann in die allerbesten Unternehmen."\n' +
+    '• "Der größte Fehler, den Investoren machen, ist das ständige Bedürfnis, an ihrem Portfolio herumzupfuschen und das Gefühl zu haben, sie müssten etwas tun."',
   guru_philosophy_greenblatt:
-    "• Magische Formel: Kombination aus hoher Gewinnrendite (Earnings Yield) und hoher Kapitalrendite (ROIC) zur systematischen Titelauswahl\n" +
-    '• Systematisches Value Investing: Regelgebundener, emotionsfreier Prozess statt Bauchgefühl; bekannt aus "The Little Book That Beats the Market"\n' +
-    "• Übersehene Qualitätswerte: Sucht gezielt günstige, hochwertige Unternehmen, die der Markt vernachlässigt\n" +
-    "• Diversifizierte Umsetzung: 20–30 Positionen, um Einzeltitelrisiken zu reduzieren und die Strategie robust umzusetzen\n" +
-    "• Geduld als Voraussetzung: Die Strategie kann über 3–4 Jahre hinter dem Markt liegen, bevor sie aufholt\n" +
-    '• Zitat: "Ermitteln Sie den Wert eines Unternehmens und zahlen Sie deutlich weniger — kurzfristig ist der Markt nur Mr. Market."',
+    "• Magische Formel: Aktien systematisch ordnen und auswählen, die gleichzeitig hohe Gewinnrenditen (Günstigkeit) und eine hohe Kapitalrendite (Qualität) aufweisen\n" +
+    "• Systematisches Value Investing: Menschliche Emotionen, Gier und Angst vollständig durch einen mechanischen, auf strengen Regeln basierenden Quant-Ansatz ersetzen\n" +
+    "• Übersehene Qualitätswerte: Methodisch Weltklasse-Unternehmen aufspüren, die vom breiteren Markt aufgrund vorübergehender, kurzfristiger Probleme vorübergehend weggeworfen wurden\n" +
+    "• Diversifizierte Umsetzung: 20–30 magische Formel-Aktien halten und diese religiös einmal im Jahr umschichten, um idiosynkratische Risiken zu mindern\n" +
+    "• Geduld als Voraussetzung: Die psychologische Pein akzeptieren, dass die Formel in regelmäßigen Abständen für 3–4 Jahre eine Underperformance aufweisen kann, was notwendig ist, damit sie langfristig funktioniert\n" +
+    '• "Ermitteln Sie den wahren Wert eines Unternehmens und zahlen Sie deutlich weniger. Der kurzfristige Aktienmarkt verhält sich genau wie ein sehr emotionaler Mr. Market."\n' +
+    '• "Die Tatsache, dass die Magische Formel nicht die ganze Zeit funktioniert, ist genau der Grund, warum sie auf lange Sicht weiterhin funktioniert."',
   guru_philosophy_piotroski:
-    "• F-Score: 9-Punkte-System, das die finanzielle Gesundheit eines Unternehmens über Rentabilität, Verschuldung und Effizienz bewertet\n" +
-    "• Value-Aktien-Filter: Filtert unter den günstigen Buchwert-Aktien diejenigen mit soliden Fundamentaldaten heraus\n" +
-    "• Rentabilitätssignale: ROA, operativer Cashflow und Abgrenzungsqualität (Cashflow > Nettogewinn)\n" +
-    "• Finanzielle Stabilität: Sinkende Verschuldung, verbesserte Liquidität und keine Verwässerung\n" +
-    "• Betriebseffizienz: Steigende Bruttomarge und Kapitalumschlag als Zeichen besserer Unternehmensführung\n" +
-    '• Zitat: "Unter High-BM-Firmen erzielen finanziell starke Unternehmen eine jährliche Mehrrendite von 7,5 % gegenüber schwachen."',
+    "• F-Score: Ein rigoroses, binäres 9-Punkte-Bilanzierungssystem verwenden, um die finanzielle Stärke und fundamentale Verbesserung von Unternehmen eiskalt zu bewerten\n" +
+    "• Value-Aktien-Filter: Value-Fallen gezielt eliminieren, indem man unter Aktien mit niedrigem Kurs-Buchwert-Verhältnis strikt nur in jene mit einer unbestreitbar starken, nachgewiesenen finanziellen Basis investiert\n" +
+    "• Rentabilitätssignale: Die tatsächliche Qualität der Gewinne priorisieren, wobei darauf geachtet wird, dass der operative Cashflow den ausgewiesenen Nettogewinn bei weitem übersteigt\n" +
+    "• Finanzielle Stabilität: Unverhandelbare Nachweise fordern: sinkende langfristige Verschuldung, sich verbessernde Liquiditätskennzahlen und absolut keine Verwässerung durch Aktienemissionen\n" +
+    "• Betriebseffizienz: Eine reale Steigerung der betrieblichen Effizienz durch explizit steigende Bruttomargen und einen beschleunigten Anlageumschlag belegen\n" +
+    '• "Kaufen Sie nicht einfach nur eine billige Aktie. Fordern Sie den mathematischen Beweis in den Finanzdaten, dass sich die fundamentalen Aussichten des Unternehmens dramatisch verbessern."\n' +
+    '• "Innerhalb des Value-Universums mit hohem Buch-Marktwert-Verhältnis erzielen finanziell makellose Unternehmen eine konstante, massive Überrendite gegenüber jenen mit schwachen Bilanzen."',
   guru_philosophy_oneil:
-    "• CAN-SLIM-System: Eine 7-Faktoren-Methodik zur Auswahl von Wachstumsaktien mit fundamentaler und technischer Analyse\n" +
-    "• C (Aktuelle Gewinne): Quartals-EPS-Wachstum von mindestens 25 % gegenüber dem Vorjahresquartal\n" +
-    "• A (Jährliche Gewinne): Jährliches EPS-Wachstum von 25 %+ über 3–5 Jahre\n" +
-    "• N (Neues Produkt/Neues Hoch): Unternehmen mit innovativen Produkten nahe am 52-Wochen-Hoch\n" +
-    "• S·L·I·M: Angebot & Nachfrage (Streubesitz), Marktführer, institutionelle Käufer, Marktrichtung\n" +
-    '• Zitat: "Das ganze Geheimnis des Erfolgs an der Börse ist, möglichst wenig zu verlieren, wenn man falsch liegt."',
+    "• CAN-SLIM-System: Intensive fundamentale Datenanalyse perfekt mit dem unbestreitbaren technischen Preis-Momentum verschmelzen, um die größten Marktsieger zu identifizieren\n" +
+    "• C & A (Gewinnwachstum): Gnadenlos Unternehmen fordern, die sowohl kurzfristig als auch über einen mehrjährigen Zeitraum hinweg ein geradezu explosives EPS-Wachstum von 25 %+ aufweisen\n" +
+    "• N (Neues Produkt/Neues Hoch): Auf Unternehmen abzielen, die die Welt mit bahnbrechenden Produkten revolutionieren und während sie das tun, direkt auf 52-Wochen-Höchstständen ausbrechen\n" +
+    "• S·L·I·M: Sich mit dem großen Geld verbünden: institutionelles Sponsoring, wahre Branchenführerschaft und eindeutige Markttrends nach oben sicherstellen\n" +
+    "• Unnachgiebige Stop-Losses: Jeden einzelnen potenziell verheerenden Verlust automatisch kappen, indem man ausnahmslos 7–8 % unter dem Kaufpreis ohne zu zögern verkauft\n" +
+    '• "Das gesamte Geheimnis des großen Erfolgs an der Börse besteht darin, extrem wenig zu verlieren, wenn man falsch liegt."\n' +
+    '• "Kaufen Sie keine Aktien auf dem Weg nach unten. Kaufen Sie sie auf dem Weg nach oben."\n' +
+    '• "Die besten Aktien der Welt scheinen für die Masse oft zu teuer und zu hoch, während die schlechtesten wie großartige Schnäppchen wirken."',
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Bewertung",
   lynch_tenbagger_desc:

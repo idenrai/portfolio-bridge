@@ -93,7 +93,7 @@ export function PnLWaterfallChart({ assets }: Props) {
               backgroundColor: "#000",
               color: "#fff",
             }}
-            itemStyle={{ color: "#fff" }}
+            itemStyle={{ color: "#fff", fontVariantNumeric: "tabular-nums" }}
           />
           <ReferenceLine x={0} stroke="#cbd5e1" strokeWidth={1} />
           <Bar dataKey="pnl" radius={[0, 3, 3, 0]}>

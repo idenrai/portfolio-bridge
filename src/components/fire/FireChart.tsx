@@ -65,7 +65,7 @@ export function FireChart({ data }: FireChartProps) {
                 color: "#f8fafc",
                 boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5)",
               }}
-              itemStyle={{ color: "#cbd5e1" }}
+              itemStyle={{ color: "#cbd5e1", fontVariantNumeric: "tabular-nums" }}
               labelFormatter={(label, payload) => {
                 const item = payload[0]?.payload as FireDataPoint;
                 return t.fire_tooltip_year(Number(label), item?.age);

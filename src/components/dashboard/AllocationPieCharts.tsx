@@ -69,7 +69,10 @@ function MiniPie({
             <Cell key={i} fill={COLORS[i % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip formatter={(value) => valueLabel(Number(value))} />
+        <Tooltip 
+          formatter={(value) => valueLabel(Number(value))}
+          itemStyle={{ fontVariantNumeric: "tabular-nums" }}
+        />
         <Legend
           formatter={(value: string) => {
             const item = data.find((d) => d.name === value);

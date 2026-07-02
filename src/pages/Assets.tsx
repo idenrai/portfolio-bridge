@@ -110,7 +110,7 @@ export function AssetsPage() {
   return (
     <div className="space-y-4 md:space-y-6">
       <div className="flex items-center justify-between gap-2 flex-wrap">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">{t.asset_title}</h1>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white text-balance">{t.asset_title}</h1>
         <div className="flex items-center gap-2">
           <Button variant="secondary" size="sm" onClick={() => setBrokerManagerOpen(true)}>
             {t.broker_manage_btn}
@@ -131,28 +131,32 @@ export function AssetsPage() {
           </Button>
         </div>
       </div>
-      <div className="rounded-xl bg-linear-to-r from-violet-600 to-purple-500 p-px shadow-md">
-        <div className="rounded-[11px] bg-zinc-950/95 px-4 py-3">
-          <div className="flex items-center justify-between gap-4">
+      <div className="rounded-xl bg-linear-to-r from-violet-500/20 to-purple-500/20 p-px shadow-sm">
+        <div className="rounded-[11px] bg-zinc-950/95 px-4 py-4 sm:px-5">
+          <div className="flex flex-col gap-4">
+            {/* Header */}
             <div className="flex items-start gap-3 min-w-0">
               <span className="text-2xl shrink-0 mt-0.5">🤖</span>
               <div className="min-w-0">
-                <p className="text-sm font-bold text-white leading-tight">
+                <p className="text-sm font-semibold text-zinc-100 leading-tight">
                   {t.asset_ai_banner_title}
                 </p>
-                <p className="text-xs text-zinc-400 mt-0.5 leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-zinc-500 mt-1 leading-relaxed">
                   {t.asset_ai_banner_desc}
                 </p>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={() => setPromptOpen(true)}
-              disabled={assets.length === 0}
-              className="shrink-0 rounded-lg bg-linear-to-r from-violet-600 to-purple-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              {t.asset_btn_ai}
-            </button>
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setPromptOpen(true)}
+                disabled={assets.length === 0}
+                className="flex-1 sm:flex-none rounded-lg bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 border border-violet-500/30 px-3 py-2 text-xs font-medium shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer whitespace-nowrap text-center disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {t.asset_btn_ai}
+              </button>
+            </div>
           </div>
         </div>
       </div>

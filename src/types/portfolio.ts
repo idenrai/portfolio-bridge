@@ -142,6 +142,7 @@ export type GuruId =
 export interface GuruProfile {
   id: GuruId;
   name: string;
+  avatar?: string;
   /** 운용사/소속 펀드 */
   firm: string;
   /** 추천 카테고리 비중 */
