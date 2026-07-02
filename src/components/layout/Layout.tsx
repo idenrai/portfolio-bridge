@@ -2,10 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { BottomNav } from "./BottomNav";
 import { ScrollToTop } from "./ScrollToTop";
-import { useT } from "@/hooks";
-
 export function Layout() {
-  const t = useT();
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-zinc-300 selection:bg-zinc-800">
@@ -17,7 +14,7 @@ export function Layout() {
 
         {/* 데스크톱 전용 푸터 */}
         <footer className="hidden md:flex justify-center py-4 mt-8 border-t border-zinc-800 text-xs text-zinc-600 shrink-0">
-          <p>v0.2.0 · {t.app_version_info}</p>
+          <p>© 2026 Portfolio Bridge. Crafted for independent investors.</p>
         </footer>
       </main>
 

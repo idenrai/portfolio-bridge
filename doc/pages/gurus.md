@@ -217,16 +217,14 @@ When no assets are registered, the page shows a message directing the user to th
 
 ## Layout Structure
 
-The guru detail view uses a 12-column grid layout with a sticky left panel and a scrollable right panel. The AI prompt banner is placed outside and below the grid at full width.
+The guru detail view uses a 12-column grid layout with a sticky left panel and a scrollable right panel. The AI prompt banner is placed at the top of the right panel.
 
-구루 상세 뷰는 12열 그리드 레이아웃을 사용하며, 좌측 패널은 고정(sticky), 우측 패널은 스크롤됩니다. AI 프롬프트 배너는 그리드 바깥 하단에 전체 폭으로 배치됩니다.
+구루 상세 뷰는 12열 그리드 레이아웃을 사용하며, 좌측 패널은 고정(sticky), 우측 패널은 스크롤됩니다. AI 프롬프트 배너는 가장 중요한 기능이므로 우측 패널 최상단에 배치됩니다.
 
 ```
 12-col grid
 ├── Left (col-span-4, sticky): Profile avatar + philosophy
-└── Right (col-span-8): Charts + rebalancing + screeners
-
-Full width (below grid): GuruAIPromptBanner
+└── Right (col-span-8): GuruAIPromptBanner (Top) + Charts + rebalancing + screeners
 ```
 
 ### Avatar Sizing
