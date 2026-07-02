@@ -133,7 +133,7 @@ export const ja: Translations = {
   asset_modal_add: "新規資産登録",
   asset_modal_edit: "資産編集",
   asset_delete_confirm: "この資産を削除しますか？",
-  asset_ai_modal_title: "🤖 AI分類",
+  asset_ai_modal_title: "AI分類",
   asset_ai_tab_generate: "① プロンプト生成",
   asset_ai_tab_import: "② AI回答インポート",
   asset_ai_copy_desc:

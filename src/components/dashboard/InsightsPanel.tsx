@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { Sparkles } from "lucide-react";
 import { Card } from "@/components/common";
 import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore } from "@/stores";
@@ -62,7 +63,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
           <div className="flex flex-col gap-4">
             {/* Header */}
             <div className="flex items-start gap-3 min-w-0">
-              <span className="text-2xl shrink-0 mt-0.5">🤖</span>
+              <Sparkles className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-zinc-100 leading-tight">
                   {t.insights_ai_banner_title}

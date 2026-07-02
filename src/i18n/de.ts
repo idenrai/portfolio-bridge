@@ -136,7 +136,7 @@ export const de: Translations = {
   asset_modal_add: "Neues Vermögen hinzufügen",
   asset_modal_edit: "Vermögen bearbeiten",
   asset_delete_confirm: "Möchten Sie diesen Vermögenswert wirklich löschen?",
-  asset_ai_modal_title: "🤖 KI-Klassifizierung",
+  asset_ai_modal_title: "KI-Klassifizierung",
   asset_ai_tab_generate: "① Prompt erstellen",
   asset_ai_tab_import: "② KI-Antwort importieren",
   asset_ai_copy_desc:

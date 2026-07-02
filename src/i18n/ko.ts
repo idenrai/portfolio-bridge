@@ -133,7 +133,7 @@ export const ko: Translations = {
   asset_modal_add: "새 자산 등록",
   asset_modal_edit: "자산 수정",
   asset_delete_confirm: "이 자산을 삭제하시겠습니까?",
-  asset_ai_modal_title: "🤖 AI 분류",
+  asset_ai_modal_title: "AI 분류",
   asset_ai_tab_generate: "① 프롬프트 생성",
   asset_ai_tab_import: "② AI 응답 가져오기",
   asset_ai_copy_desc:

@@ -132,7 +132,7 @@ export const en: Translations = {
   asset_modal_add: "Add New Asset",
   asset_modal_edit: "Edit Asset",
   asset_delete_confirm: "Are you sure you want to delete this asset?",
-  asset_ai_modal_title: "🤖 AI Classification",
+  asset_ai_modal_title: "AI Classification",
   asset_ai_tab_generate: "① Generate Prompt",
   asset_ai_tab_import: "② Import AI Response",
   asset_ai_copy_desc:
