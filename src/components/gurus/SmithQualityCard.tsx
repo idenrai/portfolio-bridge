@@ -1,3 +1,4 @@
+import { Sparkles } from "lucide-react";
 import { useT, useAnalyzer } from "@/hooks";
 import { analyzeByTickersSmith, type SmithCriterionKey, type SmithAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
@@ -31,7 +32,12 @@ export function SmithQualityCard() {
     progressEnrich:  t.smith_progress_enrich,
     phaseEnrich:     t.smith_phase_enrich,
     noResult:        t.smith_no_result,
-    highScoreBadge:  t.smith_quality_badge,
+    highScoreBadge: (
+      <span className="inline-flex items-center gap-1">
+        <Sparkles className="size-3" />
+        {t.smith_quality_badge}
+      </span>
+    ),
     initialGuide:    t.smith_initial_guide,
     noData:          t.smith_no_data,
     disclaimer:      t.smith_disclaimer,

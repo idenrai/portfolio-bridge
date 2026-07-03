@@ -1,4 +1,4 @@
-import { Card } from "@/components/common";
+import { Card, Input } from "@/components/common";
 import { useT, usePortfolio, useExchangeRates } from "@/hooks";
 import { useFireStore, useSettingsStore } from "@/stores";
 import { fromKRW, toKRW } from "@/utils";
@@ -20,12 +20,10 @@ export function FireInputForm() {
   const store = useFireStore();
   const { summary } = usePortfolio();
 
-  /** Shared input style */
-  const inputClass =
-    "bg-zinc-900/50 border border-zinc-800 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition-all text-zinc-200 placeholder-zinc-600";
+
 
   return (
-    <Card className="flex h-full flex-col gap-5 p-5">
+    <Card className="flex h-full flex-col gap-5 border border-zinc-800/60 bg-black/40 p-5 shadow-sm backdrop-blur-sm">
       {/* Tabs */}
       <div className="flex gap-2 rounded-lg border border-zinc-800/50 bg-zinc-900/50 p-1">
         <button
@@ -62,10 +60,10 @@ export function FireInputForm() {
               {t.fire_use_portfolio_assets}
             </label>
           </div>
-          <input
+          <Input
             type="text"
             inputMode="numeric"
-            className={`${inputClass} ${store.usePortfolioAssets ? 'cursor-not-allowed border-zinc-800 bg-zinc-900 text-zinc-400' : ''}`}
+            className={store.usePortfolioAssets ? 'cursor-not-allowed border-zinc-800 bg-zinc-900 text-zinc-400' : 'focus-visible:border-emerald-500 focus-visible:ring-emerald-500/50'}
             disabled={store.usePortfolioAssets}
             value={
               store.usePortfolioAssets
@@ -83,10 +81,10 @@ export function FireInputForm() {
         {/* Monthly Savings */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-zinc-300">{t.fire_monthly_savings} ({baseCurrency})</label>
-          <input
+          <Input
             type="text"
             inputMode="numeric"
-            className={inputClass}
+            className="focus-visible:border-emerald-500 focus-visible:ring-emerald-500/50"
             value={store.monthlySavings ? formatWithComma(Number(fromKRW(store.monthlySavings, baseCurrency, exchangeRates).toFixed(0))) : ""}
             onChange={(e) => store.setMonthlySavings(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
           />
@@ -95,11 +93,11 @@ export function FireInputForm() {
         {/* Expected Return */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-zinc-300">{t.fire_expected_return}</label>
-          <input
+          <Input
             type="number"
             step="0.1"
-            className={inputClass}
-            value={store.expectedReturnRate || ""}
+            className="focus-visible:border-emerald-500 focus-visible:ring-emerald-500/50"
+            value={store.expectedReturnRate}
             onChange={(e) => store.setExpectedReturnRate(Number(e.target.value))}
           />
           <p className="mt-0.5 text-xs leading-relaxed text-zinc-500">{t.fire_helper_expected_return}</p>
@@ -108,9 +106,9 @@ export function FireInputForm() {
         {/* Current Age */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-zinc-300">{t.fire_age_label}</label>
-          <input
+          <Input
             type="number"
-            className={inputClass}
+            className="focus-visible:border-emerald-500 focus-visible:ring-emerald-500/50"
             placeholder={t.fire_age_placeholder}
             value={store.currentAge || ""}
             onChange={(e) => store.setCurrentAge(e.target.value ? Number(e.target.value) : null)}
@@ -121,10 +119,10 @@ export function FireInputForm() {
         {store.mode === "target" ? (
           <div className="flex flex-col gap-1.5">
             <label className="text-sm font-medium text-zinc-300">{t.fire_target_amount} ({baseCurrency})</label>
-            <input
+            <Input
               type="text"
               inputMode="numeric"
-              className={inputClass}
+              className="focus-visible:border-emerald-500 focus-visible:ring-emerald-500/50"
               value={store.targetAmount ? formatWithComma(Number(fromKRW(store.targetAmount, baseCurrency, exchangeRates).toFixed(0))) : ""}
               onChange={(e) => store.setTargetAmount(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
             />
@@ -133,20 +131,20 @@ export function FireInputForm() {
           <>
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-medium text-zinc-300">{t.fire_monthly_expense} ({baseCurrency})</label>
-              <input
+              <Input
                 type="text"
                 inputMode="numeric"
-                className={inputClass}
+                className="focus-visible:border-emerald-500 focus-visible:ring-emerald-500/50"
                 value={store.monthlyExpense ? formatWithComma(Number(fromKRW(store.monthlyExpense, baseCurrency, exchangeRates).toFixed(0))) : ""}
                 onChange={(e) => store.setMonthlyExpense(toKRW(parseCommaNumber(e.target.value), baseCurrency, exchangeRates))}
               />
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-medium text-zinc-300">{t.fire_safe_withdrawal_rate}</label>
-              <input
+              <Input
                 type="number"
                 step="0.1"
-                className={inputClass}
+                className="focus-visible:border-emerald-500 focus-visible:ring-emerald-500/50"
                 value={store.safeWithdrawalRate || ""}
                 onChange={(e) => store.setSafeWithdrawalRate(Number(e.target.value))}
               />

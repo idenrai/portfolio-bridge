@@ -45,12 +45,12 @@ export const ja: Translations = {
   dash_empty_desc:
     "「資産管理」メニューで保有資産を登録すると、ここにサマリーが表示されます。",
   dash_notice_storage:
-    "💾 データはこの端末のブラウザにのみ保存されます。他の端末とは同期されないため、同じ端末・同じブラウザでご利用ください。",
+    "データはこの端末のブラウザにのみ保存されます。他の端末とは同期されないため、同じ端末・同じブラウザでご利用ください。",
   dash_notice_csv:
-    "📁 資産データはCSVファイルでエクスポート/インポートが可能です。バックアップや端末移行時にご活用ください。",
+    "資産データはCSVファイルでエクスポート/インポートが可能です。バックアップや端末移行時にご活用ください。",
   dash_notice_mobile:
-    "🖥️ PCブラウザに最適化されています。モバイル画面には現在対応しておりません。",
-  dash_sample_btn: "📈 サンプルデータで確認",
+    "️ PCブラウザに最適化されています。モバイル画面には現在対応しておりません。",
+  dash_sample_btn: "サンプルデータで確認",
   dash_sample_hint:
     "サンプルデータは「設定 › 全データ初期化」で削除できます。",
   dash_refresh: "為替・時価更新",
@@ -94,12 +94,12 @@ export const ja: Translations = {
   fx_scenario_title: "為替 ±5% シナリオ",
 
   rebalance_title: "リバランス提案",
-  rebalance_ok: "✅ 配分は目標に近い状態です",
+  rebalance_ok: "配分は目標に近い状態です",
   rebalance_buy: "買い",
   rebalance_sell: "売り",
 
   insights_title: "インサイト",
-  insights_ok: "✅ 特記事項なし",
+  insights_ok: "特記事項なし",
   insights_ai_btn: "プロンプトを見る",
   insights_ai_copy: "クリップボードにコピー",
   insights_ai_copied: "✓ コピー済み!",
@@ -417,10 +417,10 @@ export const ja: Translations = {
   lynch_no_data: "データなし",
   lynch_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
-  lynch_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
-  lynch_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
+  lynch_progress_enrich: (done, total) => `詳細分析中… (${done}/${total})`,
+  lynch_phase_enrich: "銘柄の詳細な財務データを補強中…",
   lynch_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
-  lynch_tenbagger_badge: "🚀 テンバガー候補",
+  lynch_tenbagger_badge: "テンバガー候補",
   lynch_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
   // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
@@ -443,10 +443,10 @@ export const ja: Translations = {
   mf_no_data: "データなし",
   mf_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
-  mf_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
-  mf_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
+  mf_progress_enrich: (done, total) => `詳細分析中… (${done}/${total})`,
+  mf_phase_enrich: "銘柄の詳細な財務データを補強中…",
   mf_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
-  mf_magic_badge: "🪄 マジック・フォーミュラ適合",
+  mf_magic_badge: "マジック・フォーミュラ適合",
   mf_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
   // Graham
@@ -462,10 +462,10 @@ export const ja: Translations = {
   graham_no_data: "データなし",
   graham_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
-  graham_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
-  graham_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
+  graham_progress_enrich: (done, total) => `詳細分析中… (${done}/${total})`,
+  graham_phase_enrich: "銘柄の詳細な財務データを補強中…",
   graham_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
-  graham_defensive_badge: "🛡️ 防御的投資適合",
+  graham_defensive_badge: "️ 防御的投資適合",
   graham_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
   // Smith
@@ -480,10 +480,10 @@ export const ja: Translations = {
   smith_no_data: "データなし",
   smith_disclaimer:
     "※ Yahoo Financeの財務データに基づきます。投資判断の根拠として使用しないでください。",
-  smith_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
-  smith_phase_enrich: "🔍 銘柄の詳細な財務データを補強中…",
+  smith_progress_enrich: (done, total) => `詳細分析中… (${done}/${total})`,
+  smith_phase_enrich: "銘柄の詳細な財務データを補強中…",
   smith_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
-  smith_quality_badge: "✨ クオリティコンパウンダー",
+  smith_quality_badge: "クオリティコンパウンダー",
   smith_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
   // Piotroski F-Score
@@ -502,10 +502,10 @@ export const ja: Translations = {
   piotroski_no_data: "データなし",
   piotroski_disclaimer:
     "※ Yahoo Finance の財務データに基づきます。投資判断の唯一の根拠にしないでください。",
-  piotroski_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
-  piotroski_phase_enrich: "🔍 銘柄の詳細財務データを補強中…",
+  piotroski_progress_enrich: (done, total) => `詳細分析中… (${done}/${total})`,
+  piotroski_phase_enrich: "銘柄の詳細財務データを補強中…",
   piotroski_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
-  piotroski_fscore_badge: "📊 Fスコア優良",
+  piotroski_fscore_badge: "Fスコア優良",
   piotroski_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
   // O'Neil CAN SLIM
@@ -522,10 +522,10 @@ export const ja: Translations = {
   oneil_no_data: "データなし",
   oneil_disclaimer:
     "※ Yahoo Finance の財務データに基づきます。投資判断の唯一の根拠にしないでください。",
-  oneil_progress_enrich: (done, total) => `⏳ 詳細分析中… (${done}/${total})`,
-  oneil_phase_enrich: "🔍 銘柄の詳細財務データを補強中…",
+  oneil_progress_enrich: (done, total) => `詳細分析中… (${done}/${total})`,
+  oneil_phase_enrich: "銘柄の詳細財務データを補強中…",
   oneil_no_result: "Yahoo Financeから銘柄データを取得できませんでした。しばらくしてから再試行してください。",
-  oneil_canslim_badge: "🚀 CAN SLIM適合",
+  oneil_canslim_badge: "CAN SLIM適合",
   oneil_initial_guide: "ポートフォリオ分析またはティッカー検索で採点を開始してください。",
 
   // ─── Buffett Indicator
@@ -554,7 +554,7 @@ export const ja: Translations = {
     `為替レート取得失敗 — キャッシュ値使用中（${time} 時点基準）`,
   settings_data_refresh_title: "為替・時価更新",
   settings_data_refresh_refreshing: "取得中…",
-  settings_data_refresh_refresh: "🔄 今すぐ更新",
+  settings_data_refresh_refresh: "今すぐ更新",
   settings_data_refresh_auto: "アプリ起動時に自動取得されます。",
   settings_data_refresh_time: (time) => `${time} 時点`,
   settings_data_refresh_cache_warn: (time) =>
@@ -602,7 +602,7 @@ export const ja: Translations = {
   settings_data_reset: "全データ初期化",
   settings_data_reset_confirm:
     "すべてのデータ（資産・設定）を初期化します。この操作は元に戻せません。",
-  settings_data_drive_title: "💡 Google Drive データ削除",
+  settings_data_drive_title: "Google Drive データ削除",
   settings_data_drive_note:
     "Google Driveに保存されたデータを削除するには、Googleアカウントのアプリ連携管理ページ（myaccount.google.com/permissions）でこのアプリのアクセス権限を解除してください。権限を解除するとDriveに保存されたバックアップファイルも削除されます。",
 
@@ -775,7 +775,7 @@ export const ja: Translations = {
   fire_res_age_label: "予想到達年齢",
   fire_res_yrs: "年",
   fire_res_out_of_bounds: "計算範囲を超えました。貯蓄額や利回りを増やしてみてください！",
-  fire_result_already_reached: "おめでとうございます！すでに目標を達成しています。 🎉",
+  fire_result_already_reached: "おめでとうございます！すでに目標を達成しています。 ",
   fire_chart_title: "予測資産成長推移",
   fire_chart_asset: "予測資産額",
   fire_chart_target: "目標額",

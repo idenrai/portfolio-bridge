@@ -45,12 +45,12 @@ export const de: Translations = {
   dash_empty_desc:
     'Registrieren Sie Ihre Bestände unter "Vermögen" und eine Übersicht erscheint hier.',
   dash_notice_storage:
-    "💾 Daten werden nur in diesem Browser auf diesem Gerät gespeichert. Sie werden nicht geräteübergreifend synchronisiert — bitte verwenden Sie dasselbe Gerät und denselben Browser.",
+    "Daten werden nur in diesem Browser auf diesem Gerät gespeichert. Sie werden nicht geräteübergreifend synchronisiert — bitte verwenden Sie dasselbe Gerät und denselben Browser.",
   dash_notice_csv:
-    "📁 Vermögensdaten können als CSV-Dateien exportiert/importiert werden. Verwenden Sie dies für Backups oder Gerätemigrationen.",
+    "Vermögensdaten können als CSV-Dateien exportiert/importiert werden. Verwenden Sie dies für Backups oder Gerätemigrationen.",
   dash_notice_mobile:
-    "🖥️ Optimiert für Desktop-Browser. Mobilbildschirme werden derzeit nicht unterstützt.",
-  dash_sample_btn: "📈 Mit Beispieldaten erkunden",
+    "️ Optimiert für Desktop-Browser. Mobilbildschirme werden derzeit nicht unterstützt.",
+  dash_sample_btn: "Mit Beispieldaten erkunden",
   dash_sample_hint:
     "Beispieldaten können über Einstellungen › Alle Daten zurücksetzen entfernt werden.",
   dash_refresh: "Alles aktualisieren",
@@ -96,12 +96,12 @@ export const de: Translations = {
   fx_scenario_title: "±5% Währungsszenario",
 
   rebalance_title: "Neuausrichtungsvorschläge",
-  rebalance_ok: "✅ Allokation liegt nahe am Ziel",
+  rebalance_ok: "Allokation liegt nahe am Ziel",
   rebalance_buy: "Kaufen",
   rebalance_sell: "Verkaufen",
 
   insights_title: "Einblicke",
-  insights_ok: "✅ Keine Probleme gefunden",
+  insights_ok: "Keine Probleme gefunden",
   insights_ai_btn: "Prompt anzeigen",
   insights_ai_copy: "In Zwischenablage kopieren",
   insights_ai_copied: "✓ Kopiert!",
@@ -425,10 +425,10 @@ export const de: Translations = {
   lynch_no_data: "Keine Daten",
   lynch_disclaimer:
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
-  lynch_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
-  lynch_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
+  lynch_progress_enrich: (done, total) => `Analyse… (${done}/${total})`,
+  lynch_phase_enrich: "Detaillierte Fundamentaldaten der Aktien ergänzen…",
   lynch_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
-  lynch_tenbagger_badge: "🚀 Tenbagger-Kandidat",
+  lynch_tenbagger_badge: "Tenbagger-Kandidat",
   lynch_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
@@ -451,10 +451,10 @@ export const de: Translations = {
   mf_no_data: "Keine Daten",
   mf_disclaimer:
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
-  mf_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
-  mf_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
+  mf_progress_enrich: (done, total) => `Analyse… (${done}/${total})`,
+  mf_phase_enrich: "Detaillierte Fundamentaldaten der Aktien ergänzen…",
   mf_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
-  mf_magic_badge: "🪄 Magic-Formula-Kandidat",
+  mf_magic_badge: "Magic-Formula-Kandidat",
   mf_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   // Graham
@@ -470,10 +470,10 @@ export const de: Translations = {
   graham_no_data: "Keine Daten",
   graham_disclaimer:
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
-  graham_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
-  graham_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
+  graham_progress_enrich: (done, total) => `Analyse… (${done}/${total})`,
+  graham_phase_enrich: "Detaillierte Fundamentaldaten der Aktien ergänzen…",
   graham_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
-  graham_defensive_badge: "🛡️ Defensiver Kandidat",
+  graham_defensive_badge: "️ Defensiver Kandidat",
   graham_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   // Smith
@@ -488,10 +488,10 @@ export const de: Translations = {
   smith_no_data: "Keine Daten",
   smith_disclaimer:
     "※ Auf Basis von Yahoo Finance-Fundamentaldaten. Nicht als Grundlage für Anlageentscheidungen verwenden.",
-  smith_progress_enrich: (done, total) => `⏳ Analyse… (${done}/${total})`,
-  smith_phase_enrich: "🔍 Detaillierte Fundamentaldaten der Aktien ergänzen…",
+  smith_progress_enrich: (done, total) => `Analyse… (${done}/${total})`,
+  smith_phase_enrich: "Detaillierte Fundamentaldaten der Aktien ergänzen…",
   smith_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
-  smith_quality_badge: "✨ Quality Compounder",
+  smith_quality_badge: "Quality Compounder",
   smith_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   // Piotroski F-Score
@@ -510,10 +510,10 @@ export const de: Translations = {
   piotroski_no_data: "Keine Daten",
   piotroski_disclaimer:
     "※ Basierend auf Yahoo Finance-Daten. Nicht als alleinige Grundlage für Anlageentscheidungen verwenden.",
-  piotroski_progress_enrich: (done, total) => `⏳ Analyse läuft… (${done}/${total})`,
-  piotroski_phase_enrich: "🔍 Detaillierte Finanzdaten werden ergänzt…",
+  piotroski_progress_enrich: (done, total) => `Analyse läuft… (${done}/${total})`,
+  piotroski_phase_enrich: "Detaillierte Finanzdaten werden ergänzt…",
   piotroski_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
-  piotroski_fscore_badge: "📊 Starker F-Score",
+  piotroski_fscore_badge: "Starker F-Score",
   piotroski_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   // O'Neil CAN SLIM
@@ -530,10 +530,10 @@ export const de: Translations = {
   oneil_no_data: "Keine Daten",
   oneil_disclaimer:
     "※ Basierend auf Yahoo Finance-Daten. Nicht als alleinige Grundlage für Anlageentscheidungen verwenden.",
-  oneil_progress_enrich: (done, total) => `⏳ Analyse läuft… (${done}/${total})`,
-  oneil_phase_enrich: "🔍 Detaillierte Finanzdaten werden ergänzt…",
+  oneil_progress_enrich: (done, total) => `Analyse läuft… (${done}/${total})`,
+  oneil_phase_enrich: "Detaillierte Finanzdaten werden ergänzt…",
   oneil_no_result: "Keine Aktiendaten von Yahoo Finance erhalten. Bitte versuchen Sie es später erneut.",
-  oneil_canslim_badge: "🚀 CAN SLIM geeignet",
+  oneil_canslim_badge: "CAN SLIM geeignet",
   oneil_initial_guide: "Analysieren Sie Ihr Portfolio oder suchen Sie einen Ticker, um die Bewertung zu starten.",
 
   // ─── Buffett Indicator
@@ -562,7 +562,7 @@ export const de: Translations = {
     `Kursabruf fehlgeschlagen — gecachten Wert verwenden (Stand: ${time})`,
   settings_data_refresh_title: "Kurse & Preise",
   settings_data_refresh_refreshing: "Wird abgerufen…",
-  settings_data_refresh_refresh: "🔄 Jetzt aktualisieren",
+  settings_data_refresh_refresh: "Jetzt aktualisieren",
   settings_data_refresh_auto:
     "Kurse und Preise werden beim App-Start automatisch abgerufen.",
   settings_data_refresh_time: (time) => `Stand: ${time}`,
@@ -612,7 +612,7 @@ export const de: Translations = {
   settings_data_reset: "Alle Daten zurücksetzen",
   settings_data_reset_confirm:
     "Dadurch werden alle Daten (Vermögen, Einstellungen) zurückgesetzt. Diese Aktion kann nicht rückgängig gemacht werden.",
-  settings_data_drive_title: "💡 Google Drive Daten löschen",
+  settings_data_drive_title: "Google Drive Daten löschen",
   settings_data_drive_note:
     "Um die auf Google Drive gespeicherten Daten zu löschen, wechseln Sie zur App-Berechtigungsseite Ihres Google-Kontos (myaccount.google.com/permissions) und widerrufen Sie den Zugriff für diese App. Beim Widerrufen wird auch die in Drive gespeicherte Sicherungsdatei gelöscht.",
 
@@ -788,7 +788,7 @@ export const de: Translations = {
   fire_res_age_label: "Erwartetes Alter",
   fire_res_yrs: "J.",
   fire_res_out_of_bounds: "Außerhalb des Berechnungsbereichs. Erhöhen Sie die Sparrate oder Rendite!",
-  fire_result_already_reached: "Herzlichen Glückwunsch! Sie haben Ihr Ziel bereits erreicht. 🎉",
+  fire_result_already_reached: "Herzlichen Glückwunsch! Sie haben Ihr Ziel bereits erreicht. ",
   fire_chart_title: "Prognostiziertes Vermögenswachstum",
   fire_chart_asset: "Prognostiziertes Vermögen",
   fire_chart_target: "Zielbetrag",

@@ -1,3 +1,4 @@
+import { Shield } from "lucide-react";
 import { useT, useAnalyzer } from "@/hooks";
 import { analyzeByTickersGraham, type GrahamCriterionKey, type GrahamAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
@@ -33,7 +34,12 @@ export function GrahamDefensiveCard() {
     progressEnrich:  t.graham_progress_enrich,
     phaseEnrich:     t.graham_phase_enrich,
     noResult:        t.graham_no_result,
-    highScoreBadge:  t.graham_defensive_badge,
+    highScoreBadge: (
+      <span className="inline-flex items-center gap-1">
+        <Shield className="size-3" />
+        {t.graham_defensive_badge}
+      </span>
+    ),
     initialGuide:    t.graham_initial_guide,
     noData:          t.graham_no_data,
     disclaimer:      t.graham_disclaimer,

@@ -1,3 +1,4 @@
+import { Wand } from "lucide-react";
 import { useT, useAnalyzer } from "@/hooks";
 import { analyzeByTickersMF, type MFCriterionKey, type MFAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
@@ -35,7 +36,12 @@ export function MagicFormulaCard() {
     progressEnrich:  t.mf_progress_enrich,
     phaseEnrich:     t.mf_phase_enrich,
     noResult:        t.mf_no_result,
-    highScoreBadge:  t.mf_magic_badge,
+    highScoreBadge: (
+      <span className="inline-flex items-center gap-1">
+        <Wand className="size-3" />
+        {t.mf_magic_badge}
+      </span>
+    ),
     initialGuide:    t.mf_initial_guide,
     noData:          t.mf_no_data,
     disclaimer:      t.mf_disclaimer,

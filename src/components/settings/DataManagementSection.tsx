@@ -1,5 +1,6 @@
 import { useGoogleDrive, useT } from "@/hooks";
 import { Card, Button } from "@/components/common";
+import { Database } from "lucide-react";
 import { STORAGE_KEYS } from "@/constants";
 import { format } from "date-fns";
 
@@ -17,7 +18,14 @@ export function DataManagementSection() {
   };
 
   return (
-    <Card title={t.settings_data_title}>
+    <Card 
+      title={
+        <div className="flex items-center gap-2">
+          <Database className="size-4 text-rose-500" />
+          {t.settings_data_title}
+        </div>
+      }
+    >
       <div className="space-y-5">
         {/* Google Drive 연동 */}
         <div className="space-y-2">

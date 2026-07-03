@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { ChevronUp, ChevronDown, ChevronsUpDown, Briefcase } from "lucide-react";
 import {
   type Asset,
   type AssetCategory,
@@ -44,7 +45,7 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
         active ? "text-blue-500" : "text-zinc-300"
       )}
     >
-      {active ? (dir === "asc" ? "▲" : "▼") : "↕"}
+      {active ? (dir === "asc" ? <ChevronUp className="inline size-3" /> : <ChevronDown className="inline size-3" />) : <ChevronsUpDown className="inline size-3 text-zinc-600" />}
     </span>
   );
 }
@@ -116,7 +117,7 @@ export function AssetTable({
   if (allAssets.length === 0) {
     return (
       <div className="py-16 text-center text-zinc-400">
-        <p className="mb-3 text-4xl">💼</p>
+        <Briefcase className="mx-auto mb-3 size-12 text-zinc-600" />
         <p className="font-medium">{t.at_empty_title}</p>
         <p className="mt-1 text-sm">{t.at_empty_desc}</p>
       </div>

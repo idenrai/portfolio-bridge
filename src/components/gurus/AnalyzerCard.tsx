@@ -1,5 +1,6 @@
 import { Card } from "@/components/common";
 import { cn } from "@/utils";
+import { Loader2 } from "lucide-react";
 import { useT } from "@/hooks";
 import type { AnalyzerMode, AnalyzerProgress, BaseAnalyzerResult } from "@/hooks";
 
@@ -11,7 +12,7 @@ interface ThemeColors {
   scoreHigh: string;
   scoreTextHigh: string;
   badgePass: string;
-  highScoreBadge: string;
+  highScoreBadge: React.ReactNode;
   resultHover: string;
   suggestHover: string;
   inputFocus: string;
@@ -77,7 +78,7 @@ export interface AnalyzerTexts {
   progressEnrich: (done: number, total: number) => string;
   phaseEnrich: string;
   noResult: string;
-  highScoreBadge: string;
+  highScoreBadge: React.ReactNode;
   initialGuide: string;
   noData: string;
   disclaimer: string;
@@ -220,9 +221,14 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
             disabled={loading || portfolioStockCount === 0}
             className={cn("mb-4 rounded-lg", colors.btn, "cursor-pointer px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40")}
           >
-            {loading
-              ? texts.progressEnrich(progress.done, progress.total)
-              : t.analyzer_btn_portfolio}
+            {loading ? (
+              <span className="inline-flex items-center gap-1.5">
+                <Loader2 className="size-3 animate-spin" />
+                {texts.progressEnrich(progress.done, progress.total)}
+              </span>
+            ) : (
+              t.analyzer_btn_portfolio
+            )}
           </button>
         </>
       )}
@@ -244,7 +250,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
               disabled={loading || isSearching || !searchQuery.trim()}
               className={cn("rounded-lg", colors.btn, "cursor-pointer px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40")}
             >
-              {isSearching ? "..." : t.analyzer_btn_search}
+              {isSearching ? <Loader2 className="inline-block size-3 animate-spin" /> : t.analyzer_btn_search}
             </button>
           </div>
           {searchSuggestions.length > 0 && (
