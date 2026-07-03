@@ -217,8 +217,18 @@ When no assets are registered, the page shows a message directing the user to th
 
 ## Layout Structure
 
+### Initial State (Hero Grid)
+
+When no guru is selected, the page displays a responsive grid (Hero Grid) of all available gurus to encourage user selection.
+
+구루가 선택되지 않은 초기 상태에서는 사용자 선택을 유도하기 위해 전체 화면 그리드(Hero Grid) 형태로 모든 구루의 목록을 표시합니다.
+
+### Detail View
+
+Once a guru is selected, the list transforms into a horizontal scrollable selector at the top (featuring explicit left/right scroll arrows and a custom scrollbar for better UX), revealing the detail view below.
 The guru detail view uses a 12-column grid layout with a sticky left panel and a scrollable right panel. The AI prompt banner is placed at the top of the right panel.
 
+구루가 선택되면 전체 목록은 화면 상단의 가로 스크롤 선택기(더 나은 UX를 위한 명시적인 좌우 스크롤 화살표 및 커스텀 스크롤바 포함)로 축소되며, 그 아래에 상세 뷰가 나타납니다.
 구루 상세 뷰는 12열 그리드 레이아웃을 사용하며, 좌측 패널은 고정(sticky), 우측 패널은 스크롤됩니다. AI 프롬프트 배너는 가장 중요한 기능이므로 우측 패널 최상단에 배치됩니다.
 
 ```

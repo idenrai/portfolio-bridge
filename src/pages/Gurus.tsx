@@ -15,7 +15,7 @@ import {
   GuruAIPromptBanner,
 } from "@/components/gurus";
 import { usePortfolio, useT } from "@/hooks";
-import { calculateRebalancing } from "@/utils";
+import { calculateRebalancing, GURU_PROFILES } from "@/utils";
 import type { GuruProfile } from "@/types";
 import { en } from "@/i18n";
 
@@ -97,13 +97,34 @@ export function GurusPage() {
   return (
     <div className="space-y-4 md:space-y-6">
       <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.guru_title}</h1>
-      <GuruSelector
-        selectedGuru={selectedGuru}
-        onSelect={setSelectedGuru}
-      />
 
-      {selectedGuru && (
+      {!selectedGuru ? (
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {GURU_PROFILES.map((guru) => (
+            <button
+              key={guru.id}
+              onClick={() => setSelectedGuru(guru)}
+              className="group flex cursor-pointer flex-col items-center gap-4 rounded-2xl border border-zinc-800 bg-black p-6 text-center transition-colors hover:border-zinc-600 hover:bg-zinc-900/50 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none"
+            >
+              <img 
+                src={guru.avatar || "/fallback-avatar.svg"} 
+                alt={guru.name}
+                className="size-24 shrink-0 rounded-full border border-zinc-800 bg-zinc-900 object-cover transition-transform duration-300 group-hover:scale-105 group-hover:border-zinc-600"
+              />
+              <div>
+                <h3 className="text-lg font-bold tracking-tight text-white">{guruName(guru)}</h3>
+                <p className="mt-1 text-xs tracking-widest text-zinc-500 uppercase">{guru.firm}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      ) : (
         <>
+          <GuruSelector
+            selectedGuru={selectedGuru}
+            onSelect={setSelectedGuru}
+          />
+
           <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-12 lg:gap-8">
             {/* 좌측 고정 패널 (철학 및 프로필) */}
             <div className="flex flex-col gap-4 lg:sticky lg:top-20 lg:col-span-4">
