@@ -45,12 +45,12 @@ export const ko: Translations = {
   dash_empty_desc:
     '"자산 관리" 메뉴에서 보유 자산을 등록하면 여기에 요약이 표시됩니다.',
   dash_notice_storage:
-    "💾 데이터는 이 기기의 브라우저에만 저장됩니다. 다른 기기와 동기화되지 않으므로, 같은 기기 · 같은 브라우저에서 이용해 주세요.",
+    "데이터는 이 기기의 브라우저에만 저장됩니다. 다른 기기와 동기화되지 않으므로, 같은 기기 · 같은 브라우저에서 이용해 주세요.",
   dash_notice_csv:
-    "📁 자산 데이터는 CSV 파일로 내보내기/가져오기가 가능합니다. 백업이나 기기 이전 시 활용하세요.",
+    "자산 데이터는 CSV 파일로 내보내기/가져오기가 가능합니다. 백업이나 기기 이전 시 활용하세요.",
   dash_notice_mobile:
-    "🖥️ 현재 PC 브라우저에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
-  dash_sample_btn: "📈 샘플 데이터로 둘러보기",
+    "️ 현재 PC 브라우저에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
+  dash_sample_btn: "샘플 데이터로 둘러보기",
   dash_sample_hint: "샘플 데이터는 '설정 › 전체 데이터 초기화'로 제거할 수 있습니다.",
   dash_refresh: "환율 · 시세 갱신",
   dash_refreshing: "조회 중…",
@@ -95,12 +95,12 @@ export const ko: Translations = {
   fx_scenario_title: "환율 ±5% 시나리오",
 
   rebalance_title: "리밸런스 제안",
-  rebalance_ok: "✅ 배분이 목표에 근접합니다",
+  rebalance_ok: "배분이 목표에 근접합니다",
   rebalance_buy: "매수",
   rebalance_sell: "매도",
 
   insights_title: "인사이트",
-  insights_ok: "✅ 특이사항 없음",
+  insights_ok: "특이사항 없음",
   insights_ai_btn: "프롬프트 보기",
   insights_ai_copy: "클립보드에 복사",
   insights_ai_copied: "✓ 복사됨!",
@@ -420,10 +420,10 @@ export const ko: Translations = {
   lynch_no_data: "데이터 없음",
   lynch_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  lynch_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
-  lynch_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  lynch_progress_enrich: (done, total) => `상세 분석 중… (${done}/${total})`,
+  lynch_phase_enrich: "종목 상세 재무 데이터 보강 중…",
   lynch_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
-  lynch_tenbagger_badge: "🚀 10루타 후보",
+  lynch_tenbagger_badge: "10루타 후보",
   lynch_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
@@ -446,10 +446,10 @@ export const ko: Translations = {
   mf_no_data: "데이터 없음",
   mf_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  mf_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
-  mf_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  mf_progress_enrich: (done, total) => `상세 분석 중… (${done}/${total})`,
+  mf_phase_enrich: "종목 상세 재무 데이터 보강 중…",
   mf_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
-  mf_magic_badge: "🪄 마법 공식 적합",
+  mf_magic_badge: "마법 공식 적합",
   mf_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   // Graham
@@ -465,10 +465,10 @@ export const ko: Translations = {
   graham_no_data: "데이터 없음",
   graham_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  graham_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
-  graham_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  graham_progress_enrich: (done, total) => `상세 분석 중… (${done}/${total})`,
+  graham_phase_enrich: "종목 상세 재무 데이터 보강 중…",
   graham_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
-  graham_defensive_badge: "🛡️ 방어적 투자 적합",
+  graham_defensive_badge: "️ 방어적 투자 적합",
   graham_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   // Smith
@@ -483,10 +483,10 @@ export const ko: Translations = {
   smith_no_data: "데이터 없음",
   smith_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  smith_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
-  smith_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  smith_progress_enrich: (done, total) => `상세 분석 중… (${done}/${total})`,
+  smith_phase_enrich: "종목 상세 재무 데이터 보강 중…",
   smith_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
-  smith_quality_badge: "✨ 퀄리티 컴파운더",
+  smith_quality_badge: "퀄리티 컴파운더",
   smith_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   // Piotroski F-Score
@@ -505,10 +505,10 @@ export const ko: Translations = {
   piotroski_no_data: "데이터 없음",
   piotroski_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  piotroski_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
-  piotroski_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  piotroski_progress_enrich: (done, total) => `상세 분석 중… (${done}/${total})`,
+  piotroski_phase_enrich: "종목 상세 재무 데이터 보강 중…",
   piotroski_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
-  piotroski_fscore_badge: "📊 F-Score 우수",
+  piotroski_fscore_badge: "F-Score 우수",
   piotroski_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   // O'Neil CAN SLIM
@@ -525,10 +525,10 @@ export const ko: Translations = {
   oneil_no_data: "데이터 없음",
   oneil_disclaimer:
     "※ Yahoo Finance 재무 데이터 기반. 투자 결정의 근거로 삼지 마세요.",
-  oneil_progress_enrich: (done, total) => `⏳ 상세 분석 중… (${done}/${total})`,
-  oneil_phase_enrich: "🔍 종목 상세 재무 데이터 보강 중…",
+  oneil_progress_enrich: (done, total) => `상세 분석 중… (${done}/${total})`,
+  oneil_phase_enrich: "종목 상세 재무 데이터 보강 중…",
   oneil_no_result: "Yahoo Finance에서 종목 데이터를 받지 못했습니다. 잠시 후 다시 시도해 주세요.",
-  oneil_canslim_badge: "🚀 CAN SLIM 적합",
+  oneil_canslim_badge: "CAN SLIM 적합",
   oneil_initial_guide: "포트폴리오 분석 또는 티커 검색으로 채점을 시작하세요.",
 
   // ─── Buffett Indicator ────────────────────────────────────────────────────
@@ -557,7 +557,7 @@ export const ko: Translations = {
     `환율 조회 실패 — 캐시값 사용 중 (${time} 기준)`,
   settings_data_refresh_title: "환율 · 시세 갱신",
   settings_data_refresh_refreshing: "조회 중…",
-  settings_data_refresh_refresh: "🔄 지금 갱신",
+  settings_data_refresh_refresh: "지금 갱신",
   settings_data_refresh_auto: "앱 시작 시 자동 조회됩니다.",
   settings_data_refresh_time: (time) => `${time} 기준`,
   settings_data_refresh_cache_warn: (time) =>
@@ -604,7 +604,7 @@ export const ko: Translations = {
   settings_data_reset: "전체 데이터 초기화",
   settings_data_reset_confirm:
     "모든 데이터(자산, 설정)를 초기화합니다. 이 작업은 되돌릴 수 없습니다.",
-  settings_data_drive_title: "💡 Google Drive 데이터 삭제",
+  settings_data_drive_title: "Google Drive 데이터 삭제",
   settings_data_drive_note:
     "Google Drive에 저장된 데이터를 삭제하려면 Google 계정의 앱 연결 관리 페이지(myaccount.google.com/permissions)에서 이 앱의 접근 권한을 해제하세요. 권한 해제 시 Google Drive에 저장된 백업 파일도 함께 삭제됩니다.",
 
@@ -778,7 +778,7 @@ export const ko: Translations = {
   fire_res_age_label: "예상 도달 연령",
   fire_res_yrs: "년",
   fire_res_out_of_bounds: "계산 범위를 초과했습니다. 저축액이나 수익률을 높여보세요!",
-  fire_result_already_reached: "축하합니다! 이미 목표를 달성하셨습니다. 🎉",
+  fire_result_already_reached: "축하합니다! 이미 목표를 달성하셨습니다. ",
   fire_chart_title: "예상 자산 성장 추이",
   fire_chart_asset: "예상 자산액",
   fire_chart_target: "목표액",

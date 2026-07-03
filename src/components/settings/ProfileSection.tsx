@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useProfileStore, useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
 import { Card, AutoResizeTextarea, Button, Input } from "@/components/common";
+import { User } from "lucide-react";
 
 export function ProfileSection() {
   const profile = useProfileStore();
@@ -19,7 +20,12 @@ export function ProfileSection() {
 
   return (
     <Card
-      title={t.profile_title}
+      title={
+        <div className="flex items-center gap-2">
+          <User className="size-4 text-indigo-500" />
+          {t.profile_title}
+        </div>
+      }
       action={
         <Button size="sm" variant="secondary" onClick={handleProfileSave}>
           {profileSaved ? t.profile_saved : t.profile_save}

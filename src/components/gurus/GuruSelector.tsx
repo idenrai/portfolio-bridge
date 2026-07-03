@@ -14,14 +14,15 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
     (t[`guru_name_${guru.id}` as keyof typeof t] as string) ?? guru.name;
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 xl:grid-cols-5">
-      {GURU_PROFILES.map((guru) => {
+    <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
+      <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 pt-1 sm:gap-4 lg:pb-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {GURU_PROFILES.map((guru) => {
         const avatarUrl = guru.avatar || "/fallback-avatar.svg";
         return (
           <button
             key={guru.id}
             onClick={() => onSelect(guru)}
-            className={`flex cursor-pointer items-center gap-3 rounded-xl border p-3 text-left transition-all focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none ${
+            className={`flex min-w-[200px] shrink-0 snap-start cursor-pointer items-center gap-3 rounded-xl border p-3 text-left transition-all focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:min-w-[240px] ${
               selectedGuru?.id === guru.id
                 ? "border-zinc-400 bg-zinc-900 text-white shadow-sm"
                 : "border-zinc-800 bg-black hover:border-zinc-700 hover:bg-zinc-900/50"
@@ -39,6 +40,9 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
           </button>
         );
       })}
+      </div>
+      {/* Right fade gradient to hint scrolling */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black to-transparent sm:w-16" />
     </div>
   );
 }

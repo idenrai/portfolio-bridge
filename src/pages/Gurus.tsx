@@ -1,3 +1,4 @@
+import { Lightbulb } from "lucide-react";
 import { useState, useMemo } from "react";
 
 import {
@@ -84,7 +85,7 @@ export function GurusPage() {
   if (assets.length === 0) {
     return (
       <div className="flex min-h-[40vh] flex-col items-center justify-center px-4 text-zinc-400 md:min-h-[60vh]">
-        <p className="mb-4 text-5xl md:text-6xl">💡</p>
+        <Lightbulb className="mb-4 size-12 text-yellow-500/80 drop-shadow-lg" />
         <h2 className="mb-2 text-center text-lg font-semibold text-zinc-400 md:text-xl">
           {t.guru_empty_title}
         </h2>
@@ -113,7 +114,7 @@ export function GurusPage() {
                     alt={selectedGuru.name} 
                     width={320}
                     height={320}
-                    className="mx-auto aspect-square w-full max-w-[320px] shrink-0 rounded-2xl border border-zinc-800 bg-zinc-900 object-cover shadow-lg lg:mx-0" 
+                    className="mx-auto aspect-square w-full max-w-[320px] shrink-0 rounded-2xl border border-zinc-800 bg-zinc-900 object-cover shadow-[0_0_40px_rgba(255,255,255,0.05)] transition-shadow hover:shadow-[0_0_50px_rgba(255,255,255,0.08)]" 
                   />
                   <div className="pt-2 text-center lg:text-left">
                     <h2 className="mb-1 text-2xl font-bold tracking-tight text-white">{guruName(selectedGuru)}</h2>

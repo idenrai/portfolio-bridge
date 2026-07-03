@@ -1,14 +1,15 @@
 import { useLanguageStore, useSettingsStore } from "@/stores";
+import { LayoutDashboard, Briefcase, Users, Target, Settings, Info } from "lucide-react";
 import { NavLink, Link } from "react-router-dom";
 import { useT } from "@/hooks";
 import type { Lang } from "@/i18n";
 import type { CurrencyCode } from "@/types";
 
 const LANG_LABELS: Record<Lang, string> = {
-  ko: "🇰🇷",
-  en: "🇺🇸",
-  ja: "🇯🇵",
-  de: "🇩🇪",
+  ko: "KR",
+  en: "US",
+  ja: "JP",
+  de: "DE",
 };
 
 const LANG_ARIA: Record<Lang, string> = {
@@ -39,12 +40,12 @@ export function Header() {
   const t = useT();
 
   const NAV_ITEMS = [
-    { to: "/", label: t.nav_dashboard },
-    { to: "/assets", label: t.nav_assets },
-    { to: "/gurus", label: t.nav_gurus },
-    { to: "/fire", label: t.nav_fire },
-    { to: "/settings", label: t.nav_settings },
-    { to: "/about", label: t.nav_about },
+    { to: "/", label: t.nav_dashboard, icon: <LayoutDashboard className="size-4" /> },
+    { to: "/assets", label: t.nav_assets, icon: <Briefcase className="size-4" /> },
+    { to: "/gurus", label: t.nav_gurus, icon: <Users className="size-4" /> },
+    { to: "/fire", label: t.nav_fire, icon: <Target className="size-4" /> },
+    { to: "/settings", label: t.nav_settings, icon: <Settings className="size-4" /> },
+    { to: "/about", label: t.nav_about, icon: <Info className="size-4" /> },
   ];
 
   const handleLangChange = (l: Lang) => {
@@ -71,19 +72,22 @@ export function Header() {
           </span>
         </Link>
         <nav className="flex items-center gap-1">
-          {NAV_ITEMS.map(({ to, label }) => (
+          {NAV_ITEMS.map(({ to, label, icon }) => (
             <NavLink
               key={to}
               to={to}
+              title={label}
+              aria-label={label}
               className={({ isActive }) =>
-                `px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                `flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   isActive
                     ? "bg-zinc-800 text-white"
                     : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50"
                 }`
               }
             >
-              {label}
+              {icon}
+              <span className="hidden lg:inline">{label}</span>
             </NavLink>
           ))}
         </nav>

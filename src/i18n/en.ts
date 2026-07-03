@@ -45,12 +45,12 @@ export const en: Translations = {
   dash_empty_desc:
     'Register your holdings in "Assets" and a summary will appear here.',
   dash_notice_storage:
-    "💾 Data is stored only in this browser on this device. It does not sync across devices — please use the same device and browser.",
+    "Data is stored only in this browser on this device. It does not sync across devices — please use the same device and browser.",
   dash_notice_csv:
-    "📁 Asset data can be exported/imported as CSV files. Use this for backups or device migration.",
+    "Asset data can be exported/imported as CSV files. Use this for backups or device migration.",
   dash_notice_mobile:
-    "🖥️ Optimized for desktop browsers. Mobile screens are not currently supported.",
-  dash_sample_btn: "📈 Explore with sample data",
+    "️ Optimized for desktop browsers. Mobile screens are not currently supported.",
+  dash_sample_btn: "Explore with sample data",
   dash_sample_hint: "Sample data can be removed via Settings › Reset All Data.",
   dash_refresh: "Refresh All",
   dash_refreshing: "Fetching…",
@@ -93,12 +93,12 @@ export const en: Translations = {
   fx_scenario_title: "±5% FX Scenario",
 
   rebalance_title: "Rebalance Suggestions",
-  rebalance_ok: "✅ Allocation is close to target",
+  rebalance_ok: "Allocation is close to target",
   rebalance_buy: "Buy",
   rebalance_sell: "Sell",
 
   insights_title: "Insights",
-  insights_ok: "✅ No issues found",
+  insights_ok: "No issues found",
   insights_ai_btn: "View Prompt",
   insights_ai_copy: "Copy to clipboard",
   insights_ai_copied: "✓ Copied!",
@@ -415,10 +415,10 @@ export const en: Translations = {
   lynch_no_data: "No data",
   lynch_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  lynch_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
-  lynch_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
+  lynch_progress_enrich: (done, total) => `Analyzing… (${done}/${total})`,
+  lynch_phase_enrich: "Enriching stocks with detailed fundamentals…",
   lynch_no_result: "No stock data received from Yahoo Finance. Please try again later.",
-  lynch_tenbagger_badge: "🚀 Tenbagger Candidate",
+  lynch_tenbagger_badge: "Tenbagger Candidate",
   lynch_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   // ─── Analyzer Common (mode tabs) ─────────────────────────────────────────────
@@ -441,10 +441,10 @@ export const en: Translations = {
   mf_no_data: "No data",
   mf_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  mf_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
-  mf_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
+  mf_progress_enrich: (done, total) => `Analyzing… (${done}/${total})`,
+  mf_phase_enrich: "Enriching stocks with detailed fundamentals…",
   mf_no_result: "No stock data received from Yahoo Finance. Please try again later.",
-  mf_magic_badge: "🪄 Magic Formula Pick",
+  mf_magic_badge: "Magic Formula Pick",
   mf_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   // Graham
@@ -460,10 +460,10 @@ export const en: Translations = {
   graham_no_data: "No data",
   graham_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  graham_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
-  graham_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
+  graham_progress_enrich: (done, total) => `Analyzing… (${done}/${total})`,
+  graham_phase_enrich: "Enriching stocks with detailed fundamentals…",
   graham_no_result: "No stock data received from Yahoo Finance. Please try again later.",
-  graham_defensive_badge: "🛡️ Defensive Pick",
+  graham_defensive_badge: "️ Defensive Pick",
   graham_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   // Smith
@@ -478,10 +478,10 @@ export const en: Translations = {
   smith_no_data: "No data",
   smith_disclaimer:
     "※ Based on Yahoo Finance fundamentals. Do not use as a basis for investment decisions.",
-  smith_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
-  smith_phase_enrich: "🔍 Enriching stocks with detailed fundamentals…",
+  smith_progress_enrich: (done, total) => `Analyzing… (${done}/${total})`,
+  smith_phase_enrich: "Enriching stocks with detailed fundamentals…",
   smith_no_result: "No stock data received from Yahoo Finance. Please try again later.",
-  smith_quality_badge: "✨ Quality Compounder",
+  smith_quality_badge: "Quality Compounder",
   smith_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   // Piotroski F-Score
@@ -500,10 +500,10 @@ export const en: Translations = {
   piotroski_no_data: "No data",
   piotroski_disclaimer:
     "※ Based on Yahoo Finance data. Do not use as sole basis for investment decisions.",
-  piotroski_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
-  piotroski_phase_enrich: "🔍 Enriching financial data…",
+  piotroski_progress_enrich: (done, total) => `Analyzing… (${done}/${total})`,
+  piotroski_phase_enrich: "Enriching financial data…",
   piotroski_no_result: "No stock data received from Yahoo Finance. Please try again later.",
-  piotroski_fscore_badge: "📊 Strong F-Score",
+  piotroski_fscore_badge: "Strong F-Score",
   piotroski_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   // O'Neil CAN SLIM
@@ -520,10 +520,10 @@ export const en: Translations = {
   oneil_no_data: "No data",
   oneil_disclaimer:
     "※ Based on Yahoo Finance data. Do not use as sole basis for investment decisions.",
-  oneil_progress_enrich: (done, total) => `⏳ Analyzing… (${done}/${total})`,
-  oneil_phase_enrich: "🔍 Enriching financial data…",
+  oneil_progress_enrich: (done, total) => `Analyzing… (${done}/${total})`,
+  oneil_phase_enrich: "Enriching financial data…",
   oneil_no_result: "No stock data received from Yahoo Finance. Please try again later.",
-  oneil_canslim_badge: "🚀 CAN SLIM Fit",
+  oneil_canslim_badge: "CAN SLIM Fit",
   oneil_initial_guide: "Analyze your portfolio or search a ticker to start.",
 
   // ─── Buffett Indicator ────────────────────────────────────────────────────
@@ -552,7 +552,7 @@ export const en: Translations = {
     `Rate fetch failed — using cached value (as of ${time})`,
   settings_data_refresh_title: "Rates & Prices",
   settings_data_refresh_refreshing: "Fetching…",
-  settings_data_refresh_refresh: "🔄 Refresh Now",
+  settings_data_refresh_refresh: "Refresh Now",
   settings_data_refresh_auto:
     "Rates and prices are fetched automatically on app start.",
   settings_data_refresh_time: (time) => `As of ${time}`,
@@ -599,7 +599,7 @@ export const en: Translations = {
   settings_data_reset: "Reset All Data",
   settings_data_reset_confirm:
     "This will reset all data (assets, settings). This action cannot be undone.",
-  settings_data_drive_title: "💡 Google Drive Data Deletion",
+  settings_data_drive_title: "Google Drive Data Deletion",
   settings_data_drive_note:
     "To delete data saved on Google Drive, go to your Google Account's app permissions page (myaccount.google.com/permissions) and revoke access for this app. Revoking access will also delete the backup file stored in Drive.",
 
@@ -773,7 +773,7 @@ export const en: Translations = {
   fire_res_age_label: "Expected Age",
   fire_res_yrs: "YRS",
   fire_res_out_of_bounds: "Out of calculation bounds. Try increasing savings or returns!",
-  fire_result_already_reached: "Congratulations! You have already reached your target. 🎉",
+  fire_result_already_reached: "Congratulations! You have already reached your target. ",
   fire_chart_title: "Projected Wealth Growth",
   fire_chart_asset: "Projected Assets",
   fire_chart_target: "Target Amount",

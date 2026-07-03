@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageSquareQuote, AlertTriangle } from "lucide-react";
+import { MessageSquareQuote, AlertTriangle, Calendar } from "lucide-react";
 import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore, useProfileStore, useGuruSessionStore } from "@/stores";
 import { buildGuruPrompt, buildGuruFollowUpPrompt } from "@/utils";
@@ -191,7 +191,7 @@ export function GuruAIPromptBanner({
           <div className="mt-4 space-y-3 border-t border-zinc-800/50 pt-4">
             <div className="flex items-center gap-2">
               <span className="rounded-full border border-emerald-800/50 bg-emerald-900/30 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
-                📅 {prevSession?.date}
+                <Calendar className="mr-1.5 inline-block size-3 text-emerald-400/80" /> {prevSession?.date}
               </span>
               <p className="text-[11px] text-zinc-500">{t.guru_ai_followup_desc}</p>
             </div>

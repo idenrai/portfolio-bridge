@@ -1,3 +1,4 @@
+import { BarChart2 } from "lucide-react";
 import { useT, useAnalyzer } from "@/hooks";
 import { analyzeByTickersPiotroski, type PiotroskiCriterionKey, type PiotroskiAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
@@ -42,7 +43,12 @@ export function PiotroskiFScoreCard() {
     progressEnrich:  t.piotroski_progress_enrich,
     phaseEnrich:     t.piotroski_phase_enrich,
     noResult:        t.piotroski_no_result,
-    highScoreBadge:  t.piotroski_fscore_badge,
+    highScoreBadge: (
+      <span className="inline-flex items-center gap-1">
+        <BarChart2 className="size-3" />
+        {t.piotroski_fscore_badge}
+      </span>
+    ),
     initialGuide:    t.piotroski_initial_guide,
     noData:          t.piotroski_no_data,
     disclaimer:      t.piotroski_disclaimer,

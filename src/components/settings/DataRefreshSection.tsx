@@ -1,6 +1,7 @@
 import { useSettingsStore, useAssetStore, useLanguageStore } from "@/stores";
 import { useT, useDataRefresh, useExchangeRates } from "@/hooks";
 import { Card, Button } from "@/components/common";
+import { RefreshCw } from "lucide-react";
 import type { CurrencyCode } from "@/types";
 import { LANG_LOCALES } from "@/i18n";
 import { format } from "date-fns";
@@ -32,7 +33,12 @@ export function DataRefreshSection() {
 
   return (
     <Card
-      title={t.settings_data_refresh_title}
+      title={
+        <div className="flex items-center gap-2">
+          <RefreshCw className="size-4 text-emerald-500" />
+          {t.settings_data_refresh_title}
+        </div>
+      }
       action={
         <div className="flex items-center gap-2">
           {lastUpdated && (

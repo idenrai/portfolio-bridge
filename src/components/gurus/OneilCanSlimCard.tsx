@@ -1,3 +1,4 @@
+import { Rocket } from "lucide-react";
 import { useT, useAnalyzer } from "@/hooks";
 import { analyzeByTickersOneil, type OneilCriterionKey, type OneilAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
@@ -54,7 +55,12 @@ export function OneilCanSlimCard() {
     progressEnrich:  t.oneil_progress_enrich,
     phaseEnrich:     t.oneil_phase_enrich,
     noResult:        t.oneil_no_result,
-    highScoreBadge:  t.oneil_canslim_badge,
+    highScoreBadge: (
+      <span className="inline-flex items-center gap-1">
+        <Rocket className="size-3" />
+        {t.oneil_canslim_badge}
+      </span>
+    ),
     initialGuide:    t.oneil_initial_guide,
     noData:          t.oneil_no_data,
     disclaimer:      t.oneil_disclaimer,

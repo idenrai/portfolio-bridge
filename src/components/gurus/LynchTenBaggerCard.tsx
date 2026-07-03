@@ -1,3 +1,4 @@
+import { Rocket } from "lucide-react";
 import { useT, useAnalyzer } from "@/hooks";
 import { analyzeByTickers, type LynchCriterionKey, type LynchAnalyzerResult } from "@/utils/analyzers";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
@@ -37,7 +38,12 @@ export function LynchTenBaggerCard() {
     progressEnrich:  t.lynch_progress_enrich,
     phaseEnrich:     t.lynch_phase_enrich,
     noResult:        t.lynch_no_result,
-    highScoreBadge:  t.lynch_tenbagger_badge,
+    highScoreBadge: (
+      <span className="inline-flex items-center gap-1">
+        <Rocket className="size-3" />
+        {t.lynch_tenbagger_badge}
+      </span>
+    ),
     initialGuide:    t.lynch_initial_guide,
     noData:          t.lynch_no_data,
     disclaimer:      t.lynch_disclaimer,
