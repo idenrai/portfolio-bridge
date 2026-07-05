@@ -1,5 +1,28 @@
 import type { GuruProfile } from "@/types";
 
+export const GURU_SINCE_YEARS: Record<string, string> = {
+  buffett: "65",
+  munger: "78",
+  lynch: "77",
+  graham: "26",
+  dalio: "75",
+  lilu: "97",
+  ackman: "04",
+  burry: "00",
+  fisher: "79",
+  cohen: "92",
+  marks: "95",
+  klarman: "82",
+  templeton: "40",
+  soros: "69",
+  wood: "14",
+  druckenmiller: "81",
+  smith: "10",
+  greenblatt: "85",
+  piotroski: "00",
+  oneil: "63",
+};
+
 /**
  * 투자 구루 프로필 데이터
  */

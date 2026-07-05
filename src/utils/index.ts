@@ -10,7 +10,7 @@ export {
 export { calculateFire, getTargetAmountFromExpense } from "./calc/fire";
 export type { FireCalculationParams, FireDataPoint, FireResult } from "./calc/fire";
 export { exportToCsv, parseCsv, downloadCsv } from "./csv";
-export { GURU_PROFILES } from "./gurus";
+export { GURU_PROFILES, GURU_SINCE_YEARS } from "./gurus";
 export { SAMPLE_ASSETS } from "./sampleData";
 export {
   searchTicker,
