@@ -219,9 +219,15 @@ When no assets are registered, the page shows a message directing the user to th
 
 ### Initial State (Hero Grid)
 
-When no guru is selected, the page displays a responsive grid (Hero Grid) of all available gurus to encourage user selection.
+When no guru is selected, the page displays a responsive grid (Hero Grid) of all available gurus to encourage user selection. The cards are designed with a premium "AMEX credit card" aesthetic, featuring a strict 1.586:1 aspect ratio, subtle gradients, and structured layout (avatar top-left, name and firm bottom-left) to simulate physical premium cards.
 
-구루가 선택되지 않은 초기 상태에서는 사용자 선택을 유도하기 위해 전체 화면 그리드(Hero Grid) 형태로 모든 구루의 목록을 표시합니다.
+구루가 선택되지 않은 초기 상태에서는 사용자 선택을 유도하기 위해 반응형 그리드(Hero Grid) 형태로 모든 구루의 목록을 표시합니다. 각 카드는 프리미엄 "AMEX 신용카드" 미학으로 디자인되어 엄격한 1.586:1 비율, 은은한 그라데이션, 구조화된 레이아웃(좌측 상단 아바타, 좌측 하단 이름 및 소속)을 통해 실제 프리미엄 카드의 느낌을 구현합니다.
+
+### Firm Name Formatting
+
+Guru firm names often include parentheses (e.g., `Berkshire Hathaway (Chairman)`). The `GuruFirm` component handles this by automatically inserting line breaks before the parenthesis to maintain a clean layout within the strict card aspect ratio.
+
+구루의 소속 이름에는 종종 괄호가 포함됩니다. `GuruFirm` 컴포넌트는 엄격한 카드 비율 내에서 깔끔한 레이아웃을 유지하기 위해 괄호 앞에 자동으로 줄바꿈을 삽입합니다.
 
 ### Detail View
 
@@ -241,10 +247,10 @@ The guru detail view uses a 12-column grid layout with a sticky left panel and a
 
 | Context | Size | Rationale |
 |---------|------|-----------|
-| GuruSelector grid | `w-11 h-11 sm:w-12 sm:h-12` (44–48px) | Meets Apple HIG touch-target-size minimum (44px); portrait detail recognizable |
+| GuruSelector grid (Mini Cards) | `w-48 sm:w-56` (aspect 1.586:1), img `40-48px` | Maintains credit card proportions while fitting horizontal carousel; touch-friendly avatars |
 | Profile panel | `w-full max-w-[320px] aspect-square` (up to 320px) | Editorial, magazine-cover style prominent display; aligned top-center or top-left |
 
-구루 선택 그리드의 아바타는 44–48px로 터치 타겟 최소 기준을 충족하며, 프로필 패널의 아바타는 최대 320px 뷰로 에디토리얼 디자인 요소를 강조해 초상화 디테일이 크게 보이도록 구성합니다.
+구루 선택 캐러셀의 미니 카드는 가로 스크롤에 맞추면서도 신용카드 비율을 유지하며, 프로필 패널의 아바타는 최대 320px 뷰로 에디토리얼 디자인 요소를 강조해 초상화 디테일이 크게 보이도록 구성합니다.
 
 ## Design & Accessibility
 

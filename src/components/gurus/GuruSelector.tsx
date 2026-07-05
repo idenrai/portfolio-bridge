@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useT } from "@/hooks";
 import { GURU_PROFILES } from "@/utils";
+import { GuruFirm } from "./GuruFirm";
 import type { GuruProfile } from "@/types";
 
 interface GuruSelectorProps {
@@ -68,20 +69,30 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
             <button
               key={guru.id}
               onClick={() => onSelect(guru)}
-              className={`flex min-w-[200px] shrink-0 snap-start cursor-pointer items-center gap-3 rounded-xl border p-3 text-left transition-colors focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:min-w-[240px] ${
+              aria-label={`${guruName(guru)}, ${guru.firm}`}
+              className={`relative flex w-48 shrink-0 snap-start cursor-pointer flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-all duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:w-56 aspect-[1.586/1] ${
                 selectedGuru?.id === guru.id
-                  ? "border-zinc-400 bg-zinc-900 text-white shadow-sm"
-                  : "border-zinc-800 bg-black hover:border-zinc-700 hover:bg-zinc-900/50"
+                  ? "border-zinc-500 bg-gradient-to-br from-zinc-800 via-zinc-900 to-black text-white shadow-lg shadow-white/5"
+                  : "border-zinc-800 bg-gradient-to-br from-zinc-900 via-black to-zinc-950 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-900/50"
               }`}
             >
-              <img src={avatarUrl} alt={guru.name} className={`size-11 shrink-0 rounded-full bg-zinc-900 object-cover transition-colors sm:size-12 ${selectedGuru?.id === guru.id ? "border border-zinc-500" : "border border-zinc-800"}`} />
-              <div className="min-w-0">
-                <p className="truncate text-sm leading-tight font-semibold text-zinc-200">
+              <div className="flex w-full items-start justify-between">
+                <img 
+                  src={avatarUrl} 
+                  alt={guru.name} 
+                  width={48}
+                  height={48}
+                  className={`size-10 shrink-0 rounded-full object-cover transition-colors sm:size-12 ${selectedGuru?.id === guru.id ? "border border-zinc-500 bg-zinc-800" : "border border-zinc-800 bg-zinc-900"}`} 
+                />
+              </div>
+              <div className="mt-auto flex min-w-0 flex-col gap-0.5">
+                <p className={`truncate text-sm font-bold tracking-tight ${selectedGuru?.id === guru.id ? "text-zinc-100" : "text-zinc-300"}`}>
                   {guruName(guru)}
                 </p>
-                <p className="mt-0.5 truncate text-[10px] leading-tight text-zinc-500 sm:text-xs">
-                  {guru.firm}
-                </p>
+                <GuruFirm 
+                  firm={guru.firm} 
+                  className={`text-[9px] tracking-wider sm:text-[10px] ${selectedGuru?.id === guru.id ? "text-zinc-400" : "text-zinc-500"}`} 
+                />
               </div>
             </button>
           );
