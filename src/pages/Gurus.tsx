@@ -16,7 +16,7 @@ import {
   GuruFirm,
 } from "@/components/gurus";
 import { usePortfolio, useT } from "@/hooks";
-import { calculateRebalancing, GURU_PROFILES } from "@/utils";
+import { calculateRebalancing, GURU_PROFILES, GURU_SINCE_YEARS } from "@/utils";
 import type { GuruProfile } from "@/types";
 import { en } from "@/i18n";
 
@@ -106,23 +106,55 @@ export function GurusPage() {
               key={guru.id}
               onClick={() => setSelectedGuru(guru)}
               aria-label={`${guruName(guru)}, ${guru.firm}`}
-              className="group relative flex aspect-[1.586/1] w-full cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-zinc-800 bg-gradient-to-br from-zinc-900 via-black to-zinc-950 p-5 text-left transition-all duration-300 hover:border-zinc-600 hover:shadow-xl hover:shadow-white/5 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none"
+              className="group relative flex aspect-[1.586/1] w-full cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 p-5 text-left transition-[transform,box-shadow,border-color] duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-white/5 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none"
             >
-              <div className="flex w-full items-start justify-between">
-                <img 
-                  src={guru.avatar || "/fallback-avatar.svg"} 
-                  alt={guru.name}
-                  width={56}
-                  height={56}
-                  className="size-14 shrink-0 rounded-full border border-zinc-700/50 bg-zinc-900/80 object-cover shadow-sm transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="mt-1 text-[10px] font-medium tracking-[0.2em] text-zinc-600 uppercase">
-                  Bridge
+              {/* Base Obsidian Black Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black transition-opacity duration-500" />
+              
+              {/* Hover Platinum Silver Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-zinc-200 to-zinc-300 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+              {/* Inner dashed border */}
+              <div className="absolute inset-2.5 rounded-xl border border-dashed border-zinc-800/30 group-hover:border-zinc-400/40 transition-colors duration-500 pointer-events-none" />
+
+              {/* Top Center Branding */}
+              <div className="relative z-10 w-full text-center">
+                <span className="font-mono text-[9px] tracking-[0.25em] font-medium text-zinc-500 transition-colors duration-500 group-hover:text-zinc-700 uppercase">
+                  Portfolio Bridge
+                </span>
+              </div>
+
+              {/* Center Large Avatar */}
+              <div className="relative z-10 my-auto flex w-full justify-center">
+                <div className="rounded-full border border-zinc-800/80 p-0.5 bg-black/20 shadow-inner transition-all duration-500 group-hover:border-zinc-400/60 group-hover:bg-zinc-200/30">
+                  <div className="rounded-full overflow-hidden size-14 sm:size-16 border border-zinc-900">
+                    <img
+                      src={guru.avatar || "/fallback-avatar.svg"}
+                      alt={guru.name}
+                      width={64}
+                      height={64}
+                      className="size-full object-cover grayscale brightness-90 contrast-125 transition-all duration-500 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="mt-auto flex min-w-0 flex-col gap-1">
-                <h3 className="truncate text-lg font-bold tracking-tight text-zinc-100">{guruName(guru)}</h3>
-                <GuruFirm firm={guru.firm} className="text-[10px] sm:text-xs" />
+
+              {/* Bottom Info: Left Name/Firm, Right Member Since */}
+              <div className="relative z-10 flex w-full items-end justify-between min-w-0">
+                <div className="min-w-0 flex-1 flex flex-col gap-0.5 pr-3">
+                  <h3 className="truncate font-mono text-sm sm:text-base font-bold tracking-wider text-zinc-200 transition-colors duration-500 group-hover:text-zinc-950 uppercase">
+                    {guruName(guru)}
+                  </h3>
+                  <GuruFirm
+                    firm={guru.firm}
+                    className="text-[9px] sm:text-[10px] tracking-wider text-zinc-500 transition-colors duration-500 group-hover:text-zinc-700"
+                  />
+                </div>
+                
+                <div className="shrink-0 flex flex-col items-end font-mono text-[8px] sm:text-[9px] leading-tight text-zinc-500 transition-colors duration-500 group-hover:text-zinc-800">
+                  <span className="text-[7px] uppercase tracking-wider opacity-60">Since</span>
+                  <span className="font-bold">'{GURU_SINCE_YEARS[guru.id] || "26"}</span>
+                </div>
               </div>
             </button>
           ))}

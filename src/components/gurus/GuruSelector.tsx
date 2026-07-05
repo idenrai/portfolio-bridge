@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useT } from "@/hooks";
-import { GURU_PROFILES } from "@/utils";
+import { GURU_PROFILES, GURU_SINCE_YEARS } from "@/utils";
 import { GuruFirm } from "./GuruFirm";
 import type { GuruProfile } from "@/types";
 
@@ -70,29 +70,77 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
               key={guru.id}
               onClick={() => onSelect(guru)}
               aria-label={`${guruName(guru)}, ${guru.firm}`}
-              className={`relative flex w-48 shrink-0 snap-start cursor-pointer flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-all duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:w-56 aspect-[1.586/1] ${
+              className={`relative flex w-48 shrink-0 snap-start cursor-pointer flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-[border-color,box-shadow] duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:w-56 aspect-[1.586/1] ${
                 selectedGuru?.id === guru.id
-                  ? "border-zinc-500 bg-gradient-to-br from-zinc-800 via-zinc-900 to-black text-white shadow-lg shadow-white/5"
-                  : "border-zinc-800 bg-gradient-to-br from-zinc-900 via-black to-zinc-950 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-900/50"
+                  ? "border-zinc-300 text-zinc-950 shadow-lg shadow-white/5"
+                  : "border-zinc-800 text-zinc-400 hover:border-zinc-700"
               }`}
             >
-              <div className="flex w-full items-start justify-between">
-                <img 
-                  src={avatarUrl} 
-                  alt={guru.name} 
-                  width={48}
-                  height={48}
-                  className={`size-10 shrink-0 rounded-full object-cover transition-colors sm:size-12 ${selectedGuru?.id === guru.id ? "border border-zinc-500 bg-zinc-800" : "border border-zinc-800 bg-zinc-900"}`} 
-                />
+              {/* Base Obsidian Black Background */}
+              <div className={`absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black transition-opacity duration-300 ${selectedGuru?.id === guru.id ? "opacity-0" : "opacity-100"}`} />
+              
+              {/* Active Platinum Silver Background */}
+              <div className={`absolute inset-0 bg-gradient-to-br from-zinc-100 via-zinc-200 to-zinc-300 transition-opacity duration-300 ${selectedGuru?.id === guru.id ? "opacity-100" : "opacity-0"}`} />
+
+              {/* Inner dashed border */}
+              <div className={`absolute inset-1.5 rounded-lg border border-dashed pointer-events-none transition-colors duration-300 ${
+                selectedGuru?.id === guru.id ? "border-zinc-400/40" : "border-zinc-800/30"
+              }`} />
+
+              {/* Top Center Branding */}
+              <div className="relative z-10 w-full text-center">
+                <span className={`font-mono text-[8px] tracking-[0.25em] font-medium uppercase transition-colors duration-300 ${
+                  selectedGuru?.id === guru.id ? "text-zinc-600" : "text-zinc-500"
+                }`}>
+                  Portfolio Bridge
+                </span>
               </div>
-              <div className="mt-auto flex min-w-0 flex-col gap-0.5">
-                <p className={`truncate text-sm font-bold tracking-tight ${selectedGuru?.id === guru.id ? "text-zinc-100" : "text-zinc-300"}`}>
-                  {guruName(guru)}
-                </p>
-                <GuruFirm 
-                  firm={guru.firm} 
-                  className={`text-[9px] tracking-wider sm:text-[10px] ${selectedGuru?.id === guru.id ? "text-zinc-400" : "text-zinc-500"}`} 
-                />
+
+              {/* Center Large Avatar */}
+              <div className="relative z-10 my-auto flex w-full justify-center">
+                <div className={`rounded-full border p-0.5 transition-all duration-300 ${
+                  selectedGuru?.id === guru.id 
+                    ? "border-zinc-400/80 bg-zinc-200/50" 
+                    : "border-zinc-800/80 bg-black/20"
+                }`}>
+                  <div className="rounded-full overflow-hidden size-10 sm:size-12 border border-zinc-900">
+                    <img
+                      src={avatarUrl}
+                      alt={guru.name}
+                      width={48}
+                      height={48}
+                      className={`size-full object-cover transition-all duration-300 ${
+                        selectedGuru?.id === guru.id 
+                          ? "grayscale-0 brightness-100 contrast-100" 
+                          : "grayscale brightness-90 contrast-125"
+                      }`}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Info: Left Name/Firm, Right Member Since */}
+              <div className="relative z-10 flex w-full items-end justify-between min-w-0">
+                <div className="min-w-0 flex-1 flex flex-col gap-0.5 pr-2.5">
+                  <p className={`truncate font-mono text-xs font-bold tracking-wider uppercase transition-colors duration-300 ${
+                    selectedGuru?.id === guru.id ? "text-zinc-950" : "text-zinc-200"
+                  }`}>
+                    {guruName(guru)}
+                  </p>
+                  <GuruFirm
+                    firm={guru.firm}
+                    className={`text-[8px] sm:text-[9px] tracking-wider transition-colors duration-300 ${
+                      selectedGuru?.id === guru.id ? "text-zinc-700" : "text-zinc-500"
+                    }`}
+                  />
+                </div>
+                
+                <div className={`shrink-0 flex flex-col items-end font-mono text-[8px] leading-tight transition-colors duration-300 ${
+                  selectedGuru?.id === guru.id ? "text-zinc-600" : "text-zinc-500"
+                }`}>
+                  <span className="text-[6px] uppercase tracking-wider opacity-60">Since</span>
+                  <span className="font-bold">'{GURU_SINCE_YEARS[guru.id] || "26"}</span>
+                </div>
               </div>
             </button>
           );

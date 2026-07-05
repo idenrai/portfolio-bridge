@@ -219,9 +219,9 @@ When no assets are registered, the page shows a message directing the user to th
 
 ### Initial State (Hero Grid)
 
-When no guru is selected, the page displays a responsive grid (Hero Grid) of all available gurus to encourage user selection. The cards are designed with a premium "AMEX credit card" aesthetic, featuring a strict 1.586:1 aspect ratio, subtle gradients, and structured layout (avatar top-left, name and firm bottom-left) to simulate physical premium cards.
+When no guru is selected, the page displays a responsive grid (Hero Grid) of all available gurus to encourage user selection. The cards are designed with a premium "AMEX credit card" aesthetic, featuring a strict 1.586:1 aspect ratio, subtle gradients, and structured layout (centered large avatar, name and firm bottom-left, member since bottom-right) to simulate physical premium cards.
 
-구루가 선택되지 않은 초기 상태에서는 사용자 선택을 유도하기 위해 반응형 그리드(Hero Grid) 형태로 모든 구루의 목록을 표시합니다. 각 카드는 프리미엄 "AMEX 신용카드" 미학으로 디자인되어 엄격한 1.586:1 비율, 은은한 그라데이션, 구조화된 레이아웃(좌측 상단 아바타, 좌측 하단 이름 및 소속)을 통해 실제 프리미엄 카드의 느낌을 구현합니다.
+구루가 선택되지 않은 초기 상태에서는 사용자 선택을 유도하기 위해 반응형 그리드(Hero Grid) 형태로 모든 구루의 목록을 표시합니다. 각 카드는 프리미엄 "AMEX 신용카드" 미학으로 디자인되어 엄격한 1.586:1 비율, 은은한 그라데이션, 구조화된 레이아웃(정중앙 대형 아바타, 좌측 하단 이름 및 소속, 우측 하단 Since 연도)을 통해 실제 프리미엄 카드의 느낌을 구현합니다.
 
 ### Firm Name Formatting
 
