@@ -225,9 +225,9 @@ When no guru is selected, the page displays a responsive grid (Hero Grid) of all
 
 ### Firm Name Formatting
 
-Guru firm names often include parentheses (e.g., `Berkshire Hathaway (Chairman)`). The `GuruFirm` component handles this by automatically inserting line breaks before the parenthesis to maintain a clean layout within the strict card aspect ratio.
+Guru firm names often include parentheses (e.g., `Berkshire Hathaway (Chairman)`). The `GuruFirm` component handles this by completely removing the parenthesis and its contents to maintain a clean and uncluttered layout within the strict card aspect ratio.
 
-구루의 소속 이름에는 종종 괄호가 포함됩니다. `GuruFirm` 컴포넌트는 엄격한 카드 비율 내에서 깔끔한 레이아웃을 유지하기 위해 괄호 앞에 자동으로 줄바꿈을 삽입합니다.
+구루의 소속 이름에는 종종 괄호가 포함됩니다. `GuruFirm` 컴포넌트는 엄격한 카드 비율 내에서 깔끔하고 심플한 레이아웃을 유지하기 위해 괄호 및 그 안의 내용(직함, 이전 회사 등)을 완전히 제거하고 렌더링합니다.
 
 ### Detail View
 
@@ -247,7 +247,8 @@ The guru detail view uses a 12-column grid layout with a sticky left panel and a
 
 | Context | Size | Rationale |
 |---------|------|-----------|
-| GuruSelector grid (Mini Cards) | `w-48 sm:w-56` (aspect 1.586:1), img `40-48px` | Maintains credit card proportions while fitting horizontal carousel; touch-friendly avatars |
+| Hero Grid (Gurus) | `aspect-[1.586/1]`, avatar `w-[28%]` | AMEX Black Card's Centurion emblem aesthetic; uses absolute positioning and percentage width to scale perfectly across all viewport sizes |
+| GuruSelector grid (Mini Cards) | `w-48 sm:w-56` (aspect 1.586:1), avatar `w-[20%]` | Maintains credit card proportions while fitting horizontal carousel; touch-friendly avatars |
 | Profile panel | `w-full max-w-[320px] aspect-square` (up to 320px) | Editorial, magazine-cover style prominent display; aligned top-center or top-left |
 
 구루 선택 캐러셀의 미니 카드는 가로 스크롤에 맞추면서도 신용카드 비율을 유지하며, 프로필 패널의 아바타는 최대 320px 뷰로 에디토리얼 디자인 요소를 강조해 초상화 디테일이 크게 보이도록 구성합니다.
