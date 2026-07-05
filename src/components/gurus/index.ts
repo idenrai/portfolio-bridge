@@ -10,3 +10,4 @@ export { GuruSelector } from "./GuruSelector";
 export { GuruRebalanceTable } from "./GuruRebalanceTable";
 export { GuruCharts } from "./GuruCharts";
 export { GuruAIPromptBanner } from "./GuruAIPromptBanner";
+export { GuruFirm } from "./GuruFirm";

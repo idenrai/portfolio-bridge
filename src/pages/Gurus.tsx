@@ -13,6 +13,7 @@ import {
   GuruRebalanceTable,
   GuruCharts,
   GuruAIPromptBanner,
+  GuruFirm,
 } from "@/components/gurus";
 import { usePortfolio, useT } from "@/hooks";
 import { calculateRebalancing, GURU_PROFILES } from "@/utils";
@@ -99,21 +100,29 @@ export function GurusPage() {
       <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.guru_title}</h1>
 
       {!selectedGuru ? (
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {GURU_PROFILES.map((guru) => (
             <button
               key={guru.id}
               onClick={() => setSelectedGuru(guru)}
-              className="group flex cursor-pointer flex-col items-center gap-4 rounded-2xl border border-zinc-800 bg-black p-6 text-center transition-colors hover:border-zinc-600 hover:bg-zinc-900/50 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none"
+              aria-label={`${guruName(guru)}, ${guru.firm}`}
+              className="group relative flex aspect-[1.586/1] w-full cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-zinc-800 bg-gradient-to-br from-zinc-900 via-black to-zinc-950 p-5 text-left transition-all duration-300 hover:border-zinc-600 hover:shadow-xl hover:shadow-white/5 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none"
             >
-              <img 
-                src={guru.avatar || "/fallback-avatar.svg"} 
-                alt={guru.name}
-                className="size-24 shrink-0 rounded-full border border-zinc-800 bg-zinc-900 object-cover transition-transform duration-300 group-hover:scale-105 group-hover:border-zinc-600"
-              />
-              <div>
-                <h3 className="text-lg font-bold tracking-tight text-white">{guruName(guru)}</h3>
-                <p className="mt-1 text-xs tracking-widest text-zinc-500 uppercase">{guru.firm}</p>
+              <div className="flex w-full items-start justify-between">
+                <img 
+                  src={guru.avatar || "/fallback-avatar.svg"} 
+                  alt={guru.name}
+                  width={56}
+                  height={56}
+                  className="size-14 shrink-0 rounded-full border border-zinc-700/50 bg-zinc-900/80 object-cover shadow-sm transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="mt-1 text-[10px] font-medium tracking-[0.2em] text-zinc-600 uppercase">
+                  Bridge
+                </div>
+              </div>
+              <div className="mt-auto flex min-w-0 flex-col gap-1">
+                <h3 className="truncate text-lg font-bold tracking-tight text-zinc-100">{guruName(guru)}</h3>
+                <GuruFirm firm={guru.firm} className="text-[10px] sm:text-xs" />
               </div>
             </button>
           ))}
@@ -135,6 +144,7 @@ export function GurusPage() {
                     alt={selectedGuru.name} 
                     width={320}
                     height={320}
+                    fetchPriority="high"
                     className="mx-auto aspect-square w-full max-w-[320px] shrink-0 rounded-2xl border border-zinc-800 bg-zinc-900 object-cover shadow-[0_0_40px_rgba(255,255,255,0.05)] transition-shadow hover:shadow-[0_0_50px_rgba(255,255,255,0.08)]" 
                   />
                   <div className="pt-2 text-center lg:text-left">
