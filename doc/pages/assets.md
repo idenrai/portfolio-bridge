@@ -118,6 +118,6 @@ Implemented in `src/utils/csv.ts`.
 
 ## Design & Accessibility
 
-Asset tables utilize `tabular-nums` for consistent numeric alignments and `focus-visible` for keyboard navigation. Action headers and sortable columns use `<button>` elements to maintain keyboard accessibility, adhering to Vercel Web Interface Guidelines.
+Asset tables utilize `tabular-nums` for consistent numeric alignments and `focus-visible` for keyboard navigation. Action headers and sortable columns use `<button>` elements to maintain keyboard accessibility, adhering to Vercel Web Interface Guidelines. For positive/negative values (e.g. PnL), the standard color convention is Red for positive and Blue for negative, matching the Korean stock market standard and ensuring consistency across pages. Decorative icons correctly implement `aria-hidden="true"`, and asynchronous feedback messages utilize `aria-live="polite"` to enhance screen reader experience.
 
-자산 테이블은 일관된 숫자 정렬을 위해 `tabular-nums`를, 키보드 탐색을 위해 `focus-visible`을 활용합니다. 액션 헤더와 정렬 가능한 컬럼은 `<button>` 요소를 사용하여 Vercel 접근성 가이드라인을 준수합니다.
+자산 테이블은 일관된 숫자 정렬을 위해 `tabular-nums`를, 키보드 탐색을 위해 `focus-visible`을 활용합니다. 액션 헤더와 정렬 가능한 컬럼은 `<button>` 요소를 사용하여 Vercel 접근성 가이드라인을 준수합니다. 손익 등 양수/음수 표기 시에는 한국 주식 시장 기준 및 앱 내 페이지 일관성을 위해 양수는 빨간색, 음수는 파란색을 사용합니다. 장식용 아이콘은 `aria-hidden="true"` 속성을 갖추고 있으며, 비동기 피드백 메시지에는 `aria-live="polite"`가 적용되어 스크린 리더 환경의 완성도를 높였습니다.

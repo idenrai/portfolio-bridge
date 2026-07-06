@@ -112,7 +112,7 @@ export function AssetsPage() {
     <div className="space-y-4 md:space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.asset_title}</h1>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-end gap-2">
           <Button variant="secondary" size="sm" onClick={() => setBrokerManagerOpen(true)}>
             {t.broker_manage_btn}
           </Button>
@@ -137,7 +137,7 @@ export function AssetsPage() {
           <div className="flex flex-col gap-4">
             {/* Header */}
             <div className="flex gap-4">
-              <Sparkles className="mt-0.5 size-6 shrink-0 text-indigo-400" />
+              <Sparkles aria-hidden="true" className="mt-0.5 size-6 shrink-0 text-indigo-400" />
               <div className="flex-1 space-y-3">
                 <p className="text-sm leading-tight font-semibold text-zinc-100">
                   {t.asset_ai_banner_title}

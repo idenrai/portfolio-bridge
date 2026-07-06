@@ -70,7 +70,7 @@ export function AIClassificationModal({
       onClose={handleClose}
       title={
         <div className="flex items-center gap-2">
-          <Sparkles className="size-5 text-indigo-400" />
+          <Sparkles aria-hidden="true" className="size-5 text-indigo-400" />
           <span>{t.asset_ai_modal_title}</span>
         </div>
       }
@@ -163,13 +163,13 @@ export function AIClassificationModal({
             />
 
             {importError && (
-              <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+              <div aria-live="polite" className="rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
                 {importError}
               </div>
             )}
 
             {importResult && (
-              <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-400">
+              <div aria-live="polite" className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-400">
                 {t.asset_ai_apply_result(
                   importResult.applied,
                   importResult.skipped,
