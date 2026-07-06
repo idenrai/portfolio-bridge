@@ -41,14 +41,14 @@ export function AssetTableRow({
   const ret = assetReturnPercent(asset);
   const sym = CURRENCY_SYMBOLS[asset.currency];
   const isPositive = pnl >= 0;
-  const pnlColor = isPositive ? "text-emerald-400" : "text-rose-400";
+  const pnlColor = isPositive ? "text-red-500" : "text-blue-500";
   const pnlIcon = isPositive ? "▲" : "▼";
   const isCash = asset.type === "cash";
 
   return (
     <tr className="whitespace-nowrap transition-colors hover:bg-zinc-800/50">
       <td className="max-w-65 py-2.5">
-        <p className="leading-snug font-medium wrap-break-word whitespace-normal text-white">
+        <p className="leading-snug font-medium truncate min-w-0 text-white" title={asset.name}>
           {asset.name}
         </p>
         {asset.ticker && (

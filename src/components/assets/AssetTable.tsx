@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { ChevronUp, ChevronDown, ChevronsUpDown, Briefcase } from "lucide-react";
+import { ChevronUp, ChevronDown, ChevronsUpDown, Briefcase, SearchX } from "lucide-react";
 import {
   type Asset,
   type AssetCategory,
@@ -45,7 +45,7 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
         active ? "text-blue-500" : "text-zinc-300"
       )}
     >
-      {active ? (dir === "asc" ? <ChevronUp className="inline size-3" /> : <ChevronDown className="inline size-3" />) : <ChevronsUpDown className="inline size-3 text-zinc-600" />}
+      {active ? (dir === "asc" ? <ChevronUp aria-hidden="true" className="inline size-3" /> : <ChevronDown aria-hidden="true" className="inline size-3" />) : <ChevronsUpDown aria-hidden="true" className="inline size-3 text-zinc-600" />}
     </span>
   );
 }
@@ -117,7 +117,7 @@ export function AssetTable({
   if (allAssets.length === 0) {
     return (
       <div className="py-16 text-center text-zinc-400">
-        <Briefcase className="mx-auto mb-3 size-12 text-zinc-600" />
+        <Briefcase aria-hidden="true" className="mx-auto mb-3 size-12 text-zinc-600" />
         <p className="font-medium">{t.at_empty_title}</p>
         <p className="mt-1 text-sm">{t.at_empty_desc}</p>
       </div>
@@ -147,8 +147,9 @@ export function AssetTable({
       />
 
       {sorted.length === 0 ? (
-        <div className="py-10 text-center text-sm text-zinc-400">
-          {t.at_filter_no_result}
+        <div className="py-10 text-center text-zinc-400">
+          <SearchX aria-hidden="true" className="mx-auto mb-3 size-8 opacity-50" />
+          <p className="text-sm">{t.at_filter_no_result}</p>
         </div>
       ) : (
         <div className="-mx-4 overflow-x-auto px-4 md:-mx-5 md:px-5">
@@ -214,6 +215,7 @@ export function AssetTable({
                 </th>
               </tr>
             </thead>
+            <tbody>
               {sorted.map((a) => (
                 <AssetTableRow
                   key={a.id}
@@ -227,6 +229,7 @@ export function AssetTable({
                   onBrokerChange={handleBrokerChange}
                 />
               ))}
+            </tbody>
           </table>
         </div>
       )}

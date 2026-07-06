@@ -36,9 +36,10 @@ export function AssetFilterBar({
   return (
     <div className="mb-3 flex flex-wrap items-center gap-2">
       <select
+        aria-label={t.at_filter_all_market}
         value={filterMarket}
         onChange={(e) => onFilterMarket(e.target.value as Market | "")}
-        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500/50 focus-visible:outline-none"
       >
         <option value="">{t.at_filter_all_market}</option>
         {markets.map((m) => (
@@ -49,9 +50,10 @@ export function AssetFilterBar({
       </select>
 
       <select
+        aria-label={t.at_filter_all_type}
         value={filterType}
         onChange={(e) => onFilterType(e.target.value as AssetType | "")}
-        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500/50 focus-visible:outline-none"
       >
         <option value="">{t.at_filter_all_type}</option>
         {types.map((tp) => (
@@ -62,9 +64,10 @@ export function AssetFilterBar({
       </select>
 
       <select
+        aria-label={t.at_filter_all_category}
         value={filterCategory}
         onChange={(e) => onFilterCategory(e.target.value as AssetCategory | "")}
-        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
+        className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs text-zinc-200 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500/50 focus-visible:outline-none"
       >
         <option value="">{t.at_filter_all_category}</option>
         {categoryOptions.map(([val, label]) => (
