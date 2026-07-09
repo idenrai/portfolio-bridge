@@ -31,6 +31,9 @@ export const en: Translations = {
   about_feat6_title: "Multi-language & Currency",
   about_feat6_desc:
     "Full UI in Korean, English, Japanese, and German. Display currency switchable between KRW, USD, JPY, and EUR.",
+  about_feat7_title: "FIRE Planner",
+  about_feat7_desc:
+    "Simulate portfolio growth to determine when you can achieve FIRE based on safe withdrawal rates and expected returns.",
   about_privacy_title: "Privacy First",
   about_privacy_desc:
     "All asset data is stored only in your browser's localStorage. Nothing is sent to an external server. No account creation needed. Optionally, you can enable Google Drive backup — data is saved only in an app-specific hidden folder (appDataFolder) with no access to your regular Drive files.",
@@ -754,9 +757,9 @@ export const en: Translations = {
   currency_krw: "Won (KRW)",
   currency_eur: "Euro (EUR)",
 
-  nav_fire: "Freedom Planner",
-  fire_title: "Financial Freedom Planner",
-  fire_desc: "Predict when you can achieve Financial Independence (FIRE) based on your current assets, savings, and expected returns.",
+  nav_fire: "FIRE Planner",
+  fire_title: "FIRE Planner",
+  fire_desc: "Predict when you can achieve FIRE based on your current assets, savings, and expected returns.",
   fire_tab_target: "By Target Amount",
   fire_tab_expense: "By Monthly Expense",
   fire_use_portfolio_assets: "Use Portfolio Assets",

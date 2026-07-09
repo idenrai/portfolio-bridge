@@ -31,6 +31,9 @@ export const ko: Translations = {
   about_feat6_title: "다국어 · 다통화",
   about_feat6_desc:
     "한국어 · English · 日本語 · Deutsch 4개국어와 KRW · USD · JPY · EUR 통화 표시를 지원합니다.",
+  about_feat7_title: "FIRE 플래너",
+  about_feat7_desc:
+    "안전 인출률과 기대 수익률을 기반으로 언제 FIRE에 도달할 수 있는지 포트폴리오 성장을 시뮬레이션합니다.",
   about_privacy_title: "프라이버시 우선",
   about_privacy_desc:
     "모든 자산 데이터는 브라우저 localStorage에만 저장됩니다. 외부 서버로 개인 자산 데이터가 전송되지 않으며, 계정 생성 없이 바로 사용할 수 있습니다. 선택적으로 개인의 Google Drive를 연동해 데이터를 백업할 수도 있습니다.",
@@ -759,9 +762,9 @@ export const ko: Translations = {
   currency_krw: "원화 (KRW)",
   currency_eur: "유로 (EUR)",
 
-  nav_fire: "경제적 자유 플래너",
-  fire_title: "경제적 자유 플래너",
-  fire_desc: "현재 자산과 저축액, 수익률을 바탕으로 언제 경제적 자유(FIRE)에 도달할 수 있는지 예측해 보세요.",
+  nav_fire: "FIRE 플래너",
+  fire_title: "FIRE 플래너",
+  fire_desc: "현재 자산과 저축액, 수익률을 바탕으로 언제 FIRE에 도달할 수 있는지 예측해 보세요.",
   fire_tab_target: "목표 금액으로 계산",
   fire_tab_expense: "월 생활비로 계산",
   fire_use_portfolio_assets: "포트폴리오 자산 연동",

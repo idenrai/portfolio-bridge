@@ -67,7 +67,7 @@ npm run tauri:build  # Production installer for current OS
 
 ```text
 src/
-├── pages/          # Dashboard, Assets, Gurus, Settings, About
+├── pages/          # Dashboard, Assets, Gurus, FirePlanner, Settings, About
 ├── components/     # layout/, common/, dashboard/, assets/, gurus/, fire/
 ├── hooks/          # Custom React hooks
 ├── stores/         # Zustand stores (all persisted to localStorage)
@@ -159,7 +159,7 @@ npm run tauri:build  # 프로덕션 인스톨러 생성
 
 ```text
 src/
-├── pages/          # Dashboard, Assets, Gurus, Settings, About
+├── pages/          # Dashboard, Assets, Gurus, FirePlanner, Settings, About
 ├── components/     # layout/, common/, dashboard/, assets/, gurus/, fire/
 ├── hooks/          # 커스텀 React 훅
 ├── stores/         # Zustand 스토어 (localStorage 영속)

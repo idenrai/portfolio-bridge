@@ -42,6 +42,8 @@ export interface Translations {
   about_feat5_desc: string;
   about_feat6_title: string;
   about_feat6_desc: string;
+  about_feat7_title: string;
+  about_feat7_desc: string;
   about_privacy_title: string;
   about_privacy_desc: string;
   about_tech_title: string;
