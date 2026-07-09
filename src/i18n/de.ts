@@ -31,6 +31,9 @@ export const de: Translations = {
   about_feat6_title: "Mehrsprachig & Mehrwährung",
   about_feat6_desc:
     "Vollständige Benutzeroberfläche auf Koreanisch, Englisch, Japanisch und Deutsch. Anzeigewährung zwischen KRW, USD, JPY und EUR umschaltbar.",
+  about_feat7_title: "FIRE-Planer",
+  about_feat7_desc:
+    "Simulieren Sie das Portfoliowachstum, um herauszufinden, wann Sie basierend auf sicheren Entnahmeraten und erwarteten Renditen FIRE erreichen können.",
   about_privacy_title: "Datenschutz an erster Stelle",
   about_privacy_desc:
     "Alle Vermögensdaten werden nur im localStorage Ihres Browsers gespeichert. Es werden keine Daten an externe Server gesendet. Kein Konto erforderlich. Optional können Sie Ihr persönliches Google Drive verknüpfen, um Ihre Daten zu sichern.",
@@ -769,9 +772,9 @@ export const de: Translations = {
   currency_krw: "Won (KRW)",
   currency_eur: "Euro (EUR)",
 
-  nav_fire: "Freiheitsplaner",
-  fire_title: "Finanzielle Freiheit Planer",
-  fire_desc: "Prognostizieren Sie, wann Sie finanzielle Unabhängigkeit (FIRE) erreichen können, basierend auf Ihrem aktuellen Vermögen, Ihren Ersparnissen und der erwarteten Rendite.",
+  nav_fire: "FIRE-Planer",
+  fire_title: "FIRE-Planer",
+  fire_desc: "Prognostizieren Sie, wann Sie FIRE erreichen können, basierend auf Ihrem aktuellen Vermögen, Ihren Ersparnissen und der erwarteten Rendite.",
   fire_tab_target: "Nach Zielbetrag",
   fire_tab_expense: "Nach monatlichen Ausgaben",
   fire_use_portfolio_assets: "Portfoliovermögen verwenden",

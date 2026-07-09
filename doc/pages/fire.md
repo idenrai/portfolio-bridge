@@ -1,9 +1,9 @@
 # FIRE Planner Page (`/fire`)
 
 ## Overview
-The FIRE (Financial Independence, Retire Early) Planner page provides users with a projection of their portfolio's future value to determine when they might achieve financial independence. It uses a compounding simulation based on current assets, expected monthly contributions, expected annual returns, and safe withdrawal rates.
+The FIRE Planner page provides users with a projection of their portfolio's future value to determine when they might achieve FIRE. It uses a compounding simulation based on current assets, expected monthly contributions, expected annual returns, and safe withdrawal rates.
 
-FIRE(조기 은퇴 및 재정적 자유) 플래너 페이지는 현재 자산, 예상 월별 투자액, 연평균 기대 수익률, 그리고 안전 인출률을 기반으로 포트폴리오의 미래 가치를 시뮬레이션하여 언제 재정적 자유를 달성할 수 있는지 보여줍니다.
+FIRE 플래너 페이지는 현재 자산, 예상 월별 투자액, 연평균 기대 수익률, 그리고 안전 인출률을 기반으로 포트폴리오의 미래 가치를 시뮬레이션하여 언제 FIRE를 달성할 수 있는지 보여줍니다.
 
 ## Key Features
 - **Portfolio Projection**: Visualizes the growth curve of the user's current portfolio over time.

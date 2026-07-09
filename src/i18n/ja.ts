@@ -31,6 +31,9 @@ export const ja: Translations = {
   about_feat6_title: "多言語・多通貨",
   about_feat6_desc:
     "韓国語・English・日本語・Deutschの4ヵ国語とKRW・USD・JPY・EURの通貨表示に対応しています。",
+  about_feat7_title: "FIREプランナー",
+  about_feat7_desc:
+    "安全な引き出し率と期待利回りに基づいて、いつFIREを達成できるかをシミュレーションします。",
   about_privacy_title: "プライバシー重視",
   about_privacy_desc:
     "すべての資産データはブラウザのlocalStorageのみに保存されます。外部サーバーへの送信は一切なく、アカウント不要で即座にご利用いただけます。任意で個人のGoogle Driveと連携してデータをバックアップすることもできます。",
@@ -756,9 +759,9 @@ export const ja: Translations = {
   currency_krw: "ウォン (KRW)",
   currency_eur: "ユーロ (EUR)",
 
-  nav_fire: "経済的自由プランナー",
-  fire_title: "経済的自由プランナー",
-  fire_desc: "現在の資産、貯蓄額、期待利回りに基づいて、いつ経済的自立（FIRE）を達成できるかを予測します。",
+  nav_fire: "FIREプランナー",
+  fire_title: "FIREプランナー",
+  fire_desc: "現在の資産、貯蓄額、期待利回りに基づいて、いつFIREを達成できるかを予測します。",
   fire_tab_target: "目標金額で計算",
   fire_tab_expense: "月間生活費で計算",
   fire_use_portfolio_assets: "ポートフォリオ資産を連動",

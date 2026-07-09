@@ -28,8 +28,8 @@ const FEATURES = [
   },
   {
     icon: "[ 06 ]",
-    titleKey: "about_feat6_title" as const,
-    descKey: "about_feat6_desc" as const,
+    titleKey: "about_feat7_title" as const,
+    descKey: "about_feat7_desc" as const,
   },
 ] as const;
 
@@ -92,7 +92,7 @@ export function AboutPage() {
           {FEATURES.map((f, idx) => (
             <div
               key={idx}
-              className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-black p-3 shadow-sm transition-colors hover:border-zinc-700 md:gap-3.5 md:p-4"
+              className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-black p-3 shadow-sm md:gap-3.5 md:p-4"
             >
               <div className="flex h-10 w-auto min-w-12 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 px-2 font-mono text-sm whitespace-nowrap text-zinc-400">
                 {f.icon}
@@ -110,18 +110,36 @@ export function AboutPage() {
         </div>
       </div>
 
-      {/* Privacy */}
-      <div className="flex items-start gap-3.5 rounded-xl border border-l-4 border-zinc-800 border-l-emerald-500 bg-zinc-900 px-4 py-3 shadow-sm md:px-5 md:py-4">
-        <div className="flex h-8 w-auto shrink-0 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950 px-2 font-mono text-sm text-zinc-400">
-          [ SECURE ]
+      {/* Foundations */}
+      <div className="grid grid-cols-1 gap-3 md:gap-3.5">
+        {/* Global */}
+        <div className="flex items-start gap-3.5 rounded-xl border border-l-4 border-zinc-800 border-l-blue-500 bg-zinc-900 px-4 py-3 shadow-sm md:px-5 md:py-4">
+          <div className="flex h-8 w-auto shrink-0 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950 px-2 font-mono text-sm text-zinc-400">
+            [ GLOBAL ]
+          </div>
+          <div className="pt-0.5">
+            <p className="text-sm font-bold text-zinc-200">
+              {t.about_feat6_title}
+            </p>
+            <p className="mt-1 text-xs leading-relaxed text-zinc-400">
+              {t.about_feat6_desc}
+            </p>
+          </div>
         </div>
-        <div className="pt-0.5">
-          <p className="text-sm font-bold text-zinc-200">
-            {t.about_privacy_title}
-          </p>
-          <p className="mt-1 text-xs leading-relaxed text-zinc-400">
-            {t.about_privacy_desc}
-          </p>
+
+        {/* Secure */}
+        <div className="flex items-start gap-3.5 rounded-xl border border-l-4 border-zinc-800 border-l-emerald-500 bg-zinc-900 px-4 py-3 shadow-sm md:px-5 md:py-4">
+          <div className="flex h-8 w-auto shrink-0 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950 px-2 font-mono text-sm text-zinc-400">
+            [ SECURE ]
+          </div>
+          <div className="pt-0.5">
+            <p className="text-sm font-bold text-zinc-200">
+              {t.about_privacy_title}
+            </p>
+            <p className="mt-1 text-xs leading-relaxed text-zinc-400">
+              {t.about_privacy_desc}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -134,7 +152,7 @@ export function AboutPage() {
           {STACK.map((s) => (
             <span
               key={s}
-              className="rounded-md border border-zinc-800 bg-zinc-950 px-2.5 py-1.5 font-mono text-[11px] tracking-wider text-zinc-400 uppercase shadow-sm transition-colors hover:border-zinc-700 hover:text-zinc-200"
+              className="rounded-md border border-zinc-800 bg-zinc-950 px-2.5 py-1.5 font-mono text-xs tracking-wider text-zinc-400 uppercase shadow-sm"
             >
               {s}
             </span>
