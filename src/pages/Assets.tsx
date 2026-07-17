@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import { Sparkles } from "lucide-react";
-import { useAssetStore } from "@/stores";
+import { useAssetStore, useBrokerStore } from "@/stores";
 import { usePortfolio } from "@/hooks";
 import { Card, Button, Modal } from "@/components/common";
+import { FilterBar } from "@/components/common";
 import { AssetForm, AssetTable, BrokerManager, AIClassificationModal, CSVPreviewModal } from "@/components/assets";
 import { downloadCsv, parseCsv } from "@/utils";
 import { useT } from "@/hooks";
@@ -17,6 +18,8 @@ import type {
 export function AssetsPage() {
   const { assets } = usePortfolio();
   const { addAsset, updateAsset, deleteAsset } = useAssetStore();
+  const brokers = useBrokerStore((s) => s.accounts);
+  
   const [modalOpen, setModalOpen] = useState(false);
   const [editingAsset, setEditingAsset] = useState<Asset | undefined>();
   const [brokerManagerOpen, setBrokerManagerOpen] = useState(false);
@@ -28,12 +31,12 @@ export function AssetsPage() {
   const t = useT();
 
   // ── 필터 / 정렬 상태 ──────────────────────────────────────────────────────
-  const [filterMarket, setFilterMarket] = useState<Market | "">("");
-  const [filterType, setFilterType] = useState<AssetType | "">("");
-  const [filterCategory, setFilterCategory] = useState<AssetCategory | "">("");
-  const [sortKey, setSortKey] = useState<"name" | "value" | "pnl" | "return">(
-    "value",
-  );
+  const [filterMarkets, setFilterMarkets] = useState<Market[]>([]);
+  const [filterTypes, setFilterTypes] = useState<AssetType[]>([]);
+  const [filterCategories, setFilterCategories] = useState<AssetCategory[]>([]);
+  const [filterBrokerIds, setFilterBrokerIds] = useState<string[]>([]);
+  
+  const [sortKey, setSortKey] = useState<"name" | "value" | "pnl" | "return">("value");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
 
   const handleSort = (key: "name" | "value" | "pnl" | "return") => {
@@ -46,14 +49,23 @@ export function AssetsPage() {
   };
 
   const filteredAssets = assets
-    .filter((a) => !filterMarket || a.market === filterMarket)
-    .filter((a) => !filterType || a.type === filterType)
-    .filter(
-      (a) =>
-        !filterCategory ||
-        a.categories.includes(filterCategory as AssetCategory),
-    );
+    .filter((a) => filterMarkets.length === 0 || filterMarkets.includes(a.market))
+    .filter((a) => filterTypes.length === 0 || filterTypes.includes(a.type))
+    .filter((a) => filterCategories.length === 0 || a.categories.some((c) => filterCategories.includes(c)))
+    .filter((a) => filterBrokerIds.length === 0 || (a.brokerId && filterBrokerIds.includes(a.brokerId)));
 
+  const handleClearFilters = () => {
+    setFilterMarkets([]);
+    setFilterTypes([]);
+    setFilterCategories([]);
+    setFilterBrokerIds([]);
+  };
+
+  const availableMarkets = Array.from(new Set(assets.map((a) => a.market)));
+  const availableTypes = Array.from(new Set(assets.map((a) => a.type)));
+  const availableCategories = Array.from(
+    new Set(assets.flatMap((a) => a.categories))
+  ).map((cat) => [cat, t.category_labels[cat] ?? cat] as [AssetCategory, string]);
 
   const handleAdd = () => {
     setEditingAsset(undefined);
@@ -132,6 +144,7 @@ export function AssetsPage() {
           </Button>
         </div>
       </div>
+      
       <div className="rounded-xl bg-linear-to-r from-violet-500/20 to-purple-500/20 p-px shadow-sm">
         <div className="rounded-[11px] bg-zinc-950/95 p-4 sm:px-5">
           <div className="flex flex-col gap-4">
@@ -171,15 +184,27 @@ export function AssetsPage() {
       />
 
       <Card>
+        <FilterBar
+          markets={availableMarkets}
+          types={availableTypes}
+          categoryOptions={availableCategories}
+          brokers={brokers}
+          filterMarkets={filterMarkets}
+          filterTypes={filterTypes}
+          filterCategories={filterCategories}
+          filterBrokerIds={filterBrokerIds}
+          onFilterMarkets={setFilterMarkets}
+          onFilterTypes={setFilterTypes}
+          onFilterCategories={setFilterCategories}
+          onFilterBrokerIds={setFilterBrokerIds}
+          onClearFilters={handleClearFilters}
+          sortedCount={filteredAssets.length}
+          allCount={assets.length}
+          showCount={true}
+        />
         <AssetTable
           assets={filteredAssets}
           allAssets={assets}
-          filterMarket={filterMarket}
-          filterType={filterType}
-          filterCategory={filterCategory}
-          onFilterMarket={setFilterMarket}
-          onFilterType={setFilterType}
-          onFilterCategory={setFilterCategory}
           sortKey={sortKey}
           sortDir={sortDir}
           onSort={handleSort}
@@ -212,7 +237,6 @@ export function AssetsPage() {
         onClose={() => setPromptOpen(false)}
       />
 
-      {/* CSV 미리보기 모달 */}
       <CSVPreviewModal
         open={!!importPreview}
         previewData={importPreview}
@@ -220,7 +244,6 @@ export function AssetsPage() {
         onConfirm={handleConfirmImport}
       />
 
-      {/* 계좌 관리 모달 */}
       <Modal
         open={brokerManagerOpen}
         onClose={() => setBrokerManagerOpen(false)}

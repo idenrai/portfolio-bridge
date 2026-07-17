@@ -484,6 +484,9 @@ export interface Translations {
   at_filter_count: (shown: number, total: number) => string;
   at_filter_no_result: string;
   at_col_ticker: string;
+  at_filter_all_account: string;
+  filter_select_all: string;
+  filter_clear_all: string;
 
   // ─── Ticker Search ──────────────────────────────────────────────────────────
   ticker_search_no_result: string;

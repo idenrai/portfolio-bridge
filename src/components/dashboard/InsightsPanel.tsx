@@ -76,10 +76,10 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
             <div className="flex min-w-0 items-start gap-3">
               <Sparkles className="mt-0.5 size-5 shrink-0 text-indigo-400" />
               <div className="min-w-0">
-                <p className="text-sm leading-tight font-semibold text-zinc-100">
+                <p className="text-sm leading-tight font-semibold text-zinc-100 text-pretty">
                   {t.insights_ai_banner_title}
                 </p>
-                <p className="mt-1 text-[11px] leading-relaxed text-zinc-500 sm:text-xs">
+                <p className="mt-1 text-[11px] leading-relaxed text-zinc-500 sm:text-xs text-pretty line-clamp-2">
                   {t.insights_ai_banner_desc}
                 </p>
               </div>
@@ -89,7 +89,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
               <button
                 type="button"
                 onClick={() => setShowPrompt((v) => !v)}
-                className="flex-1 cursor-pointer rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-indigo-400 shadow-sm transition-all hover:bg-indigo-500/20 hover:opacity-90 active:scale-95 sm:flex-none"
+                className="flex-1 cursor-pointer rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-indigo-400 shadow-sm transition-all hover:bg-indigo-500/20 hover:opacity-90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 sm:flex-none"
               >
                 {showPrompt ? t.insights_ai_close : t.insights_ai_btn}
               </button>
@@ -100,17 +100,17 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
           {showPrompt && (
             <div className="mt-4 space-y-3 border-t border-zinc-800/50 pt-4">
               <p className="text-[11px] text-zinc-500">{t.insights_ai_desc}</p>
-              <div className="group relative">
+              <div className="group relative rounded-xl border border-zinc-800 bg-zinc-950 transition-shadow focus-within:ring-1 focus-within:ring-indigo-500/50">
                 <textarea
                   readOnly
                   value={promptText}
                   rows={10}
-                  className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950 p-3 pb-12 font-mono text-[11px] text-zinc-300 transition-shadow focus:ring-1 focus:ring-indigo-500/50 focus:outline-none sm:text-xs"
+                  className="w-full resize-none rounded-xl bg-transparent p-3 pb-12 font-mono text-[11px] text-zinc-300 focus:outline-none sm:text-xs"
                 />
                 <button
                   type="button"
                   onClick={copyPrompt}
-                  className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700"
+                  className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50"
                 >
                   {copied ? "✓ " + t.insights_ai_copied : t.insights_ai_copy}
                 </button>
@@ -126,7 +126,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
           {t.insights_ok}
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-col gap-2">
           {summary.insights.map((insight, i) =>
             dismissed.has(i) ? null : (
               <div
@@ -140,7 +140,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                 <button
                   type="button"
                   onClick={() => dismiss(i)}
-                  className={`shrink-0 cursor-pointer text-base leading-none transition-colors ${CLOSE_BTN[insight.type]}`}
+                  className={`shrink-0 cursor-pointer rounded-sm text-base leading-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-900 ${CLOSE_BTN[insight.type]}`}
                   aria-label="dismiss"
                 >
                   ×

@@ -1,10 +1,11 @@
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense, useState, useMemo } from "react";
 import { usePortfolio, useDataRefresh, useT } from "@/hooks";
 import {
   useAssetStore,
   useSettingsStore,
   useLanguageStore,
   useSnapshotStore,
+  useBrokerStore,
 } from "@/stores";
 import { LANG_LOCALES } from "@/i18n";
 import {
@@ -16,7 +17,9 @@ import {
   RebalanceCard,
   InsightsPanel,
 } from "@/components/dashboard";
+import { FilterBar } from "@/components/common";
 import { SAMPLE_ASSETS } from "@/utils";
+import type { Market, AssetType, AssetCategory } from "@/types";
 
 const PortfolioHistoryChart = lazy(() =>
   import("@/components/dashboard/PortfolioHistoryChart").then((mod) => ({ default: mod.PortfolioHistoryChart }))
@@ -26,8 +29,25 @@ const PnLWaterfallChart = lazy(() =>
 );
 
 export function DashboardPage() {
-  const { assets, summary, rebalancing } = usePortfolio();
+  const [filterMarkets, setFilterMarkets] = useState<Market[]>([]);
+  const [filterTypes, setFilterTypes] = useState<AssetType[]>([]);
+  const [filterCategories, setFilterCategories] = useState<AssetCategory[]>([]);
+  const [filterBrokerIds, setFilterBrokerIds] = useState<string[]>([]);
+
+  const filters = useMemo(
+    () => ({
+      markets: filterMarkets,
+      types: filterTypes,
+      categories: filterCategories,
+      brokerIds: filterBrokerIds,
+    }),
+    [filterMarkets, filterTypes, filterCategories, filterBrokerIds]
+  );
+
+  const { assets, summary, rebalancing } = usePortfolio(filters);
+  const baseAssets = useAssetStore((s) => s.assets);
   const { addAsset } = useAssetStore();
+  const brokers = useBrokerStore((s) => s.accounts);
   const targets = useSettingsStore((s) => s.targetAllocations);
   const lang = useLanguageStore((s) => s.lang);
   const langLocale = LANG_LOCALES[lang];
@@ -37,7 +57,13 @@ export function DashboardPage() {
   const { refreshAll, isLoading, lastUpdated } = useDataRefresh();
 
   // 대시보드를 열 때마다 오늘 날짜 스냅샷 저장/갱신
+  // (단, 필터가 적용되지 않은 전체 자산 기준으로 스냅샷을 저장하는 것이 맞으므로 summary는 필터 적용 전이어야 하나
+  // 여기서는 편의상 그대로 둡니다. 실제로는 필터가 없을 때만 스냅샷을 갱신하거나 별도로 갱신해야 합니다.
+  // 필터 적용 상태에서 스냅샷이 덮어써지는 것을 방지하기 위해 필터가 없을 때만 갱신하도록 수정)
+  const isFiltered = filterMarkets.length > 0 || filterTypes.length > 0 || filterCategories.length > 0 || filterBrokerIds.length > 0;
+  
   useEffect(() => {
+    if (isFiltered) return; // 필터 적용 중에는 스냅샷 갱신 안 함
     if (assets.length === 0 || summary.totalValueKRW === 0) return;
     const today = new Date().toISOString().slice(0, 10);
     upsertSnapshot({
@@ -50,13 +76,21 @@ export function DashboardPage() {
     summary.totalCostKRW,
     assets.length,
     upsertSnapshot,
+    isFiltered,
   ]);
 
   const handleLoadSample = () => {
     SAMPLE_ASSETS.forEach((data) => addAsset(data));
   };
 
-  if (assets.length === 0) {
+  const handleClearFilters = () => {
+    setFilterMarkets([]);
+    setFilterTypes([]);
+    setFilterCategories([]);
+    setFilterBrokerIds([]);
+  };
+
+  if (baseAssets.length === 0) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center font-mono text-zinc-500">
         <p className="mb-4 text-4xl font-bold">{"[ EMPTY ]"}</p>
@@ -94,6 +128,13 @@ export function DashboardPage() {
     );
   }
 
+  // 필터 바 옵션 추출 (전체 자산 기준)
+  const availableMarkets = Array.from(new Set(baseAssets.map((a) => a.market)));
+  const availableTypes = Array.from(new Set(baseAssets.map((a) => a.type)));
+  const availableCategories = Array.from(
+    new Set(baseAssets.flatMap((a) => a.categories))
+  ).map((cat) => [cat, t.category_labels[cat] ?? cat] as [AssetCategory, string]);
+
   return (
     <div className="space-y-4 md:space-y-6">
       {/* 타이틀 + 갱신 바 */}
@@ -127,34 +168,54 @@ export function DashboardPage() {
         </button>
       </div>
 
+      <FilterBar
+        markets={availableMarkets}
+        types={availableTypes}
+        categoryOptions={availableCategories}
+        brokers={brokers}
+        filterMarkets={filterMarkets}
+        filterTypes={filterTypes}
+        filterCategories={filterCategories}
+        filterBrokerIds={filterBrokerIds}
+        onFilterMarkets={setFilterMarkets}
+        onFilterTypes={setFilterTypes}
+        onFilterCategories={setFilterCategories}
+        onFilterBrokerIds={setFilterBrokerIds}
+        onClearFilters={handleClearFilters}
+      />
+
       {/* ① KPI 바 */}
       <KpiBar summary={summary} />
 
-      {/* ② 인사이트 (상단 고정) */}
-      <InsightsPanel summary={summary} assets={assets} targets={targets} />
+      {/* 2단 메인 레이아웃 */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6 mt-2">
+        
+        {/* 좌측 메인 영역 (테이블 및 뷰어 위주) */}
+        <div className="flex flex-col gap-4 lg:col-span-2 lg:gap-6">
+          {/* 보유종목 테이블 */}
+          <TopHoldingsTable summary={summary} />
+          
+          {/* 자산 구성 추이 차트 */}
+          <Suspense fallback={<div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-black/50 font-mono text-sm text-zinc-500">Loading Chart…</div>}>
+            <PortfolioHistoryChart />
+          </Suspense>
 
-      {/* ③ 파이 차트 (국가별 · 태그별) */}
-      <AllocationPieCharts summary={summary} />
+          {/* 종목별 손익 차트 */}
+          <Suspense fallback={<div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-black/50 font-mono text-sm text-zinc-500">Loading Chart…</div>}>
+            <PnLWaterfallChart assets={assets} />
+          </Suspense>
+        </div>
+        
+        {/* 우측 사이드바 영역 (요약 및 분석 위주) */}
+        <div className="flex flex-col gap-4 lg:gap-6">
+          <InsightsPanel summary={summary} assets={assets} targets={targets} />
+          <AllocationPieCharts summary={summary} />
+          <CurrencyExposureCard summary={summary} />
+          <CategoryAnalysisCard rebalancing={rebalancing} />
+          <RebalanceCard rebalancing={rebalancing} />
+        </div>
 
-      {/* ④ 자산 구성 추이 차트 */}
-      <Suspense fallback={<div className="flex h-64 items-center justify-center border border-zinc-800 bg-black/50 font-mono text-sm text-zinc-500">Loading Chart...</div>}>
-        <PortfolioHistoryChart />
-      </Suspense>
-
-      {/* ⑤ 보유종목 테이블 */}
-      <TopHoldingsTable summary={summary} />
-
-      {/* ⑥ 하단 그리드 */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <CategoryAnalysisCard rebalancing={rebalancing} />
-        <CurrencyExposureCard summary={summary} />
-        <RebalanceCard rebalancing={rebalancing} />
       </div>
-
-      {/* ⑦ 종목별 손익 차트 */}
-      <Suspense fallback={<div className="flex h-64 items-center justify-center border border-zinc-800 bg-black/50 font-mono text-sm text-zinc-500">Loading Chart...</div>}>
-        <PnLWaterfallChart assets={assets} />
-      </Suspense>
     </div>
   );
 }

@@ -22,6 +22,12 @@ useAssetStore (assets)
 
 ## Sections
 
+### Filter Bar (`FilterBar.tsx`)
+
+A bar that allows filtering the dashboard data by market, asset type, category, and broker/account.
+
+대시보드 데이터를 시장, 자산 유형, 카테고리, 계좌별로 다중 필터링할 수 있는 바 컴포넌트입니다.
+
 ### KPI Bar (`KpiBar.tsx`)
 
 Five summary metrics in a horizontal bar. All monetary values converted to `baseCurrency`.

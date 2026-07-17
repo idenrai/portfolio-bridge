@@ -77,6 +77,12 @@ Configured in `vite.config.ts`. Rewrites `/api/yahoo/*` to `https://query1.finan
 - Does **not** accept or forward user portfolio data. / 사용자 포트폴리오 데이터를 수신하거나 전달하지 않습니다.
 - CORS headers restrict which origins can call the proxy. / CORS 헤더로 프록시를 호출할 수 있는 출처를 제한합니다.
 
+## Crumb Fetching Strategy
+
+To bypass recent 429 Too Many Requests errors and cookie restrictions, the proxies (Vercel and local Vite) fetch the crumb by scraping the HTML content of `fc.yahoo.com` or `finance.yahoo.com` directly rather than relying solely on the `/v1/test/getcrumb` API.
+
+최근의 429 Too Many Requests 에러 및 쿠키 제한을 우회하기 위해, Vercel 및 로컬 Vite 프록시는 단순 API 호출 대신 `fc.yahoo.com` 등의 HTML 본문을 스크래핑하여 직접 Crumb을 추출하는 폴백 메커니즘을 사용합니다.
+
 ## Exchange Rate Caching
 
 Rates are stored in `useSettingsStore.exchangeRates`.
