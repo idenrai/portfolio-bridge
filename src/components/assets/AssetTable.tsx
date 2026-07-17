@@ -3,8 +3,6 @@ import { ChevronUp, ChevronDown, ChevronsUpDown, Briefcase, SearchX } from "luci
 import {
   type Asset,
   type AssetCategory,
-  type Market,
-  type AssetType,
   type PortfolioAsset,
 } from "@/types";
 import { useAssetStore, useBrokerStore } from "@/stores";
@@ -16,7 +14,7 @@ import {
   toKRW,
   cn,
 } from "@/utils";
-import { AssetFilterBar, AssetTableRow } from "@/components/assets";
+import { AssetTableRow } from "@/components/assets";
 
 export type SortKey = "name" | "value" | "pnl" | "return";
 export type SortDir = "asc" | "desc";
@@ -24,12 +22,6 @@ export type SortDir = "asc" | "desc";
 interface Props {
   assets: PortfolioAsset[];
   allAssets: PortfolioAsset[];
-  filterMarket: Market | "";
-  filterType: AssetType | "";
-  filterCategory: AssetCategory | "";
-  onFilterMarket: (v: Market | "") => void;
-  onFilterType: (v: AssetType | "") => void;
-  onFilterCategory: (v: AssetCategory | "") => void;
   sortKey: SortKey;
   sortDir: SortDir;
   onSort: (key: SortKey) => void;
@@ -53,12 +45,6 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
 export function AssetTable({
   assets,
   allAssets,
-  filterMarket,
-  filterType,
-  filterCategory,
-  onFilterMarket,
-  onFilterType,
-  onFilterCategory,
   sortKey,
   sortDir,
   onSort,
@@ -83,9 +69,6 @@ export function AssetTable({
   };
 
   const hasBrokers = brokerAccounts.length > 0;
-
-  const markets = [...new Set(allAssets.map((a) => a.market))] as Market[];
-  const types = [...new Set(allAssets.map((a) => a.type))] as AssetType[];
 
   const sorted = useMemo(() => {
     return [...assets].sort((a, b) => {
@@ -112,8 +95,6 @@ export function AssetTable({
     });
   }, [assets, sortKey, sortDir, rates]);
 
-
-
   if (allAssets.length === 0) {
     return (
       <div className="py-16 text-center text-zinc-400">
@@ -126,33 +107,13 @@ export function AssetTable({
 
   return (
     <div>
-      {/* 필터 바 */}
-      <AssetFilterBar
-        markets={markets}
-        types={types}
-        categoryOptions={CATEGORY_OPTIONS}
-        filterMarket={filterMarket}
-        filterType={filterType}
-        filterCategory={filterCategory}
-        onFilterMarket={onFilterMarket}
-        onFilterType={onFilterType}
-        onFilterCategory={onFilterCategory}
-        onClearFilter={() => {
-          onFilterMarket("");
-          onFilterType("");
-          onFilterCategory("");
-        }}
-        sortedCount={sorted.length}
-        allCount={allAssets.length}
-      />
-
       {sorted.length === 0 ? (
         <div className="py-10 text-center text-zinc-400">
           <SearchX aria-hidden="true" className="mx-auto mb-3 size-8 opacity-50" />
           <p className="text-sm">{t.at_filter_no_result}</p>
         </div>
       ) : (
-        <div className="-mx-4 overflow-x-auto px-4 md:-mx-5 md:px-5">
+        <div className="-mx-4 overflow-x-auto px-4 md:-mx-5 md:px-5 mt-2">
           <table className="w-full min-w-225 text-sm">
             <thead>
               <tr className="border-b border-zinc-800 text-left text-xs whitespace-nowrap text-zinc-500">

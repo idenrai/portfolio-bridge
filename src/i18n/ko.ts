@@ -660,6 +660,9 @@ export const ko: Translations = {
   at_filter_count: (shown, total) => `${shown} / ${total}종목`,
   at_filter_no_result: "필터 조건에 맞는 자산이 없습니다.",
   at_col_ticker: "티커",
+  at_filter_all_account: "모든 계좌",
+  filter_select_all: "전체 선택",
+  filter_clear_all: "전체 해제",
   ticker_search_no_result: "검색 결과가 없습니다.",
   ticker_search_error: "검색에 실패했습니다. 네트워크 상태를 확인해 주세요.",
 

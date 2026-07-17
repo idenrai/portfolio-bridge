@@ -655,6 +655,9 @@ export const en: Translations = {
   at_filter_count: (shown, total) => `${shown} / ${total} assets`,
   at_filter_no_result: "No assets match the selected filters.",
   at_col_ticker: "Ticker",
+  at_filter_all_account: "All Accounts",
+  filter_select_all: "Select All",
+  filter_clear_all: "Clear All",
   ticker_search_no_result: "No results found.",
   ticker_search_error: "Search failed. Please check your network connection.",
 

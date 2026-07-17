@@ -2,14 +2,32 @@ import { useMemo } from "react";
 import { useAssetStore, useSettingsStore } from "@/stores";
 import { calculateSummary, calculateRebalancing } from "@/utils";
 import { useT, useExchangeRates, usePriceRefresh } from "@/hooks";
-import type { AssetCategory, PortfolioAsset } from "@/types";
+import type { AssetCategory, PortfolioAsset, Market, AssetType } from "@/types";
+
+export interface PortfolioFilters {
+  markets?: Market[];
+  types?: AssetType[];
+  categories?: AssetCategory[];
+  brokerIds?: string[];
+}
 
 /**
  * 포트폴리오 요약 & 리밸런싱 계산 훅
  * (Zustand의 클라이언트 상태와 React Query의 서버 상태를 결합하는 단방향 데이터 허브)
  */
-export function usePortfolio() {
-  const baseAssets = useAssetStore((s) => s.assets);
+export function usePortfolio(filters?: PortfolioFilters) {
+  const allBaseAssets = useAssetStore((s) => s.assets);
+
+  const baseAssets = useMemo(() => {
+    if (!filters) return allBaseAssets;
+    return allBaseAssets.filter((a) => {
+      if (filters.markets && filters.markets.length > 0 && !filters.markets.includes(a.market)) return false;
+      if (filters.types && filters.types.length > 0 && !filters.types.includes(a.type)) return false;
+      if (filters.categories && filters.categories.length > 0 && !a.categories.some((c) => filters.categories!.includes(c))) return false;
+      if (filters.brokerIds && filters.brokerIds.length > 0 && (!a.brokerId || !filters.brokerIds.includes(a.brokerId))) return false;
+      return true;
+    });
+  }, [allBaseAssets, filters]);
   const targets = useSettingsStore((s) => s.targetAllocations);
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const t = useT();
