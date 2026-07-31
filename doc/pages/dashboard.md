@@ -30,9 +30,9 @@ A bar that allows filtering the dashboard data by market, asset type, category, 
 
 ### KPI Bar (`KpiBar.tsx`)
 
-Five summary metrics in a horizontal bar. All monetary values converted to `baseCurrency`.
+Five summary metrics in a horizontal bar. All monetary values converted to `baseCurrency`. During the initial price fetch, a loading overlay is displayed to prevent stale local cache prices from being shown.
 
-5개의 핵심 지표를 가로 바로 표시합니다. 모든 금액은 `baseCurrency`로 변환됩니다.
+5개의 핵심 지표를 가로 바로 표시합니다. 모든 금액은 `baseCurrency`로 변환됩니다. 최초 시세 데이터 조회 중에는 로컬 캐시의 낡은 가격이 노출되지 않도록 로딩 오버레이가 표시됩니다.
 
 | Slot | Metric | Description |
 | --- | --- | --- |

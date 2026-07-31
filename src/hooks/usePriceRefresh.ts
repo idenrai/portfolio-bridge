@@ -24,6 +24,7 @@ export type PriceUpdate = {
 export interface UsePriceRefreshResult {
   refreshPrices: () => Promise<void>;
   isLoading: boolean;
+  isInitialLoading: boolean;
   progress: number;
   lastUpdated: string | null;
   error: string | null;
@@ -125,6 +126,7 @@ export function usePriceRefresh(): UsePriceRefreshResult {
       await refetch();
     }, [refetch]),
     isLoading: isLoading || isFetching,
+    isInitialLoading: isLoading,
     progress,
     lastUpdated,
     error: errorMsg,

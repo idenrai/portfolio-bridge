@@ -8,6 +8,8 @@ interface UseDataRefreshResult {
   refreshAll: () => Promise<void>;
   /** 전체 로딩 중 여부 */
   isLoading: boolean;
+  /** 최초 로딩 여부 (캐시 없을 때) */
+  isInitialLoading: boolean;
   /** 환율 마지막 갱신 시각 */
   rateLastUpdated: string | null;
   /** 시세 마지막 갱신 시각 */
@@ -70,6 +72,7 @@ export function useDataRefresh(): UseDataRefreshResult {
   return {
     refreshAll,
     isLoading: combinedLoading,
+    isInitialLoading: rates.isInitialLoading || prices.isInitialLoading,
     rateLastUpdated: rates.lastUpdated,
     priceLastUpdated: prices.lastUpdated,
     lastUpdated,

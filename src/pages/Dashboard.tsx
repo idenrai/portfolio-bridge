@@ -54,7 +54,7 @@ export function DashboardPage() {
   const t = useT();
   const upsertSnapshot = useSnapshotStore((s) => s.upsertSnapshot);
 
-  const { refreshAll, isLoading, lastUpdated } = useDataRefresh();
+  const { refreshAll, isLoading, isInitialLoading, lastUpdated } = useDataRefresh();
 
   // 대시보드를 열 때마다 오늘 날짜 스냅샷 저장/갱신
   // (단, 필터가 적용되지 않은 전체 자산 기준으로 스냅샷을 저장하는 것이 맞으므로 summary는 필터 적용 전이어야 하나
@@ -64,7 +64,7 @@ export function DashboardPage() {
   
   useEffect(() => {
     if (isFiltered) return; // 필터 적용 중에는 스냅샷 갱신 안 함
-    if (assets.length === 0 || summary.totalValueKRW === 0) return;
+    if (assets.length === 0 || summary.totalValueKRW === 0 || isInitialLoading) return;
     const today = new Date().toISOString().slice(0, 10);
     upsertSnapshot({
       date: today,
@@ -77,6 +77,7 @@ export function DashboardPage() {
     assets.length,
     upsertSnapshot,
     isFiltered,
+    isInitialLoading,
   ]);
 
   const handleLoadSample = () => {
@@ -185,7 +186,7 @@ export function DashboardPage() {
       />
 
       {/* ① KPI 바 */}
-      <KpiBar summary={summary} />
+      <KpiBar summary={summary} isInitialLoading={isInitialLoading} />
 
       {/* 2단 메인 레이아웃 */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6 mt-2">
