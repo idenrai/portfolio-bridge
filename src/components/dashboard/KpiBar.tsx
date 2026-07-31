@@ -2,12 +2,14 @@ import { useSettingsStore } from "@/stores";
 import { formatCurrency, formatPercent, fromKRW } from "@/utils";
 import { useT, useExchangeRates } from "@/hooks";
 import type { PortfolioSummary } from "@/types";
+import { Loader2 } from "lucide-react";
 
 interface Props {
   summary: PortfolioSummary;
+  isInitialLoading?: boolean;
 }
 
-export function KpiBar({ summary }: Props) {
+export function KpiBar({ summary, isInitialLoading }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
   const t = useT();
@@ -20,7 +22,17 @@ export function KpiBar({ summary }: Props) {
     .reduce((sum, e) => sum + e.percent, 0);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="relative flex flex-col gap-4">
+      {/* 로딩 오버레이 */}
+      {isInitialLoading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center rounded-xl bg-black/40 backdrop-blur-md">
+          <div role="status" aria-live="polite" className="flex items-center gap-3 rounded-lg border border-zinc-700 bg-zinc-900 px-6 py-4 shadow-2xl">
+            <Loader2 className="h-5 w-5 motion-safe:animate-spin text-white" />
+            <span className="text-sm font-bold tracking-tight text-white">{t.dash_refreshing}</span>
+          </div>
+        </div>
+      )}
+
       {/* 주 계기판 (Total Value & PnL) */}
       <div className="relative flex flex-col justify-between gap-6 overflow-hidden border border-zinc-800 bg-zinc-950 p-6 md:flex-row md:items-end">
         {/* 장식용 스캔라인/도트 배경 */}

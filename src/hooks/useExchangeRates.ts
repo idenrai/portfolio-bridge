@@ -10,6 +10,7 @@ const CACHE_FALLBACK_MS = 24 * 60 * 60 * 1000;
 interface UseExchangeRateResult {
   refreshRates: () => Promise<void>;
   isLoading: boolean;
+  isInitialLoading: boolean;
   data: Record<CurrencyCode, number>;
   lastUpdated: string | null;
   error: string | null;
@@ -19,7 +20,7 @@ interface UseExchangeRateResult {
 export function useExchangeRates(): UseExchangeRateResult {
   const lang = useLanguageStore((s) => s.lang);
 
-  const { data, isLoading, refetch, isError, dataUpdatedAt } = useQuery({
+  const { data, isLoading, refetch, isError, isFetching, dataUpdatedAt } = useQuery({
     queryKey: ["exchangeRates"],
     queryFn: fetchAllExchangeRates,
     staleTime: CACHE_FALLBACK_MS,
@@ -44,7 +45,8 @@ export function useExchangeRates(): UseExchangeRateResult {
 
   return {
     refreshRates,
-    isLoading,
+    isLoading: isLoading || isFetching,
+    isInitialLoading: isLoading,
     data: mergedData,
     lastUpdated,
     error: errorMsg,
