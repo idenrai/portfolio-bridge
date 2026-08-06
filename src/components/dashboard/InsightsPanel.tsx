@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
-import { Sparkles, AlertTriangle, TrendingDown, CircleDollarSign, Coins, PieChart } from "lucide-react";
-import { Card } from "@/components/common";
+import { Sparkles, AlertTriangle, TrendingDown, CircleDollarSign, Coins, PieChart, Check, Copy } from "lucide-react";
+import { Card, FeedbackIconText } from "@/components/common";
 import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore } from "@/stores";
 import { buildInsightPrompt } from "@/utils";
@@ -112,7 +112,22 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                   onClick={copyPrompt}
                   className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50"
                 >
-                  {copied ? "✓ " + t.insights_ai_copied : t.insights_ai_copy}
+                  {copied ? (
+                    <FeedbackIconText
+                      icon={Check}
+                      text={t.insights_ai_copied}
+                      animate={true}
+                      className="text-emerald-400"
+                      textClassName="text-white"
+                    />
+                  ) : (
+                    <FeedbackIconText
+                      icon={Copy}
+                      text={t.insights_ai_copy}
+                      className="transition-opacity hover:opacity-80"
+                      iconClassName="opacity-70"
+                    />
+                  )}
                 </button>
               </div>
             </div>

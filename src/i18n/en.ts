@@ -104,7 +104,7 @@ export const en: Translations = {
   insights_ok: "No issues found",
   insights_ai_btn: "View Prompt",
   insights_ai_copy: "Copy to clipboard",
-  insights_ai_copied: "✓ Copied!",
+  insights_ai_copied: "Copied!",
   insights_ai_desc:
     "Copy the prompt below and paste it into ChatGPT, Claude, Gemini, Grok, or any AI assistant.",
   insights_ai_close: "Close",
@@ -142,7 +142,7 @@ export const en: Translations = {
     "Copy the prompt below and paste it into ChatGPT, Claude, Gemini, Grok, or another AI.",
   asset_ai_tab_link: "② Import AI Response",
   asset_ai_copy: "Copy to Clipboard",
-  asset_ai_copied: "✓ Copied!",
+  asset_ai_copied: "Copied!",
   asset_ai_close: "Close",
   asset_ai_import_desc: "Paste the JSON returned by the AI below and",
   asset_ai_format_label: "Format:",
@@ -150,7 +150,7 @@ export const en: Translations = {
     'Paste AI response JSON here…\n\nExample:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "…" },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "…" }\n]',
   asset_ai_apply_btn: "Apply Categories",
   asset_ai_apply_result: (applied, skipped) =>
-    `✓ Categories applied to ${applied} assets.${skipped > 0 ? ` (${skipped} skipped)` : ""}`,
+    `Categories applied to ${applied} assets.${skipped > 0 ? ` (${skipped} skipped)` : ""}`,
   asset_ai_parse_error: "Parse error",
   exchange_rate_error: "Failed to fetch exchange rates. Please enter manually.",
   asset_ai_copy_link_pre: "When you get a response, go to the",
@@ -183,14 +183,14 @@ export const en: Translations = {
     "Copy the prompt below and paste it into AI tools like ChatGPT, Claude, Gemini, or Grok.",
   guru_ai_search_warn: "AI will search the web for the latest news, which may take a few extra seconds.",
   guru_ai_copy: "Copy to Clipboard",
-  guru_ai_copied: "✓ Copied!",
+  guru_ai_copied: "Copied!",
   guru_ai_followup_btn: "Continue Previous Chat",
   guru_ai_followup_desc:
     "A prompt containing only the portfolio changes since your last conversation. Paste it into your previous chat to get an evaluation of what's changed.",
   guru_ai_followup_new_session: "Start New Conversation",
   guru_ai_followup_new_session_confirm:
     "This will clear the saved previous portfolio state and start fresh with the current state. Continue?",
-  guru_ai_session_saved: "✓ Current portfolio state has been saved.",
+  guru_ai_session_saved: "Current portfolio state has been saved.",
   guru_name_buffett: "Warren Buffett",
   guru_name_munger: "Charlie Munger",
   guru_name_lynch: "Peter Lynch",
@@ -595,7 +595,7 @@ export const en: Translations = {
   settings_target_sum: (n) => `Total: ${n}%`,
   settings_target_save: "Save",
   settings_target_saved: "Saved",
-  settings_data_title: "Data Management",
+  settings_data_title: "Local Data Management",
   settings_data_local_title: "Local Storage",
   settings_data_desc: "All data is stored in browser local storage.",
   settings_data_count: (n) => `Registered assets: ${n}`,
@@ -608,7 +608,7 @@ export const en: Translations = {
 
   profile_title: "My Profile",
   profile_desc:
-    "Personal info used when chatting with gurus. Stored locally and never sent to any server.",
+    "Personal info used when chatting with gurus. Stored locally and never sent to any server. All inputs are automatically saved to your device in real-time.",
   profile_nickname_label: "Nickname (how gurus will address you)",
   profile_nickname_placeholder: "e.g. Alex",
   profile_age_label: "Age",
@@ -630,7 +630,7 @@ export const en: Translations = {
   profile_notes_placeholder:
     "e.g. Mortgage remaining: $230k (15 yrs left). $500/mo auto-invested in S&P 500 ETF, so only $300/mo is actively managed.",
   profile_save: "Save",
-  profile_saved: "✓ Saved",
+  profile_saved: "Saved",
 
   at_col_name: "Name",
   at_col_market: "Market",
@@ -697,7 +697,7 @@ export const en: Translations = {
   af_avg_price_label: "Average Cost",
   af_current_price_label: "Current Price",
   af_current_price_help: "※ The entered price may be overwritten upon auto-refresh. However, for assets where auto-refresh fails (e.g. mutual funds), the manually entered price will be maintained, allowing manual PnL tracking.",
-  af_current_price_auto: "✓ Auto-fetched from Yahoo Finance",
+  af_current_price_auto: "Auto-fetched from Yahoo Finance",
   af_fetch_price_btn: "Fetch Price",
   af_fetching: "Fetching…",
   af_currency_placeholder: "Select currency",

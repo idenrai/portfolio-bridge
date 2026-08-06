@@ -107,7 +107,7 @@ export const de: Translations = {
   insights_ok: "Keine Probleme gefunden",
   insights_ai_btn: "Prompt anzeigen",
   insights_ai_copy: "In Zwischenablage kopieren",
-  insights_ai_copied: "✓ Kopiert!",
+  insights_ai_copied: "Kopiert!",
   insights_ai_desc:
     "Kopieren Sie den folgenden Prompt und fügen Sie ihn in ChatGPT, Claude, Gemini, Grok oder einen anderen KI-Assistenten ein.",
   insights_ai_close: "Schließen",
@@ -146,7 +146,7 @@ export const de: Translations = {
     "Kopieren Sie den folgenden Prompt und fügen Sie ihn in ChatGPT, Claude, Gemini, Grok oder eine andere KI ein.",
   asset_ai_tab_link: "② KI-Antwort importieren",
   asset_ai_copy: "In Zwischenablage kopieren",
-  asset_ai_copied: "✓ Kopiert!",
+  asset_ai_copied: "Kopiert!",
   asset_ai_close: "Schließen",
   asset_ai_import_desc:
     "Fügen Sie das von der KI zurückgegebene JSON unten ein und",
@@ -155,7 +155,7 @@ export const de: Translations = {
     'KI-Antwort-JSON hier einfügen…\n\nBeispiel:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "…" },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "…" }\n]',
   asset_ai_apply_btn: "Kategorien anwenden",
   asset_ai_apply_result: (applied, skipped) =>
-    `✓ Kategorien auf ${applied} Vermögenswerte angewendet.${skipped > 0 ? ` (${skipped} übersprungen)` : ""}`,
+    `Kategorien auf ${applied} Vermögenswerte angewendet.${skipped > 0 ? ` (${skipped} übersprungen)` : ""}`,
   asset_ai_parse_error: "Parse-Fehler",
   exchange_rate_error:
     "Wechselkurse konnten nicht abgerufen werden. Bitte manuell eingeben.",
@@ -189,14 +189,14 @@ export const de: Translations = {
     "Kopieren Sie den Prompt unten und fügen Sie ihn in ChatGPT, Claude, Gemini oder Grok ein.",
   guru_ai_search_warn: "Die KI sucht nach den neuesten Nachrichten, was einige zusätzliche Sekunden dauern kann.",
   guru_ai_copy: "In die Zwischenablage kopieren",
-  guru_ai_copied: "✓ Kopiert!",
+  guru_ai_copied: "Kopiert!",
   guru_ai_followup_btn: "Vorheriges Gespräch fortsetzen",
   guru_ai_followup_desc:
     "Ein Prompt, der nur die Portfolio-Änderungen seit Ihrem letzten Gespräch enthält. Fügen Sie ihn in Ihren vorherigen Chat ein, um eine Bewertung der Änderungen zu erhalten.",
   guru_ai_followup_new_session: "Neues Gespräch starten",
   guru_ai_followup_new_session_confirm:
     "Dies löscht den gespeicherten früheren Portfolio-Status und startet neu mit dem aktuellen Status. Fortfahren?",
-  guru_ai_session_saved: "✓ Aktueller Portfolio-Status wurde gespeichert.",
+  guru_ai_session_saved: "Aktueller Portfolio-Status wurde gespeichert.",
   guru_name_buffett: "Warren Buffett",
   guru_name_munger: "Charlie Munger",
   guru_name_lynch: "Peter Lynch",
@@ -607,7 +607,7 @@ export const de: Translations = {
   settings_target_sum: (n) => `Gesamt: ${n}%`,
   settings_target_save: "Speichern",
   settings_target_saved: "Gespeichert",
-  settings_data_title: "Datenverwaltung",
+  settings_data_title: "Lokale Datenverwaltung",
   settings_data_local_title: "Local Storage",
   settings_data_desc:
     "Alle Daten werden im lokalen Browser-Speicher gespeichert.",
@@ -621,7 +621,7 @@ export const de: Translations = {
 
   profile_title: "Mein Profil",
   profile_desc:
-    "Persönliche Informationen, die beim Chat mit Gurus verwendet werden. Lokal gespeichert, nie an Server übertragen.",
+    "Persönliche Informationen, die beim Chat mit Gurus verwendet werden. Lokal gespeichert, nie an Server übertragen. Alle Eingaben werden in Echtzeit automatisch auf Ihrem Gerät gespeichert.",
   profile_nickname_label: "Spitzname (wie Gurus Sie ansprechen sollen)",
   profile_nickname_placeholder: "z. B. Max",
   profile_age_label: "Alter",
@@ -641,7 +641,7 @@ export const de: Translations = {
     "z. B. Finanzielle Unabhängigkeit durch passives Einkommen in 10 Jahren erreichen…", profile_notes_label: "Besonderheiten / Hinweise",
   profile_notes_placeholder:
     "z. B. Hypothek: noch 230.000 € (15 Jahre). 500 €/Monat werden automatisch in S&P-500-ETF investiert, aktiv verwaltetes Budget: 300 €.", profile_save: "Speichern",
-  profile_saved: "✓ Gespeichert",
+  profile_saved: "Gespeichert",
 
   at_col_name: "Name",
   at_col_market: "Markt",
@@ -711,7 +711,7 @@ export const de: Translations = {
   af_avg_price_label: "Durchschnittlicher Einstandspreis",
   af_current_price_label: "Aktueller Kurs",
   af_current_price_help: "※ Der eingegebene Kurs kann bei automatischer Aktualisierung überschrieben werden. Bei Vermögenswerten, bei denen die automatische Aktualisierung fehlschlägt (z. B. Investmentfonds), bleibt der manuell eingegebene Kurs erhalten.",
-  af_current_price_auto: "✓ Automatisch von Yahoo Finance abgerufen",
+  af_current_price_auto: "Automatisch von Yahoo Finance abgerufen",
   af_fetch_price_btn: "Kurs abrufen",
   af_fetching: "Wird abgerufen…",
   af_currency_placeholder: "Währung auswählen",

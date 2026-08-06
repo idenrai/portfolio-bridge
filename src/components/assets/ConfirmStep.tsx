@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, Input, Label } from "@/components/common";
+import { CheckCircle2 } from "lucide-react";
+import { Button, Input, Label, FeedbackIconText } from "@/components/common";
 import { useT } from "@/hooks";
 import type { AssetFormData } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
@@ -102,9 +103,14 @@ export function ConfirmStep({
         <span className="text-xs font-medium text-zinc-400">
           {t.af_current_price_label} ({sym})
           {item.currentPrice > 0 && (
-            <span className="ml-2 text-xs font-normal text-green-600">
-              {t.af_current_price_auto}
-            </span>
+            <FeedbackIconText
+              icon={CheckCircle2}
+              text={t.af_current_price_auto}
+              animate={true}
+              className="ml-2 text-emerald-500"
+              iconClassName="size-3"
+              textClassName="text-xs font-normal"
+            />
           )}
         </span>
         <Input

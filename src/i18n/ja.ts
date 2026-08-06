@@ -105,7 +105,7 @@ export const ja: Translations = {
   insights_ok: "特記事項なし",
   insights_ai_btn: "プロンプトを見る",
   insights_ai_copy: "クリップボードにコピー",
-  insights_ai_copied: "✓ コピー済み!",
+  insights_ai_copied: "コピー済み!",
   insights_ai_desc:
     "下のプロンプトをコピーして、ChatGPT・Claude・Gemini・GrokなどのAIに貼り付けてください。",
   insights_ai_close: "閉じる",
@@ -143,7 +143,7 @@ export const ja: Translations = {
     "以下のプロンプトをコピーして ChatGPT・Claude・Gemini・Grok などの AI に貼り付けてください。",
   asset_ai_tab_link: "② AI回答インポート",
   asset_ai_copy: "クリップボードにコピー",
-  asset_ai_copied: "✓ コピーしました！",
+  asset_ai_copied: "コピーしました！",
   asset_ai_close: "閉じる",
   asset_ai_import_desc: "AIが返答したJSONを下に貼り付けて",
   asset_ai_format_label: "形式:",
@@ -151,7 +151,7 @@ export const ja: Translations = {
     'AIの応答JSONをここに貼り付けてください…\n\n例:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "…" },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "…" }\n]',
   asset_ai_apply_btn: "カテゴリーを適用",
   asset_ai_apply_result: (applied, skipped) =>
-    `✓ ${applied}件にカテゴリーを適用しました。${skipped > 0 ? `（${skipped}件スキップ）` : ""}`,
+    `${applied}件にカテゴリーを適用しました。${skipped > 0 ? `（${skipped}件スキップ）` : ""}`,
   asset_ai_parse_error: "パースエラー",
   exchange_rate_error:
     "為替レートの取得に失敗しました。手動で入力してください。",
@@ -184,14 +184,14 @@ export const ja: Translations = {
     "以下のプロンプトをコピーし、ChatGPT、Claude、Gemini、GrokなどのAIに貼り付けてください。",
   guru_ai_search_warn: "AIが最新ニュースを検索するため、回答に数秒余分にかかる場合があります。",
   guru_ai_copy: "クリップボードにコピー",
-  guru_ai_copied: "✓ コピー済み!",
+  guru_ai_copied: "コピー済み!",
   guru_ai_followup_btn: "前回の会話から続ける",
   guru_ai_followup_desc:
     "前回の会話以降のポートフォリオ変更のみを含むプロンプトです。前のチャットに貼り付けて、変化した点を評価してもらいましょう。",
   guru_ai_followup_new_session: "新しい会話を始める",
   guru_ai_followup_new_session_confirm:
     "保存された以前のポートフォリオ状態を削除し、現在の状態で新しく始めます。続けますか？",
-  guru_ai_session_saved: "✓ 現在のポートフォリオ状態が保存されました。",
+  guru_ai_session_saved: "現在のポートフォリオ状態が保存されました。",
   guru_name_buffett: "ウォーレン・バフェット",
   guru_name_munger: "チャーリー・マンガー",
   guru_name_lynch: "ピーター・リンチ",
@@ -597,7 +597,7 @@ export const ja: Translations = {
   settings_target_sum: (n) => `合計: ${n}%`,
   settings_target_save: "保存",
   settings_target_saved: "保存しました",
-  settings_data_title: "データ管理",
+  settings_data_title: "ローカル保存データ管理",
   settings_data_local_title: "ローカルストレージ",
   settings_data_desc:
     "すべてのデータはブラウザのローカルストレージに保存されます。",
@@ -611,7 +611,7 @@ export const ja: Translations = {
 
   profile_title: "プロフィール",
   profile_desc:
-    "グルとの対話時に使用される個人情報です。ローカルに保存され、外部サーバーには送信されません。",
+    "グルとの対話時に使用される個人情報です。ローカルに保存され、外部サーバーには送信されません。すべての入力はリアルタイムで端末に自動保存されます。",
   profile_nickname_label: "ニックネーム（グルに呼んでほしい名前）",
   profile_nickname_placeholder: "例: はなこ",
   profile_age_label: "年齢",
@@ -631,7 +631,7 @@ export const ja: Translations = {
     "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成…", profile_notes_label: "特記事項 / 注意点",
   profile_notes_placeholder:
     "例: 住宅ローン残高 2,300万円５15年）。投賄予算のうち毎月 5万円は S&P500 ETF自動購入済み、実質的な機定投賄は毎月 3万円分…", profile_save: "保存",
-  profile_saved: "✓ 保存しました",
+  profile_saved: "保存しました",
 
   at_col_name: "銘柄",
   at_col_market: "市場",
@@ -698,7 +698,7 @@ export const ja: Translations = {
   af_avg_price_label: "取得単価",
   af_current_price_label: "現在値",
   af_current_price_help: "※ 入力された現在値は自動更新時に上書きされる場合があります。ただし、自動更新が失敗する資産（投資信託など）は手動入力した価格が維持されるため、手動で損益を追跡できます。",
-  af_current_price_auto: "✓ Yahoo Finance 自動取得",
+  af_current_price_auto: "Yahoo Finance 自動取得",
   af_fetch_price_btn: "現在値取得",
   af_fetching: "取得中…",
   af_currency_placeholder: "通貨を選択",
