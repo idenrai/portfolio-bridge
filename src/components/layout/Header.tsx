@@ -1,9 +1,8 @@
-import { useLanguageStore, useSettingsStore } from "@/stores";
-import { LayoutDashboard, Briefcase, Users, Target, Settings, Info } from "lucide-react";
+import { useLanguageStore } from "@/stores";
+import { LayoutDashboard, Briefcase, Users, Target, Settings, Info, Globe } from "lucide-react";
 import { NavLink, Link } from "react-router-dom";
 import { useT } from "@/hooks";
 import type { Lang } from "@/i18n";
-import type { CurrencyCode } from "@/types";
 
 const LANG_LABELS: Record<Lang, string> = {
   ko: "KR",
@@ -19,24 +18,8 @@ const LANG_ARIA: Record<Lang, string> = {
   de: "German",
 };
 
-/**
- * 언어 전환 시 기본으로 설정되는 표시 화폐
- *
- * 설계 원칙:
- *   EUR은 독일어(de)에만 국한된 통화가 아니라 유럽 20개국이 공유하는 통화입니다.
- *   추후 프랑스어(fr)·스페인어(es)·이탈리아어(it) 등 유로권 언어를 추가할 때는
- *   해당 Lang: "EUR" 엔트리를 이 맵에 추가하면 됩니다.
- */
-const LANG_CURRENCY: Record<Lang, CurrencyCode> = {
-  ko: "KRW",
-  en: "USD",
-  ja: "JPY",
-  de: "EUR", // EUR 통화권 첫 번째 언어 — 프랑스어·스페인어 등 추가 시도 EUR 매핑
-};
-
 export function Header() {
   const { lang, setLang } = useLanguageStore();
-  const setBaseCurrency = useSettingsStore((s) => s.setBaseCurrency);
   const t = useT();
 
   const NAV_ITEMS = [
@@ -47,11 +30,6 @@ export function Header() {
     { to: "/settings", label: t.nav_settings, icon: <Settings className="size-4" /> },
     { to: "/about", label: t.nav_about, icon: <Info className="size-4" /> },
   ];
-
-  const handleLangChange = (l: Lang) => {
-    setLang(l);
-    setBaseCurrency(LANG_CURRENCY[l]);
-  };
 
   return (
     <header className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-zinc-800 bg-black px-4 md:px-6">
@@ -93,24 +71,31 @@ export function Header() {
         </nav>
       </div>
       <div className="flex items-center gap-4">
-        {/* 언어 전환 버튼 (화폐 동시 전환) */}
-        <div className="flex gap-1">
-          {(Object.keys(LANG_LABELS) as Lang[]).map((l) => (
-            <button
-              key={l}
-              onClick={() => handleLangChange(l)}
-              aria-label={LANG_ARIA[l]}
-              className={`flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-md border text-sm transition-colors focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-black focus-visible:outline-none ${
-                lang === l
-                  ? "border-zinc-500 bg-zinc-800 text-white shadow-sm"
-                  : "border-transparent text-zinc-500 hover:bg-zinc-900"
-              }`}
-            >
-              <span aria-hidden="true">{LANG_LABELS[l]}</span>
-            </button>
-          ))}
+        {/* 언어 전환 버튼 (네이티브 드롭다운) */}
+        <div className="relative flex items-center justify-center rounded-md has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-white has-[:focus-visible]:ring-offset-1 has-[:focus-visible]:ring-offset-black">
+          <button
+            aria-hidden="true"
+            className="flex h-9 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-zinc-200"
+          >
+            <Globe className="size-4" />
+            <span className="text-xs font-bold uppercase">{LANG_LABELS[lang]}</span>
+          </button>
+          <select
+            title="Change Language"
+            aria-label="Change Language"
+            value={lang}
+            onChange={(e) => setLang(e.target.value as Lang)}
+            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+          >
+            {(Object.keys(LANG_LABELS) as Lang[]).map((l) => (
+              <option key={l} value={l}>
+                {LANG_ARIA[l]} ({LANG_LABELS[l]})
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </header>
   );
 }
+

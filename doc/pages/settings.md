@@ -47,11 +47,15 @@ when injected into AI prompts to prevent prompt injection.
 
 **Store**: `useSettingsStore.baseCurrency`
 
+**Component**: `DisplaySection` (`src/components/settings/DisplaySection.tsx`)
+
 Options: `KRW` · `JPY` · `USD` · `EUR`
 
 All monetary values across the app are converted to and displayed in the selected baseCurrency.
+This setting is independent of the UI language.
 
 앱 전체의 모든 금액이 선택한 baseCurrency로 변환되어 표시됩니다.
+이 설정은 UI 언어(한국어, 영어 등)와 독립적으로 동작합니다.
 
 ## Exchange Rates
 

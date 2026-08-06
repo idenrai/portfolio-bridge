@@ -96,7 +96,7 @@ Storage keys are defined in `src/constants/storage.ts`.
 | Component | Location | Role |
 | --- | --- | --- |
 | `Layout` | `components/layout/Layout.tsx` | Root shell (header + content area + footer) / 루트 셸 |
-| `Header` | `components/layout/Header.tsx` | Top bar (logo, global navigation, language, currency) / 상단 GNB 바 |
+| `Header` | `components/layout/Header.tsx` | Top bar (logo, global navigation, language dropdown) / 상단 GNB 바 |
 | `BottomNav` | `components/layout/BottomNav.tsx` | Mobile bottom navigation / 모바일 하단 내비게이션 |
 
 ## Privacy Model
