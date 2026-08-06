@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { MessageSquareQuote, AlertTriangle, Calendar } from "lucide-react";
+import { MessageSquareQuote, AlertTriangle, Calendar, Check, Copy } from "lucide-react";
 import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore, useProfileStore, useGuruSessionStore } from "@/stores";
 import { buildGuruPrompt, buildGuruFollowUpPrompt } from "@/utils";
 import type { GuruProfile, PortfolioSummary, Asset } from "@/types";
+import { FeedbackIconText } from "@/components/common";
 import { en } from "@/i18n";
 
 interface GuruAIPromptBannerProps {
@@ -174,7 +175,22 @@ export function GuruAIPromptBanner({
                 onClick={copyPrompt}
                 className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700"
               >
-                {copied ? "✓ " + t.guru_ai_copied : t.guru_ai_copy}
+                {copied ? (
+                  <FeedbackIconText
+                    icon={Check}
+                    text={t.guru_ai_copied}
+                    animate={true}
+                    className="text-emerald-400"
+                    textClassName="text-white"
+                  />
+                ) : (
+                  <FeedbackIconText
+                    icon={Copy}
+                    text={t.guru_ai_copy}
+                    className="transition-opacity hover:opacity-80"
+                    iconClassName="opacity-70"
+                  />
+                )}
               </button>
             </div>
             <div className="mt-1 flex items-start gap-2 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-2.5">
@@ -207,7 +223,22 @@ export function GuruAIPromptBanner({
                 onClick={copyFollowUp}
                 className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-emerald-700/50 bg-emerald-800/80 px-3 py-1.5 text-xs font-medium text-emerald-50 shadow-sm backdrop-blur transition-colors hover:bg-emerald-700"
               >
-                {copiedFollowUp ? "✓ " + t.guru_ai_copied : t.guru_ai_copy}
+                {copiedFollowUp ? (
+                  <FeedbackIconText
+                    icon={Check}
+                    text={t.guru_ai_copied}
+                    animate={true}
+                    className="text-emerald-300"
+                    textClassName="text-emerald-50"
+                  />
+                ) : (
+                  <FeedbackIconText
+                    icon={Copy}
+                    text={t.guru_ai_copy}
+                    className="transition-opacity hover:opacity-80"
+                    iconClassName="opacity-70"
+                  />
+                )}
               </button>
             </div>
             <div className="mt-1 flex items-start gap-2 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-2.5">

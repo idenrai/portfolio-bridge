@@ -1,19 +1,36 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useProfileStore, useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
-import { Card, AutoResizeTextarea, Button, Input } from "@/components/common";
-import { User } from "lucide-react";
+import { Card, AutoResizeTextarea, Input, FeedbackIconText } from "@/components/common";
+import { User, CheckCircle2 } from "lucide-react";
 
 export function ProfileSection() {
   const profile = useProfileStore();
   const settings = useSettingsStore();
   const t = useT();
-  const [profileSaved, setProfileSaved] = useState(false);
 
-  const handleProfileSave = () => {
-    setProfileSaved(true);
-    setTimeout(() => setProfileSaved(false), 2000);
-  };
+  const [showSaved, setShowSaved] = useState(false);
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    
+    setShowSaved(true);
+    const timer = setTimeout(() => setShowSaved(false), 2000);
+    return () => clearTimeout(timer);
+  }, [
+    profile.nickname,
+    profile.age,
+    profile.annualIncome,
+    profile.monthlyBudget,
+    profile.plan3y,
+    profile.plan5y,
+    profile.plan10y,
+    profile.notes,
+  ]);
 
   const inputCls =
     "w-full rounded-md border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-sm text-zinc-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 transition-colors";
@@ -27,12 +44,16 @@ export function ProfileSection() {
         </div>
       }
       action={
-        <Button size="sm" variant="secondary" onClick={handleProfileSave}>
-          {profileSaved ? t.profile_saved : t.profile_save}
-        </Button>
+        <FeedbackIconText
+          icon={CheckCircle2}
+          text={t.profile_saved}
+          animate={showSaved}
+          className={showSaved ? "text-emerald-500 opacity-100 scale-100" : "text-emerald-500 opacity-0 scale-95"}
+          textClassName="text-xs font-medium"
+        />
       }
     >
-      <div className="space-y-4">
+      <div className="space-y-5">
         {/* 설명 */}
         <p className="text-sm leading-relaxed text-zinc-500">
           {t.profile_desc}

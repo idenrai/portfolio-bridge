@@ -106,7 +106,7 @@ export const ko: Translations = {
   insights_ok: "특이사항 없음",
   insights_ai_btn: "프롬프트 보기",
   insights_ai_copy: "클립보드에 복사",
-  insights_ai_copied: "✓ 복사됨!",
+  insights_ai_copied: "복사됨!",
   insights_ai_desc:
     "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여넣으세요.",
   insights_ai_close: "닫기",
@@ -143,7 +143,7 @@ export const ko: Translations = {
     "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여 넣으세요.",
   asset_ai_tab_link: "② AI 응답 가져오기",
   asset_ai_copy: "클립보드에 복사",
-  asset_ai_copied: "✓ 복사됨!",
+  asset_ai_copied: "복사됨!",
   asset_ai_close: "닫기",
   asset_ai_import_desc: "AI가 응답한 JSON을 아래에 붙여 넣고",
   asset_ai_format_label: "형식:",
@@ -151,7 +151,7 @@ export const ko: Translations = {
     'AI 응답 JSON을 여기에 붙여 넣으세요…\n\n예시:\n[\n  { "index": 1, "name": "AAPL", "category": "growth", "reason": "…" },\n  { "index": 2, "name": "MSFT", "category": "growth", "reason": "…" }\n]',
   asset_ai_apply_btn: "분류 적용",
   asset_ai_apply_result: (applied, skipped) =>
-    `✓ ${applied}건 분류가 적용되었습니다.${skipped > 0 ? ` (${skipped}건 건너뜀)` : ""}`,
+    `${applied}건 분류가 적용되었습니다.${skipped > 0 ? ` (${skipped}건 건너뜀)` : ""}`,
 
   asset_ai_parse_error: "파싱 오류",
   exchange_rate_error: "환율 조회에 실패했습니다. 수동으로 입력해 주세요.",
@@ -184,14 +184,14 @@ export const ko: Translations = {
     "아래 프롬프트를 복사해 ChatGPT, Claude, Gemini, Grok 등 AI에 붙여 넣으세요.",
   guru_ai_search_warn: "AI가 최신 뉴스를 검색하므로 답변에 수 초가 더 소요될 수 있습니다.",
   guru_ai_copy: "클립보드에 복사",
-  guru_ai_copied: "✓ 복사됨!",
+  guru_ai_copied: "복사됨!",
   guru_ai_followup_btn: "이전 대화에서 계속",
   guru_ai_followup_desc:
     "지난 대화 이후의 포트폴리오 변동 사항만을 담은 프롬프트입니다. 이전 채팅에 이어 붙여넣어 바뀐 점을 평가받으세요.",
   guru_ai_followup_new_session: "새 대화 시작",
   guru_ai_followup_new_session_confirm:
     "저장된 이전 포트폴리오 상태를 삭제하고 현재 상태로 새 대화를 시작합니다. 계속하시겠습니까?",
-  guru_ai_session_saved: "✓ 현재 포트폴리오 상태가 저장되었습니다.",
+  guru_ai_session_saved: "현재 포트폴리오 상태가 저장되었습니다.",
   guru_name_buffett: "워렌 버핏",
   guru_name_munger: "찰리 멍거",
   guru_name_lynch: "피터 린치",
@@ -600,7 +600,7 @@ export const ko: Translations = {
   settings_target_sum: (n) => `합계: ${n}%`,
   settings_target_save: "저장",
   settings_target_saved: "저장되었습니다",
-  settings_data_title: "데이터 관리",
+  settings_data_title: "로컬 저장 데이터 관리",
   settings_data_local_title: "로컬 스토리지",
   settings_data_desc: "모든 데이터는 로컬 스토리지에 저장됩니다.",
   settings_data_count: (n) => `현재 등록된 자산: ${n}건`,
@@ -613,7 +613,7 @@ export const ko: Translations = {
 
   profile_title: "내 정보",
   profile_desc:
-    "구루와 대화할 때 활용되는 개인 정보입니다. 파일로 저장되며 외부로 전송되지 않습니다.",
+    "목적: AI 구루 프롬프트에 주입되는 개인 맥락 정보입니다. localStorage에만 저장되며 외부로 전송되지 않습니다. 모든 입력 내용은 기기에 실시간으로 자동 저장됩니다.",
   profile_nickname_label: "닉네임 (불리고 싶은 이름)",
   profile_nickname_placeholder: "예시: 투자가A",
   profile_age_label: "나이",
@@ -635,7 +635,7 @@ export const ko: Translations = {
   profile_notes_placeholder:
     "예시: 주택론 잔액 2.3억원(잔여 15년), 월 투자액 중 50만원은 S&P500 ETF 자동매수로 실질적 수동 투자는 30만원 분…",
   profile_save: "저장",
-  profile_saved: "✓ 저장되었습니다",
+  profile_saved: "저장되었습니다",
 
   at_col_name: "종목",
   at_col_market: "시장",
@@ -702,7 +702,7 @@ export const ko: Translations = {
   af_avg_price_label: "매입 단가",
   af_current_price_label: "현재가",
   af_current_price_help: "※ 입력된 현재가는 자동 갱신 시 최신 가격으로 덮어씌워질 수 있습니다. 단, 자동 갱신이 지원되지 않는 자산(투자신탁 등)은 직접 입력한 가격이 유지되므로 수동으로 수익률을 추적할 수 있습니다.",
-  af_current_price_auto: "✓ Yahoo Finance 자동 조회",
+  af_current_price_auto: "Yahoo Finance 자동 조회",
   af_fetch_price_btn: "현재가 조회",
   af_fetching: "조회 중…",
   af_currency_placeholder: "화폐를 선택하세요",

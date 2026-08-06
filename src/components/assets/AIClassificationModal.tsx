@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useAssetStore, useLanguageStore } from "@/stores";
 import { useT } from "@/hooks";
-import { Button, Modal } from "@/components/common";
+import { Button, Modal, FeedbackIconText } from "@/components/common";
 import { buildClassificationPrompt, parseAiResponse, cn } from "@/utils";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Check, Copy } from "lucide-react";
 
 interface AIClassificationModalProps {
   open: boolean;
@@ -133,7 +133,19 @@ export function AIClassificationModal({
                 {t.asset_ai_close}
               </Button>
               <Button onClick={handleCopyPrompt}>
-                {copied ? t.asset_ai_copied : t.asset_ai_copy}
+                {copied ? (
+                  <FeedbackIconText
+                    icon={Check}
+                    text={t.asset_ai_copied}
+                    animate={true}
+                  />
+                ) : (
+                  <FeedbackIconText
+                    icon={Copy}
+                    text={t.asset_ai_copy}
+                    iconClassName="opacity-70"
+                  />
+                )}
               </Button>
             </div>
           </>
@@ -169,11 +181,15 @@ export function AIClassificationModal({
             )}
 
             {importResult && (
-              <div aria-live="polite" className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-400">
-                {t.asset_ai_apply_result(
-                  importResult.applied,
-                  importResult.skipped,
-                )}
+              <div aria-live="polite" className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-400">
+                <FeedbackIconText
+                  icon={Check}
+                  text={t.asset_ai_apply_result(importResult.applied, importResult.skipped)}
+                  animate={true}
+                  iconClassName="size-4 shrink-0 mt-0.5"
+                  textClassName="text-sm"
+                  className="items-start gap-2"
+                />
               </div>
             )}
 

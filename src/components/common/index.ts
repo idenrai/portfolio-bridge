@@ -7,3 +7,4 @@ export { Select } from "./Select";
 export { Label } from "./Label";
 export { MultiSelect } from "./MultiSelect";
 export { FilterBar } from "./FilterBar";
+export { FeedbackIconText } from "./FeedbackIconText";
