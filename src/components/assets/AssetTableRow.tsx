@@ -11,7 +11,6 @@ import {
   assetValue,
   assetPnL,
   assetReturnPercent,
-  formatPercent,
 } from "@/utils";
 
 interface AssetTableRowProps {
@@ -40,9 +39,10 @@ export function AssetTableRow({
   const pnl = assetPnL(asset);
   const ret = assetReturnPercent(asset);
   const sym = CURRENCY_SYMBOLS[asset.currency];
-  const isPositive = pnl >= 0;
-  const pnlColor = isPositive ? "text-red-500" : "text-blue-500";
-  const pnlIcon = isPositive ? "▲" : "▼";
+  const isZero = Math.abs(ret) < 0.05;
+  const isPositive = pnl > 0 && !isZero;
+  const pnlColor = isZero ? "text-zinc-400" : isPositive ? "text-red-500" : "text-blue-500";
+  const pnlIcon = isZero ? "-" : isPositive ? "▲" : "▼";
   const isCash = asset.type === "cash";
 
   return (
@@ -146,7 +146,7 @@ export function AssetTableRow({
         {isCash ? "-" : (
           <div className="flex items-center justify-end gap-1">
             <span aria-hidden="true" className="text-[10px]">{pnlIcon}</span>
-            <span>{formatPercent(Math.abs(ret))}</span>
+            <span>{Math.abs(ret).toFixed(1)}%</span>
           </div>
         )}
       </td>
