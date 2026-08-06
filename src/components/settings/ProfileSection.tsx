@@ -18,9 +18,12 @@ export function ProfileSection() {
       return;
     }
     
-    setShowSaved(true);
-    const timer = setTimeout(() => setShowSaved(false), 2000);
-    return () => clearTimeout(timer);
+    const showTimer = setTimeout(() => setShowSaved(true), 10);
+    const hideTimer = setTimeout(() => setShowSaved(false), 2000);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, [
     profile.nickname,
     profile.age,
