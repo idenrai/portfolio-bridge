@@ -20,7 +20,6 @@ Always use `yahooFetch()` from `src/utils/yahoo/yahooCore.ts`.
 | --- | --- | --- |
 | Local dev (Vite) | Default (no `__TAURI__`) | Vite proxy at `/api/yahoo/…` |
 | Vercel deployment | Default (no `__TAURI__`) | Serverless Function `api/proxy.ts` |
-| Tauri desktop | `window.__TAURI__` present | Direct request via `tauri-plugin-http` (bypasses CORS) |
 
 ## Utility Files
 

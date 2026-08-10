@@ -41,14 +41,14 @@ The app runs in three distinct environments.
 앱은 세 가지 실행 환경을 지원합니다.
 
 ```text
-Local dev (Vite)          Vercel deployment           Tauri desktop
-┌────────────────┐    ┌────────────────────┐    ┌────────────────────┐
-│ React SPA      │    │ React SPA (CDN)    │    │ React SPA (WebView)│
-│ Vite proxy     │    │ Serverless Fn      │    │ tauri-plugin-http  │
-└──────┬─────────┘    └────────┬───────────┘    └─────────┬──────────┘
-       └──────────────────────┴─────────────────────────┘
-                               ↓
-                        Yahoo Finance API
+Local dev (Vite)          Vercel deployment
+┌────────────────┐    ┌────────────────────┐
+│ React SPA      │    │ React SPA (CDN)    │
+│ Vite proxy     │    │ Serverless Fn      │
+└──────┬─────────┘    └────────┬───────────┘
+       └──────────────┬────────┘
+                      ↓
+               Yahoo Finance API
 ```
 
 `yahooFetch()` in `src/utils/yahoo/yahooCore.ts` auto-detects the runtime and routes requests accordingly.
@@ -127,4 +127,3 @@ Storage keys are defined in `src/constants/storage.ts`.
 | AI Prompts / AI 프롬프트 | `doc/features/ai-prompts.md` | AI prompt system |
 | i18n / 다국어 | `doc/features/i18n.md` | i18n system + translation guide |
 | Yahoo Finance | `doc/system/yahoo-finance.md` | Yahoo Finance integration |
-| Tauri | `doc/system/tauri.md` | Tauri desktop app |

@@ -8,9 +8,7 @@ trigger: always_on
 
 Portfolio Bridge is a **privacy-first portfolio management web app** that lets users manage multi-country financial assets (Korea · Japan · US · Germany) in one dashboard. All data is stored in browser `localStorage` only — never sent to external servers. Market data is fetched client-side via proxy from Yahoo Finance.
 
-The app runs as:
-- A **React SPA** served locally via Vite or deployed to Vercel
-- A **native desktop app** (macOS / Windows) built with Tauri v2
+The app runs as a **React SPA** served locally via Vite or deployed to Vercel.
 
 ---
 
@@ -25,7 +23,7 @@ The app runs as:
 | Routing | React Router v7 |
 | i18n | Custom (ko / en / ja / de) |
 | Market Data | Yahoo Finance API via proxy |
-| Desktop | Tauri v2 (Rust) + `tauri-plugin-http` |
+
 | Deployment | Vercel (Serverless Functions + static CDN) |
 | Linting | ESLint 9 with TypeScript ESLint + React Hooks plugin |
 
@@ -101,13 +99,7 @@ portfolio-bridge/
 │       ├── gurus.ts            # Guru data definitions
 │       ├── sampleData.ts       # Onboarding sample portfolio
 │       └── storage.ts          # localStorage helpers
-├── src-tauri/                  # Tauri (Rust) desktop app
-│   ├── src/
-│   │   ├── main.rs             # Tauri entry point
-│   │   └── lib.rs              # Tauri command handlers
-│   ├── Cargo.toml
-│   ├── tauri.conf.json         # Tauri app configuration
-│   └── capabilities/          # Tauri capability permissions
+
 ├── public/                     # Static assets
 ├── index.html                  # Vite HTML entry
 ├── vite.config.ts              # Vite config (Yahoo Finance proxy plugin for dev)
@@ -126,7 +118,6 @@ portfolio-bridge/
 ### Prerequisites
 
 - Node.js 18+
-- (Desktop only) Rust 1.77.2+, plus OS-specific Tauri requirements
 
 ### Web App
 
@@ -144,21 +135,6 @@ npm run build
 npm run preview
 ```
 
-### Desktop App (Tauri)
-
-```bash
-# Dev mode: Vite HMR + native window
-npm run tauri:dev
-
-# Production build (native installer for the current OS)
-npm run tauri:build
-```
-
-Desktop build outputs:
-- macOS: `src-tauri/target/release/bundle/dmg/` (`.app`, `.dmg`)
-- Windows: `src-tauri/target/release/bundle/nsis/` (`.exe`) and `.../msi/` (`.msi`)
-
-> Tauri does not support cross-compilation — build on the target OS.
 
 ### Lint
 
@@ -170,7 +146,7 @@ npm run lint
 
 ## Testing
 
-There is no automated test suite in this repository at this time. All verification is done manually via the dev server or Tauri dev mode.
+There is no automated test suite in this repository at this time. All verification is done manually via the dev server.
 
 ---
 
@@ -217,7 +193,6 @@ There is no automated test suite in this repository at this time. All verificati
 - All Yahoo Finance requests go through `yahooCore.ts` (`yahooFetch()`), which auto-detects the runtime:
   - **Local dev**: Vite proxy at `/api/yahoo/…`
   - **Vercel**: Serverless function proxy
-  - **Tauri**: Direct request via `tauri-plugin-http`
 - Never call `fetch()` directly against Yahoo Finance URLs from React components.
 
 ### Vercel API Routes (`api/`)

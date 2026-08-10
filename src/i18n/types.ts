@@ -219,6 +219,9 @@ export interface Translations {
   guru_name_greenblatt: string;
   guru_name_piotroski: string;
   guru_name_oneil: string;
+  guru_name_bogle: string;
+  guru_name_swensen: string;
+  guru_name_taleb: string;
   guru_philosophy_buffett: string;
   guru_quotes_buffett?: string;
   guru_philosophy_munger: string;
@@ -259,6 +262,12 @@ export interface Translations {
   guru_quotes_piotroski?: string;
   guru_philosophy_oneil: string;
   guru_quotes_oneil?: string;
+  guru_philosophy_bogle: string;
+  guru_quotes_bogle?: string;
+  guru_philosophy_swensen: string;
+  guru_quotes_swensen?: string;
+  guru_philosophy_taleb: string;
+  guru_quotes_taleb?: string;
 
   // ─── Lynch 10-Bagger Analyzer ───────────────────────────────────────────────
   lynch_tenbagger_title: string;

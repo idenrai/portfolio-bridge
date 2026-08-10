@@ -8,7 +8,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
   // d.ts files are pure type declarations — no point linting them
-  globalIgnores(['dist', '**/*.d.ts', 'src-tauri/']),
+  globalIgnores(['dist', '**/*.d.ts']),
   tailwind.configs.recommended,
 
   {

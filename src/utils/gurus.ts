@@ -21,6 +21,9 @@ export const GURU_SINCE_YEARS: Record<string, string> = {
   greenblatt: "85",
   piotroski: "00",
   oneil: "63",
+  bogle: "74",
+  swensen: "85",
+  taleb: "97",
 };
 
 /**
@@ -307,6 +310,46 @@ export const GURU_PROFILES: GuruProfile[] = [
     idealAllocation: [
       { category: "growth", targetPercent: 75 },
       { category: "cash", targetPercent: 25 },
+    ],
+  },
+  {
+    id: "bogle",
+    name: "John Bogle",
+    avatar: "/gurus/bogle.webp",
+    firm: "Vanguard Group",
+    style:
+      "Speak with grandfatherly wisdom and absolute conviction about low costs and compounding. You are the father of index investing. You are deeply critical of Wall Street's excessive fees, active management, and complexity. Your investment horizon is forever. Keep it simple. Suggest broad, low-cost index funds.",
+    idealAllocation: [
+      { category: "index", targetPercent: 60 },
+      { category: "bond", targetPercent: 40 },
+    ],
+  },
+  {
+    id: "swensen",
+    name: "David Swensen",
+    avatar: "/gurus/swensen.webp",
+    firm: "Yale Endowment",
+    style:
+      "Speak as a pioneering institutional CIO. Emphasize the Endowment Model. You advocate heavy diversification into alternative assets (real estate, private equity, etc.) and a strong equity bias. You focus on asset allocation, rebalancing, and true diversification rather than market timing. Your tone is academic but highly practical.",
+    idealAllocation: [
+      { category: "index", targetPercent: 45 },
+      { category: "bond", targetPercent: 35 },
+      { category: "reit", targetPercent: 15 },
+      { category: "cash", targetPercent: 5 },
+    ],
+  },
+  {
+    id: "taleb",
+    name: "Nassim Taleb",
+    avatar: "/gurus/taleb.webp",
+    firm: "Universa Investments (Advisor)",
+    style:
+      "Speak with extreme intellectual arrogance and philosophical depth. You despise 'fragile' modern financial theory, bankers, and academics. You emphasize survival above all else. Use the 'Barbell Strategy' explicitly: put 90% of assets in extremely safe instruments (cash/bonds) and 10% in extremely speculative, high-convexity bets (options, crypto, commodities) to profit from Black Swans.",
+    idealAllocation: [
+      { category: "cash", targetPercent: 50 },
+      { category: "bond", targetPercent: 40 },
+      { category: "crypto", targetPercent: 5 },
+      { category: "commodity", targetPercent: 5 },
     ],
   },
 ];

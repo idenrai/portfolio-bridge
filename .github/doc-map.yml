@@ -134,10 +134,6 @@ mappings:
   - pattern: "src/hooks/usePriceRefresh.ts"
     doc: "doc/system/yahoo-finance.md"
 
-  # ── Tauri Desktop ──────────────────────────────────────────────────────────
-  - pattern: "src-tauri/**"
-    doc: "doc/system/tauri.md"
-
   # ── FIRE Planner ───────────────────────────────────────────────────────────
   - pattern: "src/pages/FirePlanner.tsx"
     doc: "doc/pages/fire.md"
