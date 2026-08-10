@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import type { Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+
 
 const YAHOO_UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
@@ -138,7 +140,19 @@ function yahooProxy(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), yahooProxy()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    yahooProxy(),
+    ViteImageOptimizer({
+      // Configure optimization settings if necessary
+      png: { quality: 80 },
+      jpeg: { quality: 80 },
+      jpg: { quality: 80 },
+      webp: { lossless: true },
+      avif: { lossless: true },
+    }),
+  ],
   resolve: {
     alias: {
       "@": "/src",

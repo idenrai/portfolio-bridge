@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useT } from "@/hooks";
 import { Button } from "@/components/common";
 import {
@@ -45,11 +46,22 @@ export function AssetTableRow({
   const pnlIcon = isZero ? "-" : isPositive ? "▲" : "▼";
   const isCash = asset.type === "cash";
 
+  const cashNames = useMemo<Record<string, string | undefined>>(
+    () => ({
+      KRW: t.currency_krw,
+      USD: t.currency_usd,
+      JPY: t.currency_jpy,
+      EUR: t.currency_eur,
+    }),
+    [t],
+  );
+  const displayName = isCash ? (cashNames[asset.currency] ?? asset.name) : asset.name;
+
   return (
     <tr className="whitespace-nowrap transition-colors hover:bg-zinc-800/50">
       <td className="max-w-65 py-2.5">
-        <p className="leading-snug font-medium truncate min-w-0 text-white" title={asset.name}>
-          {asset.name}
+        <p className="leading-snug font-medium truncate min-w-0 text-white" title={displayName}>
+          {displayName}
         </p>
         {asset.ticker && (
           <p className="text-xs text-zinc-400">{asset.ticker}</p>

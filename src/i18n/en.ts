@@ -211,6 +211,9 @@ export const en: Translations = {
   guru_name_greenblatt: "Joel Greenblatt",
   guru_name_piotroski: "Joseph Piotroski",
   guru_name_oneil: "William O'Neil",
+  guru_name_bogle: "John Bogle",
+  guru_name_swensen: "David Swensen",
+  guru_name_taleb: "Nassim Taleb",
   guru_philosophy_buffett:
     "• Economic Moat: Focus on companies with durable competitive advantages and high barriers to entry\n" +
     "• Long-Term Holding: Buy understandable businesses at fair prices and prefer holding them forever\n" +
@@ -405,6 +408,33 @@ export const en: Translations = {
     "The whole secret to winning in the stock market is to lose the least amount possible when you're not right.\n" +
     "Never buy cheap stocks. Buy expensive stocks and sell them higher.\n" +
     "The best stocks always look too high to the majority, and the worst ones always look too low.",
+  guru_philosophy_bogle:
+    "• Index Revolution: Own the entire stock market. Attempting to beat the average will ultimately fail due to fees.\n" +
+    "• Minimize Costs: Ruthlessly control management fees, turnover costs, and taxes that eat into investment returns.\n" +
+    "• Stay the Course: Do not let short-term market noise or crashes shake you; stick to your asset allocation.\n" +
+    "• Magic of Compounding: Compound interest is a miracle in investing, but compound costs are a terrible disaster.\n" +
+    "• Aesthetics of Simplicity: Instead of complex funds or derivatives, a single low-cost broad index fund is sufficient.\n",
+  guru_quotes_bogle:
+    "Don't look for the needle in the haystack. Just buy the haystack!\n" +
+    "Time is your friend; impulse is your enemy.",
+  guru_philosophy_swensen:
+    "• Endowment Model: Move beyond traditional 60/40 splits and diversify heavily into alternative assets (private equity, real estate, commodities).\n" +
+    "• Equity-Oriented Portfolio: Increase allocation to equity-like assets with high expected returns to maintain long-term purchasing power.\n" +
+    "• True Diversification: Combine asset classes with low correlation to fundamentally lower portfolio risk without sacrificing returns.\n" +
+    "• Illiquidity Premium: For long-term capital that doesn't need immediate cash, sacrifice liquidity to capture higher returns.\n" +
+    "• Mechanical Rebalancing: Do not be swayed by emotions during market volatility; strictly rebalance by selling winners and buying losers.\n",
+  guru_quotes_swensen:
+    "Diversification is the only free lunch in investing.\n" +
+    "The investor's worst enemy is typically the investor himself.",
+  guru_philosophy_taleb:
+    "• Barbell Strategy: Avoid middle-risk investments. Allocate capital to extremes: extremely safe assets (90%) and extremely risky assets (10%).\n" +
+    "• Antifragile: Go beyond just surviving shocks and disorder; build a position that grows stronger and profits from chaos.\n" +
+    "• Prepare for Black Swans: The most important thing is not going bankrupt when an extreme, unpredictable event occurs that financial models fail to foresee.\n" +
+    "• Seek Asymmetric Payoffs: Bet where the downside risk is strictly limited, but the upside potential is infinite.\n" +
+    "• Skepticism of Experts: Do not blindly trust Wall Street bankers, academics, or predictive models; focus on risk management responsible for your own survival.\n",
+  guru_quotes_taleb:
+    "Survival comes first. You must not go bankrupt to have long-term returns.\n" +
+    "Wind extinguishes a candle and energizes fire. Be the fire.",
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger Analyzer",
   lynch_tenbagger_desc:

@@ -10,10 +10,12 @@ import { STORAGE_KEYS } from "@/constants";
 interface SettingsState {
   /** 표시 기준 통화 */
   baseCurrency: CurrencyCode;
+  /** 표시 기준 통화 수동 설정 여부 */
+  isBaseCurrencyManuallySet?: boolean;
   /** 목표 비중 배분 */
   targetAllocations: TargetAllocation[];
 
-  setBaseCurrency: (c: CurrencyCode) => void;
+  setBaseCurrency: (c: CurrencyCode, isManual?: boolean) => void;
   setTargetAllocations: (allocations: TargetAllocation[]) => void;
 }
 
@@ -35,9 +37,14 @@ export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
       baseCurrency: "KRW",
+      isBaseCurrencyManuallySet: false,
       targetAllocations: DEFAULT_TARGET,
 
-      setBaseCurrency: (baseCurrency) => set({ baseCurrency }),
+      setBaseCurrency: (baseCurrency, isManual = false) =>
+        set((state) => ({
+          baseCurrency,
+          isBaseCurrencyManuallySet: isManual ? true : state.isBaseCurrencyManuallySet,
+        })),
       setTargetAllocations: (targetAllocations) => set({ targetAllocations }),
     }),
     {

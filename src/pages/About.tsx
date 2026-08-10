@@ -41,7 +41,6 @@ const STACK = [
   "Lucide React",
   "Recharts",
   "Yahoo Finance API",
-  "Tauri v2",
   "Vercel",
 ];
 

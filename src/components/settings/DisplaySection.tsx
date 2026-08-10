@@ -25,7 +25,9 @@ export function DisplaySection() {
         <div className="space-y-1 md:w-1/2">
           <Select
             value={settings.baseCurrency}
-            onChange={(e) => settings.setBaseCurrency(e.target.value as CurrencyCode)}
+            onChange={(e) =>
+              settings.setBaseCurrency(e.target.value as CurrencyCode, true)
+            }
             aria-label={t.settings_display_currency_title}
           >
             <option value="KRW">KRW - {t.currency_krw ?? "대한민국 원"}</option>

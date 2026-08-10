@@ -217,6 +217,9 @@ export const de: Translations = {
   guru_name_greenblatt: "Joel Greenblatt",
   guru_name_piotroski: "Joseph Piotroski",
   guru_name_oneil: "William O'Neil",
+  guru_name_bogle: "John Bogle",
+  guru_name_swensen: "David Swensen",
+  guru_name_taleb: "Nassim Taleb",
   guru_philosophy_buffett:
     "• Wirtschaftlicher Burggraben: Konzentration auf Unternehmen mit dauerhaften Wettbewerbsvorteilen und hohen Markteintrittsbarrieren\n" +
     "• Langfristiges Halten: Verständliche Unternehmen zu fairen Preisen kaufen und bevorzugt für immer halten\n" +
@@ -412,9 +415,34 @@ export const de: Translations = {
     "• S·L·I·M: Sich mit dem großen Geld verbünden: institutionelles Sponsoring, wahre Branchenführerschaft und eindeutige Markttrends nach oben sicherstellen\n" +
     "• Unnachgiebige Stop-Losses: Jeden einzelnen potenziell verheerenden Verlust automatisch kappen, indem man ausnahmslos 7–8 % unter dem Kaufpreis ohne zu zögern verkauft\n",
   guru_quotes_oneil:
-    "Das gesamte Geheimnis des großen Erfolgs an der Börse besteht darin, extrem wenig zu verlieren, wenn man falsch liegt.\n" +
-    "Kaufen Sie keine Aktien auf dem Weg nach unten. Kaufen Sie sie auf dem Weg nach oben.\n" +
     "Die besten Aktien der Welt scheinen für die Masse oft zu teuer und zu hoch, während die schlechtesten wie großartige Schnäppchen wirken.",
+  guru_philosophy_bogle:
+    "• Index-Revolution: Besitzen Sie den gesamten Aktienmarkt. Der Versuch, den Durchschnitt zu schlagen, scheitert letztlich an den Gebühren.\n" +
+    "• Kosten minimieren: Kontrollieren Sie gnadenlos Verwaltungsgebühren, Umschlagskosten und Steuern, die die Anlagerenditen auffressen.\n" +
+    "• Auf Kurs bleiben: Lassen Sie sich nicht von kurzfristigem Marktlern oder Abstürzen erschüttern; halten Sie an Ihrer Vermögensallokation fest.\n" +
+    "• Magie des Zinseszinses: Der Zinseszins ist ein Wunder beim Investieren, aber Zinseszinskosten sind eine schreckliche Katastrophe.\n" +
+    "• Ästhetik der Einfachheit: Anstelle von komplexen Fonds oder Derivaten reicht ein einziger kostengünstiger, breit angelegter Indexfonds völlig aus.\n",
+  guru_quotes_bogle:
+    "Suchen Sie nicht nach der Nadel im Heuhaufen. Kaufen Sie einfach den Heuhaufen!\n" +
+    "Die Zeit ist Ihr Freund, der Impuls ist Ihr Feind.",
+  guru_philosophy_swensen:
+    "• Stiftungsmodell: Gehen Sie über die traditionelle 60/40-Aufteilung hinaus und diversifizieren Sie stark in alternative Anlagen (Private Equity, Immobilien, Rohstoffe).\n" +
+    "• Aktienorientiertes Portfolio: Erhöhen Sie den Anteil aktienähnlicher Anlagen mit hohen erwarteten Renditen, um die langfristige Kaufkraft zu erhalten.\n" +
+    "• Wahre Diversifikation: Kombinieren Sie Anlageklassen mit geringer Korrelation, um das Portfoliorisiko grundlegend zu senken, ohne auf Renditen zu verzichten.\n" +
+    "• Illiquiditätsprämie: Bei langfristigem Kapital, das nicht sofort benötigt wird, verzichten Sie auf Liquidität, um höhere Renditen zu erzielen.\n" +
+    "• Mechanisches Rebalancing: Lassen Sie sich bei Marktschwankungen nicht von Emotionen leiten; führen Sie striktes Rebalancing durch den Verkauf von Gewinnern und Kauf von Verlierern durch.\n",
+  guru_quotes_swensen:
+    "Diversifikation ist das einzige kostenlose Mittagessen beim Investieren.\n" +
+    "Der schlimmste Feind des Investors ist in der Regel er selbst.",
+  guru_philosophy_taleb:
+    "• Hantelstrategie: Vermeiden Sie Investitionen mit mittlerem Risiko. Allokieren Sie extremes Kapital: extrem sichere Anlagen (90%) und extrem riskante Anlagen (10%).\n" +
+    "• Antifragilität: Überleben Sie Schocks und Unordnung nicht nur, sondern bauen Sie eine Position auf, die aus dem Chaos stärker wird und profitiert.\n" +
+    "• Vorbereitung auf Schwarze Schwäne: Das Wichtigste ist, nicht bankrottzugehen, wenn ein extremes Ereignis eintritt, das Finanzmodelle nicht vorhersagen können.\n" +
+    "• Asymmetrische Auszahlungen: Wetten Sie dort, wo das Abwärtsrisiko streng begrenzt ist, das Aufwärtspotenzial jedoch unendlich ist.\n" +
+    "• Skepsis gegenüber Experten: Vertrauen Sie nicht blind Bankern, Akademikern oder Modellen der Wall Street; konzentrieren Sie sich auf das Risikomanagement für Ihr eigenes Überleben.\n",
+  guru_quotes_taleb:
+    "Überleben steht an erster Stelle. Sie dürfen nicht bankrottgehen, um langfristige Renditen zu erzielen.\n" +
+    "Der Wind löscht eine Kerze, aber entfacht ein Feuer. Seien Sie das Feuer.",
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Bewertung",
   lynch_tenbagger_desc:

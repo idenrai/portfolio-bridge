@@ -136,7 +136,10 @@ export type GuruId =
   | "smith"
   | "greenblatt"
   | "piotroski"
-  | "oneil";
+  | "oneil"
+  | "bogle"
+  | "swensen"
+  | "taleb";
 
 /** 투자 구루 프로필 */
 export interface GuruProfile {

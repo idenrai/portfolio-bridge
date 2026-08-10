@@ -1,50 +1,14 @@
 import type { AssetType, Market, CurrencyCode } from "@/types";
 
-// ─── Tauri 환경 감지 및 CORS-free fetch 래퍼 ──────────────────────────────────
-
-const isTauri =
-  typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
-
-let _tauriFetch: typeof globalThis.fetch | null = null;
-
-async function getTauriFetch(): Promise<typeof globalThis.fetch> {
-  if (!_tauriFetch) {
-    const mod = await import("@tauri-apps/plugin-http");
-    _tauriFetch = mod.fetch;
-  }
-  return _tauriFetch;
-}
-
-/** 프록시 URL → 실제 Yahoo URL 변환 */
-function resolveUrl(proxyUrl: string): {
-  url: string;
-  headers?: Record<string, string>;
-} {
-  if (proxyUrl.startsWith("/api/yahoo/")) {
-    const path = proxyUrl.replace("/api/yahoo", "");
-    return { url: `https://query1.finance.yahoo.com${path}` };
-  }
-  return { url: proxyUrl };
-}
-
 /**
  * Yahoo Finance API 호출용 통합 fetch
- * - 브라우저(Vite dev): 프록시 URL 그대로 사용
- * - Tauri 데스크톱 앱: 실제 URL로 변환 + tauri-plugin-http fetch (CORS 우회)
+ * (Vite dev 또는 Vercel serverless proxy 환경 사용)
  */
 export async function yahooFetch(
   proxyUrl: string,
   init?: RequestInit,
 ): Promise<Response> {
-  if (!isTauri) {
-    return fetch(proxyUrl, init);
-  }
-  const { url, headers } = resolveUrl(proxyUrl);
-  const doFetch = await getTauriFetch();
-  return doFetch(url, {
-    ...init,
-    headers: { ...headers, ...(init?.headers as Record<string, string>) },
-  });
+  return fetch(proxyUrl, init);
 }
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────

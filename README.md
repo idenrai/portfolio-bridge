@@ -36,17 +36,6 @@ npm run build  # production build
 
 ---
 
-### Desktop App (Tauri)
-
-See [doc/system/tauri.md](doc/system/tauri.md) for prerequisites and full build instructions.
-
-```bash
-npm run tauri:dev    # Dev mode (Vite HMR + native window)
-npm run tauri:build  # Production installer for current OS
-```
-
----
-
 ### Tech Stack
 
 | Area | Technology |
@@ -58,7 +47,7 @@ npm run tauri:build  # Production installer for current OS
 | Routing | React Router v7 |
 | i18n | Custom (ko / en / ja / de) |
 | Market Data | Yahoo Finance API |
-| Desktop | Tauri v2 (Rust) + tauri-plugin-http |
+
 | Deployment | Vercel (Serverless Functions + static CDN) |
 
 ---
@@ -76,7 +65,7 @@ src/
 └── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/, cn.ts
 
 api/                # Vercel Serverless Functions (Yahoo Finance proxy)
-src-tauri/          # Tauri (Rust) desktop app
+
 ```
 
 ---
@@ -128,17 +117,6 @@ npm run build  # 프로덕션 빌드
 
 ---
 
-### 데스크톱 앱 (Tauri)
-
-사전 요구 사항 및 빌드 상세는 [doc/system/tauri.md](doc/system/tauri.md) 참조.
-
-```bash
-npm run tauri:dev    # 개발 모드 (Vite HMR + 네이티브 윈도우)
-npm run tauri:build  # 프로덕션 인스톨러 생성
-```
-
----
-
 ### 기술 스택
 
 | 영역 | 기술 |
@@ -150,7 +128,7 @@ npm run tauri:build  # 프로덕션 인스톨러 생성
 | 라우팅 | React Router v7 |
 | 다국어 | 커스텀 i18n (ko / en / ja / de) |
 | 시세 조회 | Yahoo Finance API |
-| 데스크톱 | Tauri v2 (Rust) + tauri-plugin-http |
+
 | 웹 배포 | Vercel (Serverless Functions + 정적 CDN) |
 
 ---
@@ -168,7 +146,7 @@ src/
 └── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/, cn.ts
 
 api/                # Vercel Serverless Functions (Yahoo Finance 프록시)
-src-tauri/          # Tauri (Rust) 데스크톱 앱
+
 ```
 
 ---
