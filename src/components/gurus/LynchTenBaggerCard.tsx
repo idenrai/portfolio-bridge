@@ -40,7 +40,7 @@ export function LynchTenBaggerCard() {
     noResult:        t.lynch_no_result,
     highScoreBadge: (
       <span className="inline-flex items-center gap-1">
-        <Rocket className="size-3" />
+        <Rocket className="size-3" aria-hidden="true" />
         {t.lynch_tenbagger_badge}
       </span>
     ),

@@ -45,7 +45,7 @@ export function PiotroskiFScoreCard() {
     noResult:        t.piotroski_no_result,
     highScoreBadge: (
       <span className="inline-flex items-center gap-1">
-        <BarChart2 className="size-3" />
+        <BarChart2 className="size-3" aria-hidden="true" />
         {t.piotroski_fscore_badge}
       </span>
     ),

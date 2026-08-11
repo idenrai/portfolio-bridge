@@ -57,7 +57,7 @@ export function OneilCanSlimCard() {
     noResult:        t.oneil_no_result,
     highScoreBadge: (
       <span className="inline-flex items-center gap-1">
-        <Rocket className="size-3" />
+        <Rocket className="size-3" aria-hidden="true" />
         {t.oneil_canslim_badge}
       </span>
     ),

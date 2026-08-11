@@ -34,7 +34,7 @@ export function SmithQualityCard() {
     noResult:        t.smith_no_result,
     highScoreBadge: (
       <span className="inline-flex items-center gap-1">
-        <Sparkles className="size-3" />
+        <Sparkles className="size-3" aria-hidden="true" />
         {t.smith_quality_badge}
       </span>
     ),
