@@ -38,7 +38,7 @@ export function MagicFormulaCard() {
     noResult:        t.mf_no_result,
     highScoreBadge: (
       <span className="inline-flex items-center gap-1">
-        <Wand className="size-3" />
+        <Wand className="size-3" aria-hidden="true" />
         {t.mf_magic_badge}
       </span>
     ),

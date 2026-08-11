@@ -36,7 +36,7 @@ export function GrahamDefensiveCard() {
     noResult:        t.graham_no_result,
     highScoreBadge: (
       <span className="inline-flex items-center gap-1">
-        <Shield className="size-3" />
+        <Shield className="size-3" aria-hidden="true" />
         {t.graham_defensive_badge}
       </span>
     ),

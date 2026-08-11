@@ -24,48 +24,48 @@ const THEMES: Record<"green" | "violet" | "blue" | "amber", ThemeColors> = {
     btn: "bg-green-600 hover:bg-green-700",
     tabActive: "bg-green-600 text-white",
     scoreHigh: "bg-emerald-500",
-    scoreTextHigh: "text-emerald-600",
-    badgePass: "bg-emerald-50 text-emerald-700",
-    highScoreBadge: "bg-emerald-100 text-emerald-700",
-    resultHover: "hover:border-emerald-500/20 hover:bg-emerald-500/10/30",
+    scoreTextHigh: "text-emerald-400",
+    badgePass: "bg-emerald-500/10 text-emerald-400",
+    highScoreBadge: "bg-emerald-500/20 text-emerald-300",
+    resultHover: "hover:border-emerald-500/20 hover:bg-emerald-500/10",
     suggestHover: "hover:bg-emerald-500/10",
-    inputFocus: "focus:border-green-400 focus:ring-1 focus:ring-green-200",
-    progressEnrich: "bg-emerald-500/100",
+    inputFocus: "focus-visible:border-green-400 focus-visible:ring-1 focus-visible:ring-green-500/30",
+    progressEnrich: "bg-emerald-500",
   },
   violet: {
     btn: "bg-violet-600 hover:bg-violet-700",
     tabActive: "bg-violet-600 text-white",
     scoreHigh: "bg-violet-500",
-    scoreTextHigh: "text-violet-600",
-    badgePass: "bg-violet-50 text-violet-700",
-    highScoreBadge: "bg-violet-100 text-violet-700",
-    resultHover: "hover:border-violet-200 hover:bg-violet-50/30",
-    suggestHover: "hover:bg-violet-50",
-    inputFocus: "focus:border-violet-400 focus:ring-1 focus:ring-violet-200",
+    scoreTextHigh: "text-violet-400",
+    badgePass: "bg-violet-500/10 text-violet-400",
+    highScoreBadge: "bg-violet-500/20 text-violet-300",
+    resultHover: "hover:border-violet-500/20 hover:bg-violet-500/10",
+    suggestHover: "hover:bg-violet-500/10",
+    inputFocus: "focus-visible:border-violet-400 focus-visible:ring-1 focus-visible:ring-violet-500/30",
     progressEnrich: "bg-violet-500",
   },
   blue: {
     btn: "bg-blue-600 hover:bg-blue-700",
-    tabActive: "bg-zinc-100 text-black shadow-sm",
-    scoreHigh: "bg-zinc-800/500",
-    scoreTextHigh: "text-zinc-300",
-    badgePass: "bg-zinc-800/50 text-zinc-300",
-    highScoreBadge: "bg-blue-100 text-zinc-300",
-    resultHover: "hover:border-blue-200 hover:bg-zinc-800/50/30",
-    suggestHover: "hover:bg-zinc-800/50",
-    inputFocus: "focus:border-blue-400 focus:ring-1 focus:ring-blue-200",
-    progressEnrich: "bg-zinc-800/500",
+    tabActive: "bg-blue-600 text-white",
+    scoreHigh: "bg-blue-500",
+    scoreTextHigh: "text-blue-400",
+    badgePass: "bg-blue-500/10 text-blue-400",
+    highScoreBadge: "bg-blue-500/20 text-blue-300",
+    resultHover: "hover:border-blue-500/20 hover:bg-blue-500/10",
+    suggestHover: "hover:bg-blue-500/10",
+    inputFocus: "focus-visible:border-blue-400 focus-visible:ring-1 focus-visible:ring-blue-500/30",
+    progressEnrich: "bg-blue-500",
   },
   amber: {
     btn: "bg-amber-600 hover:bg-amber-700",
     tabActive: "bg-amber-600 text-white",
     scoreHigh: "bg-amber-500",
-    scoreTextHigh: "text-amber-600",
-    badgePass: "bg-amber-50 text-amber-700",
-    highScoreBadge: "bg-amber-100 text-amber-700",
-    resultHover: "hover:border-amber-200 hover:bg-amber-50/30",
-    suggestHover: "hover:bg-amber-50",
-    inputFocus: "focus:border-amber-400 focus:ring-1 focus:ring-amber-200",
+    scoreTextHigh: "text-amber-400",
+    badgePass: "bg-amber-500/10 text-amber-400",
+    highScoreBadge: "bg-amber-500/20 text-amber-300",
+    resultHover: "hover:border-amber-500/20 hover:bg-amber-500/10",
+    suggestHover: "hover:bg-amber-500/10",
+    inputFocus: "focus-visible:border-amber-400 focus-visible:ring-1 focus-visible:ring-amber-500/30",
     progressEnrich: "bg-amber-500",
   },
 };
@@ -123,9 +123,16 @@ function ScoreBar({ score, colors }: { score: number; colors: ThemeColors }) {
                   "text-zinc-400";
   return (
     <div className="flex min-w-30 items-center gap-2">
-      <div className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-800/50">
+      <div 
+        className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-800/50"
+        role="progressbar"
+        aria-valuenow={score}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Score"
+      >
         <div
-          className={cn("h-full rounded-full transition-all duration-500", barColor)}
+          className={cn("h-full rounded-full transition-[width,background-color] duration-500", barColor)}
           style={{ width: `${score}%` }}
         />
       </div>
@@ -163,7 +170,7 @@ function CriterionBadge<CKey extends string>({
   }
   return (
     <span className={cn(base, pass ? colors.badgePass : "bg-red-500/10 text-red-600")}>
-      {pass ? "✓" : "✗"} {label}
+      <span aria-hidden="true">{pass ? "✓" : "✗"}</span> {label}
       {value !== null && (
         <span className="opacity-70">{formatValue(criterionKey, value)}</span>
       )}
@@ -200,7 +207,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={cn("cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors", 
+              className={cn("cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500", 
                 mode === m ? colors.tabActive : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800"
               )}
             >
@@ -223,7 +230,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
           >
             {loading ? (
               <span className="inline-flex items-center gap-1.5">
-                <Loader2 className="size-3 animate-spin" />
+                <Loader2 className="size-3 animate-spin" aria-hidden="true" />
                 {texts.progressEnrich(progress.done, progress.total)}
               </span>
             ) : (
@@ -238,7 +245,9 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
         <>
           <div className="mb-3 flex gap-2">
             <input
-              type="text"
+              type="search"
+              name="search"
+              autoComplete="off"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
@@ -250,7 +259,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
               disabled={loading || isSearching || !searchQuery.trim()}
               className={cn("rounded-lg", colors.btn, "cursor-pointer px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40")}
             >
-              {isSearching ? <Loader2 className="inline-block size-3 animate-spin" /> : t.analyzer_btn_search}
+              {isSearching ? <Loader2 className="inline-block size-3 animate-spin" aria-hidden="true" /> : t.analyzer_btn_search}
             </button>
           </div>
           {searchSuggestions.length > 0 && (
@@ -261,7 +270,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
                 <button
                   key={s.ticker}
                   onClick={() => runSearch(s.ticker, s.name)}
-                  className={cn("flex w-full items-center gap-2 px-3 py-2 text-left", colors.suggestHover, "cursor-pointer transition-colors")}
+                  className={cn("flex w-full items-center gap-2 px-3 py-2 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-zinc-500", colors.suggestHover, "cursor-pointer transition-colors")}
                 >
                   <span className="text-xs font-semibold text-zinc-300">{s.ticker}</span>
                   <span className="truncate text-xs text-zinc-400">{s.name}</span>
@@ -275,13 +284,20 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
 
       {/* ─── 로딩 진행률 바 ─── */}
       {loading && (
-        <div className="mb-4">
+        <div className="mb-4" aria-live="polite">
           <p className="mb-1 animate-pulse text-xs text-zinc-400">
             {texts.phaseEnrich}
           </p>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800/50">
+          <div 
+            className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800/50"
+            role="progressbar"
+            aria-valuenow={progress.done}
+            aria-valuemin={0}
+            aria-valuemax={progress.total}
+            aria-label="Analysis Progress"
+          >
             <div
-              className={cn("h-full rounded-full transition-all duration-300", colors.progressEnrich)}
+              className={cn("h-full rounded-full transition-[width,background-color] duration-300", colors.progressEnrich)}
               style={{
                 width: progress.total > 0
                   ? `${Math.round((progress.done / progress.total) * 100)}%`
@@ -302,9 +318,9 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
 
       {/* ─── 결과 테이블 ─── */}
       {!loading && ran && results.length > 0 && (
-        <div className="space-y-3">
+        <ul className="space-y-3">
           {results.map((r, idx) => (
-            <div
+            <li
               key={r.stock.ticker}
               className={cn("rounded-xl border border-zinc-800 bg-zinc-900/50 p-3", colors.resultHover, "transition-colors")}
             >
@@ -359,11 +375,11 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
                   </span>
                 ))}
               </div>
-            </div>
+            </li>
           ))}
 
           <p className="pt-1 text-[10px] text-zinc-300">{texts.disclaimer}</p>
-        </div>
+        </ul>
       )}
 
       {/* 초기 상태 */}
