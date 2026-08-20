@@ -51,7 +51,7 @@ export function ProfileSection() {
           icon={CheckCircle2}
           text={t.profile_saved}
           animate={showSaved}
-          className={showSaved ? "text-emerald-500 opacity-100 scale-100" : "text-emerald-500 opacity-0 scale-95"}
+          className={showSaved ? "scale-100 text-emerald-500 opacity-100" : "scale-95 text-emerald-500 opacity-0"}
           textClassName="text-xs font-medium"
         />
       }

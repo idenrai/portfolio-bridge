@@ -23,7 +23,7 @@ export function FeedbackIconText({
     <span
       className={cn(
         "inline-flex items-center gap-1.5",
-        animate && "animate-in fade-in zoom-in-95 duration-200",
+        animate && "animate-zoom-in duration-200",
         className,
       )}
     >

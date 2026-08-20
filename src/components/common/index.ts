@@ -1,10 +1,11 @@
-export { Card } from "./Card";
-export { Button } from "./Button";
-export { Modal } from "./Modal";
-export { AutoResizeTextarea } from "./AutoResizeTextarea";
-export { Input } from "./Input";
-export { Select } from "./Select";
-export { Label } from "./Label";
-export { MultiSelect } from "./MultiSelect";
-export { FilterBar } from "./FilterBar";
-export { FeedbackIconText } from "./FeedbackIconText";
+export * from "./Button";
+export * from "./Input";
+
+export * from "./CustomSelect";
+export * from "./Label";
+export * from "./Card";
+export * from "./Modal";
+export * from "./FilterBar";
+export * from "./MultiSelect";
+export * from "./FeedbackIconText";
+export * from "./AutoResizeTextarea";

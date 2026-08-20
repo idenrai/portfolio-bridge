@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useT } from "@/hooks";
-import { Button } from "@/components/common";
+import { Button, CustomSelect } from "@/components/common";
 import {
   type Asset,
   type AssetCategory,
@@ -60,7 +60,7 @@ export function AssetTableRow({
   return (
     <tr className="whitespace-nowrap transition-colors hover:bg-zinc-800/50">
       <td className="max-w-65 py-2.5">
-        <p className="leading-snug font-medium truncate min-w-0 text-white" title={displayName}>
+        <p className="min-w-0 truncate leading-snug font-medium text-white" title={displayName}>
           {displayName}
         </p>
         {asset.ticker && (
@@ -73,37 +73,29 @@ export function AssetTableRow({
         </span>
       </td>
       <td className="py-2.5 whitespace-nowrap">
-        <select
-          aria-label={t.at_col_category}
+        <CustomSelect<AssetCategory | "">
           value={asset.categories[0] ?? ""}
-          onChange={(e) =>
-            onCategoryChange(asset.id, e.target.value as AssetCategory | "")
-          }
-          className="min-w-22 cursor-pointer rounded-sm border border-transparent bg-transparent p-1 text-[11px] tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
-        >
-          <option value="">{t.at_unclassified}</option>
-          {categoryOptions.map(([val, label]) => (
-            <option key={val} value={val}>
-              {label}
-            </option>
-          ))}
-        </select>
+          onChange={(val) => onCategoryChange(asset.id, val)}
+          options={[
+            { value: "", label: t.at_unclassified },
+            ...categoryOptions.map(([val, label]) => ({ value: val, label })),
+          ]}
+          ariaLabel={t.at_col_category}
+          className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-[11px] tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
+        />
       </td>
       {hasBrokers && (
         <td className="py-2.5 whitespace-nowrap">
-          <select
-            aria-label={t.af_account_label}
+          <CustomSelect<string>
             value={asset.brokerId ?? ""}
-            onChange={(e) => onBrokerChange(asset.id, e.target.value)}
-            className="min-w-22 cursor-pointer rounded-sm border border-transparent bg-transparent p-1 text-[11px] tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
-          >
-            <option value="">{t.af_account_none}</option>
-            {brokerAccounts.map((b) => (
-              <option key={b.id} value={b.id}>
-                {b.nickname}
-              </option>
-            ))}
-          </select>
+            onChange={(val) => onBrokerChange(asset.id, val)}
+            options={[
+              { value: "", label: t.af_account_none },
+              ...brokerAccounts.map((b) => ({ value: b.id, label: b.nickname })),
+            ]}
+            ariaLabel={t.af_account_label}
+            className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-[11px] tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
+          />
         </td>
       )}
       <td className="py-2.5 text-right tabular-nums">

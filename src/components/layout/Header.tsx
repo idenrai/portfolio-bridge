@@ -2,6 +2,7 @@ import { useLanguageStore } from "@/stores";
 import { LayoutDashboard, Briefcase, Users, Target, Settings, Info, Globe } from "lucide-react";
 import { NavLink, Link } from "react-router-dom";
 import { useT } from "@/hooks";
+import { CustomSelect } from "@/components/common";
 import type { Lang } from "@/i18n";
 
 const LANG_LABELS: Record<Lang, string> = {
@@ -71,28 +72,24 @@ export function Header() {
         </nav>
       </div>
       <div className="flex items-center gap-4">
-        {/* 언어 전환 버튼 (네이티브 드롭다운) */}
-        <div className="relative flex items-center justify-center rounded-md has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-white has-[:focus-visible]:ring-offset-1 has-[:focus-visible]:ring-offset-black">
-          <button
-            aria-hidden="true"
-            className="flex h-9 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-zinc-200"
-          >
-            <Globe className="size-4" />
-            <span className="text-xs font-bold uppercase">{LANG_LABELS[lang]}</span>
-          </button>
-          <select
-            title="Change Language"
-            aria-label="Change Language"
+        {/* 언어 전환 버튼 (커스텀 드롭다운) */}
+        <div className="flex items-center justify-center">
+          <CustomSelect<Lang>
             value={lang}
-            onChange={(e) => setLang(e.target.value as Lang)}
-            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-          >
-            {(Object.keys(LANG_LABELS) as Lang[]).map((l) => (
-              <option key={l} value={l}>
-                {LANG_ARIA[l]} ({LANG_LABELS[l]})
-              </option>
-            ))}
-          </select>
+            onChange={(val) => setLang(val)}
+            options={(Object.keys(LANG_LABELS) as Lang[]).map((l) => ({
+              value: l,
+              label: `${LANG_ARIA[l]} (${LANG_LABELS[l]})`,
+            }))}
+            ariaLabel="Change Language"
+            className="flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-2 text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-black focus-visible:outline-none"
+            trigger={
+              <>
+                <Globe className="size-4" />
+                <span className="text-xs font-bold uppercase">{LANG_LABELS[lang]}</span>
+              </>
+            }
+          />
         </div>
       </div>
     </header>

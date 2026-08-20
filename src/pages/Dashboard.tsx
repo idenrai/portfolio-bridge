@@ -189,7 +189,7 @@ export function DashboardPage() {
       <KpiBar summary={summary} isInitialLoading={isInitialLoading} />
 
       {/* 2단 메인 레이아웃 */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6 mt-2">
+      <div className="mt-2 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
         
         {/* 좌측 메인 영역 (테이블 및 뷰어 위주) */}
         <div className="flex flex-col gap-4 lg:col-span-2 lg:gap-6">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useBrokerStore } from "@/stores";
-import { Button, Input, Select, Label } from "@/components/common";
+import { Button, Input, CustomSelect, Label } from "@/components/common";
 import { useT } from "@/hooks";
 import type { BrokerAccount, Market } from "@/types";
 
@@ -152,19 +152,13 @@ export function BrokerManager() {
               <Label>
                 {t.broker_country_label}
               </Label>
-              <Select
+              <CustomSelect<Market>
                 value={editing.country}
-                onChange={(e) =>
-                  setEditing({ ...editing, country: e.target.value as Market })
+                onChange={(val) =>
+                  setEditing({ ...editing, country: val })
                 }
-                
-              >
-                {COUNTRY_OPTIONS.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </Select>
+                options={COUNTRY_OPTIONS}
+              />
             </div>
             <div className="block">
               <Label>

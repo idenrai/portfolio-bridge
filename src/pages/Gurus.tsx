@@ -100,13 +100,13 @@ export function GurusPage() {
       <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.guru_title}</h1>
 
       {!selectedGuru ? (
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
           {GURU_PROFILES.map((guru) => (
             <button
               key={guru.id}
               onClick={() => setSelectedGuru(guru)}
               aria-label={`${guruName(guru)}, ${guru.firm}`}
-              className="group relative block aspect-[1.586/1] w-full cursor-pointer overflow-hidden rounded-xl sm:rounded-2xl border border-zinc-800 bg-zinc-950 text-left transition-[transform,box-shadow,border-color] duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-white/5 hover:border-zinc-700 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none"
+              className="group relative block aspect-[1.586/1] w-full cursor-pointer overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 text-left transition-[transform,box-shadow,border-color] duration-500 hover:scale-[1.02] hover:border-zinc-700 hover:shadow-2xl hover:shadow-white/5 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:rounded-2xl"
             >
               {/* Base Obsidian Black Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black transition-opacity duration-500" />
@@ -115,45 +115,45 @@ export function GurusPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/80 via-zinc-900/80 to-black opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               {/* Inner dashed border */}
-              <div className="absolute inset-2 sm:inset-2.5 rounded-lg sm:rounded-xl border border-dashed border-zinc-800/30 group-hover:border-zinc-400/40 transition-colors duration-500 pointer-events-none" />
+              <div className="pointer-events-none absolute inset-2 rounded-lg border border-dashed border-zinc-800/30 transition-colors duration-500 group-hover:border-zinc-400/40 sm:inset-2.5 sm:rounded-xl" />
 
               {/* Top Center Branding */}
-              <div className="absolute top-3 sm:top-5 left-0 w-full text-center z-10">
-                <span className="font-mono text-[8px] sm:text-[9px] leading-none tracking-[0.25em] font-medium text-zinc-500 transition-colors duration-500 group-hover:text-zinc-400 uppercase">
+              <div className="absolute top-3 left-0 z-10 w-full text-center sm:top-5">
+                <span className="font-mono text-[8px] leading-none font-medium tracking-[0.25em] text-zinc-500 uppercase transition-colors duration-500 group-hover:text-zinc-400 sm:text-[9px]">
                   Portfolio Bridge
                 </span>
               </div>
 
               {/* Center Large Avatar */}
-              <div className="absolute inset-0 flex items-center justify-center z-10">
-                <div className="rounded-full border border-zinc-800/80 p-0.5 bg-black/20 shadow-inner transition-[border-color,background-color] duration-500 group-hover:border-zinc-600/60 group-hover:bg-zinc-800/50 w-[28%] aspect-square">
-                  <div className="rounded-full overflow-hidden size-full border border-zinc-900">
+              <div className="absolute inset-0 z-10 flex items-center justify-center">
+                <div className="aspect-square w-[28%] rounded-full border border-zinc-800/80 bg-black/20 p-0.5 shadow-inner transition-[border-color,background-color] duration-500 group-hover:border-zinc-600/60 group-hover:bg-zinc-800/50">
+                  <div className="size-full overflow-hidden rounded-full border border-zinc-900">
                     <img
                       src={guru.avatar || "/fallback-avatar.svg"}
                       alt={guru.name}
                       width={112}
                       height={112}
-                      className="size-full object-cover grayscale brightness-90 contrast-125 transition-[filter] duration-500 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
+                      className="size-full object-cover brightness-90 contrast-125 grayscale transition-[filter] duration-500 group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Bottom Info: Left Name/Firm, Right Member Since */}
-              <div className="absolute bottom-3 sm:bottom-5 left-3 sm:left-5 right-3 sm:right-5 flex items-end justify-between z-10">
-                <div className="min-w-0 flex-1 flex flex-col gap-0.5 pr-2">
-                  <h3 className="truncate font-mono text-xs sm:text-sm md:text-base leading-none font-bold tracking-wider text-zinc-200 transition-colors duration-500 group-hover:text-white uppercase">
+              <div className="absolute inset-x-3 bottom-3 z-10 flex items-end justify-between sm:inset-x-5 sm:bottom-5">
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5 pr-2">
+                  <h3 className="truncate font-mono text-xs leading-none font-bold tracking-wider text-zinc-200 uppercase transition-colors duration-500 group-hover:text-white sm:text-sm md:text-base">
                     {guruName(guru)}
                   </h3>
                   <GuruFirm
                     firm={guru.firm}
-                    className="text-[9px] sm:text-[10px] leading-tight tracking-wider text-zinc-500 transition-colors duration-500 group-hover:text-zinc-400"
+                    className="text-[9px] leading-tight tracking-wider text-zinc-500 transition-colors duration-500 group-hover:text-zinc-400 sm:text-[10px]"
                   />
                 </div>
                 
-                <div className="shrink-0 flex flex-col items-end font-mono leading-tight text-zinc-500 transition-colors duration-500 group-hover:text-zinc-400">
-                  <span className="text-[6px] sm:text-[7px] uppercase tracking-wider opacity-60">Since</span>
-                  <span className="font-bold text-[8px] sm:text-[10px]">’{GURU_SINCE_YEARS[guru.id] || "26"}</span>
+                <div className="flex shrink-0 flex-col items-end font-mono leading-tight text-zinc-500 transition-colors duration-500 group-hover:text-zinc-400">
+                  <span className="text-[6px] tracking-wider uppercase opacity-60 sm:text-[7px]">Since</span>
+                  <span className="text-[8px] font-bold sm:text-[10px]">’{GURU_SINCE_YEARS[guru.id] || "26"}</span>
                 </div>
               </div>
             </button>

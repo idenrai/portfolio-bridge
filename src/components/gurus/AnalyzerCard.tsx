@@ -207,7 +207,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={cn("cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500", 
+              className={cn("cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none", 
                 mode === m ? colors.tabActive : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800"
               )}
             >
@@ -270,7 +270,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
                 <button
                   key={s.ticker}
                   onClick={() => runSearch(s.ticker, s.name)}
-                  className={cn("flex w-full items-center gap-2 px-3 py-2 text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-zinc-500", colors.suggestHover, "cursor-pointer transition-colors")}
+                  className={cn("flex w-full items-center gap-2 px-3 py-2 text-left focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none focus-visible:ring-inset", colors.suggestHover, "cursor-pointer transition-colors")}
                 >
                   <span className="text-xs font-semibold text-zinc-300">{s.ticker}</span>
                   <span className="truncate text-xs text-zinc-400">{s.name}</span>

@@ -1,6 +1,6 @@
 import { useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
-import { Card, Select } from "@/components/common";
+import { Card, CustomSelect } from "@/components/common";
 import { Monitor } from "lucide-react";
 import type { CurrencyCode } from "@/types";
 
@@ -23,18 +23,19 @@ export function DisplaySection() {
         </p>
 
         <div className="space-y-1 md:w-1/2">
-          <Select
+          <CustomSelect<CurrencyCode>
             value={settings.baseCurrency}
-            onChange={(e) =>
-              settings.setBaseCurrency(e.target.value as CurrencyCode, true)
+            onChange={(val) =>
+              settings.setBaseCurrency(val, true)
             }
-            aria-label={t.settings_display_currency_title}
-          >
-            <option value="KRW">KRW - {t.currency_krw ?? "대한민국 원"}</option>
-            <option value="USD">USD - {t.currency_usd ?? "미국 달러"}</option>
-            <option value="JPY">JPY - {t.currency_jpy ?? "일본 엔"}</option>
-            <option value="EUR">EUR - {t.currency_eur ?? "유로"}</option>
-          </Select>
+            ariaLabel={t.settings_display_currency_title}
+            options={[
+              { value: "KRW", label: `KRW - ${t.currency_krw ?? "대한민국 원"}` },
+              { value: "USD", label: `USD - ${t.currency_usd ?? "미국 달러"}` },
+              { value: "JPY", label: `JPY - ${t.currency_jpy ?? "일본 엔"}` },
+              { value: "EUR", label: `EUR - ${t.currency_eur ?? "유로"}` },
+            ]}
+          />
         </div>
       </div>
     </Card>

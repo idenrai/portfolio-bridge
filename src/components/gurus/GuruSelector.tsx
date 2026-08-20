@@ -46,7 +46,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
       {showLeftScroll && (
         <button
           onClick={() => scroll("left")}
-          className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-zinc-800 bg-black/80 p-1.5 text-zinc-400 shadow-md backdrop-blur-sm transition-colors hover:bg-zinc-800 hover:text-white md:flex"
+          className="absolute top-1/2 left-0 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-zinc-800 bg-black/80 p-1.5 text-zinc-400 shadow-md backdrop-blur-sm transition-colors hover:bg-zinc-800 hover:text-white md:flex"
           aria-label="Scroll left"
         >
           <ChevronLeft className="size-5" />
@@ -61,7 +61,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
       <div 
         ref={scrollContainerRef}
         onScroll={checkScroll}
-        className="flex snap-x snap-mandatory scroll-pl-12 scroll-pr-12 gap-3 overflow-x-auto pb-4 pt-1 sm:gap-4 lg:pb-6 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-zinc-800/80 hover:[&::-webkit-scrollbar-thumb]:bg-zinc-700"
+        className="flex snap-x snap-mandatory scroll-px-12 gap-3 overflow-x-auto pt-1 pb-4 sm:gap-4 lg:pb-6 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-zinc-800/80 hover:[&::-webkit-scrollbar-thumb]:bg-zinc-700 [&::-webkit-scrollbar-track]:bg-transparent"
       >
         {GURU_PROFILES.map((guru) => {
           const avatarUrl = guru.avatar || "/fallback-avatar.svg";
@@ -70,7 +70,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
               key={guru.id}
               onClick={() => onSelect(guru)}
               aria-label={`${guruName(guru)}, ${guru.firm}`}
-              className={`relative flex w-48 shrink-0 snap-start cursor-pointer flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-[border-color,box-shadow] duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:w-56 aspect-[1.586/1] ${
+              className={`relative flex aspect-[1.586/1] w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-[border-color,box-shadow] duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:w-56 ${
                 selectedGuru?.id === guru.id
                   ? "border-zinc-600 text-white shadow-lg shadow-white/5"
                   : "border-zinc-800 text-zinc-400 hover:border-zinc-700"
@@ -83,13 +83,13 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
               <div className={`absolute inset-0 bg-gradient-to-br from-zinc-800/80 via-zinc-900/80 to-black transition-opacity duration-300 ${selectedGuru?.id === guru.id ? "opacity-100" : "opacity-0"}`} />
 
               {/* Inner dashed border */}
-              <div className={`absolute inset-1.5 rounded-lg border border-dashed pointer-events-none transition-colors duration-300 ${
+              <div className={`pointer-events-none absolute inset-1.5 rounded-lg border border-dashed transition-colors duration-300 ${
                 selectedGuru?.id === guru.id ? "border-zinc-400/40" : "border-zinc-800/30"
               }`} />
 
               {/* Top Center Branding */}
               <div className="relative z-10 w-full text-center">
-                <span className={`font-mono text-[8px] tracking-[0.25em] font-medium uppercase transition-colors duration-300 ${
+                <span className={`font-mono text-[8px] font-medium tracking-[0.25em] uppercase transition-colors duration-300 ${
                   selectedGuru?.id === guru.id ? "text-zinc-400" : "text-zinc-500"
                 }`}>
                   Portfolio Bridge
@@ -103,7 +103,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
                     ? "border-zinc-500/80 bg-zinc-800/50" 
                     : "border-zinc-800/80 bg-black/20"
                 }`}>
-                  <div className="rounded-full overflow-hidden size-10 sm:size-12 border border-zinc-900">
+                  <div className="size-10 overflow-hidden rounded-full border border-zinc-900 sm:size-12">
                     <img
                       src={avatarUrl}
                       alt={guru.name}
@@ -111,8 +111,8 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
                       height={48}
                       className={`size-full object-cover transition-[filter] duration-300 ${
                         selectedGuru?.id === guru.id 
-                          ? "grayscale-0 brightness-100 contrast-100" 
-                          : "grayscale brightness-90 contrast-125"
+                          ? "brightness-100 contrast-100 grayscale-0" 
+                          : "brightness-90 contrast-125 grayscale"
                       }`}
                     />
                   </div>
@@ -120,8 +120,8 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
               </div>
 
               {/* Bottom Info: Left Name/Firm, Right Member Since */}
-              <div className="relative z-10 flex w-full items-end justify-between min-w-0">
-                <div className="min-w-0 flex-1 flex flex-col gap-0.5 pr-2.5">
+              <div className="relative z-10 flex w-full min-w-0 items-end justify-between">
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5 pr-2.5">
                   <p className={`truncate font-mono text-xs font-bold tracking-wider uppercase transition-colors duration-300 ${
                     selectedGuru?.id === guru.id ? "text-white" : "text-zinc-200"
                   }`}>
@@ -129,16 +129,16 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
                   </p>
                   <GuruFirm
                     firm={guru.firm}
-                    className={`text-[8px] sm:text-[9px] tracking-wider transition-colors duration-300 ${
+                    className={`text-[8px] tracking-wider transition-colors duration-300 sm:text-[9px] ${
                       selectedGuru?.id === guru.id ? "text-zinc-400" : "text-zinc-500"
                     }`}
                   />
                 </div>
                 
-                <div className={`shrink-0 flex flex-col items-end font-mono text-[8px] leading-tight transition-colors duration-300 ${
+                <div className={`flex shrink-0 flex-col items-end font-mono text-[8px] leading-tight transition-colors duration-300 ${
                   selectedGuru?.id === guru.id ? "text-zinc-400" : "text-zinc-500"
                 }`}>
-                  <span className="text-[6px] uppercase tracking-wider opacity-60">Since</span>
+                  <span className="text-[6px] tracking-wider uppercase opacity-60">Since</span>
                   <span className="font-bold">’{GURU_SINCE_YEARS[guru.id] || "26"}</span>
                 </div>
               </div>
@@ -156,7 +156,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
       {showRightScroll && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-zinc-800 bg-black/80 p-1.5 text-zinc-400 shadow-md backdrop-blur-sm transition-colors hover:bg-zinc-800 hover:text-white md:flex"
+          className="absolute top-1/2 right-0 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-zinc-800 bg-black/80 p-1.5 text-zinc-400 shadow-md backdrop-blur-sm transition-colors hover:bg-zinc-800 hover:text-white md:flex"
           aria-label="Scroll right"
         >
           <ChevronRight className="size-5" />

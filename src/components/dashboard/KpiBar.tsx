@@ -27,7 +27,7 @@ export function KpiBar({ summary, isInitialLoading }: Props) {
       {isInitialLoading && (
         <div className="absolute inset-0 z-50 flex items-center justify-center rounded-xl bg-black/40 backdrop-blur-md">
           <div role="status" aria-live="polite" className="flex items-center gap-3 rounded-lg border border-zinc-700 bg-zinc-900 px-6 py-4 shadow-2xl">
-            <Loader2 className="h-5 w-5 motion-safe:animate-spin text-white" />
+            <Loader2 className="size-5 text-white motion-safe:animate-spin" />
             <span className="text-sm font-bold tracking-tight text-white">{t.dash_refreshing}</span>
           </div>
         </div>

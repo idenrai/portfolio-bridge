@@ -1,6 +1,6 @@
 import { useBrokerStore } from "@/stores";
 import { useT } from "@/hooks";
-import { Select, Label } from "@/components/common";
+import { CustomSelect, Label } from "@/components/common";
 
 interface Props {
   value: string | undefined;
@@ -22,20 +22,17 @@ export function AccountSelect({ value, onChange }: Props) {
       <Label>
         {t.af_account_label}
       </Label>
-      <Select
+      <CustomSelect<string>
         value={value ?? ""}
-        onChange={(e) => onChange(e.target.value || undefined)}
-        
-      >
-        <option value="">{t.af_account_none}</option>
-        {accounts.map((a) => (
-          <option key={a.id} value={a.id}>
-            {a.nickname}
-            {a.broker ? ` (${a.broker}` : ""}
-            {a.accountType ? ` / ${a.accountType})` : a.broker ? ")" : ""}
-          </option>
-        ))}
-      </Select>
+        onChange={(val) => onChange(val || undefined)}
+        options={[
+          { value: "", label: t.af_account_none },
+          ...accounts.map((a) => ({
+            value: a.id,
+            label: `${a.nickname}${a.broker ? ` (${a.broker}` : ""}${a.accountType ? ` / ${a.accountType})` : a.broker ? ")" : ""}`,
+          })),
+        ]}
+      />
     </div>
   );
 }
