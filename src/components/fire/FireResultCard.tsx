@@ -15,7 +15,7 @@ export function FireResultCard({ result }: FireResultCardProps) {
   if (result.isInvalidInput) {
     return (
       <div className="flex w-full items-start gap-2 rounded-lg border border-amber-500/50 bg-amber-500/10 px-4 py-3 text-amber-400 shadow-sm">
-        <AlertTriangle className="mt-0.5 shrink-0 size-4 text-amber-500" />
+        <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-500" />
         <span className="flex-1 text-sm leading-relaxed font-medium">
           {t.fire_error_savings_exceed_target}
         </span>

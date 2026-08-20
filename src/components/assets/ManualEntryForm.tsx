@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Select, Label } from "@/components/common";
+import { Button, Input, CustomSelect, Label } from "@/components/common";
 import { useT } from "@/hooks";
 import { fetchCurrentPrice } from "@/utils";
 import type {
@@ -150,17 +150,11 @@ export function ManualEntryForm({
         <Label>
           {t.af_currency_label}
         </Label>
-        <Select
+        <CustomSelect<CurrencyCode>
           value={currency}
-          onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-          
-        >
-          {CURRENCY_INPUT_OPTIONS.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
-            </option>
-          ))}
-        </Select>
+          onChange={(val) => setCurrency(val)}
+          options={CURRENCY_INPUT_OPTIONS}
+        />
       </div>
 
       {isSimple ? (
@@ -214,33 +208,21 @@ export function ManualEntryForm({
               <Label>
                 {t.af_asset_type_label}
               </Label>
-              <Select
+              <CustomSelect<AssetType>
                 value={assetType}
-                onChange={(e) => setAssetType(e.target.value as AssetType)}
-                
-              >
-                {ASSET_TYPE_OPTIONS.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </Select>
+                onChange={(val) => setAssetType(val)}
+                options={ASSET_TYPE_OPTIONS}
+              />
             </div>
             <div className="block">
               <Label>
                 {t.af_market_label}
               </Label>
-              <Select
+              <CustomSelect<Market>
                 value={market}
-                onChange={(e) => setMarket(e.target.value as Market)}
-                
-              >
-                {MARKET_OPTIONS.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </Select>
+                onChange={(val) => setMarket(val)}
+                options={MARKET_OPTIONS}
+              />
             </div>
           </div>
 

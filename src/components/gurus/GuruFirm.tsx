@@ -10,7 +10,7 @@ export function GuruFirm({ firm, className, ...props }: GuruFirmProps) {
   const formattedFirm = firm.includes("(") ? firm.split("(")[0].trim() : firm;
 
   return (
-    <p className={cn("truncate uppercase leading-snug tracking-widest text-zinc-500", className)} {...props}>
+    <p className={cn("truncate leading-snug tracking-widest text-zinc-500 uppercase", className)} {...props}>
       {formattedFirm}
     </p>
   );

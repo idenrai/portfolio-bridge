@@ -76,10 +76,10 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
             <div className="flex min-w-0 items-start gap-3">
               <Sparkles className="mt-0.5 size-5 shrink-0 text-indigo-400" />
               <div className="min-w-0">
-                <p className="text-sm leading-tight font-semibold text-zinc-100 text-pretty">
+                <p className="text-sm leading-tight font-semibold text-pretty text-zinc-100">
                   {t.insights_ai_banner_title}
                 </p>
-                <p className="mt-1 text-[11px] leading-relaxed text-zinc-500 sm:text-xs text-pretty line-clamp-2">
+                <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-pretty text-zinc-500 sm:text-xs">
                   {t.insights_ai_banner_desc}
                 </p>
               </div>
@@ -89,7 +89,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
               <button
                 type="button"
                 onClick={() => setShowPrompt((v) => !v)}
-                className="flex-1 cursor-pointer rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-indigo-400 shadow-sm transition-all hover:bg-indigo-500/20 hover:opacity-90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 sm:flex-none"
+                className="flex-1 cursor-pointer rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-indigo-400 shadow-sm transition-all hover:bg-indigo-500/20 hover:opacity-90 focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none active:scale-95 sm:flex-none"
               >
                 {showPrompt ? t.insights_ai_close : t.insights_ai_btn}
               </button>
@@ -110,7 +110,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                 <button
                   type="button"
                   onClick={copyPrompt}
-                  className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50"
+                  className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700 focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none"
                 >
                   {copied ? (
                     <FeedbackIconText
@@ -155,7 +155,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                 <button
                   type="button"
                   onClick={() => dismiss(i)}
-                  className={`shrink-0 cursor-pointer rounded-sm text-base leading-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-900 ${CLOSE_BTN[insight.type]}`}
+                  className={`shrink-0 cursor-pointer rounded-sm text-base leading-none transition-colors focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-900 focus-visible:outline-none ${CLOSE_BTN[insight.type]}`}
                   aria-label="dismiss"
                 >
                   ×

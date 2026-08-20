@@ -113,7 +113,7 @@ export function AssetTable({
           <p className="text-sm">{t.at_filter_no_result}</p>
         </div>
       ) : (
-        <div className="-mx-4 overflow-x-auto px-4 md:-mx-5 md:px-5 mt-2">
+        <div className="-mx-4 mt-2 overflow-x-auto px-4 md:-mx-5 md:px-5">
           <table className="w-full min-w-225 text-sm">
             <thead>
               <tr className="border-b border-zinc-800 text-left text-xs whitespace-nowrap text-zinc-500">
