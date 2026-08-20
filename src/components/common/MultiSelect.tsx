@@ -87,7 +87,17 @@ export function MultiSelect({
       const items = Array.from(listRef.current.querySelectorAll('label[role="option"]')) as HTMLElement[];
       const el = items[focusedIndex];
       if (el) {
-        el.scrollIntoView({ block: "nearest" });
+        const container = listRef.current;
+        const containerTop = container.scrollTop;
+        const containerBottom = containerTop + container.clientHeight;
+        const elTop = el.offsetTop;
+        const elBottom = elTop + el.offsetHeight;
+
+        if (elTop < containerTop) {
+          container.scrollTop = elTop;
+        } else if (elBottom > containerBottom) {
+          container.scrollTop = elBottom - container.clientHeight;
+        }
       }
     }
   }, [focusedIndex, isOpen]);
@@ -185,12 +195,12 @@ export function MultiSelect({
           </button>
         </div>
       )}
-      <div 
-        className="custom-scrollbar max-h-60 overflow-y-auto py-1"
+      <div
+        id={listboxId}
         ref={listRef}
+        className="custom-scrollbar relative max-h-60 overflow-y-auto py-1"
         role="listbox"
         aria-multiselectable="true"
-        id={listboxId}
       >
         {options.map((option, index) => {
           const isSelected = selectedValues.includes(option.value);
