@@ -98,7 +98,17 @@ export function CustomSelect<T extends string | number>({
     if (isOpen && listRef.current && focusedIndex >= 0) {
       const el = listRef.current.children[focusedIndex] as HTMLElement;
       if (el) {
-        el.scrollIntoView({ block: 'nearest' });
+        const container = listRef.current;
+        const containerTop = container.scrollTop;
+        const containerBottom = containerTop + container.clientHeight;
+        const elTop = el.offsetTop;
+        const elBottom = elTop + el.offsetHeight;
+
+        if (elTop < containerTop) {
+          container.scrollTop = elTop;
+        } else if (elBottom > containerBottom) {
+          container.scrollTop = elBottom - container.clientHeight;
+        }
       }
     }
   }, [focusedIndex, isOpen]);
@@ -195,7 +205,7 @@ export function CustomSelect<T extends string | number>({
       <ul 
         id={listboxId}
         ref={listRef}
-        className="custom-scrollbar max-h-60 overflow-y-auto" 
+        className="custom-scrollbar relative max-h-60 overflow-y-auto" 
         role="listbox"
       >
         {options.map((option, index) => {
