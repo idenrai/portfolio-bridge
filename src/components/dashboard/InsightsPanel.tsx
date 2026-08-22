@@ -3,7 +3,7 @@ import { Sparkles, AlertTriangle, TrendingDown, CircleDollarSign, Coins, PieChar
 import { Card, FeedbackIconText } from "@/components/common";
 import { useT, useExchangeRates } from "@/hooks";
 import { useLanguageStore, useSettingsStore } from "@/stores";
-import { buildInsightPrompt } from "@/utils";
+import { buildInsightPrompt, cn } from "@/utils";
 import type { PortfolioSummary, Asset, TargetAllocation } from "@/types";
 
 interface Props {
@@ -13,9 +13,9 @@ interface Props {
 }
 
 const TYPE_STYLES = {
-  danger: "bg-red-500/100/10 border-red-500/20 text-red-400",
+  danger: "bg-red-500/10 border-red-500/20 text-red-400",
   warning: "bg-amber-500/10 border-amber-500/20 text-amber-400",
-  info: "bg-zinc-800/500/10 border-blue-500/20 text-blue-400",
+  info: "bg-blue-500/10 border-blue-500/20 text-blue-400",
 } as const;
 
 const CLOSE_BTN = {
@@ -70,7 +70,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
     <Card title={t.insights_title}>
       {/* ── AI 분석 배너 (항상 표시) ── */}
       <div className="mb-4 rounded-xl bg-linear-to-r from-indigo-500/20 to-blue-500/20 p-px shadow-sm">
-        <div className="rounded-[11px] bg-zinc-900/95 p-4 sm:px-5">
+        <div className="rounded-xl bg-zinc-900/95 p-4 sm:px-5">
           <div className="flex flex-col gap-4">
             {/* Header */}
             <div className="flex min-w-0 items-start gap-3">
@@ -146,7 +146,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
             dismissed.has(i) ? null : (
               <div
                 key={i}
-                className={`flex items-start gap-2 rounded-lg border px-3 py-2 text-xs ${TYPE_STYLES[insight.type]}`}
+                className={cn("flex items-start gap-2 rounded-lg border px-3 py-2 text-xs", TYPE_STYLES[insight.type])}
               >
                 <span className="mt-px shrink-0">{getInsightIcon(insight.icon, "w-3.5 h-3.5")}</span>
                 <span className="flex-1 leading-relaxed">
@@ -155,7 +155,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                 <button
                   type="button"
                   onClick={() => dismiss(i)}
-                  className={`shrink-0 cursor-pointer rounded-sm text-base leading-none transition-colors focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-900 focus-visible:outline-none ${CLOSE_BTN[insight.type]}`}
+                  className={cn("shrink-0 cursor-pointer rounded-sm text-base leading-none transition-colors focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-900 focus-visible:outline-none", CLOSE_BTN[insight.type])}
                   aria-label="dismiss"
                 >
                   ×

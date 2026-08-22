@@ -3,88 +3,11 @@ import { cn } from "@/utils";
 import { Loader2 } from "lucide-react";
 import { useT } from "@/hooks";
 import type { AnalyzerMode, AnalyzerProgress, BaseAnalyzerResult } from "@/hooks";
+import { THEMES, type AnalyzerTexts } from "./analyzerTheme";
+import { AnalyzerScoreBar } from "./AnalyzerScoreBar";
+import { AnalyzerCriterionBadge } from "./AnalyzerCriterionBadge";
 
-// ─── 컬러 테마 ─────────────────────────────────────────────────────────────────
-
-interface ThemeColors {
-  btn: string;
-  tabActive: string;
-  scoreHigh: string;
-  scoreTextHigh: string;
-  badgePass: string;
-  highScoreBadge: React.ReactNode;
-  resultHover: string;
-  suggestHover: string;
-  inputFocus: string;
-  progressEnrich: string;
-}
-
-const THEMES: Record<"green" | "violet" | "blue" | "amber", ThemeColors> = {
-  green: {
-    btn: "bg-green-600 hover:bg-green-700",
-    tabActive: "bg-green-600 text-white",
-    scoreHigh: "bg-emerald-500",
-    scoreTextHigh: "text-emerald-400",
-    badgePass: "bg-emerald-500/10 text-emerald-400",
-    highScoreBadge: "bg-emerald-500/20 text-emerald-300",
-    resultHover: "hover:border-emerald-500/20 hover:bg-emerald-500/10",
-    suggestHover: "hover:bg-emerald-500/10",
-    inputFocus: "focus-visible:border-green-400 focus-visible:ring-1 focus-visible:ring-green-500/30",
-    progressEnrich: "bg-emerald-500",
-  },
-  violet: {
-    btn: "bg-violet-600 hover:bg-violet-700",
-    tabActive: "bg-violet-600 text-white",
-    scoreHigh: "bg-violet-500",
-    scoreTextHigh: "text-violet-400",
-    badgePass: "bg-violet-500/10 text-violet-400",
-    highScoreBadge: "bg-violet-500/20 text-violet-300",
-    resultHover: "hover:border-violet-500/20 hover:bg-violet-500/10",
-    suggestHover: "hover:bg-violet-500/10",
-    inputFocus: "focus-visible:border-violet-400 focus-visible:ring-1 focus-visible:ring-violet-500/30",
-    progressEnrich: "bg-violet-500",
-  },
-  blue: {
-    btn: "bg-blue-600 hover:bg-blue-700",
-    tabActive: "bg-blue-600 text-white",
-    scoreHigh: "bg-blue-500",
-    scoreTextHigh: "text-blue-400",
-    badgePass: "bg-blue-500/10 text-blue-400",
-    highScoreBadge: "bg-blue-500/20 text-blue-300",
-    resultHover: "hover:border-blue-500/20 hover:bg-blue-500/10",
-    suggestHover: "hover:bg-blue-500/10",
-    inputFocus: "focus-visible:border-blue-400 focus-visible:ring-1 focus-visible:ring-blue-500/30",
-    progressEnrich: "bg-blue-500",
-  },
-  amber: {
-    btn: "bg-amber-600 hover:bg-amber-700",
-    tabActive: "bg-amber-600 text-white",
-    scoreHigh: "bg-amber-500",
-    scoreTextHigh: "text-amber-400",
-    badgePass: "bg-amber-500/10 text-amber-400",
-    highScoreBadge: "bg-amber-500/20 text-amber-300",
-    resultHover: "hover:border-amber-500/20 hover:bg-amber-500/10",
-    suggestHover: "hover:bg-amber-500/10",
-    inputFocus: "focus-visible:border-amber-400 focus-visible:ring-1 focus-visible:ring-amber-500/30",
-    progressEnrich: "bg-amber-500",
-  },
-};
-
-// ─── 텍스트 인터페이스 ──────────────────────────────────────────────────────────
-
-export interface AnalyzerTexts {
-  title: string;
-  desc: string;
-  progressEnrich: (done: number, total: number) => string;
-  phaseEnrich: string;
-  noResult: string;
-  highScoreBadge: React.ReactNode;
-  initialGuide: string;
-  noData: string;
-  disclaimer: string;
-}
-
-// ─── Props ─────────────────────────────────────────────────────────────────────
+export type { AnalyzerTexts, ThemeColors } from "./analyzerTheme";
 
 interface AnalyzerCardProps<CKey extends string> {
   theme: "green" | "violet" | "blue" | "amber";
@@ -110,83 +33,26 @@ interface AnalyzerCardProps<CKey extends string> {
   portfolioStockCount: number;
 }
 
-// ─── 서브 컴포넌트 ──────────────────────────────────────────────────────────────
-
-function ScoreBar({ score, colors }: { score: number; colors: ThemeColors }) {
-  const barColor =
-    score >= 70 ? colors.scoreHigh :
-    score >= 45 ? "bg-amber-400" :
-                  "bg-zinc-300";
-  const textColor =
-    score >= 70 ? colors.scoreTextHigh :
-    score >= 45 ? "text-amber-600" :
-                  "text-zinc-400";
-  return (
-    <div className="flex min-w-30 items-center gap-2">
-      <div 
-        className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-800/50"
-        role="progressbar"
-        aria-valuenow={score}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label="Score"
-      >
-        <div
-          className={cn("h-full rounded-full transition-[width,background-color] duration-500", barColor)}
-          style={{ width: `${score}%` }}
-        />
-      </div>
-      <span className={cn("w-7 text-right text-xs font-bold tabular-nums", textColor)}>
-        {score}
-      </span>
-    </div>
-  );
-}
-
-function CriterionBadge<CKey extends string>({
-  pass,
-  label,
-  value,
-  criterionKey,
-  noDataLabel,
-  formatValue,
-  colors,
-}: {
-  pass: boolean | null;
-  label: string;
-  value: number | null;
-  criterionKey: CKey;
-  noDataLabel: string;
-  formatValue: (key: CKey, value: number) => string;
-  colors: ThemeColors;
-}) {
-  const base = "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium leading-none";
-  if (pass === null) {
-    return (
-      <span className={cn(base, "bg-zinc-800/50 text-zinc-400")}>
-        {label}: {noDataLabel}
-      </span>
-    );
-  }
-  return (
-    <span className={cn(base, pass ? colors.badgePass : "bg-red-500/10 text-red-600")}>
-      <span aria-hidden="true">{pass ? "✓" : "✗"}</span> {label}
-      {value !== null && (
-        <span className="opacity-70">{formatValue(criterionKey, value)}</span>
-      )}
-    </span>
-  );
-}
-
-// ─── 메인 컴포넌트 ──────────────────────────────────────────────────────────────
-
 export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>) {
   const {
-    theme, texts, criterionHints, criterionLabel, formatValue,
-    mode, setMode,
-    results, loading, ran, progress,
-    searchQuery, setSearchQuery, searchSuggestions, isSearching,
-    runPortfolio, runSearch, handleSearch,
+    theme,
+    texts,
+    criterionHints,
+    criterionLabel,
+    formatValue,
+    mode,
+    setMode,
+    results,
+    loading,
+    ran,
+    progress,
+    searchQuery,
+    setSearchQuery,
+    searchSuggestions,
+    isSearching,
+    runPortfolio,
+    runSearch,
+    handleSearch,
     portfolioStockCount,
   } = props;
 
@@ -201,14 +67,18 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
       <div className="mb-3 flex gap-1.5">
         {(["portfolio", "search"] as const).map((m) => {
           const label =
-            m === "portfolio" ? `💼 ${t.analyzer_mode_portfolio}` :
-                                `🔍 ${t.analyzer_mode_search}`;
+            m === "portfolio"
+              ? `💼 ${t.analyzer_mode_portfolio}`
+              : `🔍 ${t.analyzer_mode_search}`;
           return (
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={cn("cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none", 
-                mode === m ? colors.tabActive : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800"
+              className={cn(
+                "cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none",
+                mode === m
+                  ? colors.tabActive
+                  : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800",
               )}
             >
               {label}
@@ -226,7 +96,11 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
           <button
             onClick={runPortfolio}
             disabled={loading || portfolioStockCount === 0}
-            className={cn("mb-4 rounded-lg", colors.btn, "cursor-pointer px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40")}
+            className={cn(
+              "mb-4 rounded-lg",
+              colors.btn,
+              "cursor-pointer px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40",
+            )}
           >
             {loading ? (
               <span className="inline-flex items-center gap-1.5">
@@ -250,34 +124,50 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
               autoComplete="off"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSearch();
+              }}
               placeholder={t.analyzer_search_placeholder}
-              className={cn("flex-1 rounded-lg border border-zinc-800 px-3 py-1.5 text-sm outline-none", colors.inputFocus)}
+              className={cn(
+                "flex-1 rounded-lg border border-zinc-800 px-3 py-1.5 text-sm outline-none",
+                colors.inputFocus,
+              )}
             />
             <button
               onClick={handleSearch}
               disabled={loading || isSearching || !searchQuery.trim()}
-              className={cn("rounded-lg", colors.btn, "cursor-pointer px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40")}
+              className={cn(
+                "rounded-lg",
+                colors.btn,
+                "cursor-pointer px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-40",
+              )}
             >
-              {isSearching ? <Loader2 className="inline-block size-3 animate-spin" aria-hidden="true" /> : t.analyzer_btn_search}
+              {isSearching ? (
+                <Loader2 className="inline-block size-3 animate-spin" aria-hidden="true" />
+              ) : (
+                t.analyzer_btn_search
+              )}
             </button>
           </div>
           {searchSuggestions.length > 0 && (
-            <>
-              {/* eslint-disable-next-line tailwindcss/no-contradicting-classname */}
-              <div className="mb-3 max-h-48 divide-y divide-zinc-800 overflow-y-auto rounded-lg border border-zinc-800">
-              {searchSuggestions.map((s) => (
-                <button
-                  key={s.ticker}
-                  onClick={() => runSearch(s.ticker, s.name)}
-                  className={cn("flex w-full items-center gap-2 px-3 py-2 text-left focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none focus-visible:ring-inset", colors.suggestHover, "cursor-pointer transition-colors")}
-                >
-                  <span className="text-xs font-semibold text-zinc-300">{s.ticker}</span>
-                  <span className="truncate text-xs text-zinc-400">{s.name}</span>
-                </button>
-              ))}
+            <div className="mb-3 max-h-48 overflow-y-auto rounded-lg border border-zinc-800">
+              <div className="divide-y divide-zinc-800">
+                {searchSuggestions.map((s) => (
+                  <button
+                    key={s.ticker}
+                    onClick={() => runSearch(s.ticker, s.name)}
+                    className={cn(
+                      "flex w-full items-center gap-2 px-3 py-2 text-left focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none focus-visible:ring-inset",
+                      colors.suggestHover,
+                      "cursor-pointer transition-colors",
+                    )}
+                  >
+                    <span className="text-xs font-semibold text-zinc-300">{s.ticker}</span>
+                    <span className="truncate text-xs text-zinc-400">{s.name}</span>
+                  </button>
+                ))}
               </div>
-            </>
+            </div>
           )}
         </>
       )}
@@ -288,7 +178,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
           <p className="mb-1 animate-pulse text-xs text-zinc-400">
             {texts.phaseEnrich}
           </p>
-          <div 
+          <div
             className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800/50"
             role="progressbar"
             aria-valuenow={progress.done}
@@ -297,11 +187,15 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
             aria-label="Analysis Progress"
           >
             <div
-              className={cn("h-full rounded-full transition-[width,background-color] duration-300", colors.progressEnrich)}
+              className={cn(
+                "h-full rounded-full transition-[width,background-color] duration-300",
+                colors.progressEnrich,
+              )}
               style={{
-                width: progress.total > 0
-                  ? `${Math.round((progress.done / progress.total) * 100)}%`
-                  : "0%",
+                width:
+                  progress.total > 0
+                    ? `${Math.round((progress.done / progress.total) * 100)}%`
+                    : "0%",
               }}
             />
           </div>
@@ -322,16 +216,26 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
           {results.map((r, idx) => (
             <li
               key={r.stock.ticker}
-              className={cn("rounded-xl border border-zinc-800 bg-zinc-900/50 p-3", colors.resultHover, "transition-colors")}
+              className={cn(
+                "rounded-xl border border-zinc-800 bg-zinc-900/50 p-3",
+                colors.resultHover,
+                "transition-colors",
+              )}
             >
               {/* 헤더 행 */}
               <div className="mb-2 flex items-center gap-2">
-                <span className={cn("w-5 shrink-0 text-xs font-bold", 
-                  idx === 0 ? "text-yellow-500" :
-                  idx === 1 ? "text-zinc-300" :
-                  idx === 2 ? "text-amber-600" :
-                              "text-zinc-500"
-                )}>
+                <span
+                  className={cn(
+                    "w-5 shrink-0 text-xs font-bold",
+                    idx === 0
+                      ? "text-yellow-500"
+                      : idx === 1
+                        ? "text-zinc-300"
+                        : idx === 2
+                          ? "text-amber-600"
+                          : "text-zinc-500",
+                  )}
+                >
                   {idx + 1}.
                 </span>
 
@@ -341,20 +245,25 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
                 </div>
 
                 {r.totalScore >= 70 && (
-                  <span className={cn("shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold", colors.highScoreBadge)}>
+                  <span
+                    className={cn(
+                      "shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold",
+                      colors.highScoreBadge,
+                    )}
+                  >
                     {texts.highScoreBadge}
                   </span>
                 )}
 
                 <div className="shrink-0">
-                  <ScoreBar score={r.totalScore} colors={colors} />
+                  <AnalyzerScoreBar score={r.totalScore} colors={colors} />
                 </div>
               </div>
 
               {/* 기준별 배지 */}
               <div className="flex flex-wrap gap-1">
                 {r.criteria.map((c) => (
-                  <CriterionBadge
+                  <AnalyzerCriterionBadge
                     key={c.key}
                     pass={c.pass}
                     label={criterionLabel(c.key as CKey)}

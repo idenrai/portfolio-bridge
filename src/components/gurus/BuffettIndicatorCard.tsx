@@ -1,6 +1,6 @@
 import { Card } from "@/components/common";
-import { useT } from "@/hooks";
-import { useBuffettIndicator } from "@/hooks";
+import { useT, useBuffettIndicator } from "@/hooks";
+import { cn } from "@/utils";
 
 // ─── 평가 구간 정의 ───────────────────────────────────────────────────────────
 
@@ -114,18 +114,27 @@ export function BuffettIndicatorCard() {
             const zone = getZone(ratio);
             return (
               <div
-                className={`flex items-center justify-between rounded-xl border px-4 py-3 ${zone.bgColor} ${zone.borderColor}`}
+                className={cn(
+                  "flex items-center justify-between rounded-xl border px-4 py-3",
+                  zone.bgColor,
+                  zone.borderColor,
+                )}
               >
                 <div>
                   <p className="mb-0.5 text-xs text-zinc-500">
                     {t.buffett_indicator_ratio_label}
                   </p>
-                  <p className={`text-3xl font-bold tabular-nums ${zone.color}`}>
+                  <p className={cn("text-3xl font-bold tabular-nums", zone.color)}>
                     {ratio.toFixed(1)}%
                   </p>
                 </div>
                 <span
-                  className={`rounded-full px-3 py-1 text-xs font-semibold ${zone.bgColor} ${zone.color} border ${zone.borderColor}`}
+                  className={cn(
+                    "rounded-full border px-3 py-1 text-xs font-semibold",
+                    zone.bgColor,
+                    zone.color,
+                    zone.borderColor,
+                  )}
                 >
                   {t[zone.labelKey]}
                 </span>

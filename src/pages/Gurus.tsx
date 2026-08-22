@@ -109,10 +109,10 @@ export function GurusPage() {
               className="group relative block aspect-[1.586/1] w-full cursor-pointer overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 text-left transition-[transform,box-shadow,border-color] duration-500 hover:scale-[1.02] hover:border-zinc-700 hover:shadow-2xl hover:shadow-white/5 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:rounded-2xl"
             >
               {/* Base Obsidian Black Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-to-br from-zinc-900 via-zinc-950 to-black transition-opacity duration-500" />
               
               {/* Hover Dark Metallic Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/80 via-zinc-900/80 to-black opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-linear-to-br from-zinc-800/80 via-zinc-900/80 to-black opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               {/* Inner dashed border */}
               <div className="pointer-events-none absolute inset-2 rounded-lg border border-dashed border-zinc-800/30 transition-colors duration-500 group-hover:border-zinc-400/40 sm:inset-2.5 sm:rounded-xl" />
@@ -177,7 +177,7 @@ export function GurusPage() {
                     width={320}
                     height={320}
                     fetchPriority="high"
-                    className="mx-auto aspect-square w-full max-w-[320px] shrink-0 rounded-2xl border border-zinc-800 bg-zinc-900 object-cover shadow-[0_0_40px_rgba(255,255,255,0.05)] transition-shadow hover:shadow-[0_0_50px_rgba(255,255,255,0.08)]" 
+                    className="mx-auto aspect-square w-full max-w-80 shrink-0 rounded-2xl border border-zinc-800 bg-zinc-900 object-cover shadow-[0_0_40px_rgba(255,255,255,0.05)] transition-shadow hover:shadow-[0_0_50px_rgba(255,255,255,0.08)]" 
                   />
                   <div className="pt-2 text-center lg:text-left">
                     <h2 className="mb-1 text-2xl font-bold tracking-tight text-white">{guruName(selectedGuru)}</h2>
@@ -190,7 +190,7 @@ export function GurusPage() {
                     <div className="h-4 w-1 rounded-full bg-indigo-500" />
                     <h3 className="text-xs font-bold tracking-widest text-zinc-400 uppercase">{t.guru_philosophy_label}</h3>
                   </div>
-                  <div className="text-sm leading-relaxed text-pretty break-words whitespace-pre-line text-zinc-300">
+                  <div className="text-sm leading-relaxed text-pretty wrap-break-word whitespace-pre-line text-zinc-300">
                     {principles.join('\n')}
                   </div>
                 </div>

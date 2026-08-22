@@ -120,7 +120,7 @@ export function GuruAIPromptBanner({
 
   return (
     <div className="rounded-xl bg-linear-to-r from-indigo-500/20 to-purple-500/20 p-px shadow-sm">
-      <div className="rounded-[11px] bg-zinc-900/95 p-4 sm:px-5">
+      <div className="rounded-xl bg-zinc-900/95 p-4 sm:px-5">
         <div className="flex flex-col gap-4">
           {/* Header */}
           <div className="flex items-center gap-2">

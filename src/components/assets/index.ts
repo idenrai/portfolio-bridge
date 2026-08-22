@@ -5,3 +5,4 @@ export { BrokerManager } from "./BrokerManager";
 export { AIClassificationModal } from "./AIClassificationModal";
 export { CSVPreviewModal } from "./CSVPreviewModal";
 export { AssetTableRow } from "./AssetTableRow";
+export { DetailAssetFields } from "./DetailAssetFields";

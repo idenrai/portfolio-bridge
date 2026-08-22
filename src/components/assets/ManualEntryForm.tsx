@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Input, CustomSelect, Label } from "@/components/common";
 import { useT } from "@/hooks";
-import { fetchCurrentPrice } from "@/utils";
+import { fetchCurrentPrice, cn } from "@/utils";
 import type {
   AssetFormData,
   AssetType,
@@ -9,6 +9,7 @@ import type {
   CurrencyCode,
 } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
+import { DetailAssetFields } from "./DetailAssetFields";
 
 export function ManualEntryForm({
   onSubmit,
@@ -36,19 +37,7 @@ export function ManualEntryForm({
   const [isFetchingPrice, setIsFetchingPrice] = useState(false);
 
   const t = useT();
-  const ASSET_TYPE_OPTIONS: { value: AssetType; label: string }[] = [
-    { value: "stock", label: t.atype_stock },
-    { value: "etf", label: t.atype_etf },
-    { value: "fund", label: t.atype_fund },
-    { value: "bond", label: t.atype_bond },
-    { value: "other", label: t.atype_other },
-  ];
-  const MARKET_OPTIONS: { value: Market; label: string }[] = [
-    { value: "JP", label: t.market_jp },
-    { value: "US", label: t.market_us },
-    { value: "KR", label: t.market_kr },
-    { value: "OTHER", label: t.market_other },
-  ];
+
   const CURRENCY_INPUT_OPTIONS: { value: CurrencyCode; label: string }[] = [
     { value: "JPY", label: t.currency_jpy },
     { value: "USD", label: t.currency_usd },
@@ -58,10 +47,10 @@ export function ManualEntryForm({
   const sym = CURRENCY_SYMBOLS[currency];
 
   const handleFetchPrice = async () => {
-    const sym = ticker.trim();
-    if (!sym) return;
+    const symbol = ticker.trim();
+    if (!symbol) return;
     setIsFetchingPrice(true);
-    const data = await fetchCurrentPrice(sym).catch(() => null);
+    const data = await fetchCurrentPrice(symbol).catch(() => null);
     if (data && data.price > 0) setCurrentPrice(data.price);
     setIsFetchingPrice(false);
   };
@@ -103,22 +92,24 @@ export function ManualEntryForm({
           <button
             type="button"
             onClick={() => setIsSimple(false)}
-            className={`rounded-md px-4 py-1.5 text-xs font-medium transition-colors ${
+            className={cn(
+              "rounded-md px-4 py-1.5 text-xs font-medium transition-colors",
               !isSimple
                 ? "bg-zinc-800 text-white shadow-sm"
-                : "text-zinc-500 hover:text-zinc-300"
-            }`}
+                : "text-zinc-500 hover:text-zinc-300",
+            )}
           >
             {t.af_entry_mode_detail}
           </button>
           <button
             type="button"
             onClick={() => setIsSimple(true)}
-            className={`rounded-md px-4 py-1.5 text-xs font-medium transition-colors ${
+            className={cn(
+              "rounded-md px-4 py-1.5 text-xs font-medium transition-colors",
               isSimple
                 ? "bg-zinc-800 text-white shadow-sm"
-                : "text-zinc-500 hover:text-zinc-300"
-            }`}
+                : "text-zinc-500 hover:text-zinc-300",
+            )}
           >
             {t.af_entry_mode_simple}
           </button>
@@ -131,9 +122,7 @@ export function ManualEntryForm({
 
       {/* 종목명 (공통) */}
       <div className="block">
-        <Label>
-          {t.af_name_label} *
-        </Label>
+        <Label>{t.af_name_label} *</Label>
         <Input
           type="text"
           required
@@ -141,15 +130,12 @@ export function ManualEntryForm({
           autoFocus
           onChange={(e) => setName(e.target.value)}
           placeholder={t.af_manual_name_placeholder}
-          
         />
       </div>
 
       {/* 통화 (공통) */}
       <div className="block">
-        <Label>
-          {t.af_currency_label}
-        </Label>
+        <Label>{t.af_currency_label}</Label>
         <CustomSelect<CurrencyCode>
           value={currency}
           onChange={(val) => setCurrency(val)}
@@ -173,115 +159,27 @@ export function ManualEntryForm({
               setSimpleAmount(e.target.value === "" ? "" : Number(e.target.value))
             }
             placeholder={t.af_simple_amount_placeholder}
-            
           />
         </div>
       ) : (
         /* 상세입력 */
-        <>
-          <div className="block">
-            <Label>
-              {t.af_ticker_label}
-            </Label>
-            <div className="mt-1 flex gap-2">
-              <Input
-                type="text"
-                value={ticker}
-                onChange={(e) => setTicker(e.target.value)}
-                placeholder={t.af_manual_ticker_placeholder}
-                
-              />
-              <Button
-                type="button"
-                size="sm"
-                variant="secondary"
-                onClick={handleFetchPrice}
-                disabled={!ticker.trim() || isFetchingPrice}
-              >
-                {isFetchingPrice ? t.af_fetching : t.af_fetch_price_btn}
-              </Button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div className="block">
-              <Label>
-                {t.af_asset_type_label}
-              </Label>
-              <CustomSelect<AssetType>
-                value={assetType}
-                onChange={(val) => setAssetType(val)}
-                options={ASSET_TYPE_OPTIONS}
-              />
-            </div>
-            <div className="block">
-              <Label>
-                {t.af_market_label}
-              </Label>
-              <CustomSelect<Market>
-                value={market}
-                onChange={(val) => setMarket(val)}
-                options={MARKET_OPTIONS}
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3">
-            <div className="block">
-              <Label>
-                {t.af_quantity_label} *
-              </Label>
-              <Input
-                type="number"
-                required
-                min={0}
-                step="any"
-                value={quantity}
-                onChange={(e) =>
-                  setQuantity(e.target.value === "" ? "" : Number(e.target.value))
-                }
-                placeholder="0"
-                
-              />
-            </div>
-            <div className="block">
-              <Label>
-                {t.af_avg_price_label} ({sym})
-              </Label>
-              <Input
-                type="number"
-                min={0}
-                step="any"
-                value={avgBuyPrice}
-                onChange={(e) =>
-                  setAvgBuyPrice(
-                    e.target.value === "" ? "" : Number(e.target.value),
-                  )
-                }
-                placeholder="0"
-                
-              />
-            </div>
-            <div className="block">
-              <Label>
-                {t.af_current_price_label} ({sym})
-              </Label>
-              <Input
-                type="number"
-                min={0}
-                step="any"
-                value={currentPrice}
-                onChange={(e) =>
-                  setCurrentPrice(
-                    e.target.value === "" ? "" : Number(e.target.value),
-                  )
-                }
-                placeholder={t.af_current_price_placeholder}
-                
-              />
-            </div>
-          </div>
-        </>
+        <DetailAssetFields
+          ticker={ticker}
+          setTicker={setTicker}
+          assetType={assetType}
+          setAssetType={setAssetType}
+          market={market}
+          setMarket={setMarket}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          avgBuyPrice={avgBuyPrice}
+          setAvgBuyPrice={setAvgBuyPrice}
+          currentPrice={currentPrice}
+          setCurrentPrice={setCurrentPrice}
+          isFetchingPrice={isFetchingPrice}
+          handleFetchPrice={handleFetchPrice}
+          sym={sym}
+        />
       )}
 
       <div className="flex justify-between">

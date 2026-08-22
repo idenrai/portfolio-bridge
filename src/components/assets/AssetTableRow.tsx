@@ -12,6 +12,7 @@ import {
   assetValue,
   assetPnL,
   assetReturnPercent,
+  cn,
 } from "@/utils";
 
 interface AssetTableRowProps {
@@ -130,7 +131,10 @@ export function AssetTableRow({
         {val.toLocaleString()}
       </td>
       <td
-        className={`py-2.5 text-right tabular-nums ${isCash ? "text-zinc-500" : pnlColor}`}
+        className={cn(
+          "py-2.5 text-right tabular-nums",
+          isCash ? "text-zinc-500" : pnlColor,
+        )}
       >
         {isCash ? (
           "-"
@@ -145,7 +149,10 @@ export function AssetTableRow({
         )}
       </td>
       <td
-        className={`py-2.5 text-right font-medium tabular-nums ${isCash ? "text-zinc-500" : pnlColor}`}
+        className={cn(
+          "py-2.5 text-right font-medium tabular-nums",
+          isCash ? "text-zinc-500" : pnlColor,
+        )}
       >
         {isCash ? "-" : (
           <div className="flex items-center justify-end gap-1">

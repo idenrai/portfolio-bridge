@@ -119,7 +119,7 @@ export function DashboardPage() {
           <button
             type="button"
             onClick={handleLoadSample}
-            className="min-h-[44px] cursor-pointer border border-zinc-500 bg-black px-5 py-2 text-sm font-bold text-zinc-300 transition-colors hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+            className="min-h-11 cursor-pointer border border-zinc-500 bg-black px-5 py-2 text-sm font-bold text-zinc-300 transition-colors hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
           >
             <span className="opacity-40">{"["}</span> {t.dash_sample_btn} <span className="opacity-40">{"]"}</span>
           </button>
@@ -147,7 +147,7 @@ export function DashboardPage() {
           onClick={() => refreshAll()}
           disabled={isLoading}
           aria-live="polite"
-          className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 border border-zinc-800 bg-black px-3 py-1.5 text-xs font-bold text-zinc-300 transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none disabled:opacity-50"
+          className="inline-flex min-h-11 cursor-pointer items-center gap-2 border border-zinc-800 bg-black px-3 py-1.5 text-xs font-bold text-zinc-300 transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none disabled:opacity-50"
         >
           <span className="opacity-40">{"["}</span>
           <span>{t.dash_refresh}</span>
