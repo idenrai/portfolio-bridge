@@ -6,27 +6,30 @@
 | Component | `src/pages/Dashboard.tsx` |
 | Related components | `src/components/dashboard/` |
 | Primary hook | `usePortfolio()` — `src/hooks/usePortfolio.ts` |
+| Related hooks | `usePortfolioSnapshot()` — `src/hooks/usePortfolioSnapshot.ts` |
 
 ## Data Flow
 
-`usePortfolio()` aggregates all portfolio calculation logic (totals, allocations, holdings, P&L, FX exposure).
+`usePortfolio()` aggregates all portfolio calculation logic (totals, allocations, holdings, P&L, FX exposure). `usePortfolioSnapshot()` automatically saves daily portfolio snapshots while guarding against filtered states or initial loading.
 
-`usePortfolio()`는 총액, 배분, 보유 종목, 손익, 환 노출 등 모든 포트폴리오 계산 로직을 집계합니다.
+`usePortfolio()`는 총액, 배분, 보유 종목, 손익, 환 노출 등 모든 포트폴리오 계산 로직을 집계합니다. `usePortfolioSnapshot()`은 필터가 적용된 상태나 초기 로딩 중 스냅샷이 오염되지 않도록 보호하며 일일 포트폴리오 스냅샷을 자동 저장합니다.
 
 ```text
 useAssetStore (assets)
   → usePortfolio() hook
   → PortfolioSummary
   → All dashboard components
+  → usePortfolioSnapshot() (daily snapshot persistence)
 ```
 
 ## Sections
 
 ### Filter Bar (`FilterBar.tsx`)
 
-A bar that allows filtering the dashboard data by market, asset type, category, and broker/account.
+A bar that allows filtering the dashboard data by market, asset type, category, and broker/account. Displays live filtered count with accessibility announcements.
 
-대시보드 데이터를 시장, 자산 유형, 카테고리, 계좌별로 다중 필터링할 수 있는 바 컴포넌트입니다.
+대시보드 데이터를 시장, 자산 유형, 카테고리, 계좌별로 다중 필터링할 수 있는 바 컴포넌트입니다. 스크린리더 접근성을 지원하는 실시간 필터링 개수 표시를 제공합니다.
+
 
 ### KPI Bar (`KpiBar.tsx`)
 
@@ -114,17 +117,18 @@ Automatically generated alerts. Each alert can be individually dismissed (persis
 
 ### P&L Waterfall Chart (`PnLWaterfallChart.tsx`)
 
-Waterfall chart showing P&L contribution by holding, sorted by impact.
+Waterfall chart showing P&L contribution by holding, sorted by impact. Lazy loaded with `ChartSkeleton` fallback.
 
-보유 종목별 손익 기여도를 영향도 순으로 정렬한 폭포수 차트입니다.
+보유 종목별 손익 기여도를 영향도 순으로 정렬한 폭포수 차트입니다. `ChartSkeleton` 스켈레톤 UI를 통해 지연 로딩됩니다.
 
 ### Portfolio History Chart (`PortfolioHistoryChart.tsx`)
 
-Line chart of portfolio value over time.
+Line chart of portfolio value over time. Lazy loaded with `ChartSkeleton` fallback.
 Data comes from `useSnapshotStore` — snapshots are saved periodically.
 
-시간에 따른 포트폴리오 가치 변화 라인 차트입니다.
+시간에 따른 포트폴리오 가치 변화 라인 차트입니다. `ChartSkeleton` 스켈레톤 UI를 통해 지연 로딩됩니다.
 데이터는 `useSnapshotStore`에서 주기적으로 저장된 스냅샷을 사용합니다.
+
 
 ### AI Analysis Banner
 
