@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useT } from "@/hooks";
 import { MultiSelect } from "./MultiSelect";
 import type { Market, AssetType, AssetCategory, BrokerAccount } from "@/types";
@@ -25,7 +26,7 @@ export interface FilterBarProps {
   showCount?: boolean;
 }
 
-export function FilterBar({
+export const FilterBar = memo(function FilterBar({
   markets,
   types,
   categoryOptions,
@@ -113,10 +114,15 @@ export function FilterBar({
 
       {/* Count Indicator */}
       {showCount && (
-        <span className="ml-auto text-xs text-zinc-400">
+        <span
+          role="status"
+          aria-live="polite"
+          className="ml-auto text-xs text-zinc-400"
+        >
           {t.at_filter_count(sortedCount, allCount)}
         </span>
       )}
     </div>
   );
-}
+});
+

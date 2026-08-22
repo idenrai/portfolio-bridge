@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useSettingsStore } from "@/stores";
 import { formatCurrency, formatPercent, fromKRW, cn } from "@/utils";
 import { useT, useExchangeRates } from "@/hooks";
@@ -9,7 +10,7 @@ interface Props {
   isInitialLoading?: boolean;
 }
 
-export function KpiBar({ summary, isInitialLoading }: Props) {
+export const KpiBar = memo(function KpiBar({ summary, isInitialLoading }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
   const t = useT();
@@ -28,7 +29,6 @@ export function KpiBar({ summary, isInitialLoading }: Props) {
   const isPositivePnL = summary.totalPnLKRW > 0;
   const pnlColor = isZeroPnL ? "text-zinc-400" : isPositivePnL ? "text-red-500" : "text-blue-500";
   const pnlSubColor = isZeroPnL ? "text-zinc-500" : isPositivePnL ? "text-red-500/80" : "text-blue-500/80";
-  const pnlSign = isPositivePnL ? "+" : "";
 
   return (
     <div className="relative flex flex-col gap-4">
@@ -63,7 +63,7 @@ export function KpiBar({ summary, isInitialLoading }: Props) {
           <p className="mb-1 text-sm font-bold tracking-widest text-zinc-500 uppercase md:mb-2">{t.kpi_pnl}</p>
           <div
             className="flex flex-wrap items-baseline gap-2 md:justify-end"
-            aria-label={`${t.kpi_pnl}: ${pnlSign}${formatCurrency(convert(summary.totalPnLKRW), baseCurrency)} (${pnlSign}${formatPercent(summary.totalReturnPercent)})`}
+            aria-label={`${t.kpi_pnl}: ${formatCurrency(convert(summary.totalPnLKRW), baseCurrency, false, true)} (${formatPercent(summary.totalReturnPercent)})`}
           >
             <span
               aria-hidden="true"
@@ -72,7 +72,7 @@ export function KpiBar({ summary, isInitialLoading }: Props) {
                 pnlColor,
               )}
             >
-              {pnlSign}{formatCurrency(convert(summary.totalPnLKRW), baseCurrency)}
+              {formatCurrency(convert(summary.totalPnLKRW), baseCurrency, false, true)}
             </span>
             <span
               aria-hidden="true"
@@ -81,7 +81,7 @@ export function KpiBar({ summary, isInitialLoading }: Props) {
                 pnlSubColor,
               )}
             >
-              ({pnlSign}{formatPercent(summary.totalReturnPercent)})
+              ({formatPercent(summary.totalReturnPercent)})
             </span>
           </div>
         </div>
@@ -121,4 +121,5 @@ export function KpiBar({ summary, isInitialLoading }: Props) {
       </div>
     </div>
   );
-}
+});
+

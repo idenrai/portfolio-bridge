@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   PieChart,
   Pie,
@@ -85,7 +86,7 @@ function MiniPie({
   );
 }
 
-export function AllocationPieCharts({ summary }: Props) {
+export const AllocationPieCharts = memo(function AllocationPieCharts({ summary }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
   const t = useT();
@@ -127,4 +128,5 @@ export function AllocationPieCharts({ summary }: Props) {
       </Card>
     </div>
   );
-}
+});
+

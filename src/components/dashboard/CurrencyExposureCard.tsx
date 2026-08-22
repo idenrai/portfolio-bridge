@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW } from "@/utils";
 import { CURRENCY_SYMBOLS } from "@/types";
@@ -9,7 +10,7 @@ interface Props {
   summary: PortfolioSummary;
 }
 
-export function CurrencyExposureCard({ summary }: Props) {
+export const CurrencyExposureCard = memo(function CurrencyExposureCard({ summary }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
@@ -109,4 +110,5 @@ export function CurrencyExposureCard({ summary }: Props) {
       )}
     </Card>
   );
-}
+});
+

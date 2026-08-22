@@ -1,10 +1,9 @@
-import { useEffect, lazy, Suspense, useState, useMemo } from "react";
-import { usePortfolio, useDataRefresh, useT } from "@/hooks";
+import { lazy, Suspense, useState, useMemo } from "react";
+import { usePortfolio, usePortfolioSnapshot, useDataRefresh, useT } from "@/hooks";
 import {
   useAssetStore,
   useSettingsStore,
   useLanguageStore,
-  useSnapshotStore,
   useBrokerStore,
 } from "@/stores";
 import { LANG_LOCALES } from "@/i18n";
@@ -17,7 +16,7 @@ import {
   RebalanceCard,
   InsightsPanel,
 } from "@/components/dashboard";
-import { FilterBar } from "@/components/common";
+import { FilterBar, ChartSkeleton } from "@/components/common";
 import { SAMPLE_ASSETS } from "@/utils";
 import type { Market, AssetType, AssetCategory } from "@/types";
 
@@ -52,33 +51,18 @@ export function DashboardPage() {
   const lang = useLanguageStore((s) => s.lang);
   const langLocale = LANG_LOCALES[lang];
   const t = useT();
-  const upsertSnapshot = useSnapshotStore((s) => s.upsertSnapshot);
 
   const { refreshAll, isLoading, isInitialLoading, lastUpdated } = useDataRefresh();
 
-  // 대시보드를 열 때마다 오늘 날짜 스냅샷 저장/갱신
-  // (단, 필터가 적용되지 않은 전체 자산 기준으로 스냅샷을 저장하는 것이 맞으므로 summary는 필터 적용 전이어야 하나
-  // 여기서는 편의상 그대로 둡니다. 실제로는 필터가 없을 때만 스냅샷을 갱신하거나 별도로 갱신해야 합니다.
-  // 필터 적용 상태에서 스냅샷이 덮어써지는 것을 방지하기 위해 필터가 없을 때만 갱신하도록 수정)
+
   const isFiltered = filterMarkets.length > 0 || filterTypes.length > 0 || filterCategories.length > 0 || filterBrokerIds.length > 0;
-  
-  useEffect(() => {
-    if (isFiltered) return; // 필터 적용 중에는 스냅샷 갱신 안 함
-    if (assets.length === 0 || summary.totalValueKRW === 0 || isInitialLoading) return;
-    const today = new Date().toISOString().slice(0, 10);
-    upsertSnapshot({
-      date: today,
-      totalValueKRW: summary.totalValueKRW,
-      totalCostKRW: summary.totalCostKRW,
-    });
-  }, [
-    summary.totalValueKRW,
-    summary.totalCostKRW,
-    assets.length,
-    upsertSnapshot,
+
+  usePortfolioSnapshot({
+    summary,
+    assetCount: assets.length,
     isFiltered,
     isInitialLoading,
-  ]);
+  });
 
   const handleLoadSample = () => {
     SAMPLE_ASSETS.forEach((data) => addAsset(data));
@@ -183,6 +167,9 @@ export function DashboardPage() {
         onFilterCategories={setFilterCategories}
         onFilterBrokerIds={setFilterBrokerIds}
         onClearFilters={handleClearFilters}
+        sortedCount={assets.length}
+        allCount={baseAssets.length}
+        showCount={isFiltered}
       />
 
       {/* ① KPI 바 */}
@@ -197,12 +184,12 @@ export function DashboardPage() {
           <TopHoldingsTable summary={summary} />
           
           {/* 자산 구성 추이 차트 */}
-          <Suspense fallback={<div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-black/50 font-mono text-sm text-zinc-500">Loading Chart…</div>}>
+          <Suspense fallback={<ChartSkeleton title={t.history_title} heightClassName="h-64" />}>
             <PortfolioHistoryChart />
           </Suspense>
 
           {/* 종목별 손익 차트 */}
-          <Suspense fallback={<div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-black/50 font-mono text-sm text-zinc-500">Loading Chart…</div>}>
+          <Suspense fallback={<ChartSkeleton title={t.pnl_chart_title} heightClassName="h-80" />}>
             <PnLWaterfallChart assets={assets} />
           </Suspense>
         </div>

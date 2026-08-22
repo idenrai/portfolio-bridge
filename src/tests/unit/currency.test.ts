@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { toKRW, fromKRW, formatPercent } from '@/utils/calc/currency';
+import { toKRW, fromKRW, formatPercent, formatCurrency } from '@/utils/calc/currency';
 
 describe('currency utilities', () => {
   const mockRates = {
@@ -21,9 +21,34 @@ describe('currency utilities', () => {
     expect(fromKRW(500, 'KRW', mockRates)).toBe(500);
   });
 
-  it('formatPercent formats correctly', () => {
+  it('formatPercent formats correctly with default signed option', () => {
     expect(formatPercent(5.123)).toBe('+5.1%');
     expect(formatPercent(-2.56, 2)).toBe('-2.56%');
     expect(formatPercent(0)).toBe('+0.0%');
+    // Ensure no duplicate plus
+    expect(formatPercent(6.8)).toBe('+6.8%');
+  });
+
+  it('formatPercent formats correctly when signed is false', () => {
+    expect(formatPercent(5.123, 1, { signed: false })).toBe('5.1%');
+    expect(formatPercent(-2.56, 2, { signed: false })).toBe('-2.56%');
+    expect(formatPercent(0, 1, { signed: false })).toBe('0.0%');
+  });
+
+  it('formatCurrency formats correctly with and without positive sign', () => {
+    // Default showPositiveSign = false
+    expect(formatCurrency(284492, 'JPY')).toBe('¥284,492');
+    expect(formatCurrency(-284492, 'JPY')).toBe('-¥284,492');
+    expect(formatCurrency(0, 'JPY')).toBe('¥0');
+
+    // showPositiveSign = true
+    expect(formatCurrency(284492, 'JPY', false, true)).toBe('+¥284,492');
+    expect(formatCurrency(-284492, 'JPY', false, true)).toBe('-¥284,492');
+    expect(formatCurrency(0, 'JPY', false, true)).toBe('¥0');
+
+    // USD
+    expect(formatCurrency(1234.56, 'USD', false, true)).toBe('+$1,234.56');
+    expect(formatCurrency(-1234.56, 'USD', false, true)).toBe('-$1,234.56');
   });
 });
+
