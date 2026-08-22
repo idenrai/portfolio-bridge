@@ -14,7 +14,7 @@
 ## 🔄 Workflows (상황별 참조 트리거)
 특정 작업이나 상황이 발생했을 때, 해당하는 워크플로우나 에이전트 지침을 로드하세요.
 
-- **프론트엔드(UI/UX) 컴포넌트 신규 생성, 수정 및 리팩토링 시 (/frontend):** `.agents/workflows/frontend.md` 읽기
+- **프론트엔드(UI/UX) 컴포넌트 신규 생성, 수정 및 리팩토링 시 (/frontend):** `.agents/workflows/frontend.md` 읽기 (Tailwind CSS v4 패턴 및 디자인 시스템 준수)
 - **백엔드(Node.js/API) 아키텍처 설계, API 개발 및 리팩토링 시 (/backend):** `.agents/workflows/backend.md` 읽기
 - **번역 키 추가 및 다국어(i18n) 작업 시:** `.agents/workflows/i18n-sync.md` 및 `.agents/workflows/i18n-audit.md` 읽기
 - **빌드 검토 및 오류 해결 시:** `.agents/workflows/build-guard.md` 및 `.agents/workflows/build-check.md` 읽기
@@ -40,4 +40,5 @@ AI가 특정 도구나 기능이 필요할 때 로드하세요.
 - Vercel/Next.js 성능 최적화 가이드 필요 시: `.agents/skills/vercel-react-best-practices/SKILL.md` 읽기
 - AI 프롬프트 작성, 개선 및 프롬프트 엔지니어링 필요 시 (예: 구루 프롬프트 작성): `.agents/skills/prompt-engineering/SKILL.md` 읽기
 - **UI/UX 설계 및 프론트엔드 디자인 기획 시:** `.agents/skills/ui-ux-pro-max/SKILL.md` 및 `.agents/skills/frontend-design/SKILL.md` 읽기
+- **Tailwind CSS v4 스타일링 및 디자인 시스템 구현 시:** `.agents/skills/tailwind-4-docs/SKILL.md`, `.agents/skills/tailwind-design-system/SKILL.md`, `.agents/skills/tailwind-css-patterns/SKILL.md` 적극 참조
 - **디자인 가이드라인 준수 여부 및 시각적 버그 감사 시:** `.agents/skills/web-design-guidelines/SKILL.md`, `.agents/skills/agent-browser/SKILL.md`, `.agents/skills/before-and-after/SKILL.md` 적극 활용

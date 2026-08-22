@@ -12,14 +12,18 @@ description: 프론트엔드 UI/UX 컴포넌트 신규 생성, 수정 및 리팩
 - **컴포넌트 수정 및 생성 시:** 기존 프로젝트의 톤앤매너(Zinc/Black 기반 다크 미니멀리즘, 터미널 감성의 모노스페이스 배지 등) 일관성을 엄격히 유지합니다.
 - **반응형 검증:** 항상 모바일 우선(Mobile-first) 레이아웃을 고려하며, 필요 시 Tailwind의 반응형 유틸리티(`md:`, `lg:`)를 적극 활용하여 여백과 크기를 세밀하게 조정합니다.
 - UI/UX 변경 시 항상 `.agents/skills/ui-ux-pro-max/SKILL.md`와 `.agents/skills/frontend-design/SKILL.md`를 우선 참조하여 퀄리티 컨트롤을 적용합니다.
+- **Tailwind CSS v4 모범 사례 준수:** 스타일링 시 `.agents/skills/tailwind-4-docs/SKILL.md`, `.agents/skills/tailwind-design-system/SKILL.md`, `.agents/skills/tailwind-css-patterns/SKILL.md`를 적극 활용하여 최신 v4 토큰(`@theme`, `@utility`) 및 구조를 준수합니다.
+- **Canonical Class 우선 원칙:** 임의 픽셀 값(`rounded-[4px]`, `h-[30px]`, `min-w-[120px]`, `max-w-[200px]`, `min-h-[44px]`, `z-[100]`) 대신 Tailwind v4 공식 스케일(`rounded-sm`, `h-7.5`, `min-w-30`, `max-w-50`, `min-h-11`, `z-100` 등)을 우선적으로 사용합니다.
 - 피해야 할 패턴: 일반적인 AI 템플릿(어두운 회색에 형광색 액센트, 세리프 폰트 남용 등)을 피하고 의도적이고 독창적인 디자인 결정을 내립니다.
 - UI 텍스트 작성 시 '디자인 속 글쓰기' 가이드(능동태, 명확한 동사, 일관성 있는 사이니지)를 준수합니다.
 
 ## 2. Component Structure & Modification
 - 모든 컴포넌트는 Functional Component 구조의 훅(Hooks) 패턴으로만 작성합니다.
 - Tailwind CSS v4 유틸리티 클래스만 사용하여 스타일링하며, 인라인 스타일(`style={{}}`)은 특별히 동적인 렌더링을 제외하고는 사용하지 않습니다.
+- 컴포넌트의 클래스 조합 및 props 오버라이드는 반드시 `@/utils/cn`(`twMerge` + `clsx`) 유틸리티를 사용하여 안전하게 병합합니다. (단순 템플릿 리터럴 결합 지양)
 - 내부 임포트 경로는 상대 경로 대신 항상 `@/` 별칭(Alias)을 사용합니다.
 - 변경 후에는 반드시 `npm run lint -- --fix`를 실행하여 Tailwind 클래스 순서를 정렬하고 중복을 자동 제거합니다.
+
 
 ## 3. Component Scaffolding (신규 생성 시)
 새로운 파일을 생성할 때는 다음 구조 규칙을 따릅니다:

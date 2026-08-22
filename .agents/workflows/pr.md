@@ -55,8 +55,11 @@ Section body in English.
 - 만약 현재 브랜치가 `main` 또는 기존 기능과 무관한 브랜치라면, 사용자에게 새 브랜치를 생성할지 물어보거나(예: `feature/xxx`) 작업 맥락에 맞는 새 브랜치를 생성합니다.
 
 ### 3. Commit Changes (If any)
-- `git add .` (또는 필요한 파일만) 명령을 실행하여 변경사항을 스테이징합니다.
-- `git-commit-rules.md`를 참고하여 Conventional Commit 메시지를 작성하고 `git commit`을 실행합니다.
+- **커밋 분할 원칙 (Logical Commit Splitting):**
+  - 대규모 변경사항이 있을 경우, 모든 파일을 한꺼번에 `git add .`로 단일 커밋에 담지 마십시오.
+  - 기능(`feat`), 성능(`perf`), 스타일(`style`), 리팩토링(`refactor`), 린트/다국어(`fix`/`chore`) 등 논리적 단위별로 파일을 선별 스테이징(`git add <files>`)하여 단계별 커밋으로 나누어 작성하십시오.
+  - 각 커밋은 빌드와 테스트가 깨지지 않는 독립적이고 일관된 상태여야 합니다.
+- `git-commit-rules.md`를 참고하여 Conventional Commit 메시지 규약을 엄격히 준수합니다.
 
 ### 4. Push to Remote
 - `git push -u origin <current-branch>`를 사용하여 원격 저장소에 푸시합니다.

@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "yoavbls.pretty-ts-errors",
+    "lokalise.i18n-ally",
+    "vitest.explorer",
+    "ms-playwright.playwright",
+    "streetsidesoftware.code-spell-checker",
+    "eamodio.gitlens"
+  ]
+}
