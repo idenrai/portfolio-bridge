@@ -11,7 +11,7 @@ description: 프론트엔드 UI/UX 컴포넌트 신규 생성, 수정 및 리팩
 ## 1. Visual Design & UI/UX (필수 준수)
 - **컴포넌트 수정 및 생성 시:** 기존 프로젝트의 톤앤매너(Zinc/Black 기반 다크 미니멀리즘, 터미널 감성의 모노스페이스 배지 등) 일관성을 엄격히 유지합니다.
 - **반응형 검증:** 항상 모바일 우선(Mobile-first) 레이아웃을 고려하며, 필요 시 Tailwind의 반응형 유틸리티(`md:`, `lg:`)를 적극 활용하여 여백과 크기를 세밀하게 조정합니다.
-- UI/UX 변경 시 항상 `.agents/skills/ui-ux-pro-max/SKILL.md`와 `.agents/skills/frontend-design/SKILL.md`를 우선 참조하여 퀄리티 컨트롤을 적용합니다.
+- UI/UX 변경 시 항상 `.agents/skills/ui-ux-pro-max/SKILL.md`, `.agents/skills/frontend-design/SKILL.md`, `.agents/skills/design-taste-frontend/SKILL.md`를 우선 참조하여 안티-슬롭(Anti-slop) 원칙 및 퀄리티 컨트롤을 적용합니다.
 - **Tailwind CSS v4 모범 사례 준수:** 스타일링 시 `.agents/skills/tailwind-4-docs/SKILL.md`, `.agents/skills/tailwind-design-system/SKILL.md`, `.agents/skills/tailwind-css-patterns/SKILL.md`를 적극 활용하여 최신 v4 토큰(`@theme`, `@utility`) 및 구조를 준수합니다.
 - **Canonical Class 우선 원칙:** 임의 픽셀 값(`rounded-[4px]`, `h-[30px]`, `min-w-[120px]`, `max-w-[200px]`, `min-h-[44px]`, `z-[100]`) 대신 Tailwind v4 공식 스케일(`rounded-sm`, `h-7.5`, `min-w-30`, `max-w-50`, `min-h-11`, `z-100` 등)을 우선적으로 사용합니다.
 - 피해야 할 패턴: 일반적인 AI 템플릿(어두운 회색에 형광색 액센트, 세리프 폰트 남용 등)을 피하고 의도적이고 독창적인 디자인 결정을 내립니다.
@@ -41,3 +41,9 @@ description: 프론트엔드 UI/UX 컴포넌트 신규 생성, 수정 및 리팩
 1. 관련된 모든 다국어 문자열 키를 식별합니다.
 2. `src/i18n/types.ts` 파일에 키를 추가하거나 업데이트합니다.
 3. 4개의 로캘 파일(`ko.ts`, `en.ts`, `ja.ts`, `de.ts`)의 정확히 동일한 상대적 위치에 번역을 추가합니다.
+
+## 5. Visual Verification & Quality Audit (검증 및 QA 파이프라인)
+프론트엔드 컴포넌트 생성 또는 수정 후에는 다음 단계적 검증을 필수로 수행합니다:
+1. **코드 정렬 및 린트 검사:** `npm run lint -- --fix`를 실행하여 Tailwind 클래스 순서 정렬 및 코드 표준을 검증합니다.
+2. **디자인 및 접근성 감사:** `.agents/skills/web-design-guidelines/SKILL.md`를 기반으로 웹 인터페이스 가이드라인, 터치 타겟(최소 44px), 명도 대비, 키보드 네비게이션, 시각적 계층을 감사합니다.
+3. **시각적 비교(Visual Diff) 검증:** `/before-and-after` 스킬 또는 `.agents/skills/agent-browser/SKILL.md` / `.agents/skills/webapp-testing/SKILL.md`를 활용하여 브라우저 렌더링 상태 및 변경 전후의 시각적 차이를 직접 검증합니다.
