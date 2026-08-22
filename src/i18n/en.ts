@@ -52,9 +52,10 @@ export const en: Translations = {
   dash_notice_csv:
     "Asset data can be exported/imported as CSV files. Use this for backups or device migration.",
   dash_notice_mobile:
-    "️ Optimized for desktop browsers. Mobile screens are not currently supported.",
+    "💡 Optimized for desktop browsers. Mobile screens are not currently supported.",
   dash_sample_btn: "Explore with sample data",
-  dash_sample_hint: "Sample data can be removed via Settings › Reset All Data.",
+  dash_sample_hint:
+    "Sample data can be removed via Settings › Local Data Management › Reset All Data.",
   dash_refresh: "Refresh All",
   dash_refreshing: "Fetching…",
   dash_updated_at: (time) => `${time}`,

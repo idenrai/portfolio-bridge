@@ -52,10 +52,10 @@ export const ja: Translations = {
   dash_notice_csv:
     "資産データはCSVファイルでエクスポート/インポートが可能です。バックアップや端末移行時にご活用ください。",
   dash_notice_mobile:
-    "️ PCブラウザに最適化されています。モバイル画面には現在対応しておりません。",
+    "💡 PCブラウザに最適化されています。モバイル画面には現在対応しておりません。",
   dash_sample_btn: "サンプルデータで確認",
   dash_sample_hint:
-    "サンプルデータは「設定 › 全データ初期化」で削除できます。",
+    "サンプルデータは「設定 › ローカル保存データ管理 › 全データ初期化」で削除できます。",
   dash_refresh: "為替・時価更新",
   dash_refreshing: "取得中…",
   dash_updated_at: (time) => `${time}`,
@@ -352,7 +352,7 @@ export const ja: Translations = {
     "• グローバルマクロ：政治・経済・社会の変化、中央銀行の政策方向を読み解き、マクロ的な投資機会を発掘\n" +
     "• 素早い損切りと生存：生き残ることが最重要であり、仮説が間違っていると判断した場合は直ちにポジションを清算して逃げるべき\n" +
     "• 混沌と非効率性の活用：市場の不安定性やバブルが形成される初期段階を、むしろ収益機会として積極的に活用\n" +
-    "• 誤謬性（Fallibility）：人間は必然的に誤りを犯すものであり、自らの仮説が間違っている可能性を常に開いて疑う\n",
+    "• 誤謬性（Fallibility）：人間は必然的に誤りを犯すものであり、自らの仮説が間違っている可能性があることを常に疑う\n",
   guru_quotes_soros:
     "正しいか間違っているかよりも、正しい時にいくら稼ぎ、間違った時にいくら失うかが重要だ\n" +
     "市場は常に間違っている\n" +
@@ -578,7 +578,7 @@ export const ja: Translations = {
   buffett_indicator_status_over: "割高",
   buffett_indicator_status_deep_over: "大幅に割高",
   buffett_indicator_source: "時価総額: Yahoo Finance ^W5000 · GDP: World Bank",
-  buffett_indicator_desc: "バフェット指標は、米国株式市場全体の時価総額をGDPで割った値です。バフェットは『おそらく最も良い単一の評価指標』と呼んでおり、75%未満は買い機会、200%超えは『火遇び』と述べました。",
+  buffett_indicator_desc: "バフェット指標は、米国株式市場全体の時価総額をGDPで割った値です。バフェットは『おそらく最も良い単一の評価指標』と呼んでおり、75%未満は買い機会、200%超えは『火遊び』と述べました。",
 
   settings_title: "設定",
   settings_display_currency_title: "表示通貨",
@@ -654,7 +654,7 @@ export const ja: Translations = {
   profile_monthly_budget_placeholder: "例: 50000",
   profile_plan3y_label: "3年投資計画",
   profile_plan3y_placeholder:
-    "例: 3年以内に配当収入月、3万円を目指し、成長株中心にリバランス…",
+    "例: 3年以内に配当収入月3万円を目指し、成長株中心にリバランス…",
   profile_plan5y_label: "5年投資計画",
   profile_plan5y_placeholder:
     "例: 5年後に結婚資金として 1000万円を目指す…",
@@ -663,7 +663,7 @@ export const ja: Translations = {
     "例: 10年後に配当収入だけで生活費を賄える経済的自由を達成…",
   profile_notes_label: "特記事項 / 注意点",
   profile_notes_placeholder:
-    "例: 住宅ローン残高 2,300万円（15年）。投資予算のうち毎月 5万円は S&P500 ETF自動購入済み、実質的な機定投資は毎月 3万円分…",
+    "例: 住宅ローン残高 2,300万円（15年）。投資予算のうち毎月 5万円は S&P500 ETF自動購入済み、実質的な積立投資は毎月 3万円分…",
   profile_save: "保存",
   profile_saved: "保存しました",
 
@@ -687,7 +687,7 @@ export const ja: Translations = {
   at_filter_all_type: "全種類",
   at_filter_all_category: "全カテゴリ",
   at_filter_clear: "フィルター解除",
-  at_filter_count: (shown, total) => `${shown} / ${total}銀柄`,
+  at_filter_count: (shown, total) => `${shown} / ${total}銘柄`,
   at_filter_no_result: "該当する資産がありません。",
   at_col_ticker: "ティッカー",
   at_filter_all_account: "すべての口座",
@@ -701,11 +701,11 @@ export const ja: Translations = {
   history_cost: "取得原価",
   history_no_data: "データを収集中です。明日からグラフが表示されます。",
 
-  pnl_chart_title: "銀柄別損益状況",
+  pnl_chart_title: "銘柄別損益状況",
   pnl_chart_pnl: "損益",
   pnl_chart_profit: "利益",
   pnl_chart_loss: "損失",
-  pnl_chart_top12: "損益絶対値上何12銀柄",
+  pnl_chart_top12: "損益絶対値上位12銘柄",
 
   af_mode_stock: "銘柄検索",
   af_mode_cash: "現金/預金",
