@@ -32,15 +32,17 @@ const CURRENCY_LOCALES: Record<CurrencyCode, string> = {
 
 /**
  * 금액 포맷 (현지 통화 형식)
+ * @param showPositiveSign true일 경우 양수 금액 앞에 '+' 부호를 추가합니다. (기본값: false)
  */
 export function formatCurrency(
   amount: number,
   currency: CurrencyCode,
   compact = false,
+  showPositiveSign = false,
 ): string {
   const symbol = CURRENCY_SYMBOLS[currency];
   const abs = Math.abs(amount);
-  const sign = amount < 0 ? "-" : "";
+  const sign = amount < 0 ? "-" : (showPositiveSign && amount > 0 ? "+" : "");
   
   if (currency === "KRW") {
     if (compact && abs >= 1_0000_0000)
@@ -66,8 +68,20 @@ export function formatCurrency(
 }
 
 /**
- * 퍼센트 포맷
+ * 퍼센트 포맷 (수익률/변화율 등)
+ * 기본적으로 양수 및 0에 대해 '+' 부호를 자동으로 포함합니다. (예: `+5.1%`, `-2.3%`)
+ *
+ * @param value 포맷팅할 수치 (예: 5.123 -> +5.1%)
+ * @param decimals 표시할 소수점 자릿수 (기본값: 1)
+ * @param options signed가 false일 경우 '+' 부호를 생략합니다. (기본값: { signed: true })
  */
-export function formatPercent(value: number, decimals = 1): string {
-  return `${value >= 0 ? "+" : ""}${value.toFixed(decimals)}%`;
+export function formatPercent(
+  value: number,
+  decimals = 1,
+  options: { signed?: boolean } = { signed: true },
+): string {
+  const isSigned = options.signed ?? true;
+  const sign = isSigned && value >= 0 ? "+" : "";
+  return `${sign}${value.toFixed(decimals)}%`;
 }
+
