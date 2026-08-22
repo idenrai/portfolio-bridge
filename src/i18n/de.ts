@@ -231,7 +231,7 @@ export const de: Translations = {
   guru_quotes_buffett:
     "Regel Nr. 1: Verliere niemals Geld. Regel Nr. 2: Vergiss niemals Regel Nr. 1.\n" +
     "Sei ängstlich, wenn andere gierig sind, und gierig, wenn andere ängstlich sind.\n" +
-    "Erst wenn die Ebbe kommt, sieht man, wer nackt geschwommen ist.",
+    "Preis ist das, was man bezahlt. Wert ist das, was man bekommt.",
   guru_philosophy_munger:
     "• Konzentriertes Investieren: Massive Wetten nur bei hoher Überzeugung in wenige herausragende Unternehmen abschließen\n" +
     "• Mentale Modelle (multidisziplinäres Denken): Kernkonzepte aus Psychologie, Physik, Biologie, Mathematik und Geschichte zusammenführen\n" +
@@ -253,7 +253,7 @@ export const de: Translations = {
     "• Cocktailparty-Theorie: Ein Kontraindikator – wenn jeder auf einer Party mit Aktien prahlt, ist der Markt am Höhepunkt; wenn sie Aktien ignorieren, am Tiefpunkt\n",
   guru_quotes_lynch:
     "Wisse, was du besitzt – und warum du es besitzt.\n" +
-    "Das wichtigste Organ an der Börse ist das Gehirn, nicht der Magen.\n" +
+    "Das wichtigste Organ an der Börse ist der Magen, nicht das Gehirn.\n" +
     "Die Zeit ist auf Ihrer Seite, wenn Sie Aktien von überlegenen Unternehmen besitzen.",
   guru_philosophy_graham:
     "• Sicherheitsmarge: Kaufen Sie ausschließlich mit einem massiven Abschlag zum inneren Wert, um einen Puffer gegen Fehler und Pech zu schaffen\n" +
@@ -268,13 +268,14 @@ export const de: Translations = {
   guru_philosophy_dalio:
     "• Allwetter-Strategie: Sich perfekt auf alle Wirtschaftsregimes in vier Quadranten vorbereiten (Wachstum/Abschwung × Inflation/Deflation)\n" +
     "• Risikoparität: Risikobeiträge statt Kapitalmengen angleichen, um die Dominanz einzelner Anlageklassen zu vermeiden\n" +
-    "• Breite Diversifikation: Strukturell in unkorrelierte Vermögenswerte wie Aktien, nominale Anleihen, inflationsgeschützte Anleihen, Gold und Rohstoffe investieren\n" +
+    "• Absicherung durch Sachwerte: Anleihen reduzieren und in Sachwerte wie Gold (10–15 %) und Bitcoin diversifizieren, um späte Schuldenzyklen abzufedern\n" +
     "• Radikale Transparenz: Unabhängig von der Hierarchie nach Wahrheit streben und eine Ideen-Meritokratie (Idea Meritocracy) im Unternehmen durchsetzen\n" +
     "• Prinzipien: Märkte und das Leben als Maschine von Ursache und Wirkung verstehen; Lehren aus Fehlern in Algorithmen systematisieren\n" +
     "• Zyklen verstehen: Kurzfristige Geschäftszyklen und langfristige Schuldenzyklen analysieren, um makroökonomische Wendepunkte zu navigieren\n",
   guru_quotes_dalio:
     "Wer von der Kristallkugel lebt, wird zersplittertes Glas essen.\n" +
-    "Schmerz + Reflexion = Fortschritt.",
+    "Schmerz + Reflexion = Fortschritt.\n" +
+    "Zu wissen, was man nicht weiß, ist viel wichtiger als alles, was man weiß.",
   guru_philosophy_lilu:
     "• Buffett-Munger-Ansatz in Asien: Wenden Sie die reinsten Prinzipien des Value-Investings systematisch auf die schnell wachsenden asiatischen Märkte an\n" +
     "• Tiefgehende Unternehmensanalyse: Verstehen Sie das absolute Wesen von Geschäftsmodellen, die Integrität des Managements und unüberwindbare Burggräben\n" +
@@ -283,7 +284,8 @@ export const de: Translations = {
     "• Intellektuelle Ehrlichkeit: Erkennen Sie die Grenzen Ihres eigenen Wissens präzise an und agieren Sie streng innerhalb Ihres Kompetenzkreises\n",
   guru_quotes_lilu:
     "Das größte Risiko beim Investieren ist nicht Volatilität, sondern permanenter Kapitalverlust.\n" +
-    "Ein wahrer Value-Investor versucht niemals, den Markt zu schlagen. Er kontrolliert nur seine eigene Unwissenheit.",
+    "Ein wahrer Value-Investor versucht niemals, den Markt zu schlagen. Er kontrolliert nur seine eigene Unwissenheit.\n" +
+    "Man braucht im Leben nur ein paar wirklich großartige Investmentideen.",
   guru_philosophy_ackman:
     "• Aktivistisches Investieren: Erwerben Sie massive Beteiligungen, um aktiv mit dem Management zu streiten und verborgenen Aktionärswert freizusetzen\n" +
     "• Konzentriertes Portfolio: Tätigen Sie riesige Investitionen mit höchster Überzeugung in ein konzentriertes Portfolio von 5–10 Weltklasse-Unternehmen\n" +
@@ -292,7 +294,8 @@ export const de: Translations = {
     "• Makro-Absicherung: Nutzen Sie massive Derivatpositionen (wie CDS) als ultimative defensive Absicherung gegen extreme makroökonomische Schocks\n",
   guru_quotes_ackman:
     "Konzentration baut Vermögen auf; Diversifikation bewahrt es.\n" +
-    "Die besten Investitionen sind oft diejenigen, über die die Leute damals als furchtbare Ideen gelacht haben.",
+    "Die besten Investitionen sind oft diejenigen, über die die Leute damals als furchtbare Ideen gelacht haben.\n" +
+    "Investieren Sie in einfache, vorhersehbare, bargeldgenerierende Unternehmen mit dominanter Marktposition.",
   guru_philosophy_burry:
     "• Konträres Investieren: Bereitwillig und entschlossen Positionen einnehmen, die dem Konsens oder dem Wahn des Marktes diametral entgegenstehen\n" +
     "• Wertbasierte Analyse: Innere und Vermögenswerte akribisch berechnen, wobei das Herdenverhalten vollständig ignoriert wird\n" +
@@ -301,7 +304,8 @@ export const de: Translations = {
     "• Hohe Bargeldreserven: Unendliche Geduld zeigen und Bargeld halten, bis sich eine wild asymmetrische, unbestreitbare Gelegenheit bietet\n",
   guru_quotes_burry:
     "Ich bin vielleicht früh dran, aber ich liege nicht falsch.\n" +
-    "Wenn jeder etwas glaubt, ist es eine gute Wette, dass es niemand wirklich überprüft hat.",
+    "Wenn jeder etwas glaubt, ist es eine gute Wette, dass es niemand wirklich überprüft hat.\n" +
+    "Berechnen Sie inmitten des Marktwahns ruhig den inneren Wert und versteckte Tail-Risiken.",
   guru_philosophy_fisher:
     "• Globales Makro: Massive Verschiebungen in der Weltwirtschaft und historische Marktzyklen analysieren, um die Top-Down-Vermögensallokation zu diktieren\n" +
     "• Stimmung ausnutzen: Aus den irrationalen Extremen der Marktmassen Kapital schlagen – maximalen Pessimismus kaufen und maximalen Optimismus verkaufen\n" +
@@ -310,7 +314,8 @@ export const de: Translations = {
     "• Die drei Fragen: Immer fragen, was der Markt weiß, was er nicht weiß und was er glaubt, das in Wirklichkeit völlig falsch ist\n",
   guru_quotes_fisher:
     "Märkte klettern an einer Mauer der Sorge hinauf.\n" +
-    "Was jeder weiß, ist meistens falsch, und genau darin liegt die größte Chance.",
+    "Was jeder weiß, ist meistens falsch, und genau darin liegt die größte Chance.\n" +
+    "Kurzfristige Schlagzeilen sind meist nur Rauschen; der wahre Treiber langfristigen Wohlstands ist kapitalistische Innovation.",
   guru_philosophy_cohen:
     "• Multi-Manager-Modell: Eine massive Plattform betreiben, die zahlreiche unabhängige Handelsstrategien kombiniert, die von brillanten, spezialisierten Portfoliomanagern ausgeführt werden\n" +
     "• Höchstes Risikomanagement: Gnadenlose Stop-Loss-Limits für jede Position durchsetzen und die Gesamtrisikolimits des Portfolios ausnahmslos streng verwalten\n" +
@@ -319,18 +324,19 @@ export const de: Translations = {
     "• Flexible Strategie: Alles einsetzen, was im aktuellen Umfeld am besten funktioniert – Long/Short-Equity, Event-Driven oder rein quantitative Strategien\n",
   guru_quotes_cohen:
     "Entscheidend ist nicht, wie genau man die Zukunft vorhersagt, sondern wie gnadenlos man Risiken managt und Verluste begrenzt.\n" +
-    "Der Markt ist nicht perfekt effizient. Geld wird da verdient, wo Informationen asymmetrisch sind.",
+    "Der Markt ist nicht perfekt effizient. Geld wird da verdient, wo Informationen asymmetrisch sind.\n" +
+    "Wenn die Trade-These bricht, schneiden Sie den Verlust sofort und emotionslos ab.",
   guru_philosophy_marks:
     "• Marktzyklus-Theorie: Verstehen, dass Märkte wie ein Pendel schwingen, und herauszufinden, wo wir uns im Zyklus befinden, ist von größter Bedeutung\n" +
     "• Denken auf zweiter Ebene (Second-Level Thinking): Man kann nicht das Gleiche tun wie andere und Überrenditen erwarten; man muss tiefer und anders denken als der Konsens\n" +
-    "• Distressed Investing: Pionier bei notleidenden Krediten; wahren Wert und hochrentable Chancen dort finden, wo die Masse in Panik gerät\n" +
+    "• Grundlegender Wandel (Sea Change): Das Zeitalter der extremen Niedrigzinsen ist vorbei; Hochzinsanleihen und Kreditinstrumente bieten nun aktienähnliche Renditen bei geringerem Risiko\n" +
     "• Risiko = Permanenter Verlust: Wahres Risiko ausschließlich als Wahrscheinlichkeit eines dauerhaften Kapitalverlusts definieren, nicht als kurzfristige Volatilität\n" +
     "• Defensives Investieren: Sich viel stärker darauf konzentrieren, Verluste in schlechten Zeiten zu begrenzen, als Gewinne in guten Zeiten zu maximieren\n" +
     "• Preis vs. Wert: Ein großartiges Asset, das zu teuer gekauft wird, ist ein schlechtes Investment; ein schlechtes Asset, das billig genug gekauft wird, ist ein großartiges Investment\n",
   guru_quotes_marks:
     "Man kann nicht vorhersagen, aber man kann sich vorbereiten.\n" +
     "Erfahrung ist das, was man bekommt, wenn man nicht das bekommt, was man wollte.\n" +
-    "Das Gefährlichste ist es, etwas auf dem Höhepunkt seiner Beliebtheit zu kaufen.",
+    "Wenn sich das Marktumfeld ändert, muss sich die Strategie anpassen. Wir leben in einer Ära des grundlegenden Wandels (Sea Change).",
   guru_philosophy_klarman:
     "• Vermächtnis der Sicherheitsmarge: Benjamin Grahams konservatives Prinzip der Sicherheitsmarge brillant an komplexe, moderne Finanzmärkte anpassen\n" +
     "• Absolute Renditen: Die Falle der relativen Benchmark-Jagd vollständig ablehnen und sich ausschließlich darauf konzentrieren, positive absolute Renditen zu erzielen, ohne Geld zu verlieren\n" +
@@ -370,26 +376,30 @@ export const de: Translations = {
     "• Radikale Transparenz: Alle proprietären Forschungsmodelle als Open-Source zur Verfügung stellen und tägliche Handelsaktivitäten für die gesamte Öffentlichkeit zur Prüfung veröffentlichen\n",
   guru_quotes_wood:
     "Innovation löst Probleme und schafft völlig neue Marktchancen.\n" +
-    "Wir stehen auf der richtigen Seite des Wandels, der richtigen Seite der Geschichte.",
+    "Wir stehen auf der richtigen Seite des Wandels, der richtigen Seite der Geschichte.\n" +
+    "Blicken Sie bei disruptiven Innovationen über kurzfristige Volatilität hinweg und fokussieren Sie sich auf die 5-Jahres-S-Kurve.",
 
   guru_philosophy_druckenmiller:
     "• Makro-Mastermind: Das komplexe Netz aus Makroökonomie, Zentralbankpolitik und Aktienmärkten entschlüsseln, um massive direktionale Positionen aufzubauen\n" +
-    "• Kapitalerhalt steht an erster Stelle: Das von Soros geerbte Prinzip, das Abwärtsrisiko strikt zu begrenzen, führte zu einem legendären 30-jährigen Track-Record ohne ein einziges Verlustjahr\n" +
+    "• Bitcoin & Infrastruktur: Bitcoin als Wertaufbewahrungs-Marke schätzen und auf KI-Rechenzentren sowie Mining-Energieinfrastruktur setzen\n" +
     "• Wetten mit hoher Überzeugung: Bei durchschnittlichen Ideen mit Diversifikation verteidigen, aber bei absoluter Überzeugung massiven Hebel einsetzen, um Home Runs zu erzielen\n" +
     "• Gnadenlose Flexibilität: Sofort umschwenken; eine massive Position augenblicklich auflösen, wenn die These bricht oder der Haupttrend des Marktes dreht\n" +
     "• Asymmetrisches Risikomanagement: Verluste mit erschreckender Geschwindigkeit begrenzen, Gewinner aber so lange laufen lassen, wie der makroökonomische Rückenwind anhält\n",
   guru_quotes_druckenmiller:
     "Der Weg zum Aufbau langfristiger Renditen führt über den Erhalt des Kapitals und das Schlagen von Home Runs.\n" +
-    "Lege alle deine Eier in einen Korb und behalte diesen Korb dann sehr genau im Auge.",
+    "Lege alle deine Eier in einen Korb und behalte diesen Korb dann sehr genau im Auge.\n" +
+    "Es geht nicht darum, immer recht zu haben, sondern den Mut zu besitzen, groß zu wetten, wenn die Überzeugung absolut ist.",
   guru_philosophy_smith:
-    "• Qualitäts-Compounder: Das radikal einfache Kernprinzip ausführen: \"Kaufe gute Unternehmen, überbezahle nicht, tu dann absolut gar nichts\"\n" +
-    "• Hoher ROIC-Fokus: Rücksichtslos Unternehmen mit wirtschaftlichen Burggräben aussortieren, die außergewöhnlich hohe Renditen auf ihr investiertes Kapital erzielen und diese Gewinne dauerhaft reinvestieren können\n" +
-    "• Konzentriertes Portfolio: Die verwässernden Auswirkungen einer breiten Diversifikation ablehnen und stattdessen eine konzentrierte Liste von 25–30 Eliteunternehmen mit extrem hoher Überzeugung halten\n" +
-    "• Qualität vor Schnäppchenjagd: Bereitwillig faire – oder sogar scheinbar hohe – Preise für außergewöhnliche, erstklassige Geschäftsmodelle zahlen, anstatt Zigarrenstummel von geringer Qualität zu jagen\n" +
-    "• Zinseszins-Effekt: Den wahren Wert des Investierens erkennen, der in der ungestörten, magischen Aufzinsung großartiger Unternehmen über Jahrzehnte hinweg liegt\n",
+    "• Qualitäts-Compounder: Das einfache Kernprinzip ausführen: 'Kaufe gute Unternehmen, überbezahle nicht, tu dann gar nichts'\n" +
+    "• Hoher ROCE-Fokus: In kapitalarme Unternehmen mit dauerhaften Wettbewerbsvorteilen investieren, die Kapital mit 20 %+ verzinsen\n" +
+    "• Disziplin bei KI-Investitionen (CapEx): Gewaltige KI-Infrastrukturausgaben von Tech-Konzernen kritisch prüfen, um Kapitalvernichtung zu vermeiden\n" +
+    "• Konzentriertes Portfolio: Verwässerung ablehnen; auf 20–30 Eliteunternehmen konzentrieren und auf die Qualität der Ideen setzen\n" +
+    "• Pragmatische Aktivität: Langfristig halten, aber gebrochene Geschäftsmodelle rücksichtslos veräußern, statt an Dogmen festzuhalten\n" +
+    "• Zinseszins-Effekt: Großartige Unternehmen über lange Zeiträume halten, um das exponentielle Aufzinsen zu maximieren\n",
   guru_quotes_smith:
+    "Kaufe gute Unternehmen, überbezahle nicht, tu dann absolut gar nichts (Buy good companies, don't overpay, do nothing).\n" +
     "Zur Risikoreduktion blind zu diversifizieren, überzeugt mich nicht. Wenn man investiert, dann in die allerbesten Unternehmen.\n" +
-    "Der größte Fehler, den Investoren machen, ist das ständige Bedürfnis, an ihrem Portfolio herumzupfuschen und das Gefühl zu haben, sie müssten etwas tun.",
+    "Der größte Fehler, den Investoren machen, ist das ständige Bedürfnis, an ihrem Portfolio herumzupfuschen.",
   guru_philosophy_greenblatt:
     "• Magische Formel: Aktien systematisch ordnen und auswählen, die gleichzeitig hohe Gewinnrenditen (Günstigkeit) und eine hohe Kapitalrendite (Qualität) aufweisen\n" +
     "• Systematisches Value Investing: Menschliche Emotionen, Gier und Angst vollständig durch einen mechanischen, auf strengen Regeln basierenden Quant-Ansatz ersetzen\n" +
@@ -415,7 +425,9 @@ export const de: Translations = {
     "• S·L·I·M: Sich mit dem großen Geld verbünden: institutionelles Sponsoring, wahre Branchenführerschaft und eindeutige Markttrends nach oben sicherstellen\n" +
     "• Unnachgiebige Stop-Losses: Jeden einzelnen potenziell verheerenden Verlust automatisch kappen, indem man ausnahmslos 7–8 % unter dem Kaufpreis ohne zu zögern verkauft\n",
   guru_quotes_oneil:
-    "Die besten Aktien der Welt scheinen für die Masse oft zu teuer und zu hoch, während die schlechtesten wie großartige Schnäppchen wirken.",
+    "Das ganze Geheimnis des Erfolgs an der Börse besteht darin, so wenig wie möglich zu verlieren, wenn man unrecht hat.\n" +
+    "Kaufen Sie niemals billige Aktien. Kaufen Sie teure Aktien und verkaufen Sie sie noch teurer.\n" +
+    "Die besten Aktien der Welt scheinen für die Masse oft zu teuer, während die schlechtesten wie Schnäppchen wirken.",
   guru_philosophy_bogle:
     "• Index-Revolution: Besitzen Sie den gesamten Aktienmarkt. Der Versuch, den Durchschnitt zu schlagen, scheitert letztlich an den Gebühren.\n" +
     "• Kosten minimieren: Kontrollieren Sie gnadenlos Verwaltungsgebühren, Umschlagskosten und Steuern, die die Anlagerenditen auffressen.\n" +
@@ -424,7 +436,8 @@ export const de: Translations = {
     "• Ästhetik der Einfachheit: Anstelle von komplexen Fonds oder Derivaten reicht ein einziger kostengünstiger, breit angelegter Indexfonds völlig aus.\n",
   guru_quotes_bogle:
     "Suchen Sie nicht nach der Nadel im Heuhaufen. Kaufen Sie einfach den Heuhaufen!\n" +
-    "Die Zeit ist Ihr Freund, der Impuls ist Ihr Feind.",
+    "Die Zeit ist Ihr Freund, der Impuls ist Ihr Feind.\n" +
+    "Die größten Feinde des Anlegers sind Kosten und Emotionen. Kaufen Sie den Markt und bleiben Sie auf Kurs.",
   guru_philosophy_swensen:
     "• Stiftungsmodell: Gehen Sie über die traditionelle 60/40-Aufteilung hinaus und diversifizieren Sie stark in alternative Anlagen (Private Equity, Immobilien, Rohstoffe).\n" +
     "• Aktienorientiertes Portfolio: Erhöhen Sie den Anteil aktienähnlicher Anlagen mit hohen erwarteten Renditen, um die langfristige Kaufkraft zu erhalten.\n" +
@@ -433,16 +446,18 @@ export const de: Translations = {
     "• Mechanisches Rebalancing: Lassen Sie sich bei Marktschwankungen nicht von Emotionen leiten; führen Sie striktes Rebalancing durch den Verkauf von Gewinnern und Kauf von Verlierern durch.\n",
   guru_quotes_swensen:
     "Diversifikation ist das einzige kostenlose Mittagessen beim Investieren.\n" +
-    "Der schlimmste Feind des Investors ist in der Regel er selbst.",
+    "Der schlimmste Feind des Investors ist in der Regel er selbst.\n" +
+    "Die Asset Allocation bestimmt mehr als 90 % des langfristigen Portfolioerfolgs.",
   guru_philosophy_taleb:
-    "• Hantelstrategie: Vermeiden Sie Investitionen mit mittlerem Risiko. Allokieren Sie extremes Kapital: extrem sichere Anlagen (90%) und extrem riskante Anlagen (10%).\n" +
+    "• Hantelstrategie: Vermeiden Sie Investitionen mit mittlerem Risiko. Allokieren Sie 90 % in extrem sichere Anlagen und 10 % in hochgradig konvexe Tail-Hedges.\n" +
     "• Antifragilität: Überleben Sie Schocks und Unordnung nicht nur, sondern bauen Sie eine Position auf, die aus dem Chaos stärker wird und profitiert.\n" +
     "• Vorbereitung auf Schwarze Schwäne: Das Wichtigste ist, nicht bankrottzugehen, wenn ein extremes Ereignis eintritt, das Finanzmodelle nicht vorhersagen können.\n" +
-    "• Asymmetrische Auszahlungen: Wetten Sie dort, wo das Abwärtsrisiko streng begrenzt ist, das Aufwärtspotenzial jedoch unendlich ist.\n" +
-    "• Skepsis gegenüber Experten: Vertrauen Sie nicht blind Bankern, Akademikern oder Modellen der Wall Street; konzentrieren Sie sich auf das Risikomanagement für Ihr eigenes Überleben.\n",
+    "• Fragilität ausfiltern: Spekulative Nullsummen-Trends ohne inneren Wert (wie im Bitcoin Black Paper dargelegt) konsequent ablehnen.\n" +
+    "• Asymmetrische Auszahlungen: Wetten Sie mit Put-Optionen und physischen Rohstoffen dort, wo das Abwärtsrisiko streng begrenzt, das Aufwärtspotenzial jedoch explosiv ist.\n",
   guru_quotes_taleb:
     "Überleben steht an erster Stelle. Sie dürfen nicht bankrottgehen, um langfristige Renditen zu erzielen.\n" +
-    "Der Wind löscht eine Kerze, aber entfacht ein Feuer. Seien Sie das Feuer.",
+    "Der Wind löscht eine Kerze, aber entfacht ein Feuer. Seien Sie das Feuer.\n" +
+    "Ein Risiko einzugehen, dessen Scheitern man nicht überleben kann, ist keine Investition, sondern Selbstmord.",
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Bewertung",
   lynch_tenbagger_desc:
