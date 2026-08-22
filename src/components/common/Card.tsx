@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "@/utils/cn";
 
 interface CardProps {
   title?: ReactNode;
@@ -7,10 +8,10 @@ interface CardProps {
   action?: ReactNode;
 }
 
-export function Card({ title, children, className = "", action }: CardProps) {
+export function Card({ title, children, className, action }: CardProps) {
   return (
     <div
-      className={`border border-zinc-800 bg-zinc-950 ${className}`}
+      className={cn("border border-zinc-800 bg-zinc-950", className)}
     >
       {(title || action) && (
         <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3 md:px-5">
@@ -24,3 +25,4 @@ export function Card({ title, children, className = "", action }: CardProps) {
     </div>
   );
 }
+

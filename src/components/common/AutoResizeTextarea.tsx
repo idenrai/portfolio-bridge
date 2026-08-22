@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { cn } from "@/utils";
 
 export function AutoResizeTextarea({
   className,
@@ -22,7 +23,7 @@ export function AutoResizeTextarea({
     <textarea
       ref={ref}
       rows={1}
-      className={`${className || ""} overflow-hidden bg-transparent outline-none`}
+      className={cn("overflow-hidden bg-transparent outline-none", className)}
       placeholder={placeholder}
       value={value}
       onChange={onChange}

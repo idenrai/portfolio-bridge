@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useRef } from "react";
+import { cn } from "@/utils/cn";
 
 interface ModalProps {
   open: boolean;
@@ -29,7 +30,10 @@ export function Modal({
     <dialog
       ref={dialogRef}
       onClose={onClose}
-      className={`${maxWidth} m-auto flex max-h-[85vh] w-[calc(100%-1rem)] flex-col rounded-none border-none p-0 shadow-none backdrop:bg-black/80 sm:max-h-[90vh] sm:w-full`}
+      className={cn(
+        "m-auto flex max-h-[85vh] w-[calc(100%-1rem)] flex-col rounded-none border-none p-0 shadow-none backdrop:bg-black/80 sm:max-h-[90vh] sm:w-full",
+        maxWidth
+      )}
     >
       {open && (
         <div className="flex max-h-[85vh] min-h-0 flex-col rounded-none border border-zinc-800 bg-zinc-950 sm:max-h-[90vh]">
@@ -55,3 +59,4 @@ export function Modal({
     </dialog>
   );
 }
+

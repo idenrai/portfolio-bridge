@@ -196,7 +196,7 @@ export function CustomSelect<T extends string | number>({
   const portalContent = isOpen && typeof document !== 'undefined' ? createPortal(
     <div 
       className={cn(
-        "absolute z-[100] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/95 p-1 shadow-xl backdrop-blur-xl",
+        "absolute z-100 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/95 p-1 shadow-xl backdrop-blur-xl",
         "animate-popup",
         dropdownClassName
       )}
@@ -205,7 +205,7 @@ export function CustomSelect<T extends string | number>({
       <ul 
         id={listboxId}
         ref={listRef}
-        className="custom-scrollbar relative max-h-60 overflow-y-auto" 
+        className="relative max-h-60 custom-scrollbar overflow-y-auto" 
         role="listbox"
       >
         {options.map((option, index) => {
