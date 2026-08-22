@@ -30,10 +30,10 @@ export function DisplaySection() {
             }
             ariaLabel={t.settings_display_currency_title}
             options={[
-              { value: "KRW", label: `KRW - ${t.currency_krw ?? "대한민국 원"}` },
-              { value: "USD", label: `USD - ${t.currency_usd ?? "미국 달러"}` },
-              { value: "JPY", label: `JPY - ${t.currency_jpy ?? "일본 엔"}` },
-              { value: "EUR", label: `EUR - ${t.currency_eur ?? "유로"}` },
+              { value: "KRW", label: t.currency_krw },
+              { value: "USD", label: t.currency_usd },
+              { value: "JPY", label: t.currency_jpy },
+              { value: "EUR", label: t.currency_eur },
             ]}
           />
         </div>
