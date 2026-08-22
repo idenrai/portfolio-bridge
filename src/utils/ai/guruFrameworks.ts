@@ -64,10 +64,10 @@ export const GURU_FRAMEWORKS: Record<string, GuruFramework> = {
   dalio: {
     lens: `Apply the All Weather and risk parity framework:
 - Economic regime mapping: classify each asset by which of the 4 quadrants it thrives in — Rising Growth, Falling Growth, Rising Inflation, Falling Inflation — and identify the quadrant currently implied by macro data
+- Debt cycle and non-liability assets: with sovereign debt mounting, evaluate exposure to non-liability assets (gold 10–15%, Bitcoin 1–2%) to hedge against fiat debasement and bond risks
 - Risk contribution: estimate which holdings contribute disproportionate risk to the portfolio (equities typically dominate risk budgets even at modest weight allocations)
 - Correlation clusters: identify groups of holdings that will move together in a crisis — apparent diversification that masks hidden concentration
 - Current macro regime: given today's date, which quadrant is the global economy closest to — and is this portfolio positioned to perform in that environment?
-- Missing asset classes: does the portfolio hold any inflation-protecting assets (gold, commodities, TIPS)? Any long-duration bonds to counterbalance equity risk?
 - Fragility check: any position sizes or leverage that could cause forced selling during a drawdown, turning a temporary loss into a permanent one?`,
     format: `Write as a structured principles document — the kind circulated internally at Bridgewater, with clear section headers and explicit logical flow. Include an economic quadrant positioning table showing each major holding and its regime sensitivity. State the portfolio's current implied macro bet explicitly and without softening. Conclude with specific rebalancing steps to move toward risk parity, quantified where possible.`,
   },
@@ -123,11 +123,11 @@ export const GURU_FRAMEWORKS: Record<string, GuruFramework> = {
   // ── Steven Cohen ──────────────────────────────────────────────────────────
   cohen: {
     lens: `Apply the trading desk risk and catalyst framework:
-- Catalyst inventory: for each position, what is the specific near-term catalyst — earnings release, product launch, regulatory decision, management change — that justifies holding this as a live, active trade today?
+- Catalyst inventory: for each position, what is the specific near-term catalyst — earnings release, product launch, regulatory decision, Web3/crypto adoption — that justifies holding this as a live, active trade today?
+- Digital asset & infrastructure alignment: are high-growth or Web3/crypto holdings supported by real institutional adoption, liquidity, or fintech integration?
 - Stop-loss discipline: at what price level does the thesis break for each holding — and has that level already been breached without triggering a cut?
 - Risk/reward ratio: for each position, estimate the realistic upside to thesis target vs. downside to stop — any position below 2:1 deserves immediate review and likely replacement
 - Portfolio heat map: what percentage of total capital is concentrated in high-risk, active-thesis positions vs. low-conviction filler that is consuming capital without purpose?
-- Correlation and crowding risk: are multiple positions exposed to the same underlying factor — rates, dollar, growth-vs-value sentiment — such that a single macro shift would hit them simultaneously?
 - Winners vs. losers discipline: separate ruthlessly what is working from what is not — underperforming positions do not earn patience, they earn a stop`,
     format: `Write as a fast, direct trading desk review — no wasted words. Lead immediately with the action list: what to cut today, in priority order. Present a risk/reward table for all significant positions. Flag the most crowded position in the portfolio explicitly. End with a portfolio heat score (1–10, where 10 is maximum risk concentration) and name the single trade that would most improve the overall risk/reward profile.`,
   },
@@ -135,12 +135,12 @@ export const GURU_FRAMEWORKS: Record<string, GuruFramework> = {
   // ── Howard Marks ──────────────────────────────────────────────────────────
   marks: {
     lens: `Apply the market cycle and second-level thinking framework:
+- Sea Change & asset class calibration: the era of zero rates is over; evaluate whether high-yield credit and debt instruments offer equity-like returns with less risk than expensive equities
 - Cycle position: where is the pendulum for each asset class in this portfolio — deep in fear territory, at neutral, or at dangerous optimism? Be specific about which direction it is swinging
 - Second-level thinking: for each major holding, state what the consensus currently thinks — then state what a superior second-level thinker should conclude instead, and why those differ
 - Risk as permanent loss: for each holding, what is the realistic probability of permanent capital impairment (not temporary paper drawdown) — and is that risk appropriately compensated?
 - Distressed opportunity check: are there any positions in the portfolio that benefit from credit stress, market panic, or forced selling — or is the portfolio entirely long-only consensus exposure?
-- Defensive vs. offensive calibration: given the current cycle phase, should the portfolio be playing offense (maximizing returns) or defense (protecting capital) — and does the current positioning reflect that judgment?
-- Aggressiveness setting: Marks does not call tops and bottoms, but he does adjust aggressiveness — is this portfolio's overall risk level appropriate for where we currently sit in the cycle?`,
+- Defensive vs. offensive calibration: given the current cycle phase, should the portfolio be playing offense (maximizing returns) or defense (protecting capital) — and does the current positioning reflect that judgment?`,
     format: `Write as an Oaktree-style client memo — thoughtful, layered, intellectually rigorous, and explicitly non-predictive. Begin with the cycle assessment and pendulum position. Apply second-level thinking explicitly to 3–4 key holdings in a structured table (Consensus View / Superior Conclusion / Implication). End with a clear stance: is this a moment for offense or defense, and what specific adjustments would move the portfolio toward the right posture for this cycle position?`,
   },
 
@@ -195,12 +195,12 @@ export const GURU_FRAMEWORKS: Record<string, GuruFramework> = {
   // ── Stanley Druckenmiller ─────────────────────────────────────────────────
   druckenmiller: {
     lens: `Apply macro regime and asymmetric risk/reward analysis:
-- Current macro regime: given today's date, assess the key macro drivers — rate cycle phase (rising/pausing/cutting), dollar trend, liquidity conditions (central bank balance sheet direction), credit spread levels — and determine which asset classes this regime structurally rewards
+- Current macro regime: given today's date, assess the key macro drivers — rate cycle phase, dollar trend, liquidity conditions, and sovereign debt dynamics — to determine which asset classes this regime structurally rewards
+- Asymmetric tech & hard asset bets: evaluate exposure to high-conviction growth (AI compute, semiconductors), energy/power infrastructure (including Bitcoin mining), and hard asset stores of value (gold, Bitcoin)
 - Risk/reward asymmetry: for each position, estimate the upside to the thesis target vs. the downside to the stop-loss level — any position below 3:1 risk/reward does not deserve capital at scale
 - Conviction ranking: rank all positions by current conviction level — the largest positions must be the highest-conviction, macro-aligned ideas, not comfortable consensus holds or legacy positions
-- Immediate cut list: identify positions where the macro tailwind has reversed, the thesis has become stale, or the risk/reward has deteriorated below acceptable levels — these must be cut regardless of entry price or psychological attachment
-- Sizing discipline audit: are the biggest bets actually the best current ideas, or has the portfolio drifted into passive accumulation of mediocre positions that consume capital without conviction?
-- Momentum alignment: in the current macro regime, which holdings have price momentum aligned with the thesis — and which are fighting the tape, burning capital while waiting for a reversal that may not come?`,
+- Immediate cut list: identify positions where the macro tailwind has reversed, the thesis has become stale, or the risk/reward has deteriorated below acceptable levels — these must be cut regardless of entry price
+- Sizing discipline audit: are the biggest bets actually the best current ideas, or has the portfolio drifted into passive accumulation of mediocre positions?`,
     format: `Write as a decisive macro trading brief — aggressive, direct, zero second-guessing. Lead with the macro regime assessment in 2–3 sentences maximum. Present a conviction and risk/reward table for all positions (Position / Conviction: High/Medium/Low / Upside / Downside / R/R Ratio). List the immediate cut candidates first — name them explicitly with a single-line reason each. End with the one highest-conviction asymmetric trade currently in the portfolio and the explicit argument for sizing it at maximum.`,
   },
 
@@ -208,11 +208,11 @@ export const GURU_FRAMEWORKS: Record<string, GuruFramework> = {
   smith: {
     lens: `Apply the Fundsmith quality compounding framework:
 - Return on Operating Capital Employed (ROCE): for each equity holding, is ROCE sustainably above 20%? Below this threshold, the business cannot compound at rates that justify a long-term hold
+- AI CapEx & capital-light discipline: scrutinize massive capital expenditures in tech (AI arms race) — is heavy CapEx diluting ROCE and turning capital-light businesses into capital-intensive utilities?
 - Free cash flow conversion: is reported net profit backed by real FCF (FCF/net income above 80%)? Accounting profits that do not convert to cash are a structural warning sign
 - Reinvestment opportunity: can the business reinvest a meaningful portion of earnings at the same high ROCE — or are high returns only maintained by paying everything out, limiting compounding potential?
 - Debt discipline: does net debt exceed 2× EBITDA? Leverage amplifies downside in quality businesses and destroys the compounding mechanism in adverse periods
-- Business simplicity test: if you cannot explain in one sentence what this business does and why competitors cannot easily replicate it, it has no place in a quality portfolio
-- Price discipline: even outstanding companies are poor investments at extreme valuations — flag any holding priced so richly that it requires operational perfection and continued multiple expansion to justify`,
+- Pragmatic quality action: if a holding's business model breaks, competition erodes its moat, or management misallocates capital, exit ruthlessly rather than clinging to dogma`,
     format: `Write as a Fundsmith-style shareholder letter excerpt — dry, precise, commercially sharp, occasionally witty. Present a quality scorecard table for each holding (ROCE / FCF conversion / net debt/EBITDA / business simplicity: Pass or Fail). Issue a Hold / Trim / Exit verdict for each position based solely on quality criteria — not sentiment, not recent performance. End with a candid assessment of whether the portfolio reflects genuine quality discipline or has drifted toward owning things that merely feel like quality names.`,
   },
 
@@ -264,6 +264,36 @@ Score interpretation: 8–9 = Strong (historically outperforms among high B/M st
 - Stop-loss rule: any position down 7–8% from the exact purchase price must be sold immediately — no averaging down, no rationalizing, no exceptions`,
     format: `Write as a tactical IBD-style stock review — direct, intensity-focused, no patience for sentiment or stories. Display the market direction (M) prominently at the top as it governs everything else. Present a CAN SLIM scorecard for every stock holding (C / A / N / S / L / I: Pass / Fail / Needs checking). Flag immediately any position that has already breached the 7–8% stop-loss rule — these must be cut before reading further. Identify the 1–2 holdings with the strongest combined CAN SLIM scores as the best candidates for adding on a proper base breakout.`,
   },
+
+  // ── John Bogle ────────────────────────────────────────────────────────────
+  bogle: {
+    lens: `Apply the low-cost index investing and compound interest framework:
+- Total cost audit: what is the expense ratio and transaction cost drag across this portfolio — is excessive turnover or management fees eroding compound returns?
+- Simplicity and indexing: are holdings excessively fragmented into individual stocks or complex products when low-cost broad market index funds (Total Stock Market + Total Bond Market) would capture the full market return?
+- Asset allocation balance: does the equity/fixed-income split match the investor's age and risk tolerance (e.g., your age in bonds)?
+- Speculation vs investment: flag any speculative bets (crypto, commodities, penny stocks, complex derivatives) that lack underlying earnings or dividends.`,
+    format: `Write as a wise, paternal, and straightforward letter from John Bogle. Begin with an assessment of the portfolio's simplicity and total fee drag. Present a comparison table (Current Holdings vs Recommended Simple Index Equivalent). Conclude with timeless advice on staying the course and ignoring the daily market noise.`,
+  },
+
+  // ── David Swensen ─────────────────────────────────────────────────────────
+  swensen: {
+    lens: `Apply the Yale Endowment Model and alternative asset allocation framework:
+- Equity bias: does the portfolio have sufficient equity exposure (including real estate/REITs, domestic equities, emerging/foreign equities) to drive real purchasing power growth over decades?
+- True diversification: are asset classes genuinely non-correlated, or do they all correlate to 1.0 during liquidity shocks?
+- Real asset protection: is there adequate inflation protection through REITs, commodities, or natural resource assets?
+- Long-term illiquidity premium: is the portfolio properly positioned for a permanent endowment horizon, avoiding market timing while systematically rebalancing?`,
+    format: `Write as an institutional investment committee policy report. Present an asset class allocation breakdown table comparing current weights with the Endowment Model target. Conclude with specific rebalancing recommendations to maintain diversification and discipline.`,
+  },
+
+  // ── Nassim Taleb ──────────────────────────────────────────────────────────
+  taleb: {
+    lens: `Apply the Antifragile Barbell Strategy and tail-risk framework:
+- Barbell structure: is 85–90% of the portfolio in hyper-safe, liquid instruments (cash, short-term government paper) that guarantee survival under any market collapse?
+- Convexity & tail hedges: is the remaining 10–15% in high-convexity, asymmetric bets (out-of-the-money put options, physical commodities/gold) that profit explosively from volatility and Black Swans?
+- Fragility and hype filter: identify and flag any 'middle-ground' or fragile assets — especially speculative tokens/fads (as detailed in the Bitcoin Black Paper) or leveraged equities that offer bounded upside with unbounded tail risk.
+- Survival test: what happens to this portfolio in a 1987-style or 2008-style 40%+ market crash? Does it gain value (antifragile) or suffer devastating permanent loss (fragile)?`,
+    format: `Write with philosophical intensity, unapologetic bluntness, and deep mathematical contempt for fragile conventional finance. Begin by ruthlessly categorizing the portfolio into Hyper-Safe, Convex/Antifragile, and Fragile (the dangerous middle). Demand the immediate elimination of all fragile holdings. End with the exact Barbell calibration needed for true antifragility.`,
+  },
 };
 
 /**
@@ -310,4 +340,10 @@ export const GURU_FOLLOWUP_FOCUS: Record<string, string> = {
   piotroski: `Run an updated F-Score for each new addition and each holding with significant weight or return changes since the last review. Do all new additions carry F-Scores of 7 or above — the threshold for statistically improving financial health among high book-to-market candidates? Are there existing holdings with deteriorating F-Scores now trending below 4 — signaling worsening fundamentals that historically precede underperformance and should trigger an exit before further deterioration?`,
 
   oneil: `State the current market direction (M) first: confirmed uptrend, uptrend under pressure, or correction? The M assessment governs all other conclusions — if under pressure or in correction, most new positions should not have been opened. For each new addition: did it have accelerating quarterly EPS growth and break out of a proper base on above-average volume at the time of purchase? For exits: were any losses cut at the 7–8% stop-loss rule from the exact purchase price — or were losing positions held past that non-negotiable stop while hoping for a recovery?`,
+
+  bogle: `Audit cost and complexity changes: did the recent changes simplify the portfolio into lower-cost, broader index funds, or did they introduce more friction, fees, and active trading noise? Has the core stock/bond allocation remained faithful to the long-term plan without trying to time the market?`,
+
+  swensen: `Review asset class rebalancing: did the changes restore target weights across core asset classes (equities, real estate, bonds, international), or did they amplify pro-cyclical concentration? Is the long-term equity bias preserved without sacrificing genuine diversification?`,
+
+  taleb: `Test for introduced fragility: did recent changes increase the vulnerable 'middle ground' of the barbell, or strengthen the two extremes (hyper-safe cash/bonds vs high-convexity tail hedges)? Were speculative, fragile assets eliminated or rationalized?`,
 };

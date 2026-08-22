@@ -10,9 +10,9 @@
 
 ## Guru List
 
-20 investment gurus defined in `src/utils/gurus.ts` (`GURU_PROFILES`).
+23 investment gurus defined in `src/utils/gurus.ts` (`GURU_PROFILES`).
 
-`src/utils/gurus.ts`의 `GURU_PROFILES`에 정의된 20명의 투자 구루입니다.
+`src/utils/gurus.ts`의 `GURU_PROFILES`에 정의된 23명의 투자 구루입니다.
 
 | ID | Name |
 | --- | --- |
@@ -36,6 +36,9 @@
 | `greenblatt` | Joel Greenblatt |
 | `piotroski` | Joseph Piotroski |
 | `oneil` | William O'Neil |
+| `bogle` | John Bogle |
+| `swensen` | David Swensen |
+| `taleb` | Nassim Taleb |
 
 Each guru has:
 

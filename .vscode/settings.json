@@ -56,5 +56,8 @@
     "**/dist": true,
     "**/node_modules": true,
     "**/.agents/skills/**/references/docs": true
-  }
+  },
+
+  // ── Code Spell Checker (cSpell) ────────────────────────────────────
+  "cSpell.configFile": "${workspaceFolder}/cspell.json"
 }

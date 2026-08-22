@@ -228,7 +228,7 @@ export const en: Translations = {
   guru_quotes_buffett:
     "Rule No.1: Never lose money. Rule No.2: Never forget Rule No.1.\n" +
     "Be fearful when others are greedy, and greedy when others are fearful.\n" +
-    "Only when the tide goes out do you discover who's been swimming naked.",
+    "Price is what you pay. Value is what you get.",
   guru_philosophy_munger:
     "• Concentrated Investing: Make massive bets only when highly confident in a few outstanding businesses\n" +
     "• Mental Models (Multidisciplinary Thinking): Leverage core frameworks from psychology, physics, biology, math, and history\n" +
@@ -250,7 +250,7 @@ export const en: Translations = {
     "• Cocktail Party Theory: A contrarian indicator—when everyone at a party is bragging about stocks, it's a market top; when they ignore stocks, it's a bottom\n",
   guru_quotes_lynch:
     "Know what you own, and know why you own it.\n" +
-    "The most important organ in the stock market is the brain, not the stomach.\n" +
+    "The most important organ in the stock market is the stomach, not the brain.\n" +
     "Time is on your side when you own shares of superior companies.",
   guru_philosophy_graham:
     "• Margin of Safety: Only buy at a significant discount to intrinsic value to provide a buffer against errors in judgment\n" +
@@ -265,13 +265,14 @@ export const en: Translations = {
   guru_philosophy_dalio:
     "• All Weather Strategy: Perfectly prepare for all economic regimes mapping to four quadrants (growth/slowdown × inflation/deflation)\n" +
     "• Risk Parity: Equalize 'risk contributions' across asset classes rather than capital amounts to avoid volatility dominance\n" +
-    "• Broad Diversification: Structurally diversify across mutually uncorrelated assets like nominal bonds, inflation-linked bonds, gold, and commodities\n" +
+    "• Non-Liability Asset Hedge: Reduce bonds and diversify into hard assets like gold (10–15%) and Bitcoin to hedge late-stage debt cycles\n" +
     "• Radical Transparency: Pursue truth regardless of hierarchy and enforce an Idea Meritocracy within the organization\n" +
     "• Principles: Understand markets and life as a machine of cause-and-effect; systemize lessons from failures into algorithms\n" +
     "• Understanding Debt Cycles: Analyze short-term business cycles and long-term debt cycles to navigate macroeconomic turning points\n",
   guru_quotes_dalio:
     "He who lives by the crystal ball will eat shattered glass.\n" +
-    "Pain + Reflection = Progress.",
+    "Pain + Reflection = Progress.\n" +
+    "Knowing what you don't know is much more important than whatever it is you know.",
   guru_philosophy_lilu:
     "• Buffett-Munger Approach in Asia: Systematically apply the purest form of value investing principles to the rapidly growing Chinese and Asian markets\n" +
     "• Deep Business Analysis: Thoroughly grasp the essence of business models, management integrity, and impenetrable long-term competitive advantages\n" +
@@ -280,7 +281,8 @@ export const en: Translations = {
     "• Intellectual Honesty: Accurately acknowledge the limits of your own knowledge and rigorously stay within your Circle of Competence\n",
   guru_quotes_lilu:
     "The biggest risk in investing is not volatility, but permanent loss of capital.\n" +
-    "A true value investor never tries to beat the market. They only control their own ignorance.",
+    "A true value investor never tries to beat the market. They only control their own ignorance.\n" +
+    "You only need a few truly great investment ideas in a lifetime.",
   guru_philosophy_ackman:
     "• Activist Investing: Acquire massive stakes to actively engage with and force management to unlock hidden shareholder value\n" +
     "• Concentrated Portfolio: Make huge, high-conviction investments in a heavily concentrated portfolio of 5–10 world-class companies\n" +
@@ -289,7 +291,8 @@ export const en: Translations = {
     "• Macro Hedging: Utilize massive derivative positions (like CDS) as ultimate defensive hedges against extreme macroeconomic shocks or pandemics\n",
   guru_quotes_ackman:
     "Concentration builds wealth; diversification preserves it.\n" +
-    "The best investments are often the ones that people laugh at as terrible ideas at the time.",
+    "The best investments are often the ones that people laugh at as terrible ideas at the time.\n" +
+    "Invest in simple, predictable, cash-flow-generative businesses with dominant market positions.",
   guru_philosophy_burry:
     "• Contrarian Investing: Willingly and decisively take positions diametrically opposed to the market consensus or mania\n" +
     "• Value-Based Analysis: Meticulously calculate intrinsic and asset values, completely ignoring herd mentality\n" +
@@ -298,7 +301,8 @@ export const en: Translations = {
     "• High Cash Reserves: Exhibit infinite patience, holding cash until a wildly asymmetric, undeniable opportunity presents itself\n",
   guru_quotes_burry:
     "I may be early, but I'm not wrong.\n" +
-    "If everyone believes something, it’s a good bet that nobody has really tested it.",
+    "If everyone believes something, it’s a good bet that nobody has really tested it.\n" +
+    "In the midst of market mania, quietly calculate intrinsic value and hidden tail risks.",
   guru_philosophy_fisher:
     "• Global Macro: Analyze massive shifts in the world economy and historical market cycles to dictate top-down asset allocation\n" +
     "• Exploiting Sentiment: Capitalize on the irrational extremes of market crowds—buying max pessimism and selling max optimism\n" +
@@ -307,7 +311,8 @@ export const en: Translations = {
     "• The Three Questions: Always ask what the market knows, what it doesn't know, and what it believes that is actually completely false\n",
   guru_quotes_fisher:
     "Markets climb a wall of worry.\n" +
-    "What everyone knows is usually wrong, and therein lies the biggest opportunity.",
+    "What everyone knows is usually wrong, and therein lies the biggest opportunity.\n" +
+    "Short-term headlines are mostly noise; the real driver of long-term wealth is capitalist innovation.",
   guru_philosophy_cohen:
     "• Multi-Manager Model: Run a massive platform combining numerous independent trading strategies executed by brilliant, specialized portfolio managers\n" +
     "• Supreme Risk Management: Enforce ruthless stop-loss limits on every position and strictly manage total portfolio risk limits without exception\n" +
@@ -316,18 +321,19 @@ export const en: Translations = {
     "• Flexible Strategy: Deploy whatever works best in the current environment—long/short equity, event-driven, or pure quantitative strategies\n",
   guru_quotes_cohen:
     "What matters is not how accurately you predict the future, but how ruthlessly you manage risk and cut losses.\n" +
-    "The market is not perfectly efficient. Money is made where information is asymmetric.",
+    "The market is not perfectly efficient. Money is made where information is asymmetric.\n" +
+    "When the trade thesis is broken, cut your loss immediately without emotion.",
   guru_philosophy_marks:
     "• Market Cycle Theory: Understand that markets swing like a pendulum, and figuring out where we are in the cycle is paramount\n" +
     "• Second-Level Thinking: You can't do the same things as others and expect to outperform; you must think deeper and differently than the consensus\n" +
-    "• Distressed Investing: Pioneer in distressed debt, finding true value and high-return opportunities where the crowd is panicking\n" +
+    "• Sea Change: The era of ultra-low rates has ended; high-yield credit and debt instruments now offer equity-like returns with less risk\n" +
     "• Risk = Permanent Loss: Define true risk exclusively as the probability of permanent capital loss, not temporary price volatility\n" +
     "• Defensive Investing: Focus far more heavily on limiting losses in bad times than maximizing gains in good times\n" +
     "• Price vs. Value: A great asset bought too expensively is a bad investment, while a bad asset bought cheaply enough is a great investment\n",
   guru_quotes_marks:
     "You can’t predict. You can prepare.\n" +
     "Experience is what you got when you didn't get what you wanted.\n" +
-    "The most dangerous thing is to buy something at the peak of its popularity.",
+    "When the economic tide turns, strategy must evolve. We are living in a Sea Change era.",
   guru_philosophy_klarman:
     "• Margin of Safety Legacy: Brilliantly adapt Benjamin Graham's conservative margin of safety principles to complex, modern financial markets\n" +
     "• Absolute Returns: Entirely reject the trap of relative benchmark chasing, focusing exclusively on achieving positive absolute returns without losing money\n" +
@@ -345,7 +351,9 @@ export const en: Translations = {
     "• Quantitative Screening: Use low P/E, P/B and other metrics to screen candidates\n" +
     "• Humble Investing: Exploit market mistakes rather than trying to beat the market\n",
   guru_quotes_templeton:
-    "The time of maximum pessimism is the best time to buy.",
+    "The time of maximum pessimism is the best time to buy.\n" +
+    "The best investment opportunities exist where common wisdom refuses to look.\n" +
+    "The four most expensive words in the English language are: 'This time is different.'",
   guru_philosophy_soros:
     "• Reflexivity Theory: Markets are not efficient; biased perceptions of participants affect prices, which in turn alter the underlying fundamentals in a feedback loop\n" +
     "• Massive Directional Bets: When you have strong conviction on macroeconomic imbalances, use leverage to make massive bets across currencies, bonds, and equities\n" +
@@ -358,31 +366,38 @@ export const en: Translations = {
     "Markets are constantly in a state of uncertainty and flux, and money is made by discounting the obvious and betting on the unexpected.\n" +
     "I'm only rich because I know when I'm wrong.",
   guru_philosophy_wood:
-    "• Disruptive Innovation: Concentrate on technologies that will transform the world in 5–10 years\n" +
-    "• Five Key Themes: AI, robotics, energy storage, genomics, and blockchain innovation platforms\n" +
-    "• Long-Term Growth Investing: Accept short-term volatility; bet on long-term growth potential\n" +
-    "• Proactive Research: Proprietary future forecasts and price modeling by in-house research teams\n" +
-    "• Transparent Management: Publicly disclose daily trades for full fund transparency\n",
+    "• Disruptive Innovation: Focus exclusively on world-transforming technologies set to dominate over the next 5–10 years\n" +
+    "• Five Innovation Platforms: Bet on exponential growth across AI, robotics, energy storage, multi-omics sequencing, and blockchain\n" +
+    "• Long-Term S-Curve Horizon: Accept short-term volatility as normal; evaluate positions based on 5-year expected-value modeling\n" +
+    "• Wright's Law in Action: Apply the cost-reduction learning curve to project rapid adoption and realistic valuation multiples\n" +
+    "• Transparent Management: Publicly share daily trades and open-source research for complete operational transparency\n" +
+    "• Mispriced Innovation: Capitalize on the market's systematic tendency to underestimate exponential technological adoption\n",
   guru_quotes_wood:
-    "Innovation solves problems and creates entirely new market opportunities.",
+    "Innovation solves problems and creates entirely new market opportunities.\n" +
+    "We are on the right side of change, on the right side of history.\n" +
+    "When investing in disruptive innovation, look beyond short-term volatility and focus on the 5-year S-curve.",
 
   guru_philosophy_druckenmiller:
     "• Macro Trading Mastery: Directional bets via analysis of correlations between currencies, rates, and equities\n" +
-    "• Soros Protégé: Inherited and evolved strategies proven at the Quantum Fund — averaged ~30% annual returns over 30 years\n" +
+    "• Bitcoin & Infrastructure: Value Bitcoin as a store-of-value brand and bet on AI compute & power/mining infrastructure\n" +
     "• Concentrated Bets: \"When you have tremendous conviction on a trade, you have to go for the jugular.\"\n" +
     "• Momentum-Aware: Ride trends with conviction; pivot immediately when signals reverse — ego is the enemy\n" +
     "• Asymmetric Risk Management: Limit losses while maximizing upside through asymmetric position sizing\n",
   guru_quotes_druckenmiller:
-    "The way to build long-term returns is through preservation of capital and home runs.",
+    "The way to build long-term returns is through preservation of capital and home runs.\n" +
+    "Put all your eggs in one basket and watch that basket very carefully.\n" +
+    "It's not about being right on every trade, but having the courage to bet big when conviction is absolute.",
   guru_philosophy_smith:
-    "• Quality Compounders: \"Buy good companies, don't overpay, do nothing\"—a remarkably simple, yet brutally effective philosophy\n" +
-    "• High ROIC Focus: Only invest in companies with wide moats that can sustainably reinvest capital at exceptionally high rates of return\n" +
-    "• Concentrated Portfolio: Reject \"diworsification\"; concentrate in 25–30 core holdings and rely on the sheer quality of the ideas\n" +
-    "• Quality Over Cheapness: Avoid low-quality \"cigar butts\" completely; willingly pay a fair price for outstanding business economics and cash flow\n" +
-    "• Compounding Machine & Patience: True value investing is not trading; it is holding a compounding machine forever to maximize exponential returns\n",
+    "• Quality Compounders: 'Buy good companies, don't overpay, do nothing'—a ruthlessly simple core philosophy\n" +
+    "• High ROCE Focus: Only invest in capital-light companies with durable competitive moats that compound capital at 20%+\n" +
+    "• AI CapEx Discipline: Scrutinize tech giants' massive AI infrastructure spending to ensure capital returns are not being destroyed\n" +
+    "• Concentrated Portfolio: Reject 'diworsification'; concentrate in 20–30 core holdings and rely on the sheer quality of the ideas\n" +
+    "• Pragmatic Active Action: Hold for the long term, but ruthlessly exit broken business models rather than clinging to dogma\n" +
+    "• Compounding Machine & Patience: True investing is holding high-return businesses to maximize exponential compounding over time\n",
   guru_quotes_smith:
+    "Buy good companies, don't overpay, do nothing.\n" +
     "I have a problem with the idea you should diversify to reduce risk. If you own a business, own the best.\n" +
-    "The greatest mistake investors make is the urge to do something, when doing nothing is the right answer.",
+    "The greatest mistake investors make is the urge to constantly tinker when doing nothing is the right answer.",
   guru_philosophy_greenblatt:
     "• Magic Formula: Mechanically combine high Earnings Yield (value) with high Return on Invested Capital (quality) to select optimal stocks\n" +
     "• Systematic Value Investing: Remove human greed and fear entirely; deploy capital coldly based on strict mathematical rules\n" +
@@ -419,7 +434,8 @@ export const en: Translations = {
     "• Aesthetics of Simplicity: Instead of complex funds or derivatives, a single low-cost broad index fund is sufficient.\n",
   guru_quotes_bogle:
     "Don't look for the needle in the haystack. Just buy the haystack!\n" +
-    "Time is your friend; impulse is your enemy.",
+    "Time is your friend; impulse is your enemy.\n" +
+    "The greatest enemies of the equity investor are expenses and emotions. Buy the market and stay the course.",
   guru_philosophy_swensen:
     "• Endowment Model: Move beyond traditional 60/40 splits and diversify heavily into alternative assets (private equity, real estate, commodities).\n" +
     "• Equity-Oriented Portfolio: Increase allocation to equity-like assets with high expected returns to maintain long-term purchasing power.\n" +
@@ -428,16 +444,18 @@ export const en: Translations = {
     "• Mechanical Rebalancing: Do not be swayed by emotions during market volatility; strictly rebalance by selling winners and buying losers.\n",
   guru_quotes_swensen:
     "Diversification is the only free lunch in investing.\n" +
-    "The investor's worst enemy is typically the investor himself.",
+    "The investor's worst enemy is typically the investor himself.\n" +
+    "Asset allocation accounts for more than 90% of the variation in portfolio returns over time.",
   guru_philosophy_taleb:
-    "• Barbell Strategy: Avoid middle-risk investments. Allocate capital to extremes: extremely safe assets (90%) and extremely risky assets (10%).\n" +
-    "• Antifragile: Go beyond just surviving shocks and disorder; build a position that grows stronger and profits from chaos.\n" +
-    "• Prepare for Black Swans: The most important thing is not going bankrupt when an extreme, unpredictable event occurs that financial models fail to foresee.\n" +
-    "• Seek Asymmetric Payoffs: Bet where the downside risk is strictly limited, but the upside potential is infinite.\n" +
-    "• Skepticism of Experts: Do not blindly trust Wall Street bankers, academics, or predictive models; focus on risk management responsible for your own survival.\n",
+    "• Barbell Strategy: Avoid middle-risk investments; allocate 90% to hyper-safe assets and 10% to high-convexity tail hedges\n" +
+    "• Antifragile: Go beyond just surviving shocks; build a portfolio that grows stronger and profits from chaos\n" +
+    "• Prepare for Black Swans: Survival is paramount when extreme, unpredictable events occur that standard models fail to foresee\n" +
+    "• Filter Out Fragility: Reject zero-sum speculative fads lacking intrinsic value (as in the Bitcoin Black Paper)\n" +
+    "• Seek Asymmetric Payoffs: Hunt for setups where downside risk is strictly capped while upside potential is explosive\n",
   guru_quotes_taleb:
     "Survival comes first. You must not go bankrupt to have long-term returns.\n" +
-    "Wind extinguishes a candle and energizes fire. Be the fire.",
+    "Wind extinguishes a candle and energizes fire. Be the fire.\n" +
+    "Taking a risk you cannot afford to survive is not investing; it is suicide.",
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger Analyzer",
   lynch_tenbagger_desc:
