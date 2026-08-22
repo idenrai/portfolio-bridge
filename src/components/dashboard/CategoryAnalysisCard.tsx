@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, Button, Modal } from "@/components/common";
 import { useT } from "@/hooks";
 import { useSettingsStore } from "@/stores";
+import { cn } from "@/utils";
 import type {
   RebalanceSuggestion,
   AssetCategory,
@@ -14,7 +15,8 @@ interface Props {
 
 export function CategoryAnalysisCard({ rebalancing }: Props) {
   const t = useT();
-  const settings = useSettingsStore();
+  const targetAllocations = useSettingsStore((s) => s.targetAllocations);
+  const setTargetAllocations = useSettingsStore((s) => s.setTargetAllocations);
   const [modalOpen, setModalOpen] = useState(false);
   const [allocations, setAllocations] = useState<TargetAllocation[]>([]);
   const [saved, setSaved] = useState(false);
@@ -23,7 +25,7 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
   const isExact = Math.abs(totalPercent - 100) < 0.01;
 
   const openModal = () => {
-    setAllocations([...settings.targetAllocations]);
+    setAllocations([...targetAllocations]);
     setSaved(false);
     setModalOpen(true);
   };
@@ -36,7 +38,7 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
   };
 
   const handleSave = () => {
-    settings.setTargetAllocations(allocations);
+    setTargetAllocations(allocations);
     setSaved(true);
     setTimeout(() => {
       setSaved(false);
@@ -62,8 +64,11 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
     >
       <div className="space-y-2">
         {allocations.map((a, i) => (
-          <label key={a.category} className="flex items-center gap-3">
-            <span className="w-32 text-sm text-zinc-400">
+          <label
+            key={a.category}
+            className="flex items-center justify-between gap-3 text-sm text-zinc-300"
+          >
+            <span className="w-24">
               {t.category_labels[a.category as AssetCategory] ?? a.category}
             </span>
             <input
@@ -79,7 +84,10 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
         ))}
         <div className="mt-1 flex items-center justify-between border-t border-zinc-800 pt-3">
           <span
-            className={`text-sm font-medium ${isExact ? "text-green-600" : "text-red-600"}`}
+            className={cn(
+              "text-sm font-medium",
+              isExact ? "text-green-600" : "text-red-600",
+            )}
           >
             {t.settings_target_sum(totalPercent.toFixed(0))}
           </span>
@@ -133,13 +141,14 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
                     {label}
                   </span>
                   <span
-                    className={`text-[11px] font-medium ${
+                    className={cn(
+                      "text-[11px] font-medium",
                       absDiff > 5
                         ? isOver
                           ? "text-amber-400"
                           : "text-zinc-300"
-                        : "text-zinc-400"
-                    }`}
+                        : "text-zinc-400",
+                    )}
                   >
                     {r.currentPercent.toFixed(1)}% / {r.targetPercent}%
                     {absDiff > 1 && (
@@ -153,13 +162,14 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
                 <div className="relative h-2">
                   <div className="absolute inset-0 overflow-hidden rounded-full bg-zinc-800/50">
                     <div
-                      className={`absolute inset-y-0 left-0 rounded-full ${
+                      className={cn(
+                        "absolute inset-y-0 left-0 rounded-full",
                         absDiff > 5
                           ? isOver
                             ? "bg-amber-400"
                             : "bg-blue-400"
-                          : "bg-emerald-400"
-                      }`}
+                          : "bg-emerald-400",
+                      )}
                       style={{
                         width: `${(r.currentPercent / maxPercent) * 100}%`,
                       }}

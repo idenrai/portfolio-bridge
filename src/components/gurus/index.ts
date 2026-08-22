@@ -11,3 +11,6 @@ export { GuruRebalanceTable } from "./GuruRebalanceTable";
 export { GuruCharts } from "./GuruCharts";
 export { GuruAIPromptBanner } from "./GuruAIPromptBanner";
 export { GuruFirm } from "./GuruFirm";
+export * from "./analyzerTheme";
+export { AnalyzerScoreBar } from "./AnalyzerScoreBar";
+export { AnalyzerCriterionBadge } from "./AnalyzerCriterionBadge";

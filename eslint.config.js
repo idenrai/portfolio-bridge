@@ -27,9 +27,31 @@ export default defineConfig([
       tailwindcss: {
         config: 'src/style.css',
         callees: ['cn'],
+        whitelist: [
+          'safe-bottom',
+          'custom-scrollbar',
+          'animate-popup',
+          'animate-zoom-in',
+          'animate-in',
+          'fade-in',
+          'zoom-in-95',
+          'slide-in-from-top-2',
+        ],
       },
     },
     rules: {
+      'tailwindcss/no-custom-classname': ['warn', {
+        whitelist: [
+          'safe-bottom',
+          'custom-scrollbar',
+          'animate-popup',
+          'animate-zoom-in',
+          'animate-in',
+          'fade-in',
+          'zoom-in-95',
+          'slide-in-from-top-2',
+        ],
+      }],
       // Allow intentionally unused variables when prefixed with _
       '@typescript-eslint/no-unused-vars': ['error', {
         varsIgnorePattern: '^_',
@@ -38,4 +60,12 @@ export default defineConfig([
       }],
     },
   },
+  {
+    files: ['src/utils/cn.ts'],
+    rules: {
+      'tailwindcss/no-custom-classname': 'off',
+    },
+  },
 ])
+
+

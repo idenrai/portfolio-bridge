@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Card } from "@/components/common";
-import { formatCurrency, formatPercent, fromKRW } from "@/utils";
+import { formatCurrency, formatPercent, fromKRW, cn } from "@/utils";
 import { useSettingsStore } from "@/stores";
 import { useT, useExchangeRates } from "@/hooks";
 import type {
@@ -41,14 +41,19 @@ export function TopHoldingsTable({ summary }: Props) {
 
   const display = showAll ? sorted : sorted.slice(0, 10);
 
-  const thCls = "text-[11px] text-zinc-400 font-bold px-3 py-2 text-right";
+  const thCls =
+    "px-3 py-2 text-right text-[11px] font-bold text-zinc-400 transition-colors";
   const tdCls = "px-3 py-2 text-right text-sm tabular-nums";
 
   const sortBtn = (key: SortKey, label: string) => (
     <th className="p-0">
       <button
         onClick={() => setSortKey(key)}
-        className={`${thCls} w-full cursor-pointer hover:text-white ${sortKey === key ? "font-bold text-white" : ""}`}
+        className={cn(
+          thCls,
+          "w-full cursor-pointer hover:text-white",
+          sortKey === key ? "font-bold text-white" : "",
+        )}
       >
         {label}
         {sortKey === key ? " ↓" : ""}
@@ -127,14 +132,29 @@ export function TopHoldingsTable({ summary }: Props) {
                   {formatCurrency(convert(h.valueKRW), baseCurrency)}
                 </td>
                 <td
-                  className={`${tdCls} ${h.type === "cash" ? "text-zinc-500" : h.pnlKRW >= 0 ? "text-red-500" : "text-blue-500"}`}
+                  className={cn(
+                    tdCls,
+                    h.type === "cash"
+                      ? "text-zinc-500"
+                      : h.pnlKRW >= 0
+                        ? "text-red-500"
+                        : "text-blue-500",
+                  )}
                 >
                   {h.type === "cash"
                     ? "-"
                     : formatCurrency(convert(h.pnlKRW), baseCurrency)}
                 </td>
                 <td
-                  className={`${tdCls} font-bold ${h.type === "cash" ? "text-zinc-500" : h.returnPercent >= 0 ? "text-red-500" : "text-blue-500"}`}
+                  className={cn(
+                    tdCls,
+                    "font-bold",
+                    h.type === "cash"
+                      ? "text-zinc-500"
+                      : h.returnPercent >= 0
+                        ? "text-red-500"
+                        : "text-blue-500",
+                  )}
                 >
                   {h.type === "cash" ? "-" : formatPercent(h.returnPercent)}
                 </td>

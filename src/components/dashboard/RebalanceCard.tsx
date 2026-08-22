@@ -1,5 +1,5 @@
 import { Card } from "@/components/common";
-import { formatCurrency, fromKRW } from "@/utils";
+import { formatCurrency, fromKRW, cn } from "@/utils";
 import { useSettingsStore } from "@/stores";
 import { useT, useExchangeRates } from "@/hooks";
 import type { RebalanceSuggestion, AssetCategory } from "@/types";
@@ -52,9 +52,10 @@ export function RebalanceCard({ rebalancing }: Props) {
                   </span>
                 </div>
                 <span
-                  className={`text-sm font-medium ${
-                    isBuy ? "text-red-500" : "text-blue-500"
-                  }`}
+                  className={cn(
+                    "text-sm font-medium",
+                    isBuy ? "text-red-500" : "text-blue-500",
+                  )}
                 >
                   {isBuy ? t.rebalance_buy + " " : t.rebalance_sell + " "}
                   {formatCurrency(

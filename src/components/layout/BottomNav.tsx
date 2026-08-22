@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useT } from "@/hooks";
+import { cn } from "@/utils/cn";
 
 export function BottomNav() {
   const t = useT();
@@ -14,7 +15,7 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className="safe-bottom fixed inset-x-0 bottom-0 z-50 border-t border-zinc-800 bg-black md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-zinc-800 bg-black safe-bottom md:hidden">
       <div className="flex h-14 items-center justify-around px-1">
         {NAV_ITEMS.map((item) => (
           <NavLink
@@ -22,9 +23,12 @@ export function BottomNav() {
             to={item.to}
             end={item.to === "/"}
             className={({ isActive }) =>
-              `flex items-center justify-center flex-1 py-0 h-full text-[11px] transition-colors border-r last:border-r-0 border-zinc-800 ${
-                isActive ? "bg-zinc-200 text-black font-bold" : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
-              }`
+              cn(
+                "flex h-full flex-1 items-center justify-center border-r border-zinc-800 py-0 text-[11px] transition-colors last:border-r-0",
+                isActive
+                  ? "bg-zinc-200 font-bold text-black"
+                  : "text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"
+              )
             }
           >
             <span className="w-full truncate px-1 text-center">{item.label}</span>
@@ -34,3 +38,4 @@ export function BottomNav() {
     </nav>
   );
 }
+

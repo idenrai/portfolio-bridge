@@ -173,7 +173,7 @@ export function MultiSelect({
   const portalContent = isOpen && typeof document !== "undefined" ? createPortal(
     <div
       className={cn(
-        "animate-popup absolute z-[100] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/95 p-1 shadow-xl backdrop-blur-xl"
+        "absolute z-100 animate-popup overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/95 p-1 shadow-xl backdrop-blur-xl"
       )}
       style={popupStyle}
     >
@@ -198,7 +198,7 @@ export function MultiSelect({
       <div
         id={listboxId}
         ref={listRef}
-        className="custom-scrollbar relative max-h-60 overflow-y-auto py-1"
+        className="relative max-h-60 custom-scrollbar overflow-y-auto py-1"
         role="listbox"
         aria-multiselectable="true"
       >
@@ -228,7 +228,7 @@ export function MultiSelect({
               />
               <div
                 className={cn(
-                  "flex size-3.5 shrink-0 items-center justify-center rounded-[4px] border peer-focus-visible:ring-2 peer-focus-visible:ring-violet-500 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-offset-zinc-950",
+                  "flex size-3.5 shrink-0 items-center justify-center rounded-sm border peer-focus-visible:ring-2 peer-focus-visible:ring-violet-500 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-offset-zinc-950",
                   isSelected
                     ? "border-violet-500 bg-violet-500 text-white"
                     : "border-zinc-700 bg-transparent text-transparent"
@@ -269,7 +269,7 @@ export function MultiSelect({
           }
         }}
         className={cn(
-          "flex h-[30px] max-w-[200px] min-w-[120px] cursor-pointer items-center justify-between gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1 text-xs text-zinc-200 transition-colors hover:bg-zinc-800/80 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500/50 focus-visible:outline-none",
+          "flex h-7.5 max-w-50 min-w-30 cursor-pointer items-center justify-between gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1 text-xs text-zinc-200 transition-colors hover:bg-zinc-800/80 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500/50 focus-visible:outline-none",
           isOpen && "border-zinc-600 bg-zinc-800/80"
         )}
       >

@@ -146,7 +146,7 @@ export function AssetsPage() {
       </div>
       
       <div className="rounded-xl bg-linear-to-r from-violet-500/20 to-purple-500/20 p-px shadow-sm">
-        <div className="rounded-[11px] bg-zinc-950/95 p-4 sm:px-5">
+        <div className="rounded-xl bg-zinc-950/95 p-4 sm:px-5">
           <div className="flex flex-col gap-4">
             {/* Header */}
             <div className="flex gap-4">

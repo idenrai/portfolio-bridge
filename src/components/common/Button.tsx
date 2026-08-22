@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { cn } from "@/utils/cn";
 
 type Variant = "primary" | "secondary" | "danger" | "ghost";
 
@@ -22,10 +23,17 @@ export function Button({
   children,
   ...rest
 }: ButtonProps) {
-  const sizeClass = size === "sm" ? "px-3 py-1.5 text-xs min-h-[44px]" : "px-4 py-2 text-sm min-h-[44px]";
+  const sizeClass = size === "sm" ? "px-3 py-1.5 text-xs min-h-11" : "px-4 py-2 text-sm min-h-11";
   return (
     <button
-      className={`inline-flex cursor-pointer items-center justify-center gap-2 font-bold whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-black focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${VARIANT_CLASSES[variant]} ${sizeClass} ${className}`}
+      className={cn(
+        "inline-flex cursor-pointer items-center justify-center gap-2 font-bold whitespace-nowrap transition-colors",
+        "focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-black focus-visible:outline-none",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        VARIANT_CLASSES[variant],
+        sizeClass,
+        className
+      )}
       {...rest}
     >
       <span className="text-inherit opacity-40">{"["}</span>
@@ -34,3 +42,4 @@ export function Button({
     </button>
   );
 }
+

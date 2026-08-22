@@ -85,11 +85,26 @@ export default async function handler(request: Request) {
     );
   }
 
-  // 보안: Path Traversal 및 비정상 URL 조작 방어
-  if (yahooPath.includes("..") || yahooPath.includes("//")) {
+  // 보안: Path Traversal 및 비정상 문자열 검증
+  const SAFE_PATH_REGEX = /^[a-zA-Z0-9/_.-]+$/;
+  if (
+    !SAFE_PATH_REGEX.test(yahooPath) ||
+    yahooPath.includes("..") ||
+    yahooPath.includes("//")
+  ) {
     console.error(`[Proxy Error] Suspicious path detected: ${yahooPath}`);
     return new Response(
-      JSON.stringify({ error: "Invalid path parameter" }),
+      JSON.stringify({ ok: false, error: "Invalid path parameter" }),
+      { status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
+    );
+  }
+
+  // 허용된 Yahoo Finance API 네임스페이스 검증
+  const ALLOWED_PATH_PREFIXES = /^(v[0-9]+|ws)\/finance\//i;
+  if (!ALLOWED_PATH_PREFIXES.test(yahooPath)) {
+    console.error(`[Proxy Error] Unrecognized endpoint prefix: ${yahooPath}`);
+    return new Response(
+      JSON.stringify({ ok: false, error: "Endpoint prefix not allowed" }),
       { status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
     );
   }
@@ -130,6 +145,11 @@ export default async function handler(request: Request) {
     const contentType = response.headers.get("content-type");
     if (contentType) headers.set("Content-Type", contentType);
 
+    // 200 OK GET 응답에 대해 30초 엣지 캐시 적용 (Yahoo 429 레이트리밋 방어 및 응답속도 향상)
+    if (request.method === "GET" && response.status === 200) {
+      headers.set("Cache-Control", "public, s-maxage=30, stale-while-revalidate=60");
+    }
+
     return new Response(await response.text(), {
       status: response.status,
       headers,
@@ -138,6 +158,7 @@ export default async function handler(request: Request) {
     console.error("[Yahoo Proxy Error]", err);
     return new Response(
       JSON.stringify({
+        ok: false,
         error: "Yahoo Finance proxy failed",
       }),
       {

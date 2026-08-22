@@ -1,7 +1,7 @@
 import { useT, useExchangeRates } from "@/hooks";
 import { useSettingsStore } from "@/stores";
 import { Card } from "@/components/common";
-import { formatCurrency, fromKRW } from "@/utils";
+import { formatCurrency, fromKRW, cn } from "@/utils";
 import type { RebalanceSuggestion } from "@/types";
 
 interface GuruRebalanceTableProps {
@@ -18,7 +18,7 @@ export function GuruRebalanceTable({
   return (
     <Card title={t.guru_rebalance_title}>
       <div className="-mx-4 overflow-x-auto px-4 md:-mx-5 md:px-5">
-        <table className="w-full min-w-[500px] text-sm">
+        <table className="w-full min-w-125 text-sm">
           <thead>
             <tr className="border-b border-zinc-800/50 text-left text-xs text-zinc-500">
               <th className="pb-2 font-medium">{t.guru_col_category}</th>
@@ -36,12 +36,12 @@ export function GuruRebalanceTable({
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-zinc-800/50">
+          <tbody className="divide-y divide-zinc-800/30">
             {guruRebalancing.map((s) => {
               const diff = s.targetPercent - s.currentPercent;
               const roundedDiff = Number(diff.toFixed(1));
               const roundedAmount = Math.round(s.diffAmountKRW);
-              
+
               return (
                 <tr key={s.category}>
                   <td className="py-2">
@@ -54,25 +54,27 @@ export function GuruRebalanceTable({
                     {s.targetPercent.toFixed(1)}%
                   </td>
                   <td
-                    className={`py-2 text-right font-medium tabular-nums ${
+                    className={cn(
+                      "py-2 text-right font-medium tabular-nums",
                       roundedDiff > 0
                         ? "text-emerald-500"
                         : roundedDiff < 0
                           ? "text-rose-500"
-                          : "text-zinc-500"
-                    }`}
+                          : "text-zinc-500",
+                    )}
                   >
                     {roundedDiff > 0 ? "+" : ""}
                     {roundedDiff.toFixed(1)}%p
                   </td>
                   <td
-                    className={`py-2 text-right tabular-nums ${
+                    className={cn(
+                      "py-2 text-right tabular-nums",
                       roundedAmount > 0
                         ? "text-emerald-500"
                         : roundedAmount < 0
                           ? "text-rose-500"
-                          : "text-zinc-500"
-                    }`}
+                          : "text-zinc-500",
+                    )}
                   >
                     {roundedAmount > 0 ? "+" : ""}
                     {formatCurrency(fromKRW(roundedAmount, baseCurrency, exchangeRates), baseCurrency, true)}

@@ -97,13 +97,13 @@ export function BrokerManager() {
                   className="border-b border-zinc-800 whitespace-nowrap hover:bg-zinc-900/50"
                 >
                   <td
-                    className="max-w-[120px] truncate py-2 pr-3 font-medium text-zinc-100"
+                    className="max-w-30 truncate py-2 pr-3 font-medium text-zinc-100"
                     title={a.nickname}
                   >
                     {a.nickname}
                   </td>
                   <td
-                    className="max-w-[100px] truncate py-2 pr-3 text-zinc-400"
+                    className="max-w-25 truncate py-2 pr-3 text-zinc-400"
                     title={a.broker}
                   >
                     {a.broker}

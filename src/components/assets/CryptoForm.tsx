@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Input, Label } from "@/components/common";
 import { useT } from "@/hooks";
-import { fetchCurrentPrice } from "@/utils";
+import { fetchCurrentPrice, cn } from "@/utils";
 import type { AssetFormData, CurrencyCode, Market } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
 
@@ -107,41 +107,46 @@ export function CryptoForm({
             </p>
           </div>
           <div className="divide-y divide-zinc-800">
-            {pairs.map((p) => (
-              <button
-                key={p.symbol}
-                type="button"
-                onClick={() => setSelectedPair(p)}
-                className={`flex w-full items-center justify-between px-4 py-3 text-left transition-colors ${
-                  selectedPair?.symbol === p.symbol
-                    ? "border-l-2 border-emerald-500 bg-emerald-950/30"
-                    : "hover:bg-zinc-900/50"
-                }`}
-              >
-                <span className="text-sm font-bold text-white">
-                  {p.symbol}
-                </span>
-                <div className="flex items-center gap-3">
-                  {p.price !== null && (
-                    <span className="text-sm text-zinc-400">
-                      {CURRENCY_SYMBOLS[p.currency]}
-                      {p.price.toLocaleString()}
-                    </span>
+            {pairs.map((p) => {
+              const isSelected = selectedPair?.symbol === p.symbol;
+              return (
+                <button
+                  key={p.symbol}
+                  type="button"
+                  onClick={() => setSelectedPair(p)}
+                  className={cn(
+                    "flex w-full items-center justify-between px-4 py-3 text-left transition-colors",
+                    isSelected
+                      ? "border-l-2 border-emerald-500 bg-emerald-950/30"
+                      : "hover:bg-zinc-900/50",
                   )}
-                  <span
-                    className={`rounded px-2 py-0.5 text-xs ${
-                      selectedPair?.symbol === p.symbol
-                        ? "bg-emerald-600 text-white"
-                        : "bg-zinc-800 text-zinc-300"
-                    }`}
-                  >
-                    {selectedPair?.symbol === p.symbol
-                      ? t.af_crypto_selected
-                      : t.af_crypto_select}
+                >
+                  <span className="text-sm font-bold text-white">
+                    {p.symbol}
                   </span>
-                </div>
-              </button>
-            ))}
+                  <div className="flex items-center gap-3">
+                    {p.price !== null && (
+                      <span className="text-sm text-zinc-400">
+                        {CURRENCY_SYMBOLS[p.currency]}
+                        {p.price.toLocaleString()}
+                      </span>
+                    )}
+                    <span
+                      className={cn(
+                        "rounded px-2 py-0.5 text-xs",
+                        isSelected
+                          ? "bg-emerald-600 text-white"
+                          : "bg-zinc-800 text-zinc-300",
+                      )}
+                    >
+                      {isSelected
+                        ? t.af_crypto_selected
+                        : t.af_crypto_select}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
