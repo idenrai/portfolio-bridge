@@ -52,10 +52,10 @@ export const de: Translations = {
   dash_notice_csv:
     "Vermögensdaten können als CSV-Dateien exportiert/importiert werden. Verwenden Sie dies für Backups oder Gerätemigrationen.",
   dash_notice_mobile:
-    "️ Optimiert für Desktop-Browser. Mobilbildschirme werden derzeit nicht unterstützt.",
+    "💡 Optimiert für Desktop-Browser. Mobilbildschirme werden derzeit nicht unterstützt.",
   dash_sample_btn: "Mit Beispieldaten erkunden",
   dash_sample_hint:
-    "Beispieldaten können über Einstellungen › Alle Daten zurücksetzen entfernt werden.",
+    "Beispieldaten können über Einstellungen › Lokale Datenverwaltung › Alle Daten zurücksetzen entfernt werden.",
   dash_refresh: "Alles aktualisieren",
   dash_refreshing: "Abruf…",
   dash_updated_at: (time) => `${time}`,

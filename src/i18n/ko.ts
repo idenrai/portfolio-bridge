@@ -15,13 +15,13 @@ export const ko: Translations = {
   about_features_title: "주요 기능",
   about_feat1_title: "통합 대시보드",
   about_feat1_desc:
-    "KPI 요약, 분류·시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안을 한눈에 확인하세요.",
+    "KPI 요약, 분류 · 시장별 배분 차트, 보유 종목 테이블, 리밸런싱 제안을 한눈에 확인하세요.",
   about_feat2_title: "자산 관리",
   about_feat2_desc:
-    "Yahoo Finance 종목 검색 및 수동 등록으로 다국가 자산을 통합 관리합니다. AI 자동 분류, CSV 가져오기·내보내기 지원.",
+    "Yahoo Finance 종목 검색 및 수동 등록으로 다국가 자산을 통합 관리합니다. AI 자동 분류, CSV 가져오기 · 내보내기 지원.",
   about_feat3_title: "투자 구루",
   about_feat3_desc:
-    "버핏, 달리오, 린치 등 20명의 투자 철학과 대표 포트폴리오를 참고해 내 포트폴리오와 비교할 수 있습니다. 린치 10루타 · 그린블라트 마법공식 · 그레이엄 방어투자 · 스미스 퀄리티 · 피오트로스키 F-Score · 오닐 CAN SLIM 6종 채점기로 종목을 분석하고, 구루 페르소나 AI 프롬프트를 제공합니다.",
+    "버핏 · 달리오 · 린치 등 20명의 투자 철학과 대표 포트폴리오를 참고해 내 포트폴리오와 비교할 수 있습니다. 린치 10루타 · 그린블라트 마법공식 · 그레이엄 방어투자 · 스미스 퀄리티 · 피오트로스키 F-Score · 오닐 CAN SLIM 6종 채점기로 종목을 분석하고, 구루 페르소나 AI 프롬프트를 제공합니다.",
   about_feat4_title: "AI 포트폴리오 분석",
   about_feat4_desc:
     "ChatGPT · Claude · Gemini · Grok에 바로 붙여넣을 수 있는 구조화된 프롬프트를 생성합니다. 이상적 배분과 조정 인사이트를 AI에게 물어보세요.",
@@ -41,7 +41,7 @@ export const ko: Translations = {
   about_links_live: "라이브 데모",
   about_links_github: "GitHub",
   about_disclaimer:
-    "이 앱은 개인 학습 및 포트폴리오 관리 목적으로 제작되었습니다. 제공되는 시세·환율·분석 데이터는 참고용이며 투자 결정의 근거로 사용해서는 안 됩니다.",
+    "이 앱은 개인 학습 및 포트폴리오 관리 목적으로 제작되었습니다. 제공되는 시세 · 환율 · 분석 데이터는 참고용이며 투자 결정의 근거로 사용해서는 안 됩니다.",
 
   dash_title: "대시보드",
   dash_empty_title: "포트폴리오를 시작하세요",
@@ -52,9 +52,10 @@ export const ko: Translations = {
   dash_notice_csv:
     "자산 데이터는 CSV 파일로 내보내기/가져오기가 가능합니다. 백업이나 기기 이전 시 활용하세요.",
   dash_notice_mobile:
-    "️ 현재 PC 브라우저에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
+    "💡 현재 PC 브라우저 환경에 최적화되어 있습니다. 모바일 화면은 지원하지 않습니다.",
   dash_sample_btn: "샘플 데이터로 둘러보기",
-  dash_sample_hint: "샘플 데이터는 '설정 › 전체 데이터 초기화'로 제거할 수 있습니다.",
+  dash_sample_hint:
+    "샘플 데이터는 '설정 › 로컬 저장 데이터 관리 › 전체 데이터 초기화'로 제거할 수 있습니다.",
   dash_refresh: "환율 · 시세 갱신",
   dash_refreshing: "조회 중…",
   dash_updated_at: (time) => `${time}`,
@@ -164,7 +165,7 @@ export const ko: Translations = {
 
   guru_title: "투자 구루",
   guru_empty_title: "투자 구루 분석",
-  guru_empty_desc: "자산을 등록한 후 구루와 비교 분석을 할 수 있습니다.",
+  guru_empty_desc: "보유 자산을 등록하면 투자 구루의 포트폴리오와 비교 분석할 수 있습니다.",
   guru_philosophy_label: "투자 철학",
   guru_ideal_alloc: "이상적 자산 배분",
   guru_radar_title: "내 포트폴리오 vs 구루 비교",
@@ -248,7 +249,7 @@ export const ko: Translations = {
     "• 칵테일 파티 이론: 대중이 주식에 열광할 때가 고점이고, 모두가 주식을 외면할 때가 바닥이라는 군중 심리 지표\n",
   guru_quotes_lynch:
     "무엇을 왜 보유하는지 스스로 명확히 설명할 수 있어야 한다.\n" +
-    "주식 시장에서 가장 뛰어난 기관은 바로 당신의 뇌다.\n" +
+    "주식 시장에서 가장 중요한 신체 부위는 위장이 아니라 뇌다.\n" +
     "뛰어난 기업의 주식을 보유하고 있다면 시간은 당신 편이다.",
   guru_philosophy_graham:
     "• 안전마진(Margin of Safety): 내재가치 대비 충분히 극단적으로 할인된 가격에서만 매수하여 오판의 여지를 방어\n" +
@@ -745,7 +746,7 @@ export const ko: Translations = {
   af_manual_ticker_placeholder: "0P0001D75H.T 또는 JP90C000KRC0",
   af_manual_link: "Yahoo Finance에서 검색되지 않나요? → 직접 입력",
   af_cash_amount_label: "보유액",
-  af_crypto_hint: "코인 티커를 입력하고 거래쌍을 선택하세요.",
+  af_crypto_hint: "암호화폐 심볼(예: BTC, ETH)을 입력하고 거래쌍을 선택하세요.",
   af_crypto_search_btn: "거래쌍 검색",
   af_crypto_searching: "조회 중…",
   af_crypto_pair_title: "거래쌍 선택",
