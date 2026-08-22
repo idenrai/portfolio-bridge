@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Card } from "@/components/common";
 import { formatCurrency, fromKRW, cn } from "@/utils";
 import { useSettingsStore } from "@/stores";
@@ -8,7 +9,7 @@ interface Props {
   rebalancing: RebalanceSuggestion[];
 }
 
-export function RebalanceCard({ rebalancing }: Props) {
+export const RebalanceCard = memo(function RebalanceCard({ rebalancing }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
   const convert = (krw: number) => fromKRW(krw, baseCurrency, rates);
@@ -70,4 +71,5 @@ export function RebalanceCard({ rebalancing }: Props) {
       </div>
     </Card>
   );
-}
+});
+

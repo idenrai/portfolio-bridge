@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { Card, Button, Modal } from "@/components/common";
 import { useT } from "@/hooks";
 import { useSettingsStore } from "@/stores";
@@ -13,7 +13,7 @@ interface Props {
   rebalancing: RebalanceSuggestion[];
 }
 
-export function CategoryAnalysisCard({ rebalancing }: Props) {
+export const CategoryAnalysisCard = memo(function CategoryAnalysisCard({ rebalancing }: Props) {
   const t = useT();
   const targetAllocations = useSettingsStore((s) => s.targetAllocations);
   const setTargetAllocations = useSettingsStore((s) => s.setTargetAllocations);
@@ -206,4 +206,5 @@ export function CategoryAnalysisCard({ rebalancing }: Props) {
       {modal}
     </>
   );
-}
+});
+

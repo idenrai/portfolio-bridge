@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { Card } from "@/components/common";
 import { formatCurrency, formatPercent, fromKRW, cn } from "@/utils";
 import { useSettingsStore } from "@/stores";
@@ -17,7 +17,7 @@ interface Props {
 
 type SortKey = "value" | "pnl" | "return" | "weight";
 
-export function TopHoldingsTable({ summary }: Props) {
+export const TopHoldingsTable = memo(function TopHoldingsTable({ summary }: Props) {
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
   const [sortKey, setSortKey] = useState<SortKey>("value");
@@ -181,4 +181,5 @@ export function TopHoldingsTable({ summary }: Props) {
       </div>
     </Card>
   );
-}
+});
+
