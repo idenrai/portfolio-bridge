@@ -2,11 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import { useProfileStore, useSettingsStore } from "@/stores";
 import { useT } from "@/hooks";
 import { Card, AutoResizeTextarea, Input, FeedbackIconText } from "@/components/common";
+import { cn } from "@/utils";
 import { User, CheckCircle2 } from "lucide-react";
 
 export function ProfileSection() {
-  const profile = useProfileStore();
-  const settings = useSettingsStore();
+  const nickname = useProfileStore((s) => s.nickname);
+  const age = useProfileStore((s) => s.age);
+  const annualIncome = useProfileStore((s) => s.annualIncome);
+  const monthlyBudget = useProfileStore((s) => s.monthlyBudget);
+  const plan3y = useProfileStore((s) => s.plan3y);
+  const plan5y = useProfileStore((s) => s.plan5y);
+  const plan10y = useProfileStore((s) => s.plan10y);
+  const notes = useProfileStore((s) => s.notes);
+  const setProfile = useProfileStore((s) => s.setProfile);
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const t = useT();
 
   const [showSaved, setShowSaved] = useState(false);
@@ -25,18 +34,25 @@ export function ProfileSection() {
       clearTimeout(hideTimer);
     };
   }, [
-    profile.nickname,
-    profile.age,
-    profile.annualIncome,
-    profile.monthlyBudget,
-    profile.plan3y,
-    profile.plan5y,
-    profile.plan10y,
-    profile.notes,
+    nickname,
+    age,
+    annualIncome,
+    monthlyBudget,
+    plan3y,
+    plan5y,
+    plan10y,
+    notes,
   ]);
 
   const inputCls =
     "w-full rounded-md border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-sm text-zinc-200 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 transition-colors";
+
+  const plans = [
+    { key: "plan3y" as const, label: t.profile_plan3y_label, placeholder: t.profile_plan3y_placeholder, value: plan3y },
+    { key: "plan5y" as const, label: t.profile_plan5y_label, placeholder: t.profile_plan5y_placeholder, value: plan5y },
+    { key: "plan10y" as const, label: t.profile_plan10y_label, placeholder: t.profile_plan10y_placeholder, value: plan10y },
+    { key: "notes" as const, label: t.profile_notes_label, placeholder: t.profile_notes_placeholder, value: notes },
+  ];
 
   return (
     <Card
@@ -70,11 +86,10 @@ export function ProfileSection() {
             </div>
             <Input
               type="text"
-              
               placeholder={t.profile_nickname_placeholder}
-              value={profile.nickname ?? ""}
+              value={nickname ?? ""}
               onChange={(e) =>
-                profile.setProfile({ nickname: e.target.value })
+                setProfile({ nickname: e.target.value })
               }
             />
           </div>
@@ -85,12 +100,12 @@ export function ProfileSection() {
             <Input
               type="number"
               min={0}
-              
               placeholder={t.profile_age_placeholder}
-              value={profile.age ?? ""}
+              value={age ?? ""}
               onChange={(e) =>
-                profile.setProfile({
-                  age: e.target.value ? Number(e.target.value) : null })
+                setProfile({
+                  age: e.target.value ? Number(e.target.value) : null,
+                })
               }
             />
           </div>
@@ -101,57 +116,50 @@ export function ProfileSection() {
           <div className="space-y-1">
             <div className="text-xs font-medium text-zinc-400">
               {t.profile_annual_income_label}
-              <span className="ml-1 text-zinc-400">({settings.baseCurrency})</span>
+              <span className="ml-1 text-zinc-400">({baseCurrency})</span>
             </div>
             <Input
               type="number"
               min={0}
-              
               placeholder={t.profile_annual_income_placeholder}
-              value={profile.annualIncome ?? ""}
+              value={annualIncome ?? ""}
               onChange={(e) =>
-                profile.setProfile({
-                  annualIncome: e.target.value ? Number(e.target.value) : null })
+                setProfile({
+                  annualIncome: e.target.value ? Number(e.target.value) : null,
+                })
               }
             />
           </div>
           <div className="space-y-1">
             <div className="text-xs font-medium text-zinc-400">
               {t.profile_monthly_budget_label}
-              <span className="ml-1 text-zinc-400">({settings.baseCurrency})</span>
+              <span className="ml-1 text-zinc-400">({baseCurrency})</span>
             </div>
             <Input
               type="number"
               min={0}
-              
               placeholder={t.profile_monthly_budget_placeholder}
-              value={profile.monthlyBudget ?? ""}
+              value={monthlyBudget ?? ""}
               onChange={(e) =>
-                profile.setProfile({
-                  monthlyBudget: e.target.value ? Number(e.target.value) : null })
+                setProfile({
+                  monthlyBudget: e.target.value ? Number(e.target.value) : null,
+                })
               }
             />
           </div>
         </div>
 
         {/* 투자 계획 */}
-        {(
-          [
-            { key: "plan3y", labelKey: "profile_plan3y_label", placeholderKey: "profile_plan3y_placeholder" },
-            { key: "plan5y", labelKey: "profile_plan5y_label", placeholderKey: "profile_plan5y_placeholder" },
-            { key: "plan10y", labelKey: "profile_plan10y_label", placeholderKey: "profile_plan10y_placeholder" },
-            { key: "notes", labelKey: "profile_notes_label", placeholderKey: "profile_notes_placeholder" },
-          ] as const
-        ).map(({ key, labelKey, placeholderKey }) => (
+        {plans.map(({ key, label, placeholder, value }) => (
           <div key={key} className="space-y-1">
             <div className="text-xs font-medium text-zinc-400">
-              {t[labelKey as keyof typeof t] as string}
+              {label}
             </div>
             <AutoResizeTextarea
-              className={`${inputCls} resize-none`}
-              placeholder={t[placeholderKey as keyof typeof t] as string}
-              value={profile[key] ?? ""}
-              onChange={(e) => profile.setProfile({ [key]: e.target.value })}
+              className={cn(inputCls, "resize-none")}
+              placeholder={placeholder}
+              value={value ?? ""}
+              onChange={(e) => setProfile({ [key]: e.target.value })}
             />
           </div>
         ))}

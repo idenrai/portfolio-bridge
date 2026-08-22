@@ -24,7 +24,7 @@ export function FireResultCard({ result }: FireResultCardProps) {
   }
 
   return (
-    <div className="relative flex min-h-[320px] flex-col justify-end gap-4 overflow-hidden border border-zinc-800 bg-black p-8 text-left md:p-12">
+    <div className="relative flex min-h-80 flex-col justify-end gap-4 overflow-hidden border border-zinc-800 bg-black p-8 text-left md:p-12">
       {/* 배경 장식 (우측 하단으로 이동) */}
       <div className="pointer-events-none absolute -right-20 -bottom-20 size-80 rounded-full bg-emerald-500/5 blur-[100px]" />
       
