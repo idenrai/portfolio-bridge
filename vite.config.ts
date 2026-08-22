@@ -158,4 +158,14 @@ export default defineConfig({
       "@": "/src",
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-recharts": ["recharts"],
+          "vendor-icons": ["lucide-react"],
+        },
+      },
+    },
+  },
 });

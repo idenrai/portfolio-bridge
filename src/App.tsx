@@ -1,14 +1,28 @@
-import { useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/layout";
-import { DashboardPage } from "@/pages/Dashboard";
-import { AssetsPage } from "@/pages/Assets";
-import { GurusPage } from "@/pages/Gurus";
-import { SettingsPage } from "@/pages/Settings";
-import { AboutPage } from "@/pages/About";
-import { FirePlannerPage } from "@/pages/FirePlanner";
+import { PageSkeleton } from "@/components/common";
 import { useDataRefresh } from "@/hooks";
 import { initGoogleDriveService } from "@/utils";
+
+const DashboardPage = lazy(() =>
+  import("@/pages/Dashboard").then((m) => ({ default: m.DashboardPage })),
+);
+const AssetsPage = lazy(() =>
+  import("@/pages/Assets").then((m) => ({ default: m.AssetsPage })),
+);
+const GurusPage = lazy(() =>
+  import("@/pages/Gurus").then((m) => ({ default: m.GurusPage })),
+);
+const SettingsPage = lazy(() =>
+  import("@/pages/Settings").then((m) => ({ default: m.SettingsPage })),
+);
+const FirePlannerPage = lazy(() =>
+  import("@/pages/FirePlanner").then((m) => ({ default: m.FirePlannerPage })),
+);
+const AboutPage = lazy(() =>
+  import("@/pages/About").then((m) => ({ default: m.AboutPage })),
+);
 
 function AppInitializer() {
   const { refreshAll } = useDataRefresh();
@@ -31,12 +45,54 @@ export default function App() {
       <AppInitializer />
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<DashboardPage />} />
-          <Route path="assets" element={<AssetsPage />} />
-          <Route path="gurus" element={<GurusPage />} />
-          <Route path="settings" element={<SettingsPage />} />
-          <Route path="fire" element={<FirePlannerPage />} />
-          <Route path="about" element={<AboutPage />} />
+          <Route
+            index
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <DashboardPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="assets"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <AssetsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="gurus"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <GurusPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="settings"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <SettingsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="fire"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <FirePlannerPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="about"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <AboutPage />
+              </Suspense>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
