@@ -24,7 +24,7 @@ export default async function handler(request: Request) {
   // 허용된 시리즈 ID만 프록시 (의도치 않은 오용 방지)
   if (!ALLOWED_SERIES.has(id)) {
     return new Response(
-      JSON.stringify({ error: `Series '${id}' not allowed` }),
+      JSON.stringify({ ok: false, error: `Series '${id}' not allowed` }),
       { status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
     );
   }
@@ -43,7 +43,7 @@ export default async function handler(request: Request) {
 
     if (!res.ok) {
       return new Response(
-        JSON.stringify({ error: `FRED responded with ${res.status}` }),
+        JSON.stringify({ ok: false, error: `FRED responded with ${res.status}` }),
         { status: res.status, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
       );
     }
@@ -61,7 +61,7 @@ export default async function handler(request: Request) {
   } catch (err) {
     console.error(`[FRED Error] Failed to fetch series ${id}:`, err);
     return new Response(
-      JSON.stringify({ error: "FRED API proxy failed" }),
+      JSON.stringify({ ok: false, error: "FRED API proxy failed" }),
       { status: 502, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
     );
   }
