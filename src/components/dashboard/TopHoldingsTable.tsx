@@ -42,7 +42,7 @@ export const TopHoldingsTable = memo(function TopHoldingsTable({ summary }: Prop
   const display = showAll ? sorted : sorted.slice(0, 10);
 
   const thCls =
-    "px-3 py-2 text-right text-[11px] font-bold text-zinc-400 transition-colors";
+    "px-3 py-2 text-right text-xs-plus font-bold text-zinc-400 transition-colors";
   const tdCls = "px-3 py-2 text-right text-sm tabular-nums";
 
   const sortBtn = (key: SortKey, label: string) => (
@@ -81,10 +81,10 @@ export const TopHoldingsTable = memo(function TopHoldingsTable({ summary }: Prop
         <table className="w-full min-w-160">
           <thead>
             <tr className="border-b border-zinc-800">
-              <th className="px-3 py-2 text-left text-[11px] font-bold text-zinc-400">
+              <th className="px-3 py-2 text-left text-xs-plus font-bold text-zinc-400">
                 {t.holdings_col_name}
               </th>
-              <th className="px-3 py-2 text-left text-[11px] font-bold text-zinc-400">
+              <th className="px-3 py-2 text-left text-xs-plus font-bold text-zinc-400">
                 {t.holdings_col_type}
               </th>
               {sortBtn("value", t.holdings_col_value)}
@@ -110,21 +110,21 @@ export const TopHoldingsTable = memo(function TopHoldingsTable({ summary }: Prop
                         }[h.currency as CurrencyCode] ?? h.name)
                       : h.name}
                   </div>
-                  <div className="text-[10px] text-zinc-500">
+                  <div className="text-2xs text-zinc-500">
                     {h.ticker && <span>{h.ticker}</span>}
                     {h.category && (
-                      <span className="ml-1 rounded bg-zinc-800/80 px-1 py-0.5 text-[9px] text-zinc-300">
+                      <span className="ml-1 rounded bg-zinc-800/80 px-1 py-0.5 text-3xs text-zinc-300">
                         {t.category_labels[h.category as AssetCategory] ??
                           h.category}
                       </span>
                     )}
                   </div>
                 </td>
-                <td className="px-3 py-2 text-left text-[11px] whitespace-nowrap text-zinc-400">
+                <td className="px-3 py-2 text-left text-xs-plus whitespace-nowrap text-zinc-400">
                   <div>
                     {t.asset_type_labels[h.type as AssetType] ?? h.type}
                   </div>
-                  <div className="text-[10px] text-zinc-500">
+                  <div className="text-2xs text-zinc-500">
                     {t.market_labels[h.market as Market] ?? h.market}
                   </div>
                 </td>
@@ -168,12 +168,11 @@ export const TopHoldingsTable = memo(function TopHoldingsTable({ summary }: Prop
                         }}
                       />
                     </div>
-                    <span className="w-10 text-right text-[11px] text-zinc-500">
+                    <span className="w-10 text-right text-xs-plus text-zinc-500">
                       {h.weightPercent.toFixed(1)}%
                     </span>
                   </div>
                 </td>
-
               </tr>
             ))}
           </tbody>

@@ -48,7 +48,7 @@ export const RebalanceCard = memo(function RebalanceCard({ rebalancing }: Props)
                   <span className="text-sm font-bold text-zinc-200">
                     {label}
                   </span>
-                  <span className="ml-2 text-[11px] text-zinc-500">
+                  <span className="ml-2 text-xs-plus text-zinc-500">
                     {r.currentPercent.toFixed(1)}% → {r.targetPercent}%
                   </span>
                 </div>

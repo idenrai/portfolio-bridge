@@ -115,7 +115,7 @@ export function PortfolioHistoryChart() {
           />
         </AreaChart>
       </ResponsiveContainer>
-      <div className="mt-2 flex items-center gap-4 text-[10px] text-zinc-400">
+      <div className="mt-2 flex items-center gap-4 text-2xs text-zinc-400">
         <span className="flex items-center gap-1">
           <span className="inline-block h-0.5 w-3 rounded bg-indigo-500" />
           {t.history_value}

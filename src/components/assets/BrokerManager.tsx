@@ -29,8 +29,10 @@ const EMPTY_FORM: EditingState = {
 };
 
 export function BrokerManager() {
-  const { accounts, addAccount, updateAccount, deleteAccount } =
-    useBrokerStore();
+  const accounts = useBrokerStore((s) => s.accounts);
+  const addAccount = useBrokerStore((s) => s.addAccount);
+  const updateAccount = useBrokerStore((s) => s.updateAccount);
+  const deleteAccount = useBrokerStore((s) => s.deleteAccount);
   const t = useT();
   const [editing, setEditing] = useState<EditingState | null>(null);
 

@@ -37,6 +37,10 @@
 AI가 특정 도구나 기능이 필요할 때 로드하세요.
 - 프로젝트 인덱싱 및 컨텍스트 파악 필요 시: `.agents/skills/indexing-awareness/SKILL.md` 읽기
 - 현재 날짜 및 시간 파악 필요 시 (지식 컷오프 회피): `.agents/skills/knowledge-cutoff-awareness/SKILL.md` 읽기
+- **TypeScript 타입 설계 및 고급 제네릭 활용 시:** `.agents/skills/typescript-advanced-types/SKILL.md` 및 `.agents/skills/typescript-best-practices/SKILL.md` 적극 활용
+- **TanStack React Query 비동기 상태/캐싱 가이드 필요 시:** `.agents/skills/tanstack-query-best-practices/SKILL.md` 적극 활용
+- **Zustand 5 상태 관리 및 영속화 패턴 필요 시:** `.agents/skills/zustand-5/SKILL.md` 적극 활용
+- **Vitest 단위 테스트 작성 및 모범 사례 필요 시:** `.agents/skills/vitest/SKILL.md` 적극 활용
 - Vercel/Next.js 성능 최적화 가이드 필요 시: `.agents/skills/vercel-react-best-practices/SKILL.md` 읽기
 - AI 프롬프트 작성, 개선 및 프롬프트 엔지니어링 필요 시 (예: 구루 프롬프트 작성): `.agents/skills/prompt-engineering/SKILL.md` 읽기
 - **UI/UX 설계 및 프론트엔드 디자인 기획 시:** `.agents/skills/ui-ux-pro-max/SKILL.md`, `.agents/skills/frontend-design/SKILL.md`, `.agents/skills/design-taste-frontend/SKILL.md` 읽기

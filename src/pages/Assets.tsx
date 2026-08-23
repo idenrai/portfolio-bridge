@@ -17,7 +17,9 @@ import type {
 
 export function AssetsPage() {
   const { assets } = usePortfolio();
-  const { addAsset, updateAsset, deleteAsset } = useAssetStore();
+  const addAsset = useAssetStore((s) => s.addAsset);
+  const updateAsset = useAssetStore((s) => s.updateAsset);
+  const deleteAsset = useAssetStore((s) => s.deleteAsset);
   const brokers = useBrokerStore((s) => s.accounts);
   
   const [modalOpen, setModalOpen] = useState(false);
@@ -155,7 +157,7 @@ export function AssetsPage() {
                 <p className="text-sm leading-tight font-semibold text-zinc-100">
                   {t.asset_ai_banner_title}
                 </p>
-                <p className="mt-1 text-[11px] leading-relaxed text-zinc-500 sm:text-xs">
+                <p className="mt-1 text-xs-plus leading-relaxed text-zinc-500 sm:text-xs">
                   {t.asset_ai_banner_desc}
                 </p>
               </div>

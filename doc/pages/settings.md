@@ -4,11 +4,24 @@
 | --- | --- |
 | Route | `/settings` |
 | Component | `src/pages/Settings.tsx` |
+| Section components | `src/components/settings/` (`DisplaySection`, `ProfileSection`, `DataRefreshSection`, `DataManagementSection`) |
 | Stores | `useSettingsStore`, `useProfileStore`, `useGoogleDriveStore` |
+
+## Page Structure
+
+`Settings.tsx` acts as a clean layout container hosting four dedicated section components from `src/components/settings/`:
+
+1. **DisplaySection**: Base display currency configuration.
+2. **ProfileSection**: Investor profile and long-term financial plans for AI prompt injection.
+3. **DataRefreshSection**: Market quote and exchange rate auto-refresh controls & status.
+4. **DataManagementSection**: Target asset allocation, Google Drive backup/restore, and full data reset.
+
+---
 
 ## User Profile
 
 **Store**: `useProfileStore` (`src/stores/useProfileStore.ts`)
+**Component**: `ProfileSection` (`src/components/settings/ProfileSection.tsx`)
 
 Purpose: personal context injected into AI guru prompts. Stored in localStorage only — never transmitted.
 
@@ -29,10 +42,10 @@ Purpose: personal context injected into AI guru prompts. Stored in localStorage 
 
 ### AutoResizeTextarea
 
-`plan3y`, `plan5y`, `plan10y`, `notes` fields use a local `AutoResizeTextarea` component defined in `Settings.tsx`.
+`plan3y`, `plan5y`, `plan10y`, `notes` fields use the shared `AutoResizeTextarea` component defined in `src/components/common/AutoResizeTextarea.tsx`.
 It automatically grows in height as content is typed, using `useRef` + `useEffect` to set `height = scrollHeight`.
 
-`plan3y`, `plan5y`, `plan10y`, `notes` 필드는 `Settings.tsx`에 정의된 로컬 `AutoResizeTextarea` 컴포넌트를 사용합니다.
+`plan3y`, `plan5y`, `plan10y`, `notes` 필드는 `src/components/common/AutoResizeTextarea.tsx`에 정의된 공통 `AutoResizeTextarea` 컴포넌트를 사용합니다.
 입력 내용이 늘어나면 `useRef` + `useEffect`를 통해 `height = scrollHeight`로 자동 높이 조정됩니다.
 
 ### Prompt Injection Protection
@@ -46,7 +59,6 @@ when injected into AI prompts to prevent prompt injection.
 ## Display Currency
 
 **Store**: `useSettingsStore.baseCurrency`
-
 **Component**: `DisplaySection` (`src/components/settings/DisplaySection.tsx`)
 
 Options: `KRW` · `JPY` · `USD` · `EUR`
@@ -57,11 +69,11 @@ This setting is independent of the UI language.
 앱 전체의 모든 금액이 선택한 baseCurrency로 변환되어 표시됩니다.
 이 설정은 UI 언어(한국어, 영어 등)와 독립적으로 동작합니다.
 
-## Exchange Rates
+## Exchange Rates & Price Refresh
 
 **Store**: `useSettingsStore.exchangeRates`
-
-**Hook**: `useExchangeRates` / `useDataRefresh`
+**Component**: `DataRefreshSection` (`src/components/settings/DataRefreshSection.tsx`)
+**Hook**: `useExchangeRates` / `usePriceRefresh` / `useDataRefresh`
 
 ### Cache Strategy
 
@@ -76,30 +88,22 @@ The refresh button shows: last-updated time, updated count, total asset count, a
 
 새로고침 버튼에는 마지막 업데이트 시간, 업데이트 수, 전체 자산 수, 실패한 티커가 표시됩니다.
 
-## Target Allocation
+## Target Allocation & Data Management
 
-**Store**: `useSettingsStore.targetAllocations`
+**Store**: `useSettingsStore.targetAllocations`, `useGoogleDriveStore`
+**Component**: `DataManagementSection` (`src/components/settings/DataManagementSection.tsx`)
+
+### Target Allocation
 
 **Type**: `TargetAllocation[]` — `{ category: AssetCategory; targetPercent: number }[]`
 
 Used by:
-
 - Dashboard → Category Analysis Card (deviation visualization) / 카테고리 편차 시각화
 - Dashboard → Rebalance Card (buy/sell suggestions) / 리밸런싱 매수·매도 제안
 
-## Data Reset
-
-Clears all assets and settings from localStorage after a confirmation dialog.
-Triggers `window.location.reload()` to reset the app to its initial state.
-Keys cleared: `STORAGE_KEYS.ASSETS`, `STORAGE_KEYS.SETTINGS`.
-
-확인 다이얼로그 후 localStorage에서 모든 자산과 설정을 삭제합니다.
-`window.location.reload()`를 호출하여 앱을 초기 상태로 재설정합니다.
-
-## Google Drive Backup
+### Google Drive Backup
 
 **Store**: `useGoogleDriveStore`
-
 **Hook**: `useGoogleDrive`
 
 Optional integration to sync/backup localStorage data to a file in the user's personal Google Drive.
@@ -110,6 +114,11 @@ localStorage 데이터를 사용자 개인 Google Drive의 파일로 동기화·
 - Backup file stored in the user's own Drive folder. / 백업 파일은 사용자 본인의 Drive 폴더에 저장됩니다.
 - To delete the backup: revoke app access at `myaccount.google.com/permissions`. / 백업 삭제: 해당 페이지에서 앱 접근 권한을 해제하면 Drive 백업 파일도 삭제됩니다.
 
-> If a user revokes access on the Google permissions page, the backup file stored in Drive is also deleted.
->
-> Google 권한 페이지에서 접근 권한을 해제하면 Drive에 저장된 백업 파일도 함께 삭제됩니다.
+### Data Reset
+
+Clears all assets and settings from localStorage after a confirmation dialog.
+Triggers `window.location.reload()` to reset the app to its initial state.
+Keys cleared: `STORAGE_KEYS.ASSETS`, `STORAGE_KEYS.SETTINGS`, `STORAGE_KEYS.BROKERS`, etc.
+
+확인 다이얼로그 후 localStorage에서 모든 자산과 설정을 삭제합니다.
+`window.location.reload()`를 호출하여 앱을 초기 상태로 재설정합니다.

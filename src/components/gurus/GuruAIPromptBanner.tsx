@@ -22,8 +22,19 @@ export function GuruAIPromptBanner({
   const lang = useLanguageStore((s) => s.lang);
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
-  const profile = useProfileStore();
-  const { sessions, saveSession, clearSession } = useGuruSessionStore();
+  const nickname = useProfileStore((s) => s.nickname);
+  const age = useProfileStore((s) => s.age);
+  const annualIncome = useProfileStore((s) => s.annualIncome);
+  const monthlyBudget = useProfileStore((s) => s.monthlyBudget);
+  const plan3y = useProfileStore((s) => s.plan3y);
+  const plan5y = useProfileStore((s) => s.plan5y);
+  const plan10y = useProfileStore((s) => s.plan10y);
+  const notes = useProfileStore((s) => s.notes);
+  const profile = { nickname, age, annualIncome, monthlyBudget, plan3y, plan5y, plan10y, notes };
+
+  const sessions = useGuruSessionStore((s) => s.sessions);
+  const saveSession = useGuruSessionStore((s) => s.saveSession);
+  const clearSession = useGuruSessionStore((s) => s.clearSession);
 
   const [showPrompt, setShowPrompt] = useState(false);
   const [showFollowUp, setShowFollowUp] = useState(false);
@@ -129,7 +140,7 @@ export function GuruAIPromptBanner({
               <p className="text-sm leading-tight font-semibold text-zinc-100">
                 {t.guru_ai_banner_title}
               </p>
-              <p className="mt-1 text-[11px] leading-relaxed text-zinc-500 sm:text-xs">
+              <p className="mt-1 text-xs-plus leading-relaxed text-zinc-500 sm:text-xs">
                 {t.guru_ai_banner_desc}
               </p>
             </div>
@@ -162,13 +173,13 @@ export function GuruAIPromptBanner({
         {/* 첫 번째 프롬프트 */}
         {showPrompt && (
           <div className="mt-4 space-y-3 border-t border-zinc-800/50 pt-4">
-            <p className="text-[11px] text-zinc-500">{t.guru_ai_desc}</p>
+            <p className="text-xs-plus text-zinc-500">{t.guru_ai_desc}</p>
             <div className="group relative">
               <textarea
                 readOnly
                 value={promptText}
                 rows={12}
-                className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950 p-3 pb-12 font-mono text-[11px] text-zinc-300 transition-shadow focus:ring-1 focus:ring-indigo-500/50 focus:outline-none sm:text-xs"
+                className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950 p-3 pb-12 font-mono text-xs-plus text-zinc-300 transition-shadow focus:ring-1 focus:ring-indigo-500/50 focus:outline-none sm:text-xs"
               />
               <button
                 type="button"
@@ -195,7 +206,7 @@ export function GuruAIPromptBanner({
             </div>
             <div className="mt-1 flex items-start gap-2 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-2.5">
               <AlertTriangle aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-yellow-500" />
-              <span className="text-[10px] leading-relaxed text-yellow-500/90 sm:text-[11px]">
+              <span className="text-2xs leading-relaxed text-yellow-500/90 sm:text-xs-plus">
                 {t.guru_ai_search_warn}
               </span>
             </div>
@@ -206,17 +217,17 @@ export function GuruAIPromptBanner({
         {showFollowUp && followUpText && (
           <div className="mt-4 space-y-3 border-t border-zinc-800/50 pt-4">
             <div className="flex items-center gap-2">
-              <span className="rounded-full border border-emerald-800/50 bg-emerald-900/30 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
+              <span className="rounded-full border border-emerald-800/50 bg-emerald-900/30 px-2 py-0.5 text-2xs font-medium text-emerald-400">
                 <Calendar className="mr-1.5 inline-block size-3 text-emerald-400/80" /> {prevSession?.date}
               </span>
-              <p className="text-[11px] text-zinc-500">{t.guru_ai_followup_desc}</p>
+              <p className="text-xs-plus text-zinc-500">{t.guru_ai_followup_desc}</p>
             </div>
             <div className="group relative">
               <textarea
                 readOnly
                 value={followUpText}
                 rows={14}
-                className="w-full resize-none rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-3 pb-12 font-mono text-[11px] text-zinc-300 transition-shadow focus:ring-1 focus:ring-emerald-500/50 focus:outline-none sm:text-xs"
+                className="w-full resize-none rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-3 pb-12 font-mono text-xs-plus text-zinc-300 transition-shadow focus:ring-1 focus:ring-emerald-500/50 focus:outline-none sm:text-xs"
               />
               <button
                 type="button"
@@ -243,7 +254,7 @@ export function GuruAIPromptBanner({
             </div>
             <div className="mt-1 flex items-start gap-2 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-2.5">
               <AlertTriangle aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-yellow-500" />
-              <span className="text-[10px] leading-relaxed text-yellow-500/90 sm:text-[11px]">
+              <span className="text-2xs leading-relaxed text-yellow-500/90 sm:text-xs-plus">
                 {t.guru_ai_search_warn}
               </span>
             </div>

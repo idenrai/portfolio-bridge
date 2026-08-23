@@ -182,14 +182,14 @@ export function MultiSelect({
           <button
             type="button"
             onClick={handleSelectAll}
-            className="cursor-pointer rounded-sm text-[10px] font-medium text-zinc-400 transition-colors hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none"
+            className="cursor-pointer rounded-sm text-2xs font-medium text-zinc-400 transition-colors hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none"
           >
             {selectAllText}
           </button>
           <button
             type="button"
             onClick={handleClearAll}
-            className="cursor-pointer rounded-sm text-[10px] font-medium text-zinc-400 transition-colors hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none"
+            className="cursor-pointer rounded-sm text-2xs font-medium text-zinc-400 transition-colors hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none"
           >
             {clearText}
           </button>
@@ -236,12 +236,12 @@ export function MultiSelect({
               >
                 <Check className="size-2.5" strokeWidth={3} />
               </div>
-              <span className="min-w-0 truncate text-[11px] leading-tight">{option.label}</span>
+              <span className="min-w-0 truncate text-xs-plus leading-tight">{option.label}</span>
             </label>
           );
         })}
         {options.length === 0 && (
-          <div className="p-2 text-center text-[11px] text-zinc-500">
+          <div className="p-2 text-center text-xs-plus text-zinc-500">
             No options
           </div>
         )}

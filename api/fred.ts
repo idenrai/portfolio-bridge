@@ -12,19 +12,34 @@ const CORS_HEADERS: Record<string, string> = {
 };
 
 const ALLOWED_SERIES = new Set(["WILL5000INDFC", "GDP"]);
+const SERIES_ID_REGEX = /^[A-Z0-9_]{3,30}$/;
 
 export default async function handler(request: Request) {
   if (request.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
   }
 
-  const url = new URL(request.url);
-  const id = url.searchParams.get("id") ?? "";
-
-  // 허용된 시리즈 ID만 프록시 (의도치 않은 오용 방지)
-  if (!ALLOWED_SERIES.has(id)) {
+  if (request.method !== "GET") {
     return new Response(
-      JSON.stringify({ ok: false, error: `Series '${id}' not allowed` }),
+      JSON.stringify({ ok: false, error: "Method Not Allowed" }),
+      {
+        status: 405,
+        headers: {
+          ...CORS_HEADERS,
+          "Content-Type": "application/json",
+          Allow: "GET, OPTIONS",
+        },
+      },
+    );
+  }
+
+  const url = new URL(request.url);
+  const id = url.searchParams.get("id")?.trim() ?? "";
+
+  // 형식 및 허용된 시리즈 ID 검증 (Zero-Trust)
+  if (!SERIES_ID_REGEX.test(id) || !ALLOWED_SERIES.has(id)) {
+    return new Response(
+      JSON.stringify({ ok: false, error: `Series '${id}' not allowed or invalid` }),
       { status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
     );
   }
@@ -39,6 +54,7 @@ export default async function handler(request: Request) {
   try {
     const res = await fetch(fredUrl, {
       headers: { "User-Agent": "portfolio-bridge/1.0" },
+      signal: AbortSignal.timeout(10_000),
     });
 
     if (!res.ok) {
@@ -53,16 +69,23 @@ export default async function handler(request: Request) {
       status: 200,
       headers: {
         ...CORS_HEADERS,
-        "Content-Type": "text/csv",
-        // 1시간 캐시
-        "Cache-Control": "public, max-age=3600",
+        "Content-Type": "text/csv; charset=utf-8",
+        // 거시 경제 데이터: 1일 엣지 캐시 + 12시간 백그라운드 갱신
+        "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=43200",
       },
     });
   } catch (err) {
+    const isTimeout = err instanceof Error && err.name === "TimeoutError";
     console.error(`[FRED Error] Failed to fetch series ${id}:`, err);
     return new Response(
-      JSON.stringify({ ok: false, error: "FRED API proxy failed" }),
-      { status: 502, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
+      JSON.stringify({
+        ok: false,
+        error: isTimeout ? "FRED API request timed out" : "FRED API proxy failed",
+      }),
+      {
+        status: isTimeout ? 504 : 502,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      },
     );
   }
 }

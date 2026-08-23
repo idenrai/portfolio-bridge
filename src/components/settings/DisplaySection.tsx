@@ -5,7 +5,8 @@ import { Monitor } from "lucide-react";
 import type { CurrencyCode } from "@/types";
 
 export function DisplaySection() {
-  const settings = useSettingsStore();
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
+  const setBaseCurrency = useSettingsStore((s) => s.setBaseCurrency);
   const t = useT();
 
   return (
@@ -24,10 +25,8 @@ export function DisplaySection() {
 
         <div className="space-y-1 md:w-1/2">
           <CustomSelect<CurrencyCode>
-            value={settings.baseCurrency}
-            onChange={(val) =>
-              settings.setBaseCurrency(val, true)
-            }
+            value={baseCurrency}
+            onChange={(val) => setBaseCurrency(val, true)}
             ariaLabel={t.settings_display_currency_title}
             options={[
               { value: "KRW", label: t.currency_krw },

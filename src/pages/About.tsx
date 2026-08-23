@@ -38,10 +38,11 @@ const STACK = [
   "Vite 7",
   "Tailwind CSS v4",
   "Zustand 5",
+  "TanStack Query v5",
+  "Recharts 3",
+  "Yahoo Finance & FRED API",
+  "Vercel Edge Runtime",
   "Lucide React",
-  "Recharts",
-  "Yahoo Finance API",
-  "Vercel",
 ];
 
 export function AboutPage() {

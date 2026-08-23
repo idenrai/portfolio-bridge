@@ -98,7 +98,7 @@ export function EditForm({
           value={currentPrice || ""}
           onChange={(e) => setCurrentPrice(Number(e.target.value))}
         />
-        <p className="mt-1.5 text-[10px] leading-relaxed text-zinc-500">
+        <p className="mt-1.5 text-2xs leading-relaxed text-zinc-500">
           {t.af_current_price_help}
         </p>
       </div>

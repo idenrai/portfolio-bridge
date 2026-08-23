@@ -24,7 +24,7 @@ export function BottomNav() {
             end={item.to === "/"}
             className={({ isActive }) =>
               cn(
-                "flex h-full flex-1 items-center justify-center border-r border-zinc-800 py-0 text-[11px] transition-colors last:border-r-0",
+                "flex h-full flex-1 items-center justify-center border-r border-zinc-800 py-0 text-xs-plus transition-colors last:border-r-0",
                 isActive
                   ? "bg-zinc-200 font-bold text-black"
                   : "text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"

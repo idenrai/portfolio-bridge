@@ -7,13 +7,14 @@ import { LANG_LOCALES } from "@/i18n";
 import { format } from "date-fns";
 
 export function DataRefreshSection() {
-  const settings = useSettingsStore();
-  const assetStore = useAssetStore();
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
+  const hasRefreshableAssets = useAssetStore((s) =>
+    s.assets.some((a) => a.ticker && !a.categories.includes("cash")),
+  );
   const lang = useLanguageStore((s) => s.lang);
   const langLocale = LANG_LOCALES[lang];
   const t = useT();
 
-  const baseCurrency = settings.baseCurrency;
   const { data: exchangeRates } = useExchangeRates();
   const baseCurrencyRate = exchangeRates[baseCurrency] ?? 1;
   const currencyDisplayNames = new Intl.DisplayNames([langLocale], {
@@ -111,7 +112,7 @@ export function DataRefreshSection() {
                     <span className="truncate text-xs text-zinc-400 sm:text-sm">
                       {currencyName} ({code})
                     </span>
-                    <span className="text-right text-[10px] text-zinc-400 tabular-nums sm:text-xs">
+                    <span className="text-right text-2xs text-zinc-400 tabular-nums sm:text-xs">
                       {unit} {code} =
                     </span>
                     <span className="text-right font-mono text-xs text-zinc-100 tabular-nums sm:text-sm">
@@ -151,9 +152,7 @@ export function DataRefreshSection() {
         )}
         {!isLoading && !lastUpdated && !error && !isCached && (
           <p className="text-xs text-zinc-400">
-            {assetStore.assets.some(
-              (a) => a.ticker && !a.categories.includes("cash"),
-            )
+            {hasRefreshableAssets
               ? t.settings_data_refresh_auto
               : t.settings_data_refresh_no_ticker}
           </p>

@@ -8,6 +8,7 @@ applyTo: "src/**/*.{ts,tsx}"
 
 - Enable and respect strict mode (`"strict": true` in `tsconfig.app.json`).
 - Use `interface` for object shapes; use `type` for unions, intersections, and aliases.
+- Follow type-safe idioms and advanced typing patterns from `.agents/skills/typescript-advanced-types/SKILL.md` (generics, conditional/mapped types, type guards) and `.agents/skills/typescript-best-practices/SKILL.md` (discriminated unions, exhaustive switch checks, branded types).
 - Export shared types from `src/types/index.ts`; utilities from `src/utils/index.ts`; hooks from `src/hooks/index.ts`.
 - Always use the `@/` path alias (maps to `src/`) for internal imports — never use relative `../` chains more than one level deep.
 

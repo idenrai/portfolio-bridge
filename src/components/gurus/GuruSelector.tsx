@@ -72,7 +72,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
               onClick={() => onSelect(guru)}
               aria-label={`${guruName(guru)}, ${guru.firm}`}
               className={cn(
-                "relative flex aspect-[1.586/1] w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-[border-color,box-shadow] duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:w-56",
+                "relative flex aspect-card w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-[border-color,box-shadow] duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:w-56",
                 isSelected
                   ? "border-zinc-600 text-white shadow-lg shadow-white/5"
                   : "border-zinc-800 text-zinc-400 hover:border-zinc-700",
@@ -106,7 +106,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
               <div className="relative z-10 w-full text-center">
                 <span
                   className={cn(
-                    "font-mono text-[8px] font-medium tracking-[0.25em] uppercase transition-colors duration-300",
+                    "font-mono text-3xs font-medium tracking-widest uppercase transition-colors duration-300",
                     isSelected ? "text-zinc-400" : "text-zinc-500",
                   )}
                 >
@@ -155,7 +155,7 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
                   <GuruFirm
                     firm={guru.firm}
                     className={cn(
-                      "text-[8px] tracking-wider transition-colors duration-300 sm:text-[9px]",
+                      "text-3xs tracking-wider transition-colors duration-300",
                       isSelected ? "text-zinc-400" : "text-zinc-500",
                     )}
                   />
@@ -163,11 +163,11 @@ export function GuruSelector({ selectedGuru, onSelect }: GuruSelectorProps) {
 
                 <div
                   className={cn(
-                    "flex shrink-0 flex-col items-end font-mono text-[8px] leading-tight transition-colors duration-300",
+                    "flex shrink-0 flex-col items-end font-mono text-3xs leading-tight transition-colors duration-300",
                     isSelected ? "text-zinc-400" : "text-zinc-500",
                   )}
                 >
-                  <span className="text-[6px] tracking-wider uppercase opacity-60">Since</span>
+                  <span className="text-4xs tracking-wider uppercase opacity-60">Since</span>
                   <span className="font-bold">’{GURU_SINCE_YEARS[guru.id] || "26"}</span>
                 </div>
               </div>
