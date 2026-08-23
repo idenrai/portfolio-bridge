@@ -55,12 +55,12 @@ npm run build
 | Area | Technology |
 | --- | --- |
 | Frontend | React 19 · TypeScript 5.9 · Vite 7 · Lucide React · date-fns · Fontsource (Inter, Fira Code) |
-| Styling | Tailwind CSS v4 (`@tailwindcss/vite`, `@theme`, `@utility`) |
-| State & Async Data | Zustand 5 (localStorage persist) · TanStack Query v5 |
+| Styling | Tailwind CSS v4 (`@tailwindcss/vite`, `@theme` design tokens, `@utility`) |
+| State & Async Data | Zustand 5 (Granular Selector pattern + localStorage persist) · TanStack Query v5 |
 | Charts | Recharts 3 |
 | Routing | React Router v7 (`react-router-dom` v7 with `React.lazy` & `Suspense`) |
 | i18n | Custom (ko / en / ja / de) |
-| Market & Economic Data | Yahoo Finance API & FRED API via Edge Proxy |
+| Market & Economic Data | Yahoo Finance & FRED API via Vercel Edge Runtime Proxy (Zero-Trust validation + smart edge caching) |
 | Deployment | Vercel (Edge Runtime Functions + static CDN) |
 | Testing | Vitest 4 · React Testing Library · Playwright E2E · JSDOM |
 | Linting | ESLint 9 (flat config) with typescript-eslint + Tailwind CSS plugin |
@@ -71,19 +71,23 @@ npm run build
 
 ```text
 src/
-├── pages/          # Dashboard, Assets, Gurus, FirePlanner, Settings, About
+├── pages/          # Dashboard, Assets, Gurus, FirePlanner, Settings, About (Lazy routes)
 ├── components/     # layout/, common/, dashboard/, assets/, gurus/, fire/, settings/
 ├── providers/      # QueryProvider (TanStack React Query)
 ├── hooks/          # Custom React hooks (usePortfolio, useAnalyzer, useTickerSearch, etc.)
-├── stores/         # Zustand stores (useAssetStore, useFireStore, useSettingsStore, etc.)
+├── stores/         # Zustand 5 stores with granular selectors (useAssetStore, useFireStore, etc.)
 ├── constants/      # App constants (fx, storage keys, thresholds)
 ├── i18n/           # Translation files (ko/en/ja/de) & TranslationKeys type
 ├── types/          # TypeScript type definitions
 ├── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/, cn.ts, csv.ts
 ├── tests/          # Unit tests (Vitest) & E2E tests (Playwright)
-└── style.css       # Global styles & Tailwind v4 theme/utility tokens
+└── style.css       # Global styles & Tailwind v4 @theme design tokens (micro typography, card aspect)
 
-api/                # Vercel Edge Runtime Functions (Yahoo Finance & FRED proxy)
+api/                # Vercel Edge Runtime Functions
+├── proxy.ts        # Yahoo Finance proxy (cookie/crumb auth, timeout guard, smart edge caching)
+├── fred.ts         # FRED API proxy (series whitelist, timeout guard, 1-day edge cache)
+├── health.ts       # Service health check endpoint (no-cache, uptime metadata)
+└── tsconfig.json   # TypeScript compilation config for Edge functions
 ```
 
 ---
@@ -154,12 +158,12 @@ npm run build
 | 영역 | 기술 |
 | --- | --- |
 | 프런트엔드 | React 19 · TypeScript 5.9 · Vite 7 · Lucide React · date-fns · Fontsource (Inter, Fira Code) |
-| 스타일링 | Tailwind CSS v4 (`@tailwindcss/vite`, `@theme`, `@utility`) |
-| 상태 & 비동기 데이터 | Zustand 5 (localStorage 영속) · TanStack Query v5 |
+| 스타일링 | Tailwind CSS v4 (`@tailwindcss/vite`, `@theme` 디자인 토큰, `@utility`) |
+| 상태 & 비동기 데이터 | Zustand 5 (Granular Selector 패턴 + localStorage 영속) · TanStack Query v5 |
 | 차트 | Recharts 3 |
 | 라우팅 | React Router v7 (`react-router-dom` v7, `React.lazy` 및 `Suspense`) |
 | 다국어 | 커스텀 i18n (ko / en / ja / de) |
-| 시세 & 경제 데이터 | Yahoo Finance API & FRED API via 엣지 프록시 |
+| 시세 & 경제 데이터 | Yahoo Finance & FRED API via Vercel 엣지 프록시 (Zero-Trust 검증 + 스마트 엣지 캐싱) |
 | 웹 배포 | Vercel (Edge Runtime Functions + 정적 CDN) |
 | 테스트 | Vitest 4 · React Testing Library · Playwright E2E · JSDOM |
 | 린트 | ESLint 9 (플랫 설정) + typescript-eslint + Tailwind CSS 플러그인 |
@@ -170,19 +174,23 @@ npm run build
 
 ```text
 src/
-├── pages/          # Dashboard, Assets, Gurus, FirePlanner, Settings, About
+├── pages/          # Dashboard, Assets, Gurus, FirePlanner, Settings, About (지연 로딩 라우트)
 ├── components/     # layout/, common/, dashboard/, assets/, gurus/, fire/, settings/
 ├── providers/      # QueryProvider (TanStack React Query)
 ├── hooks/          # 커스텀 React 훅 (usePortfolio, useAnalyzer, useTickerSearch 등)
-├── stores/         # Zustand 스토어 (useAssetStore, useFireStore, useSettingsStore 등)
+├── stores/         # Zustand 5 스토어 (Granular Selector 최적화, useAssetStore 등)
 ├── constants/      # 앱 상수 (fx, 스토리지 키, 임계값)
 ├── i18n/           # 번역 파일 (ko/en/ja/de) 및 TranslationKeys 타입
 ├── types/          # TypeScript 타입 정의
 ├── utils/          # calc/, yahoo/, ai/, analyzers/, gdrive/, cn.ts, csv.ts
 ├── tests/          # 단위 테스트 (Vitest) 및 E2E 테스트 (Playwright)
-└── style.css       # 글로벌 스타일 및 Tailwind v4 테마/유틸리티 토큰
+└── style.css       # 글로벌 스타일 및 Tailwind v4 @theme 디자인 토큰 (마이크로 타이포, 카드 종횡비)
 
-api/                # Vercel Edge Runtime Functions (Yahoo Finance 및 FRED 프록시)
+api/                # Vercel Edge Runtime Functions
+├── proxy.ts        # Yahoo Finance 프록시 (쿠키/크럼 인증, 타임아웃 보호, 스마트 엣지 캐시)
+├── fred.ts         # FRED API 프록시 (시리즈 화이트리스트, 타임아웃 보호, 1일 엣지 캐시)
+├── health.ts       # 서비스 상태 점검 엔드포인트 (no-cache, 헬스 메타데이터)
+└── tsconfig.json   # 엣지 함수 전용 TypeScript 컴파일 설정
 ```
 
 ---

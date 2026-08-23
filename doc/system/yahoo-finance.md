@@ -66,24 +66,36 @@ Applied in `yahooFundamentals.ts` and used by all 6 quantitative analyzers.
 
 ## Vite Proxy (Local Dev)
 
-Configured in `vite.config.ts`. Intercepts `/api/yahoo/*`, handles cookie/crumb lifecycle, and rewrites requests to `https://query1.finance.yahoo.com/*`.
+Configured in `vite.config.ts`. Intercepts `/api/yahoo/*`, `/api/fred`, and `/api/health`, providing full local development parity with Vercel Edge functions. Handles cookie/crumb lifecycle, timeout guards (`AbortSignal.timeout(10s)`), and request routing.
 
-`vite.config.ts`에 설정됩니다. `/api/yahoo/*` 요청을 가로채 쿠키/크럼 라이프사이클을 관리하고 Yahoo Finance URL로 중계합니다.
+`vite.config.ts`에 설정됩니다. `/api/yahoo/*`, `/api/fred`, `/api/health` 요청을 가로채 쿠키/크럼 라이프사이클을 관리하고 타임아웃 방어 및 에러 처리를 프로덕션 Vercel Edge와 동일하게 제공합니다.
 
 ## Vercel Edge Proxies
 
 ### 1. Yahoo Finance Proxy (`api/proxy.ts`)
 - **Runtime**: Vercel Edge Runtime (`export const config = { runtime: "edge" };`).
 - **Routing**: `vercel.json` rewrite maps `/api/yahoo/:path*` to `/api/proxy?__path=:path*`.
-- **Edge Caching**: Applies `Cache-Control: public, s-maxage=30, stale-while-revalidate=60` on successful GET responses to mitigate rate limits and accelerate response times.
-- **Security & Validation**: Enforces path validation regex (`/^[a-zA-Z0-9/_.-]+$/`), blocks path traversal (`..`, `//`), and restricts prefixes to allowed namespaces (`^(v[0-9]+|ws)/finance/`).
+- **Zero-Trust Validation**: Restricts methods to `GET`, `POST`, `OPTIONS` (returns `405 Method Not Allowed` with `Allow` header otherwise). Enforces path validation regex (`/^[a-zA-Z0-9/_.-]+$/`), blocks path traversal (`..`, `//`), and restricts prefixes to allowed namespaces (`^(v[0-9]+|ws)/finance/`).
+- **Resilience & Timeout Guard**: Upstream fetches use `AbortSignal.timeout(10_000)` to eliminate hanging edge executions (returns `504 Gateway Timeout` on timeout).
+- **Smart Edge Caching**:
+  - `chart` (historical/range): `public, s-maxage=300, stale-while-revalidate=600` (5 minutes)
+  - `quoteSummary` / `search`: `public, s-maxage=60, stale-while-revalidate=120` (1 minute)
+  - Real-time quote: `public, s-maxage=15, stale-while-revalidate=30` (15 seconds)
 - Does **not** accept or store user portfolio data.
 
 ### 2. FRED Economic Data Proxy (`api/fred.ts`)
 - **Runtime**: Vercel Edge Runtime (`export const config = { runtime: "edge" };`).
 - **Endpoint**: `/api/fred?id={seriesId}`.
-- **Allowed Series**: Whitelist includes `WILL5000INDFC` (Wilshire 5000 Total Market Index) and `GDP`, utilized by the Buffett Indicator.
-- **Edge Caching**: Applies 1-hour public cache (`Cache-Control: public, max-age=3600`).
+- **Validation**: Rejects non-GET/OPTIONS with `405 Method Not Allowed`. Enforces regex check (`/^[A-Z0-9_]{3,30}$/`) and whitelist matching (`WILL5000INDFC`, `GDP`).
+- **Resilience & Timeout Guard**: Uses `AbortSignal.timeout(10_000)` to guard upstream FRED CSV requests.
+- **Edge Caching**: Applies 1-day public edge cache (`Cache-Control: public, s-maxage=86400, stale-while-revalidate=43200`).
+
+### 3. Health Check (`api/health.ts`)
+- **Runtime**: Vercel Edge Runtime.
+- **Endpoint**: `/api/health`.
+- **Validation**: Rejects non-GET/OPTIONS with `405 Method Not Allowed`.
+- **Cache Control**: `no-store, no-cache, must-revalidate, proxy-revalidate`.
+- **Payload**: `{ status: "healthy", ok: true, timestamp: Date.now(), runtime: "edge" }`.
 
 ## Crumb Fetching Strategy
 

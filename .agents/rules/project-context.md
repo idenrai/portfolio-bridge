@@ -17,12 +17,12 @@ The app runs as a **React SPA** served locally via Vite or deployed to Vercel (E
 | Area | Technology |
 |------|------------|
 | Frontend | React 19 · TypeScript 5.9 · Vite 7 · Lucide React · date-fns · Fontsource (Inter, Fira Code) |
-| Styling | Tailwind CSS v4 (`@tailwindcss/vite`, `@theme`, `@utility`) |
-| State & Async Data | Zustand 5 (with `localStorage` persist middleware) · TanStack Query v5 |
+| Styling | Tailwind CSS v4 (`@tailwindcss/vite`, `@theme` design tokens, `@utility`) |
+| State & Async Data | Zustand 5 (Granular Selector pattern + `localStorage` persist) · TanStack Query v5 |
 | Charts | Recharts 3 |
 | Routing | React Router v7 (`react-router-dom` v7 with `React.lazy` & `Suspense`) |
 | i18n | Custom (ko / en / ja / de) |
-| Market & Economic Data | Yahoo Finance API & FRED API via Edge Proxy |
+| Market & Economic Data | Yahoo Finance API & FRED API via Vercel Edge Runtime Proxy (Zero-Trust + smart edge caching) |
 | Deployment | Vercel (Edge Runtime Functions + static CDN) |
 | Testing | Vitest 4 · React Testing Library · Playwright E2E · JSDOM |
 | Linting | ESLint 9 with TypeScript ESLint + React Hooks + React Refresh + Tailwind CSS plugin |
@@ -34,14 +34,14 @@ The app runs as a **React SPA** served locally via Vite or deployed to Vercel (E
 ```
 portfolio-bridge/
 ├── api/                        # Vercel Edge Runtime Functions (API proxies)
-│   ├── fred.ts                 # FRED API proxy (Edge Runtime)
-│   ├── health.ts               # Health check endpoint (Edge Runtime)
-│   ├── proxy.ts                # Yahoo Finance proxy with cookie/crumb auth (Edge Runtime)
+│   ├── fred.ts                 # FRED API proxy (Series whitelist, timeout guard, 1-day edge cache)
+│   ├── health.ts               # Health check endpoint (no-cache, uptime & status metadata)
+│   ├── proxy.ts                # Yahoo Finance proxy (cookie/crumb auth, timeout guard, smart edge cache)
 │   └── tsconfig.json           # TS config for serverless/edge API
 ├── src/                        # React SPA source
 │   ├── main.tsx                # App entry point (QueryProvider & Fontsource imports)
 │   ├── App.tsx                 # Root component (Lazy routes & Suspense fallback)
-│   ├── style.css               # Global styles (Tailwind v4 @theme, @layer base, @utility)
+│   ├── style.css               # Global styles (Tailwind v4 @theme, micro typography, card aspect)
 │   ├── vite-env.d.ts           # Vite client type declarations
 │   ├── components/             # Reusable UI components
 │   │   ├── assets/             # Asset management components & modals
@@ -77,7 +77,7 @@ portfolio-bridge/
 │   │   └── About.tsx           # About & privacy declaration
 │   ├── providers/              # React context & query providers
 │   │   └── QueryProvider.tsx   # TanStack Query Client provider
-│   ├── stores/                 # Zustand stores (persisted to localStorage)
+│   ├── stores/                 # Zustand stores with granular selectors (persisted to localStorage)
 │   │   ├── useAssetStore.ts
 │   │   ├── useBrokerStore.ts
 │   │   ├── useFireStore.ts
@@ -108,7 +108,7 @@ portfolio-bridge/
 │       └── index.ts
 ├── public/                     # Static assets
 ├── index.html                  # Vite HTML entry
-├── vite.config.ts              # Vite config (dev Yahoo proxy plugin, image optimizer, bundle splitting)
+├── vite.config.ts              # Vite config (dev API proxy plugin, image optimizer, bundle splitting)
 ├── vitest.config.ts            # Vitest test configuration
 ├── playwright.config.ts        # Playwright E2E configuration
 ├── eslint.config.js            # ESLint flat config
@@ -196,13 +196,14 @@ npm run lint
 ### State Management & Data Fetching
 
 - **Client State**: Global application state lives in Zustand stores under `src/stores/` using `persist` middleware for `localStorage` persistence. Store files follow `use<Domain>Store.ts`.
+- **Granular Selectors**: Always subscribe to state with granular selector functions (e.g. `const baseCurrency = useSettingsStore((s) => s.baseCurrency);`) instead of whole-store destructuring to prevent unnecessary component re-renders.
 - **Async Server State**: TanStack Query (`@tanstack/react-query`) is initialized in `src/providers/QueryProvider.tsx` for caching and managing async server state.
 - Always use `STORAGE_KEYS` constants (from `src/constants/`) as the `name` in Zustand `persist` options.
 
 ### Styling
 
 - Use **Tailwind CSS v4** utility classes exclusively; avoid inline `style` props unless computing purely dynamic values.
-- Global base styles and Tailwind v4 theme/utility tokens live in `src/style.css`.
+- Global base styles and Tailwind v4 `@theme` tokens (micro typography `text-4xs`, `text-3xs`, `text-2xs`, `text-xs-plus`, aspect ratio `aspect-card`) live in `src/style.css`.
 - Merge component class names safely using `@/utils/cn` (`tailwind-merge` + `clsx`).
 
 ### i18n
@@ -217,15 +218,17 @@ npm run lint
 ### Yahoo Finance & FRED Data Fetching
 
 - All Yahoo Finance requests go through `yahooCore.ts` (`yahooFetch()`), which auto-detects the runtime:
-  - **Local dev**: Vite proxy at `/api/yahoo/…` (configured in `vite.config.ts` with cookie/crumb auth handling)
-  - **Vercel**: Vercel Edge Runtime proxy (`api/proxy.ts`)
-- FRED economic series requests go through `api/fred.ts` proxy to bypass CORS.
+  - **Local dev**: Vite dev API proxy at `/api/yahoo/…` (configured in `vite.config.ts` with cookie/crumb auth handling & timeout protection)
+  - **Vercel**: Vercel Edge Runtime proxy (`api/proxy.ts`) with smart edge caching (`chart`: 5m, `quoteSummary`/`search`: 1m, realtime: 15s)
+- FRED economic series requests go through `api/fred.ts` proxy to bypass CORS with series whitelist validation & 1-day edge caching.
 - Never call external market APIs directly from browser components without going through the proxy layer.
 
 ### Vercel API Routes (`api/`)
 
 - Each file in `api/` is a **Vercel Edge Runtime Function** (`export const config = { runtime: "edge" };`).
-- Keep each endpoint lightweight, resilient (with backoff & caching headers), and focused strictly on proxy logic.
+- Follow **Zero-Trust Input Validation**: reject disallowed HTTP methods with `405 Method Not Allowed` (`Allow` header), validate paths and query parameters with strict regex.
+- Apply **Resilience & Timeout Protection**: use `AbortSignal.timeout(10_000)` on all upstream fetch operations.
+- Apply **Smart Edge Caching**: set appropriate `Cache-Control` (`s-maxage`, `stale-while-revalidate`) headers to protect against rate limits and optimize response latency.
 
 ### File and Naming Conventions
 

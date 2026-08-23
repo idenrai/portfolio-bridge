@@ -36,21 +36,21 @@ Portfolio Bridge는 프라이버시 우선 원칙으로 설계된 다통화 포�
 
 ## Architecture
 
-The app runs as a React SPA with client-side caching and Edge Runtime API proxies.
+The app runs as a React SPA with client-side caching (TanStack Query + Zustand 5) and resilient Edge Runtime API proxies.
 
-앱은 클라이언트 측 비동기 캐싱(TanStack Query) 및 엣지 런타임 API 프록시를 갖춘 React SPA로 동작합니다.
+앱은 클라이언트 측 비동기 캐싱(TanStack Query + Zustand 5 Granular Selector) 및 복원력 높은 엣지 런타임 API 프록시를 갖춘 React SPA로 동작합니다.
 
 ```text
-Local dev (Vite)                Vercel deployment
-┌───────────────────────┐    ┌─────────────────────────┐
-│ React 19 SPA          │    │ React 19 SPA (CDN)      │
-│ TanStack React Query  │    │ TanStack React Query    │
-│ Vite dev proxy plugin │    │ Vercel Edge Runtime     │
-│ (/api/yahoo)          │    │ (/api/proxy, /api/fred) │
-└──────────┬────────────┘    └────────────┬────────────┘
-           └──────────────┬───────────────┘
-                          ↓
-              Yahoo Finance & FRED API
+Local dev (Vite)                       Vercel deployment
+┌──────────────────────────────┐    ┌──────────────────────────────────┐
+│ React 19 SPA                 │    │ React 19 SPA (Static CDN)        │
+│ TanStack Query + Zustand 5   │    │ TanStack Query + Zustand 5       │
+│ Vite dev API proxy plugin    │    │ Vercel Edge Runtime Functions    │
+│ (/api/yahoo, /fred, /health) │    │ (/api/proxy, /fred, /health)     │
+└──────────────┬───────────────┘    └────────────────┬─────────────────┘
+               └───────────────────┬─────────────────┘
+                                   ↓
+                   Yahoo Finance & FRED St. Louis API
 ```
 
 `yahooFetch()` in `src/utils/yahoo/yahooCore.ts` and FRED utilities auto-detect the runtime and route requests accordingly.
@@ -72,9 +72,9 @@ Local dev (Vite)                Vercel deployment
 
 ## State Management
 
-All global state uses Zustand with `persist` middleware (localStorage) alongside TanStack Query for server state. Store files live in `src/stores/`.
+All global state uses Zustand 5 with `persist` middleware (localStorage) and granular selector subscriptions alongside TanStack Query for server state. Store files live in `src/stores/`.
 
-모든 전역 상태는 `persist` 미들웨어(localStorage)를 사용하는 Zustand 스토어 및 서버 상태를 위한 TanStack Query로 관리됩니다. 스토어 파일은 `src/stores/`에 위치합니다.
+모든 전역 상태는 `persist` 미들웨어(localStorage)를 사용하는 Zustand 5 스토어(Granular Selector 최적화 적용) 및 서버 상태를 위한 TanStack Query로 관리됩니다. 스토어 파일은 `src/stores/`에 위치합니다.
 
 | Store | File | Purpose |
 | --- | --- | --- |
