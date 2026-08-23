@@ -16,7 +16,7 @@ const YAHOO_UA =
  * Yahoo Finance v8 API는 cookie + crumb 인증이 필요합니다.
  * dev server 수명 동안 crumb을 캐시하고, 만료(401/403) 또는 rate limit(429) 시 자동 재시도합니다.
  */
-function yahooProxy(): Plugin {
+function devApiProxy(): Plugin {
   // ── Crumb 캐시 (dev server 수명 동안 유지) ────────────────────
   let crumb = "";
   let cookie = "";
@@ -36,10 +36,19 @@ function yahooProxy(): Plugin {
         const r = await fetch(cookieUrl, {
           redirect: "manual",
           headers: { "User-Agent": YAHOO_UA },
+          signal: AbortSignal.timeout(10_000),
         });
         if (typeof r.headers.getSetCookie === "function") {
           for (const sc of r.headers.getSetCookie()) {
-            parts.push(sc.split(";")[0]);
+            const name = sc.split(";")[0]?.trim();
+            if (name) parts.push(name);
+          }
+        }
+        if (parts.length === 0) {
+          const raw = r.headers.get("set-cookie") ?? "";
+          for (const piece of raw.split(/,(?=[^ ])/)) {
+            const name = piece.trim().split(";")[0]?.trim();
+            if (name) parts.push(name);
           }
         }
         if (parts.length > 0) break;
@@ -59,6 +68,7 @@ function yahooProxy(): Plugin {
         try {
           const r2 = await fetch(crumbHost, {
             headers: { "User-Agent": YAHOO_UA, Cookie: cookie },
+            signal: AbortSignal.timeout(10_000),
           });
           if (r2.status === 429) {
             // rate limited: 지수 백오프 (2s, 4s, 8s)
@@ -83,8 +93,102 @@ function yahooProxy(): Plugin {
   }
 
   return {
-    name: "yahoo-proxy",
+    name: "dev-api-proxy",
     configureServer(server) {
+      // ── Health Check ──────────────────────────────────────────
+      server.middlewares.use("/api/health", (_req, res) => {
+        if (_req.method === "OPTIONS") {
+          res.statusCode = 204;
+          res.setHeader("Access-Control-Allow-Origin", "*");
+          res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+          res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+          res.end();
+          return;
+        }
+        if (_req.method !== "GET") {
+          res.statusCode = 405;
+          res.setHeader("Content-Type", "application/json");
+          res.setHeader("Allow", "GET, OPTIONS");
+          res.end(JSON.stringify({ ok: false, error: "Method Not Allowed" }));
+          return;
+        }
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        res.end(
+          JSON.stringify({
+            status: "healthy",
+            ok: true,
+            timestamp: Date.now(),
+            runtime: "dev-vite",
+          }),
+        );
+      });
+
+      // ── FRED Proxy ────────────────────────────────────────────
+      server.middlewares.use("/api/fred", async (req, res) => {
+        if (req.method === "OPTIONS") {
+          res.statusCode = 204;
+          res.setHeader("Access-Control-Allow-Origin", "*");
+          res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+          res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+          res.end();
+          return;
+        }
+        if (req.method !== "GET") {
+          res.statusCode = 405;
+          res.setHeader("Content-Type", "application/json");
+          res.setHeader("Allow", "GET, OPTIONS");
+          res.end(JSON.stringify({ ok: false, error: "Method Not Allowed" }));
+          return;
+        }
+
+        const reqUrl = new URL(req.url ?? "/", "http://localhost");
+        const id = reqUrl.searchParams.get("id")?.trim() ?? "";
+        const ALLOWED_SERIES = new Set(["WILL5000INDFC", "GDP"]);
+        const SERIES_ID_REGEX = /^[A-Z0-9_]{3,30}$/;
+
+        if (!SERIES_ID_REGEX.test(id) || !ALLOWED_SERIES.has(id)) {
+          res.statusCode = 400;
+          res.setHeader("Content-Type", "application/json");
+          res.end(
+            JSON.stringify({
+              ok: false,
+              error: `Series '${id}' not allowed or invalid`,
+            }),
+          );
+          return;
+        }
+
+        const oneYearAgo = new Date();
+        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+        const cosd = oneYearAgo.toISOString().slice(0, 10);
+        const fredUrl = `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${encodeURIComponent(id)}&cosd=${cosd}`;
+
+        try {
+          const upstream = await fetch(fredUrl, {
+            headers: { "User-Agent": "portfolio-bridge/1.0" },
+            signal: AbortSignal.timeout(10_000),
+          });
+          res.statusCode = upstream.status;
+          const contentType = upstream.headers.get("content-type");
+          if (contentType) res.setHeader("Content-Type", contentType);
+          res.end(await upstream.text());
+        } catch (err) {
+          const isTimeout = err instanceof Error && err.name === "TimeoutError";
+          res.statusCode = isTimeout ? 504 : 502;
+          res.setHeader("Content-Type", "application/json");
+          res.end(
+            JSON.stringify({
+              ok: false,
+              error: isTimeout
+                ? "FRED API request timed out"
+                : "FRED proxy failed",
+            }),
+          );
+        }
+      });
+
       // ── Yahoo US (cookie + crumb 인증) ──────────────────────
       server.middlewares.use("/api/yahoo", async (req, res) => {
         const targetPath = req.url ?? "/";
@@ -101,6 +205,7 @@ function yahooProxy(): Plugin {
 
           let response = await fetch(buildUrl(crumb), {
             headers: { "User-Agent": YAHOO_UA, Cookie: cookie },
+            signal: AbortSignal.timeout(10_000),
           });
 
           // 401/403 → crumb 만료, 새 crumb으로 재시도
@@ -108,6 +213,7 @@ function yahooProxy(): Plugin {
             await ensureCrumb(true);
             response = await fetch(buildUrl(crumb), {
               headers: { "User-Agent": YAHOO_UA, Cookie: cookie },
+              signal: AbortSignal.timeout(10_000),
             });
           }
 
@@ -117,6 +223,7 @@ function yahooProxy(): Plugin {
             await ensureCrumb(true);
             response = await fetch(buildUrl(crumb), {
               headers: { "User-Agent": YAHOO_UA, Cookie: cookie },
+              signal: AbortSignal.timeout(10_000),
             });
           }
 
@@ -125,10 +232,15 @@ function yahooProxy(): Plugin {
           if (contentType) res.setHeader("Content-Type", contentType);
           res.end(await response.text());
         } catch (err) {
-          res.statusCode = 502;
+          const isTimeout = err instanceof Error && err.name === "TimeoutError";
+          res.statusCode = isTimeout ? 504 : 502;
+          res.setHeader("Content-Type", "application/json");
           res.end(
             JSON.stringify({
-              error: "Yahoo US proxy failed",
+              ok: false,
+              error: isTimeout
+                ? "Yahoo US request timed out"
+                : "Yahoo US proxy failed",
               detail: String(err),
             }),
           );
@@ -143,7 +255,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    yahooProxy(),
+    devApiProxy(),
     ViteImageOptimizer({
       // Configure optimization settings if necessary
       png: { quality: 80 },

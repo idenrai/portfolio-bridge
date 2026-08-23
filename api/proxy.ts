@@ -6,6 +6,8 @@ export const config = { runtime: "edge" };
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
 
+const TIMEOUT_MS = 10_000;
+
 // ─── Module-level crumb / cookie cache (serverless warm instance 동안 유지) ───
 
 let _crumb = "";
@@ -23,6 +25,7 @@ async function getCrumb(
   const r1 = await fetch("https://fc.yahoo.com/", {
     redirect: "manual",
     headers: { "User-Agent": UA },
+    signal: AbortSignal.timeout(TIMEOUT_MS),
   });
   const parts: string[] = [];
   const raw = r1.headers.get("set-cookie") ?? "";
@@ -36,6 +39,7 @@ async function getCrumb(
   for (let attempt = 0; attempt < 3; attempt++) {
     const r2 = await fetch("https://query2.finance.yahoo.com/v1/test/getcrumb", {
       headers: { "User-Agent": UA, Cookie: cookie },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
     });
     if (r2.status === 429) {
       await new Promise((resolve) => setTimeout(resolve, 2000 * (attempt + 1)));
@@ -74,13 +78,27 @@ export default async function handler(request: Request) {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
   }
 
+  if (request.method !== "GET" && request.method !== "POST") {
+    return new Response(
+      JSON.stringify({ ok: false, error: "Method Not Allowed" }),
+      {
+        status: 405,
+        headers: {
+          ...CORS_HEADERS,
+          "Content-Type": "application/json",
+          Allow: "GET, POST, OPTIONS",
+        },
+      },
+    );
+  }
+
   const url = new URL(request.url);
 
   // rewrite를 통해 전달된 Yahoo API 경로
-  const yahooPath = url.searchParams.get("__path") ?? "";
+  const yahooPath = url.searchParams.get("__path")?.trim() ?? "";
   if (!yahooPath) {
     return new Response(
-      JSON.stringify({ error: "Missing __path parameter" }),
+      JSON.stringify({ ok: false, error: "Missing __path parameter" }),
       { status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } },
     );
   }
@@ -123,6 +141,7 @@ export default async function handler(request: Request) {
     const init: RequestInit = {
       method: request.method,
       headers: { "User-Agent": UA, Cookie: cookie } as Record<string, string>,
+      signal: AbortSignal.timeout(TIMEOUT_MS),
     };
 
     if (request.method === "POST" && request.body) {
@@ -145,9 +164,18 @@ export default async function handler(request: Request) {
     const contentType = response.headers.get("content-type");
     if (contentType) headers.set("Content-Type", contentType);
 
-    // 200 OK GET 응답에 대해 30초 엣지 캐시 적용 (Yahoo 429 레이트리밋 방어 및 응답속도 향상)
+    // 200 OK GET 응답에 대해 엔드포인트별 스마트 엣지 캐시 적용 (Yahoo 429 레이트리밋 방어 및 응답속도 향상)
     if (request.method === "GET" && response.status === 200) {
-      headers.set("Cache-Control", "public, s-maxage=30, stale-while-revalidate=60");
+      if (yahooPath.includes("/chart/")) {
+        // 과거 차트/시계열 데이터: 5분 엣지 캐시 + 10분 백그라운드 갱신
+        headers.set("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
+      } else if (yahooPath.includes("/quoteSummary/") || yahooPath.includes("/search")) {
+        // 재무제표 / 티커 검색: 1분 엣지 캐시 + 2분 백그라운드 갱신
+        headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=120");
+      } else {
+        // 실시간 시세: 15초 엣지 캐시 + 30초 백그라운드 갱신
+        headers.set("Cache-Control", "public, s-maxage=15, stale-while-revalidate=30");
+      }
     }
 
     return new Response(await response.text(), {
@@ -155,14 +183,15 @@ export default async function handler(request: Request) {
       headers,
     });
   } catch (err) {
+    const isTimeout = err instanceof Error && err.name === "TimeoutError";
     console.error("[Yahoo Proxy Error]", err);
     return new Response(
       JSON.stringify({
         ok: false,
-        error: "Yahoo Finance proxy failed",
+        error: isTimeout ? "Yahoo Finance request timed out" : "Yahoo Finance proxy failed",
       }),
       {
-        status: 502,
+        status: isTimeout ? 504 : 502,
         headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
       },
     );
