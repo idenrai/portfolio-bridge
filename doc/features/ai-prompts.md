@@ -162,9 +162,9 @@ Each entry has:
 - `lens`: Specific analytical criteria the guru applies (used in `--- YOUR TASK ---`). / 구루가 적용하는 구체적 분석 기준.
 - `format`: Output format and style instructions (used in `--- OUTPUT FORMAT ---`). / 출력 형식 및 스타일 지침.
 
-All 20 gurus have entries. Gurus without a `GURU_FRAMEWORKS` entry use a generic 5-point template.
+All 23 gurus have entries. Gurus without a `GURU_FRAMEWORKS` entry use a generic 5-point template.
 
-20명의 구루 모두 항목을 가집니다. `GURU_FRAMEWORKS`에 항목이 없는 구루는 기본 5포인트 템플릿을 사용합니다.
+23명의 구루 모두 항목을 가집니다. `GURU_FRAMEWORKS`에 항목이 없는 구루는 기본 5포인트 템플릿을 사용합니다.
 
 ### GURU_FOLLOWUP_FOCUS
 

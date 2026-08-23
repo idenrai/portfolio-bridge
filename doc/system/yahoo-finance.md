@@ -1,14 +1,14 @@
-# Yahoo Finance Integration
+# Yahoo Finance & FRED Proxy Integration
 
-Yahoo Finance 연동 시스템입니다.
+Yahoo Finance 및 FRED API 연동 프록시 시스템입니다.
 
 ## Core Rule
 
-**Never call `fetch()` directly against Yahoo Finance URLs from React components or utility code.**
-Always use `yahooFetch()` from `src/utils/yahoo/yahooCore.ts`.
+**Never call `fetch()` directly against external market or economic API URLs from React components or utility code.**
+Always route requests through the proxy layer via `yahooFetch()` from `src/utils/yahoo/yahooCore.ts` or FRED proxy endpoints.
 
-**React 컴포넌트나 유틸리티 코드에서 Yahoo Finance URL로 `fetch()`를 직접 호출하지 마세요.**
-항상 `src/utils/yahoo/yahooCore.ts`의 `yahooFetch()`를 사용하세요.
+**React 컴포넌트나 유틸리티 코드에서 외부 시세/경제 API URL로 `fetch()`를 직접 호출하지 마세요.**
+항상 `src/utils/yahoo/yahooCore.ts`의 `yahooFetch()` 또는 FRED 프록시 엔드포인트를 통해 요청하세요.
 
 ## Runtime Detection
 
@@ -18,8 +18,8 @@ Always use `yahooFetch()` from `src/utils/yahoo/yahooCore.ts`.
 
 | Environment / 환경 | Detection / 감지 방법 | Mechanism / 메커니즘 |
 | --- | --- | --- |
-| Local dev (Vite) | Default (no `__TAURI__`) | Vite proxy at `/api/yahoo/…` |
-| Vercel deployment | Default (no `__TAURI__`) | Serverless Function `api/proxy.ts` |
+| Local dev (Vite) | `import.meta.env.DEV` | Vite dev proxy plugin at `/api/yahoo/…` |
+| Vercel deployment | Production runtime | Vercel Edge Runtime proxy (`api/proxy.ts`, `api/fred.ts`) |
 
 ## Utility Files
 
@@ -39,6 +39,7 @@ Always use `yahooFetch()` from `src/utils/yahoo/yahooCore.ts`.
 | `query1.finance.yahoo.com/v1/finance/search` | Ticker search / 종목 검색 |
 | `query1.finance.yahoo.com/v8/finance/chart/{ticker}` | Current price / 현재가 |
 | `query1.finance.yahoo.com/v10/finance/quoteSummary/{ticker}` | Fundamentals / 재무 데이터 |
+| `fred.stlouisfed.org/graph/fredgraph.csv` | Economic data series (via `api/fred.ts`) / 거시경제 지표 데이터 |
 
 Fundamentals modules used: `financialData`, `incomeStatementHistory`, `balanceSheetHistory`,
 `earningsHistory`, `defaultKeyStatistics`.
@@ -65,22 +66,30 @@ Applied in `yahooFundamentals.ts` and used by all 6 quantitative analyzers.
 
 ## Vite Proxy (Local Dev)
 
-Configured in `vite.config.ts`. Rewrites `/api/yahoo/*` to `https://query1.finance.yahoo.com/*`.
+Configured in `vite.config.ts`. Intercepts `/api/yahoo/*`, handles cookie/crumb lifecycle, and rewrites requests to `https://query1.finance.yahoo.com/*`.
 
-`vite.config.ts`에 설정됩니다. `/api/yahoo/*`를 Yahoo Finance URL로 리라이트합니다.
+`vite.config.ts`에 설정됩니다. `/api/yahoo/*` 요청을 가로채 쿠키/크럼 라이프사이클을 관리하고 Yahoo Finance URL로 중계합니다.
 
-## Vercel Proxy (`api/proxy.ts`)
+## Vercel Edge Proxies
 
-- Routes `/api/yahoo/*` to `query1.finance.yahoo.com`. / `/api/yahoo/*`를 Yahoo Finance로 라우팅합니다.
-- Sets appropriate `Cache-Control` headers. / 적절한 `Cache-Control` 헤더를 설정합니다.
-- Does **not** accept or forward user portfolio data. / 사용자 포트폴리오 데이터를 수신하거나 전달하지 않습니다.
-- CORS headers restrict which origins can call the proxy. / CORS 헤더로 프록시를 호출할 수 있는 출처를 제한합니다.
+### 1. Yahoo Finance Proxy (`api/proxy.ts`)
+- **Runtime**: Vercel Edge Runtime (`export const config = { runtime: "edge" };`).
+- **Routing**: `vercel.json` rewrite maps `/api/yahoo/:path*` to `/api/proxy?__path=:path*`.
+- **Edge Caching**: Applies `Cache-Control: public, s-maxage=30, stale-while-revalidate=60` on successful GET responses to mitigate rate limits and accelerate response times.
+- **Security & Validation**: Enforces path validation regex (`/^[a-zA-Z0-9/_.-]+$/`), blocks path traversal (`..`, `//`), and restricts prefixes to allowed namespaces (`^(v[0-9]+|ws)/finance/`).
+- Does **not** accept or store user portfolio data.
+
+### 2. FRED Economic Data Proxy (`api/fred.ts`)
+- **Runtime**: Vercel Edge Runtime (`export const config = { runtime: "edge" };`).
+- **Endpoint**: `/api/fred?id={seriesId}`.
+- **Allowed Series**: Whitelist includes `WILL5000INDFC` (Wilshire 5000 Total Market Index) and `GDP`, utilized by the Buffett Indicator.
+- **Edge Caching**: Applies 1-hour public cache (`Cache-Control: public, max-age=3600`).
 
 ## Crumb Fetching Strategy
 
-To bypass recent 429 Too Many Requests errors and cookie restrictions, the proxies (Vercel and local Vite) fetch the crumb by scraping the HTML content of `fc.yahoo.com` or `finance.yahoo.com` directly rather than relying solely on the `/v1/test/getcrumb` API.
+To bypass 429 Too Many Requests errors and cookie restrictions, the proxies (Vercel and local Vite) maintain a warm in-memory crumb cache (with exponential backoff retries and auto-refresh on 401/403) by fetching from `fc.yahoo.com` and `finance.yahoo.com`.
 
-최근의 429 Too Many Requests 에러 및 쿠키 제한을 우회하기 위해, Vercel 및 로컬 Vite 프록시는 단순 API 호출 대신 `fc.yahoo.com` 등의 HTML 본문을 스크래핑하여 직접 Crumb을 추출하는 폴백 메커니즘을 사용합니다.
+429 Too Many Requests 및 쿠키 제한을 우회하기 위해, Vercel 및 로컬 Vite 프록시는 `fc.yahoo.com`과 `finance.yahoo.com`에서 쿠키/크럼을 발급받아 메모리에 캐시하며 401/403 또는 429 감지 시 지수 백오프로 자동 재시도합니다.
 
 ## Exchange Rate Caching
 
