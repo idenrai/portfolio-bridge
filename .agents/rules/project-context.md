@@ -6,9 +6,9 @@ trigger: always_on
 
 ## Project Overview
 
-Portfolio Bridge is a **privacy-first portfolio management web app** that lets users manage multi-country financial assets (Korea · Japan · US · Germany) in one dashboard. All data is stored in browser `localStorage` only — never sent to external servers. Market data is fetched client-side via proxy from Yahoo Finance.
+Portfolio Bridge is a **privacy-first portfolio management web app** that lets users manage multi-country financial assets (Korea · Japan · US · Germany) in one dashboard. All data is stored in browser `localStorage` only — never sent to external servers. Market and economic data are fetched client-side via proxy from Yahoo Finance and FRED (Federal Reserve Economic Data).
 
-The app runs as a **React SPA** served locally via Vite or deployed to Vercel.
+The app runs as a **React SPA** served locally via Vite or deployed to Vercel (Edge Runtime API proxies + static CDN).
 
 ---
 
@@ -16,16 +16,16 @@ The app runs as a **React SPA** served locally via Vite or deployed to Vercel.
 
 | Area | Technology |
 |------|------------|
-| Frontend | React 19 · TypeScript · Vite 7 |
-| Styling | Tailwind CSS v4 |
-| State | Zustand 5 (with `localStorage` persist middleware) |
-| Charts | Recharts |
-| Routing | React Router v7 |
+| Frontend | React 19 · TypeScript 5.9 · Vite 7 · Lucide React · date-fns · Fontsource (Inter, Fira Code) |
+| Styling | Tailwind CSS v4 (`@tailwindcss/vite`, `@theme`, `@utility`) |
+| State & Async Data | Zustand 5 (with `localStorage` persist middleware) · TanStack Query v5 |
+| Charts | Recharts 3 |
+| Routing | React Router v7 (`react-router-dom` v7 with `React.lazy` & `Suspense`) |
 | i18n | Custom (ko / en / ja / de) |
-| Market Data | Yahoo Finance API via proxy |
-
-| Deployment | Vercel (Serverless Functions + static CDN) |
-| Linting | ESLint 9 with TypeScript ESLint + React Hooks plugin |
+| Market & Economic Data | Yahoo Finance API & FRED API via Edge Proxy |
+| Deployment | Vercel (Edge Runtime Functions + static CDN) |
+| Testing | Vitest 4 · React Testing Library · Playwright E2E · JSDOM |
+| Linting | ESLint 9 with TypeScript ESLint + React Hooks + React Refresh + Tailwind CSS plugin |
 
 ---
 
@@ -33,87 +33,96 @@ The app runs as a **React SPA** served locally via Vite or deployed to Vercel.
 
 ```
 portfolio-bridge/
-├── api/                        # Vercel Serverless Functions (Yahoo Finance proxy)
-│   ├── fred.ts                 # FRED API proxy
-│   ├── health.ts               # Health check endpoint
-│   └── proxy.ts                # Generic proxy helper
+├── api/                        # Vercel Edge Runtime Functions (API proxies)
+│   ├── fred.ts                 # FRED API proxy (Edge Runtime)
+│   ├── health.ts               # Health check endpoint (Edge Runtime)
+│   ├── proxy.ts                # Yahoo Finance proxy with cookie/crumb auth (Edge Runtime)
+│   └── tsconfig.json           # TS config for serverless/edge API
 ├── src/                        # React SPA source
-│   ├── main.tsx                # App entry point
-│   ├── App.tsx                 # Root component with routing
-│   ├── index.css               # Global styles (Tailwind directives)
+│   ├── main.tsx                # App entry point (QueryProvider & Fontsource imports)
+│   ├── App.tsx                 # Root component (Lazy routes & Suspense fallback)
+│   ├── style.css               # Global styles (Tailwind v4 @theme, @layer base, @utility)
+│   ├── vite-env.d.ts           # Vite client type declarations
 │   ├── components/             # Reusable UI components
-│   │   ├── assets/             # Asset-related components
-│   │   ├── common/             # Shared primitives (Button, Card, Modal, Input, Select, Label)
-│   │   ├── dashboard/          # Dashboard-specific components
-│   │   ├── fire/               # FIRE planner-related components
-│   │   ├── gurus/              # Guru-specific components
-│   │   └── layout/             # Layout shell (Header, Sidebar, BottomNav, Layout)
-│   ├── constants/              # App-wide constants (storage keys, thresholds, etc.)
+│   │   ├── assets/             # Asset management components & modals
+│   │   ├── common/             # Shared primitives (Button, Card, Modal, Input, CustomSelect, MultiSelect, etc.)
+│   │   ├── dashboard/          # Dashboard analytics & charts (KPI, PnL, Exposure, Rebalance, etc.)
+│   │   ├── fire/               # FIRE planner components (FireChart, FireInputForm, FireResultCard)
+│   │   ├── gurus/              # Guru investment framework analyzers & cards (Buffett, Lynch, Graham, etc.)
+│   │   ├── layout/             # Layout shell (Header, BottomNav, Layout, ScrollToTop)
+│   │   └── settings/           # Settings view sections (Profile, Display, DataRefresh, DataManagement)
+│   ├── constants/              # App-wide constants (fx, storage keys, thresholds)
 │   ├── hooks/                  # Custom React hooks
-│   │   ├── useAnalyzer.ts      # Investment analyzer logic
-│   │   ├── useBuffettIndicator.ts
-│   │   ├── useDataRefresh.ts   # Triggers price/FX refresh on startup
-│   │   ├── useExchangeRates.ts
-│   │   ├── useGoogleDrive.ts
-│   │   ├── usePortfolio.ts     # Portfolio aggregation calculations
-│   │   ├── usePriceRefresh.ts
+│   │   ├── useAnalyzer.ts      # Guru investment analyzer logic
+│   │   ├── useBuffettIndicator.ts # Buffett indicator FRED/Yahoo data logic
+│   │   ├── useDataRefresh.ts   # Price & FX auto-refresh trigger on startup
+│   │   ├── useExchangeRates.ts # FX rate fetching hook
+│   │   ├── useGoogleDrive.ts   # Google Drive backup/restore hook
+│   │   ├── usePortfolio.ts     # Portfolio aggregation & metric calculations
+│   │   ├── usePortfolioSnapshot.ts # Portfolio snapshot comparison hook
+│   │   ├── usePriceRefresh.ts  # Quote batch refreshing
 │   │   ├── useT.ts             # i18n translation hook
-│   │   └── useTickerSearch.ts
+│   │   ├── useTickerSearch.ts  # Yahoo search hook with debounce
+│   │   └── index.ts
 │   ├── i18n/                   # Translation files per locale
 │   │   ├── en.ts, ko.ts, ja.ts, de.ts
 │   │   ├── types.ts            # TranslationKeys type
 │   │   └── index.ts
-│   ├── pages/                  # Top-level route components
-│   │   ├── Dashboard.tsx
-│   │   ├── Assets.tsx
-│   │   ├── Gurus.tsx
-│   │   ├── Settings.tsx
-│   │   └── About.tsx
-│   ├── stores/                 # Zustand stores (all persist to localStorage)
+│   ├── pages/                  # Top-level route components (Code-split with React.lazy)
+│   │   ├── Dashboard.tsx       # Main portfolio overview
+│   │   ├── Assets.tsx          # Asset inventory & manual/CSV/AI entry
+│   │   ├── Gurus.tsx           # Guru philosophy matching & analyzers
+│   │   ├── FirePlanner.tsx     # Financial Independence / Early Retirement simulator
+│   │   ├── Settings.tsx        # App settings & Google Drive sync
+│   │   └── About.tsx           # About & privacy declaration
+│   ├── providers/              # React context & query providers
+│   │   └── QueryProvider.tsx   # TanStack Query Client provider
+│   ├── stores/                 # Zustand stores (persisted to localStorage)
 │   │   ├── useAssetStore.ts
 │   │   ├── useBrokerStore.ts
+│   │   ├── useFireStore.ts
 │   │   ├── useGoogleDriveStore.ts
 │   │   ├── useGuruSessionStore.ts
 │   │   ├── useLanguageStore.ts
 │   │   ├── useProfileStore.ts
 │   │   ├── useSettingsStore.ts
-│   │   └── useSnapshotStore.ts
+│   │   ├── useSnapshotStore.ts
+│   │   └── index.ts
+│   ├── tests/                  # Automated test suites
+│   │   ├── e2e/                # Playwright end-to-end tests (home.spec.ts)
+│   │   ├── setup.ts            # Vitest testing setup (jest-dom extensions)
+│   │   └── unit/               # Vitest unit & component tests
 │   ├── types/                  # TypeScript type definitions
 │   │   ├── asset.ts, currency.ts, portfolio.ts
 │   │   └── index.ts
 │   └── utils/                  # Pure utility functions
-│       ├── ai/                 # AI prompt generation helpers
-│       ├── analyzers/          # Quantitative investment analyzers
-│       ├── calc/               # Portfolio calculation utilities
-│       ├── gdrive/             # Google Drive integration helpers
-│       ├── yahoo/              # Yahoo Finance API client
-│       │   ├── yahooCore.ts    # Core fetch with runtime detection
-│       │   ├── yahooFinance.ts
-│       │   ├── yahooFundamentals.ts
-│       │   ├── yahooFx.ts
-│       │   ├── yahooQuote.ts
-│       │   └── yahooSearch.ts
+│       ├── ai/                 # AI prompt generation (Guru evaluation & classification)
+│       ├── analyzers/          # Quantitative investment analyzers (Graham, Lynch, Piotroski, etc.)
+│       ├── calc/               # Portfolio, currency conversion, FIRE, & insight calculations
+│       ├── gdrive/             # Google Drive backup/restore service integration
+│       ├── yahoo/              # Yahoo Finance API client (Quotes, FX, Fundamentals, Search)
 │       ├── cn.ts               # Tailwind class merging utility (clsx + tailwind-merge)
-│       ├── csv.ts              # CSV import/export
-│       ├── fx.ts               # FX rate helpers
-│       ├── gurus.ts            # Guru data definitions
+│       ├── csv.ts              # CSV import/export utilities
+│       ├── gurus.ts            # Guru master profiles & rules
 │       ├── sampleData.ts       # Onboarding sample portfolio
-│       └── storage.ts          # localStorage helpers
-
+│       └── index.ts
 ├── public/                     # Static assets
 ├── index.html                  # Vite HTML entry
-├── vite.config.ts              # Vite config (Yahoo Finance proxy plugin for dev)
+├── vite.config.ts              # Vite config (dev Yahoo proxy plugin, image optimizer, bundle splitting)
+├── vitest.config.ts            # Vitest test configuration
+├── playwright.config.ts        # Playwright E2E configuration
 ├── eslint.config.js            # ESLint flat config
+├── cspell.json                 # Spell checker configuration
 ├── tsconfig.json               # Root TypeScript config
 ├── tsconfig.app.json           # App-specific TS config
 ├── tsconfig.node.json          # Node/Vite tooling TS config
-├── vercel.json                 # Vercel routing and SPA fallback rules
+├── vercel.json                 # Vercel routing, Edge Function rewrites, & SPA fallback
 └── package.json
 ```
 
 ---
 
-## How to Build and Run
+## How to Build, Run and Test
 
 ### Prerequisites
 
@@ -135,6 +144,18 @@ npm run build
 npm run preview
 ```
 
+### Automated Testing
+
+```bash
+# Run unit & component tests (Vitest)
+npx vitest run
+
+# Run unit tests in watch mode
+npx vitest
+
+# Run E2E tests (Playwright)
+npx playwright test
+```
 
 ### Lint
 
@@ -144,9 +165,14 @@ npm run lint
 
 ---
 
-## Testing
+## Testing Conventions
 
-There is no automated test suite in this repository at this time. All verification is done manually via the dev server.
+- **Unit & Component Testing (Vitest + React Testing Library)**:
+  - Place unit tests under `src/tests/unit/`.
+  - Validate core calculation logic (`calculations.ts`, `currency.ts`, `fire.ts`), custom hooks, and isolated UI components (e.g. `KpiBar.test.tsx`).
+- **E2E Testing (Playwright)**:
+  - Place E2E test specs under `src/tests/e2e/`.
+  - Validate critical user flows: page navigation, asset creation/editing, and responsive layout integrity.
 
 ---
 
@@ -156,28 +182,28 @@ There is no automated test suite in this repository at this time. All verificati
 
 - All source files use **TypeScript** with strict settings.
 - Use `interface` for object shapes, `type` for unions/intersections/aliases.
-- Export types from `types/index.ts`; export utilities from `utils/index.ts`; export hooks from `hooks/index.ts`.
+- Export types from `types/index.ts`; export utilities from `utils/index.ts`; export hooks from `hooks/index.ts`; export stores from `stores/index.ts`.
 - Use the `@/` path alias (maps to `src/`) for all internal imports.
 
-### React Components
+### React Components & Pages
 
 - Use **functional components** with hooks only (no class components).
 - One component per file, named with PascalCase matching the file name.
 - Place reusable primitives in `src/components/common/`, feature-specific components in their respective subdirectory under `src/components/`.
-- Page-level route components live in `src/pages/`.
+- Page-level route components live in `src/pages/` and are dynamically loaded with `React.lazy` and `Suspense` in `src/App.tsx`.
+- Layout uses a responsive Top Header + Bottom Navigation Bar pattern (`Header.tsx` + `BottomNav.tsx`).
 
-### State Management (Zustand)
+### State Management & Data Fetching
 
-- All global state lives in Zustand stores under `src/stores/`.
-- Each store uses the `persist` middleware to sync to `localStorage`.
-- Store files are named `use<Domain>Store.ts`.
-- Store state interface and `create` call are both defined in the same file.
-- Always use `STORAGE_KEYS` constants (from `src/constants/`) as the `name` in `persist` options.
+- **Client State**: Global application state lives in Zustand stores under `src/stores/` using `persist` middleware for `localStorage` persistence. Store files follow `use<Domain>Store.ts`.
+- **Async Server State**: TanStack Query (`@tanstack/react-query`) is initialized in `src/providers/QueryProvider.tsx` for caching and managing async server state.
+- Always use `STORAGE_KEYS` constants (from `src/constants/`) as the `name` in Zustand `persist` options.
 
 ### Styling
 
-- Use **Tailwind CSS v4** utility classes exclusively; no CSS Modules or inline `style` props unless absolutely necessary.
-- Global base styles go in `src/index.css` using Tailwind directives.
+- Use **Tailwind CSS v4** utility classes exclusively; avoid inline `style` props unless computing purely dynamic values.
+- Global base styles and Tailwind v4 theme/utility tokens live in `src/style.css`.
+- Merge component class names safely using `@/utils/cn` (`tailwind-merge` + `clsx`).
 
 ### i18n
 
@@ -188,17 +214,18 @@ There is no automated test suite in this repository at this time. All verificati
 - Guru philosophy translations must keep a strict 6-line structure (5 principle bullets + 1 quote bullet).
 - AI-facing prompt text must always be generated in **English**, regardless of the active UI language.
 
-### Yahoo Finance / Data Fetching
+### Yahoo Finance & FRED Data Fetching
 
 - All Yahoo Finance requests go through `yahooCore.ts` (`yahooFetch()`), which auto-detects the runtime:
-  - **Local dev**: Vite proxy at `/api/yahoo/…`
-  - **Vercel**: Serverless function proxy
-- Never call `fetch()` directly against Yahoo Finance URLs from React components.
+  - **Local dev**: Vite proxy at `/api/yahoo/…` (configured in `vite.config.ts` with cookie/crumb auth handling)
+  - **Vercel**: Vercel Edge Runtime proxy (`api/proxy.ts`)
+- FRED economic series requests go through `api/fred.ts` proxy to bypass CORS.
+- Never call external market APIs directly from browser components without going through the proxy layer.
 
 ### Vercel API Routes (`api/`)
 
-- Each file in `api/` is a Vercel Serverless Function.
-- Keep each function small and focused — proxy logic only.
+- Each file in `api/` is a **Vercel Edge Runtime Function** (`export const config = { runtime: "edge" };`).
+- Keep each endpoint lightweight, resilient (with backoff & caching headers), and focused strictly on proxy logic.
 
 ### File and Naming Conventions
 
@@ -215,6 +242,7 @@ The project uses ESLint 9 flat config (`eslint.config.js`) with:
 - `typescript-eslint` recommended rules
 - `eslint-plugin-react-hooks` (enforces Rules of Hooks)
 - `eslint-plugin-react-refresh` (Vite fast refresh compatibility)
+- `eslint-plugin-tailwindcss` (Tailwind CSS class validation and sorting)
 
 Run `npm run lint` before committing. Fix all reported errors; warnings should be addressed where practical.
 
