@@ -82,7 +82,7 @@ export function AssetTableRow({
             ...categoryOptions.map(([val, label]) => ({ value: val, label })),
           ]}
           ariaLabel={t.at_col_category}
-          className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-[11px] tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
+          className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-xs-plus tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
         />
       </td>
       {hasBrokers && (
@@ -95,7 +95,7 @@ export function AssetTableRow({
               ...brokerAccounts.map((b) => ({ value: b.id, label: b.nickname })),
             ]}
             ariaLabel={t.af_account_label}
-            className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-[11px] tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
+            className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-xs-plus tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
           />
         </td>
       )}
@@ -140,7 +140,7 @@ export function AssetTableRow({
           "-"
         ) : (
           <div className="flex items-center justify-end gap-1">
-            <span aria-hidden="true" className="text-[10px]">{pnlIcon}</span>
+            <span aria-hidden="true" className="text-2xs">{pnlIcon}</span>
             <span>
               {sym}
               {Math.abs(pnl).toLocaleString()}
@@ -156,7 +156,7 @@ export function AssetTableRow({
       >
         {isCash ? "-" : (
           <div className="flex items-center justify-end gap-1">
-            <span aria-hidden="true" className="text-[10px]">{pnlIcon}</span>
+            <span aria-hidden="true" className="text-2xs">{pnlIcon}</span>
             <span>{Math.abs(ret).toFixed(1)}%</span>
           </div>
         )}

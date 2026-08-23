@@ -142,7 +142,7 @@ export const CategoryAnalysisCard = memo(function CategoryAnalysisCard({ rebalan
                   </span>
                   <span
                     className={cn(
-                      "text-[11px] font-medium",
+                      "text-xs-plus font-medium",
                       absDiff > 5
                         ? isOver
                           ? "text-amber-400"
@@ -184,7 +184,7 @@ export const CategoryAnalysisCard = memo(function CategoryAnalysisCard({ rebalan
             );
           })}
         </div>
-        <div className="mt-4 flex items-center gap-4 text-[10px] text-zinc-400">
+        <div className="mt-4 flex items-center gap-4 text-2xs text-zinc-400">
           <span className="flex items-center gap-1">
             <span className="inline-block h-3 w-0.5 bg-zinc-500" />
             {t.category_legend_target}

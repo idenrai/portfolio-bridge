@@ -164,7 +164,7 @@ export function BuffettIndicatorCard() {
               {MARKERS.map((m) => (
                 <span
                   key={m.value}
-                  className="absolute -translate-x-1/2 text-[10px] text-zinc-400"
+                  className="absolute -translate-x-1/2 text-2xs text-zinc-400"
                   style={{ left: `${(m.value / 200) * 100}%` }}
                 >
                   {m.label}
@@ -176,7 +176,7 @@ export function BuffettIndicatorCard() {
           {/* 세부 수치 */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
-              <p className="mb-0.5 text-[11px] tracking-wider text-zinc-500 uppercase">
+              <p className="mb-0.5 text-xs-plus tracking-wider text-zinc-500 uppercase">
                 {t.buffett_indicator_market_cap} (USD)
               </p>
               <p className="text-sm font-semibold tracking-tight text-zinc-200 tabular-nums">
@@ -184,7 +184,7 @@ export function BuffettIndicatorCard() {
               </p>
             </div>
             <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
-              <p className="mb-0.5 text-[11px] tracking-wider text-zinc-500 uppercase">
+              <p className="mb-0.5 text-xs-plus tracking-wider text-zinc-500 uppercase">
                 {t.buffett_indicator_gdp} (USD)
               </p>
               <p className="text-sm font-semibold tracking-tight text-zinc-200 tabular-nums">
@@ -192,7 +192,7 @@ export function BuffettIndicatorCard() {
               </p>
             </div>
             <div className="rounded-lg bg-zinc-900/50 px-3 py-2 text-left">
-              <p className="mb-0.5 text-[11px] tracking-wider text-zinc-500 uppercase">
+              <p className="mb-0.5 text-xs-plus tracking-wider text-zinc-500 uppercase">
                 {t.buffett_indicator_year}
               </p>
               <p className="text-sm font-semibold tracking-tight text-zinc-200 tabular-nums">{date}</p>
@@ -205,7 +205,7 @@ export function BuffettIndicatorCard() {
           </p>
 
           {/* 출처 */}
-          <p className="text-right text-[11px] text-zinc-400">
+          <p className="text-right text-xs-plus text-zinc-400">
             {t.buffett_indicator_source}
           </p>
         </div>

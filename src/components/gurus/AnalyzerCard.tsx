@@ -90,7 +90,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
       {/* ─── 포트폴리오 모드 ─── */}
       {mode === "portfolio" && (
         <>
-          <p className="mb-2 text-[11px] text-zinc-400">
+          <p className="mb-2 text-xs-plus text-zinc-400">
             {t.analyzer_portfolio_desc(portfolioStockCount)}
           </p>
           <button
@@ -199,7 +199,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
               }}
             />
           </div>
-          <p className="mt-0.5 text-right text-[10px] text-zinc-300">
+          <p className="mt-0.5 text-right text-2xs text-zinc-300">
             {progress.done} / {progress.total}
           </p>
         </div>
@@ -247,7 +247,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
                 {r.totalScore >= 70 && (
                   <span
                     className={cn(
-                      "shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold",
+                      "shrink-0 rounded-full px-2 py-0.5 text-2xs font-bold",
                       colors.highScoreBadge,
                     )}
                   >
@@ -279,7 +279,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
               {/* 기준별 힌트 */}
               <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5">
                 {r.criteria.map((c) => (
-                  <span key={c.key} className="text-[9px] text-zinc-300">
+                  <span key={c.key} className="text-3xs text-zinc-300">
                     {criterionLabel(c.key as CKey)}: {criterionHints[c.key as CKey]} ({c.score}/{c.maxScore}pt)
                   </span>
                 ))}
@@ -287,7 +287,7 @@ export function AnalyzerCard<CKey extends string>(props: AnalyzerCardProps<CKey>
             </li>
           ))}
 
-          <p className="pt-1 text-[10px] text-zinc-300">{texts.disclaimer}</p>
+          <p className="pt-1 text-2xs text-zinc-300">{texts.disclaimer}</p>
         </ul>
       )}
 

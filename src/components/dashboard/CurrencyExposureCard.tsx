@@ -34,16 +34,16 @@ export const CurrencyExposureCard = memo(function CurrencyExposureCard({ summary
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-zinc-800">
-              <th className="px-2 py-1.5 text-left text-[11px] font-medium text-zinc-500">
+              <th className="px-2 py-1.5 text-left text-xs-plus font-medium text-zinc-500">
                 {t.fx_col_currency}
               </th>
-              <th className="px-2 py-1.5 text-right text-[11px] font-medium text-zinc-500">
+              <th className="px-2 py-1.5 text-right text-xs-plus font-medium text-zinc-500">
                 {t.fx_col_value}
               </th>
-              <th className="px-2 py-1.5 text-right text-[11px] font-medium text-zinc-500">
+              <th className="px-2 py-1.5 text-right text-xs-plus font-medium text-zinc-500">
                 {t.fx_col_weight}
               </th>
-              <th className="px-2 py-1.5 text-right text-[11px] font-medium text-zinc-500">
+              <th className="px-2 py-1.5 text-right text-xs-plus font-medium text-zinc-500">
                 {t.fx_col_rate}
               </th>
             </tr>
@@ -69,12 +69,12 @@ export const CurrencyExposureCard = memo(function CurrencyExposureCard({ summary
                         }}
                       />
                     </div>
-                    <span className="w-10 text-right text-[11px] text-zinc-400">
+                    <span className="w-10 text-right text-xs-plus text-zinc-400">
                       {exp.percent.toFixed(1)}%
                     </span>
                   </div>
                 </td>
-                <td className="px-2 py-1.5 text-right text-[11px] text-zinc-500">
+                <td className="px-2 py-1.5 text-right text-xs-plus text-zinc-500">
                   {exp.currency === baseCurrency
                     ? "-"
                     : `${CURRENCY_SYMBOLS[baseCurrency]}${fromKRW(exp.rate, baseCurrency, rates).toLocaleString(undefined, { maximumFractionDigits: baseCurrency === "USD" ? 4 : 0 })}`}
@@ -88,7 +88,7 @@ export const CurrencyExposureCard = memo(function CurrencyExposureCard({ summary
       {/* ±5% 환율 시나리오 */}
       {scenarioMap.size > 0 && (
         <div>
-          <h4 className="mb-2 text-[11px] font-medium text-zinc-500">
+          <h4 className="mb-2 text-xs-plus font-medium text-zinc-500">
             {t.fx_scenario_title}
           </h4>
           <div className="grid grid-cols-1 gap-2">

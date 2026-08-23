@@ -79,7 +79,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
                 <p className="text-sm leading-tight font-semibold text-pretty text-zinc-100">
                   {t.insights_ai_banner_title}
                 </p>
-                <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-pretty text-zinc-500 sm:text-xs">
+                <p className="mt-1 line-clamp-2 text-xs-plus leading-relaxed text-pretty text-zinc-500 sm:text-xs">
                   {t.insights_ai_banner_desc}
                 </p>
               </div>
@@ -99,13 +99,13 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
           {/* 프롬프트 확장 영역 */}
           {showPrompt && (
             <div className="mt-4 space-y-3 border-t border-zinc-800/50 pt-4">
-              <p className="text-[11px] text-zinc-500">{t.insights_ai_desc}</p>
+              <p className="text-xs-plus text-zinc-500">{t.insights_ai_desc}</p>
               <div className="group relative rounded-xl border border-zinc-800 bg-zinc-950 transition-shadow focus-within:ring-1 focus-within:ring-indigo-500/50">
                 <textarea
                   readOnly
                   value={promptText}
                   rows={10}
-                  className="w-full resize-none rounded-xl bg-transparent p-3 pb-12 font-mono text-[11px] text-zinc-300 focus:outline-none sm:text-xs"
+                  className="w-full resize-none rounded-xl bg-transparent p-3 pb-12 font-mono text-xs-plus text-zinc-300 focus:outline-none sm:text-xs"
                 />
                 <button
                   type="button"
