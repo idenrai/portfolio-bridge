@@ -20,7 +20,7 @@ interface FireChartProps {
 
 export function FireChart({ data }: FireChartProps) {
   const t = useT();
-  const { baseCurrency } = useSettingsStore();
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
 
   if (!data || data.length === 0) return null;
 

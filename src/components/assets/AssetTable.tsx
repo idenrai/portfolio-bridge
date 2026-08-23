@@ -33,7 +33,7 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
   return (
     <span
       className={cn(
-        "ml-0.5 inline-block text-[10px]",
+        "ml-0.5 inline-block text-2xs",
         active ? "text-blue-500" : "text-zinc-300"
       )}
     >

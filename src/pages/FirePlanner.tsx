@@ -7,31 +7,52 @@ import { calculateFire, getTargetAmountFromExpense, fromKRW } from "@/utils";
 export function FirePlannerPage() {
   const t = useT();
   const { summary } = usePortfolio();
-  const store = useFireStore();
-  const { baseCurrency } = useSettingsStore();
+  const usePortfolioAssets = useFireStore((s) => s.usePortfolioAssets);
+  const manualCurrentAssets = useFireStore((s) => s.manualCurrentAssets);
+  const monthlySavings = useFireStore((s) => s.monthlySavings);
+  const mode = useFireStore((s) => s.mode);
+  const targetAmount = useFireStore((s) => s.targetAmount);
+  const monthlyExpense = useFireStore((s) => s.monthlyExpense);
+  const safeWithdrawalRate = useFireStore((s) => s.safeWithdrawalRate);
+  const expectedReturnRate = useFireStore((s) => s.expectedReturnRate);
+  const currentAge = useFireStore((s) => s.currentAge);
+  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: exchangeRates } = useExchangeRates();
 
   // Calculate FIRE projection
   const result = useMemo(() => {
     // Convert current assets to base currency for the calculation
-    const currentAssetsKRW = store.usePortfolioAssets ? summary.totalValueKRW : store.manualCurrentAssets;
+    const currentAssetsKRW = usePortfolioAssets ? summary.totalValueKRW : manualCurrentAssets;
     const currentAssets = fromKRW(currentAssetsKRW, baseCurrency, exchangeRates);
-    const savingsInBase = fromKRW(store.monthlySavings, baseCurrency, exchangeRates);
+    const savingsInBase = fromKRW(monthlySavings, baseCurrency, exchangeRates);
     const targetInBase =
-      store.mode === "target"
-        ? fromKRW(store.targetAmount, baseCurrency, exchangeRates)
-        : getTargetAmountFromExpense(fromKRW(store.monthlyExpense, baseCurrency, exchangeRates), store.safeWithdrawalRate);
+      mode === "target"
+        ? fromKRW(targetAmount, baseCurrency, exchangeRates)
+        : getTargetAmountFromExpense(fromKRW(monthlyExpense, baseCurrency, exchangeRates), safeWithdrawalRate);
 
     if (targetInBase <= 0) return null;
 
     return calculateFire({
       currentAssets,
       monthlySavings: savingsInBase,
-      expectedReturnRate: store.expectedReturnRate,
+      expectedReturnRate,
       targetAmount: targetInBase,
-      currentAge: store.currentAge,
+      currentAge,
     });
-  }, [summary.totalValueKRW, baseCurrency, exchangeRates, store]);
+  }, [
+    summary.totalValueKRW,
+    baseCurrency,
+    exchangeRates,
+    usePortfolioAssets,
+    manualCurrentAssets,
+    monthlySavings,
+    mode,
+    targetAmount,
+    monthlyExpense,
+    safeWithdrawalRate,
+    expectedReturnRate,
+    currentAge,
+  ]);
 
   return (
     <div className="mx-auto max-w-5xl space-y-6 pt-4 pb-20">

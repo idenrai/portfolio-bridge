@@ -45,7 +45,7 @@ export function DashboardPage() {
 
   const { assets, summary, rebalancing } = usePortfolio(filters);
   const baseAssets = useAssetStore((s) => s.assets);
-  const { addAsset } = useAssetStore();
+  const addAsset = useAssetStore((s) => s.addAsset);
   const brokers = useBrokerStore((s) => s.accounts);
   const targets = useSettingsStore((s) => s.targetAllocations);
   const lang = useLanguageStore((s) => s.lang);

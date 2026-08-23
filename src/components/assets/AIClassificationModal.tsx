@@ -13,7 +13,8 @@ interface AIClassificationModalProps {
 export function AIClassificationModal({
   open,
   onClose }: AIClassificationModalProps) {
-  const { assets, updateAsset } = useAssetStore();
+  const assets = useAssetStore((s) => s.assets);
+  const updateAsset = useAssetStore((s) => s.updateAsset);
   const lang = useLanguageStore((s) => s.lang);
   const t = useT();
 

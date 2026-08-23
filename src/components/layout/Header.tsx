@@ -3,6 +3,7 @@ import { LayoutDashboard, Briefcase, Users, Target, Settings, Info, Globe } from
 import { NavLink, Link } from "react-router-dom";
 import { useT } from "@/hooks";
 import { CustomSelect } from "@/components/common";
+import { cn } from "@/utils/cn";
 import type { Lang } from "@/i18n";
 
 const LANG_LABELS: Record<Lang, string> = {
@@ -20,7 +21,8 @@ const LANG_ARIA: Record<Lang, string> = {
 };
 
 export function Header() {
-  const { lang, setLang } = useLanguageStore();
+  const lang = useLanguageStore((s) => s.lang);
+  const setLang = useLanguageStore((s) => s.setLang);
   const t = useT();
 
   const NAV_ITEMS = [
@@ -58,11 +60,12 @@ export function Header() {
               title={label}
               aria-label={label}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                cn(
+                  "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
                   isActive
                     ? "bg-zinc-800 text-white"
-                    : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50"
-                }`
+                    : "text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-200"
+                )
               }
             >
               {icon}

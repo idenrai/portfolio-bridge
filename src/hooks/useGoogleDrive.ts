@@ -14,8 +14,11 @@ import {
 } from "@/utils";
 
 export function useGoogleDrive() {
-  const { isConnected, syncingAction, syncError, syncedAt, pendingConflict } =
-    useGoogleDriveStore();
+  const isConnected = useGoogleDriveStore((s) => s.isConnected);
+  const syncingAction = useGoogleDriveStore((s) => s.syncingAction);
+  const syncError = useGoogleDriveStore((s) => s.syncError);
+  const syncedAt = useGoogleDriveStore((s) => s.syncedAt);
+  const pendingConflict = useGoogleDriveStore((s) => s.pendingConflict);
 
   return {
     isConnected,
