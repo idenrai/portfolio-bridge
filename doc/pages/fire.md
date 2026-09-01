@@ -36,6 +36,8 @@ FIRE 플래너의 핵심 상태는 `src/stores/useFireStore.ts`에서 관리됩�
    **결정론적 복리 계산**: 정규화된 값들은 `src/utils/calc/fire.ts`의 `calculateFire` 함수로 전달되어 복리 계산을 수행합니다.
 3. **Simulation Output**: `calculateFire` returns a year-by-year projection array (`FireDataPoint[]`) until the `targetAmount` is reached or the projection caps out at 100 years of age.
    **시뮬레이션 출력**: `calculateFire`는 목표 금액에 도달하거나 100세에 이를 때까지의 연도별 프로젝션 배열(`FireDataPoint[]`)을 반환합니다.
+4. **Chart Formatting**: The Y-axis and tooltips in `FireChart.tsx` use `formatCurrency` with compact units (e.g. 억/만 for Korean, 億/万 for Japanese, M/K for English/German) tailored to the active UI language.
+   **차트 포맷팅**: `FireChart.tsx`의 Y축과 툴팁은 현재 UI 언어 설정에 맞춰 축약 단위(한국어: 억/만, 일본어: 億/万, 영/독어: M/K)를 자동으로 적용하는 `formatCurrency`를 사용합니다.
 
 ## Extensibility
 - Future enhancements may include dynamic Monte Carlo simulations considering Sequence of Returns Risk (SORR).

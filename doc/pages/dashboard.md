@@ -54,11 +54,14 @@ Two side-by-side pie charts.
 - **By market / 시장별**: KR / JP / US / EU / Other
 - **By category / 카테고리별**: Dividend / Growth / Value / Index / Bond / REIT / Cash / Crypto / Commodity / Other
 
+Uses optimized radii, explicit margins, and container heights to guarantee non-clipping donut charts across all viewports.
+모든 화면 너비에서 도넛 차트 상하단이 잘리지 않도록 최적화된 반경, 여백 및 컨테이너 높이를 적용합니다.
+
 ### Holdings Table (`TopHoldingsTable.tsx`)
 
-Sortable table of all positions (including cash).
+Sortable table of all positions (including cash). Defaults to displaying the top 20 positions to maintain visual balance with the sidebar, with an inline toggle to view all holdings.
 
-모든 포지션(현금 포함)을 정렬 가능한 테이블로 표시합니다.
+모든 포지션(현금 포함)을 정렬 가능한 테이블로 표시합니다. 우측 사이드바와의 시각적 균형을 위해 기본 상위 20개 종목을 노출하며, 전체 보기/상위 20개 토글을 제공합니다.
 
 | Column | Description |
 | --- | --- |
