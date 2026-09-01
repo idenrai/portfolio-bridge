@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MessageSquareQuote, AlertTriangle, Calendar, Check, Copy } from "lucide-react";
 import { useT, useExchangeRates } from "@/hooks";
-import { useLanguageStore, useSettingsStore, useProfileStore, useGuruSessionStore } from "@/stores";
+import { useLanguageStore, useSettingsStore, useProfileStore, useGuruSessionStore, useBrokerStore } from "@/stores";
 import { buildGuruPrompt, buildGuruFollowUpPrompt } from "@/utils";
 import type { GuruProfile, PortfolioSummary, Asset } from "@/types";
 import { FeedbackIconText } from "@/components/common";
@@ -22,6 +22,7 @@ export function GuruAIPromptBanner({
   const lang = useLanguageStore((s) => s.lang);
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
+  const brokers = useBrokerStore((s) => s.accounts);
   const nickname = useProfileStore((s) => s.nickname);
   const age = useProfileStore((s) => s.age);
   const annualIncome = useProfileStore((s) => s.annualIncome);
@@ -52,7 +53,8 @@ export function GuruAIPromptBanner({
     baseCurrency,
     rates,
     englishPhilosophy,
-    profile
+    profile,
+    brokers,
   );
 
   const prevSession = sessions[selectedGuru.id];
@@ -64,7 +66,8 @@ export function GuruAIPromptBanner({
         lang,
         baseCurrency,
         rates,
-        profile
+        profile,
+        brokers,
       )
     : null;
 

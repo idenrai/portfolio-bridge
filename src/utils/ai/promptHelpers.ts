@@ -58,7 +58,45 @@ export function formatInBase(
   return `${symbol}${Math.round(amount).toLocaleString()}`;
 }
 
-import type { PortfolioSummary, Asset } from "@/types";
+import type { PortfolioSummary, Asset, BrokerAccount, HoldingDetail } from "@/types";
+import { normalizeTicker } from "../yahoo/yahooCore";
+
+/** 개별 종목에 대한 계좌별 분기 문자열 빌드 */
+function buildHoldingAccountBreakdown(
+  h: HoldingDetail,
+  assets: Asset[],
+  brokerMap: Map<string, BrokerAccount>,
+): string {
+  if (assets.length === 0 || brokerMap.size === 0) return "";
+
+  // assets에서 h와 매칭되는 개별 자산들 필터
+  const matchingAssets = assets.filter((a) => {
+    if (a.type === "cash") return false;
+    if (h.ticker && a.ticker) {
+      return normalizeTicker(a.ticker) === normalizeTicker(h.ticker);
+    }
+    return a.name === h.name && a.currency === h.currency;
+  });
+
+  if (matchingAssets.length === 0) return "";
+
+  const breakdownParts: string[] = [];
+  for (const a of matchingAssets) {
+    if (!a.brokerId) continue;
+    const b = brokerMap.get(a.brokerId);
+    if (!b) continue;
+
+    const accountName = b.nickname || b.broker;
+    const typeLabel = b.accountType ? ` (${b.accountType})` : "";
+    breakdownParts.push(`${a.quantity.toLocaleString()} in "${accountName}"${typeLabel}`);
+  }
+
+  if (breakdownParts.length === 0) return "";
+  if (breakdownParts.length === 1) {
+    return ` | account: ${breakdownParts[0]}`;
+  }
+  return ` | accounts: ${breakdownParts.join(", ")}`;
+}
 
 /** 카테고리별 배분 섹션 빌드 (목표 비중과 비교) */
 export function buildCategorySection(
@@ -103,11 +141,17 @@ export function buildFxSection(summary: PortfolioSummary): string {
   );
 }
 
-/** 보유 종목 상세 행 빌드 (현금 제외, 평가액 순, 최대 maxItems) */
+/** 보유 종목 상세 행 빌드 (현금 제외, 평가액 순, 계좌별 분기 정보 포함, 최대 maxItems) */
 export function buildHoldingRows(
   summary: PortfolioSummary,
+  assets: Asset[] = [],
+  brokers: BrokerAccount[] = [],
   maxItems = 30,
 ): { rows: string; count: number } {
+  const brokerMap = new Map<string, BrokerAccount>(
+    brokers.map((b) => [b.id, b]),
+  );
+
   const holdings = [...summary.holdings]
     .filter((h) => h.type !== "cash")
     .sort((a, b) => b.valueKRW - a.valueKRW)
@@ -125,6 +169,8 @@ export function buildHoldingRows(
         const category = h.category
           ? (CATEGORY_LABELS_EN[h.category as AssetCategory] ?? h.category)
           : "—";
+        const accountStr = buildHoldingAccountBreakdown(h, assets, brokerMap);
+
         return (
           `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
           ` | ${type} | ${market} | ${h.currency}` +
@@ -133,7 +179,8 @@ export function buildHoldingRows(
           ` | category: ${category}` +
           (h.peRatio != null ? ` | PER: ${h.peRatio.toFixed(1)}` : "") +
           (h.pbRatio != null ? ` | PBR: ${h.pbRatio.toFixed(2)}` : "") +
-          (h.dividendYield != null ? ` | DY: ${(h.dividendYield * 100).toFixed(2)}%` : "")
+          (h.dividendYield != null ? ` | DY: ${(h.dividendYield * 100).toFixed(2)}%` : "") +
+          accountStr
         );
       })
       .join("\n") || "  (no data)";
@@ -175,12 +222,17 @@ export function buildPortfolioDataBlock(
   rates: Record<string, number>,
   categorySection: string,
   categoryHeader = "ALLOCATION BY CATEGORY",
+  brokers: BrokerAccount[] = [],
 ): string {
   const pnlKRW = summary.totalPnLKRW;
   const returnPct = summary.totalReturnPercent;
   const marketSection = buildMarketSection(summary);
   const fxSection = buildFxSection(summary);
-  const { rows: holdingRows, count: holdingCount } = buildHoldingRows(summary);
+  const { rows: holdingRows, count: holdingCount } = buildHoldingRows(
+    summary,
+    assets,
+    brokers,
+  );
   const cashSection = buildCashSection(assets);
 
   return `--- PORTFOLIO OVERVIEW ---

@@ -1,4 +1,4 @@
-import type { GuruProfile, PortfolioSummary } from "@/types";
+import type { GuruProfile, PortfolioSummary, BrokerAccount } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 import type { GuruSessionSnapshot, UserProfile } from "@/stores";
@@ -23,6 +23,7 @@ export function buildGuruFollowUpPrompt(
   baseCurrency: string = "KRW",
   rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
   profile?: Partial<UserProfile>,
+  _brokers: BrokerAccount[] = [],
 ): string {
   const guruName = guru.name;
 

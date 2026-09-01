@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { Sparkles, AlertTriangle, TrendingDown, CircleDollarSign, Coins, PieChart, Check, Copy } from "lucide-react";
 import { Card, FeedbackIconText } from "@/components/common";
 import { useT, useExchangeRates } from "@/hooks";
-import { useLanguageStore, useSettingsStore } from "@/stores";
+import { useLanguageStore, useSettingsStore, useBrokerStore } from "@/stores";
 import { buildInsightPrompt, cn } from "@/utils";
 import type { PortfolioSummary, Asset, TargetAllocation } from "@/types";
 
@@ -40,6 +40,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
   const lang = useLanguageStore((s) => s.lang);
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
+  const brokers = useBrokerStore((s) => s.accounts);
   const [dismissed, setDismissed] = useState<Set<number>>(new Set());
   const [showPrompt, setShowPrompt] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -56,6 +57,7 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
     lang,
     baseCurrency,
     rates,
+    brokers,
   );
 
   const copyPrompt = async () => {

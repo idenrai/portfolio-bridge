@@ -15,11 +15,17 @@ AI 프롬프트 시스템입니다. 모든 프롬프트 생성 유틸리티는 `
 
 ## buildGuruPrompt
 
-**Entry point**: `buildGuruPrompt(guru, summary, assets, lang, baseCurrency, rates, philosophyEn, profile?)`
+**Entry point**: `buildGuruPrompt(guru, summary, assets, lang, baseCurrency, rates, philosophyEn, profile?, brokers?)`
 
 **Triggered by**: "Ask [Guru]" button in `src/pages/Gurus.tsx`.
 
 `src/pages/Gurus.tsx`의 "[구루 이름]에게 묻기" 버튼에 의해 실행됩니다.
+
+### Account Breakdown / 계좌별 분기 정보 주입
+
+When assets are held across multiple brokerage accounts (e.g., NISA vs taxable accounts), `buildHoldingRows` resolves each position to its constituent broker accounts using `assets` and `brokers` (`BrokerAccount[]`). Each holding line includes quantity and account details (e.g., `accounts: 500 in "SBI NISA" (NISA), 100 in "SBI 특정" (특정)`), enabling gurus to give tax-aware rebalancing advice.
+
+여러 증권 계좌(예: NISA 비과세 계좌 vs 특정 과세 계좌)에 자산이 분산되어 있는 경우, `buildHoldingRows`에서 `assets`와 `brokers`(`BrokerAccount[]`)를 매핑하여 각 종목 라인에 계좌별 수량과 계좌 유형을 표기합니다. 이를 통해 구루 AI가 세제 혜택 계좌와 과세 계좌를 구분한 실질적 리밸런싱 조언을 제공할 수 있습니다.
 
 ### Prompt Structure
 
@@ -184,9 +190,9 @@ If a guru ID is not in the map, a generic 5-point delta evaluation is used.
 | `buildCategorySection(summary, targets, label?)` | Category allocation vs target / 카테고리 배분 vs 목표 |
 | `buildMarketSection(summary)` | Market allocation / 시장별 배분 |
 | `buildFxSection(summary)` | Currency exposure / 환 노출 |
-| `buildHoldingRows(summary, maxItems?)` | Holdings list (max 30, cash excluded) / 보유 종목 목록 |
+| `buildHoldingRows(summary, assets?, brokers?, maxItems?)` | Holdings list with account breakdown (max 30, cash excluded) / 보유 종목 목록 및 계좌별 분기 |
 | `buildCashSection(assets)` | Cash positions / 현금 포지션 |
-| `buildPortfolioDataBlock(...)` | Full portfolio data block / 전체 포트폴리오 데이터 블록 |
+| `buildPortfolioDataBlock(...)` | Full portfolio data block (supports account breakdown) / 전체 포트폴리오 데이터 블록 |
 | `formatInBase(krwAmount, currency, rates)` | KRW → baseCurrency string / 금액 포맷 |
 | `sign(n)` | Returns `"+"` or `""` for sign prefix |
 
