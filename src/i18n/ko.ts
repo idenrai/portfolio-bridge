@@ -82,6 +82,8 @@ export const ko: Translations = {
   holdings_col_pbr: "PBR",
   holdings_show_all: (n) => `전체 ${n}개 보기`,
   holdings_show_top10: "상위 10개만",
+  holdings_show_top20: "상위 20개만",
+  holdings_show_top: (n) => `상위 ${n}개만`,
 
   category_title: "분류 목표 vs 실제",
   category_set_target: "목표 설정",

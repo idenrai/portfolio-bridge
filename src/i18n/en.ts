@@ -82,6 +82,8 @@ export const en: Translations = {
   holdings_col_pbr: "P/B",
   holdings_show_all: (n) => `View all ${n}`,
   holdings_show_top10: "Top 10 only",
+  holdings_show_top20: "Top 20 only",
+  holdings_show_top: (n) => `Top ${n} only`,
 
   category_title: "Category Target vs Actual",
   category_set_target: "Set Targets",

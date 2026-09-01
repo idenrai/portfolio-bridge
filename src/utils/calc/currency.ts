@@ -1,4 +1,6 @@
 import { type CurrencyCode, CURRENCY_SYMBOLS } from "@/types";
+import type { Lang } from "@/i18n";
+import { useLanguageStore } from "@/stores";
 
 /**
  * 현지 통화 금액 → KRW 변환
@@ -33,33 +35,40 @@ const CURRENCY_LOCALES: Record<CurrencyCode, string> = {
 /**
  * 금액 포맷 (현지 통화 형식)
  * @param showPositiveSign true일 경우 양수 금액 앞에 '+' 부호를 추가합니다. (기본값: false)
+ * @param lang 축약 단위 표기 시 사용할 언어 (생략 시 useLanguageStore의 현재 언어 적용)
  */
 export function formatCurrency(
   amount: number,
   currency: CurrencyCode,
   compact = false,
   showPositiveSign = false,
+  lang?: Lang,
 ): string {
+  const currentLang = lang ?? useLanguageStore.getState().lang;
   const symbol = CURRENCY_SYMBOLS[currency];
   const abs = Math.abs(amount);
   const sign = amount < 0 ? "-" : (showPositiveSign && amount > 0 ? "+" : "");
   
-  if (currency === "KRW") {
-    if (compact && abs >= 1_0000_0000)
-      return `${sign}${symbol}${(abs / 1_0000_0000).toLocaleString("ko-KR", { maximumFractionDigits: 1 })}억`;
-    if (compact && abs >= 1_0000)
-      return `${sign}${symbol}${Math.round(abs / 1_0000).toLocaleString("ko-KR")}만`;
-  } else if (currency === "JPY") {
-    if (compact && abs >= 1_0000_0000)
-      return `${sign}${symbol}${(abs / 1_0000_0000).toLocaleString("ja-JP", { maximumFractionDigits: 1 })}億`;
-    if (compact && abs >= 1_0000)
-      return `${sign}${symbol}${Math.round(abs / 1_0000).toLocaleString("ja-JP")}万`;
-  } else {
-    // USD, EUR, etc.
-    if (compact && abs >= 1_000_000)
-      return `${sign}${symbol}${(abs / 1_000_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`;
-    if (compact && abs >= 1_000)
-      return `${sign}${symbol}${(abs / 1_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}K`;
+  if (compact) {
+    if (currentLang === "ko") {
+      if (abs >= 1_0000_0000)
+        return `${sign}${symbol}${(abs / 1_0000_0000).toLocaleString("ko-KR", { maximumFractionDigits: 1 })}억`;
+      if (abs >= 1_0000)
+        return `${sign}${symbol}${Math.round(abs / 1_0000).toLocaleString("ko-KR")}만`;
+    } else if (currentLang === "ja") {
+      if (abs >= 1_0000_0000)
+        return `${sign}${symbol}${(abs / 1_0000_0000).toLocaleString("ja-JP", { maximumFractionDigits: 1 })}億`;
+      if (abs >= 1_0000)
+        return `${sign}${symbol}${Math.round(abs / 1_0000).toLocaleString("ja-JP")}万`;
+    } else {
+      // en, de, etc.
+      if (abs >= 1_000_000_000)
+        return `${sign}${symbol}${(abs / 1_000_000_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}B`;
+      if (abs >= 1_000_000)
+        return `${sign}${symbol}${(abs / 1_000_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`;
+      if (abs >= 1_000)
+        return `${sign}${symbol}${(abs / 1_000).toLocaleString("en-US", { maximumFractionDigits: 1 })}K`;
+    }
   }
   
   return `${sign}${symbol}${abs.toLocaleString(CURRENCY_LOCALES[currency], {

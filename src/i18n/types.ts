@@ -89,6 +89,8 @@ export interface Translations {
   holdings_col_pbr: string;
   holdings_show_all: (n: number) => string;
   holdings_show_top10: string;
+  holdings_show_top20: string;
+  holdings_show_top: (n: number) => string;
 
   // ─── CategoryAnalysisCard ────────────────────────────────────────────────
   category_title: string;

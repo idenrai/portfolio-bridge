@@ -50,5 +50,22 @@ describe('currency utilities', () => {
     expect(formatCurrency(1234.56, 'USD', false, true)).toBe('+$1,234.56');
     expect(formatCurrency(-1234.56, 'USD', false, true)).toBe('-$1,234.56');
   });
+
+  it('formatCurrency compact units respect UI language settings', () => {
+    // Korean UI (ko): JPY currency formatted with 억 / 만
+    expect(formatCurrency(240000000, 'JPY', true, false, 'ko')).toBe('¥2.4억');
+    expect(formatCurrency(60000000, 'JPY', true, false, 'ko')).toBe('¥6,000만');
+    expect(formatCurrency(150000000, 'USD', true, false, 'ko')).toBe('$1.5억');
+
+    // Japanese UI (ja): JPY currency formatted with 億 / 万
+    expect(formatCurrency(240000000, 'JPY', true, false, 'ja')).toBe('¥2.4億');
+    expect(formatCurrency(60000000, 'JPY', true, false, 'ja')).toBe('¥6,000万');
+
+    // English / German UI (en / de): formatted with B / M / K
+    expect(formatCurrency(240000000, 'JPY', true, false, 'en')).toBe('¥240M');
+    expect(formatCurrency(60000000, 'JPY', true, false, 'en')).toBe('¥60M');
+    expect(formatCurrency(15000, 'USD', true, false, 'en')).toBe('$15K');
+    expect(formatCurrency(2500000000, 'USD', true, false, 'en')).toBe('$2.5B');
+  });
 });
 
