@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
-import { searchTicker } from "@/utils";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { searchTicker, normalizeTicker } from "@/utils";
 import { useAssetStore } from "@/stores";
 
 // ─── 타입 ─────────────────────────────────────────────────────────────────────
@@ -55,22 +55,39 @@ export function useAnalyzer<TResult extends BaseAnalyzerResult>(
   >([]);
   const [isSearching, setIsSearching] = useState(false);
 
+  /** 중복 제거된 보유 주식 티커 목록 (정규화 및 유의미한 종목명 우선 채택) */
+  const uniqueStockTickers = useMemo(() => {
+    const map = new Map<string, { ticker: string; name: string }>();
+    for (const a of assets) {
+      if (a.ticker && a.type === "stock") {
+        const key = normalizeTicker(a.ticker);
+        const existing = map.get(key);
+        const hasBetterName =
+          !existing ||
+          (Boolean(a.name?.trim()) &&
+            a.name !== a.ticker &&
+            (!existing.name || existing.name === existing.ticker));
+
+        if (hasBetterName) {
+          map.set(key, {
+            ticker: a.ticker,
+            name: a.name,
+          });
+        }
+      }
+    }
+    return Array.from(map.values());
+  }, [assets]);
+
   /** 포트폴리오 모드 — 보유 주식 채점 */
   const runPortfolio = useCallback(async () => {
-    const stockAssets = assets.filter(
-      (a) => a.ticker && a.type === "stock",
-    );
-    if (stockAssets.length === 0) return;
+    if (uniqueStockTickers.length === 0) return;
 
     setLoading(true);
     setRan(false);
-    setProgress({ phase: "enrich", done: 0, total: stockAssets.length });
+    setProgress({ phase: "enrich", done: 0, total: uniqueStockTickers.length });
     try {
-      const tickers = stockAssets.map((a) => ({
-        ticker: a.ticker!,
-        name: a.name,
-      }));
-      const res = await config.analyzeByTickers(tickers, (p) =>
+      const res = await config.analyzeByTickers(uniqueStockTickers, (p) =>
         setProgress(p),
       );
       setResults(res);
@@ -78,7 +95,7 @@ export function useAnalyzer<TResult extends BaseAnalyzerResult>(
       setLoading(false);
       setRan(true);
     }
-  }, [assets, config]);
+  }, [uniqueStockTickers, config]);
 
   /** 검색 모드 — 단일 티커 분석 */
   const runSearch = useCallback(
@@ -128,9 +145,7 @@ export function useAnalyzer<TResult extends BaseAnalyzerResult>(
     setSearchSuggestions([]);
   }, [mode]);
 
-  const portfolioStockCount = assets.filter(
-    (a) => a.ticker && a.type === "stock",
-  ).length;
+  const portfolioStockCount = uniqueStockTickers.length;
 
   return {
     mode,
