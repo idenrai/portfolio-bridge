@@ -17,6 +17,7 @@ export {
   fetchCurrentPrice,
   fetchBatchQuote,
   fetchAllExchangeRates,
+  normalizeTicker,
 } from "./yahoo/yahooFinance";
 export type { TickerSearchItem, QuoteData } from "./yahoo/yahooFinance";
 export { buildClassificationPrompt, parseAiResponse } from "./ai/aiClassification";

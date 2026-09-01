@@ -187,6 +187,11 @@ export async function fetchQuoteSummary(
   return null;
 }
 
+/** 티커 심볼 정규화 (앞뒤 공백 제거 및 대문자 변환) */
+export function normalizeTicker(ticker: string): string {
+  return ticker.trim().toUpperCase();
+}
+
 /**
  * 채점기 공용: ticker 배열에 대해 순차 fetch → score → 정렬.
  * 개별 채점기는 fetchData + scoreStock 만 구현하면 됨.
@@ -201,15 +206,26 @@ export async function analyzeByTickersGeneric<TRaw, TResult extends { totalScore
   const { tickers, fetchData, defaultRaw, scoreStock, onProgress } = opts;
   if (tickers.length === 0) return [];
 
-  onProgress?.({ phase: "enrich", done: 0, total: tickers.length });
+  // 방어적 티커 중복 제거 (대소문자/공백 정규화 기준)
+  const seen = new Set<string>();
+  const uniqueTickers = tickers.filter((t) => {
+    const k = normalizeTicker(t.ticker);
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+
+  if (uniqueTickers.length === 0) return [];
+
+  onProgress?.({ phase: "enrich", done: 0, total: uniqueTickers.length });
   const results: TResult[] = [];
 
-  for (let i = 0; i < tickers.length; i++) {
-    const { ticker, name } = tickers[i];
+  for (let i = 0; i < uniqueTickers.length; i++) {
+    const { ticker, name } = uniqueTickers[i];
     const raw = await fetchData(ticker);
     results.push(scoreStock({ ticker, name: name ?? ticker, market: "OTHER" }, raw ?? defaultRaw));
-    onProgress?.({ phase: "enrich", done: i + 1, total: tickers.length });
-    if (i < tickers.length - 1) await delay(API_DELAY);
+    onProgress?.({ phase: "enrich", done: i + 1, total: uniqueTickers.length });
+    if (i < uniqueTickers.length - 1) await delay(API_DELAY);
   }
 
   return results.sort((a, b) => b.totalScore - a.totalScore);
