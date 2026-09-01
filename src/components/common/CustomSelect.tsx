@@ -31,6 +31,7 @@ export function CustomSelect<T extends string | number>({
   const [isOpen, setIsOpen] = useState(false);
   const [popupStyle, setPopupStyle] = useState<React.CSSProperties>({});
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
   
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -53,10 +54,10 @@ export function CustomSelect<T extends string | number>({
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
 
-      let top = rect.bottom + window.scrollY + 6;
+      let top = rect.bottom + 6;
       // If not enough space below and there is more space above, flip it upwards
       if (spaceBelow < estimatedHeight && spaceAbove > spaceBelow) {
-        top = rect.top + window.scrollY - estimatedHeight - 6;
+        top = rect.top - estimatedHeight - 6;
       }
 
       const style: React.CSSProperties = {
@@ -66,9 +67,9 @@ export function CustomSelect<T extends string | number>({
 
       // Prevent horizontal overflow by anchoring to the right if on the right half of the screen
       if (rect.left > window.innerWidth / 2) {
-        style.right = `${document.documentElement.clientWidth - rect.right - window.scrollX}px`;
+        style.right = `${document.documentElement.clientWidth - rect.right}px`;
       } else {
-        style.left = `${rect.left + window.scrollX}px`;
+        style.left = `${rect.left}px`;
       }
 
       setPopupStyle(style);
@@ -129,6 +130,15 @@ export function CustomSelect<T extends string | number>({
     };
   }, [isOpen]);
 
+  const openDropdown = () => {
+    if (typeof document !== 'undefined') {
+      setPortalTarget(containerRef.current?.closest('dialog') || document.body);
+    }
+    const currentIdx = options.findIndex(o => o.value === value);
+    setFocusedIndex(currentIdx >= 0 ? currentIdx : 0);
+    setIsOpen(true);
+  };
+
   const handleKeyDown = (e: ReactKeyboardEvent) => {
     // Type-ahead logic
     if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
@@ -157,9 +167,7 @@ export function CustomSelect<T extends string | number>({
     if (!isOpen) {
       if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
-        const currentIdx = options.findIndex(o => o.value === value);
-        setFocusedIndex(currentIdx >= 0 ? currentIdx : 0);
-        setIsOpen(true);
+        openDropdown();
       }
       return;
     }
@@ -193,10 +201,10 @@ export function CustomSelect<T extends string | number>({
     }
   };
 
-  const portalContent = isOpen && typeof document !== 'undefined' ? createPortal(
+  const portalContent = isOpen && portalTarget ? createPortal(
     <div 
       className={cn(
-        "absolute z-100 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/95 p-1 shadow-xl backdrop-blur-xl",
+        "fixed z-100 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/95 p-1 shadow-xl backdrop-blur-xl",
         "animate-popup",
         dropdownClassName
       )}
@@ -238,7 +246,7 @@ export function CustomSelect<T extends string | number>({
         })}
       </ul>
     </div>,
-    document.body
+    portalTarget
   ) : null;
 
   return (
@@ -254,9 +262,7 @@ export function CustomSelect<T extends string | number>({
         aria-activedescendant={isOpen && focusedIndex >= 0 ? `${listboxId}-option-${options[focusedIndex].value}` : undefined}
         onClick={() => {
           if (!isOpen) {
-            const currentIdx = options.findIndex(o => o.value === value);
-            setFocusedIndex(currentIdx >= 0 ? currentIdx : 0);
-            setIsOpen(true);
+            openDropdown();
           } else {
             setIsOpen(false);
           }

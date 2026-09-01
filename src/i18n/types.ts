@@ -579,11 +579,16 @@ export interface Translations {
   broker_country_label: string;
   broker_name_label: string;
   broker_type_label: string;
+  broker_type_none: string;
+  broker_type_custom: string;
+  broker_type_custom_placeholder: string;
   broker_nickname_label: string;
   broker_name_placeholder: string;
   broker_type_placeholder: string;
   broker_nickname_placeholder: string;
   broker_delete_confirm: string;
+  broker_delete_inline_confirm: string;
+  broker_confirm_btn: string;
   broker_col_nickname: string;
   broker_col_broker: string;
   broker_col_type: string;
