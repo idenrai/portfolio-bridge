@@ -24,9 +24,10 @@ describe("Account Types presets and badge styling", () => {
   });
 
   it("contains specific key presets for each market", () => {
-    // JP: NISA, 特定, iDeCo
+    // JP: NISA (성장), NISA (적립), 特定, iDeCo
     const jpValues = ACCOUNT_TYPES_BY_COUNTRY.JP.map((o) => o.value);
-    expect(jpValues).toContain("NISA");
+    expect(jpValues).toContain("NISA (성장)");
+    expect(jpValues).toContain("NISA (적립)");
     expect(jpValues).toContain("特定");
     expect(jpValues).toContain("iDeCo");
 
