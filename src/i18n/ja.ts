@@ -82,6 +82,8 @@ export const ja: Translations = {
   holdings_col_pbr: "PBR",
   holdings_show_all: (n) => `全${n}件を表示`,
   holdings_show_top10: "上位10件のみ",
+  holdings_show_top20: "上位20件のみ",
+  holdings_show_top: (n) => `上位${n}件のみ`,
 
   category_title: "カテゴリー目標 vs 実績",
   category_set_target: "目標設定",

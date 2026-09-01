@@ -39,7 +39,8 @@ export const TopHoldingsTable = memo(function TopHoldingsTable({ summary }: Prop
     }
   });
 
-  const display = showAll ? sorted : sorted.slice(0, 10);
+  const DEFAULT_LIMIT = 20;
+  const display = showAll ? sorted : sorted.slice(0, DEFAULT_LIMIT);
 
   const thCls =
     "px-3 py-2 text-right text-xs-plus font-bold text-zinc-400 transition-colors";
@@ -65,13 +66,13 @@ export const TopHoldingsTable = memo(function TopHoldingsTable({ summary }: Prop
     <Card
       title={t.holdings_title}
       action={
-        sorted.length > 10 && (
+        sorted.length > DEFAULT_LIMIT && (
           <button
             onClick={() => setShowAll(!showAll)}
             className="cursor-pointer text-xs text-zinc-400 transition-colors hover:text-zinc-100"
           >
             {showAll
-              ? t.holdings_show_top10
+              ? t.holdings_show_top(DEFAULT_LIMIT)
               : t.holdings_show_all(sorted.length)}
           </button>
         )

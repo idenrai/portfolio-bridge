@@ -82,6 +82,8 @@ export const de: Translations = {
   holdings_col_pbr: "KBV",
   holdings_show_all: (n) => `Alle ${n} anzeigen`,
   holdings_show_top10: "Nur Top 10",
+  holdings_show_top20: "Nur Top 20",
+  holdings_show_top: (n) => `Nur Top ${n}`,
 
   category_title: "Kategorie: Ziel vs. Ist",
   category_set_target: "Ziele festlegen",

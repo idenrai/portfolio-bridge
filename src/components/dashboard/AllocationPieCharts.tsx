@@ -47,42 +47,46 @@ function MiniPie({
 }) {
   if (data.length === 0) {
     return (
-      <div className="flex h-55 items-center justify-center text-sm text-zinc-400">
+      <div className="flex h-60 items-center justify-center text-sm text-zinc-400">
         {noDataText}
       </div>
     );
   }
 
   return (
-    <ResponsiveContainer width="100%" height={250}>
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          innerRadius={50}
-          outerRadius={80}
-          dataKey="value"
-          nameKey="name"
-          paddingAngle={2}
-        >
-          {data.map((_, i) => (
-            <Cell key={i} fill={COLORS[i % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip 
-          formatter={(value) => valueLabel(Number(value))}
-          itemStyle={{ fontVariantNumeric: "tabular-nums" }}
-        />
-        <Legend
-          formatter={(value: string) => {
-            const item = data.find((d) => d.name === value);
-            return `${value} ${item?.percent.toFixed(1)}%`;
-          }}
-          wrapperStyle={{ fontSize: "11px" }}
-        />
-      </PieChart>
-    </ResponsiveContainer>
+    <div className="h-70 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
+          <Pie
+            data={data}
+            cx="50%"
+            cy={95}
+            innerRadius={45}
+            outerRadius={75}
+            dataKey="value"
+            nameKey="name"
+            paddingAngle={2}
+          >
+            {data.map((_, i) => (
+              <Cell key={i} fill={COLORS[i % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip 
+            formatter={(value) => valueLabel(Number(value))}
+            itemStyle={{ fontVariantNumeric: "tabular-nums" }}
+          />
+          <Legend
+            verticalAlign="bottom"
+            align="center"
+            formatter={(value: string) => {
+              const item = data.find((d) => d.name === value);
+              return `${value} ${item?.percent.toFixed(1)}%`;
+            }}
+            wrapperStyle={{ fontSize: "11px", paddingTop: "8px" }}
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 
