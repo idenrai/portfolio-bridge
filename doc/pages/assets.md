@@ -109,6 +109,48 @@ Implemented in `src/utils/csv.ts`.
 현재 자산 목록을 모든 항목이 포함된 `.csv` 파일로 내보냅니다.
 `src/utils/csv.ts`에 구현되어 있습니다.
 
+## Broker Account Management (`BrokerManager.tsx`)
+
+Users can register multiple brokerage accounts across different markets (KR, JP, US, EU, OTHER).
+When adding or editing accounts, country-specific account type presets (`ACCOUNT_TYPES_BY_COUNTRY`) are provided via `CustomSelect`:
+- **JP**: `NISA` (Tax-free), `特定` (Taxable withholding), `一般` (Taxable), `iDeCo` (Pension), `法人口座`
+- **KR**: `일반위탁` (Taxable), `ISA` (Tax-free), `연금저축` (Pension), `IRP` (Pension), `CMA`, `해외주식비과세`
+- **US**: `Taxable`, `Roth IRA` (Tax-free), `Traditional IRA` (Pension), `401(k)` (Pension), `HSA` (Tax-free)
+- **EU**: `Standard Depot`, `Sparplan`, `Riester / Rürup` (Pension), `PEA / ISA` (Tax-free)
+- **OTHER / Custom**: `Custom Input...` text mode allows entering any arbitrary account type while preserving full backward compatibility.
+
+Account type badges in the account list use visual color-coding (`getAccountTypeBadgeStyle`):
+- Emerald for tax-free/tax-advantaged (NISA, ISA, Roth IRA, HSA, etc.)
+- Violet for pensions/retirement (연금저축, IRP, iDeCo, 401(k), etc.)
+- Amber for crypto, CMA, corporate accounts
+- Zinc for standard taxable/general accounts
+
+Enhanced UI/UX Features:
+- **Dialog Top-Layer & Fixed Positioning**: `CustomSelect` dynamically mounts to the parent `<dialog>` when inside a modal and utilizes `fixed` viewport coordinates to prevent clipping.
+- **Inline Safe Deletion**: Replaces browser-native popups with an in-table confirmation banner (`[ Confirm | Cancel ]`).
+- **Smart Nickname Suggestion**: Dynamically updates the placeholder (e.g., `e.g. SBI Securities NISA`) based on the selected institution and account type.
+- **Keyboard Submission**: Supports pressing `Enter` to immediately save new or edited accounts.
+
+사용자는 여러 국가(한국, 일본, 미국, 유럽, 기타)의 증권 계좌를 등록하고 관리할 수 있습니다.
+계좌 추가/수정 시 국가별 계좌 종류 프리셋(`ACCOUNT_TYPES_BY_COUNTRY`)이 `CustomSelect`로 제공됩니다:
+- **일본**: `NISA`(비과세), `特定`(원천징수 과세), `一般`(일반과세), `iDeCo`(연금), `法人口座`
+- **한국**: `일반위탁`(과세), `ISA`(비과세), `연금저축`(연금), `IRP`(연금), `CMA`, `해외주식비과세`
+- **미국**: `Taxable`, `Roth IRA`(비과세), `Traditional IRA`(연금), `401(k)`(연금), `HSA`(비과세)
+- **유럽**: `Standard Depot`, `Sparplan`, `Riester / Rürup`(연금), `PEA / ISA`(비과세)
+- **기타/직접입력**: `직접 입력...` 모드를 통해 임의의 계좌 종류를 자유롭게 작성할 수 있으며 완벽한 하위 호환성을 보장합니다.
+
+계좌 목록의 계좌 종류 배지에는 컬러 코딩(`getAccountTypeBadgeStyle`)이 적용됩니다:
+- 절세/비과세: 에메랄드 틴트 (NISA, ISA, Roth IRA, HSA 등)
+- 연금/퇴직: 바이올렛 틴트 (연금저축, IRP, iDeCo, 401(k) 등)
+- 가상자산/CMA/법인: 앰버 틴트
+- 일반/과세: 징크 틴트
+
+개선된 UI/UX 기능:
+- **모달 Top Layer 포탈 및 Fixed 포지셔닝**: `CustomSelect`가 모달 내부일 때 상위 `<dialog>`에 포탈로 마운트되고 `fixed` 뷰포트 좌표를 사용하여 가림 현상을 방지합니다.
+- **인라인 안전 삭제**: 브라우저 기본 알림창 대신 테이블 내 인라인 확인 배지(`[ 확인 | 취소 ]`)를 제공합니다.
+- **스마트 애칭 플레이스홀더 제안**: 선택한 금융기관과 계좌 종류에 따라 플레이스홀더(`예: SBI証券 NISA`)를 실시간으로 제안합니다.
+- **키보드 빠른 저장**: 입력 필드에서 `Enter` 키를 눌러 즉시 계좌를 저장할 수 있습니다.
+
 ## Data Store
 
 | Store | localStorage Key | Content |
