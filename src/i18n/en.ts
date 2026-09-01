@@ -67,6 +67,7 @@ export const en: Translations = {
   kpi_holdings_unit: "stocks",
   kpi_asset_type_unit: "asset types",
 
+  chart_allocation_title: "Asset Allocation",
   chart_market: "By Market",
   chart_category: "By Category",
   chart_no_data: "No data",

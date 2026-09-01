@@ -1,14 +1,13 @@
-import { memo } from "react";
+import { useState, memo } from "react";
 import {
   PieChart,
   Pie,
   Cell,
   ResponsiveContainer,
   Tooltip,
-  Legend,
 } from "recharts";
 import { Card } from "@/components/common";
-import { formatCurrency, fromKRW } from "@/utils";
+import { formatCurrency, fromKRW, cn } from "@/utils";
 import { useSettingsStore } from "@/stores";
 import { useT, useExchangeRates } from "@/hooks";
 import type { PortfolioSummary, Market, AssetCategory } from "@/types";
@@ -36,61 +35,10 @@ interface Props {
   summary: PortfolioSummary;
 }
 
-function MiniPie({
-  data,
-  valueLabel,
-  noDataText,
-}: {
-  data: ChartEntry[];
-  valueLabel: (v: number) => string;
-  noDataText: string;
-}) {
-  if (data.length === 0) {
-    return (
-      <div className="flex h-60 items-center justify-center text-sm text-zinc-400">
-        {noDataText}
-      </div>
-    );
-  }
-
-  return (
-    <div className="h-70 w-full">
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
-          <Pie
-            data={data}
-            cx="50%"
-            cy={95}
-            innerRadius={45}
-            outerRadius={75}
-            dataKey="value"
-            nameKey="name"
-            paddingAngle={2}
-          >
-            {data.map((_, i) => (
-              <Cell key={i} fill={COLORS[i % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip 
-            formatter={(value) => valueLabel(Number(value))}
-            itemStyle={{ fontVariantNumeric: "tabular-nums" }}
-          />
-          <Legend
-            verticalAlign="bottom"
-            align="center"
-            formatter={(value: string) => {
-              const item = data.find((d) => d.name === value);
-              return `${value} ${item?.percent.toFixed(1)}%`;
-            }}
-            wrapperStyle={{ fontSize: "11px", paddingTop: "8px" }}
-          />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
-
-export const AllocationPieCharts = memo(function AllocationPieCharts({ summary }: Props) {
+export const AllocationPieCharts = memo(function AllocationPieCharts({
+  summary,
+}: Props) {
+  const [activeTab, setActiveTab] = useState<"market" | "category">("market");
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: rates } = useExchangeRates();
   const t = useT();
@@ -114,23 +62,98 @@ export const AllocationPieCharts = memo(function AllocationPieCharts({ summary }
     percent: x.percent,
   }));
 
+  const currentData = activeTab === "market" ? marketData : categoryData;
+
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      <Card title={t.chart_market}>
-        <MiniPie
-          data={marketData}
-          valueLabel={fmt}
-          noDataText={t.chart_no_data}
-        />
-      </Card>
-      <Card title={t.chart_category}>
-        <MiniPie
-          data={categoryData}
-          valueLabel={fmt}
-          noDataText={t.chart_no_data}
-        />
-      </Card>
-    </div>
+    <Card
+      title={t.chart_allocation_title}
+      action={
+        <div className="inline-flex rounded-lg border border-zinc-800 bg-zinc-900/80 p-0.5 text-xs">
+          <button
+            type="button"
+            onClick={() => setActiveTab("market")}
+            className={cn(
+              "cursor-pointer rounded-md px-2.5 py-1 font-medium transition-colors",
+              activeTab === "market"
+                ? "bg-zinc-800 text-white shadow-xs"
+                : "text-zinc-400 hover:text-zinc-200",
+            )}
+          >
+            {t.chart_market}
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("category")}
+            className={cn(
+              "cursor-pointer rounded-md px-2.5 py-1 font-medium transition-colors",
+              activeTab === "category"
+                ? "bg-zinc-800 text-white shadow-xs"
+                : "text-zinc-400 hover:text-zinc-200",
+            )}
+          >
+            {t.chart_category}
+          </button>
+        </div>
+      }
+    >
+      {currentData.length === 0 ? (
+        <div className="flex h-56 items-center justify-center text-sm text-zinc-400">
+          {t.chart_no_data}
+        </div>
+      ) : (
+        <div className="flex flex-col">
+          {/* 도넛 차트 영역 */}
+          <div className="h-56 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart margin={{ top: 8, right: 8, bottom: 8, left: 8 }}>
+                <Pie
+                  data={currentData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={80}
+                  dataKey="value"
+                  nameKey="name"
+                  paddingAngle={2}
+                >
+                  {currentData.map((_, i) => (
+                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  formatter={(value) => fmt(Number(value))}
+                  itemStyle={{ fontVariantNumeric: "tabular-nums" }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* 커스텀 2열 그리드 범례 (Recharts SVG 충돌 및 글자 가림 원천 방지) */}
+          <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-zinc-800/80 pt-3">
+            {currentData.map((item, i) => (
+              <div
+                key={item.name}
+                className="flex items-center justify-between text-xs"
+              >
+                <div className="flex min-w-0 items-center gap-1.5 pr-1">
+                  <span
+                    className="size-2 shrink-0 rounded-full"
+                    style={{ backgroundColor: COLORS[i % COLORS.length] }}
+                  />
+                  <span className="truncate text-zinc-300" title={item.name}>
+                    {item.name}
+                  </span>
+                </div>
+                <span className="shrink-0 font-medium text-zinc-400 tabular-nums">
+                  {item.percent.toFixed(1)}%
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </Card>
   );
 });
+
 

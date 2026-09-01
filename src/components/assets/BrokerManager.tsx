@@ -136,8 +136,19 @@ export function BrokerManager() {
     ? "__CUSTOM__"
     : (editing?.accountType ?? "");
 
+  const formatSuggestedNickname = (broker: string, accountType: string): string => {
+    const b = broker.trim();
+    const act = accountType.trim();
+    if (!b && !act) return "";
+    if (!b) return act;
+    if (!act) return b;
+    if (act === "NISA (성장)") return `${b} NISA 성장`;
+    if (act === "NISA (적립)") return `${b} NISA 적립`;
+    return `${b} ${act}`;
+  };
+
   const suggestedNickname = editing
-    ? [editing.broker.trim(), editing.accountType.trim()].filter(Boolean).join(" ")
+    ? formatSuggestedNickname(editing.broker, editing.accountType)
     : "";
 
   return (

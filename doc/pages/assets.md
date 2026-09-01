@@ -113,7 +113,7 @@ Implemented in `src/utils/csv.ts`.
 
 Users can register multiple brokerage accounts across different markets (KR, JP, US, EU, OTHER).
 When adding or editing accounts, country-specific account type presets (`ACCOUNT_TYPES_BY_COUNTRY`) are provided via `CustomSelect`:
-- **JP**: `NISA` (Tax-free), `特定` (Taxable withholding), `一般` (Taxable), `iDeCo` (Pension), `法人口座`
+- **JP**: `NISA (Growth)` (Tax-free growth limit), `NISA (Accumulation)` (Tax-free installment limit), `特定` (Taxable withholding), `一般` (Taxable), `iDeCo` (Pension), `法人口座`
 - **KR**: `일반위탁` (Taxable), `ISA` (Tax-free), `연금저축` (Pension), `IRP` (Pension), `CMA`, `해외주식비과세`
 - **US**: `Taxable`, `Roth IRA` (Tax-free), `Traditional IRA` (Pension), `401(k)` (Pension), `HSA` (Tax-free)
 - **EU**: `Standard Depot`, `Sparplan`, `Riester / Rürup` (Pension), `PEA / ISA` (Tax-free)
@@ -128,12 +128,12 @@ Account type badges in the account list use visual color-coding (`getAccountType
 Enhanced UI/UX Features:
 - **Dialog Top-Layer & Fixed Positioning**: `CustomSelect` dynamically mounts to the parent `<dialog>` when inside a modal and utilizes `fixed` viewport coordinates to prevent clipping.
 - **Inline Safe Deletion**: Replaces browser-native popups with an in-table confirmation banner (`[ Confirm | Cancel ]`).
-- **Smart Nickname Suggestion**: Dynamically updates the placeholder (e.g., `e.g. SBI Securities NISA`) based on the selected institution and account type.
+- **Smart Nickname Suggestion**: Dynamically updates the placeholder (e.g., `e.g. SBI Securities NISA Growth`) based on the selected institution and account type.
 - **Keyboard Submission**: Supports pressing `Enter` to immediately save new or edited accounts.
 
 사용자는 여러 국가(한국, 일본, 미국, 유럽, 기타)의 증권 계좌를 등록하고 관리할 수 있습니다.
 계좌 추가/수정 시 국가별 계좌 종류 프리셋(`ACCOUNT_TYPES_BY_COUNTRY`)이 `CustomSelect`로 제공됩니다:
-- **일본**: `NISA`(비과세), `特定`(원천징수 과세), `一般`(일반과세), `iDeCo`(연금), `法人口座`
+- **일본**: `NISA (성장)`(성장투자 비과세), `NISA (적립)`(적립투자 비과세), `特定`(원천징수 과세), `一般`(일반과세), `iDeCo`(연금), `法人口座`
 - **한국**: `일반위탁`(과세), `ISA`(비과세), `연금저축`(연금), `IRP`(연금), `CMA`, `해외주식비과세`
 - **미국**: `Taxable`, `Roth IRA`(비과세), `Traditional IRA`(연금), `401(k)`(연금), `HSA`(비과세)
 - **유럽**: `Standard Depot`, `Sparplan`, `Riester / Rürup`(연금), `PEA / ISA`(비과세)

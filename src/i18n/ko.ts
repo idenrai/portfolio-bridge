@@ -67,6 +67,7 @@ export const ko: Translations = {
   kpi_holdings_unit: "종목",
   kpi_asset_type_unit: "개 자산군",
 
+  chart_allocation_title: "자산 배분",
   chart_market: "국가(시장)별 배분",
   chart_category: "분류별 배분",
   chart_no_data: "데이터 없음",

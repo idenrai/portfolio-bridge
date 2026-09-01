@@ -10,7 +10,8 @@ export interface AccountTypeOption {
 
 export const ACCOUNT_TYPES_BY_COUNTRY: Record<Market, AccountTypeOption[]> = {
   JP: [
-    { value: "NISA", label: "NISA (성장·적립 / 少額投資非課税)", category: "tax_free" },
+    { value: "NISA (성장)", label: "NISA (성장투자 / 成長投資枠)", category: "tax_free" },
+    { value: "NISA (적립)", label: "NISA (적립투자 / つみたて投資枠)", category: "tax_free" },
     { value: "特定", label: "特定 (원천징수 과세 / 特定口座)", category: "taxable" },
     { value: "一般", label: "一般 (일반과세 / 一般口座)", category: "taxable" },
     { value: "iDeCo", label: "iDeCo (개인형 확정기여연금)", category: "pension" },
