@@ -25,7 +25,7 @@ Always route requests through the proxy layer via `yahooFetch()` from `src/utils
 
 | File | Purpose |
 | --- | --- |
-| `yahooCore.ts` | Runtime detection + `yahooFetch()` base function / 런타임 감지 + 기본 함수 |
+| `yahooCore.ts` | Runtime detection, `normalizeTicker()`, `analyzeByTickersGeneric()`, `yahooFetch()` base / 런타임 감지, 티커 정규화, 채점기 공용 유틸리티, 기본 fetch 함수 |
 | `yahooSearch.ts` | Ticker search (`/v1/finance/search`) / 종목 검색 |
 | `yahooQuote.ts` | Single ticker current price / 단일 종목 현재가 |
 | `yahooFinance.ts` | Combined search and quote helpers / 검색·시세 통합 헬퍼 |

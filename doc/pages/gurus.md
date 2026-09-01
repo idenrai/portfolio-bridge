@@ -104,6 +104,18 @@ Fundamental data is fetched via `useAnalyzer` → `yahooFundamentals.ts`.
 모든 채점기는 `src/utils/analyzers/`에 있으며 `src/components/gurus/`에서 렌더링됩니다.
 기초 데이터는 `useAnalyzer` → `yahooFundamentals.ts`를 통해 가져옵니다.
 
+### Portfolio Stock Deduplication / 보유 주식 중복 제거
+
+When analyzing portfolio holdings across multiple brokerage accounts, duplicate stocks with the same ticker (case/whitespace-normalized) are deduplicated by `useAnalyzer`.
+- `portfolioStockCount` displays the number of unique stocks.
+- API fetches and scoring run once per unique ticker.
+- If multiple entries exist with differing names, the more descriptive company name (e.g., official company name over raw ticker string) is preferentially preserved for display.
+
+여러 증권 계좌에 동일한 종목(티커)이 분산 등록되어 있는 경우, `useAnalyzer`에서 대소문자/공백 정규화된 티커를 기준으로 중복을 제거하여 채점합니다.
+- `portfolioStockCount`는 고유 종목 수를 표시합니다.
+- 고유 티커당 1회만 API 호출 및 채점을 수행합니다.
+- 계좌별로 다른 이름이 등록되어 있는 경우, 단순 티커명보다 더 구체적인 정식 사명을 우선 채택하여 결과 카드에 표시합니다.
+
 ### Fallback Strategy / 폴백 전략
 
 ```text
