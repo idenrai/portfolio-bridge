@@ -67,6 +67,7 @@ export const de: Translations = {
   kpi_holdings_unit: "Positionen",
   kpi_asset_type_unit: "Vermögensklassen",
 
+  chart_allocation_title: "Vermögensallokation",
   chart_market: "Nach Markt",
   chart_category: "Nach Kategorie",
   chart_no_data: "Keine Daten",

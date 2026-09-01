@@ -73,6 +73,7 @@ export interface Translations {
   kpi_asset_type_unit: string;
 
   // ─── Allocation Charts ─────────────────────────────────────────────────────
+  chart_allocation_title: string;
   chart_market: string;
   chart_category: string;
   chart_no_data: string;

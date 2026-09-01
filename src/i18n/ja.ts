@@ -67,6 +67,7 @@ export const ja: Translations = {
   kpi_holdings_unit: "銘柄",
   kpi_asset_type_unit: "資産クラス",
 
+  chart_allocation_title: "資産配分",
   chart_market: "国別配分",
   chart_category: "カテゴリー別配分",
   chart_no_data: "データなし",

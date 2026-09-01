@@ -47,15 +47,16 @@ Five summary metrics in a horizontal bar. All monetary values converted to `base
 
 ### Allocation Pie Charts (`AllocationPieCharts.tsx`)
 
-Two side-by-side pie charts.
+A unified tabbed card allowing users to switch between market allocation and category allocation via a header segmented button.
 
-두 개의 파이 차트를 나란히 표시합니다.
+헤더 세그먼트 버튼을 통해 시장별 배분과 분류별 배분을 손쉽게 전환할 수 있는 통합 탭형 카드입니다.
 
 - **By market / 시장별**: KR / JP / US / EU / Other
 - **By category / 카테고리별**: Dividend / Growth / Value / Index / Bond / REIT / Cash / Crypto / Commodity / Other
 
-Uses optimized radii, explicit margins, and container heights to guarantee non-clipping donut charts across all viewports.
-모든 화면 너비에서 도넛 차트 상하단이 잘리지 않도록 최적화된 반경, 여백 및 컨테이너 높이를 적용합니다.
+Features a standalone SVG donut chart paired with a clean 2-column HTML grid legend (`grid grid-cols-2`) to guarantee 0% text overlapping, perfect vertical compact sizing, and full non-clipping geometry in sidebar layouts.
+
+사이드바 레이아웃에서 텍스트 겹침을 100% 방지하고 세로 공간을 효율적으로 활용하기 위해 Recharts SVG 내부 범례 대신 깔끔한 HTML 2열 그리드 범례(`grid grid-cols-2`)와 온전한 도넛 차트를 결합하여 렌더링합니다.
 
 ### Holdings Table (`TopHoldingsTable.tsx`)
 
