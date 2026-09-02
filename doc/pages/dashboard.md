@@ -121,9 +121,9 @@ Automatically generated alerts. Each alert can be individually dismissed (persis
 
 ### P&L Ranked Bar-List Widget (`PnLWaterfallChart.tsx`)
 
-Modern fintech-styled bidirectional ranked bar-list widget visualizing profit and loss by aggregated holding (using `summary.holdings`). Features 0% text truncation with a 2-tier asset metadata display (Name + Market / Ticker / Asset Type), a zero-line centered bidirectional gauge (Loss in blue on left, Gain in red on right), tabular right-aligned P&L amount and return percentages, interactive sort controls (`By Impact`, `By Gain`, `By Return`), and a `Top 10 / Show All` item toggle. Synchronizes seamlessly with the top Filter Bar. Lazy loaded with `ChartSkeleton` fallback.
+Modern fintech-styled bidirectional ranked bar-list widget visualizing profit and loss by aggregated holding (using `summary.holdings`). Features 0% text truncation with a 2-tier asset metadata display (Name + Market / Ticker / Asset Type), a zero-line centered bidirectional gauge (Loss in blue on left, Gain in red on right), tabular right-aligned P&L amount and return percentages, interactive sort controls (`By Impact`, `By Gain`, `By Return`), and a `Top 20 / Show All` item toggle. Synchronizes seamlessly with the top Filter Bar. Lazy loaded with `ChartSkeleton` fallback.
 
-보유 종목별 손익을 시각화하는 모던 핀테크 스타일의 양방향 게이지 바 리스트 위젯입니다 (`summary.holdings` 기반). 2열 종목 메타데이터(이름 + 시장/티커/자산유형)를 통해 텍스트 잘림을 완전히 해소하고, 중앙 제로 기준선 중심의 양방향 게이지(좌측 파란색 손실, 우측 빨간색 수익)와 우측 표 형식의 손익/수익률 컬럼을 제공합니다. 인터랙티브 정렬 세그먼트(`절댓값순`, `수익순`, `수익률순`) 및 `상위 10개 / 전체 보기` 토글을 지원하며, 상단 필터 바와 완벽하게 연동됩니다. `ChartSkeleton` 스켈레톤 UI를 통해 지연 로딩됩니다.
+보유 종목별 손익을 시각화하는 모던 핀테크 스타일의 양방향 게이지 바 리스트 위젯입니다 (`summary.holdings` 기반). 2열 종목 메타데이터(이름 + 시장/티커/자산유형)를 통해 텍스트 잘림을 완전히 해소하고, 중앙 제로 기준선 중심의 양방향 게이지(좌측 파란색 손실, 우측 빨간색 수익)와 우측 표 형식의 손익/수익률 컬럼을 제공합니다. 인터랙티브 정렬 세그먼트(`절댓값순`, `수익순`, `수익률순`) 및 `상위 20개 / 전체 보기` 토글을 지원하며, 상단 필터 바와 완벽하게 연동됩니다. `ChartSkeleton` 스켈레톤 UI를 통해 지연 로딩됩니다.
 
 ### Portfolio History Chart (`PortfolioHistoryChart.tsx`)
 
