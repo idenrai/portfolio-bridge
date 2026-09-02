@@ -69,9 +69,10 @@ export function PnLWaterfallChart({ holdings }: Props) {
     return { profitCount, lossCount };
   }, [processedData]);
 
-  if (processedData.length === 0) return null;
-
-  const displayedItems = showAll ? sortedData : sortedData.slice(0, 10);
+  const DEFAULT_LIMIT = 20;
+  const displayedItems = showAll
+    ? sortedData
+    : sortedData.slice(0, DEFAULT_LIMIT);
   const maxAbsPnl = Math.max(
     ...displayedItems.map((d) => Math.abs(d.pnl)),
     1,
@@ -91,7 +92,7 @@ export function PnLWaterfallChart({ holdings }: Props) {
             <span className="font-semibold text-zinc-100">
               {t.pnl_chart_title}
             </span>
-            <span className="rounded border border-zinc-800 bg-zinc-900 px-1.5 py-0.5 font-mono text-3xs font-medium text-zinc-400">
+            <span className="rounded border border-zinc-700/80 bg-zinc-900 px-1.5 py-0.5 font-mono text-3xs font-medium text-zinc-300">
               {t.pnl_summary_win_loss(
                 summaryStats.profitCount,
                 summaryStats.lossCount,
@@ -106,10 +107,10 @@ export function PnLWaterfallChart({ holdings }: Props) {
                 type="button"
                 onClick={() => setSortBy(opt.id)}
                 className={cn(
-                  "rounded-md px-2 py-0.5 text-3xs font-medium transition-colors",
+                  "cursor-pointer rounded-md px-2 py-0.5 text-3xs font-medium transition-colors",
                   sortBy === opt.id
                     ? "bg-zinc-800 font-semibold text-white shadow-xs"
-                    : "text-zinc-400 hover:text-zinc-200",
+                    : "text-zinc-300 hover:text-white",
                 )}
               >
                 {opt.label}
@@ -202,7 +203,7 @@ export function PnLWaterfallChart({ holdings }: Props) {
       </div>
 
       {/* 하단 푸터: 범례 & 개수 토글 버튼 */}
-      <div className="mt-4 flex items-center justify-between border-t border-zinc-800/60 pt-3 text-2xs text-zinc-400">
+      <div className="mt-4 flex items-center justify-between border-t border-zinc-800/80 pt-3 text-2xs text-zinc-300">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5">
             <span className="inline-block size-2 rounded-sm bg-red-500" />
@@ -214,14 +215,14 @@ export function PnLWaterfallChart({ holdings }: Props) {
           </span>
         </div>
 
-        {processedData.length > 10 && (
+        {processedData.length > 20 && (
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            className="font-medium text-indigo-400 transition-colors hover:text-indigo-300"
+            className="cursor-pointer font-medium text-indigo-400 transition-colors hover:text-indigo-200"
           >
             {showAll
-              ? t.pnl_show_top10
+              ? t.pnl_show_top20
               : t.pnl_show_all(processedData.length)}
           </button>
         )}

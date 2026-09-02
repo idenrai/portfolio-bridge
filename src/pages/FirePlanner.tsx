@@ -32,13 +32,20 @@ export function FirePlannerPage() {
 
     if (targetInBase <= 0) return null;
 
-    return calculateFire({
+    const fireResult = calculateFire({
       currentAssets,
       monthlySavings: savingsInBase,
       expectedReturnRate,
       targetAmount: targetInBase,
       currentAge,
     });
+
+    return {
+      fireResult,
+      targetInBase,
+      currentAssets,
+      savingsInBase,
+    };
   }, [
     summary.totalValueKRW,
     baseCurrency,
@@ -70,10 +77,18 @@ export function FirePlannerPage() {
           <FireInputForm />
         </div>
         <div className="flex flex-col gap-6 lg:col-span-7">
-          <FireResultCard result={result} />
-          {result && result.data.length > 0 && (
+          <FireResultCard
+            result={result?.fireResult ?? null}
+            targetAmount={result?.targetInBase}
+            currentAssets={result?.currentAssets}
+            monthlySavings={result?.savingsInBase}
+          />
+          {result && result.fireResult.data.length > 0 && (
             <div className="flex flex-1 flex-col">
-              <FireChart data={result.data} />
+              <FireChart
+                data={result.fireResult.data}
+                successYear={result.fireResult.successYear}
+              />
             </div>
           )}
         </div>

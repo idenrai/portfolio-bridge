@@ -444,6 +444,7 @@ export interface Translations {
   settings_target_save: string;
   settings_target_saved: string;
   settings_data_title: string;
+  settings_data_local_auto_note: string;
   settings_data_local_title: string;
   settings_data_desc: string;
   settings_data_count: (n: number) => string;
@@ -529,7 +530,7 @@ export interface Translations {
   pnl_sort_abs: string;
   pnl_sort_profit: string;
   pnl_sort_return: string;
-  pnl_show_top10: string;
+  pnl_show_top20: string;
   pnl_show_all: (count: number) => string;
   pnl_summary_win_loss: (win: number, loss: number) => string;
 
@@ -650,9 +651,28 @@ export interface Translations {
   fire_res_yrs: string;
   fire_res_out_of_bounds: string;
   fire_result_already_reached: string;
+  fire_kpi_target_amount: string;
+  fire_kpi_total_contributions: string;
+  fire_kpi_compound_growth: string;
+  fire_kpi_years_to_fire: string;
+  fire_kpi_already_achieved: string;
+  fire_preset_conservative: string;
+  fire_preset_moderate: string;
+  fire_preset_aggressive: string;
+  fire_kpi_compound_leverage: string;
+  fire_kpi_compound_ratio: (ratio: string) => string;
+  fire_kpi_years_suffix: (years: number) => string;
+  fire_age_reached_badge: (age: number) => string;
+  fire_already_reached_desc: string;
+  fire_age_unit: string;
+  fire_swr_preset_conservative: string;
+  fire_swr_preset_trinity: string;
+  fire_swr_preset_aggressive: string;
+  settings_data_drive_subtitle: string;
   fire_chart_title: string;
   fire_chart_asset: string;
   fire_chart_target: string;
+  fire_chart_milestone: string;
   fire_tooltip_year: (year: number, age: number | null) => string;
   fire_age_label: string;
   fire_age_placeholder: string;

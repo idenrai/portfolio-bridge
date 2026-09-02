@@ -40,7 +40,9 @@ const STACK = [
   "Zustand 5",
   "TanStack Query v5",
   "Recharts 3",
-  "Yahoo Finance & FRED API",
+  "Yahoo Finance API",
+  "FRED Economic API",
+  "Google Drive API",
   "Vercel Edge Runtime",
   "Lucide React",
 ];
