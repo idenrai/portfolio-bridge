@@ -190,7 +190,7 @@ export function DashboardPage() {
 
           {/* 종목별 손익 차트 */}
           <Suspense fallback={<ChartSkeleton title={t.pnl_chart_title} heightClassName="h-80" />}>
-            <PnLWaterfallChart assets={assets} />
+            <PnLWaterfallChart holdings={summary.holdings} />
           </Suspense>
         </div>
         
