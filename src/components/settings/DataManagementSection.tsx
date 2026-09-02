@@ -1,6 +1,6 @@
 import { useGoogleDrive, useT } from "@/hooks";
 import { Card, Button } from "@/components/common";
-import { Database } from "lucide-react";
+import { Cloud, HardDrive, CheckCircle2 } from "lucide-react";
 import { STORAGE_KEYS } from "@/constants";
 import { format } from "date-fns";
 
@@ -21,17 +21,26 @@ export function DataManagementSection() {
     <Card 
       title={
         <div className="flex items-center gap-2">
-          <Database className="size-4 text-rose-500" />
+          <Cloud className="size-4 text-indigo-400" />
           {t.settings_data_title}
         </div>
       }
     >
       <div className="space-y-5">
+        {/* 실시간 로컬 자동 저장 안내 배너 */}
+        <div className="flex items-start gap-2.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-2.5 text-xs text-emerald-400">
+          <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-400" />
+          <span className="leading-relaxed font-medium">
+            {t.settings_data_local_auto_note}
+          </span>
+        </div>
+
         {/* Google Drive 연동 */}
         <div className="space-y-2">
-          <p className="text-xs font-semibold tracking-wide text-zinc-500">
-            Google Drive
-          </p>
+          <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-zinc-400">
+            <Cloud className="size-3.5 text-blue-400" />
+            {t.settings_data_drive_subtitle}
+          </div>
           {drive.isConnected ? (
             <div className="space-y-3">
               <div className="flex flex-wrap items-center gap-2">
@@ -146,10 +155,11 @@ export function DataManagementSection() {
 
         {/* 로컬 스토리지 초기화 */}
         <div className="space-y-2">
-          <p className="text-xs font-semibold tracking-wide text-zinc-500">
+          <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-zinc-400">
+            <HardDrive className="size-3.5 text-rose-400" />
             {t.settings_data_local_title}
-          </p>
-          <p className="text-sm text-zinc-500">{t.settings_data_desc}</p>
+          </div>
+          <p className="text-xs text-zinc-500">{t.settings_data_desc}</p>
           <Button variant="danger" size="sm" onClick={handleResetAll}>
             {t.settings_data_reset}
           </Button>

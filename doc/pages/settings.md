@@ -88,37 +88,32 @@ The refresh button shows: last-updated time, updated count, total asset count, a
 
 새로고침 버튼에는 마지막 업데이트 시간, 업데이트 수, 전체 자산 수, 실패한 티커가 표시됩니다.
 
-## Target Allocation & Data Management
-
+## Data Backup & Management
+ 
 **Store**: `useSettingsStore.targetAllocations`, `useGoogleDriveStore`
 **Component**: `DataManagementSection` (`src/components/settings/DataManagementSection.tsx`)
 
-### Target Allocation
+Features a top notice banner confirming all data is automatically and securely saved to browser `localStorage` in real time.
+모든 자산 및 설정 데이터는 브라우저 `localStorage`에 실시간으로 안전하게 자동 저장된다는 상단 안내 배너를 제공합니다.
 
-**Type**: `TargetAllocation[]` — `{ category: AssetCategory; targetPercent: number }[]`
-
-Used by:
-- Dashboard → Category Analysis Card (deviation visualization) / 카테고리 편차 시각화
-- Dashboard → Rebalance Card (buy/sell suggestions) / 리밸런싱 매수·매도 제안
-
-### Google Drive Backup
+### Google Drive Backup & Restore
 
 **Store**: `useGoogleDriveStore`
 **Hook**: `useGoogleDrive`
 
-Optional integration to sync/backup localStorage data to a file in the user's personal Google Drive.
+Optional integration to backup and sync localStorage data to the user's personal Google Drive.
 
-localStorage 데이터를 사용자 개인 Google Drive의 파일로 동기화·백업하는 선택적 연동입니다.
+localStorage 데이터를 사용자 개인 Google Drive의 비공개 앱 데이터 폴더로 수동/자동 백업 및 복원하는 클라우드 연동 기능입니다.
 
-- Auth via Google OAuth (client-side, no server involved). / Google OAuth 인증 (클라이언트 전용, 서버 없음).
-- Backup file stored in the user's own Drive folder. / 백업 파일은 사용자 본인의 Drive 폴더에 저장됩니다.
-- To delete the backup: revoke app access at `myaccount.google.com/permissions`. / 백업 삭제: 해당 페이지에서 앱 접근 권한을 해제하면 Drive 백업 파일도 삭제됩니다.
+- Auth via Google OAuth (client-side, zero-knowledge serverless). / Google OAuth 인증 (클라이언트 전용).
+- Backup file stored in the user's own Drive folder. / 백업 파일은 사용자 본인의 Google Drive 폴더에 저장됩니다.
+- To delete the backup: revoke app access at `myaccount.google.com/permissions`. / 백업 삭제: 해당 페이지에서 앱 접근 권한을 해제할 수 있습니다.
 
-### Data Reset
+### Local Data Reset
 
 Clears all assets and settings from localStorage after a confirmation dialog.
 Triggers `window.location.reload()` to reset the app to its initial state.
-Keys cleared: `STORAGE_KEYS.ASSETS`, `STORAGE_KEYS.SETTINGS`, `STORAGE_KEYS.BROKERS`, etc.
+Keys cleared: `STORAGE_KEYS.ASSETS`, `STORAGE_KEYS.SETTINGS`, `STORAGE_KEYS.BROKERS`, `STORAGE_KEYS.SNAPSHOTS`, etc.
 
-확인 다이얼로그 후 localStorage에서 모든 자산과 설정을 삭제합니다.
+확인 다이얼로그 후 localStorage에서 모든 자산, 브로커 계좌, 스냅샷 기록, 설정을 일괄 삭제합니다.
 `window.location.reload()`를 호출하여 앱을 초기 상태로 재설정합니다.
