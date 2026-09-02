@@ -52,12 +52,13 @@ export function buildGuruPrompt(
   const framework = GURU_FRAMEWORKS[guru.id];
 
   const taskSection = framework
-    ? `Apply YOUR specific analytical framework to this portfolio. Before concluding, include a brief step-by-step reasoning section evaluating macro conditions and weight gaps. When suggesting adjustments, take into account the investor's specific account types (e.g., tax-advantaged NISA/ISA vs taxable/regular accounts) if provided in the holdings breakdown.\n\n--- YOUR ANALYTICAL FRAMEWORK ---\n${framework.lens}`
+    ? `Apply YOUR specific analytical framework to this portfolio. Before concluding, include a brief step-by-step reasoning section evaluating macro conditions and weight gaps.
+When suggesting adjustments, evaluate Tax-Efficient Asset Location: consider the investor's specific account types (Tax-Free NISA/ISA/Roth vs Tax-Deferred Pension vs Taxable accounts) and advise whether high-growth or high-yield assets should be placed in tax-advantaged wrappers.\n\n--- YOUR ANALYTICAL FRAMEWORK ---\n${framework.lens}`
     : `Analyze it from YOUR perspective — as ${guruEnName} — and provide:\n\n` +
       `1. [Step-by-Step Reasoning] Before drawing conclusions, think step-by-step: evaluate macro conditions, weight gaps, and specific position performances\n` +
       `2. An honest assessment of the portfolio in your own voice and philosophy\n` +
       `3. What you like and dislike about the current holdings mix\n` +
-      `4. Specific recommendations for what to buy more, reduce, or rebalance — grounded in your investment principles (considering tax-advantaged NISA/ISA vs taxable accounts where applicable)\n` +
+      `4. Specific recommendations for what to buy more, reduce, or rebalance — grounded in your investment principles and Tax-Efficient Asset Location (advising which assets belong in Tax-Free NISA/ISA/Roth vs Tax-Deferred Pension vs Taxable accounts)\n` +
       `5. What the ideal top holdings should look like — suggest weight % for up to 10 positions in order of priority\n` +
       `6. Any key risks or opportunities considering today's macro environment`;
 

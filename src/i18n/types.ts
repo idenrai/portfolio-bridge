@@ -510,7 +510,15 @@ export interface Translations {
   history_title: string;
   history_value: string;
   history_cost: string;
+  history_pnl: string;
+  history_return: string;
   history_no_data: string;
+  history_range_1m: string;
+  history_range_3m: string;
+  history_range_6m: string;
+  history_range_1y: string;
+  history_range_all: string;
+  history_all_portfolio_badge: string;
 
   // ─── PnL Waterfall Chart ──────────────────────────────────────────────────
   pnl_chart_title: string;
@@ -518,6 +526,12 @@ export interface Translations {
   pnl_chart_profit: string;
   pnl_chart_loss: string;
   pnl_chart_top12: string;
+  pnl_sort_abs: string;
+  pnl_sort_profit: string;
+  pnl_sort_return: string;
+  pnl_show_top10: string;
+  pnl_show_all: (count: number) => string;
+  pnl_summary_win_loss: (win: number, loss: number) => string;
 
   // ─── Asset Form ────────────────────────────────────────────────────────────
   af_mode_stock: string;

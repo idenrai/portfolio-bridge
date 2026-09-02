@@ -112,13 +112,6 @@ export function BrokerManager() {
     setEditing(null);
   };
 
-  const handleInputKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && editing && editing.nickname.trim()) {
-      e.preventDefault();
-      handleSave();
-    }
-  };
-
   const currentCountryPresets = editing
     ? ACCOUNT_TYPES_BY_COUNTRY[editing.country] ?? []
     : [];
@@ -386,7 +379,6 @@ export function BrokerManager() {
               <Input
                 type="text"
                 value={editing.broker}
-                onKeyDown={handleInputKeyDown}
                 onChange={(e) =>
                   setEditing({ ...editing, broker: e.target.value })
                 }
@@ -405,7 +397,6 @@ export function BrokerManager() {
                   <Input
                     type="text"
                     value={editing.accountType}
-                    onKeyDown={handleInputKeyDown}
                     onChange={(e) =>
                       setEditing({ ...editing, accountType: e.target.value })
                     }
@@ -421,7 +412,6 @@ export function BrokerManager() {
                 type="text"
                 value={editing.nickname}
                 autoFocus={!editing.isCustomType}
-                onKeyDown={handleInputKeyDown}
                 onChange={(e) =>
                   setEditing({ ...editing, nickname: e.target.value })
                 }

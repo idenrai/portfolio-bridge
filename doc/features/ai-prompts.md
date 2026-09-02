@@ -21,11 +21,19 @@ AI 프롬프트 시스템입니다. 모든 프롬프트 생성 유틸리티는 `
 
 `src/pages/Gurus.tsx`의 "[구루 이름]에게 묻기" 버튼에 의해 실행됩니다.
 
-### Account Breakdown / 계좌별 분기 정보 주입
+### Account & Tax Allocation / 계좌 및 세무 배분 정보 주입
 
-When assets are held across multiple brokerage accounts (e.g., NISA vs taxable accounts), `buildHoldingRows` resolves each position to its constituent broker accounts using `assets` and `brokers` (`BrokerAccount[]`). Each holding line includes quantity and account details (e.g., `accounts: 500 in "SBI NISA" (NISA), 100 in "SBI 특정" (특정)`), enabling gurus to give tax-aware rebalancing advice.
+When brokerage accounts are registered (e.g., NISA Growth/Accumulation, ISA, iDeCo, Pension Savings, IRP, Taxable Brokerage), `buildPortfolioDataBlock` automatically creates an `--- ALLOCATION BY ACCOUNT & TAX STATUS ---` section detailing:
+- Macro tax-advantaged exposure (Tax-Free % vs Tax-Deferred Pension % vs Taxable %)
+- Exact value and weight per registered broker account
+- Standardized English tax category tags (`[Tax-Free]`, `[Tax-Deferred Pension]`, `[Taxable]`) appended to each holding line (e.g., `accounts: 500 in "SBI Main" (NISA Growth [Tax-Free]), 100 in "SBI 특정" (Specific/Withholding Tax [Taxable])`)
+- Explicit `Tax-Efficient Asset Location` task instructions prompting the Guru to advise whether high-growth or high-yield assets should be moved into tax-free wrappers to maximize compounding.
 
-여러 증권 계좌(예: NISA 비과세 계좌 vs 특정 과세 계좌)에 자산이 분산되어 있는 경우, `buildHoldingRows`에서 `assets`와 `brokers`(`BrokerAccount[]`)를 매핑하여 각 종목 라인에 계좌별 수량과 계좌 유형을 표기합니다. 이를 통해 구루 AI가 세제 혜택 계좌와 과세 계좌를 구분한 실질적 리밸런싱 조언을 제공할 수 있습니다.
+등록된 증권 계좌(예: NISA 성장/적립, ISA, iDeCo, 연금저축, IRP, 일반과세 계좌 등)가 있는 경우, `buildPortfolioDataBlock`에서 `--- ALLOCATION BY ACCOUNT & TAX STATUS ---` 섹션을 자동 생성하여 다음 정보를 주입합니다:
+- 거시적 절세 자산 배분 비중 (비과세 % vs 과세이연 연금 % vs 일반과세 %)
+- 등록된 각 증권 계좌별 평가액 및 포트폴리오 내 비중
+- 종목별 행에 표준 영문 세무 태그(`[Tax-Free]`, `[Tax-Deferred Pension]`, `[Taxable]`) 자동 부착 (예: `accounts: 500 in "SBI Main" (NISA Growth [Tax-Free]), 100 in "SBI 특정" (Specific/Withholding Tax [Taxable])`)
+- 구루의 분석 지침(TASK)에 세무 효율적 자산 배치(`Tax-Efficient Asset Location`) 평가 지침을 명시하여 고수익/고배당 자산의 비과세 계좌 최적 배치를 조언하도록 유도합니다.
 
 ### Prompt Structure
 

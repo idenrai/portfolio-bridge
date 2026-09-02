@@ -129,7 +129,7 @@ Enhanced UI/UX Features:
 - **Dialog Top-Layer & Fixed Positioning**: `CustomSelect` dynamically mounts to the parent `<dialog>` when inside a modal and utilizes `fixed` viewport coordinates to prevent clipping.
 - **Inline Safe Deletion**: Replaces browser-native popups with an in-table confirmation banner (`[ Confirm | Cancel ]`).
 - **Smart Nickname Suggestion**: Dynamically updates the placeholder (e.g., `e.g. SBI Securities NISA Growth`) based on the selected institution and account type.
-- **Keyboard Submission**: Supports pressing `Enter` to immediately save new or edited accounts.
+- **IME-Safe Form Submission**: Prevents accidental premature form submission during Japanese/CJK IME character selection, requiring explicit button submission.
 
 사용자는 여러 국가(한국, 일본, 미국, 유럽, 기타)의 증권 계좌를 등록하고 관리할 수 있습니다.
 계좌 추가/수정 시 국가별 계좌 종류 프리셋(`ACCOUNT_TYPES_BY_COUNTRY`)이 `CustomSelect`로 제공됩니다:
