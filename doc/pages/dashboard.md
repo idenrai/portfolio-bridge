@@ -119,19 +119,19 @@ Automatically generated alerts. Each alert can be individually dismissed (persis
 | FX overexposure / 환 노출 초과 | Foreign currency > 40% of portfolio |
 | Category deviation / 카테고리 편차 | Any category deviates > 10 %p from target |
 
-### P&L Waterfall Chart (`PnLWaterfallChart.tsx`)
+### P&L Ranked Bar-List Widget (`PnLWaterfallChart.tsx`)
 
-Waterfall chart showing P&L contribution by holding, sorted by impact. Lazy loaded with `ChartSkeleton` fallback.
+Modern fintech-styled bidirectional ranked bar-list widget visualizing profit and loss by aggregated holding (using `summary.holdings`). Features 0% text truncation with a 2-tier asset metadata display (Name + Market / Ticker / Asset Type), a zero-line centered bidirectional gauge (Loss in blue on left, Gain in red on right), tabular right-aligned P&L amount and return percentages, interactive sort controls (`By Impact`, `By Gain`, `By Return`), and a `Top 10 / Show All` item toggle. Synchronizes seamlessly with the top Filter Bar. Lazy loaded with `ChartSkeleton` fallback.
 
-보유 종목별 손익 기여도를 영향도 순으로 정렬한 폭포수 차트입니다. `ChartSkeleton` 스켈레톤 UI를 통해 지연 로딩됩니다.
+보유 종목별 손익을 시각화하는 모던 핀테크 스타일의 양방향 게이지 바 리스트 위젯입니다 (`summary.holdings` 기반). 2열 종목 메타데이터(이름 + 시장/티커/자산유형)를 통해 텍스트 잘림을 완전히 해소하고, 중앙 제로 기준선 중심의 양방향 게이지(좌측 파란색 손실, 우측 빨간색 수익)와 우측 표 형식의 손익/수익률 컬럼을 제공합니다. 인터랙티브 정렬 세그먼트(`절댓값순`, `수익순`, `수익률순`) 및 `상위 10개 / 전체 보기` 토글을 지원하며, 상단 필터 바와 완벽하게 연동됩니다. `ChartSkeleton` 스켈레톤 UI를 통해 지연 로딩됩니다.
 
 ### Portfolio History Chart (`PortfolioHistoryChart.tsx`)
 
-Line chart of portfolio value over time. Lazy loaded with `ChartSkeleton` fallback.
-Data comes from `useSnapshotStore` — snapshots are saved periodically.
+Area chart of portfolio value and cost basis over time with interactive time range filtering (`1M`, `3M`, `6M`, `1Y`, `ALL`). Displays real-time period performance (value change and return percentage) in the header. Features a rich dark-themed custom tooltip providing detailed breakdown (Value, Cost Basis, Profit/Loss, and Return %) and an "All Portfolio Basis" badge. Lazy loaded with `ChartSkeleton` fallback.
+Data comes from `useSnapshotStore` — daily snapshots saved automatically via `usePortfolioSnapshot`.
 
-시간에 따른 포트폴리오 가치 변화 라인 차트입니다. `ChartSkeleton` 스켈레톤 UI를 통해 지연 로딩됩니다.
-데이터는 `useSnapshotStore`에서 주기적으로 저장된 스냅샷을 사용합니다.
+시간에 따른 포트폴리오 평가액 및 매입원가 추이를 인터랙티브 기간 필터(`1M`, `3M`, `6M`, `1Y`, `ALL`)와 함께 제공하는 영역 차트입니다. 카드 헤더에 선택된 기간 동안의 자산 변동액 및 수익률 변동(%) 미니 KPI를 실시간 표시합니다. 다크 테마 커스텀 툴팁(평가액, 원가, 평가손익, 수익률 4종 지표) 및 "전체 포트폴리오 기준" 뱃지를 제공하며, `ChartSkeleton` 스켈레톤 UI를 통해 지연 로딩됩니다.
+데이터는 `useSnapshotStore`에서 `usePortfolioSnapshot` 훅을 통해 일일 단위로 자동 기록된 스냅샷을 사용합니다.
 
 
 ### AI Analysis Banner
