@@ -1,6 +1,10 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from "vitest";
-import { buildHoldingRows, buildPortfolioDataBlock } from "@/utils/ai/promptHelpers";
+import {
+  buildHoldingRows,
+  buildPortfolioDataBlock,
+  getAccountTypePromptInfo,
+} from "@/utils/ai/promptHelpers";
 import { buildGuruPrompt } from "@/utils/ai/buildGuruPrompt";
 import { GURU_PROFILES } from "@/utils/gurus";
 import type { Asset, BrokerAccount, PortfolioSummary } from "@/types";
@@ -162,16 +166,16 @@ describe("AI prompt account breakdown helpers", () => {
     ],
   };
 
-  it("builds multi-account and single-account breakdown in buildHoldingRows", () => {
+  it("builds multi-account and single-account breakdown in buildHoldingRows with English tax labels", () => {
     const { rows } = buildHoldingRows(mockSummary, mockAssets, mockBrokers);
 
     // Sanrio: 2개 계좌에 분산 (500 in SBI NISA, 100 in SBI 특정)
     expect(rows).toContain(
-      'accounts: 500 in "SBI NISA" (NISA), 100 in "SBI 특정" (특정)',
+      'accounts: 500 in "SBI NISA" (NISA [Tax-Free]), 100 in "SBI 특정" (Specific/Withholding Tax [Taxable])',
     );
 
     // 삼성전자: 1개 계좌 (50 in 미래 ISA)
-    expect(rows).toContain('account: 50 in "미래 ISA" (ISA)');
+    expect(rows).toContain('account: 50 in "미래 ISA" (ISA [Tax-Free])');
 
     // Apple: 계좌 미지정
     const appleLine = rows.split("\n").find((l) => l.includes("Apple Inc."));
@@ -179,7 +183,7 @@ describe("AI prompt account breakdown helpers", () => {
     expect(appleLine).not.toContain("account");
   });
 
-  it("includes account breakdown in buildPortfolioDataBlock", () => {
+  it("includes account tax allocation overview and holding breakdown in buildPortfolioDataBlock", () => {
     const block = buildPortfolioDataBlock(
       mockSummary,
       mockAssets,
@@ -190,13 +194,21 @@ describe("AI prompt account breakdown helpers", () => {
       mockBrokers,
     );
 
+    // 세무 배분 요약 블록 확인
+    expect(block).toContain("--- ALLOCATION BY ACCOUNT & TAX STATUS ---");
+    expect(block).toContain("Tax-Advantaged Total:");
+    expect(block).toContain("Tax-Free (e.g., NISA, ISA, Roth):");
+    expect(block).toContain("Taxable Accounts (Standard / Specific):");
+    expect(block).toContain('"SBI NISA" (JP: NISA [Tax-Free])');
+
+    // 종목별 행 확인
     expect(block).toContain(
-      'accounts: 500 in "SBI NISA" (NISA), 100 in "SBI 특정" (특정)',
+      'accounts: 500 in "SBI NISA" (NISA [Tax-Free]), 100 in "SBI 특정" (Specific/Withholding Tax [Taxable])',
     );
-    expect(block).toContain('account: 50 in "미래 ISA" (ISA)');
+    expect(block).toContain('account: 50 in "미래 ISA" (ISA [Tax-Free])');
   });
 
-  it("includes account breakdown and tax-advantaged guidelines in buildGuruPrompt", () => {
+  it("includes account breakdown and tax-efficient asset location guidelines in buildGuruPrompt", () => {
     const buffett = GURU_PROFILES.find((g) => g.id === "buffett")!;
     const prompt = buildGuruPrompt(
       buffett,
@@ -211,8 +223,67 @@ describe("AI prompt account breakdown helpers", () => {
     );
 
     expect(prompt).toContain(
-      'accounts: 500 in "SBI NISA" (NISA), 100 in "SBI 특정" (특정)',
+      'accounts: 500 in "SBI NISA" (NISA [Tax-Free]), 100 in "SBI 특정" (Specific/Withholding Tax [Taxable])',
     );
-    expect(prompt).toContain("NISA/ISA");
+    expect(prompt).toContain("Tax-Efficient Asset Location");
+    expect(prompt).toContain("ALLOCATION BY ACCOUNT & TAX STATUS");
+  });
+
+  it("correctly categorizes and translates various account types in getAccountTypePromptInfo", () => {
+    // JP
+    expect(getAccountTypePromptInfo("NISA (성장)")).toEqual({
+      labelEn: "NISA Growth",
+      category: "tax_free",
+      categoryTag: "[Tax-Free]",
+    });
+    expect(getAccountTypePromptInfo("NISA (적립)")).toEqual({
+      labelEn: "NISA Accumulation",
+      category: "tax_free",
+      categoryTag: "[Tax-Free]",
+    });
+    expect(getAccountTypePromptInfo("特定")).toEqual({
+      labelEn: "Specific/Withholding Tax",
+      category: "taxable",
+      categoryTag: "[Taxable]",
+    });
+    expect(getAccountTypePromptInfo("iDeCo")).toEqual({
+      labelEn: "iDeCo Pension",
+      category: "pension",
+      categoryTag: "[Tax-Deferred Pension]",
+    });
+
+    // KR
+    expect(getAccountTypePromptInfo("ISA")).toEqual({
+      labelEn: "ISA",
+      category: "tax_free",
+      categoryTag: "[Tax-Free]",
+    });
+    expect(getAccountTypePromptInfo("연금저축")).toEqual({
+      labelEn: "Pension Savings",
+      category: "pension",
+      categoryTag: "[Tax-Deferred Pension]",
+    });
+    expect(getAccountTypePromptInfo("IRP")).toEqual({
+      labelEn: "IRP Retirement",
+      category: "pension",
+      categoryTag: "[Tax-Deferred Pension]",
+    });
+    expect(getAccountTypePromptInfo("일반위탁")).toEqual({
+      labelEn: "Standard Brokerage",
+      category: "taxable",
+      categoryTag: "[Taxable]",
+    });
+
+    // US
+    expect(getAccountTypePromptInfo("Roth IRA")).toEqual({
+      labelEn: "Roth IRA",
+      category: "tax_free",
+      categoryTag: "[Tax-Free]",
+    });
+    expect(getAccountTypePromptInfo("401(k)")).toEqual({
+      labelEn: "401(k) Pension",
+      category: "pension",
+      categoryTag: "[Tax-Deferred Pension]",
+    });
   });
 });
