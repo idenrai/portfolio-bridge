@@ -1,84 +1,70 @@
 import { test, expect } from '@playwright/test';
+import { setupTestPortfolio } from './helpers/mockStorage';
 
 test('verifies asset visibility and guru consultation scope', async ({ page }) => {
-  await page.addInitScript(() => {
-    localStorage.setItem(
-      'portfolio-bridge-assets',
-      JSON.stringify({
-        state: {
-          assets: [
-            {
-              id: 'sample-1',
-              name: 'Apple Inc.',
-              ticker: 'AAPL',
-              type: 'stock',
-              market: 'US',
-              currency: 'USD',
-              quantity: 10,
-              avgBuyPrice: 150,
-              currentPrice: 180,
-              categories: ['growth'],
-              visibility: 'all',
-              createdAt: '2026-01-01T00:00:00Z',
-              updatedAt: '2026-01-01T00:00:00Z',
-            },
-            {
-              id: 'sample-2',
-              name: 'Gold ETF',
-              ticker: 'GLD',
-              type: 'etf',
-              market: 'US',
-              currency: 'USD',
-              quantity: 5,
-              avgBuyPrice: 180,
-              currentPrice: 200,
-              categories: ['commodity'],
-              visibility: 'dashboard_only',
-              createdAt: '2026-01-01T00:00:00Z',
-              updatedAt: '2026-01-01T00:00:00Z',
-            },
-            {
-              id: 'sample-3',
-              name: 'Berkshire Hathaway',
-              ticker: 'BRK-B',
-              type: 'stock',
-              market: 'US',
-              currency: 'USD',
-              quantity: 2,
-              avgBuyPrice: 300,
-              currentPrice: 350,
-              categories: ['value'],
-              visibility: 'guru_only',
-              createdAt: '2026-01-01T00:00:00Z',
-              updatedAt: '2026-01-01T00:00:00Z',
-            },
-            {
-              id: 'sample-4',
-              name: 'Secret Coin',
-              ticker: 'BTC',
-              type: 'crypto',
-              market: 'OTHER',
-              currency: 'USD',
-              quantity: 1,
-              avgBuyPrice: 50000,
-              currentPrice: 60000,
-              categories: ['crypto'],
-              visibility: 'hidden',
-              createdAt: '2026-01-01T00:00:00Z',
-              updatedAt: '2026-01-01T00:00:00Z',
-            },
-          ],
-        },
-        version: 0,
-      })
-    );
-    localStorage.setItem(
-      'portfolio-bridge-lang',
-      JSON.stringify({
-        state: { lang: 'ko' },
-        version: 0,
-      })
-    );
+  await setupTestPortfolio(page, {
+    assets: [
+      {
+        id: 'sample-1',
+        name: 'Apple Inc.',
+        ticker: 'AAPL',
+        type: 'stock',
+        market: 'US',
+        currency: 'USD',
+        quantity: 10,
+        avgBuyPrice: 150,
+        currentPrice: 180,
+        categories: ['growth'],
+        visibility: 'all',
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+      {
+        id: 'sample-2',
+        name: 'Gold ETF',
+        ticker: 'GLD',
+        type: 'etf',
+        market: 'US',
+        currency: 'USD',
+        quantity: 5,
+        avgBuyPrice: 180,
+        currentPrice: 200,
+        categories: ['commodity'],
+        visibility: 'dashboard_only',
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+      {
+        id: 'sample-3',
+        name: 'Berkshire Hathaway',
+        ticker: 'BRK-B',
+        type: 'stock',
+        market: 'US',
+        currency: 'USD',
+        quantity: 2,
+        avgBuyPrice: 300,
+        currentPrice: 350,
+        categories: ['value'],
+        visibility: 'guru_only',
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+      {
+        id: 'sample-4',
+        name: 'Secret Coin',
+        ticker: 'BTC',
+        type: 'crypto',
+        market: 'OTHER',
+        currency: 'USD',
+        quantity: 1,
+        avgBuyPrice: 50000,
+        currentPrice: 60000,
+        categories: ['crypto'],
+        visibility: 'hidden',
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+    ],
   });
 
   // 1. Visit dashboard
