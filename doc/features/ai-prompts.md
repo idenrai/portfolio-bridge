@@ -7,10 +7,14 @@ AI 프롬프트 시스템입니다. 모든 프롬프트 생성 유틸리티는 `
 | File | Purpose |
 | --- | --- |
 | `buildGuruPrompt.ts` | Initial full portfolio review in a guru's persona / 구루 페르소나 첫 번째 전체 리뷰 |
+| `buildCustomGuruPrompt.ts` | Personalized AI mentor review based on custom persona & target benchmark / 커스텀 구루 페르소나 및 목표 배분 기반 맞춤 리뷰 |
 | `buildGuruFollowUpPrompt.ts` | Delta-only follow-up review / 변경 사항 전용 팔로우업 리뷰 |
 | `buildInsightPrompt.ts` | Generic portfolio analysis (no guru persona) / 구루 없는 일반 포트폴리오 분석 |
 | `guruFrameworks.ts` | Per-guru analytical lens and output format / 구루별 분석 기준 및 출력 포맷 |
-| `promptHelpers.ts` | Shared utility functions and label maps / 공유 유틸리티 함수 및 레이블 맵 |
+| `promptFormatters.ts` | Category/market label maps, base currency formatting, sign helper / 라벨 매핑 및 통화 포맷팅 |
+| `promptAccountBreakdown.ts` | Account categorization, tax wrappers, multi-account holding breakdown / 계좌 분류, 세무 래퍼, 복수 계좌 종목 분기 |
+| `promptHoldings.ts` | Holding table rows, portfolio data block assembly / 보유 종목 행 포맷 및 데이터 블록 조립 |
+| `promptHelpers.ts` | Facade re-export barrel maintaining 100% backward compatibility / 100% 하위 호환성을 유지하는 파사드 배럴 |
 | `aiClassification.ts` | Asset auto-classification prompt / 자산 자동 카테고리 분류 프롬프트 |
 
 ## buildGuruPrompt
@@ -91,6 +95,25 @@ to prevent free-text input from influencing prompt behavior (prompt injection pr
 
 - The prompt always requests a response in `LANG_NAMES[lang]` (active UI language). / 프롬프트는 항상 현재 UI 언어(`LANG_NAMES[lang]`)로 응답을 요청합니다.
 - Philosophy text (`philosophyEn`) is always English for cross-language consistency. / 철학 텍스트는 언어 간 일관성을 위해 항상 영어입니다.
+
+## buildCustomGuruPrompt
+
+**Entry point**: `buildCustomGuruPrompt(config, summary, assets, targets, lang, baseCurrency, rates, profile?, brokers?)`
+
+**Triggered by**: "Ask [Custom Guru]" button in `src/pages/Gurus.tsx` when the user-defined custom guru is selected.
+
+`src/pages/Gurus.tsx`에서 유저가 정의한 커스텀 구루가 선택되었을 때 실행됩니다.
+
+- **Persona Customization / 페르소나 맞춤화**:
+  - Injects risk stance (`conservative`, `balanced`, `aggressive`).
+  - Injects strategy focus (`dividend_cashflow`, `tech_growth`, `deep_value`, `all_weather`, `quant_momentum`).
+  - Injects coaching voice (`direct_unfiltered`, `supportive_mentor`, `analytical_quant`).
+  - Injects user's free-text investment philosophy if provided.
+- **Target Allocation Benchmark / 목표 배분 벤치마크**:
+  - Compares current holdings directly against the user's custom asset allocation targets configured in Settings.
+  - If no custom targets exist, prompts the AI to recommend an ideal allocation matching the selected strategy.
+- **Currency & Rates SSoT**: Defaults to `DEFAULT_RATES` from `@/types` to ensure uniform multi-currency conversion across KRW, USD, JPY, and EUR.
+- **Multi-Account & Tax Directive / 복수 계좌 세무 지침**: Instructs the AI to recognize positions split across tax wrappers (NISA, Taxable, Pension) and give precise account-level execution guidance.
 
 ## buildGuruFollowUpPrompt
 
