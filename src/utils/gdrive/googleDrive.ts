@@ -35,6 +35,8 @@ export interface DriveBackup {
   snapshots?: { date: string; totalValueKRW: number; totalCostKRW: number }[];
   /** 증권사/계좌 목록 */
   brokerAccounts?: unknown[];
+  /** 커스텀 구루 설정 */
+  customGuru?: unknown;
 }
 
 // ─── 파일 검색 ────────────────────────────────────────────────────────────────
