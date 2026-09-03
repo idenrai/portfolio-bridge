@@ -2,7 +2,6 @@ import { lazy, Suspense, useState, useMemo } from "react";
 import { usePortfolio, usePortfolioSnapshot, useDataRefresh, useT } from "@/hooks";
 import {
   useAssetStore,
-  useSettingsStore,
   useLanguageStore,
   useBrokerStore,
 } from "@/stores";
@@ -48,7 +47,6 @@ export function DashboardPage() {
   const baseAssets = useAssetStore((s) => s.assets);
   const addAsset = useAssetStore((s) => s.addAsset);
   const brokers = useBrokerStore((s) => s.accounts);
-  const targets = useSettingsStore((s) => s.targetAllocations);
   const lang = useLanguageStore((s) => s.lang);
   const langLocale = LANG_LOCALES[lang];
   const t = useT();
@@ -219,7 +217,7 @@ export function DashboardPage() {
         
         {/* 우측 사이드바 영역 (요약 및 분석 위주) */}
         <div className="flex flex-col gap-4 lg:gap-6">
-          <InsightsPanel summary={summary} assets={assets} targets={targets} />
+          <InsightsPanel summary={summary} />
           <AllocationPieCharts summary={summary} />
           <CurrencyExposureCard summary={summary} />
           <CategoryAnalysisCard rebalancing={rebalancing} />

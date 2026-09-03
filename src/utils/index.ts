@@ -10,7 +10,15 @@ export {
 export { calculateFire, getTargetAmountFromExpense } from "./calc/fire";
 export type { FireCalculationParams, FireDataPoint, FireResult } from "./calc/fire";
 export { exportToCsv, parseCsv, downloadCsv } from "./csv";
-export { GURU_PROFILES, GURU_SINCE_YEARS } from "./gurus";
+export {
+  GURU_PROFILES,
+  GURU_SINCE_YEARS,
+  createCustomGuruProfile,
+  getGuruDetails,
+  type GuruFullDetails,
+} from "./gurus";
+export { GURU_METADATA, type GuruCategoryTag, type GuruMetadata } from "./guruMetadata";
+export { matchGurus, type GuruMatchAnswer, type GuruMatchResult } from "./guruMatcher";
 export { SAMPLE_ASSETS } from "./sampleData";
 export {
   searchTicker,
@@ -24,6 +32,7 @@ export { buildClassificationPrompt, parseAiResponse } from "./ai/aiClassificatio
 export { buildInsightPrompt } from "./ai/buildInsightPrompt";
 export { buildGuruPrompt } from "./ai/buildGuruPrompt";
 export { buildGuruFollowUpPrompt } from "./ai/buildGuruFollowUpPrompt";
+export { buildCustomGuruPrompt } from "./ai/buildCustomGuruPrompt";
 export {
   initGoogleDriveService,
   driveConnect,
