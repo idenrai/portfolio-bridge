@@ -204,6 +204,14 @@ export interface Translations {
   guru_ai_followup_new_session: string;
   guru_ai_followup_new_session_confirm: string;
   guru_ai_session_saved: string;
+  guru_ai_scope_title: string;
+  guru_ai_scope_desc: string;
+  guru_ai_scope_count: (selected: number, total: number) => string;
+  guru_ai_scope_reset: string;
+  guru_ai_scope_select_all: string;
+  guru_ai_scope_deselect_all: string;
+  guru_ai_scope_empty_warning: string;
+  guru_all_scoped_out_notice: string;
   guru_name_buffett: string;
   guru_name_munger: string;
   guru_name_lynch: string;
@@ -499,6 +507,8 @@ export interface Translations {
   at_filter_count: (shown: number, total: number) => string;
   at_filter_no_result: string;
   at_col_ticker: string;
+  at_col_visibility: string;
+  at_filter_all_visibility: string;
   at_filter_all_account: string;
   filter_select_all: string;
   filter_clear_all: string;
@@ -584,6 +594,8 @@ export interface Translations {
   /** 계좌 선택 셀렉트박스 */
   af_account_label: string;
   af_account_none: string;
+  af_visibility_label: string;
+  af_visibility_help: string;
 
   // ─── Broker Account Manager ───────────────────────────────────────────────
   broker_manage_btn: string;
@@ -682,4 +694,6 @@ export interface Translations {
   category_labels: Record<string, string>;
   asset_type_labels: Record<string, string>;
   market_labels: Record<string, string>;
+  visibility_labels: Record<string, string>;
+  visibility_descriptions: Record<string, string>;
 }

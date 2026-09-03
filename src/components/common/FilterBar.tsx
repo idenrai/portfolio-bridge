@@ -1,26 +1,35 @@
 import { memo } from "react";
 import { useT } from "@/hooks";
 import { MultiSelect } from "./MultiSelect";
-import type { Market, AssetType, AssetCategory, BrokerAccount } from "@/types";
+import type {
+  Market,
+  AssetType,
+  AssetCategory,
+  BrokerAccount,
+  AssetVisibility,
+} from "@/types";
 
 export interface FilterBarProps {
   markets: Market[];
   types: AssetType[];
   categoryOptions: [AssetCategory, string][];
   brokers: BrokerAccount[];
-  
+  visibilityOptions?: { value: AssetVisibility; label: string }[];
+
   filterMarkets: Market[];
   filterTypes: AssetType[];
   filterCategories: AssetCategory[];
   filterBrokerIds: string[];
-  
+  filterVisibilities?: AssetVisibility[];
+
   onFilterMarkets: (v: Market[]) => void;
   onFilterTypes: (v: AssetType[]) => void;
   onFilterCategories: (v: AssetCategory[]) => void;
   onFilterBrokerIds: (v: string[]) => void;
-  
+  onFilterVisibilities?: (v: AssetVisibility[]) => void;
+
   onClearFilters: () => void;
-  
+
   sortedCount?: number;
   allCount?: number;
   showCount?: boolean;
@@ -31,14 +40,17 @@ export const FilterBar = memo(function FilterBar({
   types,
   categoryOptions,
   brokers,
+  visibilityOptions,
   filterMarkets,
   filterTypes,
   filterCategories,
   filterBrokerIds,
+  filterVisibilities = [],
   onFilterMarkets,
   onFilterTypes,
   onFilterCategories,
   onFilterBrokerIds,
+  onFilterVisibilities,
   onClearFilters,
   sortedCount = 0,
   allCount = 0,
@@ -50,7 +62,8 @@ export const FilterBar = memo(function FilterBar({
     filterMarkets.length > 0 ||
     filterTypes.length > 0 ||
     filterCategories.length > 0 ||
-    filterBrokerIds.length > 0;
+    filterBrokerIds.length > 0 ||
+    filterVisibilities.length > 0;
 
   const marketOptions = markets.map((m) => ({ label: t.market_labels[m], value: m }));
   const typeOptions = types.map((tp) => ({ label: t.asset_type_labels[tp] ?? tp, value: tp }));
@@ -100,6 +113,18 @@ export const FilterBar = memo(function FilterBar({
         selectAllText={t.filter_select_all}
         clearText={t.filter_clear_all}
       />
+
+      {/* Visibility Filter */}
+      {visibilityOptions && onFilterVisibilities && (
+        <MultiSelect
+          options={visibilityOptions}
+          selectedValues={filterVisibilities}
+          onChange={(v) => onFilterVisibilities(v as AssetVisibility[])}
+          placeholder={t.at_filter_all_visibility}
+          selectAllText={t.filter_select_all}
+          clearText={t.filter_clear_all}
+        />
+      )}
 
       {/* Clear Button */}
       {hasFilter && (

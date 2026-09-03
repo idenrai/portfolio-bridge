@@ -4,6 +4,7 @@ import {
   type Asset,
   type AssetCategory,
   type PortfolioAsset,
+  type AssetVisibility,
 } from "@/types";
 import { useAssetStore, useBrokerStore } from "@/stores";
 import { useT, useExchangeRates } from "@/hooks";
@@ -68,6 +69,10 @@ export function AssetTable({
     updateAsset(id, { brokerId: brokerId || undefined });
   };
 
+  const handleVisibilityChange = (id: string, visibility: AssetVisibility) => {
+    updateAsset(id, { visibility });
+  };
+
   const hasBrokers = brokerAccounts.length > 0;
 
   const sorted = useMemo(() => {
@@ -114,7 +119,7 @@ export function AssetTable({
         </div>
       ) : (
         <div className="-mx-4 mt-2 overflow-x-auto px-4 md:-mx-5 md:px-5">
-          <table className="w-full min-w-225 text-sm">
+          <table className="w-full min-w-250 text-sm">
             <thead>
               <tr className="border-b border-zinc-800 text-left text-xs whitespace-nowrap text-zinc-500">
                 <th className="pb-2 font-medium select-none">
@@ -129,6 +134,7 @@ export function AssetTable({
                 </th>
                 <th className="pb-2 font-medium">{t.at_col_market}</th>
                 <th className="pb-2 font-medium">{t.at_col_category}</th>
+                <th className="pb-2 font-medium">{t.at_col_visibility}</th>
                 {hasBrokers && (
                   <th className="pb-2 font-medium">{t.af_account_label}</th>
                 )}
@@ -188,6 +194,7 @@ export function AssetTable({
                   onDelete={onDelete}
                   onCategoryChange={handleCategoryChange}
                   onBrokerChange={handleBrokerChange}
+                  onVisibilityChange={handleVisibilityChange}
                 />
               ))}
             </tbody>

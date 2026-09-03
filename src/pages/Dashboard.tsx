@@ -39,6 +39,7 @@ export function DashboardPage() {
       types: filterTypes,
       categories: filterCategories,
       brokerIds: filterBrokerIds,
+      scope: "dashboard" as const,
     }),
     [filterMarkets, filterTypes, filterCategories, filterBrokerIds]
   );
@@ -54,6 +55,32 @@ export function DashboardPage() {
 
   const { refreshAll, isLoading, isInitialLoading, lastUpdated } = useDataRefresh();
 
+  // 대시보드 노출 대상 기본 자산
+  const dashboardBaseAssets = useMemo(
+    () =>
+      baseAssets.filter(
+        (a) =>
+          (a.visibility ?? "all") === "all" || a.visibility === "dashboard_only",
+      ),
+    [baseAssets],
+  );
+
+  // 필터 바 옵션 추출 (대시보드 자산 기준)
+  const availableMarkets = useMemo(
+    () => Array.from(new Set(dashboardBaseAssets.map((a) => a.market))),
+    [dashboardBaseAssets],
+  );
+  const availableTypes = useMemo(
+    () => Array.from(new Set(dashboardBaseAssets.map((a) => a.type))),
+    [dashboardBaseAssets],
+  );
+  const availableCategories = useMemo(
+    () =>
+      Array.from(new Set(dashboardBaseAssets.flatMap((a) => a.categories))).map(
+        (cat) => [cat, t.category_labels[cat] ?? cat] as [AssetCategory, string],
+      ),
+    [dashboardBaseAssets, t.category_labels],
+  );
 
   const isFiltered = filterMarkets.length > 0 || filterTypes.length > 0 || filterCategories.length > 0 || filterBrokerIds.length > 0;
 
@@ -87,13 +114,16 @@ export function DashboardPage() {
         {/* 이용 안내 */}
         <div className="mt-8 w-full max-w-lg space-y-2">
           {[t.dash_notice_storage, t.dash_notice_csv, t.dash_notice_mobile].map(
-            (notice, i) => (
-              <p
-                key={i}
-                className="border border-zinc-800 bg-black px-4 py-2.5 text-left text-xs leading-relaxed text-zinc-500"
+            (notice, idx) => (
+              <div
+                key={idx}
+                className="flex items-start gap-2 border border-zinc-900 bg-zinc-950 p-2.5 text-xs text-zinc-400"
               >
-                {notice}
-              </p>
+                <span className="font-bold text-zinc-300 select-none">
+                  {`0${idx + 1}`}
+                </span>
+                <span>{notice}</span>
+              </div>
             ),
           )}
         </div>
@@ -112,13 +142,6 @@ export function DashboardPage() {
       </div>
     );
   }
-
-  // 필터 바 옵션 추출 (전체 자산 기준)
-  const availableMarkets = Array.from(new Set(baseAssets.map((a) => a.market)));
-  const availableTypes = Array.from(new Set(baseAssets.map((a) => a.type)));
-  const availableCategories = Array.from(
-    new Set(baseAssets.flatMap((a) => a.categories))
-  ).map((cat) => [cat, t.category_labels[cat] ?? cat] as [AssetCategory, string]);
 
   return (
     <div className="space-y-4 md:space-y-6">
@@ -168,7 +191,7 @@ export function DashboardPage() {
         onFilterBrokerIds={setFilterBrokerIds}
         onClearFilters={handleClearFilters}
         sortedCount={assets.length}
-        allCount={baseAssets.length}
+        allCount={dashboardBaseAssets.length}
         showCount={isFiltered}
       />
 

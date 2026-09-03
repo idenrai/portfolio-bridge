@@ -200,6 +200,14 @@ export const de: Translations = {
   guru_ai_followup_new_session_confirm:
     "Dies löscht den gespeicherten früheren Portfolio-Status und startet neu mit dem aktuellen Status. Fortfahren?",
   guru_ai_session_saved: "Aktueller Portfolio-Status wurde gespeichert.",
+  guru_ai_scope_title: "Beratungs-Assets auswählen",
+  guru_ai_scope_desc: "Wählen Sie Positionen aus, die in die Guru-Analyse einbezogen oder ausgeschlossen werden sollen.",
+  guru_ai_scope_count: (selected, total) => `${selected}/${total} ausgewählt`,
+  guru_ai_scope_reset: "Auf Standard zurücksetzen",
+  guru_ai_scope_select_all: "Alle auswählen",
+  guru_ai_scope_deselect_all: "Auswahl aufheben",
+  guru_ai_scope_empty_warning: "Bitte wählen Sie mindestens 1 Asset aus, um den Guru-Beratungsprompt zu generieren.",
+  guru_all_scoped_out_notice: "Alle Vermögenswerte sind derzeit auf 'Nur Dashboard' oder 'Ausgeblendet' gesetzt. Wählen Sie einen Guru und passen Sie die Positionen im oberen Banner an.",
   guru_name_buffett: "Warren Buffett",
   guru_name_munger: "Charlie Munger",
   guru_name_lynch: "Peter Lynch",
@@ -720,6 +728,8 @@ export const de: Translations = {
   at_filter_count: (shown, total) => `${shown} / ${total} Werte`,
   at_filter_no_result: "Keine Werte entsprechen den Filterkriterien.",
   at_col_ticker: "Ticker",
+  at_col_visibility: "Sichtbarkeit",
+  at_filter_all_visibility: "Alle Sichtbarkeiten",
   ticker_search_no_result: "Keine Ergebnisse gefunden.",
   ticker_search_error: "Suche fehlgeschlagen. Bitte überprüfen Sie Ihre Netzwerkverbindung.",
 
@@ -800,6 +810,8 @@ export const de: Translations = {
   af_current_price_placeholder: "Automatisch abrufen oder manuell eingeben",
   af_account_label: "Depot",
   af_account_none: "Kein Depot",
+  af_visibility_label: "Sichtbarkeit",
+  af_visibility_help: "Legen Sie fest, ob das Asset im Dashboard, in der Guru-KI-Beratung oder in beiden angezeigt wird.",
 
   broker_manage_btn: "Depots",
   broker_title: "Konto-Verwaltung",
@@ -919,5 +931,17 @@ export const de: Translations = {
     US: "USA",
     EU: "Europa",
     OTHER: "Sonstige",
+  },
+  visibility_labels: {
+    all: "Alle (Dashboard & Guru)",
+    dashboard_only: "Nur Dashboard",
+    guru_only: "Nur Guru",
+    hidden: "Ausgeblendet",
+  },
+  visibility_descriptions: {
+    all: "Sowohl im Dashboard als auch in der Guru-KI-Beratung enthalten.",
+    dashboard_only: "Wird nur im Dashboard angezeigt; aus der Guru-KI-Beratung ausgeschlossen.",
+    guru_only: "Nur in der Guru-KI-Beratung enthalten; vom Dashboard ausgeschlossen.",
+    hidden: "Sowohl vom Dashboard als auch von der Guru-KI-Beratung ausgeschlossen.",
   },
 };
