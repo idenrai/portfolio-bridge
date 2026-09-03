@@ -29,6 +29,13 @@ export type AssetType =
   | "real_estate" // 부동산
   | "other"; // 기타
 
+/** 자산 표시 범위 (노출 스코프) */
+export type AssetVisibility =
+  | "all" // 전체 표시 (대시보드 + 구루 상담)
+  | "dashboard_only" // 대시보드 전용 (구루 상담 제외)
+  | "guru_only" // 구루 전용 (대시보드 제외)
+  | "hidden"; // 숨김 (대시보드 및 구루 상담 모두 제외)
+
 /** 개별 자산 (보유 종목 한 건) */
 export interface Asset {
   id: string;
@@ -52,6 +59,8 @@ export interface Asset {
   categories: AssetCategory[];
   /** 연결된 증권사 계좌 ID */
   brokerId?: string;
+  /** 표시 범위 (기본값: 'all') */
+  visibility?: AssetVisibility;
   /** 메모 */
   memo?: string;
   /** 생성일 */

@@ -5,6 +5,7 @@ import type {
   AssetType,
   CurrencyCode,
   Market,
+  AssetVisibility,
 } from "@/types";
 
 const CSV_HEADERS = [
@@ -18,6 +19,7 @@ const CSV_HEADERS = [
   "currentPrice",
   "categories",
   "memo",
+  "visibility",
 ] as const;
 
 /**
@@ -36,6 +38,7 @@ export function exportToCsv(assets: Asset[]): string {
       a.currentPrice,
       a.categories.join(";"),
       quote(a.memo ?? ""),
+      a.visibility ?? "all",
     ].join(","),
   );
   return [CSV_HEADERS.join(","), ...rows].join("\n");
@@ -50,6 +53,12 @@ export function parseCsv(csv: string): AssetFormData[] {
 
   return lines.slice(1).map((line) => {
     const cols = splitCsvLine(line);
+    const rawVis = cols[10]?.trim() as AssetVisibility | undefined;
+    const visibility: AssetVisibility =
+      rawVis === "dashboard_only" || rawVis === "guru_only" || rawVis === "hidden"
+        ? rawVis
+        : "all";
+
     return {
       name: cols[0] ?? "",
       ticker: cols[1] || undefined,
@@ -63,6 +72,7 @@ export function parseCsv(csv: string): AssetFormData[] {
         ? (cols[8].split(";").filter(Boolean) as AssetCategory[])
         : [],
       memo: cols[9] || undefined,
+      visibility,
     };
   });
 }
