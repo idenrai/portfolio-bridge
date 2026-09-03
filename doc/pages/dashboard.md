@@ -10,13 +10,13 @@
 
 ## Data Flow
 
-`usePortfolio()` aggregates all portfolio calculation logic (totals, allocations, holdings, P&L, FX exposure). `usePortfolioSnapshot()` automatically saves daily portfolio snapshots while guarding against filtered states or initial loading.
+`usePortfolio()` aggregates all portfolio calculation logic (totals, allocations, holdings, P&L, FX exposure). On the Dashboard, it is invoked with `scope: "dashboard"`, including only assets with visibility set to `all` or `dashboard_only` (excluding `guru_only` and `hidden` assets). `usePortfolioSnapshot()` automatically saves daily portfolio snapshots while guarding against filtered states or initial loading.
 
-`usePortfolio()`는 총액, 배분, 보유 종목, 손익, 환 노출 등 모든 포트폴리오 계산 로직을 집계합니다. `usePortfolioSnapshot()`은 필터가 적용된 상태나 초기 로딩 중 스냅샷이 오염되지 않도록 보호하며 일일 포트폴리오 스냅샷을 자동 저장합니다.
+`usePortfolio()`는 총액, 배분, 보유 종목, 손익, 환 노출 등 모든 포트폴리오 계산 로직을 집계합니다. 대시보드에서는 `scope: "dashboard"`로 호출되어 표시 범위가 `전체(all)` 또는 `대시보드 전용(dashboard_only)`인 자산만 포함하며(`구루 전용` 및 `숨김` 자산 제외), `usePortfolioSnapshot()`은 필터가 적용된 상태나 초기 로딩 중 스냅샷이 오염되지 않도록 보호하며 일일 포트폴리오 스냅샷을 자동 저장합니다.
 
 ```text
 useAssetStore (assets)
-  → usePortfolio() hook
+  → usePortfolio({ scope: "dashboard" }) hook
   → PortfolioSummary
   → All dashboard components
   → usePortfolioSnapshot() (daily snapshot persistence)
@@ -26,9 +26,9 @@ useAssetStore (assets)
 
 ### Filter Bar (`FilterBar.tsx`)
 
-A bar that allows filtering the dashboard data by market, asset type, category, and broker/account. Displays live filtered count with accessibility announcements.
+A bar that allows filtering the dashboard data by market, asset type, category, broker/account, and visibility scope. Displays live filtered count with accessibility announcements.
 
-대시보드 데이터를 시장, 자산 유형, 카테고리, 계좌별로 다중 필터링할 수 있는 바 컴포넌트입니다. 스크린리더 접근성을 지원하는 실시간 필터링 개수 표시를 제공합니다.
+대시보드 데이터를 시장, 자산 유형, 카테고리, 계좌, 표시 범위별로 다중 필터링할 수 있는 바 컴포넌트입니다. 스크린리더 접근성을 지원하는 실시간 필터링 개수 표시를 제공합니다.
 
 
 ### KPI Bar (`KpiBar.tsx`)

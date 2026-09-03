@@ -90,6 +90,20 @@ When the "Follow-up" prompt is copied, the session snapshot is updated to the cu
 
 See [../features/ai-prompts.md](../features/ai-prompts.md#buildgurufollowupprompt).
 
+### Consultation Holdings Selector / 상담 종목 선택 (`GuruAIPromptBanner.tsx`)
+
+- **Default Scoping / 기본 스코프**: Initialized via `usePortfolio({ scope: "guru" })`, automatically including assets with `all` and `guru_only` visibilities while excluding `dashboard_only` (e.g., gold, crypto) and `hidden` assets to prevent repetitive divestment advice from gurus.
+- **Dynamic Selection Accordion / 동적 선택 아코디언**: An accordion panel accessible via `[ 🎛️ Consultation Assets (X/Y) ]` allows users to dynamically check or uncheck individual positions for AI analysis without altering global visibility settings.
+- **Real-time Recalculation / 실시간 재연산**: Toggling holdings immediately recalculates the portfolio summary and allocations via `calculateSummary()`, updating both the generated AI prompt and the session snapshot.
+- **Quick Controls / 퀵 컨트롤**: Provides `Select All`, `Deselect All`, and `Reset to Default` actions.
+- **Empty Scope Handling / 빈 스코프 안내**: If a portfolio contains assets but all are set to `dashboard_only` or `hidden`, Gurus page displays an informational notice banner (`guru_all_scoped_out_notice`) encouraging manual asset selection rather than blocking navigation with a generic empty screen.
+
+- **기본 스코프**: `usePortfolio({ scope: "guru" })`를 통해 초기화되어 `전체(all)` 및 `구루 전용(guru_only)` 자산만 포함하고, `대시보드 전용`(예: 금, 암호화폐) 및 `숨김` 자산은 기본 배제하여 일률적인 매도 잔소리를 방지합니다.
+- **동적 종목 선택 아코디언**: 배너 상단의 `[ 🎛️ 상담 포함 종목 선택 (X/Y) ]` 버튼을 통해 전역 설정을 바꾸지 않고도 AI 상담에 포함할 종목을 실시간으로 체크/해제할 수 있습니다.
+- **실시간 재연산**: 종목 체크 상태 변경 시 `calculateSummary()`를 통해 로컬 요약치와 비중을 즉시 재계산하여 생성되는 AI 프롬프트와 세션 스냅샷에 실시간 반영합니다.
+- **퀵 컨트롤**: `전체 선택`, `전체 해제`, `기본값으로 복원` 단축 액션을 제공합니다.
+- **빈 스코프 안내**: 자산이 등록되어 있으나 모두 `대시보드 전용` 또는 `숨김`인 경우, 일반 빈 화면으로 차단하는 대신 페이지 상단에 안내 배너(`guru_all_scoped_out_notice`)를 띄워 수동 선택을 유도합니다.
+
 ### Session Management (`useGuruSessionStore`)
 
 - Stores one `GuruSessionSnapshot` per guru. / 구루당 하나의 `GuruSessionSnapshot`을 저장합니다.
