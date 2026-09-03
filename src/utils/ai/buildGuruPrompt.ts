@@ -4,6 +4,7 @@ import type {
   GuruProfile,
   BrokerAccount,
 } from "@/types";
+import { DEFAULT_RATES } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 import type { UserProfile } from "@/stores";
@@ -23,7 +24,7 @@ export function buildGuruPrompt(
   assets: Asset[],
   lang: Lang = "ko",
   baseCurrency: string = "KRW",
-  rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
+  rates: Record<string, number> = DEFAULT_RATES,
   philosophyEn: string = "",
   profile?: Partial<UserProfile>,
   brokers: BrokerAccount[] = [],
@@ -51,14 +52,18 @@ export function buildGuruPrompt(
 
   const framework = GURU_FRAMEWORKS[guru.id];
 
+  const multiAccountTaxDirective =
+    "IMPORTANT - MULTI-ACCOUNT & TAX-AWARE ADVICE: Several positions are split across multiple accounts (e.g. partially in Tax-Free NISA and partially in Taxable accounts) with different cost bases and returns. NEVER assume a split position is entirely in one account. When recommending buy, trim, or rebalance actions, explicitly specify WHICH account wrapper to transact in (e.g. prioritize selling from taxable accounts while preserving tax-sheltered compounding in NISA/tax-free accounts, or leveraging taxable accounts for tax-loss harvesting).";
+
   const taskSection = framework
     ? `Apply YOUR specific analytical framework to this portfolio. Before concluding, include a brief step-by-step reasoning section evaluating macro conditions and weight gaps.
-When suggesting adjustments, evaluate Tax-Efficient Asset Location: consider the investor's specific account types (Tax-Free NISA/ISA/Roth vs Tax-Deferred Pension vs Taxable accounts) and advise whether high-growth or high-yield assets should be placed in tax-advantaged wrappers.\n\n--- YOUR ANALYTICAL FRAMEWORK ---\n${framework.lens}`
+When suggesting adjustments, evaluate Tax-Efficient Asset Location: consider the investor's specific account types (Tax-Free NISA/ISA/Roth vs Tax-Deferred Pension vs Taxable accounts) and advise whether high-growth or high-yield assets should be placed in tax-advantaged wrappers.
+${multiAccountTaxDirective}\n\n--- YOUR ANALYTICAL FRAMEWORK ---\n${framework.lens}`
     : `Analyze it from YOUR perspective — as ${guruEnName} — and provide:\n\n` +
       `1. [Step-by-Step Reasoning] Before drawing conclusions, think step-by-step: evaluate macro conditions, weight gaps, and specific position performances\n` +
       `2. An honest assessment of the portfolio in your own voice and philosophy\n` +
       `3. What you like and dislike about the current holdings mix\n` +
-      `4. Specific recommendations for what to buy more, reduce, or rebalance — grounded in your investment principles and Tax-Efficient Asset Location (advising which assets belong in Tax-Free NISA/ISA/Roth vs Tax-Deferred Pension vs Taxable accounts)\n` +
+      `4. Specific recommendations for what to buy more, reduce, or rebalance — grounded in your investment principles and Tax-Efficient Asset Location. ${multiAccountTaxDirective}\n` +
       `5. What the ideal top holdings should look like — suggest weight % for up to 10 positions in order of priority\n` +
       `6. Any key risks or opportunities considering today's macro environment`;
 

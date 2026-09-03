@@ -139,7 +139,8 @@ export type GuruId =
   | "oneil"
   | "bogle"
   | "swensen"
-  | "taleb";
+  | "taleb"
+  | "custom";
 
 /** 투자 구루 프로필 */
 export interface GuruProfile {
