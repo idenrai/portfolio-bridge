@@ -21,12 +21,21 @@
 
 `KR` (Korea / 한국) · `JP` (Japan / 일본) · `US` (United States / 미국) · `EU` (Europe / 유럽) · `OTHER`
 
+### Asset Visibility (`AssetVisibility`)
+
+- `all`: Visible in both Dashboard and Guru consultation (Default). / 대시보드 및 구루 상담 모두에 표시 (기본값).
+- `dashboard_only`: Included in Dashboard KPI/analytics, but excluded from Guru consultation. / 대시보드에는 포함되나 구루 상담 대상에서는 제외.
+- `guru_only`: Included only in Guru consultation, hidden from main Dashboard. / 구루 상담에만 포함되고 대시보드에서는 숨김.
+- `hidden`: Hidden from both Dashboard and Guru consultation; retained in Asset Management. / 대시보드 및 구루 상담 모두에서 제외 (자산 관리에만 보관).
+
 ## Asset Table (`AssetTable.tsx`)
 
-Displays all registered assets with columns: Name, Market, Category, Qty, Avg Cost, Current Price, Value, P&L, Return.
+Displays all registered assets with columns: Name, Market, Category, Scope (Visibility), Qty, Avg Cost, Current Price, Value, P&L, Return.
+The Scope column features inline badge dropdowns with semantic tinting: Indigo (`all`), Emerald (`dashboard_only`), Purple (`guru_only`), and Zinc (`hidden`).
 Actions per row: Edit, Delete.
 
-등록된 모든 자산을 표시합니다. 컬럼: 종목명, 시장, 카테고리, 수량, 매입단가, 현재가, 평가액, 손익, 수익률.
+등록된 모든 자산을 표시합니다. 컬럼: 종목명, 시장, 카테고리, 표시 범위, 수량, 매입단가, 현재가, 평가액, 손익, 수익률.
+표시 범위 컬럼은 시맨틱 틴트가 적용된 인라인 배지 드롭다운(전체: 인디고, 대시보드 전용: 에메랄드, 구루 전용: 퍼플, 숨김: 징크)을 제공합니다.
 각 행의 액션: 수정, 삭제.
 
 ## Add Asset Flow
@@ -95,11 +104,15 @@ requesting JSON category assignments.
 2. A 5-row preview is displayed before confirmation. / 확인 전 5행 미리보기가 표시됩니다.
 3. On confirm, rows are parsed and added to `useAssetStore`. / 확인 시 행이 파싱되어 `useAssetStore`에 추가됩니다.
 
-Expected CSV columns: `name`, `ticker`, `type`, `market`, `currency`, `quantity`,
-`avgBuyPrice`, `currentPrice`, `category`.
+Expected CSV columns (11 columns): `name`, `ticker`, `type`, `market`, `currency`, `quantity`,
+`avgBuyPrice`, `currentPrice`, `category`, `memo`, `visibility`.
+Older 10-column CSV files without `visibility` default automatically to `all`.
 Implemented in `src/utils/csv.ts`.
 
-CSV 예상 컬럼: 위와 동일. `src/utils/csv.ts`에 구현되어 있습니다.
+CSV 예상 컬럼 (11개 컬럼): `name`, `ticker`, `type`, `market`, `currency`, `quantity`,
+`avgBuyPrice`, `currentPrice`, `category`, `memo`, `visibility`.
+`visibility` 컬럼이 없는 구버전 10개 컬럼 CSV 파일은 자동으로 `all`로 복원됩니다.
+`src/utils/csv.ts`에 구현되어 있습니다.
 
 ## CSV Export
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, Input, Label } from "@/components/common";
+import { Button, Input, Label, CustomSelect } from "@/components/common";
 import { useT } from "@/hooks";
-import type { Asset, AssetFormData } from "@/types";
+import type { Asset, AssetFormData, AssetVisibility } from "@/types";
 import { CURRENCY_SYMBOLS } from "@/types";
 
 export function EditForm({
@@ -15,8 +15,18 @@ export function EditForm({
   const [quantity, setQuantity] = useState(initial.quantity);
   const [avgBuyPrice, setAvgBuyPrice] = useState(initial.avgBuyPrice);
   const [currentPrice, setCurrentPrice] = useState(initial.currentPrice);
+  const [visibility, setVisibility] = useState<AssetVisibility>(
+    initial.visibility ?? "all",
+  );
   const sym = CURRENCY_SYMBOLS[initial.currency];
   const t = useT();
+
+  const VISIBILITY_OPTIONS: { value: AssetVisibility; label: string }[] = [
+    { value: "all", label: t.visibility_labels.all },
+    { value: "dashboard_only", label: t.visibility_labels.dashboard_only },
+    { value: "guru_only", label: t.visibility_labels.guru_only },
+    { value: "hidden", label: t.visibility_labels.hidden },
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +40,9 @@ export function EditForm({
       avgBuyPrice,
       currentPrice,
       categories: initial.categories,
-      brokerId: initial.brokerId });
+      brokerId: initial.brokerId,
+      visibility,
+    });
   };
 
   return (
@@ -100,6 +112,19 @@ export function EditForm({
         />
         <p className="mt-1.5 text-2xs leading-relaxed text-zinc-500">
           {t.af_current_price_help}
+        </p>
+      </div>
+
+      <div className="block">
+        <Label>{t.af_visibility_label}</Label>
+        <CustomSelect<AssetVisibility>
+          value={visibility}
+          onChange={(val) => setVisibility(val)}
+          options={VISIBILITY_OPTIONS}
+          ariaLabel={t.af_visibility_label}
+        />
+        <p className="mt-1.5 text-2xs leading-relaxed text-zinc-400">
+          {t.visibility_descriptions[visibility]}
         </p>
       </div>
 

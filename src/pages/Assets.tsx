@@ -13,10 +13,11 @@ import type {
   Market,
   AssetType,
   AssetCategory,
+  AssetVisibility,
 } from "@/types";
 
 export function AssetsPage() {
-  const { assets } = usePortfolio();
+  const { assets } = usePortfolio({ scope: "all" });
   const addAsset = useAssetStore((s) => s.addAsset);
   const updateAsset = useAssetStore((s) => s.updateAsset);
   const deleteAsset = useAssetStore((s) => s.deleteAsset);
@@ -37,6 +38,7 @@ export function AssetsPage() {
   const [filterTypes, setFilterTypes] = useState<AssetType[]>([]);
   const [filterCategories, setFilterCategories] = useState<AssetCategory[]>([]);
   const [filterBrokerIds, setFilterBrokerIds] = useState<string[]>([]);
+  const [filterVisibilities, setFilterVisibilities] = useState<AssetVisibility[]>([]);
   
   const [sortKey, setSortKey] = useState<"name" | "value" | "pnl" | "return">("value");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
@@ -54,13 +56,19 @@ export function AssetsPage() {
     .filter((a) => filterMarkets.length === 0 || filterMarkets.includes(a.market))
     .filter((a) => filterTypes.length === 0 || filterTypes.includes(a.type))
     .filter((a) => filterCategories.length === 0 || a.categories.some((c) => filterCategories.includes(c)))
-    .filter((a) => filterBrokerIds.length === 0 || (a.brokerId && filterBrokerIds.includes(a.brokerId)));
+    .filter((a) => filterBrokerIds.length === 0 || (a.brokerId && filterBrokerIds.includes(a.brokerId)))
+    .filter(
+      (a) =>
+        filterVisibilities.length === 0 ||
+        filterVisibilities.includes(a.visibility ?? "all"),
+    );
 
   const handleClearFilters = () => {
     setFilterMarkets([]);
     setFilterTypes([]);
     setFilterCategories([]);
     setFilterBrokerIds([]);
+    setFilterVisibilities([]);
   };
 
   const availableMarkets = Array.from(new Set(assets.map((a) => a.market)));
@@ -121,6 +129,13 @@ export function AssetsPage() {
     importPreview.forEach((data) => addAsset(data));
     setImportPreview(null);
   };
+
+  const visibilityOptions: { value: AssetVisibility; label: string }[] = [
+    { value: "all", label: t.visibility_labels.all },
+    { value: "dashboard_only", label: t.visibility_labels.dashboard_only },
+    { value: "guru_only", label: t.visibility_labels.guru_only },
+    { value: "hidden", label: t.visibility_labels.hidden },
+  ];
 
   return (
     <div className="space-y-4 md:space-y-6">
@@ -191,14 +206,17 @@ export function AssetsPage() {
           types={availableTypes}
           categoryOptions={availableCategories}
           brokers={brokers}
+          visibilityOptions={visibilityOptions}
           filterMarkets={filterMarkets}
           filterTypes={filterTypes}
           filterCategories={filterCategories}
           filterBrokerIds={filterBrokerIds}
+          filterVisibilities={filterVisibilities}
           onFilterMarkets={setFilterMarkets}
           onFilterTypes={setFilterTypes}
           onFilterCategories={setFilterCategories}
           onFilterBrokerIds={setFilterBrokerIds}
+          onFilterVisibilities={setFilterVisibilities}
           onClearFilters={handleClearFilters}
           sortedCount={filteredAssets.length}
           allCount={assets.length}

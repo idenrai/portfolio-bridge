@@ -7,6 +7,7 @@ import {
   CURRENCY_SYMBOLS,
   type BrokerAccount,
   type PortfolioAsset,
+  type AssetVisibility,
 } from "@/types";
 import {
   assetValue,
@@ -24,6 +25,7 @@ interface AssetTableRowProps {
   onDelete: (id: string) => void;
   onCategoryChange: (id: string, category: AssetCategory | "") => void;
   onBrokerChange: (id: string, brokerId: string) => void;
+  onVisibilityChange: (id: string, visibility: AssetVisibility) => void;
 }
 
 export function AssetTableRow({
@@ -35,6 +37,7 @@ export function AssetTableRow({
   onDelete,
   onCategoryChange,
   onBrokerChange,
+  onVisibilityChange,
 }: AssetTableRowProps) {
   const t = useT();
   const val = assetValue(asset);
@@ -83,6 +86,33 @@ export function AssetTableRow({
           ]}
           ariaLabel={t.at_col_category}
           className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-xs-plus tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
+        />
+      </td>
+      <td className="py-2.5 whitespace-nowrap">
+        <CustomSelect<AssetVisibility>
+          value={asset.visibility ?? "all"}
+          onChange={(val) => onVisibilityChange(asset.id, val)}
+          options={[
+            { value: "all", label: t.visibility_labels.all },
+            {
+              value: "dashboard_only",
+              label: t.visibility_labels.dashboard_only,
+            },
+            { value: "guru_only", label: t.visibility_labels.guru_only },
+            { value: "hidden", label: t.visibility_labels.hidden },
+          ]}
+          ariaLabel={t.at_col_visibility}
+          className={cn(
+            "flex h-6 min-w-24 cursor-pointer items-center justify-between gap-1 rounded-sm border px-1.5 py-0 text-xs-plus font-medium transition-colors focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none",
+            (asset.visibility ?? "all") === "all" &&
+              "border-indigo-500/30 bg-indigo-500/10 text-indigo-300 hover:border-indigo-500/50",
+            asset.visibility === "dashboard_only" &&
+              "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:border-emerald-500/50",
+            asset.visibility === "guru_only" &&
+              "border-purple-500/30 bg-purple-500/10 text-purple-300 hover:border-purple-500/50",
+            asset.visibility === "hidden" &&
+              "border-zinc-700/50 bg-zinc-800/40 text-zinc-500 hover:border-zinc-600",
+          )}
         />
       </td>
       {hasBrokers && (

@@ -15,8 +15,8 @@ Portfolio Bridge는 프라이버시 우선 원칙으로 설계된 다통화 포�
 | Feature | Description |
 | --- | --- |
 | Unified Dashboard | KPI bar, allocation charts, holdings table, rebalance suggestions, auto insights |
-| Asset Management | Yahoo Finance ticker search, manual entry, AI classification, CSV import/export |
-| Investment Gurus | 23 guru personas, ideal allocation comparison, 6 quantitative analyzers, AI prompt generation |
+| Asset Management | Yahoo Finance ticker search, manual entry, AI classification, CSV import/export, display scope |
+| Investment Gurus | 23 guru personas, ideal allocation comparison, 6 quantitative analyzers, AI prompt generation with dynamic asset scoping |
 | AI Portfolio Analysis | Structured prompts for ChatGPT / Claude / Gemini / Grok |
 | Auto Insights | Alerts for overweight, large losses, low cash, currency overexposure |
 | Multi-language | Korean / English / 日本語 / Deutsch with instant switch |
@@ -26,8 +26,8 @@ Portfolio Bridge는 프라이버시 우선 원칙으로 설계된 다통화 포�
 | 기능 | 설명 |
 | --- | --- |
 | 통합 대시보드 | KPI 바, 배분 차트, 보유 종목 테이블, 리밸런싱 제안, 자동 인사이트 |
-| 자산 관리 | Yahoo Finance 종목 검색, 수동 등록, AI 카테고리 분류, CSV 가져오기·내보내기 |
-| 투자 구루 | 23명의 구루 페르소나, 이상적 배분 비교, 6종 정량 채점기, AI 프롬프트 생성 |
+| 자산 관리 | Yahoo Finance 종목 검색, 수동 등록, AI 카테고리 분류, CSV 가져오기·내보내기, 표시 범위 설정 |
+| 투자 구루 | 23명의 구루 페르소나, 이상적 배분 비교, 6종 정량 채점기, 상담 종목 동적 선택 AI 프롬프트 생성 |
 | AI 포트폴리오 분석 | ChatGPT / Claude / Gemini / Grok에 바로 붙여넣을 구조화 프롬프트 |
 | 자동 인사이트 | 과대비중·큰 손실·현금 부족·환 노출 초과 자동 감지 경고 |
 | 다국어 | 한국어 / English / 日本語 / Deutsch 즉시 전환 |

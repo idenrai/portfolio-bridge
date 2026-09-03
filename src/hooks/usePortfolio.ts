@@ -4,13 +4,21 @@ import { calculateSummary, calculateRebalancing } from "@/utils";
 import { useT } from "./useT";
 import { useExchangeRates } from "./useExchangeRates";
 import { usePriceRefresh } from "./usePriceRefresh";
-import type { AssetCategory, PortfolioAsset, Market, AssetType } from "@/types";
+import type {
+  AssetCategory,
+  PortfolioAsset,
+  Market,
+  AssetType,
+  AssetVisibility,
+} from "@/types";
 
 export interface PortfolioFilters {
   markets?: Market[];
   types?: AssetType[];
   categories?: AssetCategory[];
   brokerIds?: string[];
+  visibilities?: AssetVisibility[];
+  scope?: "dashboard" | "guru" | "all";
 }
 
 /**
@@ -21,12 +29,46 @@ export function usePortfolio(filters?: PortfolioFilters) {
   const allBaseAssets = useAssetStore((s) => s.assets);
 
   const baseAssets = useMemo(() => {
-    if (!filters) return allBaseAssets;
     return allBaseAssets.filter((a) => {
-      if (filters.markets && filters.markets.length > 0 && !filters.markets.includes(a.market)) return false;
-      if (filters.types && filters.types.length > 0 && !filters.types.includes(a.type)) return false;
-      if (filters.categories && filters.categories.length > 0 && !a.categories.some((c) => filters.categories!.includes(c))) return false;
-      if (filters.brokerIds && filters.brokerIds.length > 0 && (!a.brokerId || !filters.brokerIds.includes(a.brokerId))) return false;
+      const vis = a.visibility ?? "all";
+
+      // 1. Visibility filter: 명시적인 visibilities 필터가 있으면 우선 적용하고, 없을 때만 scope 적용
+      if (filters?.visibilities && filters.visibilities.length > 0) {
+        if (!filters.visibilities.includes(vis)) return false;
+      } else {
+        const scope = filters?.scope ?? "dashboard";
+        if (scope === "dashboard" && vis !== "all" && vis !== "dashboard_only")
+          return false;
+        if (scope === "guru" && vis !== "all" && vis !== "guru_only")
+          return false;
+      }
+
+      // 2. Specific filters
+      if (!filters) return true;
+      if (
+        filters.markets &&
+        filters.markets.length > 0 &&
+        !filters.markets.includes(a.market)
+      )
+        return false;
+      if (
+        filters.types &&
+        filters.types.length > 0 &&
+        !filters.types.includes(a.type)
+      )
+        return false;
+      if (
+        filters.categories &&
+        filters.categories.length > 0 &&
+        !a.categories.some((c) => filters.categories!.includes(c))
+      )
+        return false;
+      if (
+        filters.brokerIds &&
+        filters.brokerIds.length > 0 &&
+        (!a.brokerId || !filters.brokerIds.includes(a.brokerId))
+      )
+        return false;
       return true;
     });
   }, [allBaseAssets, filters]);

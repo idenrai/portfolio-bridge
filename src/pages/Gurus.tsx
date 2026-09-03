@@ -1,4 +1,4 @@
-import { Lightbulb } from "lucide-react";
+import { Lightbulb, Info } from "lucide-react";
 import { useState, useMemo } from "react";
 
 import {
@@ -21,7 +21,8 @@ import type { GuruProfile } from "@/types";
 import { en } from "@/i18n";
 
 export function GurusPage() {
-  const { assets, summary } = usePortfolio();
+  const { assets, summary } = usePortfolio({ scope: "guru" });
+  const { assets: allAssets } = usePortfolio({ scope: "all" });
   const [selectedGuru, setSelectedGuru] = useState<GuruProfile | null>(null);
   const t = useT();
 
@@ -83,7 +84,7 @@ export function GurusPage() {
   const principles = localizedPhilosophy.split('\n').map(l => l.trim()).filter(Boolean);
   const quotes = localizedQuotes.split('\n').map(l => l.trim()).filter(Boolean);
 
-  if (assets.length === 0) {
+  if (allAssets.length === 0) {
     return (
       <div className="flex min-h-[40vh] flex-col items-center justify-center px-4 text-zinc-400 md:min-h-[60vh]">
         <Lightbulb className="mb-4 size-12 text-yellow-500/80 drop-shadow-lg" />
@@ -98,6 +99,13 @@ export function GurusPage() {
   return (
     <div className="space-y-4 md:space-y-6">
       <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.guru_title}</h1>
+
+      {allAssets.length > 0 && assets.length === 0 && (
+        <div className="flex items-center gap-2.5 rounded-xl border border-indigo-500/30 bg-indigo-500/10 p-3 text-xs text-indigo-300">
+          <Info aria-hidden="true" className="size-4 shrink-0" />
+          <span>{t.guru_all_scoped_out_notice}</span>
+        </div>
+      )}
 
       {!selectedGuru ? (
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
@@ -216,6 +224,7 @@ export function GurusPage() {
                 selectedGuru={selectedGuru}
                 summary={summary}
                 assets={assets}
+                allAssets={allAssets}
               />
 
               <GuruCharts
