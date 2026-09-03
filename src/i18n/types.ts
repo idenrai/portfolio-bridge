@@ -243,6 +243,8 @@ export interface Translations {
   custom_guru_philosophy_label: string;
   custom_guru_philosophy_placeholder: string;
   custom_guru_target_preview_label: string;
+  custom_guru_target_help: string;
+  custom_guru_target_edit_btn: string;
   custom_guru_target_empty: string;
   custom_guru_save_btn: string;
   custom_guru_reset_btn: string;
@@ -283,6 +285,7 @@ export interface Translations {
   guru_guide_q3_opt_blunt: string;
   guru_guide_q3_opt_academic: string;
   guru_guide_q3_opt_trader: string;
+  guru_guide_q3_opt_trader_desc: string;
 
   guru_guide_result_title: string;
   guru_guide_result_desc: string;
@@ -290,6 +293,7 @@ export interface Translations {
   guru_guide_result_score: string;
   guru_guide_result_select_btn: string;
   guru_guide_result_other_matches: string;
+  guru_guide_result_candidate_select: string;
   guru_guide_result_custom_prompt: string;
   guru_guide_result_custom_link: string;
   guru_guide_btn_next: string;
@@ -551,6 +555,7 @@ export interface Translations {
   drive_error_no_client_id: string;
   drive_error_gis_not_loaded: string;
   settings_target_title: string;
+  settings_target_section_desc: string;
   settings_target_sum: (n: string) => string;
   settings_target_save: string;
   settings_target_saved: string;

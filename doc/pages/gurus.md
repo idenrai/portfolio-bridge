@@ -252,7 +252,7 @@ Users can create and configure their own personalized AI Guru via `CustomGuruMod
 - **Investment Strategy / 투자 전략**: `dividend_cashflow`, `tech_growth`, `deep_value`, `all_weather`, `quant_momentum`.
 - **Coaching Tone / 코칭 톤**: `direct_unfiltered` (단도직입적), `supportive_mentor` (격려와 멘토링), `analytical_quant` (데이터 기반 분석).
 - **Guiding Principles / 개인 원칙**: Custom free-text investment philosophy note.
-- **Target Allocation Sync / 목표 배분 연동**: Automatically benchmarks against user's custom targets set in Settings.
+- **Target Allocation Sync & In-place Edit / 목표 배분 연동 및 즉시 편집**: Automatically benchmarks against user's custom targets set in Settings or Dashboard. Users can click `[ Edit Target Allocation ]` to edit targets in-place via `TargetAllocationModal` without losing their in-progress persona configuration.
 - **Dedicated Avatar & Card**: Represented by a glowing indigo gradient card with a customizable avatar icon (`bot`, `shield`, `rocket`, `scale`, `sparkles`).
 
 사용자는 `CustomGuruModal`을 통해 자신만의 맞춤형 AI 구루를 생성하고 설정할 수 있습니다:
@@ -260,7 +260,7 @@ Users can create and configure their own personalized AI Guru via `CustomGuruMod
 - **투자 전략**: 배당 및 현금흐름, 기술 성장, 딥 밸류, 올웨더, 퀀트 및 모멘텀.
 - **코칭 톤**: 단도직입적 팩트 폭격, 지지적인 멘토, 계량적 퀀트 분석가.
 - **개인 원칙/메모**: 자유 텍스트 투자 메모 입력.
-- **목표 배분 연동**: 설정(Settings) 페이지에 등록된 유저의 목표 배분과 실시간 연동되어 갭을 평가.
+- **목표 배분 연동 및 즉시 편집**: 설정 또는 대시보드에 등록된 목표 배분과 실시간 연동되며, 모달 내 `[ 목표 배분 수정 ]` 버튼을 통해 작성 중인 페르소나 데이터 유실 없이 인플레이스로 즉시 수정할 수 있습니다.
 - **전용 아바타 및 카드**: 인디고 그라데이션 카드와 선택 가능한 아바타 아이콘(`bot`, `shield`, `rocket`, `scale`, `sparkles`)으로 시각화.
 
 ## Strategy Filtering & Multi-Faceted Search
@@ -280,10 +280,20 @@ A 3-step interactive assessment modal that recommends the most suitable guru bas
 2. **Analysis Methodology / 분석 방식**: Bottom-up Fundamentals vs Macro & Trends vs Systematic Rules & Factor Models.
 3. **Coaching Style / 코칭 스타일**: Strict Margin of Safety vs Growth Potential vs Structural Asset Allocation.
 
+Features:
+- Refined micro-typography (minimum `text-xs` / `text-2xs` for crystal-clear readability across devices).
+- Custom Guru interactive gradient callout card with full touch targets (`min-h-12`) directly opening persona configuration.
+- Candidate quick-select buttons for alternative matching gurus.
+
 3단계 대화형 진단을 통해 유저 성향에 최적화된 구루(또는 커스텀 구루)를 매칭하고 원클릭 선택을 지원합니다:
 1. **위험 성향**: 손실 방어(보수) vs 분산 복리(중립) vs 고수익 성장(공격).
 2. **분석 방식**: 기업 재무제표 펀더멘털 vs 거시경제 매크로 vs 수학적 퀀트/팩터.
 3. **피드백 스타일**: 엄격한 안전마진 vs 미래 성장 잠재력 vs 기계적 자산배분.
+
+주요 특징:
+- 가독성 극대화를 위한 마이크로 타이포그래피 개선 (최소 `text-xs` / `text-2xs` 보장).
+- 커스텀 구루 생성을 위한 인터랙티브 그라데이션 콜아웃 카드 (`min-h-12` 터치 타깃 준수).
+- 추천 대안 후보들에 대한 원클릭 퀵 선택 버튼 제공.
 
 ## Layout Structure
 

@@ -11,4 +11,4 @@ export * from "./FeedbackIconText";
 export * from "./AutoResizeTextarea";
 export * from "./PageSkeleton";
 export * from "./ChartSkeleton";
-
+export * from "./TargetAllocationModal";

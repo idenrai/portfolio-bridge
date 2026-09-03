@@ -43,7 +43,7 @@ test('verifies Custom Guru navigation from Dashboard and persona customization i
 
   // 1. 대시보드 진입
   await page.goto('/');
-  await page.waitForTimeout(500);
+  await expect(page.getByRole('heading', { level: 1, name: '대시보드' })).toBeVisible({ timeout: 15000 });
 
   // 2. 대시보드 내 커스텀 구루 진단 배너 확인 및 클릭
   const dashBannerTitle = page.locator('text=나만의 맞춤형 AI 구루 진단');
@@ -84,6 +84,34 @@ test('verifies Custom Guru navigation from Dashboard and persona customization i
   const directToneOption = page.getByRole('button', { name: /냉철한 팩트폭격형/ });
   await directToneOption.click();
 
+  // 4-1. 인플레이스 목표 배분 수정 버튼 확인 및 모달 열기
+  const editTargetBtn = page.getByRole('button', { name: '목표 배분 수정' });
+  await expect(editTargetBtn).toBeVisible();
+
+  // 커스텀 구루 모달(새로운 연동 목표 배분 영역 포함) 스크롤 및 스크린샷 캡처
+  await editTargetBtn.scrollIntoViewIfNeeded();
+  await page.screenshot({
+    path: '/Users/idenrai/.gemini/antigravity-ide/brain/cd2743a6-c0ff-4c96-b971-225635dcc631/custom_guru_modal_updated.png',
+  });
+
+  await editTargetBtn.click();
+
+  // 상위 다이얼로그(TargetAllocationModal) 확인
+  const targetModal = page.getByRole('dialog').last();
+  await expect(targetModal.getByRole('heading', { name: '목표 비중 배분' })).toBeVisible();
+
+  // 모달 스크린샷 캡처
+  await page.screenshot({
+    path: '/Users/idenrai/.gemini/antigravity-ide/brain/cd2743a6-c0ff-4c96-b971-225635dcc631/custom_guru_target_modal_demo.png',
+  });
+
+  // 모달 닫기 (TargetAllocationModal 전용 Close 버튼)
+  await targetModal.getByRole('button', { name: 'Close' }).click();
+  await expect(targetModal.getByRole('heading', { name: '목표 비중 배분' })).not.toBeVisible();
+
+  // 폼 입력값(이름, 전략 등)이 그대로 유지되었는지 확인
+  await expect(nameInput).toHaveValue('글로벌 퀀트 멘토');
+
   // 저장
   const saveBtn = page.getByRole('button', { name: '저장하고 구루 적용' });
   await saveBtn.click();
@@ -108,5 +136,14 @@ test('verifies Custom Guru navigation from Dashboard and persona customization i
   await page.screenshot({
     path: '/Users/idenrai/.gemini/antigravity-ide/brain/cd2743a6-c0ff-4c96-b971-225635dcc631/custom_guru_demo.png',
     fullPage: true,
+  });
+
+  // 8. 설정(/settings) 페이지 이동하여 신규 TargetAllocationSection 검증
+  await page.goto('/settings');
+  await expect(page.getByRole('heading', { level: 1, name: '설정' })).toBeVisible();
+  await expect(page.locator('text=목표 비중 배분').first()).toBeVisible();
+
+  await page.screenshot({
+    path: '/Users/idenrai/.gemini/antigravity-ide/brain/cd2743a6-c0ff-4c96-b971-225635dcc631/settings_target_demo.png',
   });
 });

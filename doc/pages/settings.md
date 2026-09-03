@@ -4,17 +4,31 @@
 | --- | --- |
 | Route | `/settings` |
 | Component | `src/pages/Settings.tsx` |
-| Section components | `src/components/settings/` (`DisplaySection`, `ProfileSection`, `DataRefreshSection`, `DataManagementSection`) |
+| Section components | `src/components/settings/` (`DisplaySection`, `TargetAllocationSection`, `ProfileSection`, `DataRefreshSection`, `DataManagementSection`) |
 | Stores | `useSettingsStore`, `useProfileStore`, `useGoogleDriveStore` |
 
 ## Page Structure
 
-`Settings.tsx` acts as a clean layout container hosting four dedicated section components from `src/components/settings/`:
+`Settings.tsx` acts as a clean layout container hosting five dedicated section components from `src/components/settings/`:
 
 1. **DisplaySection**: Base display currency configuration.
-2. **ProfileSection**: Investor profile and long-term financial plans for AI prompt injection.
-3. **DataRefreshSection**: Market quote and exchange rate auto-refresh controls & status.
-4. **DataManagementSection**: Target asset allocation, Google Drive backup/restore, and full data reset.
+2. **TargetAllocationSection**: Portfolio target allocation view, sum indicator, and launch point for `TargetAllocationModal`.
+3. **ProfileSection**: Investor profile and long-term financial plans for AI prompt injection.
+4. **DataRefreshSection**: Market quote and exchange rate auto-refresh controls & status.
+5. **DataManagementSection**: Google Drive backup/restore, and full data reset.
+
+---
+
+## Target Asset Allocation
+
+**Store**: `useSettingsStore.targetAllocations`
+**Component**: `TargetAllocationSection` (`src/components/settings/TargetAllocationSection.tsx`) & `TargetAllocationModal` (`src/components/common/TargetAllocationModal.tsx`)
+
+Displays configured portfolio target percentage chips across categories (growth, dividend, value, index, bond, reit, cash, crypto, commodity) and the cumulative allocation sum indicator (emerald if exactly 100%, rose otherwise).
+Opening the target allocation modal (`TargetAllocationModal`) allows editing percentages with real-time 100% sum validation, Enter shortcut handling, and instant persistence to `useSettingsStore`. Changes synchronize seamlessly across Dashboard, Settings, and Custom Guru.
+
+카테고리별(성장, 배당, 가치, 인덱스, 채권, 리츠, 현금성, 암호화폐, 원자재) 포트폴리오 목표 비중 칩과 합계 인디케이터(100% 충족 시 에메랄드, 미충족 시 로즈)를 표시합니다.
+목표 설정 버튼 클릭 시 `TargetAllocationModal`이 열려 실시간 100% 합계 검증, Enter 키 단축 저장 기능과 함께 `useSettingsStore`에 즉시 저장됩니다. 대시보드, 설정 페이지, 맞춤 구루 간에 완벽하게 실시간 동기화됩니다.
 
 ---
 

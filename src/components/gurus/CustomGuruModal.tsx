@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   Sparkles,
   Bot,
@@ -8,9 +7,9 @@ import {
   Scale,
   RotateCcw,
   Check,
-  ExternalLink,
+  SlidersHorizontal,
 } from "lucide-react";
-import { Modal } from "@/components/common";
+import { Modal, TargetAllocationModal } from "@/components/common";
 import { useT } from "@/hooks";
 import {
   useCustomGuruStore,
@@ -57,6 +56,7 @@ function CustomGuruModalInner({
   const [customPhilosophy, setCustomPhilosophy] = useState(
     config.customPhilosophy ?? "",
   );
+  const [targetModalOpen, setTargetModalOpen] = useState(false);
 
   const handleReset = () => {
     setName(DEFAULT_CUSTOM_GURU.name);
@@ -102,8 +102,9 @@ function CustomGuruModalInner({
   ];
 
   return (
-    <Modal open={true} onClose={onClose} title={t.custom_guru_modal_title} maxWidth="max-w-2xl">
-      <div className="space-y-6">
+    <>
+      <Modal open={true} onClose={onClose} title={t.custom_guru_modal_title} maxWidth="max-w-2xl">
+        <div className="space-y-6">
         <p className="text-xs leading-relaxed text-zinc-400">
           {t.custom_guru_modal_desc}
         </p>
@@ -256,20 +257,25 @@ function CustomGuruModalInner({
 
         {/* 6. 연동된 목표 자산 배분 현황 */}
         <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-3.5">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-zinc-300">
-              {t.custom_guru_target_preview_label}
-            </span>
-            <Link
-              to="/settings"
-              onClick={onClose}
-              className="inline-flex items-center gap-1 text-2xs text-indigo-400 hover:underline"
+          <div className="flex items-center justify-between gap-2">
+            <div>
+              <span className="text-xs font-semibold text-zinc-300">
+                {t.custom_guru_target_preview_label}
+              </span>
+              <p className="mt-0.5 text-2xs text-zinc-400">
+                {t.custom_guru_target_help}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setTargetModalOpen(true)}
+              className="inline-flex min-h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-indigo-500/40 bg-indigo-500/15 px-2.5 py-1 text-2xs font-bold text-indigo-300 transition-colors hover:bg-indigo-500/25 hover:text-white focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none"
             >
-              <span>{t.nav_settings}</span>
-              <ExternalLink className="size-3" />
-            </Link>
+              <SlidersHorizontal className="size-3" />
+              <span>{t.custom_guru_target_edit_btn}</span>
+            </button>
           </div>
-          <div className="mt-2 flex flex-wrap items-center gap-2">
+          <div className="mt-2.5 flex flex-wrap items-center gap-2">
             {targetAllocations && targetAllocations.length > 0 ? (
               targetAllocations.map((item) => (
                 <span
@@ -317,8 +323,15 @@ function CustomGuruModalInner({
             </button>
           </div>
         </div>
-      </div>
-    </Modal>
+        </div>
+      </Modal>
+
+      {/* 인플레이스 목표 배분 편집 모달 */}
+      <TargetAllocationModal
+        open={targetModalOpen}
+        onClose={() => setTargetModalOpen(false)}
+      />
+    </>
   );
 }
 
