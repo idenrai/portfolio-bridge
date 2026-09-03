@@ -2,6 +2,7 @@ import { useT } from "@/hooks";
 import {
   ProfileSection,
   DisplaySection,
+  TargetAllocationSection,
   DataRefreshSection,
   DataManagementSection,
 } from "@/components/settings";
@@ -14,6 +15,7 @@ export function SettingsPage() {
       <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">{t.settings_title}</h1>
 
       <DisplaySection />
+      <TargetAllocationSection />
       <ProfileSection />
       <DataRefreshSection />
       <DataManagementSection />

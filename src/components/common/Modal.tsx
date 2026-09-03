@@ -29,7 +29,10 @@ export function Modal({
   return (
     <dialog
       ref={dialogRef}
-      onClose={onClose}
+      onClose={(e) => {
+        if (e.target !== dialogRef.current) return;
+        onClose();
+      }}
       className={cn(
         "m-auto flex max-h-[85vh] w-[calc(100%-1rem)] flex-col rounded-none border-none p-0 shadow-none backdrop:bg-black/80 sm:max-h-[90vh] sm:w-full",
         maxWidth

@@ -106,16 +106,16 @@ function GuruGuideModalInner({
           </p>
 
           {step < 4 ? (
-            <span className="shrink-0 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-0.5 font-mono text-3xs font-semibold text-indigo-400">
+            <span className="shrink-0 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-0.5 font-mono text-2xs font-semibold text-indigo-400">
               {t.guru_guide_step(step, 3)}
             </span>
           ) : (
             <button
               type="button"
               onClick={handleRestart}
-              className="flex shrink-0 cursor-pointer items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-3xs text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+              className="flex shrink-0 cursor-pointer items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-white"
             >
-              <RotateCcw className="size-3" />
+              <RotateCcw className="size-3.5" />
               <span>{t.guru_guide_btn_restart}</span>
             </button>
           )}
@@ -176,7 +176,7 @@ function GuruGuideModalInner({
                       </div>
                       <div>
                         <div className="text-xs font-bold text-white">{title}</div>
-                        <div className="text-3xs text-zinc-400">{desc}</div>
+                        <div className="mt-0.5 text-xs text-zinc-400">{desc}</div>
                       </div>
                     </div>
                     {selected && <Check className="size-4 text-indigo-400" />}
@@ -263,7 +263,7 @@ function GuruGuideModalInner({
                       </div>
                       {selected && <Check className="size-4 text-indigo-400" />}
                     </div>
-                    <p className="mt-2 text-3xs leading-relaxed text-zinc-400">{desc}</p>
+                    <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">{desc}</p>
                   </button>
                 );
               })}
@@ -297,7 +297,7 @@ function GuruGuideModalInner({
                 {
                   id: "trader" as const,
                   title: t.guru_guide_q3_opt_trader,
-                  desc: "기민한 모멘텀 및 시장 흐름 중시",
+                  desc: t.guru_guide_q3_opt_trader_desc,
                 },
               ].map(({ id, title, desc }) => {
                 const selected = tone === id;
@@ -317,7 +317,7 @@ function GuruGuideModalInner({
                   >
                     <div>
                       <div className="text-xs font-bold text-white">{title}</div>
-                      <div className="text-3xs text-zinc-400">{desc}</div>
+                      <div className="mt-0.5 text-xs text-zinc-400">{desc}</div>
                     </div>
                     {selected && <Check className="size-4 text-indigo-400" />}
                   </button>
@@ -346,23 +346,23 @@ function GuruGuideModalInner({
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="flex items-center gap-1 rounded bg-indigo-500/20 px-2 py-0.5 text-4xs font-bold text-indigo-300">
+                        <span className="flex items-center gap-1 rounded bg-indigo-500/20 px-2 py-0.5 text-2xs font-semibold text-indigo-300">
                           <Award className="size-3" />
                           {t.guru_guide_result_best_badge}
                         </span>
-                        <span className="rounded bg-zinc-800 px-1.5 py-0.5 font-mono text-4xs text-zinc-300">
+                        <span className="rounded bg-zinc-800 px-1.5 py-0.5 font-mono text-2xs text-zinc-300">
                           {t[topMatch.metadata.tagKey as keyof typeof t] as string}
                         </span>
                       </div>
                       <h4 className="mt-1 text-base font-bold text-white sm:text-lg">
                         {t[`guru_name_${topMatch.guru.id}` as keyof typeof t] as string}
                       </h4>
-                      <p className="text-3xs text-zinc-400">{topMatch.guru.firm}</p>
+                      <p className="mt-0.5 text-xs text-zinc-400">{topMatch.guru.firm}</p>
                     </div>
                   </div>
 
                   <div className="flex flex-col items-end">
-                    <span className="text-3xs text-zinc-400">
+                    <span className="text-2xs font-medium text-zinc-400">
                       {t.guru_guide_result_score}
                     </span>
                     <span className="font-mono text-xl font-extrabold text-indigo-400 sm:text-2xl">
@@ -393,7 +393,7 @@ function GuruGuideModalInner({
             {/* ALTERNATIVE MATCHES */}
             {otherMatches.length > 0 && (
               <div className="space-y-2">
-                <h5 className="text-3xs font-semibold tracking-wider text-zinc-400 uppercase">
+                <h5 className="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                   {t.guru_guide_result_other_matches}
                 </h5>
                 <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -413,11 +413,11 @@ function GuruGuideModalInner({
                             {t[`guru_name_${res.guru.id}` as keyof typeof t] as string}
                           </div>
                           <div className="flex items-center gap-1.5">
-                            <span className="font-mono text-3xs font-semibold text-zinc-400">
+                            <span className="font-mono text-xs font-semibold text-zinc-300">
                               {res.score}%
                             </span>
-                            <span className="text-3xs text-zinc-500">·</span>
-                            <span className="truncate text-4xs text-zinc-400">
+                            <span className="text-xs text-zinc-500">·</span>
+                            <span className="truncate text-xs text-zinc-400">
                               {res.guru.firm}
                             </span>
                           </div>
@@ -427,9 +427,9 @@ function GuruGuideModalInner({
                       <button
                         type="button"
                         onClick={() => handleSelect(res.guru.id)}
-                        className="shrink-0 cursor-pointer rounded-lg border border-zinc-700 px-2 py-1 text-3xs font-medium text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white"
+                        className="shrink-0 cursor-pointer rounded-lg border border-zinc-700 px-2.5 py-1.5 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-500 hover:bg-zinc-800 hover:text-white"
                       >
-                        선택
+                        {t.guru_guide_result_candidate_select}
                       </button>
                     </div>
                   ))}
@@ -437,28 +437,36 @@ function GuruGuideModalInner({
               </div>
             )}
 
-            {/* CUSTOM GURU LINK */}
-            <div className="flex items-center justify-between rounded-xl border border-zinc-800/80 bg-zinc-900/40 px-3.5 py-2.5">
-              <div className="flex items-center gap-2">
-                <Sparkles className="size-4 text-indigo-400" />
-                <span className="text-3xs text-zinc-300">
-                  {t.guru_guide_result_custom_prompt}
-                </span>
+            {/* CUSTOM GURU CALLOUT CARD */}
+            <button
+              type="button"
+              onClick={() => {
+                if (onOpenCustomGuruConfig) {
+                  onOpenCustomGuruConfig();
+                } else {
+                  handleSelect("custom");
+                }
+              }}
+              className="group flex min-h-12 w-full cursor-pointer items-center justify-between rounded-xl border border-indigo-500/30 bg-linear-to-r from-indigo-950/40 via-purple-950/25 to-zinc-900/60 p-3 text-left transition-all hover:border-indigo-500/60 hover:bg-indigo-950/50 active:scale-[0.99] sm:p-3.5"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-indigo-500/30 bg-indigo-500/15 text-indigo-400 transition-all group-hover:scale-105 group-hover:bg-indigo-500/25">
+                  <Sparkles className="size-4.5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-zinc-100 transition-colors group-hover:text-white sm:text-sm">
+                    {t.guru_guide_result_custom_prompt}
+                  </div>
+                  <div className="mt-0.5 text-2xs text-zinc-400">
+                    {t.custom_guru_modal_desc}
+                  </div>
+                </div>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  if (onOpenCustomGuruConfig) {
-                    onOpenCustomGuruConfig();
-                  } else {
-                    handleSelect("custom");
-                  }
-                }}
-                className="cursor-pointer text-3xs font-bold text-indigo-400 transition-colors hover:text-indigo-300 hover:underline"
-              >
-                {t.guru_guide_result_custom_link}
-              </button>
-            </div>
+              <div className="flex shrink-0 items-center gap-1 rounded-lg border border-indigo-500/40 bg-indigo-500/20 px-3 py-1.5 text-xs font-bold text-indigo-300 transition-all group-hover:bg-indigo-600 group-hover:text-white">
+                <span>{t.guru_guide_result_custom_link}</span>
+                <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+              </div>
+            </button>
           </div>
         )}
 

@@ -1,13 +1,8 @@
 import { useState, memo } from "react";
-import { Card, Button, Modal } from "@/components/common";
+import { Card, TargetAllocationModal } from "@/components/common";
 import { useT } from "@/hooks";
-import { useSettingsStore } from "@/stores";
 import { cn } from "@/utils";
-import type {
-  RebalanceSuggestion,
-  AssetCategory,
-  TargetAllocation,
-} from "@/types";
+import type { RebalanceSuggestion, AssetCategory } from "@/types";
 
 interface Props {
   rebalancing: RebalanceSuggestion[];
@@ -15,95 +10,23 @@ interface Props {
 
 export const CategoryAnalysisCard = memo(function CategoryAnalysisCard({ rebalancing }: Props) {
   const t = useT();
-  const targetAllocations = useSettingsStore((s) => s.targetAllocations);
-  const setTargetAllocations = useSettingsStore((s) => s.setTargetAllocations);
   const [modalOpen, setModalOpen] = useState(false);
-  const [allocations, setAllocations] = useState<TargetAllocation[]>([]);
-  const [saved, setSaved] = useState(false);
-
-  const totalPercent = allocations.reduce((s, a) => s + a.targetPercent, 0);
-  const isExact = Math.abs(totalPercent - 100) < 0.01;
-
-  const openModal = () => {
-    setAllocations([...targetAllocations]);
-    setSaved(false);
-    setModalOpen(true);
-  };
-
-  const handleChange = (index: number, value: string) => {
-    const updated = [...allocations];
-    updated[index] = { ...updated[index], targetPercent: Number(value) || 0 };
-    setAllocations(updated);
-    setSaved(false);
-  };
-
-  const handleSave = () => {
-    setTargetAllocations(allocations);
-    setSaved(true);
-    setTimeout(() => {
-      setSaved(false);
-      setModalOpen(false);
-    }, 1200);
-  };
 
   const setTargetBtn = (
     <button
       type="button"
-      onClick={openModal}
-      className="cursor-pointer rounded-md border border-zinc-800 px-2 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-900/50 hover:text-zinc-700"
+      onClick={() => setModalOpen(true)}
+      className="inline-flex min-h-8 cursor-pointer items-center rounded-md border border-zinc-800 px-2.5 py-1 text-xs text-zinc-400 transition-colors hover:border-zinc-700 hover:bg-zinc-900/50 hover:text-white focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none"
     >
       {t.category_set_target}
     </button>
   );
 
   const modal = (
-    <Modal
+    <TargetAllocationModal
       open={modalOpen}
       onClose={() => setModalOpen(false)}
-      title={t.settings_target_title}
-    >
-      <div className="space-y-2">
-        {allocations.map((a, i) => (
-          <label
-            key={a.category}
-            className="flex items-center justify-between gap-3 text-sm text-zinc-300"
-          >
-            <span className="w-24">
-              {t.category_labels[a.category as AssetCategory] ?? a.category}
-            </span>
-            <input
-              type="number"
-              min={0}
-              max={100}
-              value={a.targetPercent}
-              onChange={(e) => handleChange(i, e.target.value)}
-              className="w-24 rounded-lg border border-zinc-300 px-3 py-1.5 text-sm"
-            />
-            <span className="text-xs text-zinc-400">%</span>
-          </label>
-        ))}
-        <div className="mt-1 flex items-center justify-between border-t border-zinc-800 pt-3">
-          <span
-            className={cn(
-              "text-sm font-medium",
-              isExact ? "text-green-600" : "text-red-600",
-            )}
-          >
-            {t.settings_target_sum(totalPercent.toFixed(0))}
-          </span>
-          <div className="flex items-center gap-2">
-            {saved && (
-              <span className="animate-pulse text-xs font-medium text-green-600">
-                ✓ {t.settings_target_saved}
-              </span>
-            )}
-            <Button size="sm" onClick={handleSave} disabled={!isExact}>
-              {t.settings_target_save}
-            </Button>
-          </div>
-        </div>
-      </div>
-    </Modal>
+    />
   );
 
   if (rebalancing.length === 0) {
