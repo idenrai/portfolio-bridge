@@ -80,10 +80,10 @@ Sort options: value / P&L / return / weight (descending default).
 ### Category Analysis Card (`CategoryAnalysisCard.tsx`)
 
 Shows target allocation vs actual for each category with visual deviation bars.
-Target allocations are configured in Settings → Target Allocation.
+Target allocations are configured via the shared `TargetAllocationModal.tsx` directly from the card header, as well as in Settings (`TargetAllocationSection.tsx`) and the Custom Guru modal.
 
 각 카테고리의 목표 배분 대비 실제 배분을 편차 바로 시각화합니다.
-목표 배분은 설정 → 목표 배분에서 설정합니다.
+목표 배분은 카드 헤더의 목표 설정 버튼을 통해 공용 `TargetAllocationModal.tsx` 모달로 즉시 설정할 수 있으며, 설정 페이지(`TargetAllocationSection.tsx`) 및 맞춤 구루 모달과 실시간 연동됩니다.
 
 ### Currency Exposure Card (`CurrencyExposureCard.tsx`)
 
