@@ -182,6 +182,7 @@ export interface Translations {
   guru_empty_title: string;
   guru_empty_desc: string;
   guru_philosophy_label: string;
+  guru_detail_explorer_label: string;
   guru_ideal_alloc: string;
   guru_radar_title: string;
   guru_my_portfolio: string;
@@ -212,6 +213,108 @@ export interface Translations {
   guru_ai_scope_deselect_all: string;
   guru_ai_scope_empty_warning: string;
   guru_all_scoped_out_notice: string;
+
+  // ─── Custom Guru ──────────────────────────────────────────────────────────
+  custom_guru_dash_banner_title: string;
+  custom_guru_dash_banner_desc: string;
+  custom_guru_dash_banner_action: string;
+  custom_guru_selector_badge: string;
+  custom_guru_default_name: string;
+  custom_guru_unconfigured_desc: string;
+  custom_guru_settings_btn: string;
+  custom_guru_modal_title: string;
+  custom_guru_modal_desc: string;
+  custom_guru_name_label: string;
+  custom_guru_icon_label: string;
+  custom_guru_risk_label: string;
+  custom_guru_risk_conservative: string;
+  custom_guru_risk_balanced: string;
+  custom_guru_risk_aggressive: string;
+  custom_guru_strategy_label: string;
+  custom_guru_strat_all_weather: string;
+  custom_guru_strat_dividend: string;
+  custom_guru_strat_tech: string;
+  custom_guru_strat_value: string;
+  custom_guru_strat_momentum: string;
+  custom_guru_tone_label: string;
+  custom_guru_tone_direct: string;
+  custom_guru_tone_mentor: string;
+  custom_guru_tone_quant: string;
+  custom_guru_philosophy_label: string;
+  custom_guru_philosophy_placeholder: string;
+  custom_guru_target_preview_label: string;
+  custom_guru_target_empty: string;
+  custom_guru_save_btn: string;
+  custom_guru_reset_btn: string;
+  custom_guru_cancel_btn: string;
+
+  // ─── Guru Guide & Strategy Tags ──────────────────────────────────────────
+  guru_tag_value: string;
+  guru_tag_growth: string;
+  guru_tag_passive: string;
+  guru_tag_quant: string;
+  guru_tag_macro: string;
+  guru_tag_hedge: string;
+
+  guru_filter_all: string;
+  guru_search_placeholder: string;
+  guru_search_clear: string;
+  guru_search_empty: string;
+  guru_count_badge: (count: number) => string;
+  guru_btn_all_grid: string;
+
+  guru_guide_btn: string;
+  guru_guide_modal_title: string;
+  guru_guide_modal_desc: string;
+  guru_guide_step: (current: number, total: number) => string;
+  guru_guide_q1_title: string;
+  guru_guide_q1_opt_conservative: string;
+  guru_guide_q1_opt_balanced: string;
+  guru_guide_q1_opt_aggressive: string;
+  guru_guide_q2_title: string;
+  guru_guide_q2_opt_value: string;
+  guru_guide_q2_opt_growth: string;
+  guru_guide_q2_opt_passive: string;
+  guru_guide_q2_opt_quant: string;
+  guru_guide_q2_opt_macro: string;
+  guru_guide_q2_opt_hedge: string;
+  guru_guide_q3_title: string;
+  guru_guide_q3_opt_mentor: string;
+  guru_guide_q3_opt_blunt: string;
+  guru_guide_q3_opt_academic: string;
+  guru_guide_q3_opt_trader: string;
+
+  guru_guide_result_title: string;
+  guru_guide_result_desc: string;
+  guru_guide_result_best_badge: string;
+  guru_guide_result_score: string;
+  guru_guide_result_select_btn: string;
+  guru_guide_result_other_matches: string;
+  guru_guide_result_custom_prompt: string;
+  guru_guide_result_custom_link: string;
+  guru_guide_btn_next: string;
+  guru_guide_btn_prev: string;
+  guru_guide_btn_restart: string;
+
+  guru_match_reason_buffett: string;
+  guru_match_reason_munger: string;
+  guru_match_reason_lynch: string;
+  guru_match_reason_graham: string;
+  guru_match_reason_dalio: string;
+  guru_match_reason_bogle: string;
+  guru_match_reason_swensen: string;
+  guru_match_reason_taleb: string;
+  guru_match_reason_wood: string;
+  guru_match_reason_soros: string;
+  guru_match_reason_greenblatt: string;
+  guru_match_reason_marks: string;
+  guru_match_reason_category_value: string;
+  guru_match_reason_category_growth: string;
+  guru_match_reason_category_passive: string;
+  guru_match_reason_category_quant: string;
+  guru_match_reason_category_macro: string;
+  guru_match_reason_category_hedge: string;
+
   guru_name_buffett: string;
   guru_name_munger: string;
   guru_name_lynch: string;

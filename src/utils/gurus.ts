@@ -1,4 +1,7 @@
-import type { GuruProfile } from "@/types";
+import type { GuruProfile, TargetAllocation } from "@/types";
+import type { CustomGuruConfig } from "@/stores";
+import { GURU_METADATA, type GuruMetadata } from "./guruMetadata";
+import { GURU_FRAMEWORKS, type GuruFramework } from "./ai/guruFrameworks";
 
 export const GURU_SINCE_YEARS: Record<string, string> = {
   buffett: "65",
@@ -356,3 +359,59 @@ export const GURU_PROFILES: GuruProfile[] = [
     ],
   },
 ];
+
+export function createCustomGuruProfile(
+  config: CustomGuruConfig,
+  targets: TargetAllocation[] = [],
+): GuruProfile {
+  return {
+    id: "custom",
+    name: config.name || "Custom Guru",
+    avatar: "",
+    firm: "My Portfolio Bridge",
+    style: `Risk: ${config.riskTolerance}, Strategy: ${config.strategy}, Tone: ${config.tone}`,
+    idealAllocation: targets.map((t) => ({
+      category: t.category,
+      targetPercent: t.targetPercent,
+    })),
+  };
+}
+
+export interface GuruFullDetails {
+  profile: GuruProfile;
+  metadata?: GuruMetadata;
+  framework?: GuruFramework;
+  sinceYear?: string;
+  philosophyKey: string;
+}
+
+/**
+ * 구루 ID로 프로필, 메타데이터, AI 프레임워크, 연도, i18n 철학 키를 일괄 조회하는 통합 헬퍼
+ */
+export function getGuruDetails(
+  guruId: string,
+  customConfig?: CustomGuruConfig,
+  targets?: TargetAllocation[],
+): GuruFullDetails | null {
+  if (guruId === "custom" && customConfig) {
+    const profile = createCustomGuruProfile(customConfig, targets);
+    return {
+      profile,
+      philosophyKey: "",
+      sinceYear: "26",
+    };
+  }
+
+  const profile = GURU_PROFILES.find((g) => g.id === guruId);
+  if (!profile) return null;
+
+  return {
+    profile,
+    metadata: GURU_METADATA[guruId as keyof typeof GURU_METADATA],
+    framework: GURU_FRAMEWORKS[guruId],
+    sinceYear: GURU_SINCE_YEARS[guruId],
+    philosophyKey: `guru_phil_${guruId}`,
+  };
+}
+
+

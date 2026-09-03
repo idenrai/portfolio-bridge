@@ -1,4 +1,5 @@
-import type { GuruProfile, PortfolioSummary, BrokerAccount } from "@/types";
+import type { Asset, GuruProfile, PortfolioSummary, BrokerAccount } from "@/types";
+import { DEFAULT_RATES } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 import type { GuruSessionSnapshot, UserProfile } from "@/stores";
@@ -21,9 +22,10 @@ export function buildGuruFollowUpPrompt(
   current: PortfolioSummary,
   lang: Lang = "ko",
   baseCurrency: string = "KRW",
-  rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
+  rates: Record<string, number> = DEFAULT_RATES,
   profile?: Partial<UserProfile>,
-  _brokers: BrokerAccount[] = [],
+  brokers: BrokerAccount[] = [],
+  currentAssets: Asset[] = [],
 ): string {
   const guruName = guru.name;
 
@@ -97,6 +99,66 @@ export function buildGuruFollowUpPrompt(
       parts.push(
         `return: ${sign(p.returnPercent)}${p.returnPercent.toFixed(1)}% → ${sign(curr.returnPercent)}${curr.returnPercent.toFixed(1)}% (${sign(rDiff)}${rDiff.toFixed(1)}pp)`,
       );
+      if (currentAssets.length > 0 && brokers.length > 0) {
+        const brokerMap = new Map<string, BrokerAccount>(brokers.map((b) => [b.id, b]));
+        const isMatch = (item: { ticker?: string; name: string; currency: string }) => {
+          if (curr.ticker && item.ticker) return item.ticker === curr.ticker;
+          return item.name === curr.name && item.currency === curr.currency;
+        };
+
+        const currMatching = currentAssets.filter((a) => a.type !== "cash" && isMatch(a));
+        const prevMatching = prev.assets?.filter((a) => isMatch(a)) ?? [];
+
+        if (prev.assets && prev.assets.length > 0) {
+          const allBrokerIds = Array.from(
+            new Set([
+              ...currMatching.map((a) => a.brokerId || "__unassigned__"),
+              ...prevMatching.map((a) => a.brokerId || "__unassigned__"),
+            ]),
+          );
+
+          if (allBrokerIds.length > 1) {
+            const accDeltas: string[] = [];
+            for (const bid of allBrokerIds) {
+              const b = bid !== "__unassigned__" ? brokerMap.get(bid) : undefined;
+              const name = b ? (b.nickname || b.broker) : "Unassigned";
+              const prevPos = prevMatching.find((a) => (a.brokerId || "__unassigned__") === bid);
+              const currPos = currMatching.find((a) => (a.brokerId || "__unassigned__") === bid);
+
+              const prevQ = prevPos?.quantity ?? 0;
+              const currQ = currPos?.quantity ?? 0;
+              if (prevQ !== currQ) {
+                const qDelta = currQ - prevQ;
+                accDeltas.push(
+                  `"${name}": ${prevQ.toLocaleString()} → ${currQ.toLocaleString()} (${sign(qDelta)}${qDelta.toLocaleString()})`,
+                );
+              } else if (currQ > 0) {
+                accDeltas.push(`"${name}": ${currQ.toLocaleString()} (no change)`);
+              }
+            }
+            if (accDeltas.length > 0) {
+              parts.push(`account changes: ${accDeltas.join(", ")}`);
+            }
+          } else if (currMatching.length === 1 && currMatching[0].brokerId) {
+            const b = brokerMap.get(currMatching[0].brokerId);
+            if (b) {
+              parts.push(`account: "${b.nickname || b.broker}"`);
+            }
+          }
+        } else {
+          // 레거시 스냅샷(prev.assets 미보유 시) 폴백
+          if (currMatching.length > 1) {
+            const accParts = currMatching
+              .map((a) => {
+                const b = a.brokerId ? brokerMap.get(a.brokerId) : undefined;
+                const name = b ? (b.nickname || b.broker) : "Unassigned";
+                return `${a.quantity.toLocaleString()} in "${name}"`;
+              })
+              .join(", ");
+            parts.push(`accounts: ${accParts}`);
+          }
+        }
+      }
       changedWeights.push(parts[0] + " | " + parts.slice(1).join(" | "));
     }
   }

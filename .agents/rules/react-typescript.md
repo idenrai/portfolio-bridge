@@ -76,3 +76,16 @@ export const useMyStore = create<MyState>()(
 - Name custom hooks with the `use` prefix.
 - A hook that calls an external API must handle loading and error states explicitly.
 - Hooks that fetch data on mount must be safe to call multiple times without side-effects (idempotent).
+
+## Fail-Fast & Testing Pipeline (크레딧 & 에러 방지 필수 규칙)
+
+- **검증 실행 순서 (Fail-Fast, Fail-Cheap 원칙)**:
+  1. `npx tsc --noEmit`: 코드/컴포넌트 수정 후 **가장 먼저** 실행하여 Props 불일치, 타입 에러, 오타를 1초 내에 전수 검출한다. (이 단계 통과 전 Playwright 실행 금지!)
+  2. `npm run lint`: Hook 의존성 및 린트 검사.
+  3. `npx vitest run`: 비즈니스 로직 및 계산 함수 검증.
+  4. `npx playwright test`: 최종 E2E 플로우 단 1회 클린 실행.
+- **Playwright E2E 스토리지 모킹**:
+  - 테스트 작성 시 반드시 `src/tests/e2e/helpers/mockStorage.ts`의 `setupTestPortfolio(page, options)`를 사용하여 Zustand persist 규약(`{ state, version: 0 }`)과 언어 설정을 주입한다.
+- **E2E 로케이터 스코핑**:
+  - 모달이나 특정 섹션 내부 요소를 조회할 때는 `page.getByRole('dialog')` 등으로 범위를 한정하여 Strict Mode 위반(중복 요소 에러)을 방지한다.
+

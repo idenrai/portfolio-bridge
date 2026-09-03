@@ -1,15 +1,21 @@
 import { useState, useCallback } from "react";
-import { Sparkles, AlertTriangle, TrendingDown, CircleDollarSign, Coins, PieChart, Check, Copy } from "lucide-react";
-import { Card, FeedbackIconText } from "@/components/common";
-import { useT, useExchangeRates } from "@/hooks";
-import { useLanguageStore, useSettingsStore, useBrokerStore } from "@/stores";
-import { buildInsightPrompt, cn } from "@/utils";
-import type { PortfolioSummary, Asset, TargetAllocation } from "@/types";
+import { Link } from "react-router-dom";
+import {
+  Sparkles,
+  ArrowRight,
+  AlertTriangle,
+  TrendingDown,
+  CircleDollarSign,
+  Coins,
+  PieChart,
+} from "lucide-react";
+import { Card } from "@/components/common";
+import { useT } from "@/hooks";
+import { cn } from "@/utils";
+import type { PortfolioSummary } from "@/types";
 
 interface Props {
   summary: PortfolioSummary;
-  assets: Asset[];
-  targets: TargetAllocation[];
 }
 
 const TYPE_STYLES = {
@@ -26,118 +32,63 @@ const CLOSE_BTN = {
 
 function getInsightIcon(id: string, className: string) {
   switch (id) {
-    case "warning": return <AlertTriangle aria-hidden="true" className={className} />;
-    case "danger": return <TrendingDown aria-hidden="true" className={className} />;
-    case "money": return <CircleDollarSign aria-hidden="true" className={className} />;
-    case "fx": return <Coins aria-hidden="true" className={className} />;
-    case "chart": return <PieChart aria-hidden="true" className={className} />;
-    default: return <AlertTriangle aria-hidden="true" className={className} />;
+    case "warning":
+      return <AlertTriangle aria-hidden="true" className={className} />;
+    case "danger":
+      return <TrendingDown aria-hidden="true" className={className} />;
+    case "money":
+      return <CircleDollarSign aria-hidden="true" className={className} />;
+    case "fx":
+      return <Coins aria-hidden="true" className={className} />;
+    case "chart":
+      return <PieChart aria-hidden="true" className={className} />;
+    default:
+      return <AlertTriangle aria-hidden="true" className={className} />;
   }
 }
 
-export function InsightsPanel({ summary, assets, targets }: Props) {
+export function InsightsPanel({ summary }: Props) {
   const t = useT();
-  const lang = useLanguageStore((s) => s.lang);
-  const baseCurrency = useSettingsStore((s) => s.baseCurrency);
-  const { data: rates } = useExchangeRates();
-  const brokers = useBrokerStore((s) => s.accounts);
   const [dismissed, setDismissed] = useState<Set<number>>(new Set());
-  const [showPrompt, setShowPrompt] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const dismiss = useCallback(
     (i: number) => setDismissed((prev) => new Set([...prev, i])),
     [],
   );
 
-  const promptText = buildInsightPrompt(
-    summary,
-    assets,
-    targets,
-    lang,
-    baseCurrency,
-    rates,
-    brokers,
-  );
-
-  const copyPrompt = async () => {
-    await navigator.clipboard.writeText(promptText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   const visible = summary.insights.filter((_, i) => !dismissed.has(i));
 
   return (
     <Card title={t.insights_title}>
-      {/* ── AI 분석 배너 (항상 표시) ── */}
-      <div className="mb-4 rounded-xl bg-linear-to-r from-indigo-500/20 to-blue-500/20 p-px shadow-sm">
-        <div className="rounded-xl bg-zinc-900/95 p-4 sm:px-5">
-          <div className="flex flex-col gap-4">
-            {/* Header */}
-            <div className="flex min-w-0 items-start gap-3">
-              <Sparkles className="mt-0.5 size-5 shrink-0 text-indigo-400" />
+      {/* ── 커스텀 구루 1:1 상담 바로가기 배너 ── */}
+      <div className="mb-4 rounded-xl bg-linear-to-r from-indigo-500/20 via-purple-500/20 to-blue-500/20 p-px shadow-sm">
+        <div className="rounded-xl bg-zinc-900/95 p-3.5 sm:px-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-indigo-500/30 bg-indigo-500/10 text-indigo-400">
+                <Sparkles className="size-4" />
+              </div>
               <div className="min-w-0">
-                <p className="text-sm leading-tight font-semibold text-pretty text-zinc-100">
-                  {t.insights_ai_banner_title}
+                <p className="truncate text-xs font-semibold text-zinc-100 sm:text-xs-plus">
+                  {t.custom_guru_dash_banner_title}
                 </p>
-                <p className="mt-1 line-clamp-2 text-xs-plus leading-relaxed text-pretty text-zinc-500 sm:text-xs">
-                  {t.insights_ai_banner_desc}
+                <p className="truncate text-3xs text-zinc-400 sm:text-2xs">
+                  {t.custom_guru_dash_banner_desc}
                 </p>
               </div>
             </div>
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setShowPrompt((v) => !v)}
-                className="flex-1 cursor-pointer rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-indigo-400 shadow-sm transition-all hover:bg-indigo-500/20 hover:opacity-90 focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none active:scale-95 sm:flex-none"
-              >
-                {showPrompt ? t.insights_ai_close : t.insights_ai_btn}
-              </button>
-            </div>
+            <Link
+              to="/gurus?guru=custom"
+              className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1.5 text-xs font-medium text-indigo-300 shadow-sm transition-all hover:bg-indigo-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none active:scale-95"
+            >
+              <span>{t.custom_guru_dash_banner_action}</span>
+              <ArrowRight className="size-3.5" />
+            </Link>
           </div>
-
-          {/* 프롬프트 확장 영역 */}
-          {showPrompt && (
-            <div className="mt-4 space-y-3 border-t border-zinc-800/50 pt-4">
-              <p className="text-xs-plus text-zinc-500">{t.insights_ai_desc}</p>
-              <div className="group relative rounded-xl border border-zinc-800 bg-zinc-950 transition-shadow focus-within:ring-1 focus-within:ring-indigo-500/50">
-                <textarea
-                  readOnly
-                  value={promptText}
-                  rows={10}
-                  className="w-full resize-none rounded-xl bg-transparent p-3 pb-12 font-mono text-xs-plus text-zinc-300 focus:outline-none sm:text-xs"
-                />
-                <button
-                  type="button"
-                  onClick={copyPrompt}
-                  className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700 focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none"
-                >
-                  {copied ? (
-                    <FeedbackIconText
-                      icon={Check}
-                      text={t.insights_ai_copied}
-                      animate={true}
-                      className="text-emerald-400"
-                      textClassName="text-white"
-                    />
-                  ) : (
-                    <FeedbackIconText
-                      icon={Copy}
-                      text={t.insights_ai_copy}
-                      className="transition-opacity hover:opacity-80"
-                      iconClassName="opacity-70"
-                    />
-                  )}
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
-      {/* ── 인사이트 목록 ── */}
+      {/* ── 룰 기반 실시간 인사이트/경고 목록 ── */}
       {visible.length === 0 ? (
         <div className="py-4 text-center text-sm text-zinc-400">
           {t.insights_ok}
@@ -148,16 +99,24 @@ export function InsightsPanel({ summary, assets, targets }: Props) {
             dismissed.has(i) ? null : (
               <div
                 key={i}
-                className={cn("flex items-start gap-2 rounded-lg border px-3 py-2 text-xs", TYPE_STYLES[insight.type])}
+                className={cn(
+                  "flex items-start gap-2 rounded-lg border px-3 py-2 text-xs",
+                  TYPE_STYLES[insight.type],
+                )}
               >
-                <span className="mt-px shrink-0">{getInsightIcon(insight.icon, "w-3.5 h-3.5")}</span>
+                <span className="mt-px shrink-0">
+                  {getInsightIcon(insight.icon, "w-3.5 h-3.5")}
+                </span>
                 <span className="flex-1 leading-relaxed">
                   {insight.message}
                 </span>
                 <button
                   type="button"
                   onClick={() => dismiss(i)}
-                  className={cn("shrink-0 cursor-pointer rounded-sm text-base leading-none transition-colors focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-900 focus-visible:outline-none", CLOSE_BTN[insight.type])}
+                  className={cn(
+                    "shrink-0 cursor-pointer rounded-sm text-base leading-none transition-colors focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-zinc-900 focus-visible:outline-none",
+                    CLOSE_BTN[insight.type],
+                  )}
                   aria-label="dismiss"
                 >
                   ×

@@ -4,9 +4,10 @@
 | --- | --- |
 | Route | `/gurus` |
 | Component | `src/pages/Gurus.tsx` |
-| Related components | `src/components/gurus/` |
-| Hook | `useAnalyzer` (`src/hooks/useAnalyzer.ts`) |
-| Session store | `useGuruSessionStore` |
+| Sub-components | `src/components/gurus/page/`, `src/components/gurus/prompt/` |
+| Modals | `CustomGuruModal`, `GuruGuideModal` |
+| Hooks | `useAnalyzer`, `useGuruFilter`, `useGuruPromptScope` |
+| Stores | `useGuruSessionStore`, `useCustomGuruStore` |
 
 ## Guru List
 
@@ -243,6 +244,46 @@ Score interpretation: **8–9 = Strong / 강함** · **4–7 = Neutral / 중립*
 When no assets are registered, the page shows a message directing the user to the Asset Management page.
 
 등록된 자산이 없으면 자산 관리 페이지로 안내하는 메시지가 표시됩니다.
+
+## Custom Guru Persona Service
+
+Users can create and configure their own personalized AI Guru via `CustomGuruModal`:
+- **Risk Tolerance / 위험 감수 성향**: `conservative` (안정 지향), `balanced` (균형 성장), `aggressive` (공격 투자).
+- **Investment Strategy / 투자 전략**: `dividend_cashflow`, `tech_growth`, `deep_value`, `all_weather`, `quant_momentum`.
+- **Coaching Tone / 코칭 톤**: `direct_unfiltered` (단도직입적), `supportive_mentor` (격려와 멘토링), `analytical_quant` (데이터 기반 분석).
+- **Guiding Principles / 개인 원칙**: Custom free-text investment philosophy note.
+- **Target Allocation Sync / 목표 배분 연동**: Automatically benchmarks against user's custom targets set in Settings.
+- **Dedicated Avatar & Card**: Represented by a glowing indigo gradient card with a customizable avatar icon (`bot`, `shield`, `rocket`, `scale`, `sparkles`).
+
+사용자는 `CustomGuruModal`을 통해 자신만의 맞춤형 AI 구루를 생성하고 설정할 수 있습니다:
+- **위험 감수 성향**: `conservative` (안정 지향), `balanced` (균형 성장), `aggressive` (공격 투자).
+- **투자 전략**: 배당 및 현금흐름, 기술 성장, 딥 밸류, 올웨더, 퀀트 및 모멘텀.
+- **코칭 톤**: 단도직입적 팩트 폭격, 지지적인 멘토, 계량적 퀀트 분석가.
+- **개인 원칙/메모**: 자유 텍스트 투자 메모 입력.
+- **목표 배분 연동**: 설정(Settings) 페이지에 등록된 유저의 목표 배분과 실시간 연동되어 갭을 평가.
+- **전용 아바타 및 카드**: 인디고 그라데이션 카드와 선택 가능한 아바타 아이콘(`bot`, `shield`, `rocket`, `scale`, `sparkles`)으로 시각화.
+
+## Strategy Filtering & Multi-Faceted Search
+
+Managed by the `useGuruFilter` custom hook and rendered via `GuruFilterToolbar`:
+- **Category Chips**: Quick toggle between `All`, `Value`, `Growth`, `Passive`, `Quant`, `Macro`, `Hedge`. Implemented as accessible toggle buttons with `role="group"` and `aria-pressed`.
+- **Multi-Faceted Search**: Real-time matching across localized name, raw English name, firm, primary/secondary category tag labels, investment style summary, and custom guru strategy keywords.
+
+`useGuruFilter` 커스텀 훅과 `GuruFilterToolbar` 컴포넌트를 통해 제공됩니다:
+- **카테고리 칩**: 전체, 가치투자, 성장·모멘텀, 자산배분·패시브, 퀀트, 매크로, 헤지 필터. `role="group"` 및 `aria-pressed` 속성을 갖춘 웹 접근성 토글 버튼 규격 준수.
+- **다차원 실시간 검색**: 현지화 이름, 영문 원본 이름, 운용사, 1차/2차 카테고리 태그 번역 라벨, 투자 스타일 요약문, 커스텀 전략 키워드를 아우르는 포괄적 검색.
+
+## Interactive Guru Guide Matcher (`GuruGuideModal`)
+
+A 3-step interactive assessment modal that recommends the most suitable guru based on user tendencies:
+1. **Risk & Volatility Stance / 위험 성향**: Conservative (drawdown defense) vs Balanced (diversified compounding) vs Aggressive (high-volatility growth).
+2. **Analysis Methodology / 분석 방식**: Bottom-up Fundamentals vs Macro & Trends vs Systematic Rules & Factor Models.
+3. **Coaching Style / 코칭 스타일**: Strict Margin of Safety vs Growth Potential vs Structural Asset Allocation.
+
+3단계 대화형 진단을 통해 유저 성향에 최적화된 구루(또는 커스텀 구루)를 매칭하고 원클릭 선택을 지원합니다:
+1. **위험 성향**: 손실 방어(보수) vs 분산 복리(중립) vs 고수익 성장(공격).
+2. **분석 방식**: 기업 재무제표 펀더멘털 vs 거시경제 매크로 vs 수학적 퀀트/팩터.
+3. **피드백 스타일**: 엄격한 안전마진 vs 미래 성장 잠재력 vs 기계적 자산배분.
 
 ## Layout Structure
 

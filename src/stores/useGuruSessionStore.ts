@@ -29,6 +29,16 @@ export interface GuruSessionSnapshot {
   }[];
   baseCurrency: string;
   rates: Record<string, number>;
+  /** (선택) 계좌별 개별 자산 스냅샷 (후속 프롬프트에서 계좌별 델타 추적용) */
+  assets?: {
+    id: string;
+    ticker?: string;
+    name: string;
+    currency: string;
+    quantity: number;
+    avgBuyPrice: number;
+    brokerId?: string;
+  }[];
 }
 
 interface GuruSessionState {

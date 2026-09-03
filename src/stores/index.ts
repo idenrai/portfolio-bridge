@@ -32,4 +32,16 @@ export type { UserProfile } from "./useProfileStore";
 export { useBrokerStore } from "./useBrokerStore";
 export { useFireStore } from "./useFireStore";
 export type { FireCalculationMode } from "./useFireStore";
+export {
+  useCustomGuruStore,
+  DEFAULT_CUSTOM_GURU,
+  CUSTOM_GURU_RISK_KEYS,
+  CUSTOM_GURU_STRATEGY_KEYS,
+  CUSTOM_GURU_TONE_KEYS,
+  type CustomGuruConfig,
+  type CustomGuruRisk,
+  type CustomGuruStrategy,
+  type CustomGuruTone,
+} from "./useCustomGuruStore";
+
 

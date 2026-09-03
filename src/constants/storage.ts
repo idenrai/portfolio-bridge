@@ -9,4 +9,5 @@ export const STORAGE_KEYS = {
   PROFILE: "portfolio-bridge-profile",
   BROKERS: "portfolio-bridge-brokers",
   FIRE: "portfolio-bridge-fire",
+  CUSTOM_GURU: "portfolio-bridge-custom-guru",
 } as const;

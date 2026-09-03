@@ -10,6 +10,7 @@ import {
   useLanguageStore,
   useSnapshotStore,
   useBrokerStore,
+  useCustomGuruStore,
 } from "@/stores";
 import {
   findDriveFile,
@@ -44,6 +45,7 @@ function buildBackup(): DriveBackup {
   const { lang } = useLanguageStore.getState();
   const { snapshots } = useSnapshotStore.getState();
   const { accounts: brokerAccounts } = useBrokerStore.getState();
+  const { config: customGuru } = useCustomGuruStore.getState();
   return {
     version: 1,
     syncedAt: new Date().toISOString(),
@@ -54,6 +56,7 @@ function buildBackup(): DriveBackup {
     lang,
     snapshots,
     brokerAccounts,
+    customGuru,
   };
 }
 
@@ -82,9 +85,14 @@ function applyRemote(backup: DriveBackup) {
       if (backup.snapshots.length >= local.length) {
         useSnapshotStore.setState({ snapshots: backup.snapshots });
       }
-    }    if (Array.isArray(backup.brokerAccounts) && backup.brokerAccounts.length > 0) {
+    }
+    if (Array.isArray(backup.brokerAccounts) && backup.brokerAccounts.length > 0) {
       useBrokerStore.setState({ accounts: backup.brokerAccounts as never });
-    }  } catch (e) {
+    }
+    if (backup.customGuru && typeof backup.customGuru === "object") {
+      useCustomGuruStore.getState().updateConfig(backup.customGuru as never);
+    }
+  } catch (e) {
     console.error("applyRemote failed", e);
   }
 }
