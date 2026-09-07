@@ -8,8 +8,16 @@
 | Stores | `useSettingsStore`, `useProfileStore`, `useGoogleDriveStore` |
 
 ## Page Structure
+ 
+`Settings.tsx` acts as a 100% full-width responsive workspace (`space-y-4 md:space-y-6`), organizing settings into a 2-column desktop layout (`lg:grid-cols-12 lg:gap-6`):
+- **Left column (`lg:order-1 lg:col-span-5`)**: System & data controls (`DisplaySection`, `TargetAllocationSection`, `DataRefreshSection`, `DataManagementSection`).
+- **Right column (`lg:order-2 lg:col-span-7`)**: Investor profile & long-term plans (`ProfileSection`).
+- **Mobile ordering (`< lg`)**: `ProfileSection` appears first (`order-1`) for fast personal profile access, while system and backup controls appear below (`order-2`).
 
-`Settings.tsx` acts as a clean layout container hosting five dedicated section components from `src/components/settings/`:
+`Settings.tsx`는 100% 전폭 반응형 워크스페이스(`space-y-4 md:space-y-6`)로 동작하며, 데스크톱 환경에서는 2열 그리드(`lg:grid-cols-12 lg:gap-6`)로 구성됩니다:
+- **좌측 컬럼 (`lg:order-1 lg:col-span-5`)**: 시스템 및 데이터 설정 (`DisplaySection`, `TargetAllocationSection`, `DataRefreshSection`, `DataManagementSection`).
+- **우측 컬럼 (`lg:order-2 lg:col-span-7`)**: 투자자 프로필 및 장기 계획 (`ProfileSection`).
+- **모바일 순서 (`< lg`)**: 빠른 프로필 확인을 위해 `ProfileSection`이 상단(`order-1`)에 먼저 노출되고, 시스템 및 백업 설정이 하단(`order-2`)에 자연스럽게 배치됩니다.
 
 1. **DisplaySection**: Base display currency configuration.
 2. **TargetAllocationSection**: Portfolio target allocation view, sum indicator, and launch point for `TargetAllocationModal`.

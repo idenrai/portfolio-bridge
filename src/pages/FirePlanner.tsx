@@ -62,8 +62,8 @@ export function FirePlannerPage() {
   ]);
 
   return (
-    <div className="mx-auto max-w-5xl space-y-6 pt-4 pb-20">
-      <div className="flex flex-col gap-2">
+    <div className="space-y-4 md:space-y-6">
+      <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight text-balance text-white md:text-3xl">
           {t.fire_title}
         </h1>
@@ -72,11 +72,11 @@ export function FirePlannerPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-5">
+      <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-12 lg:gap-6">
+        <div className="lg:col-span-5 xl:col-span-4">
           <FireInputForm />
         </div>
-        <div className="flex flex-col gap-6 lg:col-span-7">
+        <div className="flex flex-col gap-4 lg:col-span-7 lg:gap-6 xl:col-span-8">
           <FireResultCard
             result={result?.fireResult ?? null}
             targetAmount={result?.targetInBase}

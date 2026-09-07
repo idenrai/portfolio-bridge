@@ -40,12 +40,14 @@ FIRE 플래너의 핵심 상태는 `src/stores/useFireStore.ts`에서 관리됩�
    **차트 포맷팅**: `FireChart.tsx`의 Y축과 툴팁은 현재 UI 언어 설정에 맞춰 축약 단위(한국어: 억/만, 일본어: 億/万, 영/독어: M/K)를 자동으로 적용하는 `formatCurrency`를 사용합니다.
 
 ### UI & Visual Components
+- **`FirePlanner.tsx`**: Utilizes a 100% full-width responsive workspace (`space-y-4 md:space-y-6`), split on desktop (`lg:grid-cols-12 lg:gap-6`) between the left input form (`lg:col-span-5 xl:col-span-4`) and right analytics/chart stack (`lg:col-span-7 xl:col-span-8`).
+  **`FirePlanner.tsx`**: 100% 전폭 반응형 워크스페이스(`space-y-4 md:space-y-6`)로 동작하며, 데스크톱(`lg:grid-cols-12 lg:gap-6`)에서 좌측 입력 폼(`lg:col-span-5 xl:col-span-4`)과 우측 결과/차트 스택(`lg:col-span-7 xl:col-span-8`)으로 분할됩니다.
 - **`FireResultCard.tsx`**: Features a top milestone badge (`N years to FIRE / Reach at age N`) with compound leverage ratio (`+XX% compound gain`), followed by a 4-card financial KPI grid displaying Target Net Worth, Total Contributions, Compound Growth Amount, and Milestone year.
   **`FireResultCard.tsx`**: 상단 FIRE 마일스톤 달성 배지(`N년 후 FIRE 달성 / N세 도달`) 및 복리 레버리지 효과(`+XX% 복리 창출`)를 표기하며, 하단에 목표 자산, 총 저축 원금, 복리 창출 수익, 달성 시점의 4대 핵심 재무 KPI 그리드를 제공합니다.
-- **`FireInputForm.tsx`**: Interactive form equipped with currency/unit badges, expected return slider with quick presets (`4% Conservative`, `7% Moderate`, `10% Aggressive`), safe withdrawal rate presets (`3.5%`, `4.0% Trinity Rule`, `5.0%`), and real-time portfolio linking.
-  **`FireInputForm.tsx`**: 통화/단위 뱃지가 부착된 인풋, 기대수익률 조절 슬라이더 및 원클릭 프리셋(`보수적 4%`, `중립적 7%`, `공격적 10%`), 안전 인출률 프리셋(`3.5%`, `4.0% 트리니티 룰`, `5.0%`), 실시간 포트폴리오 연동 토글을 갖춘 인터랙티브 입력 폼입니다.
-- **`FireChart.tsx`**: Recharts area & line visualization equipped with a dark glassmorphic custom tooltip, compact currency formatting, and a highlighted vertical `ReferenceLine` marking the exact milestone year where projected assets cross the target line.
-  **`FireChart.tsx`**: 다크 글래스모피즘 커스텀 툴팁, 축약 통화 포맷팅, 자산 곡선이 목표선과 교차하는 FIRE 달성 연도를 표시하는 골든 하이라이트 수직 참조선(`ReferenceLine`)을 탑재한 시뮬레이션 차트입니다.
+- **`FireInputForm.tsx`**: Interactive form equipped with currency/unit badges, expected return slider with quick presets (`4% Conservative`, `7% Moderate`, `10% Aggressive`), safe withdrawal rate presets (`3.5%`, `4.0% Trinity Rule`, `5.0%`), enlarged mobile touch targets (`min-h-7.5 px-2 py-1.5 sm:text-2xs`), and real-time portfolio linking.
+  **`FireInputForm.tsx`**: 통화/단위 뱃지가 부착된 인풋, 기대수익률 조절 슬라이더 및 원클릭 프리셋(`보수적 4%`, `중립적 7%`, `공격적 10%`), 안전 인출률 프리셋(`3.5%`, `4.0% 트리니티 룰`, `5.0%`), 확장된 모바일 터치 타겟(`min-h-7.5 px-2 py-1.5 sm:text-2xs`), 실시간 포트폴리오 연동 토글을 갖춘 인터랙티브 입력 폼입니다.
+- **`FireChart.tsx`**: Recharts area & line visualization equipped with responsive container height (`h-72 min-h-72 w-full sm:h-80 sm:min-h-80 lg:h-96 lg:min-h-96`), a dark glassmorphic custom tooltip, compact currency formatting, and a highlighted vertical `ReferenceLine` marking the exact milestone year where projected assets cross the target line.
+  **`FireChart.tsx`**: 반응형 컨테이너 높이(`h-72 min-h-72 w-full sm:h-80 sm:min-h-80 lg:h-96 lg:min-h-96`), 다크 글래스모피즘 커스텀 툴팁, 축약 통화 포맷팅, 자산 곡선이 목표선과 교차하는 FIRE 달성 연도를 표시하는 골든 하이라이트 수직 참조선(`ReferenceLine`)을 탑재한 시뮬레이션 차트입니다.
 
 ## Extensibility
 - Future enhancements may include dynamic Monte Carlo simulations considering Sequence of Returns Risk (SORR).

@@ -94,11 +94,13 @@ Storage keys are defined in `src/constants/storage.ts`.
 
 ## App Layout
 
-앱의 레이아웃 구성 컴포넌트입니다.
+All pages (`/`, `/assets`, `/gurus`, `/fire`, `/settings`, `/about`) utilize a unified 100% full-width responsive layout inside `Layout.tsx`, preventing horizontal container jitter across tab transitions and maximizing data visibility on large monitors.
+
+모든 페이지(`/`, `/assets`, `/gurus`, `/fire`, `/settings`, `/about`)는 `Layout.tsx` 내에서 통일된 100% 전폭 반응형 레이아웃을 사용하여 탭 전환 시 시야가 흔들리는 현상을 방지하고 와이드 디스플레이의 공간을 극대화합니다.
 
 | Component | Location | Role |
 | --- | --- | --- |
-| `Layout` | `components/layout/Layout.tsx` | Root shell (header + content area + bottom nav) / 루트 셸 |
+| `Layout` | `components/layout/Layout.tsx` | Root shell (header + full-width content area + bottom nav) / 루트 셸 |
 | `Header` | `components/layout/Header.tsx` | Top bar (logo, global navigation, language dropdown) / 상단 GNB 바 |
 | `BottomNav` | `components/layout/BottomNav.tsx` | Mobile bottom navigation bar / 모바일 하단 내비게이션 |
 | `ScrollToTop` | `components/layout/ScrollToTop.tsx` | Scroll restoration on route change / 라우트 이동 시 스크롤 상단 복원 |

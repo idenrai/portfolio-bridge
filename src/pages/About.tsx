@@ -51,7 +51,7 @@ export function AboutPage() {
   const t = useT();
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6 pb-10 md:space-y-8">
+    <div className="space-y-6 md:space-y-8">
       {/* Hero */}
       <div className="rounded-2xl border border-zinc-800 bg-zinc-950 px-5 py-7 text-white shadow-lg md:px-8 md:py-10">
         <div className="mb-4 flex items-center gap-4">
@@ -63,7 +63,7 @@ export function AboutPage() {
             <p className="mt-1 text-sm text-zinc-400">{t.about_tagline}</p>
           </div>
         </div>
-        <p className="text-sm leading-relaxed text-zinc-300">
+        <p className="max-w-3xl text-sm leading-relaxed text-zinc-300">
           {t.about_intro}
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
@@ -90,7 +90,7 @@ export function AboutPage() {
         <h2 className="mb-3 text-base font-bold text-zinc-200">
           {t.about_features_title}
         </h2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3">
           {FEATURES.map((f, idx) => (
             <div
               key={idx}
@@ -113,7 +113,7 @@ export function AboutPage() {
       </div>
 
       {/* Foundations */}
-      <div className="grid grid-cols-1 gap-3 md:gap-3.5">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
         {/* Global */}
         <div className="flex items-start gap-3.5 rounded-xl border border-l-4 border-zinc-800 border-l-blue-500 bg-zinc-900 px-4 py-3 shadow-sm md:px-5 md:py-4">
           <div className="flex h-8 w-auto shrink-0 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950 px-2 font-mono text-sm text-zinc-400">

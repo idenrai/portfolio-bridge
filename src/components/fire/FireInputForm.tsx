@@ -200,7 +200,7 @@ export function FireInputForm() {
                 type="button"
                 onClick={() => setExpectedReturnRate(p.val)}
                 className={cn(
-                  "flex-1 cursor-pointer rounded-md border px-2 py-1 text-3xs font-medium transition-colors",
+                  "min-h-7.5 flex-1 cursor-pointer rounded-md border px-2 py-1.5 text-3xs font-medium transition-colors sm:text-2xs",
                   expectedReturnRate === p.val
                     ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-300"
                     : "border-zinc-800 bg-zinc-900/70 text-zinc-400 hover:text-zinc-200",
@@ -326,7 +326,7 @@ export function FireInputForm() {
                     type="button"
                     onClick={() => setSafeWithdrawalRate(p.val)}
                     className={cn(
-                      "flex-1 cursor-pointer rounded-md border px-2 py-1 text-3xs font-medium transition-colors",
+                      "min-h-7.5 flex-1 cursor-pointer rounded-md border px-2 py-1.5 text-3xs font-medium transition-colors sm:text-2xs",
                       safeWithdrawalRate === p.val
                         ? "border-cyan-500/50 bg-cyan-500/20 text-cyan-300"
                         : "border-zinc-800 bg-zinc-900/70 text-zinc-400 hover:text-zinc-200",

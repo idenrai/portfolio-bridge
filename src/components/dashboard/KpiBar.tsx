@@ -88,7 +88,7 @@ export const KpiBar = memo(function KpiBar({ summary, isInitialLoading }: Props)
       </div>
 
       {/* 보조 지표 그리드 */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-6">
         <div className="border border-zinc-800 bg-black px-4 py-3">
           <p className="mb-1 text-xs font-bold tracking-wider text-zinc-500 uppercase">{t.holdings_title}</p>
           <p className="font-mono text-lg text-zinc-300 tabular-nums">
