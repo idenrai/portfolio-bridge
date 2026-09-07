@@ -42,7 +42,7 @@ export function FireChart({ data, successYear }: FireChartProps) {
         </div>
       </div>
 
-      <div className="h-72 w-full">
+      <div className="h-72 min-h-72 w-full sm:h-80 sm:min-h-80 lg:h-96 lg:min-h-96">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
             data={data}
