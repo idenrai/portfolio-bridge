@@ -33,9 +33,9 @@ A bar that allows filtering the dashboard data by market, asset type, category, 
 
 ### KPI Bar (`KpiBar.tsx`)
 
-Five summary metrics in a horizontal bar. All monetary values converted to `baseCurrency`. During the initial price fetch, a loading overlay is displayed to prevent stale local cache prices from being shown.
+Five summary metrics in a horizontal bar. All monetary values converted to `baseCurrency`. During the initial price fetch, a loading overlay is displayed to prevent stale local cache prices from being shown. The secondary metrics sub-grid uses `gap-4 md:grid-cols-3 lg:gap-6` to strictly align its vertical split lines with the 2-column main dashboard layout below (`lg:grid-cols-3 lg:gap-6`).
 
-5개의 핵심 지표를 가로 바로 표시합니다. 모든 금액은 `baseCurrency`로 변환됩니다. 최초 시세 데이터 조회 중에는 로컬 캐시의 낡은 가격이 노출되지 않도록 로딩 오버레이가 표시됩니다.
+5개의 핵심 지표를 가로 바로 표시합니다. 모든 금액은 `baseCurrency`로 변환됩니다. 최초 시세 데이터 조회 중에는 로컬 캐시의 낡은 가격이 노출되지 않도록 로딩 오버레이가 표시됩니다. 보조 지표 서브 그리드는 `gap-4 md:grid-cols-3 lg:gap-6`을 사용하여 하단 메인 2열 그리드(`lg:grid-cols-3 lg:gap-6`)와 수직 분할선 및 여백을 정확히 일치시킵니다.
 
 | Slot | Metric | Description |
 | --- | --- | --- |
