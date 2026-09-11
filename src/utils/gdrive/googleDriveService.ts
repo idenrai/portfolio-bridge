@@ -11,6 +11,7 @@ import {
   useSnapshotStore,
   useBrokerStore,
   useCustomGuruStore,
+  useFireStore,
 } from "@/stores";
 import {
   findDriveFile,
@@ -46,6 +47,7 @@ function buildBackup(): DriveBackup {
   const { snapshots } = useSnapshotStore.getState();
   const { accounts: brokerAccounts } = useBrokerStore.getState();
   const { config: customGuru } = useCustomGuruStore.getState();
+  const fire = useFireStore.getState();
   return {
     version: 1,
     syncedAt: new Date().toISOString(),
@@ -57,6 +59,17 @@ function buildBackup(): DriveBackup {
     snapshots,
     brokerAccounts,
     customGuru,
+    fire: {
+      mode: fire.mode,
+      monthlySavings: fire.monthlySavings,
+      expectedReturnRate: fire.expectedReturnRate,
+      targetAmount: fire.targetAmount,
+      monthlyExpense: fire.monthlyExpense,
+      safeWithdrawalRate: fire.safeWithdrawalRate,
+      currentAge: fire.currentAge,
+      usePortfolioAssets: fire.usePortfolioAssets,
+      manualCurrentAssets: fire.manualCurrentAssets,
+    },
   };
 }
 
@@ -91,6 +104,20 @@ function applyRemote(backup: DriveBackup) {
     }
     if (backup.customGuru && typeof backup.customGuru === "object") {
       useCustomGuruStore.getState().updateConfig(backup.customGuru as never);
+    }
+    if (backup.fire && typeof backup.fire === "object") {
+      const f = backup.fire as Record<string, unknown>;
+      useFireStore.setState({
+        mode: (f.mode as never) ?? "expense",
+        monthlySavings: (f.monthlySavings as number) ?? 1000000,
+        expectedReturnRate: (f.expectedReturnRate as number) ?? 7,
+        targetAmount: (f.targetAmount as number) ?? 1000000000,
+        monthlyExpense: (f.monthlyExpense as number) ?? 3000000,
+        safeWithdrawalRate: (f.safeWithdrawalRate as number) ?? 4,
+        currentAge: (f.currentAge as number | null) ?? null,
+        usePortfolioAssets: (f.usePortfolioAssets as boolean) ?? true,
+        manualCurrentAssets: (f.manualCurrentAssets as number) ?? 0,
+      });
     }
   } catch (e) {
     console.error("applyRemote failed", e);

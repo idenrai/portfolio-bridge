@@ -37,6 +37,8 @@ export interface DriveBackup {
   brokerAccounts?: unknown[];
   /** 커스텀 구루 설정 */
   customGuru?: unknown;
+  /** FIRE 플래너 설정 */
+  fire?: unknown;
 }
 
 // ─── 파일 검색 ────────────────────────────────────────────────────────────────

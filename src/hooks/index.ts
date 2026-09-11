@@ -11,4 +11,7 @@ export { useBuffettIndicator } from "./useBuffettIndicator";
 export { usePortfolioSnapshot } from "./usePortfolioSnapshot";
 export { useGuruPromptScope } from "./useGuruPromptScope";
 export { useGuruFilter } from "./useGuruFilter";
+export { useNetworkStatus } from "./useNetworkStatus";
+export { useMultiTabSync } from "./useMultiTabSync";
+export { useStoragePersistence, formatBytes, calculateLocalStorageUsage } from "./useStoragePersistence";
 

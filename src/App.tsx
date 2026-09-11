@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/layout";
 import { PageSkeleton } from "@/components/common";
-import { useDataRefresh } from "@/hooks";
+import { useDataRefresh, useMultiTabSync, useStoragePersistence, useNetworkStatus } from "@/hooks";
 import { initGoogleDriveService } from "@/utils";
 
 const DashboardPage = lazy(() =>
@@ -26,15 +26,23 @@ const AboutPage = lazy(() =>
 
 function AppInitializer() {
   const { refreshAll } = useDataRefresh();
+  const { requestPersistence } = useStoragePersistence();
   const initRef = useRef(false);
+
+  // 다중 브라우저 탭 간 실시간 Zustand 상태 동기화
+  useMultiTabSync();
+
+  // 네트워크 복구 시 자동 시세/환율 재조회
+  useNetworkStatus({ onReconnect: refreshAll });
 
   useEffect(() => {
     if (!initRef.current) {
       initRef.current = true;
       refreshAll();
       initGoogleDriveService(); // Drive 서비스 초기화 (앱 전체에서 1회)
+      requestPersistence();     // 브라우저 스토리지 자동 삭제(Eviction) 방지 요청
     }
-  }, [refreshAll]);
+  }, [refreshAll, requestPersistence]);
 
   return null;
 }

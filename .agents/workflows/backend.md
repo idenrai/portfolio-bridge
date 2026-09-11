@@ -12,6 +12,7 @@ description: 백엔드(Node.js/API/Edge Runtime) 아키텍처 설계, API 개발
 백엔드 및 API 관련 작업을 시작하기 전, 다음 스킬(지침서)을 **반드시 먼저 읽고** 원칙을 숙지하십시오:
 - `.agents/skills/nodejs-best-practices/SKILL.md` (아키텍처 사고 방식, 프레임워크 선택, 보안 원칙)
 - `.agents/skills/nodejs-backend-patterns/SKILL.md` (실제 코드 구현 패턴)
+- **로컬 퍼스트(Local-First) 연동 및 오프라인 회복력 설계 시:** `.agents/skills/local-first/SKILL.md` 읽기 (네트워크 프로브 엔드포인트 설계, 스마트 엣지 캐싱, 오프라인 지원 API 패턴, 무상태 엣지 가드레일)
 - **Vercel Edge Runtime & 프록시 연동 시:** `.agents/skills/yahoo-finance/SKILL.md` 및 `.agents/skills/vercel-react-best-practices/SKILL.md` (Edge Functions, 엣지 캐싱, 쿠키/크럼 인증)
 
 ## 2. Runtime & Architecture Selection
@@ -19,6 +20,11 @@ description: 백엔드(Node.js/API/Edge Runtime) 아키텍처 설계, API 개발
   - 모든 Vercel 서버리스 엔드포인트는 `export const config = { runtime: "edge" };` 기반의 **Edge Runtime**으로 작성합니다.
   - Node.js 내장 모듈(fs, path 등) 대신 **Web Standard API (`Request`, `Response`, `fetch`, `Headers`)**를 사용합니다.
   - 엣지 레이트리밋 방어 및 응답속도 향상을 위해 성공적인 GET 응답에 적절한 `Cache-Control` 헤더(`s-maxage`, `stale-while-revalidate`)를 부여합니다.
+- **Local-First 지원 원칙 (Privacy-First & Stateless Edge):**
+  - 백엔드(Edge Functions)는 사용자의 개인 금융 상태를 서버에 영속화하지 않습니다. 모든 영속 상태는 클라이언트 브라우저가 소유합니다.
+  - 클라이언트의 실시간 오프라인 감지 및 재연결 프로브를 위해 무캐시(No-cache) 헬스체크 엔드포인트(`/api/health`)를 항시 지원합니다.
+  - 외부 시세/환율 데이터는 엣지 캐싱(`s-maxage`, `stale-while-revalidate`)을 적극 적용하여 클라이언트 오프라인 복귀 시 버스트 부하를 방어합니다.
+  - **스토리지 엔진 마이그레이션 기준:** 등록 자산 수가 500건을 초과하거나 로컬 스토리지 사용량이 3MB(5MB 한도의 60%)를 초과할 경우, `.agents/skills/local-first/SKILL.md`의 IndexedDB 또는 OPFS/SQLite WASM 마이그레이션 패턴 도입을 우선 검토합니다.
 - 복잡해지는 로직은 항상 Controller(Route), Service 계층으로 분리하여 단일 책임 원칙을 준수합니다.
 
 ## 3. Security & Validation (Zero-Trust)
