@@ -18,7 +18,7 @@ The app runs as a **React SPA** served locally via Vite or deployed to Vercel (E
 |------|------------|
 | Frontend | React 19 · TypeScript 5.9 · Vite 7 · Lucide React · date-fns · Fontsource (Inter, Fira Code) |
 | Styling | Tailwind CSS v4 (`@tailwindcss/vite`, `@theme` design tokens, `@utility`) |
-| State & Async Data | Zustand 5 (Granular Selector pattern + `localStorage` persist) · TanStack Query v5 |
+| State & Async Data | Local-First Architecture · Zustand 5 (Granular Selector pattern + `localStorage` persist + Multi-tab sync) · TanStack Query v5 (offlineFirst) |
 | Charts | Recharts 3 |
 | Routing | React Router v7 (`react-router-dom` v7 with `React.lazy` & `Suspense`) |
 | i18n | Custom (ko / en / ja / de) |
@@ -98,6 +98,7 @@ portfolio-bridge/
 │   └── utils/                  # Pure utility functions
 │       ├── ai/                 # AI prompt generation (Guru evaluation & classification)
 │       ├── analyzers/          # Quantitative investment analyzers (Graham, Lynch, Piotroski, etc.)
+│       ├── backup/             # Full portfolio JSON backup & restore engine (Local-First)
 │       ├── calc/               # Portfolio, currency conversion, FIRE, & insight calculations
 │       ├── gdrive/             # Google Drive backup/restore service integration
 │       ├── yahoo/              # Yahoo Finance API client (Quotes, FX, Fundamentals, Search)
@@ -197,7 +198,8 @@ npm run lint
 
 - **Client State**: Global application state lives in Zustand stores under `src/stores/` using `persist` middleware for `localStorage` persistence. Store files follow `use<Domain>Store.ts`.
 - **Granular Selectors**: Always subscribe to state with granular selector functions (e.g. `const baseCurrency = useSettingsStore((s) => s.baseCurrency);`) instead of whole-store destructuring to prevent unnecessary component re-renders.
-- **Async Server State**: TanStack Query (`@tanstack/react-query`) is initialized in `src/providers/QueryProvider.tsx` for caching and managing async server state.
+- **Local-First Architecture**: Follow guidelines in `.agents/skills/local-first/SKILL.md`. Ensure persistence via `navigator.storage.persist()`, synchronize multi-tab changes via `useMultiTabSync()`, monitor storage quota, and maintain true local ownership with all-in-one JSON backups.
+- **Async Server State**: TanStack Query (`@tanstack/react-query`) is initialized in `src/providers/QueryProvider.tsx` with `networkMode: 'offlineFirst'` and extended `gcTime` for offline resilience.
 - Always use `STORAGE_KEYS` constants (from `src/constants/`) as the `name` in Zustand `persist` options.
 
 ### Styling

@@ -38,6 +38,7 @@
 AI가 특정 도구나 기능이 필요할 때 로드하세요.
 - 프로젝트 인덱싱 및 컨텍스트 파악 필요 시: `.agents/skills/indexing-awareness/SKILL.md` 읽기
 - 현재 날짜 및 시간 파악 필요 시 (지식 컷오프 회피): `.agents/skills/knowledge-cutoff-awareness/SKILL.md` 읽기
+- **로컬 퍼스트(Local-First) 아키텍처 및 클라이언트 스토리지/오프라인/동기화 설계 시:** `.agents/skills/local-first/SKILL.md` 적극 활용 (스토리지 지속성, Safari ITP 7일 삭제 방어, 다중 탭 동기화, 오프라인 헬스 프로브, 스키마 진화 및 원클릭 JSON 백업)
 - **TypeScript 타입 설계 및 고급 제네릭 활용 시:** `.agents/skills/typescript-advanced-types/SKILL.md` 및 `.agents/skills/typescript-best-practices/SKILL.md` 적극 활용
 - **TanStack React Query 비동기 상태/캐싱 가이드 필요 시:** `.agents/skills/tanstack-query-best-practices/SKILL.md` 적극 활용
 - **Zustand 5 상태 관리 및 영속화 패턴 필요 시:** `.agents/skills/zustand-5/SKILL.md` 적극 활용

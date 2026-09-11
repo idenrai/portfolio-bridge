@@ -44,3 +44,13 @@ export {
 } from "./gdrive/googleDriveService";
 export type { DriveBackup } from "./gdrive/googleDrive";
 export { cn } from "./cn";
+export {
+  createFullBackup,
+  exportFullBackupAsJson,
+  validateBackupData,
+  sanitizeAssets,
+  sanitizeSnapshots,
+  sanitizeBrokerAccounts,
+  importFullBackupFromJson,
+  type FullPortfolioBackup,
+} from "./backup";

@@ -49,6 +49,7 @@ export const useFireStore = create<FireState>()(
     }),
     {
       name: STORAGE_KEYS.FIRE,
+      version: 1,
     }
   )
 );

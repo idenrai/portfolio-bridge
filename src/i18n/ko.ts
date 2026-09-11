@@ -775,6 +775,29 @@ export const ko: Translations = {
   settings_data_drive_title: "Google Drive 데이터 삭제",
   settings_data_drive_note:
     "Google Drive에 저장된 데이터를 삭제하려면 Google 계정의 앱 연결 관리 페이지(myaccount.google.com/permissions)에서 이 앱의 접근 권한을 해제하세요. 권한 해제 시 Google Drive에 저장된 백업 파일도 함께 삭제됩니다.",
+  storage_persisted_active: "영구 보관 활성화됨 (Safe)",
+  storage_persisted_inactive: "일반 보관 (브라우저 자동 삭제 가능)",
+  storage_request_persist: "영구 보관 활성화",
+  storage_usage_label: (used: string, quota: string) => `로컬 저장소 사용량: ${used} (할당량: ${quota})`,
+  storage_persisted_desc:
+    "브라우저의 디스크 공간 부족이나 Safari의 7일 미방문 삭제 정책(ITP)으로부터 포트폴리오 데이터를 안전하게 보호하기 위해 영구 보관 권한을 요청합니다.",
+  offline_badge_title: "오프라인",
+  offline_badge_tooltip: "네트워크가 연결되지 않았습니다. 현재 기기에 저장된 로컬 데이터로 작동 중입니다.",
+  backup_json_title: "오프라인 통합 백업 (JSON)",
+  backup_json_desc:
+    "클라우드 로그인 없이도 자산, 설정, 프로필, 스냅샷, 브로커, FIRE 계획 등 모든 포트폴리오 데이터를 단일 파일로 안전하게 백업 및 복원할 수 있습니다.",
+  backup_json_export_btn: "전체 백업 다운로드 (.json)",
+  backup_json_import_btn: "백업 파일 복원 (.json)",
+  backup_json_success: "백업 데이터를 성공적으로 복원했습니다.",
+  backup_json_error: "유효하지 않거나 손상된 백업 파일입니다.",
+  backup_json_confirm: "현재 로컬 데이터가 백업 파일 내용으로 덮어씌워집니다. 계속하시겠습니까?",
+  backup_json_quota_exceeded:
+    "백업 파일의 크기가 브라우저 로컬 저장소 한도(약 5MB)에 근접하여 데이터 저장에 실패할 수 있습니다. 불필요한 스냅샷을 정리한 후 다시 시도해 주세요.",
+  modal_confirm: "확인",
+  modal_cancel: "취소",
+  modal_close: "닫기",
+  settings_data_reset_title: "로컬 데이터 전체 초기화",
+  backup_json_import_title: "포트폴리오 백업 복원",
 
   profile_title: "내 정보",
   profile_desc:
@@ -999,6 +1022,15 @@ export const ko: Translations = {
   fire_age_label: "현재 나이 (선택)",
   fire_age_placeholder: "예: 30",
   fire_error_savings_exceed_target: "월 저축액이 목표 자산 총액을 초과합니다. 목표 금액이나 월 저축액을 다시 확인해 주세요.",
+  fire_profile_age_linked: (age) => `내 정보 프로필 연동됨 (${age}세)`,
+  fire_reset_to_profile_age: "프로필 나이로 되돌리기",
+  fire_longevity_title: "은퇴 라이프사이클 (100세 기대 수명)",
+  fire_longevity_badge: (years) => `${years}년 안전 인출 필요`,
+  fire_longevity_desc: (age, years) => `${age}세에 은퇴 후 100세 기대 수명까지 약 ${years}년간 자산을 인출하며 생활하게 됩니다.`,
+  fire_longevity_warning_extended: "인출 기간이 30년을 초과하는 조기 은퇴는 장기 시장 변동성에 대비해 안전 인출률(SWR)을 3.5% 이하로 보수적으로 설정하는 것이 권장됩니다.",
+  fire_timeline_current_age: (age) => `현재 ${age}세`,
+  fire_timeline_target_age: (age) => `${age}세 은퇴 달성`,
+  fire_timeline_longevity_age: "100세 기대 수명",
 
   category_labels: {
     dividend: "배당",

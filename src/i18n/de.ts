@@ -782,6 +782,29 @@ export const de: Translations = {
   settings_data_drive_title: "Google Drive Daten löschen",
   settings_data_drive_note:
     "Um die auf Google Drive gespeicherten Daten zu löschen, wechseln Sie zur App-Berechtigungsseite Ihres Google-Kontos (myaccount.google.com/permissions) und widerrufen Sie den Zugriff für diese App. Beim Widerrufen wird auch die in Drive gespeicherte Sicherungsdatei gelöscht.",
+  storage_persisted_active: "Dauerhafter Speicher aktiviert (Safe)",
+  storage_persisted_inactive: "Standard-Speicher (kann vom Browser gelöscht werden)",
+  storage_request_persist: "Dauerhaften Speicher aktivieren",
+  storage_usage_label: (used: string, quota: string) => `Lokaler Speicherverbrauch: ${used} (Kontingent: ${quota})`,
+  storage_persisted_desc:
+    "Fordern Sie Berechtigungen für dauerhaften Speicher an, um Ihre Portfoliodaten vor der automatischen Browser-Bereinigung und der 7-Tage-Löschrichtlinie von Safari (ITP) zu schützen.",
+  offline_badge_title: "Offline",
+  offline_badge_tooltip: "Keine Netzwerkverbindung. Sie arbeiten nahtlos mit lokalen Gerätedaten.",
+  backup_json_title: "Offline-Gesamtsicherung (JSON)",
+  backup_json_desc:
+    "Sichern und wiederherstellen Sie alle Portfoliodaten (Assets, Einstellungen, Profil, Snapshots, Broker, FIRE-Pläne) in einer einzigen Datei ohne Cloud-Anmeldung.",
+  backup_json_export_btn: "Vollständige Sicherung herunterladen (.json)",
+  backup_json_import_btn: "Sicherungsdatei wiederherstellen (.json)",
+  backup_json_success: "Portfoliodaten erfolgreich wiederhergestellt.",
+  backup_json_error: "Ungültige oder beschädigte Sicherungsdatei.",
+  backup_json_confirm: "Ihre aktuellen lokalen Daten werden durch die Sicherungsdatei überschrieben. Möchten Sie fortfahren?",
+  backup_json_quota_exceeded:
+    "Die Größe der Sicherungsdatei nähert sich dem Limit des lokalen Browser-Speichers (~5 MB). Das Speichern kann fehlschlagen. Bitte bereinigen Sie alte Snapshots und versuchen Sie es erneut.",
+  modal_confirm: "Bestätigen",
+  modal_cancel: "Abbrechen",
+  modal_close: "Schließen",
+  settings_data_reset_title: "Alle lokalen Daten zurücksetzen",
+  backup_json_import_title: "Portfolio-Sicherung wiederherstellen",
 
   profile_title: "Mein Profil",
   profile_desc:
@@ -1010,6 +1033,15 @@ export const de: Translations = {
   fire_age_label: "Aktuelles Alter (optional)",
   fire_age_placeholder: "z.B. 30",
   fire_error_savings_exceed_target: "Die monatlichen Ersparnisse übersteigen den Zielvermögensbetrag. Bitte überprüfen Sie Ihren Zielbetrag oder Ihre Ersparnisse.",
+  fire_profile_age_linked: (age) => `Profil-Alter verknüpft (${age})`,
+  fire_reset_to_profile_age: "Auf Profil-Alter zurücksetzen",
+  fire_longevity_title: "Ruhestands-Zeithorizont (bis 100 Jahre)",
+  fire_longevity_badge: (years) => `${years} J. Entnahmehorizont`,
+  fire_longevity_desc: (age, years) => `Ein Ruhestand mit ${age} Jahren erfordert Kapitalentnahmen für ca. ${years} Jahre bis zum 100. Lebensjahr.`,
+  fire_longevity_warning_extended: "Für Ruhestandsphasen von über 30 Jahren wird zum Schutz vor Renditereihenfolgerisiken eine konservative Entnahmerate von maximal 3,5% empfohlen.",
+  fire_timeline_current_age: (age) => `Aktuell: ${age} J.`,
+  fire_timeline_target_age: (age) => `FIRE mit ${age} J.`,
+  fire_timeline_longevity_age: "Alter 100",
 
   category_labels: {
     dividend: "Dividende",

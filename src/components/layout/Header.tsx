@@ -1,7 +1,7 @@
 import { useLanguageStore } from "@/stores";
-import { LayoutDashboard, Briefcase, Users, Target, Settings, Info, Globe } from "lucide-react";
+import { LayoutDashboard, Briefcase, Users, Target, Settings, Info, Globe, WifiOff } from "lucide-react";
 import { NavLink, Link } from "react-router-dom";
-import { useT } from "@/hooks";
+import { useT, useNetworkStatus } from "@/hooks";
 import { CustomSelect } from "@/components/common";
 import { cn } from "@/utils/cn";
 import type { Lang } from "@/i18n";
@@ -24,6 +24,7 @@ export function Header() {
   const lang = useLanguageStore((s) => s.lang);
   const setLang = useLanguageStore((s) => s.setLang);
   const t = useT();
+  const { isOnline } = useNetworkStatus();
 
   const NAV_ITEMS = [
     { to: "/", label: t.nav_dashboard, icon: <LayoutDashboard className="size-4" /> },
@@ -74,7 +75,21 @@ export function Header() {
           ))}
         </nav>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
+        {/* 오프라인 상태 인디케이터 배지 */}
+        {!isOnline && (
+          <div
+            className="flex items-center gap-1.5 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-xs font-medium text-amber-400"
+            title={t.offline_badge_tooltip}
+            role="status"
+            aria-live="polite"
+          >
+            <span className="size-1.5 animate-pulse rounded-full bg-amber-400" aria-hidden="true" />
+            <WifiOff className="size-3.5 shrink-0" aria-hidden="true" />
+            <span className="hidden sm:inline">{t.offline_badge_title}</span>
+          </div>
+        )}
+
         {/* 언어 전환 버튼 (커스텀 드롭다운) */}
         <div className="flex items-center justify-center">
           <CustomSelect<Lang>

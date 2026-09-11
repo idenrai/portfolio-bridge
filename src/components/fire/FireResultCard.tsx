@@ -1,6 +1,6 @@
 
 import { useT } from "@/hooks";
-import { AlertTriangle, CheckCircle2, TrendingUp, Target, PiggyBank, Sparkles } from "lucide-react";
+import { AlertTriangle, CheckCircle2, TrendingUp, Target, PiggyBank, Sparkles, Hourglass } from "lucide-react";
 import { formatCurrency } from "@/utils/calc/currency";
 import { useSettingsStore } from "@/stores";
 import type { FireResult } from "@/utils/calc/fire";
@@ -10,6 +10,7 @@ interface FireResultCardProps {
   targetAmount?: number;
   currentAssets?: number;
   monthlySavings?: number;
+  currentAge?: number | null;
 }
 
 export function FireResultCard({
@@ -17,6 +18,7 @@ export function FireResultCard({
   targetAmount = 0,
   currentAssets = 0,
   monthlySavings = 0,
+  currentAge = null,
 }: FireResultCardProps) {
   const t = useT();
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
@@ -149,6 +151,68 @@ export function FireResultCard({
           </div>
         </div>
       )}
+
+      {/* 3. 은퇴 라이프사이클 타임라인 (기대 수명 & 인출 지속 기간) */}
+      {typeof result.successAge === "number" && typeof result.retirementYears === "number" && (() => {
+        const targetLongevity = result.targetLongevity ?? 100;
+        const totalSpan = currentAge !== null ? Math.max(1, targetLongevity - currentAge) : 100;
+        const accumSpan = currentAge !== null ? Math.max(0, result.successAge - currentAge) : 0;
+        const accumPct = currentAge !== null && result.successAge > currentAge
+          ? Math.min(92, Math.max(8, (accumSpan / totalSpan) * 100))
+          : 0;
+
+        return (
+          <div className="z-10 flex flex-col gap-3 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-4">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <Hourglass className="size-4 text-emerald-400" />
+                <span className="text-xs font-semibold text-zinc-200">
+                  {t.fire_longevity_title}
+                </span>
+              </div>
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-2xs font-semibold text-emerald-300">
+                {t.fire_longevity_badge(result.retirementYears)}
+              </span>
+            </div>
+
+            {/* 시각적 라이프사이클 타임라인 */}
+            <div className="space-y-1.5 pt-1">
+              <div className="flex items-center justify-between text-3xs font-medium text-zinc-400">
+                {currentAge !== null && <span>{t.fire_timeline_current_age(currentAge)}</span>}
+                <span className="font-bold text-emerald-400">
+                  {t.fire_timeline_target_age(result.successAge)}
+                </span>
+                <span>{t.fire_timeline_longevity_age}</span>
+              </div>
+              <div className="relative flex h-2.5 w-full overflow-hidden rounded-full bg-zinc-800">
+                {accumPct > 0 && (
+                  <div
+                    className="h-full bg-indigo-500/80 transition-all duration-500"
+                    style={{ width: `${accumPct}%` }}
+                    title={`${accumSpan}년 자산 축적`}
+                  />
+                )}
+                <div
+                  className="h-full flex-1 bg-emerald-500/80 transition-all duration-500"
+                  title={`${result.retirementYears}년 안전 인출`}
+                />
+              </div>
+            </div>
+
+            <p className="text-2xs leading-relaxed text-zinc-400">
+              {t.fire_longevity_desc(result.successAge, result.retirementYears)}
+            </p>
+
+            {/* 30년 초과 시 조기 은퇴 장기 인출 리스크 알림 */}
+            {result.isExtendedRetirement && (
+              <div className="flex items-start gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-3xs leading-relaxed text-amber-300">
+                <AlertTriangle className="mt-0.5 size-3.5 shrink-0 text-amber-400" />
+                <span>{t.fire_longevity_warning_extended}</span>
+              </div>
+            )}
+          </div>
+        );
+      })()}
     </div>
   );
 }

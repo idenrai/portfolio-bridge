@@ -1,6 +1,7 @@
+import { RotateCcw } from "lucide-react";
 import { Card } from "@/components/common";
 import { useT, usePortfolio, useExchangeRates } from "@/hooks";
-import { useFireStore, useSettingsStore } from "@/stores";
+import { useFireStore, useSettingsStore, useProfileStore } from "@/stores";
 import { fromKRW, toKRW, cn } from "@/utils";
 
 /** Format a number with thousand-separator commas for display */
@@ -29,6 +30,7 @@ export function FireInputForm() {
   const setExpectedReturnRate = useFireStore((s) => s.setExpectedReturnRate);
   const currentAge = useFireStore((s) => s.currentAge);
   const setCurrentAge = useFireStore((s) => s.setCurrentAge);
+  const profileAge = useProfileStore((s) => s.age);
   const targetAmount = useFireStore((s) => s.targetAmount);
   const setTargetAmount = useFireStore((s) => s.setTargetAmount);
   const monthlyExpense = useFireStore((s) => s.monthlyExpense);
@@ -214,16 +216,33 @@ export function FireInputForm() {
 
         {/* 4. 현재 나이 (선택) */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold text-zinc-300">
-            {t.fire_age_label}
-          </label>
+          <div className="flex items-center justify-between gap-2">
+            <label className="text-xs font-semibold text-zinc-300">
+              {t.fire_age_label}
+            </label>
+            {currentAge !== null && profileAge !== null ? (
+              <button
+                type="button"
+                onClick={() => setCurrentAge(null)}
+                className="flex cursor-pointer items-center gap-1 rounded border border-zinc-700/60 bg-zinc-800/60 px-1.5 py-0.5 text-3xs font-medium text-zinc-300 transition-colors hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:text-emerald-300"
+                title={t.fire_reset_to_profile_age}
+              >
+                <RotateCcw className="size-2.5" />
+                <span>{t.fire_reset_to_profile_age}</span>
+              </button>
+            ) : currentAge === null && profileAge !== null ? (
+              <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 text-3xs font-medium text-emerald-400">
+                {t.fire_profile_age_linked(profileAge)}
+              </span>
+            ) : null}
+          </div>
           <div className="relative">
             <input
               type="number"
               min="10"
               max="100"
               className="w-full rounded-lg border border-zinc-800 bg-zinc-900/80 px-3 py-2 pr-12 text-sm font-medium text-white transition-colors focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 focus:outline-none"
-              placeholder={t.fire_age_placeholder}
+              placeholder={profileAge ? String(profileAge) : t.fire_age_placeholder}
               value={currentAge || ""}
               onChange={(e) =>
                 setCurrentAge(e.target.value ? Number(e.target.value) : null)

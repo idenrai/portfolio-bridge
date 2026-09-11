@@ -25,6 +25,7 @@ export { useSettingsStore } from "./useSettingsStore";
 export { useLanguageStore } from "./useLanguageStore";
 export { useGoogleDriveStore } from "./useGoogleDriveStore";
 export { useSnapshotStore } from "./useSnapshotStore";
+export type { PortfolioSnapshot } from "./useSnapshotStore";
 export { useGuruSessionStore } from "./useGuruSessionStore";
 export type { GuruSessionSnapshot } from "./useGuruSessionStore";
 export { useProfileStore } from "./useProfileStore";

@@ -23,6 +23,9 @@ description: 프론트엔드 UI/UX 컴포넌트 신규 생성, 수정 및 리팩
   - 스토어 생성 및 상태 구독 시 `.agents/skills/zustand-5/SKILL.md`의 패턴(Granular Selectors, `persist` 미들웨어, 불변성 보장)을 철저히 준수합니다.
 - **TanStack Query (React Query v5) 비동기 서버 상태:**
   - API 통신, 시세 및 외부 데이터 캐싱 시 `.agents/skills/tanstack-query-best-practices/SKILL.md`를 기반으로 Query Key Factory, Stale Time, 낙관적 업데이트(Optimistic Updates)를 설계합니다.
+- **로컬 퍼스트(Local-First) 지속성 및 오프라인 설계:**
+  - 클라이언트 상태 저장소 설계 시 `.agents/skills/local-first/SKILL.md`의 원칙(영구 스토리지 `navigator.storage.persist()`, 다중 탭 동기화 `useMultiTabSync`, 스토리지 쿼터 모니터링, 안전한 JSON 백업)을 철저히 준수합니다.
+  - TanStack Query 사용 시 `networkMode: 'offlineFirst'` 및 적절한 `gcTime`을 설정하여 오프라인 환경에서도 캐시된 시세를 즉시 렌더링할 수 있도록 보장합니다.
 
 ## 3. Component Structure & Modification
 - 모든 컴포넌트는 Functional Component 구조의 훅(Hooks) 패턴으로만 작성합니다.

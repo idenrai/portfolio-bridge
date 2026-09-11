@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useT, usePortfolio, useExchangeRates } from "@/hooks";
-import { useFireStore, useSettingsStore } from "@/stores";
+import { useFireStore, useSettingsStore, useProfileStore } from "@/stores";
 import { FireInputForm, FireChart, FireResultCard } from "@/components/fire";
 import { calculateFire, getTargetAmountFromExpense, fromKRW } from "@/utils";
 
@@ -16,6 +16,8 @@ export function FirePlannerPage() {
   const safeWithdrawalRate = useFireStore((s) => s.safeWithdrawalRate);
   const expectedReturnRate = useFireStore((s) => s.expectedReturnRate);
   const currentAge = useFireStore((s) => s.currentAge);
+  const profileAge = useProfileStore((s) => s.age);
+  const effectiveAge = currentAge ?? profileAge;
   const baseCurrency = useSettingsStore((s) => s.baseCurrency);
   const { data: exchangeRates } = useExchangeRates();
 
@@ -37,7 +39,7 @@ export function FirePlannerPage() {
       monthlySavings: savingsInBase,
       expectedReturnRate,
       targetAmount: targetInBase,
-      currentAge,
+      currentAge: effectiveAge,
     });
 
     return {
@@ -58,7 +60,7 @@ export function FirePlannerPage() {
     monthlyExpense,
     safeWithdrawalRate,
     expectedReturnRate,
-    currentAge,
+    effectiveAge,
   ]);
 
   return (
@@ -82,6 +84,7 @@ export function FirePlannerPage() {
             targetAmount={result?.targetInBase}
             currentAssets={result?.currentAssets}
             monthlySavings={result?.savingsInBase}
+            currentAge={effectiveAge}
           />
           {result && result.fireResult.data.length > 0 && (
             <div className="flex flex-1 flex-col">
