@@ -568,6 +568,26 @@ export interface Translations {
   settings_data_reset_confirm: string;
   settings_data_drive_title: string;
   settings_data_drive_note: string;
+  storage_persisted_active: string;
+  storage_persisted_inactive: string;
+  storage_request_persist: string;
+  storage_usage_label: (used: string, quota: string) => string;
+  storage_persisted_desc: string;
+  offline_badge_title: string;
+  offline_badge_tooltip: string;
+  backup_json_title: string;
+  backup_json_desc: string;
+  backup_json_export_btn: string;
+  backup_json_import_btn: string;
+  backup_json_success: string;
+  backup_json_error: string;
+  backup_json_confirm: string;
+  backup_json_quota_exceeded: string;
+  modal_confirm: string;
+  modal_cancel: string;
+  modal_close: string;
+  settings_data_reset_title: string;
+  backup_json_import_title: string;
 
   // ─── Profile Section ───────────────────────────────────────────────────────
   profile_title: string;
@@ -797,6 +817,15 @@ export interface Translations {
   fire_age_label: string;
   fire_age_placeholder: string;
   fire_error_savings_exceed_target: string;
+  fire_profile_age_linked: (age: number) => string;
+  fire_reset_to_profile_age: string;
+  fire_longevity_title: string;
+  fire_longevity_badge: (years: number) => string;
+  fire_longevity_desc: (age: number, years: number) => string;
+  fire_longevity_warning_extended: string;
+  fire_timeline_current_age: (age: number) => string;
+  fire_timeline_target_age: (age: number) => string;
+  fire_timeline_longevity_age: string;
 
   // ─── Label maps (charts, dropdowns) ───────────────────────────────────────
   category_labels: Record<string, string>;

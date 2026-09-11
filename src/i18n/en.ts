@@ -777,6 +777,29 @@ export const en: Translations = {
   settings_data_drive_title: "Google Drive Data Deletion",
   settings_data_drive_note:
     "To delete data saved on Google Drive, go to your Google Account's app permissions page (myaccount.google.com/permissions) and revoke access for this app. Revoking access will also delete the backup file stored in Drive.",
+  storage_persisted_active: "Persistent Storage Enabled (Safe)",
+  storage_persisted_inactive: "Standard Storage (Subject to browser eviction)",
+  storage_request_persist: "Enable Persistent Storage",
+  storage_usage_label: (used: string, quota: string) => `Local Storage Usage: ${used} (Quota: ${quota})`,
+  storage_persisted_desc:
+    "Request persistent storage permissions to protect your portfolio data from browser disk cleanup and Safari 7-day eviction policies (ITP).",
+  offline_badge_title: "Offline",
+  offline_badge_tooltip: "No network connection. Running seamlessly with local device data.",
+  backup_json_title: "All-in-One Offline Backup (JSON)",
+  backup_json_desc:
+    "Export and restore your entire portfolio data (assets, settings, profile, snapshots, brokers, FIRE plans) into a single file without cloud sign-in.",
+  backup_json_export_btn: "Download Full Backup (.json)",
+  backup_json_import_btn: "Restore Backup File (.json)",
+  backup_json_success: "Portfolio data successfully restored.",
+  backup_json_error: "Invalid or corrupted backup file.",
+  backup_json_confirm: "Your current local data will be replaced by the backup file. Do you wish to proceed?",
+  backup_json_quota_exceeded:
+    "The backup file size is close to the browser local storage limit (~5MB). Storage may fail. Please prune old snapshots and try again.",
+  modal_confirm: "Confirm",
+  modal_cancel: "Cancel",
+  modal_close: "Close",
+  settings_data_reset_title: "Reset All Local Data",
+  backup_json_import_title: "Restore Portfolio Backup",
 
   profile_title: "My Profile",
   profile_desc:
@@ -1001,6 +1024,15 @@ export const en: Translations = {
   fire_age_label: "Current Age (Optional)",
   fire_age_placeholder: "e.g., 30",
   fire_error_savings_exceed_target: "Monthly savings exceed the target asset amount. Please check your target amount or monthly savings.",
+  fire_profile_age_linked: (age) => `Profile Age Linked (${age})`,
+  fire_reset_to_profile_age: "Reset to Profile Age",
+  fire_longevity_title: "Retirement Longevity Horizon (Age 100)",
+  fire_longevity_badge: (years) => `${years}-Yr Withdrawal Horizon`,
+  fire_longevity_desc: (age, years) => `Retiring at age ${age} requires sustaining portfolio withdrawals for ~${years} years up to age 100.`,
+  fire_longevity_warning_extended: "For retirement horizons exceeding 30 years, adopting a conservative Safe Withdrawal Rate (3.5% or lower) is recommended to protect against market volatility.",
+  fire_timeline_current_age: (age) => `Current: ${age}yo`,
+  fire_timeline_target_age: (age) => `FIRE at ${age}yo`,
+  fire_timeline_longevity_age: "Age 100 Horizon",
 
   category_labels: {
     dividend: "Dividend",

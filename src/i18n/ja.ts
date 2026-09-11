@@ -776,6 +776,29 @@ export const ja: Translations = {
   settings_data_drive_title: "Google Drive データ削除",
   settings_data_drive_note:
     "Google Driveに保存されたデータを削除するには、Googleアカウントのアプリ連携管理ページ（myaccount.google.com/permissions）でこのアプリのアクセス権限を解除してください。権限を解除するとDriveに保存されたバックアップファイルも削除されます。",
+  storage_persisted_active: "永続ストレージ有効 (Safe)",
+  storage_persisted_inactive: "標準ストレージ (ブラウザ自動削除の可能性あり)",
+  storage_request_persist: "永続ストレージを有効化",
+  storage_usage_label: (used: string, quota: string) => `ローカルストレージ使用量: ${used} (割り当て量: ${quota})`,
+  storage_persisted_desc:
+    "ブラウザの空き容量不足やSafariの7日間未訪問削除ポリシー(ITP)からポートフォリオデータを保護するため、永続ストレージ権限をリクエストします。",
+  offline_badge_title: "オフライン",
+  offline_badge_tooltip: "ネットワークに接続されていません。端末に保存されたローカルデータで動作しています。",
+  backup_json_title: "オフライン統合バックアップ (JSON)",
+  backup_json_desc:
+    "クラウドにログインすることなく、資産、設定、プロフィール、スナップショット、証券口座、FIRE計画などすべてのポートフォリオデータを単一ファイルで安全にバックアップ・復元できます。",
+  backup_json_export_btn: "全体バックアップをダウンロード (.json)",
+  backup_json_import_btn: "バックアップファイルを復元 (.json)",
+  backup_json_success: "バックアップデータを正常に復元しました。",
+  backup_json_error: "無効または破損したバックアップファイルです。",
+  backup_json_confirm: "現在のローカルデータがバックアップファイルの内容で上書きされます。続行しますか？",
+  backup_json_quota_exceeded:
+    "バックアップファイルのサイズがブラウザのローカルストレージ制限（約5MB）に近づいているため、保存に失敗する可能性があります。不要なスナップショットを整理して再試行してください。",
+  modal_confirm: "確認",
+  modal_cancel: "キャンセル",
+  modal_close: "閉じる",
+  settings_data_reset_title: "全ローカルデータの初期化",
+  backup_json_import_title: "ポートフォリオバックアップの復元",
 
   profile_title: "プロフィール",
   profile_desc:
@@ -1001,6 +1024,15 @@ export const ja: Translations = {
   fire_age_label: "現在の年齢（任意）",
   fire_age_placeholder: "例：30",
   fire_error_savings_exceed_target: "毎月の貯蓄額が目標資産総額を超えています。目標金額または貯蓄額を再確認してください。",
+  fire_profile_age_linked: (age) => `プロフィール年齢と連携中 (${age}歳)`,
+  fire_reset_to_profile_age: "プロフィールの年齢に戻す",
+  fire_longevity_title: "リタイアメント・ライフサイクル (100歳想定)",
+  fire_longevity_badge: (years) => `${years}年間の安全取り崩し`,
+  fire_longevity_desc: (age, years) => `${age}歳で早期退職後、100歳までの約${years}年間、資産を取り崩しながら生活します。`,
+  fire_longevity_warning_extended: "30年を超える長期の早期リタイアでは、市場変動（収益順序リスク）に備えて安全取り崩し率(SWR)を3.5%以下に保守的に設定することを推奨します。",
+  fire_timeline_current_age: (age) => `現在 ${age}歳`,
+  fire_timeline_target_age: (age) => `${age}歳 達成`,
+  fire_timeline_longevity_age: "100歳 想定寿命",
 
   category_labels: {
     dividend: "配当",
