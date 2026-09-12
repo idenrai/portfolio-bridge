@@ -14,6 +14,7 @@ description: 백엔드(Node.js/API/Edge Runtime) 아키텍처 설계, API 개발
 - `.agents/skills/nodejs-backend-patterns/SKILL.md` (실제 코드 구현 패턴)
 - **로컬 퍼스트(Local-First) 연동 및 오프라인 회복력 설계 시:** `.agents/skills/local-first/SKILL.md` 읽기 (네트워크 프로브 엔드포인트 설계, 스마트 엣지 캐싱, 오프라인 지원 API 패턴, 무상태 엣지 가드레일)
 - **Vercel Edge Runtime & 프록시 연동 시:** `.agents/skills/yahoo-finance/SKILL.md` 및 `.agents/skills/vercel-react-best-practices/SKILL.md` (Edge Functions, 엣지 캐싱, 쿠키/크럼 인증)
+- **AI 프롬프트 및 분석 유틸리티 연동 시:** 구루 프롬프트 조립, 계좌/세무 데이터 블록 주입, 구조화된 분석 포맷을 설계하거나 수정할 때는 반드시 `.agents/workflows/prompt.md` 워크플로우를 참조합니다.
 
 ## 2. Runtime & Architecture Selection
 - **Vercel Edge Runtime 활용 (`api/` 디렉터리):**

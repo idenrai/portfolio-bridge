@@ -60,7 +60,7 @@ export function MagicFormulaCard() {
 
   return (
     <AnalyzerCard<MFCriterionKey>
-      theme="violet"
+      theme="cyan"
       texts={texts}
       criterionHints={CRITERION_HINT}
       criterionLabel={criterionLabel}

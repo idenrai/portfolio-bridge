@@ -26,37 +26,37 @@ export function GuruScopeSelector({
   t,
 }: GuruScopeSelectorProps) {
   return (
-    <div className="mt-4 space-y-3 rounded-xl border border-zinc-800/90 bg-zinc-950/70 p-3.5">
+    <div className="mt-4 space-y-3 rounded-none border border-zinc-800 bg-zinc-950 p-3.5">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800/80 pb-2.5">
         <div className="min-w-0">
-          <p className="text-xs font-semibold text-zinc-200">
+          <p className="font-mono text-xs font-semibold text-zinc-200">
             {t.guru_ai_scope_title}
           </p>
-          <p className="text-2xs text-zinc-400">
+          <p className="font-mono text-2xs text-zinc-400">
             {t.guru_ai_scope_desc}
           </p>
         </div>
-        <div className="flex items-center gap-2 font-medium">
+        <div className="flex items-center gap-2 font-mono text-2xs font-medium">
           <button
             type="button"
             onClick={selectAll}
-            className="cursor-pointer text-2xs text-indigo-400 transition-colors hover:text-indigo-300"
+            className="cursor-pointer text-amber-400 transition-colors hover:text-amber-300"
           >
             {t.guru_ai_scope_select_all}
           </button>
-          <span className="text-2xs text-zinc-700">|</span>
+          <span className="text-zinc-700">|</span>
           <button
             type="button"
             onClick={deselectAll}
-            className="cursor-pointer text-2xs text-zinc-400 transition-colors hover:text-zinc-300"
+            className="cursor-pointer text-zinc-400 transition-colors hover:text-zinc-300"
           >
             {t.guru_ai_scope_deselect_all}
           </button>
-          <span className="text-2xs text-zinc-700">|</span>
+          <span className="text-zinc-700">|</span>
           <button
             type="button"
             onClick={resetToDefaultScope}
-            className="cursor-pointer text-2xs text-emerald-400 transition-colors hover:text-emerald-300"
+            className="cursor-pointer text-emerald-400 transition-colors hover:text-emerald-300"
           >
             {t.guru_ai_scope_reset}
           </button>
@@ -64,7 +64,7 @@ export function GuruScopeSelector({
       </div>
 
       {availableAssets.length === 0 ? (
-        <p className="py-2 text-center text-xs text-zinc-500">{t.guru_empty_desc}</p>
+        <p className="py-2 text-center font-mono text-xs text-zinc-500">{t.guru_empty_desc}</p>
       ) : (
         <div className="grid max-h-60 grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3">
           {availableAssets.map((asset) => {
@@ -77,9 +77,9 @@ export function GuruScopeSelector({
               <label
                 key={asset.id}
                 className={cn(
-                  "flex cursor-pointer items-center gap-2.5 rounded-lg border p-2 text-xs transition-all select-none",
+                  "flex cursor-pointer items-center gap-2.5 rounded-none border p-2 text-xs transition-all select-none",
                   isSelected
-                    ? "border-indigo-500/40 bg-indigo-500/5 text-zinc-100"
+                    ? "border-amber-400/60 bg-amber-500/10 text-zinc-100"
                     : "border-zinc-800/80 bg-zinc-900/30 text-zinc-500 opacity-60 hover:border-zinc-700",
                 )}
               >
@@ -87,7 +87,7 @@ export function GuruScopeSelector({
                   type="checkbox"
                   checked={isSelected}
                   onChange={() => toggleAssetId(asset.id)}
-                  className="size-4 shrink-0 cursor-pointer rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                  className="size-4 shrink-0 cursor-pointer rounded-none border-zinc-700 bg-zinc-900 text-amber-500 focus:ring-1 focus:ring-amber-400/40"
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5">
@@ -114,11 +114,11 @@ export function GuruScopeSelector({
                 {vis !== "all" && (
                   <span
                     className={cn(
-                      "shrink-0 rounded border px-1.5 py-0.5 text-4xs font-medium uppercase",
+                      "shrink-0 rounded-none border px-1.5 py-0.5 font-mono text-4xs font-medium uppercase",
                       vis === "dashboard_only" &&
                         "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
                       vis === "guru_only" &&
-                        "border-purple-500/30 bg-purple-500/10 text-purple-400",
+                        "border-cyan-500/30 bg-cyan-500/10 text-cyan-400",
                       vis === "hidden" &&
                         "border-zinc-700 bg-zinc-800 text-zinc-400",
                     )}
@@ -133,7 +133,7 @@ export function GuruScopeSelector({
       )}
 
       {activeAssetsCount === 0 && (
-        <div className="flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 p-2.5 text-xs text-amber-400">
+        <div className="flex items-center gap-2 rounded-none border border-amber-500/30 bg-amber-500/10 p-2.5 font-mono text-xs text-amber-400">
           <AlertTriangle className="size-4 shrink-0" />
           <span>{t.guru_ai_scope_empty_warning}</span>
         </div>

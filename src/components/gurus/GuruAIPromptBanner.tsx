@@ -258,105 +258,103 @@ export function GuruAIPromptBanner({
   };
 
   return (
-    <div className="rounded-xl bg-linear-to-r from-indigo-500/20 to-purple-500/20 p-px shadow-sm">
-      <div className="rounded-xl bg-zinc-900/95 p-4 sm:px-5">
-        <div className="flex flex-col gap-4">
-          {/* Header */}
-          <div className="flex items-center gap-2">
-            <MessageSquareQuote aria-hidden="true" className="size-5 text-indigo-400" />
-            <div className="min-w-0">
-              <p className="text-sm leading-tight font-semibold text-zinc-100">
-                {t.guru_ai_banner_title}
-              </p>
-              <p className="mt-1 text-xs-plus leading-relaxed text-zinc-500 sm:text-xs">
-                {t.guru_ai_banner_desc}
-              </p>
-            </div>
-          </div>
-          
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setShowScopeSelector((prev) => !prev)}
-              aria-expanded={showScopeSelector}
-              className={cn(
-                "inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-center text-xs font-medium whitespace-nowrap shadow-sm transition-all active:scale-95 sm:flex-none",
-                showScopeSelector || isCustomScope
-                  ? "border-indigo-500/50 bg-indigo-500/20 text-indigo-300"
-                  : "border-zinc-700/60 bg-zinc-800/60 text-zinc-300 hover:bg-zinc-800 hover:text-white",
-              )}
-            >
-              <SlidersHorizontal aria-hidden="true" className="size-3.5 text-indigo-400" />
-              <span>{t.guru_ai_scope_title}</span>
-              <span className="rounded-full bg-zinc-700/70 px-1.5 py-0.5 font-mono text-3xs text-zinc-200">
-                {selectedAssetIds.size}/{availableAssets.length}
-              </span>
-              <ChevronDown
-                aria-hidden="true"
-                className={cn("size-3.5 text-zinc-400 transition-transform", showScopeSelector && "rotate-180")}
-              />
-            </button>
-
-            {prevSession && (
-              <button
-                type="button"
-                onClick={() => {
-                  setShowFollowUp(true);
-                  setShowPrompt(false);
-                }}
-                className="flex-1 cursor-pointer rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-emerald-400 shadow-sm transition-all hover:bg-emerald-500/20 active:scale-95 sm:flex-none"
-              >
-                {t.guru_ai_followup_btn}
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={handleNewSession}
-              className="flex-1 cursor-pointer rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-indigo-400 shadow-sm transition-all hover:bg-indigo-500/20 hover:opacity-90 active:scale-95 sm:flex-none"
-            >
-              {t.guru_ai_followup_new_session}
-            </button>
+    <div className="rounded-none border border-zinc-800 bg-zinc-950 p-4 sm:px-5">
+      <div className="flex flex-col gap-4">
+        {/* Header */}
+        <div className="flex items-center gap-2">
+          <MessageSquareQuote aria-hidden="true" className="size-5 text-amber-400" />
+          <div className="min-w-0">
+            <p className="font-mono text-xs font-semibold text-zinc-100">
+              {t.guru_ai_banner_title}
+            </p>
+            <p className="mt-0.5 font-mono text-xs text-zinc-500">
+              {t.guru_ai_banner_desc}
+            </p>
           </div>
         </div>
+        
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setShowScopeSelector((prev) => !prev)}
+            aria-expanded={showScopeSelector}
+            className={cn(
+              "inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-none border px-3 py-2 text-center font-mono text-xs font-medium whitespace-nowrap shadow-none transition-all sm:flex-none",
+              showScopeSelector || isCustomScope
+                ? "border-amber-400 bg-amber-500/10 text-amber-300"
+                : "border-zinc-800 bg-zinc-900 text-zinc-300 hover:bg-zinc-800 hover:text-white",
+            )}
+          >
+            <SlidersHorizontal aria-hidden="true" className="size-3.5 text-amber-400" />
+            <span>{t.guru_ai_scope_title}</span>
+            <span className="rounded-none border border-zinc-800 bg-zinc-800 px-1.5 py-0.5 font-mono text-3xs text-zinc-200">
+              {selectedAssetIds.size}/{availableAssets.length}
+            </span>
+            <ChevronDown
+              aria-hidden="true"
+              className={cn("size-3.5 text-zinc-400 transition-transform", showScopeSelector && "rotate-180")}
+            />
+          </button>
 
-        {/* 종목 선택기 패널 */}
-        {showScopeSelector && (
-          <GuruScopeSelector
-            availableAssets={availableAssets}
-            selectedAssetIds={selectedAssetIds}
-            toggleAssetId={toggleAssetId}
-            selectAll={selectAll}
-            deselectAll={deselectAll}
-            resetToDefaultScope={resetToDefaultScope}
-            activeAssetsCount={activeAssets.length}
-            t={t}
-          />
-        )}
-
-        {/* 첫 번째 프롬프트 */}
-        {showPrompt && (
-          <GuruPromptCard
-            promptText={promptText}
-            activeAssetsCount={activeAssets.length}
-            copied={copied}
-            onCopy={copyPrompt}
-            t={t}
-          />
-        )}
-
-        {/* 두 번째 (변동 사항) 프롬프트 */}
-        {showFollowUp && followUpText && (
-          <GuruFollowUpSection
-            followUpText={followUpText}
-            prevSessionDate={prevSession?.date}
-            activeAssetsCount={activeAssets.length}
-            copiedFollowUp={copiedFollowUp}
-            onCopyFollowUp={copyFollowUp}
-            t={t}
-          />
-        )}
+          {prevSession && (
+            <button
+              type="button"
+              onClick={() => {
+                setShowFollowUp(true);
+                setShowPrompt(false);
+              }}
+              className="flex-1 cursor-pointer rounded-none border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-center font-mono text-xs font-medium whitespace-nowrap text-emerald-400 shadow-none transition-all hover:bg-emerald-500/20 active:scale-100 sm:flex-none"
+            >
+              {t.guru_ai_followup_btn}
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={handleNewSession}
+            className="flex-1 cursor-pointer rounded-none border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-center font-mono text-xs font-semibold whitespace-nowrap text-amber-400 shadow-none transition-all hover:bg-amber-400 hover:text-black active:scale-100 sm:flex-none"
+          >
+            {t.guru_ai_followup_new_session}
+          </button>
+        </div>
       </div>
+
+      {/* 종목 선택기 패널 */}
+      {showScopeSelector && (
+        <GuruScopeSelector
+          availableAssets={availableAssets}
+          selectedAssetIds={selectedAssetIds}
+          toggleAssetId={toggleAssetId}
+          selectAll={selectAll}
+          deselectAll={deselectAll}
+          resetToDefaultScope={resetToDefaultScope}
+          activeAssetsCount={activeAssets.length}
+          t={t}
+        />
+      )}
+
+      {/* 첫 번째 프롬프트 */}
+      {showPrompt && (
+        <GuruPromptCard
+          promptText={promptText}
+          activeAssetsCount={activeAssets.length}
+          copied={copied}
+          onCopy={copyPrompt}
+          t={t}
+        />
+      )}
+
+      {/* 두 번째 (변동 사항) 프롬프트 */}
+      {showFollowUp && followUpText && (
+        <GuruFollowUpSection
+          followUpText={followUpText}
+          prevSessionDate={prevSession?.date}
+          activeAssetsCount={activeAssets.length}
+          copiedFollowUp={copiedFollowUp}
+          onCopyFollowUp={copyFollowUp}
+          t={t}
+        />
+      )}
     </div>
   );
 }

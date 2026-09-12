@@ -64,7 +64,7 @@ describe("Account Types presets and badge styling", () => {
     }
   });
 
-  it("returns violet badge style for retirement / pension accounts", () => {
+  it("returns cyan badge style for retirement / pension accounts", () => {
     const pensionTypes = [
       "연금저축",
       "IRP",
@@ -76,7 +76,7 @@ describe("Account Types presets and badge styling", () => {
 
     for (const type of pensionTypes) {
       const style = getAccountTypeBadgeStyle(type);
-      expect(style).toContain("violet");
+      expect(style).toContain("cyan");
     }
   });
 

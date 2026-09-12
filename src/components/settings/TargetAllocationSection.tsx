@@ -21,7 +21,7 @@ export function TargetAllocationSection() {
     <button
       type="button"
       onClick={() => setModalOpen(true)}
-      className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-indigo-500/40 bg-indigo-500/15 px-3 py-1.5 text-xs font-semibold text-indigo-300 transition-colors hover:bg-indigo-500/25 hover:text-white focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none sm:min-h-8"
+      className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-none border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 font-mono text-xs font-semibold text-amber-300 transition-colors hover:bg-amber-400 hover:text-black focus-visible:ring-1 focus-visible:ring-amber-400/50 focus-visible:outline-none sm:min-h-8"
     >
       <SlidersHorizontal className="size-3.5" />
       <span>{t.category_set_target}</span>
@@ -33,7 +33,7 @@ export function TargetAllocationSection() {
       <Card
         title={
           <div className="flex items-center gap-2">
-            <PieChart className="size-4 text-indigo-400" />
+            <PieChart className="size-4 text-amber-400" />
             <span>{t.settings_target_title}</span>
           </div>
         }
@@ -49,12 +49,12 @@ export function TargetAllocationSection() {
               targetAllocations.map((item) => (
                 <div
                   key={item.category}
-                  className="flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/70 px-2.5 py-1.5 text-xs text-zinc-300"
+                  className="flex items-center gap-1.5 rounded-none border border-zinc-800 bg-zinc-900/70 px-2.5 py-1.5 font-mono text-xs text-zinc-300"
                 >
                   <span className="font-medium text-zinc-200">
                     {t.category_labels[item.category as AssetCategory] ?? item.category}
                   </span>
-                  <span className="font-mono font-bold text-indigo-400">
+                  <span className="font-mono font-bold text-amber-400">
                     {item.targetPercent}%
                   </span>
                 </div>

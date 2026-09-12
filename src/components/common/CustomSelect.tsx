@@ -204,7 +204,7 @@ export function CustomSelect<T extends string | number>({
   const portalContent = isOpen && portalTarget ? createPortal(
     <div 
       className={cn(
-        "fixed z-100 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/95 p-1 shadow-xl backdrop-blur-xl",
+        "fixed z-100 overflow-hidden rounded-none border border-zinc-800 bg-zinc-950 p-1 shadow-2xl",
         "animate-popup",
         dropdownClassName
       )}
@@ -233,14 +233,14 @@ export function CustomSelect<T extends string | number>({
                 containerRef.current?.querySelector('button')?.focus();
               }}
               className={cn(
-                "flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "flex cursor-pointer items-center gap-2 rounded-none px-3 py-2 font-mono text-xs font-medium transition-colors",
                 isFocused
-                  ? isSelected ? "bg-violet-500/30 text-violet-200" : "bg-zinc-800/80 text-white"
-                  : isSelected ? "bg-violet-500/20 text-violet-300" : "text-zinc-300"
+                  ? isSelected ? "bg-amber-500/20 text-amber-300" : "bg-zinc-800 text-white"
+                  : isSelected ? "bg-amber-500/10 text-amber-400" : "text-zinc-300"
               )}
             >
               <span className="min-w-0 flex-1 truncate">{option.label}</span>
-              {isSelected && <Check className="size-4 shrink-0 text-violet-500" />}
+              {isSelected && <Check className="size-3.5 shrink-0 text-amber-400" />}
             </li>
           );
         })}
@@ -268,7 +268,7 @@ export function CustomSelect<T extends string | number>({
           }
         }}
         className={className || cn(
-          "flex w-full cursor-pointer items-center justify-between gap-2 rounded-md border border-zinc-800 bg-zinc-900/50 px-3 py-2 font-mono text-sm text-white shadow-sm transition-colors",
+          "flex w-full cursor-pointer items-center justify-between gap-2 rounded-none border border-zinc-800 bg-zinc-900/50 px-3 py-2 font-mono text-sm text-white shadow-sm transition-colors",
           "hover:bg-zinc-800/80 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500/50 focus-visible:outline-none"
         )}
       >

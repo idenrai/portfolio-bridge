@@ -3,7 +3,7 @@ import { useAssetStore, useLanguageStore } from "@/stores";
 import { useT } from "@/hooks";
 import { Button, Modal, FeedbackIconText } from "@/components/common";
 import { buildClassificationPrompt, parseAiResponse, cn } from "@/utils";
-import { Sparkles, Check, Copy } from "lucide-react";
+import { Terminal, Check, Copy } from "lucide-react";
 
 interface AIClassificationModalProps {
   open: boolean;
@@ -36,13 +36,10 @@ export function AIClassificationModal({
   };
 
   const handleImportAiJson = () => {
-    setImportResult(null);
     setImportError(null);
+    setImportResult(null);
     try {
-      const { applied, skipped, results } = parseAiResponse(
-        aiJsonInput,
-        assets,
-      );
+      const { results, applied, skipped } = parseAiResponse(aiJsonInput, assets);
       for (const { id, category } of results) {
         updateAsset(id, { categories: [category] });
       }
@@ -50,18 +47,18 @@ export function AIClassificationModal({
     } catch (err) {
       setImportError(
         err instanceof Error
-          ? `${t.asset_ai_parse_error}: ${err.message}`
+          ? err.message
           : t.asset_ai_parse_error,
       );
     }
   };
 
   const handleClose = () => {
+    setPromptTab("generate");
     setCopied(false);
     setAiJsonInput("");
     setImportResult(null);
     setImportError(null);
-    setPromptTab("generate");
     onClose();
   };
 
@@ -70,8 +67,8 @@ export function AIClassificationModal({
       open={open}
       onClose={handleClose}
       title={
-        <div className="flex items-center gap-2">
-          <Sparkles aria-hidden="true" className="size-5 text-indigo-400" />
+        <div className="flex items-center gap-2 font-mono">
+          <Terminal aria-hidden="true" className="size-4 text-amber-400" />
           <span>{t.asset_ai_modal_title}</span>
         </div>
       }
@@ -79,27 +76,31 @@ export function AIClassificationModal({
     >
       <div className="space-y-4">
         {/* 탭 */}
-        <div className="flex overflow-hidden rounded-lg border border-zinc-800">
+        <div role="tablist" aria-label={t.asset_ai_modal_title} className="flex overflow-hidden rounded-none border border-zinc-800 font-mono">
           <button
             type="button"
+            role="tab"
+            aria-selected={promptTab === "generate"}
             onClick={() => setPromptTab("generate")}
             className={cn(
               "flex-1 cursor-pointer py-2 text-sm font-medium transition-colors",
               promptTab === "generate"
                 ? "bg-zinc-100 text-black shadow-sm"
-                : "bg-white text-zinc-400 hover:bg-zinc-900/50"
+                : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
             )}
           >
             {t.asset_ai_tab_generate}
           </button>
           <button
             type="button"
+            role="tab"
+            aria-selected={promptTab === "import"}
             onClick={() => setPromptTab("import")}
             className={cn(
               "flex-1 cursor-pointer py-2 text-sm font-medium transition-colors",
               promptTab === "import"
                 ? "bg-zinc-100 text-black shadow-sm"
-                : "bg-white text-zinc-400 hover:bg-zinc-900/50"
+                : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
             )}
           >
             {t.asset_ai_tab_import}
@@ -127,7 +128,7 @@ export function AIClassificationModal({
               rows={16}
               aria-label={t.asset_ai_copy_desc}
               onFocus={(e) => e.target.select()}
-              className="w-full resize-none rounded-lg border border-zinc-800 bg-zinc-900 p-3 font-mono text-sm text-zinc-300 focus:ring-1 focus:ring-zinc-700 focus:outline-none"
+              className="w-full resize-none rounded-none border border-zinc-800 bg-zinc-900 p-3 font-mono text-sm text-zinc-300 focus:ring-1 focus:ring-zinc-700 focus:outline-none"
             />
             <div className="flex justify-end gap-2">
               <Button variant="secondary" onClick={handleClose}>
@@ -172,17 +173,17 @@ export function AIClassificationModal({
               aria-label={t.asset_ai_json_placeholder}
               spellCheck={false}
               placeholder={t.asset_ai_json_placeholder}
-              className="w-full resize-none rounded-lg border border-zinc-800 bg-zinc-900 p-3 font-mono text-sm text-zinc-300 focus:ring-1 focus:ring-zinc-700 focus:outline-none"
+              className="w-full resize-none rounded-none border border-zinc-800 bg-zinc-900 p-3 font-mono text-sm text-zinc-300 focus:ring-1 focus:ring-zinc-700 focus:outline-none"
             />
 
             {importError && (
-              <div aria-live="polite" className="rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+              <div aria-live="polite" className="rounded-none border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
                 {importError}
               </div>
             )}
 
             {importResult && (
-              <div aria-live="polite" className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-400">
+              <div aria-live="polite" className="rounded-none border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-400">
                 <FeedbackIconText
                   icon={Check}
                   text={t.asset_ai_apply_result(importResult.applied, importResult.skipped)}

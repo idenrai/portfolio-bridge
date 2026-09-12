@@ -34,10 +34,10 @@ export function GuruFilterToolbar({
               aria-pressed={active}
               onClick={() => onSelectCategory(tab.id)}
               className={cn(
-                "cursor-pointer rounded-lg px-2.5 py-1 text-xs transition-all",
+                "cursor-pointer rounded-none border px-2.5 py-1 font-mono text-xs transition-colors",
                 active
-                  ? "bg-zinc-100 font-semibold text-black shadow-sm"
-                  : "border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
+                  ? "border-amber-400 bg-amber-500/10 font-bold text-amber-300"
+                  : "border-zinc-800 bg-zinc-950 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
               )}
             >
               {t[tab.labelKey as keyof typeof t] as string}
@@ -56,7 +56,7 @@ export function GuruFilterToolbar({
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder={t.guru_search_placeholder}
             aria-label={t.guru_search_placeholder}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-900/50 py-1.5 pr-7 pl-8 text-xs text-zinc-200 placeholder:text-zinc-500 focus:border-indigo-500/60 focus:outline-none"
+            className="w-full rounded-none border border-zinc-800 bg-zinc-950 py-1.5 pr-7 pl-8 font-mono text-xs text-zinc-200 placeholder:text-zinc-500 focus:border-amber-400 focus:outline-none"
           />
           {searchQuery && (
             <button
@@ -69,8 +69,8 @@ export function GuruFilterToolbar({
             </button>
           )}
         </div>
-        <span className="shrink-0 font-mono text-3xs text-zinc-500">
-          {t.guru_count_badge(totalCount)}
+        <span className="shrink-0 rounded-none border border-zinc-800 bg-zinc-950 px-2 py-1 font-mono text-xs text-zinc-400">
+          {totalCount}
         </span>
       </div>
     </div>

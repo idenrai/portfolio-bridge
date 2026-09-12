@@ -65,7 +65,7 @@ function TargetAllocationModalInner({
         {t.settings_target_section_desc}
       </p>
 
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-2">
+      <div className="rounded-none border border-zinc-800 bg-zinc-950 p-2">
         <div className="divide-y divide-zinc-800/60">
           {allocations.map((a, i) => (
             <label
@@ -89,9 +89,9 @@ function TargetAllocationModalInner({
                       handleSave();
                     }
                   }}
-                  className="w-20 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-right font-mono text-sm text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
+                  className="w-20 rounded-none border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-right font-mono text-sm text-white focus:border-amber-400 focus:ring-1 focus:ring-amber-400/40 focus:outline-none"
                 />
-                <span className="w-4 text-xs text-zinc-400">%</span>
+                <span className="w-4 font-mono text-xs text-zinc-400">%</span>
               </div>
             </label>
           ))}

@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import { Sparkles } from "lucide-react";
 import { useAssetStore, useBrokerStore } from "@/stores";
 import { usePortfolio } from "@/hooks";
 import { Card, Button, Modal } from "@/components/common";
@@ -162,32 +161,37 @@ export function AssetsPage() {
         </div>
       </div>
       
-      <div className="rounded-xl bg-linear-to-r from-violet-500/20 to-purple-500/20 p-px shadow-sm">
-        <div className="rounded-xl bg-zinc-950/95 p-4 sm:px-5">
-          <div className="flex flex-col gap-4">
-            {/* Header */}
-            <div className="flex gap-4">
-              <Sparkles aria-hidden="true" className="mt-0.5 size-6 shrink-0 text-indigo-400" />
-              <div className="flex-1 space-y-3">
-                <p className="text-sm leading-tight font-semibold text-zinc-100">
+      <div className="border border-zinc-800 bg-zinc-950 p-4 sm:p-5">
+        <div className="flex flex-col gap-3 font-mono sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-start gap-3">
+            <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center border border-amber-500/30 bg-amber-500/10 text-xs font-bold text-amber-400">
+              {">"}
+            </div>
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="text-2xs font-bold tracking-wider text-amber-400 uppercase">
+                  {"[ AI TAXONOMY CONSOLE ]"}
+                </span>
+                <span className="text-xs font-semibold text-zinc-200">
                   {t.asset_ai_banner_title}
-                </p>
-                <p className="mt-1 text-xs-plus leading-relaxed text-zinc-500 sm:text-xs">
-                  {t.asset_ai_banner_desc}
-                </p>
+                </span>
               </div>
+              <p className="text-xs leading-relaxed text-zinc-400">
+                {t.asset_ai_banner_desc}
+              </p>
             </div>
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setPromptOpen(true)}
-                disabled={assets.length === 0}
-                className="flex-1 cursor-pointer rounded-lg border border-violet-500/30 bg-violet-500/10 px-3 py-2 text-center text-xs font-medium whitespace-nowrap text-violet-400 shadow-sm transition-all hover:bg-violet-500/20 hover:opacity-90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
-              >
-                {t.asset_btn_ai}
-              </button>
-            </div>
+          </div>
+          <div className="flex shrink-0 items-center">
+            <button
+              type="button"
+              onClick={() => setPromptOpen(true)}
+              disabled={assets.length === 0}
+              className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 border border-amber-500/40 bg-amber-500/10 px-4 py-2 text-xs font-bold text-amber-400 transition-colors hover:border-amber-400 hover:bg-amber-400 hover:text-black focus-visible:ring-1 focus-visible:ring-amber-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <span className="opacity-50">{"["}</span>
+              <span>{t.asset_btn_ai}</span>
+              <span className="opacity-50">{"]"}</span>
+            </button>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useMemo } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  Sparkles,
+  Terminal,
   Bot,
   Shield,
   Rocket,
@@ -49,7 +49,7 @@ function CustomGuruAvatarIcon({
     case "scale":
       return <Scale className={className} />;
     default:
-      return <Sparkles className={className} />;
+      return <Terminal className={className} />;
   }
 }
 
@@ -139,40 +139,24 @@ export function GuruSelector({
           }}
           aria-label={`${customGuruConfig.name || t.custom_guru_default_name}, Custom AI Guru`}
           className={cn(
-            "relative flex aspect-card w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-[border-color,box-shadow] duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none sm:w-56",
+            "relative flex aspect-card w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-none border p-4 text-left transition-colors focus-visible:border-transparent focus-visible:ring-1 focus-visible:ring-amber-400 focus-visible:outline-none sm:w-56",
             isCustomSelected
-              ? "border-indigo-500/80 text-white shadow-lg shadow-indigo-500/10"
-              : "border-zinc-800 text-zinc-400 hover:border-indigo-500/40",
+              ? "border-amber-400 bg-zinc-900 text-white"
+              : "border-zinc-800 bg-zinc-950 text-zinc-400 hover:border-amber-400/40",
           )}
         >
-          {/* Base Background */}
-          <div
-            className={cn(
-              "absolute inset-0 bg-linear-to-br from-indigo-950/20 via-zinc-950 to-black transition-opacity duration-300",
-              isCustomSelected ? "opacity-0" : "opacity-100",
-            )}
-          />
-
-          {/* Active Background */}
-          <div
-            className={cn(
-              "absolute inset-0 bg-linear-to-br from-indigo-900/30 via-zinc-900/90 to-black transition-opacity duration-300",
-              isCustomSelected ? "opacity-100" : "opacity-0",
-            )}
-          />
-
           {/* Inner dashed border */}
           <div
             className={cn(
-              "pointer-events-none absolute inset-1.5 rounded-lg border border-dashed transition-colors duration-300",
-              isCustomSelected ? "border-indigo-400/40" : "border-zinc-800/30",
+              "pointer-events-none absolute inset-1.5 rounded-none border border-dashed transition-colors",
+              isCustomSelected ? "border-amber-400/40" : "border-zinc-800/40",
             )}
           />
 
           {/* Top Branding & Settings button */}
-          <div className="relative z-10 flex w-full items-center justify-between">
-            <span className="inline-flex items-center gap-1 font-mono text-3xs font-medium tracking-widest text-indigo-400 uppercase">
-              <Sparkles className="size-2.5" />
+          <div className="relative z-10 flex w-full items-center justify-between font-mono">
+            <span className="inline-flex items-center gap-1 text-3xs font-bold tracking-widest text-amber-400 uppercase">
+              <Terminal className="size-2.5" />
               <span>{t.custom_guru_selector_badge}</span>
             </span>
             {onOpenCustomModal && (
@@ -182,7 +166,7 @@ export function GuruSelector({
                   e.stopPropagation();
                   onOpenCustomModal();
                 }}
-                className="cursor-pointer rounded-md p-1 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+                className="cursor-pointer rounded-none p-1 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
                 aria-label={t.custom_guru_settings_btn}
               >
                 <Settings className="size-3.5" />
@@ -194,13 +178,13 @@ export function GuruSelector({
           <div className="relative z-10 my-auto flex w-full justify-center">
             <div
               className={cn(
-                "rounded-full border p-1 transition-[border-color,background-color] duration-300",
+                "rounded-none border p-1 transition-colors",
                 isCustomSelected
-                  ? "border-indigo-500/80 bg-indigo-950/60 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.25)]"
-                  : "border-zinc-800/80 bg-black/40 text-zinc-400",
+                  ? "border-amber-400 bg-amber-500/10 text-amber-300"
+                  : "border-zinc-800 bg-black text-zinc-400",
               )}
             >
-              <div className="flex size-10 items-center justify-center rounded-full border border-zinc-900 sm:size-12">
+              <div className="flex size-10 items-center justify-center rounded-none border border-zinc-900 sm:size-12">
                 <CustomGuruAvatarIcon
                   iconId={customGuruConfig.avatarIcon}
                   className="size-5 sm:size-6"
@@ -210,11 +194,11 @@ export function GuruSelector({
           </div>
 
           {/* Bottom Info */}
-          <div className="relative z-10 flex w-full min-w-0 items-end justify-between">
+          <div className="relative z-10 flex w-full min-w-0 items-end justify-between font-mono">
             <div className="flex min-w-0 flex-1 flex-col gap-0.5 pr-2.5">
               <p
                 className={cn(
-                  "truncate font-mono text-xs font-bold tracking-wider uppercase transition-colors duration-300",
+                  "truncate text-xs font-bold tracking-wider uppercase transition-colors",
                   isCustomSelected ? "text-white" : "text-zinc-200",
                 )}
               >
@@ -227,8 +211,8 @@ export function GuruSelector({
 
             <div
               className={cn(
-                "flex shrink-0 flex-col items-end font-mono text-3xs leading-tight transition-colors duration-300",
-                isCustomSelected ? "text-indigo-300" : "text-zinc-500",
+                "flex shrink-0 flex-col items-end text-3xs leading-tight transition-colors",
+                isCustomSelected ? "text-amber-400" : "text-zinc-500",
               )}
             >
               <span className="text-4xs tracking-wider uppercase opacity-70">
@@ -249,33 +233,17 @@ export function GuruSelector({
               onClick={() => onSelect(guru)}
               aria-label={`${guruName(guru)}, ${guru.firm}`}
               className={cn(
-                "relative flex aspect-card w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-xl border p-4 text-left transition-[border-color,box-shadow] duration-300 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:outline-none sm:w-56",
+                "relative flex aspect-card w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-none border p-4 text-left transition-colors focus-visible:border-transparent focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none sm:w-56",
                 isSelected
-                  ? "border-zinc-600 text-white shadow-lg shadow-white/5"
-                  : "border-zinc-800 text-zinc-400 hover:border-zinc-700",
+                  ? "border-zinc-400 bg-zinc-900 text-white"
+                  : "border-zinc-800 bg-zinc-950 text-zinc-400 hover:border-zinc-600",
               )}
             >
-              {/* Base Obsidian Black Background */}
-              <div
-                className={cn(
-                  "absolute inset-0 bg-linear-to-br from-zinc-900 via-zinc-950 to-black transition-opacity duration-300",
-                  isSelected ? "opacity-0" : "opacity-100",
-                )}
-              />
-
-              {/* Active Dark Metallic Background */}
-              <div
-                className={cn(
-                  "absolute inset-0 bg-linear-to-br from-zinc-800/80 via-zinc-900/80 to-black transition-opacity duration-300",
-                  isSelected ? "opacity-100" : "opacity-0",
-                )}
-              />
-
               {/* Inner dashed border */}
               <div
                 className={cn(
-                  "pointer-events-none absolute inset-1.5 rounded-lg border border-dashed transition-colors duration-300",
-                  isSelected ? "border-zinc-400/40" : "border-zinc-800/30",
+                  "pointer-events-none absolute inset-1.5 rounded-none border border-dashed transition-colors",
+                  isSelected ? "border-zinc-400/40" : "border-zinc-800/40",
                 )}
               />
 

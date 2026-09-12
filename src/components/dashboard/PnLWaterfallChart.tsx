@@ -219,7 +219,7 @@ export function PnLWaterfallChart({ holdings }: Props) {
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            className="cursor-pointer font-medium text-indigo-400 transition-colors hover:text-indigo-200"
+            className="cursor-pointer font-mono text-xs font-medium text-amber-400 transition-colors hover:text-amber-200"
           >
             {showAll
               ? t.pnl_show_top20

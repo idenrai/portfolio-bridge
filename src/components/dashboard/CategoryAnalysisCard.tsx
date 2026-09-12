@@ -16,7 +16,7 @@ export const CategoryAnalysisCard = memo(function CategoryAnalysisCard({ rebalan
     <button
       type="button"
       onClick={() => setModalOpen(true)}
-      className="inline-flex min-h-8 cursor-pointer items-center rounded-md border border-zinc-800 px-2.5 py-1 text-xs text-zinc-400 transition-colors hover:border-zinc-700 hover:bg-zinc-900/50 hover:text-white focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none"
+      className="inline-flex min-h-8 cursor-pointer items-center rounded-none border border-zinc-800 bg-zinc-900 px-2.5 py-1 font-mono text-xs text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white focus-visible:ring-1 focus-visible:ring-amber-400/50 focus-visible:outline-none"
     >
       {t.category_set_target}
     </button>

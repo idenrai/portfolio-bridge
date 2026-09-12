@@ -69,7 +69,7 @@ export function getAccountTypeBadgeStyle(accountType?: string): string {
     return "border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
   }
 
-  // 연금 / 퇴직 계좌 (바이올렛 틴트)
+  // 연금 / 퇴직 계좌 (터미널 시안 틴트)
   if (
     lower.includes("연금") ||
     lower.includes("irp") ||
@@ -82,7 +82,7 @@ export function getAccountTypeBadgeStyle(accountType?: string): string {
     lower.includes("rürup") ||
     lower.includes("rurup")
   ) {
-    return "border-violet-500/30 bg-violet-500/10 text-violet-400";
+    return "border-cyan-500/30 bg-cyan-500/10 text-cyan-400";
   }
 
   // 가상자산 / CMA / 법인 / 특수 계좌 (앰버 틴트)

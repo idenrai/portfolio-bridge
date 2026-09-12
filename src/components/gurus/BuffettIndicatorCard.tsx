@@ -115,7 +115,7 @@ export function BuffettIndicatorCard() {
             return (
               <div
                 className={cn(
-                  "flex items-center justify-between rounded-xl border px-4 py-3",
+                  "flex items-center justify-between rounded-none border px-4 py-3 font-mono",
                   zone.bgColor,
                   zone.borderColor,
                 )}

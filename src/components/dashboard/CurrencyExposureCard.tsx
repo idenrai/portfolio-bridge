@@ -61,9 +61,9 @@ export const CurrencyExposureCard = memo(function CurrencyExposureCard({ summary
                 </td>
                 <td className="px-2 py-1.5 text-right">
                   <div className="flex items-center justify-end gap-1">
-                    <div className="h-1.5 w-10 overflow-hidden rounded-full bg-zinc-800/50">
+                    <div className="h-1.5 w-10 overflow-hidden rounded-none bg-zinc-800/50">
                       <div
-                        className="h-full rounded-full bg-indigo-400"
+                        className="h-full rounded-none bg-cyan-400"
                         style={{
                           width: `${Math.min(exp.percent, 100)}%`,
                         }}

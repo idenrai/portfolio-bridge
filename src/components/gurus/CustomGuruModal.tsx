@@ -141,10 +141,10 @@ function CustomGuruModalInner({
                     type="button"
                     onClick={() => setAvatarIcon(id)}
                     className={cn(
-                      "flex size-9 cursor-pointer items-center justify-center rounded-lg border transition-all",
+                      "flex size-9 cursor-pointer items-center justify-center rounded-none border transition-all",
                       isSelected
-                        ? "border-indigo-500 bg-indigo-500/20 text-indigo-300 shadow-sm"
-                        : "border-zinc-800 bg-zinc-900/80 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
+                        ? "border-amber-400 bg-amber-500/20 text-amber-300 shadow-none"
+                        : "border-zinc-800 bg-zinc-900 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
                     )}
                     aria-label={id}
                   >
@@ -158,7 +158,7 @@ function CustomGuruModalInner({
 
         {/* 2. 투자 위험 성향 (3택) */}
         <div>
-          <span className="block text-xs font-semibold text-zinc-200">
+          <span className="block font-mono text-xs font-semibold text-zinc-200">
             {t.custom_guru_risk_label}
           </span>
           <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3">
@@ -170,10 +170,10 @@ function CustomGuruModalInner({
                   type="button"
                   onClick={() => setRiskTolerance(opt.value)}
                   className={cn(
-                    "flex cursor-pointer flex-col items-start rounded-xl border p-3 text-left transition-all",
+                    "flex cursor-pointer flex-col items-start rounded-none border p-3 text-left font-mono transition-all",
                     active
-                      ? "border-indigo-500/80 bg-indigo-500/10 text-white shadow-sm ring-1 ring-indigo-500/30"
-                      : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
+                      ? "border-amber-400 bg-amber-500/10 text-amber-300 shadow-none ring-1 ring-amber-400/40"
+                      : "border-zinc-800 bg-zinc-950 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
                   )}
                 >
                   <span className="text-xs leading-snug font-medium">{opt.label}</span>
@@ -185,7 +185,7 @@ function CustomGuruModalInner({
 
         {/* 3. 투자 전략 스타일 (5택) */}
         <div>
-          <span className="block text-xs font-semibold text-zinc-200">
+          <span className="block font-mono text-xs font-semibold text-zinc-200">
             {t.custom_guru_strategy_label}
           </span>
           <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -197,10 +197,10 @@ function CustomGuruModalInner({
                   type="button"
                   onClick={() => setStrategy(opt.value)}
                   className={cn(
-                    "flex cursor-pointer flex-col items-start rounded-xl border p-3 text-left transition-all",
+                    "flex cursor-pointer flex-col items-start rounded-none border p-3 text-left font-mono transition-all",
                     active
-                      ? "border-indigo-500/80 bg-indigo-500/10 text-white shadow-sm ring-1 ring-indigo-500/30"
-                      : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
+                      ? "border-amber-400 bg-amber-500/10 text-amber-300 shadow-none ring-1 ring-amber-400/40"
+                      : "border-zinc-800 bg-zinc-950 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
                   )}
                 >
                   <span className="text-xs leading-snug font-medium">{opt.label}</span>
@@ -212,7 +212,7 @@ function CustomGuruModalInner({
 
         {/* 4. 조언 어투 (코칭 톤 - 3택) */}
         <div>
-          <span className="block text-xs font-semibold text-zinc-200">
+          <span className="block font-mono text-xs font-semibold text-zinc-200">
             {t.custom_guru_tone_label}
           </span>
           <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3">
@@ -224,10 +224,10 @@ function CustomGuruModalInner({
                   type="button"
                   onClick={() => setTone(opt.value)}
                   className={cn(
-                    "flex cursor-pointer flex-col items-start rounded-xl border p-3 text-left transition-all",
+                    "flex cursor-pointer flex-col items-start rounded-none border p-3 text-left font-mono transition-all",
                     active
-                      ? "border-indigo-500/80 bg-indigo-500/10 text-white shadow-sm ring-1 ring-indigo-500/30"
-                      : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
+                      ? "border-amber-400 bg-amber-500/10 text-amber-300 shadow-none ring-1 ring-amber-400/40"
+                      : "border-zinc-800 bg-zinc-950 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
                   )}
                 >
                   <span className="text-xs leading-snug font-medium">{opt.label}</span>
@@ -241,7 +241,7 @@ function CustomGuruModalInner({
         <div>
           <label
             htmlFor="custom-guru-philosophy"
-            className="block text-xs font-semibold text-zinc-200"
+            className="block font-mono text-xs font-semibold text-zinc-200"
           >
             {t.custom_guru_philosophy_label}
           </label>
@@ -251,15 +251,15 @@ function CustomGuruModalInner({
             value={customPhilosophy}
             onChange={(e) => setCustomPhilosophy(e.target.value)}
             placeholder={t.custom_guru_philosophy_placeholder}
-            className="mt-1.5 w-full resize-none rounded-lg border border-zinc-800 bg-zinc-900 p-2.5 text-xs text-white placeholder:text-zinc-600 focus:border-zinc-500 focus:outline-none"
+            className="mt-1.5 w-full resize-none rounded-none border border-zinc-800 bg-zinc-950 p-2.5 font-mono text-xs text-zinc-100 placeholder:text-zinc-600 focus:border-amber-400 focus:outline-none"
           />
         </div>
 
         {/* 6. 연동된 목표 자산 배분 현황 */}
-        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-3.5">
+        <div className="rounded-none border border-zinc-800 bg-zinc-950 p-3.5">
           <div className="flex items-center justify-between gap-2">
             <div>
-              <span className="text-xs font-semibold text-zinc-300">
+              <span className="font-mono text-xs font-semibold text-zinc-300">
                 {t.custom_guru_target_preview_label}
               </span>
               <p className="mt-0.5 text-2xs text-zinc-400">
@@ -269,7 +269,7 @@ function CustomGuruModalInner({
             <button
               type="button"
               onClick={() => setTargetModalOpen(true)}
-              className="inline-flex min-h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-indigo-500/40 bg-indigo-500/15 px-2.5 py-1 text-2xs font-bold text-indigo-300 transition-colors hover:bg-indigo-500/25 hover:text-white focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none"
+              className="inline-flex min-h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-none border border-amber-500/40 bg-amber-500/10 px-2.5 py-1 font-mono text-2xs font-bold text-amber-300 transition-colors hover:bg-amber-400 hover:text-black focus-visible:ring-1 focus-visible:ring-amber-400/50 focus-visible:outline-none"
             >
               <SlidersHorizontal className="size-3" />
               <span>{t.custom_guru_target_edit_btn}</span>
@@ -280,14 +280,14 @@ function CustomGuruModalInner({
               targetAllocations.map((item) => (
                 <span
                   key={item.category}
-                  className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-2xs font-medium text-zinc-300"
+                  className="inline-flex items-center gap-1 rounded-none border border-zinc-800 bg-zinc-900 px-2 py-1 font-mono text-2xs font-medium text-zinc-300"
                 >
                   <span>{t.category_labels[item.category] ?? item.category}</span>
-                  <span className="font-mono text-indigo-400">{item.targetPercent}%</span>
+                  <span className="font-mono text-amber-400">{item.targetPercent}%</span>
                 </span>
               ))
             ) : (
-              <p className="text-2xs text-zinc-500">
+              <p className="font-mono text-2xs text-zinc-500">
                 {t.custom_guru_target_empty}
               </p>
             )}
@@ -299,7 +299,7 @@ function CustomGuruModalInner({
           <button
             type="button"
             onClick={handleReset}
-            className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-zinc-800 px-3 py-2 text-xs font-medium text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-200"
+            className="inline-flex cursor-pointer items-center gap-1.5 rounded-none border border-zinc-800 bg-zinc-900 px-3 py-2 font-mono text-xs font-medium text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-200"
           >
             <RotateCcw className="size-3.5" />
             <span>{t.custom_guru_reset_btn}</span>
@@ -309,14 +309,14 @@ function CustomGuruModalInner({
             <button
               type="button"
               onClick={onClose}
-              className="cursor-pointer rounded-lg px-3 py-2 text-xs font-medium text-zinc-400 hover:text-white"
+              className="cursor-pointer rounded-none px-3 py-2 font-mono text-xs font-medium text-zinc-400 hover:text-white"
             >
               [ {t.custom_guru_cancel_btn} ]
             </button>
             <button
               type="button"
               onClick={handleSave}
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-indigo-500 active:scale-95"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-none border border-amber-500/40 bg-amber-500/10 px-4 py-2 font-mono text-xs font-semibold text-amber-400 shadow-none transition-all hover:bg-amber-400 hover:text-black active:scale-100"
             >
               <Check className="size-3.5" />
               <span>{t.custom_guru_save_btn}</span>

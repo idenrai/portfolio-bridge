@@ -58,7 +58,7 @@ export function ProfileSection() {
     <Card
       title={
         <div className="flex items-center gap-2">
-          <User className="size-4 text-indigo-500" />
+          <User className="size-4 text-amber-400" />
           {t.profile_title}
         </div>
       }

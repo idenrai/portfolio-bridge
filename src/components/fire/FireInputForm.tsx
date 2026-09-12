@@ -154,7 +154,7 @@ export function FireInputForm() {
         </div>
 
         {/* 3. 연간 기대 수익률 (%) */}
-        <div className="flex flex-col gap-2 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-3">
+        <div className="flex flex-col gap-2 rounded-none border border-zinc-800/80 bg-zinc-900/40 p-3 font-mono">
           <div className="flex items-center justify-between">
             <label className="text-xs font-semibold text-zinc-300">
               {t.fire_expected_return}
@@ -313,7 +313,7 @@ export function FireInputForm() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-3">
+            <div className="flex flex-col gap-2 rounded-none border border-zinc-800/80 bg-zinc-900/40 p-3 font-mono">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-semibold text-zinc-300">
                   {t.fire_safe_withdrawal_rate}

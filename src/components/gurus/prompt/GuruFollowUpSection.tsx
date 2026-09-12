@@ -41,12 +41,12 @@ export function GuruFollowUpSection({
             value={followUpText}
             rows={14}
             aria-label={t.guru_ai_followup_btn}
-            className="w-full resize-none rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-3 pb-12 font-mono text-xs-plus text-zinc-300 transition-shadow focus:ring-1 focus:ring-emerald-500/50 focus:outline-none sm:text-xs"
+            className="w-full resize-none rounded-none border border-emerald-900/50 bg-emerald-950/20 p-3 pb-12 font-mono text-xs-plus text-zinc-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 focus:outline-none sm:text-xs"
           />
           <button
             type="button"
             onClick={onCopyFollowUp}
-            className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-emerald-700/50 bg-emerald-800/80 px-3 py-1.5 text-xs font-medium text-emerald-50 shadow-sm backdrop-blur transition-colors hover:bg-emerald-700"
+            className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-none border border-emerald-700/50 bg-emerald-800/80 px-3 py-1.5 font-mono text-xs font-medium text-emerald-50 shadow-none backdrop-blur transition-colors hover:bg-emerald-700"
           >
             {copiedFollowUp ? (
               <FeedbackIconText

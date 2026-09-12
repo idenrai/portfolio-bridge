@@ -143,8 +143,8 @@ export function PortfolioHistoryChart() {
         >
           <defs>
             <linearGradient id="gradValue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+              <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
             </linearGradient>
             <linearGradient id="gradCost" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#94a3b8" stopOpacity={0.2} />
@@ -184,13 +184,13 @@ export function PortfolioHistoryChart() {
               );
 
               return (
-                <div className="rounded-lg border border-zinc-800 bg-zinc-950/95 p-3 text-xs shadow-xl backdrop-blur-md">
-                  <p className="mb-2 border-b border-zinc-800/80 pb-1 font-mono text-3xs text-zinc-400">
+                <div className="rounded-none border border-zinc-800 bg-zinc-950 p-2.5 font-mono text-xs shadow-none">
+                  <p className="mb-2 font-mono text-2xs font-semibold text-zinc-400">
                     {formattedDate}
                   </p>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 tabular-nums">
                     <span className="text-zinc-400">{t.history_value}:</span>
-                    <span className="text-right font-medium text-indigo-300">
+                    <span className="text-right font-medium text-amber-300">
                       {formatCurrency(item.value, baseCurrency)}
                     </span>
                     <span className="text-zinc-400">{t.history_cost}:</span>
@@ -231,25 +231,25 @@ export function PortfolioHistoryChart() {
           <Area
             type="monotone"
             dataKey="value"
-            stroke="#6366f1"
+            stroke="#f59e0b"
             strokeWidth={2}
             fill="url(#gradValue)"
             dot={false}
           />
         </AreaChart>
       </ResponsiveContainer>
-      <div className="mt-2 flex items-center justify-between gap-4 text-2xs text-zinc-400">
+      <div className="mt-2 flex items-center justify-between gap-4 font-mono text-2xs text-zinc-400">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-1 w-3 rounded-full bg-indigo-500" />
+            <span className="inline-block h-1 w-3 rounded-none bg-amber-500" />
             {t.history_value}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-1 w-3 rounded-full bg-zinc-400" />
+            <span className="inline-block h-1 w-3 rounded-none bg-zinc-400" />
             {t.history_cost}
           </span>
         </div>
-        <span className="rounded border border-zinc-800 bg-zinc-900/60 px-1.5 py-0.5 font-mono text-4xs text-zinc-400">
+        <span className="rounded-none border border-zinc-800 bg-zinc-950 px-1.5 py-0.5 font-mono text-4xs text-zinc-400">
           {t.history_all_portfolio_badge}
         </span>
       </div>

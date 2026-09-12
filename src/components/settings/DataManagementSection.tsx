@@ -121,14 +121,14 @@ export function DataManagementSection() {
     <Card 
       title={
         <div className="flex items-center gap-2">
-          <Cloud className="size-4 text-indigo-400" />
+          <Cloud className="size-4 text-amber-400" />
           {t.settings_data_title}
         </div>
       }
     >
       <div className="space-y-5">
         {/* 실시간 로컬 자동 저장 안내 배너 */}
-        <div className="flex items-start gap-2.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-2.5 text-xs text-emerald-400">
+        <div className="flex items-start gap-2.5 rounded-none border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-2.5 font-mono text-xs text-emerald-400">
           <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-400" />
           <span className="leading-relaxed font-medium">
             {t.settings_data_local_auto_note}
@@ -136,16 +136,16 @@ export function DataManagementSection() {
         </div>
 
         {/* 로컬 스토리지 진단 및 지속성 상태 */}
-        <div className="space-y-2.5 rounded-lg border border-zinc-800 bg-zinc-900/50 p-3.5">
+        <div className="space-y-2.5 rounded-none border border-zinc-800 bg-zinc-900/50 p-3.5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <HardDrive className="size-4 text-indigo-400" />
-              <span className="text-xs font-semibold text-zinc-300">
+              <HardDrive className="size-4 text-amber-400" />
+              <span className="font-mono text-xs font-semibold text-zinc-300">
                 {t.storage_usage_label(formattedLocalUsage, formattedBrowserQuota || "50MB+")}
               </span>
             </div>
             {isPersisted ? (
-              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-2xs font-medium text-emerald-400">
+              <span className="inline-flex items-center gap-1 rounded-none border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-2xs font-medium text-emerald-400">
                 <ShieldCheck className="size-3" />
                 {t.storage_persisted_active}
               </span>

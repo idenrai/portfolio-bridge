@@ -105,6 +105,20 @@ All pages (`/`, `/assets`, `/gurus`, `/fire`, `/settings`, `/about`) utilize a u
 | `BottomNav` | `components/layout/BottomNav.tsx` | Mobile bottom navigation bar / 모바일 하단 내비게이션 |
 | `ScrollToTop` | `components/layout/ScrollToTop.tsx` | Scroll restoration on route change / 라우트 이동 시 스크롤 상단 복원 |
 
+## Design System & Aesthetics
+
+Portfolio Bridge adopts a **Bloomberg Terminal-inspired aesthetic**:
+- **High Information Density (`DENSITY: 9`)**: Compact fonts (`text-xs`, `text-2xs`, `text-3xs`), dense tabular layouts, and efficient screen real estate utilization.
+- **Monospace Typography**: `Fira Code` (`font-mono`) as the primary data font for tickers, quantities, monetary amounts, percentages, and status badges.
+- **Terminal Color Palette**: Terminal Amber (`amber-400` / `#f59e0b`) as the primary highlight color, Terminal Cyan (`cyan-400`) for high-contrast accents, and Zinc (`zinc-100` to `zinc-950`) / pure black surfaces. Legacy decorative colors (`indigo`, `purple`, `violet`) are strictly excluded.
+- **Sharp Geometry & Hairline Borders (`rounded-none`)**: Crisp right-angle corners without rounded borders (`rounded-none`), 1px hairline borders (`border-zinc-800`), bracketed terminal signage (`[FIRE REACHED]`, `[action]`), and clean focus rings. Non-terminal decorative aura/blur effects (`blur-2xl`, glassmorphism) are prohibited.
+
+Portfolio Bridge는 **블룸버그 단말기(Bloomberg Terminal) 감성의 디자인 시스템**을 엄격히 적용합니다:
+- **초고밀도 정보 표현 (`DENSITY: 9`)**: 조밀한 폰트 스케일(`text-xs`, `text-2xs`, `text-3xs`), 표 형식 데이터 레이아웃, 와이드 디스플레이의 공간 효율 극대화.
+- **모노스페이스 타이포그래피**: 티커, 수량, 평가액, 수익률 및 상태 배지에 `Fira Code`(`font-mono`) 고정폭 글꼴 사용.
+- **터미널 전용 컬러 팔레트**: 메인 하이라이트로 터미널 앰버(`amber-400` / `#f59e0b`), 고대비 액센트로 터미널 시안(`cyan-400`), 징크(`zinc-100`~`zinc-950`) 및 칠흑색(`bg-black`) 서피스 사용. 비-터미널 장식성 색상(`indigo`, `purple`, `violet`) 전면 배제.
+- **칼각 직각 기하학 및 1px 헤어라인 (`rounded-none`)**: 둥근 모서리를 배제한 완전 직각 모서리(`rounded-none`), 1px 헤어라인 테두리(`border-zinc-800`), 각괄호 터미널 사이니지(`[FIRE REACHED]`, `[action]`), 직각 포커스 링. 장식성 블러 오라(`blur-2xl`) 및 글래스모피즘 전면 금지.
+
 ## Privacy Model
 
 - No backend, no database, no user accounts.
@@ -134,3 +148,23 @@ All pages (`/`, `/assets`, `/gurus`, `/fire`, `/settings`, `/about`) utilize a u
 | AI Prompts / AI 프롬프트 | `doc/features/ai-prompts.md` | AI prompt system |
 | i18n / 다국어 | `doc/features/i18n.md` | i18n system + translation guide |
 | Yahoo Finance | `doc/system/yahoo-finance.md` | Yahoo Finance & FRED proxy integration |
+
+## AI Engineering Workflows
+
+The repository maintains Single Source of Truth (SSoT) guidelines under `.agents/` to coordinate AI-assisted development across frontend, backend, and prompt engineering domains.
+
+본 저장소는 프론트엔드, 백엔드 및 프롬프트 엔지니어링 전반에 걸친 AI 페어 프로그래밍을 조율하기 위해 `.agents/` 디렉토리 아래에 단일 진실 공급원(SSoT) 가이드라인을 유지 관리합니다.
+
+### Available Engineering Workflows
+
+| Workflow | Activation | Primary Focus |
+| :--- | :--- | :--- |
+| Frontend Engineering | `/frontend` | UI/UX components, Tailwind CSS v4 canonical styling, accessibility, and Zustand 5 state integration. |
+| Backend Engineering | `/backend` | Vercel Edge Runtime proxies, privacy-first stateless architecture, and zero-trust validation. |
+| Prompt Engineering | `/prompt` | Guru persona frameworks, multi-account tax wrapper tags, prompt injection protection, and client-side assembly. |
+
+엔지니어링 작업 영역별 주요 워크플로우 매트릭스:
+- 프론트엔드 워크플로우 (`/frontend`): UI/UX 컴포넌트, Tailwind CSS v4 스타일링, 웹 접근성 감사 및 Zustand 5 상태 연동.
+- 백엔드 워크플로우 (`/backend`): Vercel Edge Runtime 프록시, 무상태 프라이버시 아키텍처 및 제로 트러스트 검증.
+- 프롬프트 엔지니어링 워크플로우 (`/prompt`): 구루 페르소나 분석 프레임워크, 다계좌 절세 래퍼 태그, 프롬프트 인젝션 방어 및 클라이언트 사이드 조립.
+
