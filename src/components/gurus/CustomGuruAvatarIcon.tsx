@@ -1,4 +1,4 @@
-import { Sparkles, Bot, Shield, Rocket, Scale } from "lucide-react";
+import { Terminal, Bot, Shield, Rocket, Scale } from "lucide-react";
 
 export function CustomGuruAvatarIcon({
   iconId,
@@ -16,7 +16,8 @@ export function CustomGuruAvatarIcon({
       return <Rocket className={className} />;
     case "scale":
       return <Scale className={className} />;
+    case "terminal":
     default:
-      return <Sparkles className={className} />;
+      return <Terminal className={className} />;
   }
 }

@@ -3,10 +3,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Terminal,
-  Bot,
-  Shield,
-  Rocket,
-  Scale,
   Settings,
 } from "lucide-react";
 import { useT } from "@/hooks";
@@ -23,6 +19,7 @@ import {
   cn,
 } from "@/utils";
 import { GuruFirm } from "./GuruFirm";
+import { CustomGuruAvatarIcon } from "./CustomGuruAvatarIcon";
 import type { GuruProfile } from "@/types";
 
 interface GuruSelectorProps {
@@ -30,27 +27,6 @@ interface GuruSelectorProps {
   onSelect: (guru: GuruProfile) => void;
   onOpenCustomModal?: () => void;
   onOpenGuideModal?: () => void;
-}
-
-function CustomGuruAvatarIcon({
-  iconId,
-  className,
-}: {
-  iconId: string;
-  className?: string;
-}) {
-  switch (iconId) {
-    case "bot":
-      return <Bot className={className} />;
-    case "shield":
-      return <Shield className={className} />;
-    case "rocket":
-      return <Rocket className={className} />;
-    case "scale":
-      return <Scale className={className} />;
-    default:
-      return <Terminal className={className} />;
-  }
 }
 
 export function GuruSelector({
