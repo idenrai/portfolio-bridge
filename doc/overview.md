@@ -105,6 +105,20 @@ All pages (`/`, `/assets`, `/gurus`, `/fire`, `/settings`, `/about`) utilize a u
 | `BottomNav` | `components/layout/BottomNav.tsx` | Mobile bottom navigation bar / 모바일 하단 내비게이션 |
 | `ScrollToTop` | `components/layout/ScrollToTop.tsx` | Scroll restoration on route change / 라우트 이동 시 스크롤 상단 복원 |
 
+## Design System & Aesthetics
+
+Portfolio Bridge adopts a **Bloomberg Terminal-inspired aesthetic**:
+- **High Information Density (`DENSITY: 9`)**: Compact fonts (`text-xs`, `text-2xs`, `text-3xs`), dense tabular layouts, and efficient screen real estate utilization.
+- **Monospace Typography**: `Fira Code` (`font-mono`) as the primary data font for tickers, quantities, monetary amounts, percentages, and status badges.
+- **Terminal Color Palette**: Terminal Amber (`amber-400` / `#f59e0b`) as the primary highlight color, Terminal Cyan (`cyan-400`) for high-contrast accents, and Zinc (`zinc-100` to `zinc-950`) / pure black surfaces. Legacy decorative colors (`indigo`, `purple`, `violet`) are strictly excluded.
+- **Sharp Geometry & Hairline Borders (`rounded-none`)**: Crisp right-angle corners without rounded borders (`rounded-none`), 1px hairline borders (`border-zinc-800`), bracketed terminal signage (`[FIRE REACHED]`, `[action]`), and clean focus rings. Non-terminal decorative aura/blur effects (`blur-2xl`, glassmorphism) are prohibited.
+
+Portfolio Bridge는 **블룸버그 단말기(Bloomberg Terminal) 감성의 디자인 시스템**을 엄격히 적용합니다:
+- **초고밀도 정보 표현 (`DENSITY: 9`)**: 조밀한 폰트 스케일(`text-xs`, `text-2xs`, `text-3xs`), 표 형식 데이터 레이아웃, 와이드 디스플레이의 공간 효율 극대화.
+- **모노스페이스 타이포그래피**: 티커, 수량, 평가액, 수익률 및 상태 배지에 `Fira Code`(`font-mono`) 고정폭 글꼴 사용.
+- **터미널 전용 컬러 팔레트**: 메인 하이라이트로 터미널 앰버(`amber-400` / `#f59e0b`), 고대비 액센트로 터미널 시안(`cyan-400`), 징크(`zinc-100`~`zinc-950`) 및 칠흑색(`bg-black`) 서피스 사용. 비-터미널 장식성 색상(`indigo`, `purple`, `violet`) 전면 배제.
+- **칼각 직각 기하학 및 1px 헤어라인 (`rounded-none`)**: 둥근 모서리를 배제한 완전 직각 모서리(`rounded-none`), 1px 헤어라인 테두리(`border-zinc-800`), 각괄호 터미널 사이니지(`[FIRE REACHED]`, `[action]`), 직각 포커스 링. 장식성 블러 오라(`blur-2xl`) 및 글래스모피즘 전면 금지.
+
 ## Privacy Model
 
 - No backend, no database, no user accounts.

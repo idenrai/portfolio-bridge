@@ -145,6 +145,16 @@ Used to maximize coverage for Korean and Japanese stocks.
 
 한국·일본 종목의 데이터 커버리지를 최대화하기 위해 사용됩니다.
 
+#### Terminal Theme & UI Standards (`analyzerTheme.ts`)
+
+All quantitative analyzers utilize a Bloomberg Terminal-compliant UI framework (`AnalyzerCard.tsx` + `analyzerTheme.ts`):
+- **4 Terminal Theme Colors**: Standardized on `"green"`, `"cyan"`, `"blue"`, and `"amber"` (legacy non-terminal `violet` removed).
+- **Accessible Mode Navigation**: WAI-ARIA compliant tab navigation (`role="tablist"`, `role="tab"`) with Lucide icons (`Briefcase` for Portfolio Mode, `Search` for Search Mode) and monospace progress gauges.
+
+모든 퀀트 분석기는 블룸버그 단말기 스타일의 UI 프레임워크(`AnalyzerCard.tsx` + `analyzerTheme.ts`)를 적용합니다:
+- **4종 터미널 테마 컬러**: `"green"`, `"cyan"`, `"blue"`, `"amber"` 고대비 색상셋으로 일원화 (비-터미널 `violet` 완전 제거).
+- **접근성 준수 모드 내비게이션**: WAI-ARIA 규격의 탭 내비게이션(`role="tablist"`, `role="tab"`)과 Lucide 아이콘(포트폴리오 모드: `Briefcase`, 검색 모드: `Search`), 직각 모노스페이스 게이지 적용.
+
 ### Lynch 10-Bagger (`LynchTenBaggerCard.tsx`)
 
 피터 린치 성장주 기준. Max score: 100 / 최고 점수: 100점.
@@ -253,7 +263,7 @@ Users can create and configure their own personalized AI Guru via `CustomGuruMod
 - **Coaching Tone / 코칭 톤**: `direct_unfiltered` (단도직입적), `supportive_mentor` (격려와 멘토링), `analytical_quant` (데이터 기반 분석).
 - **Guiding Principles / 개인 원칙**: Custom free-text investment philosophy note.
 - **Target Allocation Sync & In-place Edit / 목표 배분 연동 및 즉시 편집**: Automatically benchmarks against user's custom targets set in Settings or Dashboard. Users can click `[ Edit Target Allocation ]` to edit targets in-place via `TargetAllocationModal` without losing their in-progress persona configuration.
-- **Dedicated Avatar & Card**: Represented by a glowing indigo gradient card with a customizable avatar icon (`bot`, `shield`, `rocket`, `scale`, `sparkles`).
+- **Dedicated Avatar & Card**: Represented by a terminal amber bordered card (`rounded-none border-zinc-800 bg-zinc-950`) with a customizable avatar icon (`bot`, `shield`, `rocket`, `scale`, `sparkles`).
 
 사용자는 `CustomGuruModal`을 통해 자신만의 맞춤형 AI 구루를 생성하고 설정할 수 있습니다:
 - **위험 감수 성향**: `conservative` (안정 지향), `balanced` (균형 성장), `aggressive` (공격 투자).
@@ -261,7 +271,7 @@ Users can create and configure their own personalized AI Guru via `CustomGuruMod
 - **코칭 톤**: 단도직입적 팩트 폭격, 지지적인 멘토, 계량적 퀀트 분석가.
 - **개인 원칙/메모**: 자유 텍스트 투자 메모 입력.
 - **목표 배분 연동 및 즉시 편집**: 설정 또는 대시보드에 등록된 목표 배분과 실시간 연동되며, 모달 내 `[ 목표 배분 수정 ]` 버튼을 통해 작성 중인 페르소나 데이터 유실 없이 인플레이스로 즉시 수정할 수 있습니다.
-- **전용 아바타 및 카드**: 인디고 그라데이션 카드와 선택 가능한 아바타 아이콘(`bot`, `shield`, `rocket`, `scale`, `sparkles`)으로 시각화.
+- **전용 아바타 및 카드**: 터미널 앰버 테두리 카드(`rounded-none border-zinc-800 bg-zinc-950`)와 선택 가능한 아바타 아이콘(`bot`, `shield`, `rocket`, `scale`, `sparkles`)으로 시각화.
 
 ## Strategy Filtering & Multi-Faceted Search
 

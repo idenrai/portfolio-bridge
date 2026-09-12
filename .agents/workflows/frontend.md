@@ -8,15 +8,33 @@ description: 프론트엔드 UI/UX 컴포넌트 신규 생성, 수정 및 리팩
 
 이 워크플로우는 프론트엔드와 관련된 생성, 수정, 리팩토링, 디자인 개선의 모든 라이프사이클에 적용되는 마스터 가이드라인입니다.
 
-## 1. Visual Design & UI/UX (필수 준수)
-- **컴포넌트 수정 및 생성 시:** 기존 프로젝트의 톤앤매너(Zinc/Black 기반 다크 미니멀리즘, 터미널 감성의 모노스페이스 배지 등) 일관성을 엄격히 유지합니다.
-- **반응형 검증:** 항상 모바일 우선(Mobile-first) 레이아웃을 고려하며, 필요 시 Tailwind의 반응형 유틸리티(`md:`, `lg:`)를 적극 활용하여 여백과 크기를 세밀하게 조정합니다.
-- UI/UX 변경 시 항상 `.agents/skills/ui-ux-pro-max/SKILL.md`, `.agents/skills/frontend-design/SKILL.md`, `.agents/skills/design-taste-frontend/SKILL.md`를 우선 참조하여 안티-슬롭(Anti-slop) 원칙 및 퀄리티 컨트롤을 적용합니다.
-- **Tailwind CSS v4 모범 사례 준수:** 스타일링 시 `.agents/skills/tailwind-4-docs/SKILL.md`, `.agents/skills/tailwind-design-system/SKILL.md`, `.agents/skills/tailwind-css-patterns/SKILL.md`를 적극 활용하여 최신 v4 토큰(`@theme`, `@utility`) 및 구조를 준수합니다.
-- **Canonical Class 우선 원칙:** 임의 픽셀 값(`rounded-[4px]`, `h-[30px]`, `min-w-[120px]`, `max-w-[200px]`, `min-h-[44px]`, `z-[100]`) 대신 Tailwind v4 공식 스케일(`rounded-sm`, `h-7.5`, `min-w-30`, `max-w-50`, `min-h-11`, `z-100` 등)을 우선적으로 사용합니다.
-- 피해야 할 패턴: 일반적인 AI 템플릿(어두운 회색에 형광색 액센트, 세리프 폰트 남용 등)을 피하고 의도적이고 독창적인 디자인 결정을 내립니다.
-- UI 텍스트 작성 시 '디자인 속 글쓰기' 가이드(능동태, 명확한 동사, 일관성 있는 사이니지)를 준수합니다.
-- **AI 프롬프트 생성기 및 구루 컴포넌트 작업 시:** 구루 질의 프롬프트 모달, 커스텀 구루 멘토 뷰, 자산 자동 분류 프롬프트 UI 등 AI 프롬프트와 관련된 컴포넌트나 템플릿을 신규 생성/수정할 때는 반드시 `.agents/workflows/prompt.md` 워크플로우를 참조하여 템플릿 품질과 프라이버시 원칙을 보장합니다.
+## 1. Visual Design & Bloomberg Terminal System (필수 준수)
+
+### 1.1 프론트엔드 작업 착수 전 Design Read & 다이얼 선언 (의무)
+프론트엔드 컴포넌트나 페이지를 생성/수정할 때는 `.agents/skills/design-taste-frontend/SKILL.md`에 따라 첫머리에 다음 고정 프리셋을 선언하고 이를 기준으로 스타일을 결정합니다:
+```text
+Reading this as: Financial Terminal for multi-asset investors, with Bloomberg Terminal language (Sharp edges, Fira Code, Amber/Green telemetry, zero generic gradients).
+Dials: DESIGN_VARIANCE: 3 | MOTION_INTENSITY: 2 | VISUAL_DENSITY: 9
+```
+
+### 1.2 안티-AI-슬롭 엄격 금지 규칙 (Negative Constraints)
+`.agents/skills/frontend-design/SKILL.md`의 원칙에 따라 다음 AI 템플릿 기본값들을 **절대 생성하거나 유입시켜서는 안 됩니다**:
+- ❌ **보라색/인디고 오염 금지:** `violet-*`, `purple-*`, `indigo-*` 계열의 악센트 및 그라디언트(`bg-linear-to-r from-violet...`) 사용 엄격 금지.
+- ❌ **글래스모피즘 오라 금지:** 배경에 떠 있는 블러 글로우(`blur-[80px]`, floating glow balls) 및 `backdrop-blur-md` 남용 금지.
+- ❌ **둥근 모서리 남발 금지:** `rounded-lg`, `rounded-xl`, `rounded-2xl` 사용 엄격 금지. 기본은 날카로운 직각(`rounded-none`)이며, 초소형 배지나 인풋에서만 제한적으로 `rounded-sm` 허용.
+- ❌ **장식용 AI 아이콘 남용 금지:** `Sparkles`와 같은 맥락 없는 장식성 아이콘 사용 금지. 터미널 프롬프트(`>`), 브래킷(`[ ]`), 상태 인디케이터(`●`) 등 기능적 사이니지를 사용.
+- ❌ **과도한 그림자 금지:** `shadow-lg`, `shadow-xl` 등 떠 있는 카드 그림자 배제 (단단한 1px 헤어라인 `border-zinc-800` 사용).
+
+### 1.3 블룸버그 단말기 시그니처 토큰 & 사이니지 (`ui-ux-pro-max` terminal-style)
+- **배경 및 테두리:** `bg-black`, `bg-zinc-950`, `border-zinc-800` (1px hairline border).
+- **시그니처 앰버(Bloomberg Amber):** `text-amber-400`, `border-amber-500/30`, `bg-amber-500/10` (시스템 하이라이트, 중요 프롬프트, 알림).
+- **시그니처 텔레메트리 그린(Terminal Green):** `text-emerald-400`, `border-emerald-500/30`, `bg-emerald-500/10` (수익, 긍정 지표).
+- **시그니처 터미널 레드(Terminal Red):** `text-rose-400`, `border-rose-500/30`, `bg-rose-500/10` (손실, 위험 지표).
+- **타이포그래피:** 모든 수치와 티커 심볼은 `font-mono tabular-nums` (`Fira Code`). 라벨은 마이크로 대문자 표기(`text-2xs font-bold uppercase tracking-wider text-zinc-500`).
+- **브래킷 사이니지:** 버튼 및 배지는 `[ BUTTON ]`, `[ 01 ]`, `[ LIVE ]` 형태의 터미널 브래킷 감싸기 유지.
+- **반응형 검증:** 모바일 우선(Mobile-first) 레이아웃을 준수하되 모바일에서도 고밀도(DENSITY 9) 정보 전달력을 유지.
+- **Tailwind CSS v4 최신 스케일:** 임의 픽셀 값(`rounded-[4px]`, `h-[30px]`) 대신 v4 공식 토큰(`rounded-sm`, `h-7.5`, `min-h-11`) 사용.
+- **AI 프롬프트 생성기 및 구루 컴포넌트 작업 시:** 반드시 `.agents/workflows/prompt.md` 워크플로우를 참조하여 프롬프트 품질과 프라이버시 원칙을 보장.
 
 ## 2. State Management & Data Fetching
 - **Zustand 5 클라이언트 상태 관리:**
