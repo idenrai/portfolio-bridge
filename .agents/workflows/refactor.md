@@ -31,6 +31,7 @@ description: 프로젝트 폴더 구조 및 소스코드 전면 리팩토링
 1. ❌ **기능 변경 절대 금지 (Behavior Preservation):**
    - 리팩토링은 "코드가 어떻게 조직되는가"만 바꾸는 것이며, "코드가 무엇을 하는가"를 변경해서는 안 됩니다.
    - 새로운 기능 추가(Feature addition)나 비즈니스 로직 수정은 리팩토링 커밋과 엄격히 분리하여 별도 작업으로 진행합니다.
+   - 리팩토링 진행 중 신규 UI 화면/스타일 변경이 필요하면 반드시 `.agents/workflows/frontend.md`로, 신규 API나 비즈니스 로직 추가가 필요하면 `.agents/workflows/backend.md` 워크플로우로 작업을 인계(Handoff)합니다.
 2. ❌ **그린 베이스라인 필수 (No Refactor on Red):**
    - 리팩토링 착수 전 반드시 린트 및 빌드 검증을 실행하여 통과(Green) 상태임을 확인합니다:
      ```bash
