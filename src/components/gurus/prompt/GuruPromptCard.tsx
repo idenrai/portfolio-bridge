@@ -19,9 +19,9 @@ export function GuruPromptCard({
 }: GuruPromptCardProps) {
   return (
     <div className="mt-4 space-y-3 border-t border-zinc-800/50 pt-4">
-      <p className="text-xs-plus text-zinc-500">{t.guru_ai_desc}</p>
+      <p className="font-mono text-xs text-zinc-500">{t.guru_ai_desc}</p>
       {activeAssetsCount === 0 ? (
-        <div className="flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-400">
+        <div className="flex items-center gap-2 rounded-none border border-amber-500/30 bg-amber-500/10 p-3 font-mono text-xs text-amber-400">
           <AlertTriangle className="size-4 shrink-0" />
           <span>{t.guru_ai_scope_empty_warning}</span>
         </div>
@@ -32,12 +32,12 @@ export function GuruPromptCard({
             value={promptText}
             rows={12}
             aria-label={t.guru_ai_banner_title}
-            className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950 p-3 pb-12 font-mono text-xs-plus text-zinc-300 transition-shadow focus:ring-1 focus:ring-indigo-500/50 focus:outline-none sm:text-xs"
+            className="w-full resize-none rounded-none border border-zinc-800 bg-zinc-950 p-3 pb-12 font-mono text-xs-plus text-zinc-300 focus:border-amber-400 focus:ring-1 focus:ring-amber-400/40 focus:outline-none sm:text-xs"
           />
           <button
             type="button"
             onClick={onCopy}
-            className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-md border border-zinc-700/50 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-white shadow-sm backdrop-blur transition-colors hover:bg-zinc-700"
+            className="absolute right-3 bottom-3 shrink-0 cursor-pointer rounded-none border border-zinc-700 bg-zinc-900 px-3 py-1.5 font-mono text-xs font-medium text-white shadow-none transition-colors hover:border-zinc-500 hover:bg-zinc-800"
           >
             {copied ? (
               <FeedbackIconText
@@ -58,7 +58,7 @@ export function GuruPromptCard({
           </button>
         </div>
       )}
-      <div className="mt-1 flex items-start gap-2 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-2.5">
+      <div className="mt-1 flex items-start gap-2 rounded-none border border-yellow-500/20 bg-yellow-500/10 p-2.5 font-mono">
         <AlertTriangle aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-yellow-500" />
         <span className="text-2xs leading-relaxed text-yellow-500/90 sm:text-xs-plus">
           {t.guru_ai_search_warn}

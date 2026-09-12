@@ -135,36 +135,42 @@ export function GurusPage() {
             <button
               type="button"
               onClick={handleReturnToGrid}
-              className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-1.5 text-xs font-medium text-zinc-300 shadow-sm transition-all hover:border-zinc-700 hover:bg-zinc-800 hover:text-white active:scale-95"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-none border border-zinc-800 bg-black px-3 py-1.5 font-mono text-xs font-bold text-zinc-300 transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:ring-1 focus-visible:ring-white focus-visible:outline-none"
             >
-              <LayoutGrid className="size-3.5 text-zinc-400" />
+              <LayoutGrid className="size-3.5 text-inherit" />
+              <span className="opacity-50">{"["}</span>
               <span>{t.guru_btn_all_grid}</span>
+              <span className="opacity-50">{"]"}</span>
             </button>
           )}
           <button
             type="button"
             onClick={() => setIsGuideModalOpen(true)}
-            className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-indigo-500/40 bg-indigo-500/10 px-3 py-1.5 text-xs font-semibold text-indigo-300 shadow-sm transition-all hover:bg-indigo-500/20 hover:text-white active:scale-95"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-none border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 font-mono text-xs font-bold text-amber-400 transition-colors hover:border-amber-400 hover:bg-amber-400 hover:text-black focus-visible:ring-1 focus-visible:ring-amber-400 focus-visible:outline-none"
           >
             <Compass className="size-3.5" />
+            <span className="opacity-50">{"["}</span>
             <span>{t.guru_guide_btn}</span>
+            <span className="opacity-50">{"]"}</span>
           </button>
           {isCustom && (
             <button
               type="button"
               onClick={() => setIsCustomModalOpen(true)}
-              className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-3 py-1.5 text-xs font-medium text-indigo-300 shadow-sm transition-all hover:bg-indigo-500/20 hover:text-white active:scale-95"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-none border border-zinc-800 bg-black px-3 py-1.5 font-mono text-xs font-bold text-zinc-300 transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:ring-1 focus-visible:ring-white focus-visible:outline-none"
             >
               <Settings className="size-3.5" />
+              <span className="opacity-50">{"["}</span>
               <span>{t.custom_guru_settings_btn}</span>
+              <span className="opacity-50">{"]"}</span>
             </button>
           )}
         </div>
       </div>
 
       {allAssets.length > 0 && assets.length === 0 && (
-        <div className="flex items-center gap-2.5 rounded-xl border border-indigo-500/30 bg-indigo-500/10 p-3 text-xs text-indigo-300">
-          <Info aria-hidden="true" className="size-4 shrink-0" />
+        <div className="flex items-center gap-2.5 rounded-none border border-amber-500/30 bg-amber-500/10 p-3 font-mono text-xs text-amber-300">
+          <Info aria-hidden="true" className="size-4 shrink-0 text-amber-400" />
           <span>{t.guru_all_scoped_out_notice}</span>
         </div>
       )}

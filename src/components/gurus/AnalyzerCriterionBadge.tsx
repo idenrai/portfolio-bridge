@@ -21,7 +21,7 @@ export function AnalyzerCriterionBadge<CKey extends string>({
   colors,
 }: CriterionBadgeProps<CKey>) {
   const base =
-    "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-2xs font-medium leading-none";
+    "inline-flex items-center gap-1 rounded-none border border-zinc-800/80 px-2 py-0.5 font-mono text-2xs font-medium leading-none";
   if (pass === null) {
     return (
       <span className={cn(base, "bg-zinc-800/50 text-zinc-400")}>

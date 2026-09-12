@@ -23,7 +23,7 @@ export function AnalyzerScoreBar({ score, colors }: ScoreBarProps) {
   return (
     <div className="flex min-w-30 items-center gap-2">
       <div
-        className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-800/50"
+        className="h-2 flex-1 overflow-hidden rounded-none bg-zinc-800/50"
         role="progressbar"
         aria-valuenow={score}
         aria-valuemin={0}
@@ -32,13 +32,13 @@ export function AnalyzerScoreBar({ score, colors }: ScoreBarProps) {
       >
         <div
           className={cn(
-            "h-full rounded-full transition-[width,background-color] duration-500",
+            "h-full rounded-none transition-[width,background-color] duration-500",
             barColor,
           )}
           style={{ width: `${score}%` }}
         />
       </div>
-      <span className={cn("w-7 text-right text-xs font-bold tabular-nums", textColor)}>
+      <span className={cn("w-7 text-right font-mono text-xs font-bold tabular-nums", textColor)}>
         {score}
       </span>
     </div>
