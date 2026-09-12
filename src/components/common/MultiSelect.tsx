@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect, useCallback, useId } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/utils/cn";
+import { useDropdownPosition } from "@/hooks";
 
 export interface MultiSelectProps {
   options: { label: string; value: string }[];
@@ -26,61 +27,19 @@ export function MultiSelect({
   className,
 }: MultiSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [popupStyle, setPopupStyle] = useState<React.CSSProperties>({});
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
-  const rafRef = useRef<number | null>(null);
 
-  const updatePopupPosition = useCallback(() => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      
-      const estimatedHeight = Math.min(options.length * 36 + 40, 240);
-      const spaceBelow = window.innerHeight - rect.bottom;
-      const spaceAbove = rect.top;
-
-      let top = rect.bottom + 6;
-      if (spaceBelow < estimatedHeight && spaceAbove > spaceBelow) {
-        top = rect.top - estimatedHeight - 6;
-      }
-
-      const style: React.CSSProperties = {
-        top: `${top}px`,
-        minWidth: `${Math.max(rect.width, 224)}px`,
-      };
-
-      if (rect.left > window.innerWidth / 2) {
-        style.right = `${document.documentElement.clientWidth - rect.right}px`;
-      } else {
-        style.left = `${rect.left}px`;
-      }
-
-      setPopupStyle(style);
-    });
-  }, [options.length]);
-
-  useEffect(() => {
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      updatePopupPosition();
-      window.addEventListener("scroll", updatePopupPosition, true);
-      window.addEventListener("resize", updatePopupPosition);
-    }
-    return () => {
-      window.removeEventListener("scroll", updatePopupPosition, true);
-      window.removeEventListener("resize", updatePopupPosition);
-    };
-  }, [isOpen, updatePopupPosition]);
+  const { popupStyle } = useDropdownPosition({
+    containerRef,
+    isOpen,
+    itemCount: options.length,
+    extraHeight: 40,
+    minWidthFloor: 224,
+  });
 
   useEffect(() => {
     if (isOpen && listRef.current && focusedIndex >= 0) {
