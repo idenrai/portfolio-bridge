@@ -134,3 +134,23 @@ All pages (`/`, `/assets`, `/gurus`, `/fire`, `/settings`, `/about`) utilize a u
 | AI Prompts / AI 프롬프트 | `doc/features/ai-prompts.md` | AI prompt system |
 | i18n / 다국어 | `doc/features/i18n.md` | i18n system + translation guide |
 | Yahoo Finance | `doc/system/yahoo-finance.md` | Yahoo Finance & FRED proxy integration |
+
+## AI Engineering Workflows
+
+The repository maintains Single Source of Truth (SSoT) guidelines under `.agents/` to coordinate AI-assisted development across frontend, backend, and prompt engineering domains.
+
+본 저장소는 프론트엔드, 백엔드 및 프롬프트 엔지니어링 전반에 걸친 AI 페어 프로그래밍을 조율하기 위해 `.agents/` 디렉토리 아래에 단일 진실 공급원(SSoT) 가이드라인을 유지 관리합니다.
+
+### Available Engineering Workflows
+
+| Workflow | Activation | Primary Focus |
+| :--- | :--- | :--- |
+| Frontend Engineering | `/frontend` | UI/UX components, Tailwind CSS v4 canonical styling, accessibility, and Zustand 5 state integration. |
+| Backend Engineering | `/backend` | Vercel Edge Runtime proxies, privacy-first stateless architecture, and zero-trust validation. |
+| Prompt Engineering | `/prompt` | Guru persona frameworks, multi-account tax wrapper tags, prompt injection protection, and client-side assembly. |
+
+엔지니어링 작업 영역별 주요 워크플로우 매트릭스:
+- 프론트엔드 워크플로우 (`/frontend`): UI/UX 컴포넌트, Tailwind CSS v4 스타일링, 웹 접근성 감사 및 Zustand 5 상태 연동.
+- 백엔드 워크플로우 (`/backend`): Vercel Edge Runtime 프록시, 무상태 프라이버시 아키텍처 및 제로 트러스트 검증.
+- 프롬프트 엔지니어링 워크플로우 (`/prompt`): 구루 페르소나 분석 프레임워크, 다계좌 절세 래퍼 태그, 프롬프트 인젝션 방어 및 클라이언트 사이드 조립.
+
