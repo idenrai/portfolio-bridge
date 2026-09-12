@@ -44,9 +44,9 @@ export function MultiSelect({
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
 
-      let top = rect.bottom + window.scrollY + 6;
+      let top = rect.bottom + 6;
       if (spaceBelow < estimatedHeight && spaceAbove > spaceBelow) {
-        top = rect.top + window.scrollY - estimatedHeight - 6;
+        top = rect.top - estimatedHeight - 6;
       }
 
       const style: React.CSSProperties = {
@@ -55,9 +55,9 @@ export function MultiSelect({
       };
 
       if (rect.left > window.innerWidth / 2) {
-        style.right = `${document.documentElement.clientWidth - rect.right - window.scrollX}px`;
+        style.right = `${document.documentElement.clientWidth - rect.right}px`;
       } else {
-        style.left = `${rect.left + window.scrollX}px`;
+        style.left = `${rect.left}px`;
       }
 
       setPopupStyle(style);
@@ -173,23 +173,23 @@ export function MultiSelect({
   const portalContent = isOpen && typeof document !== "undefined" ? createPortal(
     <div
       className={cn(
-        "absolute z-100 animate-popup overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/95 p-1 shadow-xl backdrop-blur-xl"
+        "absolute z-100 animate-popup overflow-hidden rounded-none border border-zinc-800 bg-zinc-950 p-1 shadow-2xl"
       )}
       style={popupStyle}
     >
       {options.length > 1 && (
-        <div className="mb-1 flex items-center justify-between border-b border-zinc-800/50 px-2 pt-1 pb-1.5">
+        <div className="mb-1 flex items-center justify-between border-b border-zinc-800/50 px-2 pt-1 pb-1.5 font-mono">
           <button
             type="button"
             onClick={handleSelectAll}
-            className="cursor-pointer rounded-sm text-2xs font-medium text-zinc-400 transition-colors hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none"
+            className="cursor-pointer rounded-none text-2xs font-medium text-zinc-400 transition-colors hover:text-amber-400 focus-visible:ring-1 focus-visible:ring-amber-400 focus-visible:outline-none"
           >
             {selectAllText}
           </button>
           <button
             type="button"
             onClick={handleClearAll}
-            className="cursor-pointer rounded-sm text-2xs font-medium text-zinc-400 transition-colors hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none"
+            className="cursor-pointer rounded-none text-2xs font-medium text-zinc-400 transition-colors hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none"
           >
             {clearText}
           </button>
@@ -198,7 +198,7 @@ export function MultiSelect({
       <div
         id={listboxId}
         ref={listRef}
-        className="relative max-h-60 custom-scrollbar overflow-y-auto py-1"
+        className="relative max-h-60 custom-scrollbar overflow-y-auto py-1 font-mono"
         role="listbox"
         aria-multiselectable="true"
       >
@@ -214,9 +214,9 @@ export function MultiSelect({
               id={`${listboxId}-option-${index}`}
               onMouseEnter={() => setFocusedIndex(index)}
               className={cn(
-                "flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 transition-colors",
-                isFocused ? "bg-zinc-800/80" : "hover:bg-zinc-800/50",
-                isSelected ? "text-white" : "text-zinc-300"
+                "flex cursor-pointer items-center gap-2.5 rounded-none px-2 py-1.5 transition-colors",
+                isFocused ? "bg-zinc-800" : "hover:bg-zinc-800/60",
+                isSelected ? "font-bold text-amber-300" : "text-zinc-300"
               )}
             >
               <input
@@ -228,9 +228,9 @@ export function MultiSelect({
               />
               <div
                 className={cn(
-                  "flex size-3.5 shrink-0 items-center justify-center rounded-sm border peer-focus-visible:ring-2 peer-focus-visible:ring-violet-500 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-offset-zinc-950",
+                  "flex size-3.5 shrink-0 items-center justify-center rounded-none border peer-focus-visible:ring-1 peer-focus-visible:ring-amber-400 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-offset-zinc-950",
                   isSelected
-                    ? "border-violet-500 bg-violet-500 text-white"
+                    ? "border-amber-400 bg-amber-400 text-black"
                     : "border-zinc-700 bg-transparent text-transparent"
                 )}
               >
@@ -269,7 +269,7 @@ export function MultiSelect({
           }
         }}
         className={cn(
-          "flex h-7.5 max-w-50 min-w-30 cursor-pointer items-center justify-between gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1 text-xs text-zinc-200 transition-colors hover:bg-zinc-800/80 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500/50 focus-visible:outline-none",
+          "flex h-7.5 max-w-50 min-w-30 cursor-pointer items-center justify-between gap-2 rounded-none border border-zinc-800 bg-zinc-900/50 px-2.5 py-1 font-mono text-xs text-zinc-200 transition-colors hover:bg-zinc-800/80 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500/50 focus-visible:outline-none",
           isOpen && "border-zinc-600 bg-zinc-800/80"
         )}
       >

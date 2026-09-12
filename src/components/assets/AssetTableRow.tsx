@@ -72,7 +72,7 @@ export function AssetTableRow({
         )}
       </td>
       <td className="py-2.5 whitespace-nowrap">
-        <span className="rounded bg-zinc-800 px-2 py-0.5 text-xs text-zinc-300">
+        <span className="rounded-none border border-zinc-800 bg-zinc-900 px-2 py-0.5 font-mono text-2xs text-zinc-300">
           {t.market_labels[asset.market]}
         </span>
       </td>
@@ -85,7 +85,7 @@ export function AssetTableRow({
             ...categoryOptions.map(([val, label]) => ({ value: val, label })),
           ]}
           ariaLabel={t.at_col_category}
-          className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-xs-plus tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
+          className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-none border border-transparent bg-transparent px-1.5 py-0 font-mono text-xs tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
         />
       </td>
       <td className="py-2.5 whitespace-nowrap">
@@ -103,15 +103,15 @@ export function AssetTableRow({
           ]}
           ariaLabel={t.at_col_visibility}
           className={cn(
-            "flex h-6 min-w-24 cursor-pointer items-center justify-between gap-1 rounded-sm border px-1.5 py-0 text-xs-plus font-medium transition-colors focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none",
+            "flex h-6 min-w-24 cursor-pointer items-center justify-between gap-1 rounded-none border px-1.5 py-0 font-mono text-xs-plus font-medium transition-colors focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none",
             (asset.visibility ?? "all") === "all" &&
-              "border-indigo-500/30 bg-indigo-500/10 text-indigo-300 hover:border-indigo-500/50",
+              "border-zinc-700 bg-zinc-800/60 text-zinc-300 hover:border-zinc-500",
             asset.visibility === "dashboard_only" &&
               "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:border-emerald-500/50",
             asset.visibility === "guru_only" &&
-              "border-purple-500/30 bg-purple-500/10 text-purple-300 hover:border-purple-500/50",
+              "border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:border-cyan-500/50",
             asset.visibility === "hidden" &&
-              "border-zinc-700/50 bg-zinc-800/40 text-zinc-500 hover:border-zinc-600",
+              "border-zinc-800 bg-zinc-900/60 text-zinc-500 hover:border-zinc-700",
           )}
         />
       </td>
@@ -125,7 +125,7 @@ export function AssetTableRow({
               ...brokerAccounts.map((b) => ({ value: b.id, label: b.nickname })),
             ]}
             ariaLabel={t.af_account_label}
-            className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-sm border border-transparent bg-transparent px-1.5 py-0 text-xs-plus tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
+            className="flex h-6 min-w-22 cursor-pointer items-center justify-between gap-1 rounded-none border border-transparent bg-transparent px-1.5 py-0 font-mono text-xs tracking-wider text-zinc-300 uppercase transition-colors hover:border-zinc-700 hover:bg-zinc-900 focus-visible:border-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:outline-none"
           />
         </td>
       )}

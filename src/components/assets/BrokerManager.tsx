@@ -148,8 +148,8 @@ export function BrokerManager() {
     <div className="space-y-4">
       {/* 계좌 목록 */}
       {accounts.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800/80 bg-zinc-900/20 py-8 text-center">
-          <div className="mb-2 flex size-10 items-center justify-center rounded-full bg-zinc-900 text-zinc-500">
+        <div className="flex flex-col items-center justify-center rounded-none border border-dashed border-zinc-800/80 bg-zinc-900/20 py-8 text-center font-mono">
+          <div className="mb-2 flex size-10 items-center justify-center rounded-none border border-zinc-800 bg-zinc-900 text-zinc-500">
             <Landmark className="size-5" />
           </div>
           <p className="text-sm font-medium text-zinc-400">
