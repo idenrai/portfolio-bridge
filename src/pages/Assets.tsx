@@ -1,17 +1,13 @@
 import { useState, useRef } from "react";
 import { useAssetStore, useBrokerStore } from "@/stores";
-import { usePortfolio } from "@/hooks";
+import { usePortfolio, useAssetFilterSort, useT } from "@/hooks";
 import { Card, Button, Modal } from "@/components/common";
 import { FilterBar } from "@/components/common";
 import { AssetForm, AssetTable, BrokerManager, AIClassificationModal, CSVPreviewModal } from "@/components/assets";
 import { downloadCsv, parseCsv } from "@/utils";
-import { useT } from "@/hooks";
 import type {
   Asset,
   AssetFormData,
-  Market,
-  AssetType,
-  AssetCategory,
   AssetVisibility,
 } from "@/types";
 
@@ -21,6 +17,7 @@ export function AssetsPage() {
   const updateAsset = useAssetStore((s) => s.updateAsset);
   const deleteAsset = useAssetStore((s) => s.deleteAsset);
   const brokers = useBrokerStore((s) => s.accounts);
+  const t = useT();
   
   const [modalOpen, setModalOpen] = useState(false);
   const [editingAsset, setEditingAsset] = useState<Asset | undefined>();
@@ -30,51 +27,31 @@ export function AssetsPage() {
     null,
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const t = useT();
 
-  // ── 필터 / 정렬 상태 ──────────────────────────────────────────────────────
-  const [filterMarkets, setFilterMarkets] = useState<Market[]>([]);
-  const [filterTypes, setFilterTypes] = useState<AssetType[]>([]);
-  const [filterCategories, setFilterCategories] = useState<AssetCategory[]>([]);
-  const [filterBrokerIds, setFilterBrokerIds] = useState<string[]>([]);
-  const [filterVisibilities, setFilterVisibilities] = useState<AssetVisibility[]>([]);
-  
-  const [sortKey, setSortKey] = useState<"name" | "value" | "pnl" | "return">("value");
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
-
-  const handleSort = (key: "name" | "value" | "pnl" | "return") => {
-    if (sortKey === key)
-      setSortDir((d: "asc" | "desc") => (d === "asc" ? "desc" : "asc"));
-    else {
-      setSortKey(key);
-      setSortDir("desc");
-    }
-  };
-
-  const filteredAssets = assets
-    .filter((a) => filterMarkets.length === 0 || filterMarkets.includes(a.market))
-    .filter((a) => filterTypes.length === 0 || filterTypes.includes(a.type))
-    .filter((a) => filterCategories.length === 0 || a.categories.some((c) => filterCategories.includes(c)))
-    .filter((a) => filterBrokerIds.length === 0 || (a.brokerId && filterBrokerIds.includes(a.brokerId)))
-    .filter(
-      (a) =>
-        filterVisibilities.length === 0 ||
-        filterVisibilities.includes(a.visibility ?? "all"),
-    );
-
-  const handleClearFilters = () => {
-    setFilterMarkets([]);
-    setFilterTypes([]);
-    setFilterCategories([]);
-    setFilterBrokerIds([]);
-    setFilterVisibilities([]);
-  };
-
-  const availableMarkets = Array.from(new Set(assets.map((a) => a.market)));
-  const availableTypes = Array.from(new Set(assets.map((a) => a.type)));
-  const availableCategories = Array.from(
-    new Set(assets.flatMap((a) => a.categories))
-  ).map((cat) => [cat, t.category_labels[cat] ?? cat] as [AssetCategory, string]);
+  // ── 필터 및 정렬 상태/파이프라인 (useAssetFilterSort 위임) ────────────────────
+  const {
+    filterMarkets,
+    filterTypes,
+    filterCategories,
+    filterBrokerIds,
+    filterVisibilities,
+    sortKey,
+    sortDir,
+    setFilterMarkets,
+    setFilterTypes,
+    setFilterCategories,
+    setFilterBrokerIds,
+    setFilterVisibilities,
+    handleSort,
+    handleClearFilters,
+    filteredAssets,
+    availableMarkets,
+    availableTypes,
+    availableCategories,
+  } = useAssetFilterSort({
+    assets,
+    categoryLabels: t.category_labels,
+  });
 
   const handleAdd = () => {
     setEditingAsset(undefined);
