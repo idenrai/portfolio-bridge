@@ -81,7 +81,7 @@ export function OneilCanSlimCard() {
 
   return (
     <AnalyzerCard<OneilCriterionKey>
-      theme="violet"
+      theme="cyan"
       texts={texts}
       criterionHints={CRITERION_HINT}
       criterionLabel={criterionLabel}

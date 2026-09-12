@@ -13,7 +13,7 @@ export interface ThemeColors {
   progressEnrich: string;
 }
 
-export const THEMES: Record<"green" | "violet" | "blue" | "amber", ThemeColors> = {
+export const THEMES: Record<"green" | "cyan" | "blue" | "amber", ThemeColors> = {
   green: {
     btn: "bg-green-600 hover:bg-green-700",
     tabActive: "bg-green-600 text-white",
@@ -26,17 +26,17 @@ export const THEMES: Record<"green" | "violet" | "blue" | "amber", ThemeColors> 
     inputFocus: "focus-visible:border-green-400 focus-visible:ring-1 focus-visible:ring-green-500/30",
     progressEnrich: "bg-emerald-500",
   },
-  violet: {
-    btn: "bg-violet-600 hover:bg-violet-700",
-    tabActive: "bg-violet-600 text-white",
-    scoreHigh: "bg-violet-500",
-    scoreTextHigh: "text-violet-400",
-    badgePass: "bg-violet-500/10 text-violet-400",
-    highScoreBadge: "bg-violet-500/20 text-violet-300",
-    resultHover: "hover:border-violet-500/20 hover:bg-violet-500/10",
-    suggestHover: "hover:bg-violet-500/10",
-    inputFocus: "focus-visible:border-violet-400 focus-visible:ring-1 focus-visible:ring-violet-500/30",
-    progressEnrich: "bg-violet-500",
+  cyan: {
+    btn: "bg-cyan-600 hover:bg-cyan-700",
+    tabActive: "bg-cyan-600 text-black font-semibold",
+    scoreHigh: "bg-cyan-500",
+    scoreTextHigh: "text-cyan-400",
+    badgePass: "bg-cyan-500/10 text-cyan-400",
+    highScoreBadge: "bg-cyan-500/20 text-cyan-300",
+    resultHover: "hover:border-cyan-500/20 hover:bg-cyan-500/10",
+    suggestHover: "hover:bg-cyan-500/10",
+    inputFocus: "focus-visible:border-cyan-400 focus-visible:ring-1 focus-visible:ring-cyan-500/30",
+    progressEnrich: "bg-cyan-500",
   },
   blue: {
     btn: "bg-blue-600 hover:bg-blue-700",
