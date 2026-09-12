@@ -4,7 +4,7 @@
 | --- | --- |
 | Route | `/gurus` |
 | Component | `src/pages/Gurus.tsx` |
-| Sub-components | `src/components/gurus/page/`, `src/components/gurus/prompt/` |
+| Sub-components | `src/components/gurus/page/`, `src/components/gurus/prompt/`, `src/components/gurus/guide/` |
 | Modals | `CustomGuruModal`, `GuruGuideModal` |
 | Hooks | `useAnalyzer`, `useGuruFilter`, `useGuruPromptScope` |
 | Stores | `useGuruSessionStore`, `useCustomGuruStore` |
@@ -294,6 +294,7 @@ Features:
 - Refined micro-typography (minimum `text-xs` / `text-2xs` for crystal-clear readability across devices).
 - Custom Guru interactive gradient callout card with full touch targets (`min-h-12`) directly opening persona configuration.
 - Candidate quick-select buttons for alternative matching gurus.
+- **Decomposed Step Architecture (`src/components/gurus/guide/`)**: Steps are split into focused subcomponents: `GuruGuideStepRisk.tsx` (Step 1), `GuruGuideStepStrategy.tsx` (Step 2), `GuruGuideStepTone.tsx` (Step 3), and `GuruGuideResultView.tsx` (Match result and recommendations), keeping the parent modal thin and maintainable.
 
 3단계 대화형 진단을 통해 유저 성향에 최적화된 구루(또는 커스텀 구루)를 매칭하고 원클릭 선택을 지원합니다:
 1. **위험 성향**: 손실 방어(보수) vs 분산 복리(중립) vs 고수익 성장(공격).
@@ -304,6 +305,7 @@ Features:
 - 가독성 극대화를 위한 마이크로 타이포그래피 개선 (최소 `text-xs` / `text-2xs` 보장).
 - 커스텀 구루 생성을 위한 인터랙티브 그라데이션 콜아웃 카드 (`min-h-12` 터치 타깃 준수).
 - 추천 대안 후보들에 대한 원클릭 퀵 선택 버튼 제공.
+- **단계별 컴포넌트 모듈화 (`src/components/gurus/guide/`)**: 각 진단 단계와 결과 화면이 `GuruGuideStepRisk.tsx`(1단계), `GuruGuideStepStrategy.tsx`(2단계), `GuruGuideStepTone.tsx`(3단계), `GuruGuideResultView.tsx`(결과 및 추천 구루 표시)로 분리되어 부모 모달의 복잡도를 낮추고 유지보수성을 극대화했습니다.
 
 ## Layout Structure
 
