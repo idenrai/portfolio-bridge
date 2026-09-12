@@ -273,9 +273,21 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          "vendor-recharts": ["recharts"],
-          "vendor-icons": ["lucide-react"],
+        manualChunks(id) {
+          if (id.includes("node_modules/recharts")) return "vendor-recharts";
+          if (id.includes("node_modules/lucide-react")) return "vendor-icons";
+          if (
+            id.includes("node_modules/react/") ||
+            id.includes("node_modules/react-dom/") ||
+            id.includes("node_modules/react-router-dom/")
+          ) {
+            return "vendor-react";
+          }
+          if (id.includes("node_modules/@tanstack/react-query")) {
+            return "vendor-query";
+          }
+          if (id.includes("node_modules/date-fns")) return "vendor-date";
+          if (/[\\/]src[\\/]i18n[\\/]/.test(id)) return "app-i18n";
         },
       },
     },
