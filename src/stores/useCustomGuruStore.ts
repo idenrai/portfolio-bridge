@@ -46,7 +46,7 @@ export const CUSTOM_GURU_TONE_KEYS = {
 
 export const DEFAULT_CUSTOM_GURU: CustomGuruConfig = {
   name: "나만의 맞춤 구루",
-  avatarIcon: "sparkles",
+  avatarIcon: "terminal",
   riskTolerance: "balanced",
   strategy: "all_weather",
   tone: "supportive_mentor",

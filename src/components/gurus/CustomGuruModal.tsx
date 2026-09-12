@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  Sparkles,
+  Terminal,
   Bot,
   Shield,
   Rocket,
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const AVATAR_ICONS = [
-  { id: "sparkles", Icon: Sparkles, label: "Sparkles" },
+  { id: "terminal", Icon: Terminal, label: "Terminal" },
   { id: "bot", Icon: Bot, label: "Bot" },
   { id: "shield", Icon: Shield, label: "Shield" },
   { id: "rocket", Icon: Rocket, label: "Rocket" },

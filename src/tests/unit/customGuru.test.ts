@@ -60,7 +60,7 @@ describe("useCustomGuruStore", () => {
 describe("buildCustomGuruPrompt", () => {
   const mockConfig: CustomGuruConfig = {
     name: "자산배분 전속 멘토",
-    avatarIcon: "sparkles",
+    avatarIcon: "terminal",
     riskTolerance: "aggressive",
     strategy: "dividend_cashflow",
     tone: "direct_unfiltered",
