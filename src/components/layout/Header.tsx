@@ -40,20 +40,20 @@ export function Header() {
       {/* 모바일: 로고 표시 / 데스크톱: 빈 공간 */}
       <div className="md:hidden">
         <Link to="/" className="group flex shrink-0 items-center gap-2.5">
-          <img src="/favicon.svg" alt="" className="size-6 rounded-md border border-zinc-800" aria-hidden="true" />
-          <span className="text-lg font-bold tracking-tight text-white">
+          <img src="/favicon.svg" alt="" className="size-6 rounded-none border border-zinc-800" aria-hidden="true" />
+          <span className="font-mono text-lg font-bold tracking-tight text-white">
             Portfolio Bridge
           </span>
         </Link>
       </div>
       <div className="hidden items-center gap-3 md:flex">
         <Link to="/" className="group mr-6 flex shrink-0 items-center gap-2.5">
-          <img src="/favicon.svg" alt="" className="size-7 rounded-md border border-zinc-800" aria-hidden="true" />
-          <span className="text-xl font-bold tracking-tight text-white">
+          <img src="/favicon.svg" alt="" className="size-7 rounded-none border border-zinc-800" aria-hidden="true" />
+          <span className="font-mono text-xl font-bold tracking-tight text-white">
             Portfolio Bridge
           </span>
         </Link>
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-1 font-mono">
           {NAV_ITEMS.map(({ to, label, icon }) => (
             <NavLink
               key={to}
@@ -62,10 +62,10 @@ export function Header() {
               aria-label={label}
               className={({ isActive }) =>
                 cn(
-                  "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                  "flex items-center gap-1.5 rounded-none px-3 py-1.5 text-xs font-bold transition-colors",
                   isActive
-                    ? "bg-zinc-800 text-white"
-                    : "text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-200"
+                    ? "border border-zinc-200 bg-zinc-200 text-black"
+                    : "border border-transparent text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"
                 )
               }
             >
@@ -75,16 +75,16 @@ export function Header() {
           ))}
         </nav>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 font-mono">
         {/* 오프라인 상태 인디케이터 배지 */}
         {!isOnline && (
           <div
-            className="flex items-center gap-1.5 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-xs font-medium text-amber-400"
+            className="flex items-center gap-1.5 rounded-none border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-xs font-medium text-amber-400"
             title={t.offline_badge_tooltip}
             role="status"
             aria-live="polite"
           >
-            <span className="size-1.5 animate-pulse rounded-full bg-amber-400" aria-hidden="true" />
+            <span className="size-1.5 animate-pulse rounded-none bg-amber-400" aria-hidden="true" />
             <WifiOff className="size-3.5 shrink-0" aria-hidden="true" />
             <span className="hidden sm:inline">{t.offline_badge_title}</span>
           </div>
@@ -100,7 +100,7 @@ export function Header() {
               label: `${LANG_ARIA[l]} (${LANG_LABELS[l]})`,
             }))}
             ariaLabel="Change Language"
-            className="flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-2 text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-black focus-visible:outline-none"
+            className="flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-none border border-transparent px-2 text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-zinc-200 focus-visible:ring-1 focus-visible:ring-white focus-visible:outline-none"
             trigger={
               <>
                 <Globe className="size-4" />

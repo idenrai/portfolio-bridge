@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import {
-  Sparkles,
   ArrowRight,
   AlertTriangle,
   TrendingDown,
@@ -61,30 +60,30 @@ export function InsightsPanel({ summary }: Props) {
   return (
     <Card title={t.insights_title}>
       {/* ── 커스텀 구루 1:1 상담 바로가기 배너 ── */}
-      <div className="mb-4 rounded-xl bg-linear-to-r from-indigo-500/20 via-purple-500/20 to-blue-500/20 p-px shadow-sm">
-        <div className="rounded-xl bg-zinc-900/95 p-3.5 sm:px-4">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex min-w-0 items-center gap-2.5">
-              <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-indigo-500/30 bg-indigo-500/10 text-indigo-400">
-                <Sparkles className="size-4" />
-              </div>
-              <div className="min-w-0">
-                <p className="truncate text-xs font-semibold text-zinc-100 sm:text-xs-plus">
-                  {t.custom_guru_dash_banner_title}
-                </p>
-                <p className="truncate text-3xs text-zinc-400 sm:text-2xs">
-                  {t.custom_guru_dash_banner_desc}
-                </p>
-              </div>
+      <div className="mb-4 border border-zinc-800 bg-black p-3 font-mono sm:p-3.5">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <div className="flex size-7 shrink-0 items-center justify-center border border-amber-500/30 bg-amber-500/10 text-xs font-bold text-amber-400">
+              {">"}
             </div>
-            <Link
-              to="/gurus?guru=custom"
-              className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1.5 text-xs font-medium text-indigo-300 shadow-sm transition-all hover:bg-indigo-500/20 hover:text-white focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:outline-none active:scale-95"
-            >
-              <span>{t.custom_guru_dash_banner_action}</span>
-              <ArrowRight className="size-3.5" />
-            </Link>
+            <div className="min-w-0">
+              <p className="truncate text-xs font-semibold text-zinc-100">
+                {t.custom_guru_dash_banner_title}
+              </p>
+              <p className="truncate text-3xs text-zinc-400">
+                {t.custom_guru_dash_banner_desc}
+              </p>
+            </div>
           </div>
+          <Link
+            to="/gurus?guru=custom"
+            className="inline-flex shrink-0 items-center gap-1 border border-amber-500/40 bg-amber-500/10 px-2.5 py-1 text-xs font-bold text-amber-400 transition-colors hover:border-amber-400 hover:bg-amber-400 hover:text-black focus-visible:ring-1 focus-visible:ring-amber-400 focus-visible:outline-none"
+          >
+            <span className="opacity-50">{"["}</span>
+            <span>{t.custom_guru_dash_banner_action}</span>
+            <span className="opacity-50">{"]"}</span>
+            <ArrowRight className="size-3" />
+          </Link>
         </div>
       </div>
 
@@ -100,7 +99,7 @@ export function InsightsPanel({ summary }: Props) {
               <div
                 key={i}
                 className={cn(
-                  "flex items-start gap-2 rounded-lg border px-3 py-2 text-xs",
+                  "flex items-start gap-2 rounded-none border px-3 py-2 text-xs",
                   TYPE_STYLES[insight.type],
                 )}
               >
