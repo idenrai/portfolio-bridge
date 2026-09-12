@@ -162,9 +162,37 @@ The repository maintains Single Source of Truth (SSoT) guidelines under `.agents
 | Frontend Engineering | `/frontend` | UI/UX components, Tailwind CSS v4 canonical styling, accessibility, and Zustand 5 state integration. |
 | Backend Engineering | `/backend` | Vercel Edge Runtime proxies, privacy-first stateless architecture, and zero-trust validation. |
 | Prompt Engineering | `/prompt` | Guru persona frameworks, multi-account tax wrapper tags, prompt injection protection, and client-side assembly. |
+| Code Refactoring | `/refactor` | Clean code, smell elimination, single responsibility decomposition, and behavior-preserving refactoring. |
 
 엔지니어링 작업 영역별 주요 워크플로우 매트릭스:
 - 프론트엔드 워크플로우 (`/frontend`): UI/UX 컴포넌트, Tailwind CSS v4 스타일링, 웹 접근성 감사 및 Zustand 5 상태 연동.
 - 백엔드 워크플로우 (`/backend`): Vercel Edge Runtime 프록시, 무상태 프라이버시 아키텍처 및 제로 트러스트 검증.
 - 프롬프트 엔지니어링 워크플로우 (`/prompt`): 구루 페르소나 분석 프레임워크, 다계좌 절세 래퍼 태그, 프롬프트 인젝션 방어 및 클라이언트 사이드 조립.
+- 코드 리팩토링 워크플로우 (`/refactor`): 클린 코드, 코드 스멜 제거, 단일 책임 원칙(SRP)에 따른 컴포넌트 분해 및 행위 보존 리팩토링.
+
+## Build & Bundle Optimization (`vite.config.ts`)
+
+The production build employs Rollup `manualChunks` partitioning in `vite.config.ts` to prevent oversized vendor bundles:
+- `vendor-react`: `react`, `react-dom`, `react-router-dom`
+- `vendor-query`: `@tanstack/react-query`
+- `vendor-date`: `date-fns`
+- `app-i18n`: All translation dictionary files under `src/i18n/`
+
+This optimization reduced the main `index.js` bundle size from 613.9 kB to 78.17 kB (an 87% reduction), eliminating Vite's 500 kB chunk warning and maximizing initial load performance and browser cache efficiency.
+
+프로덕션 빌드는 대형 벤더 번들 생성을 방지하기 위해 `vite.config.ts`의 Rollup `manualChunks` 분할 전략을 사용합니다:
+- `vendor-react`: `react`, `react-dom`, `react-router-dom`
+- `vendor-query`: `@tanstack/react-query`
+- `vendor-date`: `date-fns`
+- `app-i18n`: `src/i18n/` 하위의 모든 다국어 사전 파일
+
+이 최적화를 통해 메인 `index.js` 번들 크기가 613.9 kB에서 78.17 kB로 87% 대폭 감축되었으며, Vite의 500 kB 청크 경고가 완전히 해소되고 초기 로드 속도와 브라우저 캐시 재사용성이 극대화되었습니다.
+
+## Pure Calculation & Shared UI Primitives
+
+1. **Pure Calculation Extraction (`src/utils/calc/calculations.ts`)**: Extracted `mergeHoldingsByTicker`, `calculateCurrencyExposure`, and `calculateCurrencyScenarios` as standalone pure functions from the monolithic `calculateSummary` function, improving testability and code reuse.
+2. **Shared Dropdown Positioning Hook (`src/hooks/useDropdownPosition.ts`)**: Extracted dynamic fixed-coordinate calculation and window/scroll event listeners into a reusable hook, eliminating duplicated positioning logic across `CustomSelect` and `MultiSelect`.
+
+1. **순수 연산 함수 분리 (`src/utils/calc/calculations.ts`)**: 거대했던 `calculateSummary` 함수로부터 `mergeHoldingsByTicker`(티커별 종목 합산), `calculateCurrencyExposure`(통화별 노출액 계산), `calculateCurrencyScenarios`(환율 변동 시나리오 연산)를 독립 순수 함수로 추출하여 테스트 용이성과 재사용성을 향상했습니다.
+2. **공용 드롭다운 포지셔닝 훅 (`src/hooks/useDropdownPosition.ts`)**: `CustomSelect` 및 `MultiSelect`에 중복되어 있던 fixed 뷰포트 좌표 계산과 스크롤/리사이즈 이벤트 리스너 로직을 단일 커스텀 훅으로 추출하여 유지보수성을 강화했습니다.
 

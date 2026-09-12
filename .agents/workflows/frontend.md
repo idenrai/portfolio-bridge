@@ -1,12 +1,12 @@
 ---
-description: 프론트엔드 UI/UX 컴포넌트 신규 생성, 수정 및 리팩토링
+description: 프론트엔드 UI/UX 컴포넌트 신규 생성, 수정 및 디자인 시스템 고도화
 ---
 
 # Frontend Engineering Workflow
 
-**Activation:** `/frontend` (또는 UI/UX 컴포넌트, 페이지, 훅, 스토어 등의 신규 생성 및 수정을 진행할 때)
+**Activation:** `/frontend` (또는 UI/UX 컴포넌트, 페이지, 훅, 스토어 등의 신규 생성, 수정, 디자인 개선을 진행할 때)
 
-이 워크플로우는 프론트엔드와 관련된 생성, 수정, 리팩토링, 디자인 개선의 모든 라이프사이클에 적용되는 마스터 가이드라인입니다.
+이 워크플로우는 프론트엔드와 관련된 생성, 수정, 디자인 개선의 모든 라이프사이클에 적용되는 마스터 가이드라인입니다.
 
 ## 1. Visual Design & Bloomberg Terminal System (필수 준수)
 
@@ -64,6 +64,10 @@ Dials: DESIGN_VARIANCE: 3 | MOTION_INTENSITY: 2 | VISUAL_DENSITY: 9
   - Zustand store: `src/stores/use<Domain>Store.ts`
   - Utility function: `src/utils/camelCase.ts`
 - **Barrel Exports:** 새로운 파일을 생성한 후, 동일 디렉토리 내의 `index.ts`를 반드시 업데이트합니다 (예: `export { MyComponent } from "./MyComponent";`).
+
+> [!TIP]
+> **순수 리팩토링 위임 (Handoff to `/refactor`):**
+> 기존 컴포넌트의 외부 동작과 기능을 100% 보존한 채 파일/폴더 구조 개편, 대규모 코드 스멜 제거, 모듈 분할 등 순수 리팩토링을 진행할 때는 본 워크플로우 대신 반드시 `.agents/workflows/refactor.md` 워크플로우를 호출하십시오.
 
 ## 5. i18n 동기화 (다국어 지원)
 컴포넌트 생성 또는 수정 과정에서 사용자에게 노출되는 문자열(User-visible strings)이 포함되거나 변경될 경우:

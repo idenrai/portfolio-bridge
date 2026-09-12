@@ -14,4 +14,6 @@ export { useGuruFilter } from "./useGuruFilter";
 export { useNetworkStatus } from "./useNetworkStatus";
 export { useMultiTabSync } from "./useMultiTabSync";
 export { useStoragePersistence, formatBytes, calculateLocalStorageUsage } from "./useStoragePersistence";
-
+export { useDropdownPosition } from "./useDropdownPosition";
+export { useAssetFilterSort } from "./useAssetFilterSort";
+export type { AssetSortKey, AssetSortDir } from "./useAssetFilterSort";

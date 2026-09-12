@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect, useCallback, useId } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import { ChevronDown, Check } from "lucide-react";
 import { cn } from "@/utils/cn";
+import { useDropdownPosition } from "@/hooks";
 
 export interface SelectOption<T extends string | number> {
   label: string;
@@ -29,7 +30,6 @@ export function CustomSelect<T extends string | number>({
   ariaLabel
 }: CustomSelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
-  const [popupStyle, setPopupStyle] = useState<React.CSSProperties>({});
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
   const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
   
@@ -39,61 +39,15 @@ export function CustomSelect<T extends string | number>({
 
   const searchStringRef = useRef("");
   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const rafRef = useRef<number | null>(null);
 
   const selectedOption = options.find((o) => o.value === value);
 
-  const updatePopupPosition = useCallback(() => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      
-      // Estimate popup height (max-h-60 is ~240px, plus padding)
-      const estimatedHeight = Math.min(options.length * 36 + 16, 240);
-      const spaceBelow = window.innerHeight - rect.bottom;
-      const spaceAbove = rect.top;
-
-      let top = rect.bottom + 6;
-      // If not enough space below and there is more space above, flip it upwards
-      if (spaceBelow < estimatedHeight && spaceAbove > spaceBelow) {
-        top = rect.top - estimatedHeight - 6;
-      }
-
-      const style: React.CSSProperties = {
-        top: `${top}px`,
-        minWidth: `${rect.width}px`
-      };
-
-      // Prevent horizontal overflow by anchoring to the right if on the right half of the screen
-      if (rect.left > window.innerWidth / 2) {
-        style.right = `${document.documentElement.clientWidth - rect.right}px`;
-      } else {
-        style.left = `${rect.left}px`;
-      }
-
-      setPopupStyle(style);
-    });
-  }, [options.length]);
-
-  useEffect(() => {
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      updatePopupPosition();
-      window.addEventListener('scroll', updatePopupPosition, true);
-      window.addEventListener('resize', updatePopupPosition);
-    }
-    
-    return () => {
-      window.removeEventListener('scroll', updatePopupPosition, true);
-      window.removeEventListener('resize', updatePopupPosition);
-    };
-  }, [isOpen, updatePopupPosition]);
+  const { popupStyle } = useDropdownPosition({
+    containerRef,
+    isOpen,
+    itemCount: options.length,
+    extraHeight: 16,
+  });
 
   useEffect(() => {
     if (isOpen && listRef.current && focusedIndex >= 0) {

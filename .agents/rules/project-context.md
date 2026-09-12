@@ -56,6 +56,8 @@ portfolio-bridge/
 │   │   ├── useAnalyzer.ts      # Guru investment analyzer logic
 │   │   ├── useBuffettIndicator.ts # Buffett indicator FRED/Yahoo data logic
 │   │   ├── useDataRefresh.ts   # Price & FX auto-refresh trigger on startup
+│   │   ├── useAssetFilterSort.ts # Asset multi-filter & sorting hook
+│   │   ├── useDropdownPosition.ts # Floating popup viewport boundary positioning hook
 │   │   ├── useExchangeRates.ts # FX rate fetching hook
 │   │   ├── useGoogleDrive.ts   # Google Drive backup/restore hook
 │   │   ├── usePortfolio.ts     # Portfolio aggregation & metric calculations

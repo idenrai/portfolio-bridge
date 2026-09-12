@@ -38,6 +38,12 @@ Actions per row: Edit, Delete.
 표시 범위 컬럼은 시맨틱 틴트가 적용된 인라인 배지 드롭다운(전체: 인디고, 대시보드 전용: 에메랄드, 구루 전용: 퍼플, 숨김: 징크)을 제공합니다.
 각 행의 액션: 수정, 삭제.
 
+## Asset Filtering and Sorting Architecture (`useAssetFilterSort.ts`)
+
+Asset searching, multi-criteria filtering (Market, Type, Category, Broker Account), and sorting states (Field, Direction) are encapsulated in the custom hook `useAssetFilterSort`. It decouples query and filter state management from `Assets.tsx`, memoizes the 5-stage asset evaluation pipeline, and maintains comprehensive unit test coverage (`src/tests/unit/useAssetFilterSort.test.ts`).
+
+자산 검색, 다중 조건 필터링(시장, 자산 유형, 카테고리, 증권 계좌) 및 정렬 상태(정렬 기준, 방향) 관리는 커스텀 훅 `useAssetFilterSort`로 캡슐화되어 있습니다. 이를 통해 `Assets.tsx` 페이지 컴포넌트의 책임을 분리하고 5단계 자산 연산 파이프라인을 메모이제이션하며 전용 단위 테스트(`src/tests/unit/useAssetFilterSort.test.ts`)를 통해 상태 무결성을 검증합니다.
+
 ## Add Asset Flow
 
 ### Step 1 — Mode Selection (`ModeSelector.tsx`)
@@ -143,6 +149,7 @@ Enhanced UI/UX Features:
 - **Inline Safe Deletion**: Replaces browser-native popups with an in-table confirmation banner (`[ Confirm | Cancel ]`).
 - **Smart Nickname Suggestion**: Dynamically updates the placeholder (e.g., `e.g. SBI Securities NISA Growth`) based on the selected institution and account type.
 - **IME-Safe Form Submission**: Prevents accidental premature form submission during Japanese/CJK IME character selection, requiring explicit button submission.
+- **Modular Component Architecture (`src/components/assets/broker/`)**: `BrokerManager.tsx` is broken down into single-responsibility subcomponents: `BrokerAccountList.tsx` (table rendering and inline deletion), `BrokerAccountForm.tsx` (creation and edit form), and `brokerHelpers.ts` (styling heuristics and presets separated for Vite Fast Refresh compliance).
 
 사용자는 여러 국가(한국, 일본, 미국, 유럽, 기타)의 증권 계좌를 등록하고 관리할 수 있습니다.
 계좌 추가/수정 시 국가별 계좌 종류 프리셋(`ACCOUNT_TYPES_BY_COUNTRY`)이 `CustomSelect`로 제공됩니다:
@@ -163,6 +170,7 @@ Enhanced UI/UX Features:
 - **인라인 안전 삭제**: 브라우저 기본 알림창 대신 테이블 내 인라인 확인 배지(`[ 확인 | 취소 ]`)를 제공합니다.
 - **스마트 애칭 플레이스홀더 제안**: 선택한 금융기관과 계좌 종류에 따라 플레이스홀더(`예: SBI証券 NISA`)를 실시간으로 제안합니다.
 - **키보드 빠른 저장**: 입력 필드에서 `Enter` 키를 눌러 즉시 계좌를 저장할 수 있습니다.
+- **모듈형 컴포넌트 아키텍처 (`src/components/assets/broker/`)**: `BrokerManager.tsx`는 단일 책임 원칙에 따라 `BrokerAccountList.tsx`(목록 렌더링 및 인라인 삭제), `BrokerAccountForm.tsx`(계좌 생성 및 수정 폼), `brokerHelpers.ts`(Vite Fast Refresh 준수를 위해 스타일 헬퍼 분리)로 구조화되어 있습니다.
 
 ## Data Store
 
