@@ -22,8 +22,7 @@ import {
 import type { GuruProfile, PortfolioSummary, PortfolioAsset } from "@/types";
 import { en } from "@/i18n";
 import { GuruScopeSelector } from "./prompt/GuruScopeSelector";
-import { GuruPromptCard } from "./prompt/GuruPromptCard";
-import { GuruFollowUpSection } from "./prompt/GuruFollowUpSection";
+import { GuruPromptCard, type GuruPromptMode } from "./prompt/GuruPromptCard";
 
 interface GuruAIPromptBannerProps {
   selectedGuru: GuruProfile;
@@ -62,20 +61,20 @@ export function GuruAIPromptBanner({
 
   const sessions = useGuruSessionStore((s) => s.sessions);
   const saveSession = useGuruSessionStore((s) => s.saveSession);
-  const clearSession = useGuruSessionStore((s) => s.clearSession);
 
-  const [showPrompt, setShowPrompt] = useState(false);
-  const [showFollowUp, setShowFollowUp] = useState(false);
+  // ─── 단순화된 단일 뷰 상태 관리 ──────────────────────────────────────────
+  const [isOpen, setIsOpen] = useState(false);
+  const [mode, setMode] = useState<GuruPromptMode>("full");
   const [copied, setCopied] = useState(false);
-  const [copiedFollowUp, setCopiedFollowUp] = useState(false);
+  const [baselineResetFeedback, setBaselineResetFeedback] = useState(false);
 
   const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const followUpTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {
       if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
-      if (followUpTimerRef.current) clearTimeout(followUpTimerRef.current);
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
     };
   }, []);
 
@@ -109,7 +108,7 @@ export function GuruAIPromptBanner({
     ? ((en[selectedPhilosophyKey] as string | undefined) ?? "")
     : "";
 
-  const promptText = useMemo(() => {
+  const fullPromptText = useMemo(() => {
     if (activeAssets.length === 0) return "";
     if (selectedGuru.id === "custom") {
       return buildCustomGuruPrompt(
@@ -150,7 +149,7 @@ export function GuruAIPromptBanner({
   ]);
 
   const prevSession = sessions[selectedGuru.id];
-  const followUpText = useMemo(() => {
+  const followUpPromptText = useMemo(() => {
     if (!prevSession || activeAssets.length === 0) return null;
     return buildGuruFollowUpPrompt(
       selectedGuru,
@@ -212,49 +211,55 @@ export function GuruAIPromptBanner({
         })),
       baseCurrency,
       rates,
+      assets: activeAssets.map((a) => ({
+        id: a.id,
+        ticker: a.ticker,
+        name: a.name,
+        currency: a.currency,
+        quantity: a.quantity,
+        avgBuyPrice: a.avgBuyPrice,
+        brokerId: a.brokerId,
+      })),
     });
   };
 
-  const copyPrompt = async () => {
+  const handleCopy = async () => {
+    const textToCopy = mode === "followup" && followUpPromptText ? followUpPromptText : fullPromptText;
+    if (!textToCopy) return;
+
     try {
-      await navigator.clipboard.writeText(promptText);
+      await navigator.clipboard.writeText(textToCopy);
     } catch {
-      // Fallback
       const textarea = document.createElement("textarea");
-      textarea.value = promptText;
+      textarea.value = textToCopy;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand("copy");
       document.body.removeChild(textarea);
     }
     setCopied(true);
-    updateCurrentSession();
+    // 전체 분석을 복사할 때는 현재 상태를 기준 스냅샷으로 자동 저장
+    if (mode === "full") {
+      updateCurrentSession();
+    }
     if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
     copiedTimerRef.current = setTimeout(() => setCopied(false), 2000);
   };
 
-  const copyFollowUp = async () => {
-    if (!followUpText) return;
-    try {
-      await navigator.clipboard.writeText(followUpText);
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = followUpText;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-    }
-    setCopiedFollowUp(true);
+  const handleResetBaseline = () => {
     updateCurrentSession();
-    if (followUpTimerRef.current) clearTimeout(followUpTimerRef.current);
-    followUpTimerRef.current = setTimeout(() => setCopiedFollowUp(false), 2000);
+    setBaselineResetFeedback(true);
+    if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+    resetTimerRef.current = setTimeout(() => setBaselineResetFeedback(false), 2000);
   };
 
-  const handleNewSession = () => {
-    clearSession(selectedGuru.id);
-    setShowPrompt(true);
-    setShowFollowUp(false);
+  const handleToggleMode = (targetMode: GuruPromptMode) => {
+    if (isOpen && mode === targetMode) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+      setMode(targetMode);
+    }
   };
 
   return (
@@ -272,9 +277,10 @@ export function GuruAIPromptBanner({
             </p>
           </div>
         </div>
-        
+
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center gap-2">
+          {/* Scope Selector Button */}
           <button
             type="button"
             onClick={() => setShowScopeSelector((prev) => !prev)}
@@ -297,29 +303,47 @@ export function GuruAIPromptBanner({
             />
           </button>
 
-          {prevSession && (
-            <button
-              type="button"
-              onClick={() => {
-                setShowFollowUp(true);
-                setShowPrompt(false);
-              }}
-              className="flex-1 cursor-pointer rounded-none border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-center font-mono text-xs font-medium whitespace-nowrap text-emerald-400 shadow-none transition-all hover:bg-emerald-500/20 active:scale-100 sm:flex-none"
-            >
-              {t.guru_ai_followup_btn}
-            </button>
-          )}
+          {/* Mode 1: Full Review Prompt Button */}
           <button
             type="button"
-            onClick={handleNewSession}
-            className="flex-1 cursor-pointer rounded-none border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-center font-mono text-xs font-semibold whitespace-nowrap text-amber-400 shadow-none transition-all hover:bg-amber-400 hover:text-black active:scale-100 sm:flex-none"
+            onClick={() => handleToggleMode("full")}
+            aria-expanded={isOpen && mode === "full"}
+            className={cn(
+              "flex-1 cursor-pointer rounded-none border px-3 py-2 text-center font-mono text-xs font-semibold whitespace-nowrap shadow-none transition-all sm:flex-none",
+              isOpen && mode === "full"
+                ? "border-amber-400 bg-amber-500/20 text-amber-300 ring-1 ring-amber-400/50"
+                : "border-amber-500/30 bg-amber-500/10 text-amber-400 hover:bg-amber-400 hover:text-black",
+            )}
           >
-            {t.guru_ai_followup_new_session}
+            [ 01: {t.guru_ai_tab_full} ]
+          </button>
+
+          {/* Mode 2: Follow-up Delta Button */}
+          <button
+            type="button"
+            onClick={() => handleToggleMode("followup")}
+            aria-expanded={isOpen && mode === "followup"}
+            className={cn(
+              "flex-1 cursor-pointer rounded-none border px-3 py-2 text-center font-mono text-xs font-medium whitespace-nowrap shadow-none transition-all sm:flex-none",
+              isOpen && mode === "followup"
+                ? "border-emerald-400 bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-400/50"
+                : prevSession
+                  ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+                  : "border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200",
+            )}
+          >
+            <span className="flex items-center justify-center gap-1.5">
+              <span>[ 02: {t.guru_ai_tab_followup}</span>
+              {prevSession && (
+                <span className="inline-block size-1.5 rounded-none bg-emerald-400" aria-hidden="true" />
+              )}
+              <span>]</span>
+            </span>
           </button>
         </div>
       </div>
 
-      {/* 종목 선택기 패널 */}
+      {/* Scope Selector Panel */}
       {showScopeSelector && (
         <GuruScopeSelector
           availableAssets={availableAssets}
@@ -333,25 +357,19 @@ export function GuruAIPromptBanner({
         />
       )}
 
-      {/* 첫 번째 프롬프트 */}
-      {showPrompt && (
+      {/* Unified Prompt Deck */}
+      {isOpen && (
         <GuruPromptCard
-          promptText={promptText}
-          activeAssetsCount={activeAssets.length}
-          copied={copied}
-          onCopy={copyPrompt}
-          t={t}
-        />
-      )}
-
-      {/* 두 번째 (변동 사항) 프롬프트 */}
-      {showFollowUp && followUpText && (
-        <GuruFollowUpSection
-          followUpText={followUpText}
+          mode={mode}
+          onModeChange={setMode}
+          fullPromptText={fullPromptText}
+          followUpPromptText={followUpPromptText}
           prevSessionDate={prevSession?.date}
           activeAssetsCount={activeAssets.length}
-          copiedFollowUp={copiedFollowUp}
-          onCopyFollowUp={copyFollowUp}
+          copied={copied}
+          onCopy={handleCopy}
+          onResetBaseline={handleResetBaseline}
+          baselineResetFeedback={baselineResetFeedback}
           t={t}
         />
       )}

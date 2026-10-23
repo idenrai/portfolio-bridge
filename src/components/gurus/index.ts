@@ -21,5 +21,5 @@ export { GuruGridSection } from "./page/GuruGridSection";
 export { CustomGuruAvatarIcon } from "./CustomGuruAvatarIcon";
 export { GuruDetailView } from "./page/GuruDetailView";
 export { GuruScopeSelector } from "./prompt/GuruScopeSelector";
-export { GuruPromptCard } from "./prompt/GuruPromptCard";
+export { GuruPromptCard, type GuruPromptMode } from "./prompt/GuruPromptCard";
 export { GuruFollowUpSection } from "./prompt/GuruFollowUpSection";
