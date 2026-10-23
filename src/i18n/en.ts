@@ -205,6 +205,11 @@ export const en: Translations = {
   guru_ai_scope_select_all: "Select All",
   guru_ai_scope_deselect_all: "Deselect All",
   guru_ai_scope_empty_warning: "Please select at least 1 asset to generate a Guru consultation prompt.",
+  guru_ai_tab_full: "Full Portfolio Review",
+  guru_ai_tab_followup: "Changes & Follow-up",
+  guru_ai_baseline_reset: "Reset Baseline",
+  guru_ai_baseline_reset_desc: "Set current portfolio as the new comparison baseline.",
+  guru_ai_no_prev_session: "No previous review history yet. Copy the [Full Portfolio Review] first to start your chat with AI, which will automatically save a baseline.",
   guru_all_scoped_out_notice: "All assets are currently set to 'Dashboard Only' or 'Hidden', so no holdings are included by default. Select a Guru and choose holdings in the banner above.",
 
   // ─── Custom Guru ──────────────────────────────────────────────────────────

@@ -208,6 +208,11 @@ export const de: Translations = {
   guru_ai_scope_select_all: "Alle auswählen",
   guru_ai_scope_deselect_all: "Auswahl aufheben",
   guru_ai_scope_empty_warning: "Bitte wählen Sie mindestens 1 Asset aus, um den Guru-Beratungsprompt zu generieren.",
+  guru_ai_tab_full: "Vollständige Portfolio-Analyse",
+  guru_ai_tab_followup: "Änderungen & Follow-up",
+  guru_ai_baseline_reset: "Basislinie zurücksetzen",
+  guru_ai_baseline_reset_desc: "Setzt das aktuelle Portfolio als neue Vergleichsbasis.",
+  guru_ai_no_prev_session: "Noch kein bisheriger Analyseverlauf. Kopieren Sie zuerst die [Vollständige Portfolio-Analyse], um das Gespräch mit der KI zu beginnen. Die Basislinie wird automatisch gespeichert.",
   guru_all_scoped_out_notice: "Alle Vermögenswerte sind derzeit auf 'Nur Dashboard' oder 'Ausgeblendet' gesetzt. Wählen Sie einen Guru und passen Sie die Positionen im oberen Banner an.",
 
   // ─── Custom Guru ──────────────────────────────────────────────────────────

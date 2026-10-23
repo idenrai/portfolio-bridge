@@ -205,6 +205,11 @@ export const ja: Translations = {
   guru_ai_scope_select_all: "すべて選択",
   guru_ai_scope_deselect_all: "選択解除",
   guru_ai_scope_empty_warning: "相談プロンプトを生成するには、最低1件以上の銘柄を選択してください。",
+  guru_ai_tab_full: "ポートフォリオ全体分析",
+  guru_ai_tab_followup: "変更点のフィードバック",
+  guru_ai_baseline_reset: "基準点を更新",
+  guru_ai_baseline_reset_desc: "現在のポートフォリオを新しい比較基準として設定します。",
+  guru_ai_no_prev_session: "前回の分析履歴がまだありません。[ポートフォリオ全体分析]をコピーしてAIとの対話を開始すると、比較基準が自動保存されます。",
   guru_all_scoped_out_notice: "現在すべての資産が「ダッシュボード専用」または「非表示」に設定されているため、デフォルトの相談対象銘柄がありません。グルを選択後、バナーから相談に含める銘柄を選択してください。",
 
   // ─── Custom Guru ──────────────────────────────────────────────────────────

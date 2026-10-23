@@ -212,6 +212,11 @@ export interface Translations {
   guru_ai_scope_select_all: string;
   guru_ai_scope_deselect_all: string;
   guru_ai_scope_empty_warning: string;
+  guru_ai_tab_full: string;
+  guru_ai_tab_followup: string;
+  guru_ai_baseline_reset: string;
+  guru_ai_baseline_reset_desc: string;
+  guru_ai_no_prev_session: string;
   guru_all_scoped_out_notice: string;
 
   // ─── Custom Guru ──────────────────────────────────────────────────────────
