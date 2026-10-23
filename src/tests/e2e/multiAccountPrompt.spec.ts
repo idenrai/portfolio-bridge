@@ -71,10 +71,10 @@ test('verifies multi-account holding breakdown and tax wrappers in Guru prompt',
   await guruBtn.click();
   await page.waitForTimeout(500);
 
-  // Click '새 대화 시작' to reveal prompt textarea
-  const newSessionBtn = page.getByRole('button', { name: /새 대화 시작/i });
-  await expect(newSessionBtn).toBeVisible();
-  await newSessionBtn.click();
+  // Click '01: 전체 포트폴리오 분석' to reveal prompt textarea
+  const promptBtn = page.getByRole('button', { name: /전체 포트폴리오 분석|Full Portfolio Review/i });
+  await expect(promptBtn).toBeVisible();
+  await promptBtn.click();
   await page.waitForTimeout(500);
 
   // Check prompt textarea
