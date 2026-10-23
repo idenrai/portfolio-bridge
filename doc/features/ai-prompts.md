@@ -117,11 +117,33 @@ to prevent free-text input from influencing prompt behavior (prompt injection pr
 
 ## buildGuruFollowUpPrompt
 
-**Entry point**: `buildGuruFollowUpPrompt(guru, prev, current, lang, baseCurrency, rates, profile?)`
+**Entry point**: `buildGuruFollowUpPrompt(guru, prev, current, lang, baseCurrency, rates, profile?, brokers?, activeAssets?)`
 
 **Requires**: A `GuruSessionSnapshot` saved in `useGuruSessionStore` from a previous initial review.
 
 이전 첫 번째 리뷰에서 `useGuruSessionStore`에 저장된 `GuruSessionSnapshot`이 필요합니다.
+
+### Key Capabilities / 핵심 기능
+
+1. **Trade Detection vs. Price Drift Distinction / 능동 매매 및 시세 드리프트 구분**:
+   - Differentiates active rebalancing (`[TRADE DETECTED]`) from passive market movements (`[PRICE DRIFT ONLY]`).
+   - Generates a top-level summary notice distinguishing active transactions from passive market fluctuations.
+   - 능동적 리밸런싱/매매(`[TRADE DETECTED]`)와 단순 시세/환율 변동(`[PRICE DRIFT ONLY]`)을 구분하여 태깅하며, 상단 요약문에서 능동 매매 유무를 명시합니다.
+2. **Refined Sensitivity Thresholds / 완화된 감지 임계값**:
+   - Position weight changes: lowered from ≥1.5%p to ≥0.5%p.
+   - Return rate shifts: lowered from ≥5pp to ≥2pp.
+   - Category and market allocation shifts: lowered from ≥1.0%p to ≥0.5%p.
+   - 비중 변동 감지 기준을 기존 1.5%p에서 0.5%p로, 수익률 변동 기준을 5pp에서 2pp로 완화하여 미세한 포트폴리오 변화도 놓치지 않고 포착합니다.
+3. **Multi-Account Tax Wrapper Breakdown / 복수 계좌 세무 래퍼 분기**:
+   - Displays position changes split across registered accounts with tax wrapper tags (`[Tax-Free]`, `[Tax-Deferred Pension]`, `[Taxable]`).
+   - Injects explicit `Tax-Efficient Asset Location` directives.
+   - 복수 증권 계좌에 분산된 종목의 변동을 세무 래퍼 태그와 함께 표시하고, 절세 계좌 최적 배치 지침을 프롬프트에 포함합니다.
+4. **Normalized Holding Identity / 정규화된 종목 식별 키 (`getNormalizedHoldingKey`)**:
+   - Resolves tickers defensively by trimming whitespace and uppercase normalizing (`t:TICKER`), or fallback name/currency keying (`n:name__CURRENCY`), preventing accidental duplicate classification.
+   - 대소문자/공백 차이로 인한 동일 종목 오분류를 방지하도록 정규화 키를 사용합니다.
+5. **Standardized 4-Section Output Format / 표준 4단계 응답 형식**:
+   - Directs the LLM to structure feedback into: `1. Overall Verdict`, `2. Critique of Active Trades & Market Drift`, `3. Verdict on New & Modified Positions`, and `4. Next Priority Rebalancing Step`.
+   - LLM이 4개의 표준 마크다운 섹션(종합 판정, 매매 vs 시세 드리프트 비판, 종목별 액션 제언, 최우선 리밸런싱 1순위)으로 일관되게 응답하도록 유도합니다.
 
 ### Prompt Structure
 
@@ -133,9 +155,14 @@ to prevent free-text input from influencing prompt behavior (prompt injection pr
 --- CONTEXT ---
 Today's date: [ISO date]
 This is a follow-up review. Previous review date: [prev.date]
+[TRADE DETECTED] and [PRICE DRIFT ONLY] distinction rules
 
 --- YOUR TASK ---
-[GURU_FOLLOWUP_FOCUS[guru.id], or default 6-point delta evaluation with Step-by-Step reasoning]
+1. [Distinguish Trades vs Drift]
+2. [Tax-Efficient Asset Location]
+3. [Position Verdicts]
+4. [Directional Verdict with conditional rebalancing guidance]
+[Guru-specific inquiries]
 
 --- PORTFOLIO PERFORMANCE SINCE LAST REVIEW ---
 [value delta, P&L delta, return delta, position count, cash %]
@@ -143,11 +170,18 @@ This is a follow-up review. Previous review date: [prev.date]
 --- YOUR IDEAL ALLOCATION vs. CURRENT ---
 --- NEW POSITIONS ADDED ---
 --- POSITIONS REMOVED ---
---- POSITION CHANGES ---
-[threshold: ≥1.5 %p weight, ≥5 pp return, or any qty/cost change]
+--- POSITION CHANGES (Trades or ≥0.5%p weight / ≥2pp return drift) ---
+[Summary: Active trades detected vs. No active trades detected]
+[Holdings tagged with [TRADE DETECTED] or [PRICE DRIFT ONLY] and account breakdowns]
 
---- CATEGORY ALLOCATION SHIFTS (≥1 %p) ---
---- MARKET ALLOCATION SHIFTS (≥1 %p) ---
+--- CATEGORY ALLOCATION SHIFTS (≥0.5%p) ---
+--- MARKET ALLOCATION SHIFTS (≥0.5%p) ---
+
+--- RECOMMENDED OUTPUT FORMAT ---
+### 1. Overall Verdict: [IMPROVED / DETERIORATED / NEUTRAL]
+### 2. Critique of Active Trades & Market Drift
+### 3. Verdict on New & Modified Positions
+### 4. Next Priority Rebalancing Step
 
 --- RESPONSE CONSTRAINTS ---
 - Language: [LANG_NAMES[lang]]
