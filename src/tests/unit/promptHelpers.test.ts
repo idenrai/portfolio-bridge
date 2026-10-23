@@ -383,6 +383,140 @@ describe("AI prompt account breakdown helpers", () => {
       currentAssets,
     );
 
-    expect(prompt).toContain('account changes: "SBI NISA": 500 (no change), "SBI 특정": 100 → 50 (-50)');
+    expect(prompt).toContain(
+      'account changes: "SBI NISA" [Tax-Free]: 500 (no change), "SBI 특정" [Taxable]: 100 → 50 (-50)',
+    );
+    expect(prompt).toContain('[TRADE DETECTED] Sanrio Company, Ltd. [8136.T]');
+    expect(prompt).toContain('Focus especially on whether the 1 intentional trade(s) improved risk-adjusted return');
+    expect(prompt).toContain('### 1. Overall Verdict: [IMPROVED / DETERIORATED / NEUTRAL]');
+    expect(prompt).toContain('### 2. Critique of Active Trades & Market Drift');
+  });
+
+  it("distinguishes [PRICE DRIFT ONLY] when share quantities are unchanged but prices fluctuate", () => {
+    const buffett = GURU_PROFILES.find((g) => g.id === "buffett")!;
+    const prevSnapshot: GuruSessionSnapshot = {
+      guruId: "buffett",
+      date: "2026-01-01",
+      totalValueKRW: 10000000,
+      totalCostKRW: 8000000,
+      totalPnLKRW: 2000000,
+      totalReturnPercent: 25,
+      holdingCount: 1,
+      cashPercent: 0,
+      categoryAllocation: [],
+      marketAllocation: [],
+      currencyAllocation: [],
+      baseCurrency: "KRW",
+      rates: { KRW: 1, USD: 1350, JPY: 9 },
+      holdings: [
+        {
+          id: "t:AAPL",
+          name: "Apple Inc.",
+          ticker: "AAPL",
+          currency: "USD",
+          quantity: 100,
+          avgBuyPrice: 150,
+          weightPercent: 30.0,
+          returnPercent: 20.0,
+          category: "growth",
+        },
+      ],
+    };
+
+    // Current: quantity is unchanged (100), but market price caused weight to drop to 28.5% (-1.5%p)
+    const currentSummary: PortfolioSummary = {
+      ...mockSummary,
+      holdings: [
+        {
+          ...mockSummary.holdings[0],
+          id: "t:AAPL",
+          name: "Apple Inc.",
+          ticker: "AAPL",
+          currency: "USD",
+          quantity: 100,
+          avgBuyPrice: 150,
+          weightPercent: 28.5,
+          returnPercent: 14.0, // -6pp return drift
+        },
+      ],
+    };
+
+    const prompt = buildGuruFollowUpPrompt(
+      buffett,
+      prevSnapshot,
+      currentSummary,
+      "ko",
+      "KRW",
+    );
+
+    expect(prompt).toContain('[PRICE DRIFT ONLY] Apple Inc. [AAPL]');
+    expect(prompt).toContain('qty: 100 (no trades)');
+    expect(prompt).toContain('weight: 30.0% → 28.5% (-1.5%p)');
+    expect(prompt).toContain(
+      'Even without active trades, determine if passive market drift has significantly skewed asset allocation',
+    );
+  });
+
+  it("safely matches holdings even with case sensitivity or spacing differences via getNormalizedHoldingKey", () => {
+    const buffett = GURU_PROFILES.find((g) => g.id === "buffett")!;
+    const prevSnapshot: GuruSessionSnapshot = {
+      guruId: "buffett",
+      date: "2026-01-01",
+      totalValueKRW: 10000000,
+      totalCostKRW: 8000000,
+      totalPnLKRW: 2000000,
+      totalReturnPercent: 25,
+      holdingCount: 1,
+      cashPercent: 0,
+      categoryAllocation: [],
+      marketAllocation: [],
+      currencyAllocation: [],
+      baseCurrency: "KRW",
+      rates: { KRW: 1, USD: 1350, JPY: 9 },
+      holdings: [
+        {
+          id: "legacy-uuid-12345", // Legacy UUID id in snapshot
+          name: " Microsoft Corp ",
+          ticker: "msft", // lowercase in snapshot
+          currency: "USD",
+          quantity: 50,
+          avgBuyPrice: 300,
+          weightPercent: 20.0,
+          returnPercent: 10.0,
+          category: "growth",
+        },
+      ],
+    };
+
+    // Current: uppercase ticker "MSFT", new quantity (60)
+    const currentSummary: PortfolioSummary = {
+      ...mockSummary,
+      holdings: [
+        {
+          ...mockSummary.holdings[0],
+          id: "t:MSFT",
+          name: "Microsoft Corp",
+          ticker: "MSFT",
+          currency: "USD",
+          quantity: 60,
+          avgBuyPrice: 310,
+          weightPercent: 24.0,
+          returnPercent: 15.0,
+        },
+      ],
+    };
+
+    const prompt = buildGuruFollowUpPrompt(
+      buffett,
+      prevSnapshot,
+      currentSummary,
+      "ko",
+      "KRW",
+    );
+
+    // Should NOT be recognized as removed or new position, but as a TRADE
+    expect(prompt).not.toContain('--- NEW POSITIONS ADDED ---\n  + Microsoft Corp');
+    expect(prompt).toContain('[TRADE DETECTED] Microsoft Corp [MSFT]');
+    expect(prompt).toContain('qty: 50 → 60 (+10)');
   });
 });
