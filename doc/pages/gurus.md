@@ -67,29 +67,19 @@ For each selected guru:
 
 ## AI Prompt Generation
 
-### Initial Review / 첫 번째 리뷰
+### AI Consultation Prompt Interface / AI 상담 프롬프트 인터페이스 (`GuruAIPromptBanner.tsx`, `GuruPromptCard.tsx`)
 
-Builds a full portfolio review prompt in the guru's persona via `buildGuruPrompt()`.
+The Guru AI consultation interface adopts a high-density, Bloomberg Terminal-compliant segmented tab system replacing multi-step modals:
+- **Mode 01: Full Portfolio Review (`[ 01: 전체 포트폴리오 분석 ]`)**: In Amber telemetry styling. Generates an exhaustive portfolio evaluation prompt via `buildGuruPrompt()` or `buildCustomGuruPrompt()`. Copying this prompt automatically saves the current portfolio state as the baseline snapshot.
+- **Mode 02: Delta Changes Feedback (`[ 02: 변동사항 피드백 ]`)**: In Emerald telemetry styling. Generates a delta-only prompt via `buildGuruFollowUpPrompt()` focusing strictly on changes since the baseline. Copying this follow-up prompt does NOT overwrite the baseline snapshot, preserving consecutive comparison integrity.
+- **Baseline Date & Reset Controls (`[ ↺ 기준점 갱신 ]`)**: When a previous session exists, displays `Base: YYYY-MM-DD` alongside an instant baseline reset button, enabling manual baseline alignment without friction.
+- **WAI-ARIA Tab Navigation & Accessibility**: Full keyboard navigation support (<kbd>→</kbd>/<kbd>↓</kbd> next tab, <kbd>←</kbd>/<kbd>↑</kbd> previous tab, <kbd>Home</kbd> first tab, <kbd>End</kbd> last tab) with explicit `role="tablist"`, `role="tab"`, `role="tabpanel"`, `aria-controls`, and `aria-labelledby` bindings.
 
-`buildGuruPrompt()`를 통해 구루 페르소나로 전체 포트폴리오 리뷰 프롬프트를 생성합니다.
-
-- Button: "Ask [Guru Name]" / 버튼: "[구루 이름]에게 묻기"
-- Output: structured prompt in a modal/panel, copy-to-clipboard. / 출력: 모달/패널의 구조화 프롬프트, 클립보드 복사.
-- Session saved to `useGuruSessionStore` after copying. / 복사 후 `useGuruSessionStore`에 세션 저장.
-
-See [../features/ai-prompts.md](../features/ai-prompts.md#buildguruprompt).
-
-### Follow-up Review / 팔로우업 리뷰
-
-After saving a session, the "Follow-up" button becomes available.
-Builds a delta-only prompt via `buildGuruFollowUpPrompt()` showing only changes since the saved session date.
-When the "Follow-up" prompt is copied, the session snapshot is updated to the current state, allowing for sequential comparisons.
-
-세션 저장 후 "팔로우업" 버튼이 활성화됩니다.
-저장된 세션 날짜 이후 변경 사항만 담은 델타 프롬프트를 `buildGuruFollowUpPrompt()`로 생성합니다.
-"팔로우업" 프롬프트를 복사할 때 세션 스냅샷이 현재 상태로 갱신되어, 매번 직전 질문 시점과의 꼬리물기 식 비교가 가능해집니다.
-
-See [../features/ai-prompts.md](../features/ai-prompts.md#buildgurufollowupprompt).
+구루 AI 상담 인터페이스는 다단계 모달 대신 블룸버그 단말기 스타일의 고밀도 2-모드 세그먼트 탭 시스템을 적용했습니다:
+- **01 모드: 전체 포트폴리오 분석 (`[ 01: 전체 포트폴리오 분석 ]`)**: 앰버 텔레메트리 스타일. `buildGuruPrompt()` 또는 `buildCustomGuruPrompt()`를 통해 포트폴리오 전체 종합 진단 프롬프트를 생성합니다. 이 프롬프트를 복사하면 현재 포트폴리오 상태가 기준 스냅샷으로 자동 저장됩니다.
+- **02 모드: 변동사항 피드백 (`[ 02: 변동사항 피드백 ]`)**: 에메랄드 텔레메트리 스타일. 기준 스냅샷 이후의 변경점만 추출하는 델타 전용 프롬프트를 `buildGuruFollowUpPrompt()`로 생성합니다. 이 팔로우업 프롬프트를 복사해도 기준 스냅샷이 덮어써지지 않아 연속적인 비교 정합성이 유지됩니다.
+- **기준점 일자 표기 및 수동 갱신 (`[ ↺ 기준점 갱신 ]`)**: 이전 분석 이력이 있는 경우 `Base: YYYY-MM-DD` 배지와 함께 원클릭 기준점 갱신 버튼을 노출하여 간편하게 새 기준점을 지정할 수 있습니다.
+- **WAI-ARIA 탭 내비게이션 및 웹 접근성**: 화살표 키(<kbd>→</kbd>/<kbd>↓</kbd>, <kbd>←</kbd>/<kbd>↑</kbd>) 및 <kbd>Home</kbd>/<kbd>End</kbd> 키를 통한 키보드 탐색과 포커스 이동을 완벽 지원하며, `role="tablist"`, `role="tab"`, `role="tabpanel"`, `aria-controls`, `aria-labelledby` 표준을 준수합니다.
 
 ### Consultation Holdings Selector / 상담 종목 선택 (`GuruAIPromptBanner.tsx`)
 
@@ -108,8 +98,8 @@ See [../features/ai-prompts.md](../features/ai-prompts.md#buildgurufollowuppromp
 ### Session Management (`useGuruSessionStore`)
 
 - Stores one `GuruSessionSnapshot` per guru. / 구루당 하나의 `GuruSessionSnapshot`을 저장합니다.
-- Snapshot includes: date, total value, holdings list, category/market allocation, cash %. / 스냅샷에는 날짜, 총액, 보유 종목, 카테고리·시장 배분, 현금 비중이 포함됩니다.
-- Snapshot is taken at the time the initial prompt is generated. / 스냅샷은 첫 번째 프롬프트 생성 시점에 저장됩니다.
+- Snapshot includes: date, total value, holdings list, category/market allocation, cash %, and raw assets. / 스냅샷에는 날짜, 총액, 보유 종목, 카테고리·시장 배분, 현금 비중, 계좌별 원본 자산이 포함됩니다.
+- Snapshot is updated automatically upon copying the Mode 01 (Full Portfolio) prompt or manually clicking `[ ↺ Reset Baseline ]`. Copying Mode 02 does not overwrite the snapshot. / 스냅샷은 01(전체 분석) 프롬프트를 복사하거나 `[ ↺ 기준점 갱신 ]`을 클릭할 때 업데이트되며, 02 모드 복사 시에는 기준점이 보존됩니다.
 
 ## Quantitative Analyzers
 

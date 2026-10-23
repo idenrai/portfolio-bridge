@@ -125,10 +125,10 @@ test('verifies asset visibility and guru consultation scope', async ({ page }) =
   await expect(goldCheckbox).not.toBeChecked();
   await expect(page.getByRole('button', { name: /상담 포함 종목|Consultation/i })).toContainText('2/4');
 
-  // Click '새 대화 시작' to open prompt textarea
-  const newSessionBtn = page.getByRole('button', { name: /새 대화 시작/i });
-  if (await newSessionBtn.isVisible()) {
-    await newSessionBtn.click();
+  // Click '01: 전체 포트폴리오 분석' to open prompt textarea
+  const promptBtn = page.getByRole('button', { name: /전체 포트폴리오 분석|Full Portfolio Review/i });
+  if (await promptBtn.isVisible()) {
+    await promptBtn.click();
     await page.waitForTimeout(300);
     const textarea = page.locator('textarea');
     await expect(textarea).toBeVisible();

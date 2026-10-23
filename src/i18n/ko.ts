@@ -204,6 +204,11 @@ export const ko: Translations = {
   guru_ai_scope_select_all: "전체 선택",
   guru_ai_scope_deselect_all: "전체 해제",
   guru_ai_scope_empty_warning: "최소 1개 이상의 종목을 선택해야 구루 상담 프롬프트를 생성할 수 있습니다.",
+  guru_ai_tab_full: "전체 포트폴리오 분석",
+  guru_ai_tab_followup: "변동사항 피드백",
+  guru_ai_baseline_reset: "기준점 갱신",
+  guru_ai_baseline_reset_desc: "현재 포트폴리오를 새로운 비교 기준점으로 설정합니다.",
+  guru_ai_no_prev_session: "아직 이전 분석 이력이 없습니다. [전체 포트폴리오 분석]을 복사하여 AI와 첫 대화를 시작하면 기준점이 자동으로 저장됩니다.",
   guru_all_scoped_out_notice: "현재 모든 자산이 '대시보드 전용' 또는 '숨김'으로 설정되어 있어 기본 상담 대상 종목이 없습니다. 구루를 선택한 후 상단 배너에서 상담에 포함할 종목을 직접 선택할 수 있습니다.",
 
   // ─── Custom Guru ──────────────────────────────────────────────────────────

@@ -56,3 +56,20 @@ export function formatInBase(
 export function sign(val: number): string {
   return val >= 0 ? "+" : "";
 }
+
+/**
+ * 보유 종목 비교(Diff)를 위한 정규화 키 생성 함수
+ * - ticker가 있으면: "t:TICKER" (공백 제거 및 대문자 통일)
+ * - ticker가 없으면: "n:name__CURRENCY" (공백 트림 소문자 이름 + 대문자 통일 통화)
+ */
+export function getNormalizedHoldingKey(item: {
+  ticker?: string;
+  name: string;
+  currency: string;
+}): string {
+  if (item.ticker && item.ticker.trim()) {
+    return `t:${item.ticker.trim().toUpperCase()}`;
+  }
+  return `n:${item.name.trim().toLowerCase()}__${item.currency.trim().toUpperCase()}`;
+}
+

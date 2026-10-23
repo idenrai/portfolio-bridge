@@ -120,7 +120,7 @@ test('verifies Custom Guru navigation from Dashboard and persona customization i
   await expect(page.locator('text=글로벌 퀀트 멘토').first()).toBeVisible();
 
   // 6. 프롬프트 열기 및 내용 검증
-  const showPromptBtn = page.getByRole('button', { name: /새 대화 시작/ });
+  const showPromptBtn = page.getByRole('button', { name: /전체 포트폴리오 분석|전체 분석|Full Portfolio Review/i });
   await showPromptBtn.click();
 
   const textarea = page.locator('textarea').first();

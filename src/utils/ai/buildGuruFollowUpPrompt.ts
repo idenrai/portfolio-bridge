@@ -10,6 +10,8 @@ import {
   MARKET_LABELS_EN,
   buildPersonaHeader,
   sign,
+  getNormalizedHoldingKey,
+  getAccountTypePromptInfo,
 } from "./promptHelpers";
 
 /**
@@ -38,21 +40,23 @@ export function buildGuruFollowUpPrompt(
 
   const fmt = (n: number) => formatInBase(n, baseCurrency, rates);
 
-  // ── 보유 종목 비교 ────────────────────────────────────────────────────────
-  const prevMap = new Map(prev.holdings.map((h) => [h.id, h]));
+  // ── 정규화된 종목 비교 (대소문자/공백/ID 불일치 방어) ─────────────────────
+  const prevMap = new Map(prev.holdings.map((h) => [getNormalizedHoldingKey(h), h]));
   const currMap = new Map(
     current.holdings
       .filter((h) => h.type !== "cash")
-      .map((h) => [h.id, h]),
+      .map((h) => [getNormalizedHoldingKey(h), h]),
   );
 
   const newHoldings: string[] = [];
   const removedHoldings: string[] = [];
   const changedWeights: string[] = [];
+  let activeTradesCount = 0;
 
   // 신규 편입
-  for (const [id, h] of currMap) {
-    if (!prevMap.has(id)) {
+  for (const [key, h] of currMap) {
+    if (!prevMap.has(key)) {
+      activeTradesCount++;
       newHoldings.push(
         `  + ${h.name}${h.ticker ? ` [${h.ticker}]` : ""} — weight: ${h.weightPercent.toFixed(1)}%` +
           ` | return: ${sign(h.returnPercent)}${h.returnPercent.toFixed(1)}%`,
@@ -61,32 +65,43 @@ export function buildGuruFollowUpPrompt(
   }
 
   // 제거된 종목
-  for (const [id, h] of prevMap) {
-    if (!currMap.has(id)) {
+  for (const [key, h] of prevMap) {
+    if (!currMap.has(key)) {
+      activeTradesCount++;
       removedHoldings.push(
         `  - ${h.name}${h.ticker ? ` [${h.ticker}]` : ""} (was ${h.weightPercent.toFixed(1)}%)`,
       );
     }
   }
 
-  // 비중 변화 ≥ 1.5%p, return ≥ 5pp, 또는 수량/평단가 변화가 있는 종목
-  for (const [id, curr] of currMap) {
-    const p = prevMap.get(id);
+  // 비중 및 포지션 변화 (능동 매매 vs 단순 시세 변동 명확히 구분)
+  // 수량/평단가가 바뀌었으면 미세 변경도 100% 포착, 단순 주가 변동은 weight >= 0.5%p 또는 return >= 2pp로 완화 포착
+  for (const [key, curr] of currMap) {
+    const p = prevMap.get(key);
     if (!p) continue;
     const wDiff = curr.weightPercent - p.weightPercent;
     const rDiff = curr.returnPercent - p.returnPercent;
     const qtyChanged = curr.quantity !== p.quantity;
     const costChanged = Math.abs(curr.avgBuyPrice - p.avgBuyPrice) > 0.001;
 
-    if (Math.abs(wDiff) >= 1.5 || Math.abs(rDiff) >= 5 || qtyChanged || costChanged) {
+    const isTraded = qtyChanged || costChanged;
+    if (isTraded) {
+      activeTradesCount++;
+    }
+    const isSignificantDrift = Math.abs(wDiff) >= 0.5 || Math.abs(rDiff) >= 2.0;
+
+    if (isTraded || isSignificantDrift) {
+      const typeTag = isTraded ? "[TRADE DETECTED]" : "[PRICE DRIFT ONLY]";
       const parts: string[] = [
-        `  ${curr.name}${curr.ticker ? ` [${curr.ticker}]` : ""}`,
+        `  ${typeTag} ${curr.name}${curr.ticker ? ` [${curr.ticker}]` : ""}`,
       ];
       if (qtyChanged) {
         const qDiff = curr.quantity - p.quantity;
         parts.push(
           `qty: ${p.quantity} → ${curr.quantity} (${sign(qDiff)}${qDiff})`,
         );
+      } else {
+        parts.push(`qty: ${curr.quantity} (no trades)`);
       }
       if (costChanged) {
         parts.push(
@@ -99,15 +114,15 @@ export function buildGuruFollowUpPrompt(
       parts.push(
         `return: ${sign(p.returnPercent)}${p.returnPercent.toFixed(1)}% → ${sign(curr.returnPercent)}${curr.returnPercent.toFixed(1)}% (${sign(rDiff)}${rDiff.toFixed(1)}pp)`,
       );
+
       if (currentAssets.length > 0 && brokers.length > 0) {
         const brokerMap = new Map<string, BrokerAccount>(brokers.map((b) => [b.id, b]));
-        const isMatch = (item: { ticker?: string; name: string; currency: string }) => {
-          if (curr.ticker && item.ticker) return item.ticker === curr.ticker;
-          return item.name === curr.name && item.currency === curr.currency;
-        };
-
-        const currMatching = currentAssets.filter((a) => a.type !== "cash" && isMatch(a));
-        const prevMatching = prev.assets?.filter((a) => isMatch(a)) ?? [];
+        const currMatching = currentAssets.filter(
+          (a) => a.type !== "cash" && getNormalizedHoldingKey(a) === key,
+        );
+        const prevMatching = prev.assets?.filter(
+          (a) => getNormalizedHoldingKey(a) === key,
+        ) ?? [];
 
         if (prev.assets && prev.assets.length > 0) {
           const allBrokerIds = Array.from(
@@ -121,7 +136,8 @@ export function buildGuruFollowUpPrompt(
             const accDeltas: string[] = [];
             for (const bid of allBrokerIds) {
               const b = bid !== "__unassigned__" ? brokerMap.get(bid) : undefined;
-              const name = b ? (b.nickname || b.broker) : "Unassigned";
+              const bName = b ? (b.nickname || b.broker) : "Unassigned";
+              const tag = b ? ` ${getAccountTypePromptInfo(b.accountType).categoryTag}` : "";
               const prevPos = prevMatching.find((a) => (a.brokerId || "__unassigned__") === bid);
               const currPos = currMatching.find((a) => (a.brokerId || "__unassigned__") === bid);
 
@@ -130,10 +146,10 @@ export function buildGuruFollowUpPrompt(
               if (prevQ !== currQ) {
                 const qDelta = currQ - prevQ;
                 accDeltas.push(
-                  `"${name}": ${prevQ.toLocaleString()} → ${currQ.toLocaleString()} (${sign(qDelta)}${qDelta.toLocaleString()})`,
+                  `"${bName}"${tag}: ${prevQ.toLocaleString()} → ${currQ.toLocaleString()} (${sign(qDelta)}${qDelta.toLocaleString()})`,
                 );
               } else if (currQ > 0) {
-                accDeltas.push(`"${name}": ${currQ.toLocaleString()} (no change)`);
+                accDeltas.push(`"${bName}"${tag}: ${currQ.toLocaleString()} (no change)`);
               }
             }
             if (accDeltas.length > 0) {
@@ -142,17 +158,19 @@ export function buildGuruFollowUpPrompt(
           } else if (currMatching.length === 1 && currMatching[0].brokerId) {
             const b = brokerMap.get(currMatching[0].brokerId);
             if (b) {
-              parts.push(`account: "${b.nickname || b.broker}"`);
+              const tag = ` ${getAccountTypePromptInfo(b.accountType).categoryTag}`;
+              parts.push(`account: "${b.nickname || b.broker}"${tag}`);
             }
           }
         } else {
-          // 레거시 스냅샷(prev.assets 미보유 시) 폴백
+          // 레거시 스냅샷 폴백
           if (currMatching.length > 1) {
             const accParts = currMatching
               .map((a) => {
                 const b = a.brokerId ? brokerMap.get(a.brokerId) : undefined;
-                const name = b ? (b.nickname || b.broker) : "Unassigned";
-                return `${a.quantity.toLocaleString()} in "${name}"`;
+                const bName = b ? (b.nickname || b.broker) : "Unassigned";
+                const tag = b ? ` ${getAccountTypePromptInfo(b.accountType).categoryTag}` : "";
+                return `${a.quantity.toLocaleString()} in "${bName}"${tag}`;
               })
               .join(", ");
             parts.push(`accounts: ${accParts}`);
@@ -163,7 +181,7 @@ export function buildGuruFollowUpPrompt(
     }
   }
 
-  // ── 카테고리 배분 변화 ────────────────────────────────────────────────────
+  // ── 카테고리 배분 변화 (0.5%p 완화 기준) ──────────────────────────────────
   const prevCatMap = new Map(prev.categoryAllocation.map((c) => [c.category, c.percent]));
   const catChanges = current.categoryAllocation
     .map((c) => {
@@ -172,9 +190,9 @@ export function buildGuruFollowUpPrompt(
       const label = CATEGORY_LABELS_EN[c.category as keyof typeof CATEGORY_LABELS_EN] ?? c.category;
       return { label, prev: prevPct, curr: c.percent, diff };
     })
-    .filter((c) => Math.abs(c.diff) >= 1.0);
+    .filter((c) => Math.abs(c.diff) >= 0.5);
 
-  // prev에만 있던 카테고리 (완전 제거)
+  // prev에만 있던 카테고리
   for (const [cat, pct] of prevCatMap) {
     if (!current.categoryAllocation.find((c) => c.category === cat)) {
       const label = CATEGORY_LABELS_EN[cat as keyof typeof CATEGORY_LABELS_EN] ?? cat;
@@ -192,7 +210,7 @@ export function buildGuruFollowUpPrompt(
           .join("\n")
       : "  (no significant category changes)";
 
-  // ── 시장 배분 변화 ────────────────────────────────────────────────────────
+  // ── 시장 배분 변화 (0.5%p 완화 기준) ──────────────────────────────────────
   const prevMktMap = new Map(prev.marketAllocation.map((m) => [m.market, m.percent]));
   const mktChanges = current.marketAllocation
     .map((m) => {
@@ -201,7 +219,7 @@ export function buildGuruFollowUpPrompt(
       const label = MARKET_LABELS_EN[m.market as keyof typeof MARKET_LABELS_EN] ?? m.market;
       return { label, prev: prevPct, curr: m.percent, diff };
     })
-    .filter((m) => Math.abs(m.diff) >= 1.0);
+    .filter((m) => Math.abs(m.diff) >= 0.5);
 
   const marketSection =
     mktChanges.length > 0
@@ -240,6 +258,16 @@ export function buildGuruFollowUpPrompt(
     ? `Please address the investor as "${profile.nickname}" throughout your response.`
     : `Maintain ${guruName}'s characteristic voice and reasoning style.`;
 
+  const tradeSummaryNotice =
+    activeTradesCount > 0
+      ? `Active trades detected: ${activeTradesCount} transaction(s) occurred since last review.`
+      : "No active trades detected since last review. All shifts reflect passive market price movements only.";
+
+  const directionalGuidance =
+    activeTradesCount > 0
+      ? `Focus especially on whether the ${activeTradesCount} intentional trade(s) improved risk-adjusted return and discipline.`
+      : "Even without active trades, determine if passive market drift has significantly skewed asset allocation away from your ideal model, requiring rebalancing.";
+
   return `${buildPersonaHeader(guruName)}
 
 --- YOUR COMMUNICATION STYLE ---
@@ -248,19 +276,23 @@ ${guru.style}
 --- CONTEXT ---
 Today's date: ${today}
 This is a follow-up review. You previously assessed this investor's portfolio on ${prev.date}. The data below covers ONLY the changes since that date.
+Items tagged with [TRADE DETECTED] represent active rebalancing or buying/selling by the investor.
+Items tagged with [PRICE DRIFT ONLY] represent passive market price movements with no changes in share quantity.
 
 --- YOUR TASK ---
 Evaluate the changes from YOUR perspective as ${guruName}. This is a focused check-in, not a full portfolio review.
+1. [Distinguish Trades vs Drift]: Distinguish clearly between intentional investor trades and passive market price drifts.
+2. [Tax-Efficient Asset Location]: If account changes are listed, evaluate whether transactions in specific account wrappers (Tax-Free [Tax-Free] vs Tax-Deferred [Tax-Deferred Pension] vs Taxable [Taxable]) were optimal.
+3. [Position Verdicts]: Provide clear actionable verdicts (BUY MORE / HOLD / TRIM / EXIT) on the newly added and significantly changed holdings.
+4. [Directional Verdict]: Deliver a firm, unequivocal judgment on whether the portfolio's overall health and alignment with your principles has IMPROVED, DETERIORATED, or remained NEUTRAL. (${directionalGuidance})
 
 ${GURU_FOLLOWUP_FOCUS[guru.id] 
-  ? `Before concluding, briefly think step-by-step about the weight shifts and macro context.\n${GURU_FOLLOWUP_FOCUS[guru.id]}`
-  : `Address the following, in order:
-1. [Step-by-Step Reasoning] Briefly think step-by-step about the most significant weight shifts and current macro context
-2. Whether the changes are moving in the right direction based on your principles
-3. Your reaction to the new positions added and positions removed
-4. Whether the rebalancing moves were wise or misguided
-5. Any specific concerns or approvals about the shifts you observe
-6. A brief updated verdict on the portfolio's direction — improving or deteriorating?`}
+  ? `--- YOUR SPECIFIC FOLLOW-UP INQUIRIES ---\nBefore concluding, address these questions:\n${GURU_FOLLOWUP_FOCUS[guru.id]}`
+  : `--- YOUR SPECIFIC FOLLOW-UP INQUIRIES ---
+1. Whether the changes are moving in the right direction based on your principles
+2. Your reaction to the new positions added and positions removed
+3. Whether the rebalancing moves were wise or misguided
+4. Any specific concerns or approvals about the shifts you observe`}
 
 --- PORTFOLIO PERFORMANCE SINCE LAST REVIEW (${prev.date}) ---
 Portfolio value change (${baseCurrency}): ${sign(valueDelta)}${fmt(valueDelta)} (${sign(valueDeltaPct)}${valueDeltaPct.toFixed(2)}%)
@@ -278,14 +310,29 @@ ${newHoldings.length > 0 ? newHoldings.join("\n") : "  (none)"}
 --- POSITIONS REMOVED ---
 ${removedHoldings.length > 0 ? removedHoldings.join("\n") : "  (none)"}
 
---- POSITION CHANGES (qty/avg cost changes, ≥1.5%p weight, or ≥5pp return) ---
+--- POSITION CHANGES (Trades or ≥0.5%p weight / ≥2pp return drift) ---
+[Summary: ${tradeSummaryNotice}]
 ${changedWeights.length > 0 ? changedWeights.join("\n") : "  (none)"}
 
---- CATEGORY ALLOCATION SHIFTS (≥1%p) ---
+--- CATEGORY ALLOCATION SHIFTS (≥0.5%p) ---
 ${categorySection}
 
---- MARKET ALLOCATION SHIFTS (≥1%p) ---
+--- MARKET ALLOCATION SHIFTS (≥0.5%p) ---
 ${marketSection}
+
+--- RECOMMENDED OUTPUT FORMAT ---
+Please structure your response into the following clear sections:
+### 1. Overall Verdict: [IMPROVED / DETERIORATED / NEUTRAL]
+A brief executive assessment of the portfolio's direction since ${prev.date}.
+
+### 2. Critique of Active Trades & Market Drift
+Evaluate the intentional trades ([TRADE DETECTED]) vs market price movements ([PRICE DRIFT ONLY]). Include account wrapper comments if applicable.
+
+### 3. Verdict on New & Modified Positions
+Specific verdicts (BUY MORE / HOLD / TRIM / EXIT) and reasoning for key changes.
+
+### 4. Next Priority Rebalancing Step
+The single most urgent action the investor should take next according to your philosophy.
 
 --- RESPONSE CONSTRAINTS ---
 - Language: respond entirely in ${LANG_NAMES[lang]}
@@ -295,3 +342,4 @@ ${marketSection}
 - Edge Cases: If the user sold everything to cash, or moved >80% into a single asset, strongly address this extreme move first.
 - ${addressLine}`;
 }
+
