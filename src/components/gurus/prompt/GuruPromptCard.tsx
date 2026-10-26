@@ -181,10 +181,10 @@ export function GuruPromptCard({
             <textarea
               readOnly
               value={currentPromptText}
-              rows={13}
+              rows={12}
               aria-label={isFollowUp ? t.guru_ai_tab_followup : t.guru_ai_tab_full}
               className={cn(
-                "w-full resize-none rounded-none border p-3 pb-12 font-mono text-xs-plus text-zinc-200 focus:outline-none sm:text-xs",
+                "max-h-[55vh] min-h-60 w-full resize-none rounded-none border p-3 pb-12 font-mono text-xs-plus text-zinc-200 focus:outline-none sm:min-h-75 sm:text-xs",
                 isFollowUp
                   ? "border-emerald-900/40 bg-emerald-950/10 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/40"
                   : "border-zinc-800 bg-zinc-950 focus:border-amber-400 focus:ring-1 focus:ring-amber-400/40",

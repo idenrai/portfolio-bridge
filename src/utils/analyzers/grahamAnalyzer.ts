@@ -185,10 +185,11 @@ function scoreDebtToEquity(de: number | null): Pick<GrahamCriterion, "pass" | "s
  */
 function scoreDividendYield(dy: number | null): Pick<GrahamCriterion, "pass" | "score"> {
   if (dy === null) return { pass: null, score: 0 };
-  if (dy > 0.04) return { pass: true, score: 10 };
-  if (dy > 0.03) return { pass: true, score: 8 };
-  if (dy > 0.02) return { pass: false, score: 5 };
-  if (dy > 0.01) return { pass: false, score: 2 };
+  const normalized = dy > 1 ? dy / 100 : dy;
+  if (normalized > 0.04) return { pass: true, score: 10 };
+  if (normalized > 0.03) return { pass: true, score: 8 };
+  if (normalized > 0.02) return { pass: false, score: 5 };
+  if (normalized > 0.01) return { pass: false, score: 2 };
   return { pass: false, score: 0 };
 }
 
@@ -201,6 +202,10 @@ function scoreStock(stock: UniverseStock, data: GrahamRawData): GrahamAnalyzerRe
   const cr  = scoreCurrentRatio(data.currentRatio);
   const de  = scoreDebtToEquity(data.debtToEquity);
   const dy  = scoreDividendYield(data.dividendYield);
+  const normalizedDy =
+    data.dividendYield !== null && data.dividendYield > 1
+      ? data.dividendYield / 100
+      : data.dividendYield;
 
   const grahamProduct =
     data.peRatio !== null && data.peRatio > 0 && data.pbRatio !== null && data.pbRatio > 0
@@ -213,7 +218,7 @@ function scoreStock(stock: UniverseStock, data: GrahamRawData): GrahamAnalyzerRe
     { key: "grahamNumber",  value: grahamProduct,      maxScore: 20, ...gn },
     { key: "currentRatio",  value: data.currentRatio,  maxScore: 15, ...cr },
     { key: "debtToEquity",  value: data.debtToEquity,  maxScore: 10, ...de },
-    { key: "dividendYield", value: data.dividendYield, maxScore: 10, ...dy },
+    { key: "dividendYield", value: normalizedDy,        maxScore: 10, ...dy },
   ];
 
   const totalScore = criteria.reduce((sum, c) => sum + c.score, 0);

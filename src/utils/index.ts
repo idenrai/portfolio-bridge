@@ -33,7 +33,11 @@ export { buildInsightPrompt } from "./ai/buildInsightPrompt";
 export { buildGuruPrompt } from "./ai/buildGuruPrompt";
 export { buildGuruFollowUpPrompt } from "./ai/buildGuruFollowUpPrompt";
 export { buildCustomGuruPrompt } from "./ai/buildCustomGuruPrompt";
-export { getNormalizedHoldingKey } from "./ai/promptHelpers";
+export {
+  getNormalizedHoldingKey,
+  normalizeDividendYield,
+  formatDividendYield,
+} from "./ai/promptHelpers";
 export {
   initGoogleDriveService,
   driveConnect,

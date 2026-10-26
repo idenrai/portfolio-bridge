@@ -240,6 +240,15 @@ export async function fetchBatchQuote(
           const num = (v: unknown) => typeof v === "number" ? v : null;
           const str = (v: unknown) => typeof v === "string" ? v : null;
 
+          const rawDy = num(q.dividendYield);
+          const rawTrailingDy = num(q.trailingAnnualDividendYield);
+          let normalizedDy: number | null = null;
+          if (rawDy != null) {
+            normalizedDy = rawDy > 1 ? rawDy / 100 : rawDy;
+          } else if (rawTrailingDy != null) {
+            normalizedDy = rawTrailingDy > 1 ? rawTrailingDy / 100 : rawTrailingDy;
+          }
+
           map.set(sym, {
             pegRatio:        num(q.pegRatio),
             epsGrowth:       num(q.earningsQuarterlyGrowth),
@@ -250,7 +259,7 @@ export async function fetchBatchQuote(
             currency:        str(q.financialCurrency) ?? str(q.currency),
             peRatio:         num(q.trailingPE),
             pbRatio:         num(q.priceToBook),
-            dividendYield:   num(q.dividendYield) ?? num(q.trailingAnnualDividendYield),
+            dividendYield:   normalizedDy,
             currentPrice:    num(q.regularMarketPrice),
           });
         }

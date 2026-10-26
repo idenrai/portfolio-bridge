@@ -9,6 +9,7 @@ import {
   ASSET_TYPE_LABELS_EN,
   MARKET_LABELS_EN,
   formatInBase,
+  formatDividendYield,
   sign,
 } from "./promptFormatters";
 import {
@@ -97,17 +98,19 @@ export function buildHoldingRows(
           rates,
         );
 
-        return (
-          `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""}` +
-          ` | ${type} | ${market} | ${h.currency}` +
-          ` | weight: ${h.weightPercent.toFixed(1)}%` +
-          ` | return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%` +
-          ` | category: ${category}` +
-          (h.peRatio != null ? ` | PER: ${h.peRatio.toFixed(1)}` : "") +
-          (h.pbRatio != null ? ` | PBR: ${h.pbRatio.toFixed(2)}` : "") +
-          (h.dividendYield != null ? ` | DY: ${(h.dividendYield * 100).toFixed(2)}%` : "") +
-          accountStr
-        );
+        const dyStr = formatDividendYield(h.dividendYield);
+
+        const metrics = [
+          `weight: ${h.weightPercent.toFixed(1)}%`,
+          `return: ${h.returnPercent >= 0 ? "+" : ""}${h.returnPercent.toFixed(1)}%`,
+          `category: ${category}`,
+          h.peRatio != null ? `PER: ${h.peRatio.toFixed(1)}` : null,
+          h.pbRatio != null ? `PBR: ${h.pbRatio.toFixed(2)}` : null,
+          dyStr != null ? `DY: ${dyStr}` : null,
+        ].filter(Boolean);
+
+        const prefix = `  ${i + 1}. ${h.name}${h.ticker ? ` [${h.ticker}]` : ""} | ${type} | ${market} | ${h.currency}`;
+        return `${prefix} | ${metrics.join(" | ")}${accountStr}`;
       })
       .join("\n") || "  (no data)";
 

@@ -4,6 +4,9 @@ import {
   buildHoldingRows,
   buildPortfolioDataBlock,
   getAccountTypePromptInfo,
+  normalizeDividendYield,
+  formatDividendYield,
+  formatInBase,
 } from "@/utils/ai/promptHelpers";
 import { buildGuruPrompt } from "@/utils/ai/buildGuruPrompt";
 import { buildGuruFollowUpPrompt } from "@/utils/ai/buildGuruFollowUpPrompt";
@@ -518,5 +521,101 @@ describe("AI prompt account breakdown helpers", () => {
     expect(prompt).not.toContain('--- NEW POSITIONS ADDED ---\n  + Microsoft Corp');
     expect(prompt).toContain('[TRADE DETECTED] Microsoft Corp [MSFT]');
     expect(prompt).toContain('qty: 50 → 60 (+10)');
+  });
+
+  it("normalizes and formats dividend yield defensively across decimal and percentage scales", () => {
+    // 0.035 (decimal) -> 3.50%
+    expect(normalizeDividendYield(0.035)).toBe(0.035);
+    expect(formatDividendYield(0.035)).toBe("3.50%");
+
+    // 3.5 (percentage from Yahoo quote API) -> 0.035, 3.50%
+    expect(normalizeDividendYield(3.5)).toBe(0.035);
+    expect(formatDividendYield(3.5)).toBe("3.50%");
+
+    // Edge cases
+    expect(normalizeDividendYield(null)).toBeNull();
+    expect(normalizeDividendYield(undefined)).toBeNull();
+    expect(normalizeDividendYield(NaN)).toBeNull();
+    expect(normalizeDividendYield(-0.01)).toBeNull();
+    expect(formatDividendYield(null)).toBeNull();
+    expect(formatDividendYield(0)).toBe("0.00%");
+  });
+
+  it("formats DY correctly in buildHoldingRows without 100x inflation", () => {
+    const summaryWithDy: PortfolioSummary = {
+      ...mockSummary,
+      holdings: [
+        {
+          ...mockSummary.holdings[0],
+          dividendYield: 0.035, // 3.5%
+        },
+        {
+          ...mockSummary.holdings[1],
+          dividendYield: 4.2, // 4.2% (percentage scale)
+        },
+        {
+          ...mockSummary.holdings[2],
+          dividendYield: null,
+        },
+      ],
+    };
+
+    const { rows } = buildHoldingRows(summaryWithDy, mockAssets, mockBrokers);
+    expect(rows).toContain("DY: 3.50%");
+    expect(rows).toContain("DY: 4.20%");
+    expect(rows).not.toContain("DY: 420.00%");
+  });
+
+  it("places negative sign before currency symbol in formatInBase", () => {
+    const rates = { KRW: 1, USD: 1350, JPY: 9 };
+    // KRW
+    expect(formatInBase(5000000, "KRW", rates)).toBe("₩5,000,000");
+    expect(formatInBase(-5000000, "KRW", rates)).toBe("-₩5,000,000");
+
+    // USD
+    expect(formatInBase(1350000, "USD", rates)).toBe("$1,000");
+    expect(formatInBase(-1350000, "USD", rates)).toBe("-$1,000");
+  });
+
+  it("preserves negative gap sign in buildGuruFollowUpPrompt when allocation is under target", () => {
+    const buffett = GURU_PROFILES.find((g) => g.id === "buffett")!;
+    // Buffett ideal: value 35%, cash 25%, dividend 20%, index 10%, growth 10%
+    const currentSummary: PortfolioSummary = {
+      ...mockSummary,
+      categoryAllocation: [
+        { category: "value", percent: 20.0, valueKRW: 6000000 }, // target 35% -> gap -15.0%p
+        { category: "growth", percent: 15.0, valueKRW: 4500000 }, // target 10% -> gap +5.0%p
+      ],
+    };
+
+    const prevSnapshot: GuruSessionSnapshot = {
+      guruId: "buffett",
+      date: "2026-01-01",
+      totalValueKRW: 30000000,
+      totalCostKRW: 25000000,
+      totalPnLKRW: 5000000,
+      totalReturnPercent: 20,
+      holdingCount: 2,
+      cashPercent: 0,
+      categoryAllocation: [],
+      marketAllocation: [],
+      currencyAllocation: [],
+      baseCurrency: "KRW",
+      rates: { KRW: 1, USD: 1350, JPY: 9 },
+      holdings: [],
+    };
+
+    const prompt = buildGuruFollowUpPrompt(
+      buffett,
+      prevSnapshot,
+      currentSummary,
+      "ko",
+      "KRW",
+    );
+
+    // Should contain negative gap sign for under-allocated category
+    expect(prompt).toContain("Value: target 35% | actual 20.0% (gap -15.0%p)");
+    // Should contain positive gap sign for over-allocated category
+    expect(prompt).toContain("Growth: target 10% | actual 15.0% (gap +5.0%p)");
   });
 });
