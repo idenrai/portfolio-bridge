@@ -258,7 +258,9 @@ If a guru ID is not in the map, a generic 5-point delta evaluation is used.
 | `buildHoldingRows(summary, assets?, brokers?, maxItems?)` | Holdings list with account breakdown (max 30, cash excluded) / 보유 종목 목록 및 계좌별 분기 |
 | `buildCashSection(assets)` | Cash positions / 현금 포지션 |
 | `buildPortfolioDataBlock(...)` | Full portfolio data block (supports account breakdown) / 전체 포트폴리오 데이터 블록 |
-| `formatInBase(krwAmount, currency, rates)` | KRW → baseCurrency string / 금액 포맷 |
+| `formatInBase(krwAmount, currency, rates)` | KRW → baseCurrency string (places '-' before currency symbol on negative) / 금액 포맷 |
+| `normalizeDividendYield(dy)` | Normalizes decimal (0.035) and percentage (3.5) scale to decimal ratio / 배당률 단위 정규화 |
+| `formatDividendYield(dy)` | Formats dividend yield safely as percentage string (e.g. 3.50%) / 배당률 백분율 문자열 포맷 |
 | `sign(n)` | Returns `"+"` or `""` for sign prefix |
 
 ### Label Maps (English, for AI prompts)

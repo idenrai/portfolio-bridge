@@ -38,8 +38,13 @@ Always route requests through the proxy layer via `yahooFetch()` from `src/utils
 | --- | --- |
 | `query1.finance.yahoo.com/v1/finance/search` | Ticker search / 종목 검색 |
 | `query1.finance.yahoo.com/v8/finance/chart/{ticker}` | Current price / 현재가 |
+| `query1.finance.yahoo.com/v7/finance/quote` | Batch quote & market stats (`fetchBatchQuote`) / 일괄 시세 및 통계 |
 | `query1.finance.yahoo.com/v10/finance/quoteSummary/{ticker}` | Fundamentals / 재무 데이터 |
 | `fred.stlouisfed.org/graph/fredgraph.csv` | Economic data series (via `api/fred.ts`) / 거시경제 지표 데이터 |
+
+Dividend yield scaling normalization: `fetchBatchQuote` normalizes `/v7/finance/quote` dividend yields (which arrive on a 0–100 percentage scale) to a decimal ratio (`0.01 = 1%`), matching `quoteSummary.summaryDetail` conventions and preventing 100x calculation skew across analyzers and AI prompt generators.
+
+배당수익률 스케일 정규화: `fetchBatchQuote`는 `/v7/finance/quote`에서 백분율 스케일(0~100)로 제공되는 배당수익률을 소수점 비율(`0.01 = 1%`)로 정규화하여 `quoteSummary.summaryDetail` 규격과 일치시키며, 분석기 및 AI 프롬프트 생성기에서의 100배 왜곡 현상을 원천 방지합니다.
 
 Fundamentals modules used: `financialData`, `incomeStatementHistory`, `balanceSheetHistory`,
 `earningsHistory`, `defaultKeyStatistics`.

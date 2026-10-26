@@ -74,12 +74,14 @@ The Guru AI consultation interface adopts a high-density, Bloomberg Terminal-com
 - **Mode 02: Delta Changes Feedback (`[ 02: 변동사항 피드백 ]`)**: In Emerald telemetry styling. Generates a delta-only prompt via `buildGuruFollowUpPrompt()` focusing strictly on changes since the baseline. Copying this follow-up prompt does NOT overwrite the baseline snapshot, preserving consecutive comparison integrity.
 - **Baseline Date & Reset Controls (`[ ↺ 기준점 갱신 ]`)**: When a previous session exists, displays `Base: YYYY-MM-DD` alongside an instant baseline reset button, enabling manual baseline alignment without friction.
 - **WAI-ARIA Tab Navigation & Accessibility**: Full keyboard navigation support (<kbd>→</kbd>/<kbd>↓</kbd> next tab, <kbd>←</kbd>/<kbd>↑</kbd> previous tab, <kbd>Home</kbd> first tab, <kbd>End</kbd> last tab) with explicit `role="tablist"`, `role="tab"`, `role="tabpanel"`, `aria-controls`, and `aria-labelledby` bindings.
+- **Responsive Terminal Prompt Viewer**: Formatted inside a monospaced terminal viewport (`font-mono text-xs-plus`) with responsive height constraints (`min-h-60 max-h-[55vh] sm:min-h-75`) preventing viewport overflows on mobile screens.
 
 구루 AI 상담 인터페이스는 다단계 모달 대신 블룸버그 단말기 스타일의 고밀도 2-모드 세그먼트 탭 시스템을 적용했습니다:
 - **01 모드: 전체 포트폴리오 분석 (`[ 01: 전체 포트폴리오 분석 ]`)**: 앰버 텔레메트리 스타일. `buildGuruPrompt()` 또는 `buildCustomGuruPrompt()`를 통해 포트폴리오 전체 종합 진단 프롬프트를 생성합니다. 이 프롬프트를 복사하면 현재 포트폴리오 상태가 기준 스냅샷으로 자동 저장됩니다.
 - **02 모드: 변동사항 피드백 (`[ 02: 변동사항 피드백 ]`)**: 에메랄드 텔레메트리 스타일. 기준 스냅샷 이후의 변경점만 추출하는 델타 전용 프롬프트를 `buildGuruFollowUpPrompt()`로 생성합니다. 이 팔로우업 프롬프트를 복사해도 기준 스냅샷이 덮어써지지 않아 연속적인 비교 정합성이 유지됩니다.
 - **기준점 일자 표기 및 수동 갱신 (`[ ↺ 기준점 갱신 ]`)**: 이전 분석 이력이 있는 경우 `Base: YYYY-MM-DD` 배지와 함께 원클릭 기준점 갱신 버튼을 노출하여 간편하게 새 기준점을 지정할 수 있습니다.
 - **WAI-ARIA 탭 내비게이션 및 웹 접근성**: 화살표 키(<kbd>→</kbd>/<kbd>↓</kbd>, <kbd>←</kbd>/<kbd>↑</kbd>) 및 <kbd>Home</kbd>/<kbd>End</kbd> 키를 통한 키보드 탐색과 포커스 이동을 완벽 지원하며, `role="tablist"`, `role="tab"`, `role="tabpanel"`, `aria-controls`, `aria-labelledby` 표준을 준수합니다.
+- **반응형 터미널 프롬프트 뷰어**: 고밀도 터미널 뷰포트(`font-mono text-xs-plus`) 내에 반응형 높이 제약(`min-h-60 max-h-[55vh] sm:min-h-75`)을 두어 모바일 화면에서도 뷰포트 스크롤 이탈 없이 편안하게 프롬프트를 확인하고 복사할 수 있습니다.
 
 ### Consultation Holdings Selector / 상담 종목 선택 (`GuruAIPromptBanner.tsx`)
 
