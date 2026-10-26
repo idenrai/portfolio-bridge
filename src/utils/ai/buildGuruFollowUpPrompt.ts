@@ -247,7 +247,7 @@ export function buildGuruFollowUpPrompt(
       const gap = currPct - ia.targetPercent;
       return (
         `  ${label}: target ${ia.targetPercent}% | actual ${currPct.toFixed(1)}%` +
-        ` (gap ${sign(gap)}${Math.abs(gap).toFixed(1)}%p)`
+        ` (gap ${sign(gap)}${gap.toFixed(1)}%p)`
       );
     })
     .join("\n");

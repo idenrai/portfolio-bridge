@@ -4,6 +4,7 @@ import type {
   PortfolioSummary,
   BrokerAccount,
 } from "@/types";
+import { DEFAULT_RATES } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
 import {
@@ -20,7 +21,7 @@ export function buildInsightPrompt(
   targets: TargetAllocation[],
   lang: Lang = "ko",
   baseCurrency: string = "KRW",
-  rates: Record<string, number> = { KRW: 1, USD: 1350, JPY: 9 },
+  rates: Record<string, number> = DEFAULT_RATES,
   brokers: BrokerAccount[] = [],
 ): string {
   const categorySection = buildCategorySection(summary, targets);

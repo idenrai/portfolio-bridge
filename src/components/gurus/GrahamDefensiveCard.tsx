@@ -1,6 +1,7 @@
 import { Shield } from "lucide-react";
 import { useT, useAnalyzer } from "@/hooks";
 import { analyzeByTickersGraham, type GrahamCriterionKey, type GrahamAnalyzerResult } from "@/utils/analyzers";
+import { formatDividendYield } from "@/utils";
 import { AnalyzerCard, type AnalyzerTexts } from "./AnalyzerCard";
 
 // ─── 기준별 힌트 ──────────────────────────────────────────────────────────────
@@ -17,7 +18,10 @@ const CRITERION_HINT: Record<GrahamCriterionKey, string> = {
 // ─── 값 포매터 ────────────────────────────────────────────────────────────────
 
 function formatValue(key: GrahamCriterionKey, value: number): string {
-  if (key === "dividendYield") return ` ${(value * 100).toFixed(1)}%`;
+  if (key === "dividendYield") {
+    const formatted = formatDividendYield(value);
+    return formatted ? ` ${formatted}` : " -";
+  }
   if (key === "debtToEquity") return ` ${value.toFixed(0)}`;
   return ` ${value.toFixed(2)}`;
 }

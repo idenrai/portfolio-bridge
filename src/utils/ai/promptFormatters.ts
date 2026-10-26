@@ -36,7 +36,7 @@ export const MARKET_LABELS_EN: Record<Market, string> = {
   OTHER: "Other",
 };
 
-/** KRW 기준 금액을 baseCurrency로 변환하여 포맷팅 */
+/** KRW 기준 금액을 baseCurrency로 변환하여 포맷팅 (음수 시 -₩5,000 형태) */
 export function formatInBase(
   krwAmount: number,
   baseCurrency: string,
@@ -44,12 +44,39 @@ export function formatInBase(
 ): string {
   const symbol =
     (CURRENCY_SYMBOLS as Record<string, string>)[baseCurrency] ?? baseCurrency;
+  const isNegative = krwAmount < 0;
+  const absAmount = Math.abs(krwAmount);
   if (baseCurrency === "KRW") {
-    return `${symbol}${Math.round(krwAmount).toLocaleString()}`;
+    const formatted = `${symbol}${Math.round(absAmount).toLocaleString()}`;
+    return isNegative ? `-${formatted}` : formatted;
   }
   const rate = rates[baseCurrency] ?? 1;
-  const amount = krwAmount / rate;
-  return `${symbol}${Math.round(amount).toLocaleString()}`;
+  const amount = absAmount / rate;
+  const formatted = `${symbol}${Math.round(amount).toLocaleString()}`;
+  return isNegative ? `-${formatted}` : formatted;
+}
+
+/**
+ * 배당수익률 값을 소수점 비율(0.01 = 1%)로 정규화
+ * - 0.035 -> 0.035 (3.5%)
+ * - 3.5   -> 0.035 (3.5%, 레거시 데이터 또는 백분율 스케일 방어)
+ */
+export function normalizeDividendYield(
+  dy: number | null | undefined,
+): number | null {
+  if (dy == null || isNaN(dy) || dy < 0) return null;
+  return dy > 1 ? dy / 100 : dy;
+}
+
+/**
+ * 프롬프트 및 UI용 배당수익률 문자열 포맷팅 (예: 0.035 또는 3.5 -> "3.50%")
+ */
+export function formatDividendYield(
+  dy: number | null | undefined,
+): string | null {
+  const normalized = normalizeDividendYield(dy);
+  if (normalized == null) return null;
+  return `${(normalized * 100).toFixed(2)}%`;
 }
 
 /** 숫자의 부호 접두사 반환 (양수면 "+", 음수면 "") */
