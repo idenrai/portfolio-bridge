@@ -124,7 +124,7 @@ function CustomGuruModalInner({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder={t.custom_guru_default_name}
-              className="mt-1.5 w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2 text-xs text-white placeholder:text-zinc-600 focus:border-zinc-500 focus:outline-none"
+              className="mt-1.5 w-full rounded-none border border-zinc-800 bg-zinc-900 px-3 py-2 text-xs text-white placeholder:text-zinc-600 focus:border-zinc-500 focus:outline-none"
             />
           </div>
 

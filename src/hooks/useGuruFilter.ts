@@ -1,8 +1,20 @@
 import { useState, useMemo, useCallback } from "react";
 import { GURU_PROFILES, GURU_METADATA, type GuruCategoryTag } from "@/utils";
 import type { GuruProfile } from "@/types";
-import { type CustomGuruConfig, CUSTOM_GURU_STRATEGY_KEYS } from "@/stores";
+import {
+  type CustomGuruConfig,
+  type CustomGuruStrategy,
+  CUSTOM_GURU_STRATEGY_KEYS,
+} from "@/stores";
 import type { Translations } from "@/i18n";
+
+export const CUSTOM_STRATEGY_TO_CATEGORY: Record<CustomGuruStrategy, GuruCategoryTag> = {
+  all_weather: "passive",
+  dividend_cashflow: "value",
+  tech_growth: "growth",
+  deep_value: "value",
+  quant_momentum: "quant",
+};
 
 export function useGuruFilter(
   t: Translations,
@@ -59,7 +71,8 @@ export function useGuruFilter(
   }, [selectedCategory, searchQuery, guruName, t]);
 
   const showCustomGuruCard = useMemo(() => {
-    if (selectedCategory !== "all" && selectedCategory !== "value") {
+    const customCategory = CUSTOM_STRATEGY_TO_CATEGORY[customGuruConfig.strategy] ?? "value";
+    if (selectedCategory !== "all" && selectedCategory !== customCategory) {
       return false;
     }
     if (searchQuery.trim()) {
@@ -72,6 +85,7 @@ export function useGuruFilter(
         customName.includes(q) ||
         strategyLabel.includes(q) ||
         customGuruConfig.strategy.toLowerCase().includes(q) ||
+        customCategory.toLowerCase().includes(q) ||
         q.includes("ai") ||
         q.includes("커스텀") ||
         q.includes("custom");

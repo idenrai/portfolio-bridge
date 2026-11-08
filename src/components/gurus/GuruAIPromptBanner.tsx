@@ -161,6 +161,7 @@ export function GuruAIPromptBanner({
       profile,
       brokers,
       activeAssets,
+      selectedGuru.id === "custom" ? customGuruConfig : undefined,
     );
   }, [
     selectedGuru,
@@ -172,6 +173,7 @@ export function GuruAIPromptBanner({
     rates,
     profile,
     brokers,
+    customGuruConfig,
   ]);
 
   const updateCurrentSession = () => {

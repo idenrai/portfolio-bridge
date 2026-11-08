@@ -36,6 +36,7 @@ export function GuruSelector({
 }: GuruSelectorProps) {
   const t = useT();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const selectedCardRef = useRef<HTMLButtonElement | HTMLDivElement | null>(null);
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
 
@@ -69,6 +70,17 @@ export function GuruSelector({
     return () => window.removeEventListener("resize", checkScroll);
   }, []);
 
+  // 선택된 구루 카드가 뷰포트 중앙에 오도록 자동 스크롤
+  useEffect(() => {
+    if (selectedCardRef.current && scrollContainerRef.current) {
+      selectedCardRef.current.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [selectedGuru?.id]);
+
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
       const scrollAmount = direction === "left" ? -300 : 300;
@@ -85,7 +97,7 @@ export function GuruSelector({
       {showLeftScroll && (
         <button
           onClick={() => scroll("left")}
-          className="absolute top-1/2 left-0 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-zinc-800 bg-black/80 p-1.5 text-zinc-400 shadow-md backdrop-blur-sm transition-colors hover:bg-zinc-800 hover:text-white md:flex"
+          className="absolute top-1/2 left-0 z-10 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-none border border-zinc-800 bg-black/90 p-1.5 text-zinc-400 shadow-none transition-colors hover:border-zinc-500 hover:bg-zinc-800 hover:text-white md:flex"
           aria-label="Scroll left"
         >
           <ChevronLeft className="size-5" />
@@ -100,10 +112,11 @@ export function GuruSelector({
       <div
         ref={scrollContainerRef}
         onScroll={checkScroll}
-        className="flex snap-x snap-mandatory scroll-px-12 gap-3 overflow-x-auto pt-1 pb-4 sm:gap-4 lg:pb-6 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-zinc-800/80 hover:[&::-webkit-scrollbar-thumb]:bg-zinc-700 [&::-webkit-scrollbar-track]:bg-transparent"
+        className="flex snap-x snap-mandatory scroll-px-12 gap-3 overflow-x-auto pt-1 pb-4 sm:gap-4 lg:pb-6 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-thumb]:bg-zinc-800/80 hover:[&::-webkit-scrollbar-thumb]:bg-zinc-700 [&::-webkit-scrollbar-track]:bg-transparent"
       >
         {/* ── Slot 0: Custom Guru Card ── */}
         <div
+          ref={isCustomSelected ? (el) => { selectedCardRef.current = el; } : null}
           role="button"
           tabIndex={0}
           onClick={() => onSelect(customProfile)}
@@ -199,19 +212,20 @@ export function GuruSelector({
           </div>
         </div>
 
-        {/* ── 20 Historical Gurus ── */}
+        {/* ── Historical Gurus ── */}
         {GURU_PROFILES.map((guru) => {
           const avatarUrl = guru.avatar || "/fallback-avatar.svg";
           const isSelected = selectedGuru?.id === guru.id;
           return (
             <button
               key={guru.id}
+              ref={isSelected ? (el) => { selectedCardRef.current = el; } : null}
               onClick={() => onSelect(guru)}
               aria-label={`${guruName(guru)}, ${guru.firm}`}
               className={cn(
-                "relative flex aspect-card w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-none border p-4 text-left transition-colors focus-visible:border-transparent focus-visible:ring-1 focus-visible:ring-zinc-400 focus-visible:outline-none sm:w-56",
+                "relative flex aspect-card w-48 shrink-0 cursor-pointer snap-start flex-col justify-between overflow-hidden rounded-none border p-4 text-left transition-colors focus-visible:border-transparent focus-visible:ring-1 focus-visible:ring-amber-400 focus-visible:outline-none sm:w-56",
                 isSelected
-                  ? "border-zinc-400 bg-zinc-900 text-white"
+                  ? "border-amber-400 bg-zinc-900 text-white"
                   : "border-zinc-800 bg-zinc-950 text-zinc-400 hover:border-zinc-600",
               )}
             >
@@ -219,7 +233,7 @@ export function GuruSelector({
               <div
                 className={cn(
                   "pointer-events-none absolute inset-1.5 rounded-none border border-dashed transition-colors",
-                  isSelected ? "border-zinc-400/40" : "border-zinc-800/40",
+                  isSelected ? "border-amber-400/40" : "border-zinc-800/40",
                 )}
               />
 
@@ -228,27 +242,27 @@ export function GuruSelector({
                 <span
                   className={cn(
                     "font-mono text-4xs font-medium tracking-widest uppercase transition-colors duration-300",
-                    isSelected ? "text-zinc-400" : "text-zinc-500",
+                    isSelected ? "text-zinc-300" : "text-zinc-500",
                   )}
                 >
                   Portfolio Bridge
                 </span>
-                <span className="rounded bg-zinc-800/80 px-1.5 py-0.5 font-mono text-4xs text-zinc-400">
+                <span className="rounded-none border border-zinc-800 bg-zinc-900 px-1.5 py-0.5 font-mono text-4xs text-zinc-400">
                   {t[GURU_METADATA[guru.id]?.tagKey as keyof typeof t] as string}
                 </span>
               </div>
 
-              {/* Center Large Avatar */}
+              {/* Center Large Avatar (Bloomberg Terminal Sharp Edges) */}
               <div className="relative z-10 my-auto flex w-full justify-center">
                 <div
                   className={cn(
-                    "rounded-full border p-0.5 transition-[border-color,background-color] duration-300",
+                    "rounded-none border p-0.5 transition-[border-color,background-color] duration-300",
                     isSelected
-                      ? "border-zinc-500/80 bg-zinc-800/50"
+                      ? "border-amber-400/80 bg-zinc-800/50"
                       : "border-zinc-800/80 bg-black/20",
                   )}
                 >
-                  <div className="size-10 overflow-hidden rounded-full border border-zinc-900 sm:size-12">
+                  <div className="size-10 overflow-hidden rounded-none border border-zinc-900 sm:size-12">
                     <img
                       src={avatarUrl}
                       alt={guru.name}
@@ -288,7 +302,7 @@ export function GuruSelector({
                 <div
                   className={cn(
                     "flex shrink-0 flex-col items-end font-mono text-3xs leading-tight transition-colors duration-300",
-                    isSelected ? "text-zinc-400" : "text-zinc-500",
+                    isSelected ? "text-amber-400" : "text-zinc-500",
                   )}
                 >
                   <span className="text-4xs tracking-wider uppercase opacity-60">
@@ -313,7 +327,7 @@ export function GuruSelector({
       {showRightScroll && (
         <button
           onClick={() => scroll("right")}
-          className="absolute top-1/2 right-0 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-zinc-800 bg-black/80 p-1.5 text-zinc-400 shadow-md backdrop-blur-sm transition-colors hover:bg-zinc-800 hover:text-white md:flex"
+          className="absolute top-1/2 right-0 z-10 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-none border border-zinc-800 bg-black/90 p-1.5 text-zinc-400 shadow-none transition-colors hover:border-zinc-500 hover:bg-zinc-800 hover:text-white md:flex"
           aria-label="Scroll right"
         >
           <ChevronRight className="size-5" />
