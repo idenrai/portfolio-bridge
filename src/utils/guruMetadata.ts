@@ -221,6 +221,15 @@ export const GURU_METADATA: Record<GuruId, GuruMetadata> = {
     tone: "blunt",
     tagKey: "guru_tag_hedge",
   },
+  griffin: {
+    id: "griffin",
+    category: "quant",
+    secondaryCategory: "hedge",
+    risk: "balanced",
+    horizon: "tactical",
+    tone: "trader",
+    tagKey: "guru_tag_quant",
+  },
   custom: {
     id: "custom",
     category: "value",

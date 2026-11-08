@@ -317,6 +317,7 @@ export interface Translations {
   guru_match_reason_soros: string;
   guru_match_reason_greenblatt: string;
   guru_match_reason_marks: string;
+  guru_match_reason_griffin: string;
   guru_match_reason_category_value: string;
   guru_match_reason_category_growth: string;
   guru_match_reason_category_passive: string;
@@ -347,6 +348,7 @@ export interface Translations {
   guru_name_bogle: string;
   guru_name_swensen: string;
   guru_name_taleb: string;
+  guru_name_griffin: string;
   guru_philosophy_buffett: string;
   guru_quotes_buffett?: string;
   guru_philosophy_munger: string;
@@ -393,6 +395,8 @@ export interface Translations {
   guru_quotes_swensen?: string;
   guru_philosophy_taleb: string;
   guru_quotes_taleb?: string;
+  guru_philosophy_griffin: string;
+  guru_quotes_griffin?: string;
 
   // ─── Lynch 10-Bagger Analyzer ───────────────────────────────────────────────
   lynch_tenbagger_title: string;

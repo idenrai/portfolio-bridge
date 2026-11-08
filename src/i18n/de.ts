@@ -313,6 +313,7 @@ export const de: Translations = {
   guru_match_reason_soros: "Nutzt Marktreflexivität und makroökonomische Ungleichgewichte gezielt aus.",
   guru_match_reason_greenblatt: "Systematischer Quant-Ansatz basierend auf der magischen Formel aus ROC und Gewinnrendite.",
   guru_match_reason_marks: "Meistert Marktzyklen, Denken zweiter Ordnung und Risikokontrolle in unsicheren Zeiten.",
+  guru_match_reason_griffin: "Strebt durch strikte Faktorneutralität und Center-Book-Risikodisziplin reines, unkorreliertes Alpha an.",
   guru_match_reason_category_value: "Fokussiert auf unterbewertete Qualitätsunternehmen für stetigen langfristigen Zinseszins.",
   guru_match_reason_category_growth: "Setzt auf wachstumsstarke Marktführer mit starker Dynamik und Skalierbarkeit.",
   guru_match_reason_category_passive: "Breite Diversifikation und regelbasiertes Rebalancing für stabile Zinseszinseffekte.",
@@ -343,6 +344,7 @@ export const de: Translations = {
   guru_name_bogle: "John Bogle",
   guru_name_swensen: "David Swensen",
   guru_name_taleb: "Nassim Taleb",
+  guru_name_griffin: "Ken Griffin",
   guru_philosophy_buffett:
     "• Wirtschaftlicher Burggraben: Konzentration auf Unternehmen mit dauerhaften Wettbewerbsvorteilen und hohen Markteintrittsbarrieren\n" +
     "• Langfristiges Halten: Verständliche Unternehmen zu fairen Preisen kaufen und bevorzugt für immer halten\n" +
@@ -581,6 +583,17 @@ export const de: Translations = {
     "Überleben steht an erster Stelle. Sie dürfen nicht bankrottgehen, um langfristige Renditen zu erzielen.\n" +
     "Der Wind löscht eine Kerze, aber entfacht ein Feuer. Seien Sie das Feuer.\n" +
     "Ein Risiko einzugehen, dessen Scheitern man nicht überleben kann, ist keine Investition, sondern Selbstmord.",
+  guru_philosophy_griffin:
+    "• Multistrategie-Faktorneutralität: Isolieren Sie echtes Alpha durch Relative-Value-Long/Short-Strategien, statt ungesicherte Richtungsrisiken einzugehen.\n" +
+    "• Center-Book-Risikodisziplin: Liquidieren Sie Positionen, die Drawdown-Grenzen verletzen oder deren These hinfällig ist, konsequent und emotionslos.\n" +
+    "• Quantitativer Vorsprung & Informationseffizienz: Nutzen Sie Fehlbewertungen anhand empirischer Daten und statistischer Wahrscheinlichkeiten statt Marktnarrativen.\n" +
+    "• Kapitalumschlagsrate & Opportunitätskosten: Minimieren Sie brachliegendes Kapital und allozieren Sie Ressourcen kontinuierlich in die chancenreichsten Positionen.\n" +
+    "• Makroökonomischer & Politischer Realismus: Berücksichtigen Sie Zinspfade der Notenbanken, fiskalische Liquidität und politische Rahmenbedingungen präzise.\n" +
+    "• „Wir versuchen nicht, die Launen des Marktes vorherzusagen; wir messen Ineffizienzen und schöpfen Vorteile durch unnachgiebige Disziplin ab.“",
+  guru_quotes_griffin:
+    "Der Markt schert sich nicht um Ihre Emotionen oder Hoffnungen. Nur Daten und Risikodisziplin sprechen die Wahrheit.\n" +
+    "Bei der Kapitalallokation ist der Mut, Fehler sofort einzugestehen und Verluste zu kappen, die wichtigste Eigenschaft.\n" +
+    "Alpha währt nicht ewig. Wer seine Systeme und Modelle nicht unerbittlich weiterentwickelt, wird vom Markt eliminiert.",
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger-Bewertung",
   lynch_tenbagger_desc:

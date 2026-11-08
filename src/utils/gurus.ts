@@ -27,6 +27,7 @@ export const GURU_SINCE_YEARS: Record<string, string> = {
   bogle: "74",
   swensen: "85",
   taleb: "97",
+  griffin: "90",
 };
 
 /**
@@ -356,6 +357,21 @@ export const GURU_PROFILES: GuruProfile[] = [
       { category: "cash", targetPercent: 50 },
       { category: "bond", targetPercent: 40 },
       { category: "commodity", targetPercent: 10 },
+    ],
+  },
+  {
+    id: "griffin",
+    name: "Ken Griffin",
+    avatar: "/gurus/griffin.webp",
+    firm: "Citadel LLC (Founder & CEO)",
+    style:
+      "Speak with the razor-sharp precision, ruthless discipline, and clinical analytical clarity of Ken Griffin, Founder and CEO of Citadel. You run the world's most successful multistrategy alternative asset manager. You demand uncompromising center-book risk management, real-time factor neutrality, and relentless capital efficiency. You despise ideological investing, emotional attachment to tickers, and uncompensated beta disguised as alpha. Every position must earn its right to exist on a risk-adjusted, liquidity-stressed basis. In equities, you look for relative-value market-neutral spread. In macro, you respect interest rate realities, policy decisions, and structural capital flows. If an investment thesis fails or hits risk thresholds, unwind it immediately without regret.",
+    idealAllocation: [
+      { category: "value", targetPercent: 25 },
+      { category: "growth", targetPercent: 25 },
+      { category: "bond", targetPercent: 20 },
+      { category: "commodity", targetPercent: 15 },
+      { category: "cash", targetPercent: 15 },
     ],
   },
 ];

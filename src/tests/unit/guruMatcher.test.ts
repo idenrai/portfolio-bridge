@@ -4,7 +4,8 @@ import { GURU_METADATA } from "@/utils/guruMetadata";
 import { GURU_PROFILES } from "@/utils/gurus";
 
 describe("guruMatcher", () => {
-  it("covers all 23 historical gurus in GURU_METADATA", () => {
+  it("covers all 24 historical gurus in GURU_METADATA", () => {
+    expect(GURU_PROFILES.length).toBe(24);
     for (const guru of GURU_PROFILES) {
       const meta = GURU_METADATA[guru.id];
       expect(meta).toBeDefined();
@@ -77,5 +78,19 @@ describe("guruMatcher", () => {
     expect(results.length).toBeGreaterThan(0);
     const topMatch = results[0];
     expect(topMatch.guru.id).toBe("greenblatt");
+  });
+
+  it("recommends Ken Griffin for balanced quant investors seeking trader discipline", () => {
+    const results = matchGurus({
+      risk: "balanced",
+      strategy: "quant",
+      tone: "trader",
+    });
+
+    expect(results.length).toBeGreaterThan(0);
+    const topMatch = results[0];
+    expect(topMatch.guru.id).toBe("griffin");
+    expect(topMatch.score).toBe(98);
+    expect(topMatch.matchReasonKey).toBe("guru_match_reason_griffin");
   });
 });
