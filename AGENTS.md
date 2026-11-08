@@ -36,6 +36,7 @@ Antigravity 2.0 사양에 따라 모든 절차는 점진적 공개(Progressive D
 - **커밋 메시지 자동 생성 (`/commit`, `/commit-kr`):** `.agents/skills/commit/SKILL.md` (Conventional Commits 한영 규격)
 - **문서 동기화 및 PR 자동 생성 (`/pr`):** `.agents/skills/pr/SKILL.md` (`doc/` 영한 병기 동기화, 단계적 커밋 분할, `github-mcp-server` 연동)
 - **다각도 전문 코드 리뷰 (`/review`, `/code-review`):** `.agents/skills/code-review/SKILL.md` (`code-reviewer` 서브에이전트 위임 및 체크리스트 감사)
+- **원격 정리된 로컬 브랜치 일괄 정리 (`/prune`):** `.agents/skills/prune/SKILL.md` (`[gone]` 상태 고립 브랜치 감지, 보호 브랜치 보존 및 일괄 안전 삭제)
 - **로컬 퍼스트(Local-First) 영속성 & 동기화:** `.agents/skills/local-first/SKILL.md`
 - **단위 테스트 작성 및 모범 사례:** `.agents/skills/vitest/SKILL.md`
 - **UI 변경 시각적 차이(Visual Diff) 검증:** `.agents/skills/before-and-after/SKILL.md` 및 `agent-browser`
