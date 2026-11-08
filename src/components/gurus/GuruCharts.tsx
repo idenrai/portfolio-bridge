@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useT } from "@/hooks";
 import { Card } from "@/components/common";
 import {
@@ -16,16 +17,16 @@ import {
 import type { GuruProfile } from "@/types";
 
 const COLORS = [
-  "#60a5fa",
-  "#34d399",
-  "#fbbf24",
-  "#f87171",
-  "#c084fc",
-  "#2dd4bf",
-  "#fb923c",
-  "#a78bfa",
-  "#f472b6",
-  "#a3e635",
+  "#38bdf8", // Sky
+  "#34d399", // Emerald
+  "#fbbf24", // Amber
+  "#f87171", // Rose
+  "#2dd4bf", // Teal
+  "#fb923c", // Orange
+  "#60a5fa", // Blue
+  "#a3e635", // Lime
+  "#94a3b8", // Slate
+  "#cbd5e1", // Light Slate
 ];
 
 interface GuruChartsProps {
@@ -40,8 +41,27 @@ interface GuruChartsProps {
 export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
   const t = useT();
 
-  const guruName = (guru: GuruProfile) =>
-    (t[`guru_name_${guru.id}` as keyof typeof t] as string) ?? guru.name;
+  const guruName = (guru: GuruProfile) => {
+    if (guru.id === "custom") {
+      return guru.name || (t.custom_guru_default_name ?? "Custom Guru");
+    }
+    return (t[`guru_name_${guru.id}` as keyof typeof t] as string) ?? guru.name;
+  };
+
+  const maxRadarVal = Math.max(
+    60,
+    ...radarData.flatMap((d) => [d.guru, d.mine]),
+  );
+  const radarDomainMax = Math.ceil(maxRadarVal / 10) * 10;
+
+  const pieData = useMemo(
+    () =>
+      selectedGuru.idealAllocation.map((a) => ({
+        name: t.category_labels[a.category] ?? a.category,
+        value: a.targetPercent,
+      })),
+    [selectedGuru.idealAllocation, t],
+  );
 
   return (
     <div className="grid grid-cols-1 gap-3 md:gap-4 lg:grid-cols-2">
@@ -50,10 +70,7 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
         <ResponsiveContainer width="100%" height={220}>
           <PieChart>
             <Pie
-              data={selectedGuru.idealAllocation.map((a) => ({
-                name: t.category_labels[a.category] ?? a.category,
-                value: a.targetPercent,
-              }))}
+              data={pieData}
               cx="50%"
               cy="50%"
               innerRadius={50}
@@ -82,7 +99,7 @@ export function GuruCharts({ selectedGuru, radarData }: GuruChartsProps) {
           <RadarChart data={radarData}>
             <PolarGrid stroke="rgba(255,255,255,0.1)" />
             <PolarAngleAxis dataKey="category" tick={{ fontSize: 11, fill: "#94a3b8" }} />
-            <PolarRadiusAxis angle={90} domain={[0, 60]} tick={false} axisLine={false} />
+            <PolarRadiusAxis angle={90} domain={[0, radarDomainMax]} tick={false} axisLine={false} />
             <Radar
               name={guruName(selectedGuru)}
               dataKey="guru"

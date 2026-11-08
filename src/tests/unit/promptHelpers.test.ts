@@ -11,7 +11,7 @@ import {
 import { buildGuruPrompt } from "@/utils/ai/buildGuruPrompt";
 import { buildGuruFollowUpPrompt } from "@/utils/ai/buildGuruFollowUpPrompt";
 import { GURU_PROFILES } from "@/utils/gurus";
-import type { Asset, BrokerAccount, PortfolioSummary } from "@/types";
+import type { Asset, BrokerAccount, PortfolioSummary, GuruProfile } from "@/types";
 import type { GuruSessionSnapshot } from "@/stores";
 
 describe("AI prompt account breakdown helpers", () => {
@@ -617,5 +617,101 @@ describe("AI prompt account breakdown helpers", () => {
     expect(prompt).toContain("Value: target 35% | actual 20.0% (gap -15.0%p)");
     // Should contain positive gap sign for over-allocated category
     expect(prompt).toContain("Growth: target 10% | actual 15.0% (gap +5.0%p)");
+  });
+
+  it("injects custom philosophy and detailed persona into buildGuruFollowUpPrompt for custom gurus", () => {
+    const customGuru: GuruProfile = {
+      id: "custom",
+      name: "퀀트 전략가",
+      firm: "My Portfolio Bridge",
+      style: "Default style",
+      idealAllocation: [],
+    };
+
+    const prevSnapshot: GuruSessionSnapshot = {
+      guruId: "custom",
+      date: "2026-10-01",
+      totalValueKRW: 10000000,
+      totalCostKRW: 8000000,
+      totalPnLKRW: 2000000,
+      totalReturnPercent: 25,
+      holdingCount: 1,
+      cashPercent: 10,
+      categoryAllocation: [],
+      marketAllocation: [],
+      currencyAllocation: [],
+      baseCurrency: "KRW",
+      rates: { KRW: 1, USD: 1350, JPY: 9 },
+      holdings: [],
+    };
+
+    const currentSummary: PortfolioSummary = {
+      totalValueKRW: 11000000,
+      totalCostKRW: 8000000,
+      totalPnLKRW: 3000000,
+      totalReturnPercent: 37.5,
+      holdingCount: 1,
+      cashPercent: 5,
+      assetTypeCount: 1,
+      categoryAllocation: [],
+      marketAllocation: [],
+      currencyAllocation: [],
+      holdings: [],
+      currencyExposure: [],
+      currencyScenarios: [],
+      insights: [],
+    };
+
+    const prompt = buildGuruFollowUpPrompt(
+      customGuru,
+      prevSnapshot,
+      currentSummary,
+      "ko",
+      "KRW",
+      undefined,
+      undefined,
+      undefined,
+      [],
+      {
+        name: "퀀트 마스터",
+        avatarIcon: "terminal",
+        riskTolerance: "aggressive",
+        strategy: "quant_momentum",
+        tone: "analytical_quant",
+        customPhilosophy: "데이터와 백테스팅만이 살 길이다",
+        isConfigured: true,
+      },
+    );
+
+    expect(prompt).toContain("Personal Guiding Philosophy: \"데이터와 백테스팅만이 살 길이다\"");
+    expect(prompt).toContain("Quantitative & Momentum");
+    expect(prompt).toContain("analytical strategist");
+  });
+
+  it("includes Citadel Multistrategy framework when evaluating Ken Griffin guru prompt", () => {
+    const griffin = GURU_PROFILES.find((g) => g.id === "griffin")!;
+    expect(griffin).toBeDefined();
+
+    const emptySummary: PortfolioSummary = {
+      totalValueKRW: 50000000,
+      totalCostKRW: 40000000,
+      totalPnLKRW: 10000000,
+      totalReturnPercent: 25,
+      holdingCount: 1,
+      cashPercent: 15,
+      assetTypeCount: 1,
+      categoryAllocation: [],
+      marketAllocation: [],
+      currencyAllocation: [],
+      holdings: [],
+      currencyExposure: [],
+      currencyScenarios: [],
+      insights: [],
+    };
+
+    const prompt = buildGuruPrompt(griffin, emptySummary, []);
+    expect(prompt).toContain("Citadel Multistrategy Risk & Capital Allocation Framework");
+    expect(prompt).toContain("Alpha vs. Beta Decomposition");
+    expect(prompt).toContain("Center-Book Risk & Drawdown Discipline");
   });
 });

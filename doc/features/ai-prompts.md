@@ -114,10 +114,12 @@ to prevent free-text input from influencing prompt behavior (prompt injection pr
   - If no custom targets exist, prompts the AI to recommend an ideal allocation matching the selected strategy.
 - **Currency & Rates SSoT**: Defaults to `DEFAULT_RATES` from `@/types` to ensure uniform multi-currency conversion across KRW, USD, JPY, and EUR.
 - **Multi-Account & Tax Directive / 복수 계좌 세무 지침**: Instructs the AI to recognize positions split across tax wrappers (NISA, Taxable, Pension) and give precise account-level execution guidance.
+- **Safety & Prompt Injection Defense / 안전 및 인젝션 방어**: Enforces current date injection, mandatory web search verification, strict boundary delimiters (`[INVESTOR DATA START/END]`), disclaimer suppression, and extreme allocation warnings.
+  - 최신 기준일 주입, 웹 검색 강제, 투자자 프로필 인젝션 방어 마커, 면책 조항 억제 및 극단적 포지션(100% 현금/단일 종목 집중) 사전 경고 지침을 기본 탑재합니다.
 
 ## buildGuruFollowUpPrompt
 
-**Entry point**: `buildGuruFollowUpPrompt(guru, prev, current, lang, baseCurrency, rates, profile?, brokers?, activeAssets?)`
+**Entry point**: `buildGuruFollowUpPrompt(guru, prev, current, lang, baseCurrency, rates, profile?, brokers?, activeAssets?, customConfig?)`
 
 **Requires**: A `GuruSessionSnapshot` saved in `useGuruSessionStore` from a previous initial review.
 
@@ -125,7 +127,10 @@ to prevent free-text input from influencing prompt behavior (prompt injection pr
 
 ### Key Capabilities / 핵심 기능
 
-1. **Trade Detection vs. Price Drift Distinction / 능동 매매 및 시세 드리프트 구분**:
+1. **Custom Guru Delta Persona / 커스텀 구루 델타 페르소나 연동**:
+   - Seamlessly passes `customConfig` so custom gurus maintain their custom coaching philosophy, strategy focus, and tone during follow-up reviews.
+   - 커스텀 구루의 경우 `customConfig`를 전달받아 사용자가 설정한 고유 철학, 위험 성향, 코칭 톤이 팔로우업 프롬프트에서도 온전히 유지됩니다.
+2. **Trade Detection vs. Price Drift Distinction / 능동 매매 및 시세 드리프트 구분**:
    - Differentiates active rebalancing (`[TRADE DETECTED]`) from passive market movements (`[PRICE DRIFT ONLY]`).
    - Generates a top-level summary notice distinguishing active transactions from passive market fluctuations.
    - 능동적 리밸런싱/매매(`[TRADE DETECTED]`)와 단순 시세/환율 변동(`[PRICE DRIFT ONLY]`)을 구분하여 태깅하며, 상단 요약문에서 능동 매매 유무를 명시합니다.

@@ -140,6 +140,7 @@ export type GuruId =
   | "bogle"
   | "swensen"
   | "taleb"
+  | "griffin"
   | "custom";
 
 /** 투자 구루 프로필 */

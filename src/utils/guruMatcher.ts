@@ -28,6 +28,7 @@ const SPECIFIC_REASON_GURUS: Set<GuruId> = new Set([
   "soros",
   "greenblatt",
   "marks",
+  "griffin",
 ]);
 
 export function matchGurus(answers: GuruMatchAnswer): GuruMatchResult[] {

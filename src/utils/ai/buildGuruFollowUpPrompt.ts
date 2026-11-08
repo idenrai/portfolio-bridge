@@ -2,8 +2,13 @@ import type { Asset, GuruProfile, PortfolioSummary, BrokerAccount } from "@/type
 import { DEFAULT_RATES } from "@/types";
 import type { Lang } from "@/i18n";
 import { LANG_NAMES } from "@/i18n";
-import type { GuruSessionSnapshot, UserProfile } from "@/stores";
+import type { GuruSessionSnapshot, UserProfile, CustomGuruConfig } from "@/stores";
 import { GURU_FOLLOWUP_FOCUS } from "./guruFrameworks";
+import {
+  RISK_DESCRIPTIONS,
+  STRATEGY_DESCRIPTIONS,
+  TONE_DESCRIPTIONS,
+} from "./buildCustomGuruPrompt";
 import {
   formatInBase,
   CATEGORY_LABELS_EN,
@@ -28,8 +33,10 @@ export function buildGuruFollowUpPrompt(
   profile?: Partial<UserProfile>,
   brokers: BrokerAccount[] = [],
   currentAssets: Asset[] = [],
+  customConfig?: CustomGuruConfig,
 ): string {
-  const guruName = guru.name;
+  const isCustom = guru.id === "custom";
+  const guruName = (isCustom && customConfig?.name) ? customConfig.name : guru.name;
 
   // ── 총액 · 손익 변화 ─────────────────────────────────────────────────────
   const valueDelta = current.totalValueKRW - prev.totalValueKRW;
@@ -41,7 +48,7 @@ export function buildGuruFollowUpPrompt(
   const fmt = (n: number) => formatInBase(n, baseCurrency, rates);
 
   // ── 정규화된 종목 비교 (대소문자/공백/ID 불일치 방어) ─────────────────────
-  const prevMap = new Map(prev.holdings.map((h) => [getNormalizedHoldingKey(h), h]));
+  const prevMap = new Map((prev.holdings ?? []).map((h) => [getNormalizedHoldingKey(h), h]));
   const currMap = new Map(
     current.holdings
       .filter((h) => h.type !== "cash")
@@ -182,7 +189,7 @@ export function buildGuruFollowUpPrompt(
   }
 
   // ── 카테고리 배분 변화 (0.5%p 완화 기준) ──────────────────────────────────
-  const prevCatMap = new Map(prev.categoryAllocation.map((c) => [c.category, c.percent]));
+  const prevCatMap = new Map((prev.categoryAllocation ?? []).map((c) => [c.category, c.percent]));
   const catChanges = current.categoryAllocation
     .map((c) => {
       const prevPct = prevCatMap.get(c.category) ?? 0;
@@ -211,7 +218,7 @@ export function buildGuruFollowUpPrompt(
       : "  (no significant category changes)";
 
   // ── 시장 배분 변화 (0.5%p 완화 기준) ──────────────────────────────────────
-  const prevMktMap = new Map(prev.marketAllocation.map((m) => [m.market, m.percent]));
+  const prevMktMap = new Map((prev.marketAllocation ?? []).map((m) => [m.market, m.percent]));
   const mktChanges = current.marketAllocation
     .map((m) => {
       const prevPct = prevMktMap.get(m.market) ?? 0;
@@ -268,10 +275,33 @@ export function buildGuruFollowUpPrompt(
       ? `Focus especially on whether the ${activeTradesCount} intentional trade(s) improved risk-adjusted return and discipline.`
       : "Even without active trades, determine if passive market drift has significantly skewed asset allocation away from your ideal model, requiring rebalancing.";
 
+  const customPhilosophyLine = customConfig?.customPhilosophy?.trim()
+    ? `\nPersonal Guiding Philosophy: "${customConfig.customPhilosophy.trim()}"`
+    : "";
+
+  const communicationStyle = isCustom && customConfig
+    ? `Risk Profile: ${RISK_DESCRIPTIONS[customConfig.riskTolerance] ?? RISK_DESCRIPTIONS.balanced}
+Strategy Focus: ${STRATEGY_DESCRIPTIONS[customConfig.strategy] ?? STRATEGY_DESCRIPTIONS.all_weather}
+Coaching Tone: ${TONE_DESCRIPTIONS[customConfig.tone] ?? TONE_DESCRIPTIONS.supportive_mentor}${customPhilosophyLine}`
+    : guru.style;
+
+  const specificInquiries = isCustom
+    ? `--- YOUR SPECIFIC FOLLOW-UP INQUIRIES ---
+1. Evaluate whether the portfolio changes strictly adhere to your defined strategy (${customConfig?.strategy ?? "custom strategy"}) and risk profile
+2. Review whether intentional trades improved risk-adjusted alignment or increased unwanted speculative exposure
+3. Check if position rebalancing correctly honors tax wrappers and target allocations`
+    : (GURU_FOLLOWUP_FOCUS[guru.id]
+      ? `--- YOUR SPECIFIC FOLLOW-UP INQUIRIES ---\nBefore concluding, address these questions:\n${GURU_FOLLOWUP_FOCUS[guru.id]}`
+      : `--- YOUR SPECIFIC FOLLOW-UP INQUIRIES ---
+1. Whether the changes are moving in the right direction based on your principles
+2. Your reaction to the new positions added and positions removed
+3. Whether the rebalancing moves were wise or misguided
+4. Any specific concerns or approvals about the shifts you observe`);
+
   return `${buildPersonaHeader(guruName)}
 
 --- YOUR COMMUNICATION STYLE ---
-${guru.style}
+${communicationStyle}
 
 --- CONTEXT ---
 Today's date: ${today}
@@ -286,13 +316,7 @@ Evaluate the changes from YOUR perspective as ${guruName}. This is a focused che
 3. [Position Verdicts]: Provide clear actionable verdicts (BUY MORE / HOLD / TRIM / EXIT) on the newly added and significantly changed holdings.
 4. [Directional Verdict]: Deliver a firm, unequivocal judgment on whether the portfolio's overall health and alignment with your principles has IMPROVED, DETERIORATED, or remained NEUTRAL. (${directionalGuidance})
 
-${GURU_FOLLOWUP_FOCUS[guru.id] 
-  ? `--- YOUR SPECIFIC FOLLOW-UP INQUIRIES ---\nBefore concluding, address these questions:\n${GURU_FOLLOWUP_FOCUS[guru.id]}`
-  : `--- YOUR SPECIFIC FOLLOW-UP INQUIRIES ---
-1. Whether the changes are moving in the right direction based on your principles
-2. Your reaction to the new positions added and positions removed
-3. Whether the rebalancing moves were wise or misguided
-4. Any specific concerns or approvals about the shifts you observe`}
+${specificInquiries}
 
 --- PORTFOLIO PERFORMANCE SINCE LAST REVIEW (${prev.date}) ---
 Portfolio value change (${baseCurrency}): ${sign(valueDelta)}${fmt(valueDelta)} (${sign(valueDeltaPct)}${valueDeltaPct.toFixed(2)}%)

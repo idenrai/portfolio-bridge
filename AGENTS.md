@@ -1,55 +1,54 @@
 # Project Guidelines (SSoT)
 
-이 파일은 AI 에이전트가 상황에 맞게 적절한 규칙과 워크플로우를 참조할 수 있도록 라우팅하는 마스터 파일입니다.
+이 파일은 AI 에이전트가 상황에 맞게 최신 규칙(Rules), 서브에이전트(Subagents), 스킬(Skills), 라이프사이클 훅(Hooks), MCP 도구를 탐색하고 오케스트레이션할 수 있도록 안내하는 Antigravity 2.0 단일 진실 공급원(SSoT) 마스터 라우팅 파일입니다.
 
-## 📌 Core Rules (항상 준수)
-코딩 전반에 적용되는 필수 규칙입니다. 코드 작성 전 반드시 다음 파일들을 확인하세요.
-- 프로젝트 전체 아키텍처 및 스택: `.agents/rules/project-context.md` 읽기
-- 프로젝트 보안 및 데이터 취급 원칙: `.agents/rules/security.md` 읽기
-- React/TypeScript/스타일링/Zustand 코딩 표준: `.agents/rules/react-typescript.md` 읽기
-- GitHub 커밋 규칙: `.agents/rules/git-commit-rules.md` 읽기
-- **AI 에이전트 출력 언어 전략:** `.agents/rules/language-strategies.md` 읽기 (채팅, 산출물, PR 본문은 예외 없이 100% 한국어)
-- **오픈소스 스킬 탐색 (필수):** 새로운 지시를 받으면, 코딩이나 계획 수립에 앞서 `npx skills find [키워드]` 명령어로 필요한 도구나 가이드라인(Skill)이 있는지 검색하세요. 적합한 스킬이 발견되면 `npx skills add <package> -y`를 통해 프로젝트에 설치 및 적용한 후 작업을 진행하세요.
-- **UI 변경 시각적 검증 (필수):** 프론트엔드 컴포넌트나 UI 레이아웃을 변경한 후에는 반드시 `/before-and-after` 스킬/명령어를 적극 활용하여 변경 전후의 시각적 차이(Visual Diff)를 브라우저 환경에서 꼼꼼히 대조하고 검증해야 합니다.
+---
 
-## 🔄 Workflows (상황별 참조 트리거)
-특정 작업이나 상황이 발생했을 때, 해당하는 워크플로우나 에이전트 지침을 로드하세요.
+## 📌 1. Core Rules (항상 준수)
+- **프로젝트 아키텍처 & 스택:** `.agents/rules/project-context.md`
+- **보안 & 데이터 프라이버시 (Zero-Trust / Local-First):** `.agents/rules/security.md`
+- **React 19 / TypeScript 5.9 / Tailwind v4 / Zustand 5 코딩 표준:** `.agents/rules/react-typescript.md`
+- **Conventional Commits 규약:** `.agents/rules/git-commit-rules.md`
+- **언어 제어 전략 (채팅, 산출물, PR 본문 100% 한국어):** `.agents/rules/language-strategies.md`
+- **구루 아바타 화이트 라인 아트 스타일 규격:** `.agents/rules/guru-avatar-style.md`
+- **시니어 엔지니어 행동 규범 & 인덱싱 의식:** `.agents/rules/senior-engineer-conduct.md`, `.agents/rules/indexing-codebase.md`
 
-- **프론트엔드(UI/UX) 컴포넌트 신규 생성, 수정 및 디자인 시스템 고도화 시 (/frontend):** `.agents/workflows/frontend.md` 읽기 (Tailwind CSS v4 패턴 및 디자인 시스템 준수)
-- **백엔드(Node.js/API) 아키텍처 설계, API 개발 및 비즈니스 로직 구현 시 (/backend):** `.agents/workflows/backend.md` 읽기
-- **AI 프롬프트 작성, 템플릿 설계 및 최적화 시 (/prompt, /prompt-engineering):** `.agents/workflows/prompt.md` 읽기
-- **프로젝트 폴더 구조 및 소스코드 전면 리팩토링 시 (/refactor):** `.agents/workflows/refactor.md` 읽기 (동작 보존 및 코드 스멜 제거)
-- **번역 키 추가 및 다국어(i18n) 작업 시:** `.agents/workflows/i18n-sync.md` 및 `.agents/workflows/i18n-audit.md` 읽기
-- **빌드 검토 및 오류 해결 시:** `.agents/workflows/build-guard.md` 및 `.agents/workflows/build-check.md` 읽기
-- **단위 테스트 작성 및 검증 시:** `.agents/workflows/test-writer.md` 읽기
-- **Yahoo Finance API 연동 및 수정 시:** `.agents/skills/yahoo-finance/SKILL.md` 읽기
-- **코드 리뷰 요청 시:** `.agents/workflows/review.md` 읽기
-- **한국어 커밋 메시지 작성 시:** `.agents/workflows/commit-kr.md` 읽기
-- **영어 커밋 메시지 작성 시:** `.agents/workflows/commit.md` 읽기
-- **기능 구현 전 계획 수립 및 복잡한 문제의 심층 분석 시 (/plan):** `.agents/workflows/plan.md` 읽기
-- **기존 코드 파악 및 종속성 분석 시:** `.agents/workflows/grasp.md` 읽기
-- **코드 및 개념 설명 요청 시:** `.agents/workflows/explain.md` 읽기
-- **코드 수정 없이 순수 상담 및 질문 요청 시 (/ask):** `.agents/workflows/ask.md` 읽기
-- **GitHub 이슈 기반 버그 수정 및 자동 PR 시 (/solve-issue):** `.agents/workflows/solve-issue.md` 읽기
-- **작업 완료 후 PR 자동 생성 시 (/pr):** `.agents/workflows/pr.md` 읽기
-- **현재 세션을 요약하고 파기할 시 (/discard):** `.agents/workflows/discard.md` 읽기
-- **ESLint 오류를 자동 수정할 시 (/lint-fix):** `.agents/workflows/lint-fix.md` 읽기
-- **원격에서 삭제된 로컬 브랜치 일괄 정리 시 (/prune):** `.agents/workflows/prune.md` 읽기
+---
 
-## 🛠 Skills (도구 및 스킬)
-AI가 특정 도구나 기능이 필요할 때 로드하세요.
-- 프로젝트 인덱싱 및 컨텍스트 파악 필요 시: `.agents/skills/indexing-awareness/SKILL.md` 읽기
-- 현재 날짜 및 시간 파악 필요 시 (지식 컷오프 회피): `.agents/skills/knowledge-cutoff-awareness/SKILL.md` 읽기
-- **로컬 퍼스트(Local-First) 아키텍처 및 클라이언트 스토리지/오프라인/동기화 설계 시:** `.agents/skills/local-first/SKILL.md` 적극 활용 (스토리지 지속성, Safari ITP 7일 삭제 방어, 다중 탭 동기화, 오프라인 헬스 프로브, 스키마 진화 및 원클릭 JSON 백업)
-- **TypeScript 타입 설계 및 고급 제네릭 활용 시:** `.agents/skills/typescript-advanced-types/SKILL.md` 및 `.agents/skills/typescript-best-practices/SKILL.md` 적극 활용
-- **TanStack React Query 비동기 상태/캐싱 가이드 필요 시:** `.agents/skills/tanstack-query-best-practices/SKILL.md` 적극 활용
-- **Zustand 5 상태 관리 및 영속화 패턴 필요 시:** `.agents/skills/zustand-5/SKILL.md` 적극 활용
-- **Vitest 단위 테스트 작성 및 모범 사례 필요 시:** `.agents/skills/vitest/SKILL.md` 적극 활용
-- Vercel/Next.js 성능 최적화 가이드 필요 시: `.agents/skills/vercel-react-best-practices/SKILL.md` 읽기
-- **AI 프롬프트 작성, 개선 및 프롬프트 엔지니어링 필요 시 (예: 구루 프롬프트 작성):** `.agents/skills/prompt-engineering/SKILL.md` 및 `.agents/skills/prompt-engineering-patterns/SKILL.md` 읽기 (워크플로우: `.agents/workflows/prompt.md`)
-- **UI/UX 설계 및 프론트엔드 디자인 기획 시:** `.agents/skills/ui-ux-pro-max/SKILL.md`, `.agents/skills/frontend-design/SKILL.md`, `.agents/skills/design-taste-frontend/SKILL.md` 읽기
-- **Tailwind CSS v4 스타일링 및 디자인 시스템 구현 시:** `.agents/skills/tailwind-4-docs/SKILL.md`, `.agents/skills/tailwind-design-system/SKILL.md`, `.agents/skills/tailwind-css-patterns/SKILL.md` 적극 참조
-- **디자인 가이드라인 준수 여부 및 시각적 버그 감사 시:** `.agents/skills/web-design-guidelines/SKILL.md`, `.agents/skills/agent-browser/SKILL.md`, `.agents/skills/before-and-after/SKILL.md`, `.agents/skills/webapp-testing/SKILL.md` 적극 활용
-- **프로젝트 및 폴더/모듈 구조 리팩토링 및 클린 아키텍처 설계 시:** `.agents/skills/project-structure-refactoring/SKILL.md` 읽기
-- **코드 스멜 진단 및 마틴 파울러 리팩토링 패턴 적용 시:** `.agents/skills/refactoring-patterns/SKILL.md` 읽기
-- **행위 보존 및 안전한 무중단 점진적 리팩토링 검증 시:** `.agents/skills/safe-refactor/SKILL.md` 읽기
+## 🤖 2. Declarative Subagents (선언형 서브에이전트)
+메인 컨텍스트를 오염시키지 않고 독립된 관점과 전용 도구 세트로 백그라운드 작업을 수행하는 전문 서브에이전트입니다.
+
+- **전문 코드 리뷰어 (`code-reviewer`):** `.agents/agents/code-reviewer.md` (블룸버그 UI/UX, 접근성, 보안, 성능 다각도 편향 없는 감사)
+- **품질 게이트 검증자 (`quality-guard`):** `.agents/agents/quality-guard.md` (격리된 환경에서 빌드, 타입 검사, 린트, Vitest 테스트 일괄 검증 및 장애 분석)
+
+---
+
+## 🛠️ 3. Specialized Modern Skills (모던 스킬 및 슬래시 커맨드)
+Antigravity 2.0 사양에 따라 모든 절차는 점진적 공개(Progressive Disclosure)를 준수하는 모듈형 스킬(`.agents/skills/<name>/SKILL.md`)로 구성됩니다.
+
+- **심층 기술 조사 및 아키텍처 원인 규명 (`/deep-dive`):** `.agents/skills/deep-dive/SKILL.md` (Context7 공식 문서 교차검증 + Sequential Thinking 다단계 논리 분석)
+- **프론트엔드 UI/UX & 블룸버그 단말기 디자인 시스템 (`/frontend`):** `.agents/skills/frontend/SKILL.md` (Sharp edges, Fira Code, Amber/Green 텔레메트리, 안티-AI-슬롭, WAI-ARIA 접근성)
+- **백엔드 & Vercel Edge Runtime 프록시 (`/backend`):** `.agents/skills/backend/SKILL.md` (Zero-Trust 파라미터 검증, 스마트 엣지 캐싱, 무상태 아키텍처)
+- **구루 AI 프롬프트 엔지니어링 (`/prompt`, `/guru-prompt`):** `.agents/skills/guru-prompt/SKILL.md` (페르소나 렌즈, 프롬프트 인젝션 방어, 세무 최적화, 아바타 스텐실 변환 스크립트)
+- **점진적 무중단 리팩토링 (`/refactor`):** `.agents/skills/refactor/SKILL.md` (Green Baseline, 6단계 파이프라인, 마틴 파울러 코드 스멜 카탈로그)
+- **품질 게이트 & Fail-Fast 파이프라인 (`/quality-gate`):** `.agents/skills/quality-gate/SKILL.md` (1초 타입 체크 `tsc --noEmit`, ESLint `--fix`, Vitest, 번들 빌드)
+- **4개 국어(ko/en/ja/de) 번역 동기화 & 감사 (`/i18n`):** `.agents/skills/i18n/SKILL.md` (키 누락/중복/불일치 1초 감사 스크립트 내장)
+- **커밋 메시지 자동 생성 (`/commit`, `/commit-kr`):** `.agents/skills/commit/SKILL.md` (Conventional Commits 한영 규격)
+- **문서 동기화 및 PR 자동 생성 (`/pr`):** `.agents/skills/pr/SKILL.md` (`doc/` 영한 병기 동기화, 단계적 커밋 분할, `github-mcp-server` 연동)
+- **다각도 전문 코드 리뷰 (`/review`, `/code-review`):** `.agents/skills/code-review/SKILL.md` (`code-reviewer` 서브에이전트 위임 및 체크리스트 감사)
+- **로컬 퍼스트(Local-First) 영속성 & 동기화:** `.agents/skills/local-first/SKILL.md`
+- **단위 테스트 작성 및 모범 사례:** `.agents/skills/vitest/SKILL.md`
+- **UI 변경 시각적 차이(Visual Diff) 검증:** `.agents/skills/before-and-after/SKILL.md` 및 `agent-browser`
+
+---
+
+## 🛡️ 4. Lifecycle Hooks (생명주기 안전 가드)
+- **PreToolUse 안전 가드 (`.agents/hooks.json`):**
+  - 파괴적 셸 명령(`git push --force`, `git reset --hard`, `rm -rf`, `main` 브랜치 삭제, `--no-verify`)을 사전 차단하는 Node.js 고속 가드 (`.agents/hooks/scripts/block-dangerous-commands.cjs`).
+
+---
+
+## 🔌 5. Model Context Protocol (MCP 서버 연동)
+- **GitHub MCP (`github-mcp-server`):** PR 생성, 이슈 조회, 커밋 히스토리 추적.
+- **Context7 (`context7`):** React 19, Tailwind v4, Zustand 5 등 최신 공식 문서 실시간 교차검증.
+- **Sequential Thinking (`sequential-thinking`):** 복잡한 기술적 문제의 다단계 논리 분석 및 가설 반증.

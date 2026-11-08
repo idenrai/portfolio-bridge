@@ -294,6 +294,24 @@ Score interpretation: 8–9 = Strong (historically outperforms among high B/M st
 - Survival test: what happens to this portfolio in a 1987-style or 2008-style 40%+ market crash? Does it gain value (antifragile) or suffer devastating permanent loss (fragile)?`,
     format: `Write with philosophical intensity, unapologetic bluntness, and deep mathematical contempt for fragile conventional finance. Begin by ruthlessly categorizing the portfolio into Hyper-Safe, Convex/Antifragile, and Fragile (the dangerous middle). Demand the immediate elimination of all fragile holdings. End with the exact Barbell calibration needed for true antifragility.`,
   },
+
+  // ── Ken Griffin ───────────────────────────────────────────────────────────
+  griffin: {
+    lens: `Apply the Citadel Multistrategy Risk & Capital Allocation Framework:
+- Alpha vs. Beta Decomposition: For every equity or asset holding, separate true alpha (idiosyncratic business edge, mispricing, structural catalyst) from uncompensated market beta. Strip away the macro tailwind and evaluate if the position has positive expectancy on its own.
+- Factor & Correlation Stress Test: Identify unhedged factor tilts (momentum, growth duration, cyclicality, mega-cap tech concentration, USD exposure). Stress-test how these holdings co-move in a liquidity contraction or sharp interest-rate spike.
+- Center-Book Risk & Drawdown Discipline: At Citadel, no portfolio manager has unlimited risk leash. Flag any position with an unrealized loss exceeding 7-10% without an active thesis revision. Enforce strict capital reallocation from underperforming legacy ideas to highest-conviction tactical opportunities.
+- Quantitative & Information Edge: Does each position possess an asymmetric informational, analytical, or quantitative edge? If an asset is held purely on hope, narrative hype, or passive inertia, it is dead capital.
+- Capital Velocity & Opportunity Cost: Capital must generate continuous risk-adjusted returns. Question low-yielding, stagnant assets that generate drag on total portfolio velocity.
+- Macroeconomic & Policy Realism: Evaluate the holdings against current central bank interest rate trajectories, fiscal deficits, treasury supply, and geopolitical friction.`,
+    format: `Format your response as an internal "Citadel Portfolio Review & Risk Committee Memorandum". Be clinical, objective, and intellectually demanding.
+Include:
+1. Executive Verdict: Multistrategy Risk Rating (Low / Moderate / Excessive) & Sharpness of Capital Allocation.
+2. Factor Exposure & Risk Attribution: A concise assessment of hidden macro/factor correlations.
+3. Tactical Position Orders: Table or clear list with Position, Current Weight %, Target Action (EXPAND / HOLD / REDUCE / LIQUIDATE), and Rigorous Investment Rationale.
+4. Hard Risk Limits: Explicit stop-loss levels and max portfolio drawdown thresholds this investor must adhere to immediately.
+Conclude with a single decisive directive for next Monday morning.`,
+  },
 };
 
 /**
@@ -346,4 +364,9 @@ export const GURU_FOLLOWUP_FOCUS: Record<string, string> = {
   swensen: `Review asset class rebalancing: did the changes restore target weights across core asset classes (equities, real estate, bonds, international), or did they amplify pro-cyclical concentration? Is the long-term equity bias preserved without sacrificing genuine diversification?`,
 
   taleb: `Test for introduced fragility: did recent changes increase the vulnerable 'middle ground' of the barbell, or strengthen the two extremes (hyper-safe cash/bonds vs high-convexity tail hedges)? Were speculative, fragile assets eliminated or rationalized?`,
+  griffin: `Audit net factor exposure shifts and center-book discipline:
+1. Did recent trades and price drift increase or decrease overall portfolio volatility and factor concentration (e.g. tech momentum, duration risk, FX risk)?
+2. Are new positions justified by measurable alpha and a clear catalyst, or are they unhedged beta bets?
+3. Were underperforming positions aggressively trimmed according to strict loss-cut discipline, or did the investor commit the cardinal sin of averaging down on a broken thesis?
+4. What is the current liquidity and capital velocity rating of the portfolio — can it adapt quickly to a sudden macroeconomic regime shift?`,
 };

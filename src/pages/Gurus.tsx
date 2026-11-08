@@ -25,7 +25,7 @@ import {
 import type { GuruProfile } from "@/types";
 
 export function GurusPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { assets, summary } = usePortfolio({ scope: "guru" });
   const { assets: allAssets } = usePortfolio({ scope: "all" });
   const t = useT();
@@ -53,31 +53,30 @@ export function GurusPage() {
   );
 
   const guruParam = searchParams.get("guru");
-  const [selectedGuruId, setSelectedGuruId] = useState<string | null>(() => {
-    return guruParam || null;
-  });
 
-  // 파라미터나 상태에 따라 현재 선택된 구루 파생 (useEffect 없이 자동 동기화)
+  // URL 파라미터가 유일한 진실 공급원(SSoT)으로 동작하여 쿼리 우선순위 충돌 방지
   const selectedGuru = useMemo<GuruProfile | null>(() => {
-    const effectiveId = guruParam || selectedGuruId;
-    if (effectiveId === "custom") {
+    if (!guruParam) return null;
+    if (guruParam === "custom") {
       return customProfile;
     }
-    if (effectiveId) {
-      return GURU_PROFILES.find((g) => g.id === effectiveId) ?? null;
-    }
-    return null;
-  }, [guruParam, selectedGuruId, customProfile]);
+    return GURU_PROFILES.find((g) => g.id === guruParam) ?? null;
+  }, [guruParam, customProfile]);
 
   const handleSelectGuru = (guru: GuruProfile) => {
-    setSelectedGuruId(guru.id);
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.set("guru", guru.id);
+      return next;
+    });
   };
 
   const handleReturnToGrid = () => {
-    setSelectedGuruId(null);
-    if (guruParam) {
-      window.history.replaceState(null, "", "/gurus");
-    }
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.delete("guru");
+      return next;
+    });
   };
 
   const isCustom = selectedGuru?.id === "custom";
@@ -228,14 +227,7 @@ export function GurusPage() {
         open={isGuideModalOpen}
         onClose={() => setIsGuideModalOpen(false)}
         onSelectGuru={(guruId) => {
-          if (guruId === "custom") {
-            setSelectedGuruId("custom");
-          } else {
-            const matched = GURU_PROFILES.find((g) => g.id === guruId);
-            if (matched) {
-              setSelectedGuruId(matched.id);
-            }
-          }
+          setSearchParams({ guru: guruId });
         }}
         onOpenCustomGuruConfig={() => {
           setIsGuideModalOpen(false);

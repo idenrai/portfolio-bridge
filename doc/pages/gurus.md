@@ -11,9 +11,9 @@
 
 ## Guru List
 
-23 investment gurus defined in `src/utils/gurus.ts` (`GURU_PROFILES`).
+24 investment gurus defined in `src/utils/gurus.ts` (`GURU_PROFILES`).
 
-`src/utils/gurus.ts`의 `GURU_PROFILES`에 정의된 23명의 투자 구루입니다.
+`src/utils/gurus.ts`의 `GURU_PROFILES`에 정의된 24명의 투자 구루입니다.
 
 | ID | Name |
 | --- | --- |
@@ -40,6 +40,7 @@
 | `bogle` | John Bogle |
 | `swensen` | David Swensen |
 | `taleb` | Nassim Taleb |
+| `griffin` | Ken Griffin |
 
 Each guru has:
 

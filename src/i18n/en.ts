@@ -310,6 +310,7 @@ export const en: Translations = {
   guru_match_reason_soros: "Exploit market reflexivity, regulatory tipping points, and macroeconomic regime shifts.",
   guru_match_reason_greenblatt: "Systematic evidence-based quantitative value using the formulaic blend of ROC and Earnings Yield.",
   guru_match_reason_marks: "Master market cycles, second-level thinking, and risk asymmetry during uncertain periods.",
+  guru_match_reason_griffin: "Pursue pure alpha uncorrelated to market direction through rigorous factor neutrality and center-book risk discipline.",
   guru_match_reason_category_value: "Focuses on undervalued high-quality assets trading below intrinsic value for steady compounding.",
   guru_match_reason_category_growth: "Targets high-growth momentum and market leadership to capture substantial capital appreciation.",
   guru_match_reason_category_passive: "Combines broad diversification and rule-based rebalancing to achieve steady compound returns.",
@@ -340,6 +341,7 @@ export const en: Translations = {
   guru_name_bogle: "John Bogle",
   guru_name_swensen: "David Swensen",
   guru_name_taleb: "Nassim Taleb",
+  guru_name_griffin: "Ken Griffin",
   guru_philosophy_buffett:
     "• Economic Moat: Focus on companies with durable competitive advantages and high barriers to entry\n" +
     "• Long-Term Holding: Buy understandable businesses at fair prices and prefer holding them forever\n" +
@@ -579,6 +581,17 @@ export const en: Translations = {
     "Survival comes first. You must not go bankrupt to have long-term returns.\n" +
     "Wind extinguishes a candle and energizes fire. Be the fire.\n" +
     "Taking a risk you cannot afford to survive is not investing; it is suicide.",
+  guru_philosophy_griffin:
+    "• Multistrategy Factor Neutrality: Isolate pure idiosyncratic alpha through relative-value long/short execution rather than taking directional beta bets.\n" +
+    "• Center-Book Risk Discipline: Ruthlessly unwind positions that breach drawdown limits or invalidate their investment thesis without emotional attachment.\n" +
+    "• Quantitative Edge & Information Efficiency: Exploit price dislocations through empirical data and probability distributions, rejecting emotional narratives.\n" +
+    "• Capital Velocity & Opportunity Cost: Minimize stagnant idle capital and continuously reallocate resources to the highest risk-adjusted opportunities.\n" +
+    "• Macroeconomic & Policy Realism: Rigorously integrate central bank rate trajectories, sovereign liquidity shifts, and policy dynamics into portfolio risk.\n" +
+    "• \"We don't seek to predict the whims of the market; we measure inefficiencies and harvest edges through uncompromising discipline.\"",
+  guru_quotes_griffin:
+    "The market does not care about your emotions or hopes. Only data and risk discipline tell the truth.\n" +
+    "In capital allocation, the most important trait is the courage to admit when you are wrong and cut losses immediately.\n" +
+    "Alpha is never permanent. If you do not relentlessly evolve your systems and models, the market will eliminate you.",
 
   lynch_tenbagger_title: "Peter Lynch Tenbagger Analyzer",
   lynch_tenbagger_desc:
